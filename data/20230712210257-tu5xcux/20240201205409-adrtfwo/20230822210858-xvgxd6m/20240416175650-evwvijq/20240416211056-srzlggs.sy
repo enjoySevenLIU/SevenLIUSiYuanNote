@@ -1,0 +1,532 @@
+{
+	"ID": "20240416211056-srzlggs",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240416211056-srzlggs",
+		"title": "UFL4-2——事件中心传递参数",
+		"type": "doc",
+		"updated": "20240416221707"
+	},
+	"Children": [
+		{
+			"ID": "20240416211056-nomazwm",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240416211056-nomazwm",
+				"updated": "20240416211320"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "事件中心中传递参数指的是什么"
+				}
+			]
+		},
+		{
+			"ID": "20240416211326-5q6ni7e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416211326-5q6ni7e",
+				"updated": "20240416211336"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "希望在触发事件时传递数据，比如"
+				}
+			]
+		},
+		{
+			"ID": "20240416211336-wvfhqin",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240416211336-wvfhqin",
+				"updated": "20240416211336"
+			},
+			"Children": [
+				{
+					"ID": "20240416211336-fylp148",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240416211336-fylp148",
+						"updated": "20240416211336"
+					},
+					"Children": [
+						{
+							"ID": "20240416211336-hr828u8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416211336-hr828u8",
+								"updated": "20240416211336"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "怪物死亡时，将怪物信息传递出去\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240416211337-51s0czs",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240416211337-51s0czs"
+					},
+					"Children": [
+						{
+							"ID": "20240416211337-lsk5d4b",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416211337-lsk5d4b",
+								"updated": "20240416211339"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取奖励时，将奖励信息传递出去"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240416211339-hsucikd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416211339-hsucikd",
+				"updated": "20240416211344"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "等等"
+				}
+			]
+		},
+		{
+			"ID": "20240416211326-onrb519",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416211326-onrb519",
+				"updated": "20240416211329"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "传递数据的主要目的是，我们可以在各系统、模块、对象中获取到我们希望获取的有用信息"
+				}
+			]
+		},
+		{
+			"ID": "20240416211345-z891fms",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240416211345-z891fms",
+				"updated": "20240416211359"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "制作思路和具体实现"
+				}
+			]
+		},
+		{
+			"ID": "20240416211406-jmb9r1e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416211406-jmb9r1e",
+				"updated": "20240416211409"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们目前触发事件，是通过执行委托中存储的函数来执行各系统对应的逻辑，那么需要传递参数，我们很自然的联想到应该从委托入手"
+				}
+			]
+		},
+		{
+			"ID": "20240416211406-i9nak4b",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416211406-i9nak4b",
+				"updated": "20240416212100"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但是参数的类型可能有多种多样，我们可以采用万物之父 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "object"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 利用里式替换原则，父类容器装载子类对象的方式来传递参数"
+				}
+			]
+		},
+		{
+			"ID": "20240416212731-3fnacb7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416212731-3fnacb7",
+				"updated": "20240416213325"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此，将存储事件的委托字典"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "eventDic"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的值从"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UnityAction"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​转为使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UnityAction\u0026lt;object\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，\n其他相关方法"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AddEventListener"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "RemoveEventListener"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​也修改为使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UnityAction\u0026lt;object\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数，\n而触发事件的方法"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "EventTrigger"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​就需要额外传入一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "object"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数，在执行委托时将参数传进去"
+				}
+			]
+		},
+		{
+			"ID": "20240416213336-wzcakio",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416213336-wzcakio",
+				"style": "line-height: 22px;",
+				"updated": "20240416213411"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private Dictionary\u003cstring, UnityAction\u003cobject\u003e\u003e eventDic = new Dictionary\u003cstring, UnityAction\u003cobject\u003e\u003e();\n\nprivate EventCenter() { }\n\n// 触发事件\npublic void EventTrigger(string eventName, object info = null)\n{\n    //如果没有对象监听这个事件，则直接返回\n    if (!eventDic.ContainsKey(eventName))\n        return;\n    eventDic[eventName]?.Invoke(info);\n}\n\n// 添加事件监听者\npublic void AddEventListener(string eventName, UnityAction\u003cobject\u003e action)\n{\n    if (eventDic.ContainsKey(eventName))\n        eventDic[eventName] += action;\n    else\n    {\n        //eventDic.Add(eventName, new UnityAction(action));     //不要这样写，会无法移除传入的方法\n        eventDic.Add(eventName, null);\n        eventDic[eventName] += action;\n    }\n}\n\n// 移除事件监听\npublic void RemoveEventListener(string eventName, UnityAction\u003cobject\u003e action)\n{\n    if (eventDic.ContainsKey(eventName))\n        eventDic[eventName] -= action;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240416221644-64p4oal",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240416221644-64p4oal",
+				"updated": "20240416221707"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20240416212844-haf21mc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416212844-haf21mc",
+				"updated": "20240416221707"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这样 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Monster"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 类就可以在触发事件时，将自己作为参数传递到各个监听者，监听者即可获取怪物的消息"
+				}
+			]
+		},
+		{
+			"ID": "20240416213121-fhxilfh",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416213121-fhxilfh",
+				"style": "line-height: 22px;",
+				"updated": "20240416221707"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class Monster : MonoBehaviour\n{\n    public string monsterName = \"123123123\";\n    public int monsterID = 1;\n\n    public void Dead()\n    {\n        Debug.Log(\"怪物死亡了\");\n        //其他对象在怪物死亡时要做的事情\n        EventCenter.Instance.EventTrigger(\"MonsterDead\", this);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240416213130-dao9k2f",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416213130-dao9k2f",
+				"style": "line-height: 22px;",
+				"updated": "20240416221707"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class Player : MonoBehaviour\n{\n    private void Awake()\n    {\n        EventCenter.Instance.AddEventListener(\"MonsterDead\", PlayerWaitMonsterDeadDo);\n    }\n\n    public void PlayerWaitMonsterDeadDo(object info)\n    {\n        Monster monster = info as Monster;\n        Debug.Log(\"怪物名为：\" + monster.monsterName + \"，怪物ID\" + monster.monsterID);\n        Debug.Log(\"玩家得到奖励\");\n    }\n\n    public void OnDestroy()\n    {\n        EventCenter.Instance.RemoveEventListener(\"MonsterDead\", PlayerWaitMonsterDeadDo);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240416213136-iidbc4k",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416213136-iidbc4k",
+				"updated": "20240416221707"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 334px;",
+						"style": "width: 324px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240416213157-wexd4sv.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 324px;\" parent-style=\"width: 334px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240416211413-7dlmjc6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240416211413-7dlmjc6",
+				"updated": "20240416211419"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "存在的问题"
+				}
+			]
+		},
+		{
+			"ID": "20240416211424-c8z86nj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416211424-c8z86nj",
+				"updated": "20240416213218"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "object"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 进行参数传递，当传递值类型数据时，会存在装箱拆箱，增加性能开销"
+				}
+			]
+		},
+		{
+			"ID": "20240416213213-4rqu0kt",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240416213213-4rqu0kt",
+				"updated": "20240416213440"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可传入参数的事件中心具体代码"
+				}
+			]
+		},
+		{
+			"ID": "20240416213441-wvsrawb",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416213441-wvsrawb",
+				"style": "line-height: 22px;",
+				"updated": "20240416213448"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\n\n/// \u003csummary\u003e\n/// 事件中心模块\n/// \u003c/summary\u003e\npublic class EventCenter : BaseManager\u003cEventCenter\u003e\n{\n    private Dictionary\u003cstring, UnityAction\u003cobject\u003e\u003e eventDic = new Dictionary\u003cstring, UnityAction\u003cobject\u003e\u003e();\n\n    private EventCenter() { }\n\n    /// \u003csummary\u003e\n    /// 触发事件\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventName\"\u003e要触发的事件名字\u003c/param\u003e\n    public void EventTrigger(string eventName, object info = null)\n    {\n        //如果没有对象监听这个事件，则直接返回\n        if (!eventDic.ContainsKey(eventName))\n            return;\n        eventDic[eventName]?.Invoke(info);\n    }\n\n    /// \u003csummary\u003e\n    /// 添加事件监听者\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventName\"\u003e要监听的事件\u003c/param\u003e\n    /// \u003cparam name=\"action\"\u003e监听到事件后要执行的方法\u003c/param\u003e\n    public void AddEventListener(string eventName, UnityAction\u003cobject\u003e action)\n    {\n        if (eventDic.ContainsKey(eventName))\n            eventDic[eventName] += action;\n        else\n        {\n            //eventDic.Add(eventName, new UnityAction(action));     //不要这样写，会无法移除传入的方法\n            eventDic.Add(eventName, null);\n            eventDic[eventName] += action;\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 移除事件监听\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventName\"\u003e要移除监听的事件\u003c/param\u003e\n    /// \u003cparam name=\"action\"\u003e要移除监听的方法\u003c/param\u003e\n    public void RemoveEventListener(string eventName, UnityAction\u003cobject\u003e action)\n    {\n        if (eventDic.ContainsKey(eventName))\n            eventDic[eventName] -= action;\n    }\n\n    /// \u003csummary\u003e\n    /// 清除所有事件的监听\n    /// \u003c/summary\u003e\n    public void Clear()\n    {\n        eventDic.Clear();\n    }\n\n    /// \u003csummary\u003e\n    /// 清除某一个事件的监听\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventName\"\u003e\u003c/param\u003e\n    public void Clear(string eventName)\n    {\n        if (eventDic.ContainsKey(eventName))\n            eventDic.Remove(eventName);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

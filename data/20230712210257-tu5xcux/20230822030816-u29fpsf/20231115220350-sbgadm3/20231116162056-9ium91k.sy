@@ -1,0 +1,436 @@
+{
+	"ID": "20231116162056-9ium91k",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20231116162056-9ium91k",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20231116162056-9ium91k\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20231116162421-wvugiz1\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20231116163629-v3n4bxp\u0026quot;,\u0026quot;scrollTop\u0026quot;:876,\u0026quot;focusId\u0026quot;:\u0026quot;20231116163629-v3n4bxp\u0026quot;,\u0026quot;focusStart\u0026quot;:249,\u0026quot;focusEnd\u0026quot;:249\u0026#125;",
+		"title": "U4S2L4——ScriptableObject 让其真正意义上的持久化",
+		"type": "doc",
+		"updated": "20231116164418"
+	},
+	"Children": [
+		{
+			"ID": "20231116162421-wvugiz1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116162421-wvugiz1",
+				"updated": "20231116162427"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于ScriptableObject的数据，由于它在游戏发布运行过程中无法被持久化\n我们可以利用PlayerPrefs、XML、Json、2进制等等方式\n让其可以达到被真正持久化的目的"
+				}
+			]
+		},
+		{
+			"ID": "20231116162421-tggsc63",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116162421-tggsc63",
+				"updated": "20231116162440"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但是并不是很建议大家利用ScriptableObject来做数据持久化，有点画蛇添足的意思了"
+				}
+			]
+		},
+		{
+			"ID": "20231116163932-b21lf7e",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231116163932-b21lf7e",
+				"updated": "20231116163936"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20231116163936-dcg3co2",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231116163936-dcg3co2",
+				"style": "line-height: 22px;",
+				"updated": "20231116164053"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "JsonUtility.FromJsonOverwrite()    //传入json字符串和要读取数据的对象，json字符串反序列化的内容会直接覆盖掉传入的对象的数据\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231116162104-dqxai6y",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231116162104-dqxai6y",
+				"updated": "20231116162207"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "前置知识"
+				}
+			]
+		},
+		{
+			"ID": "20231116162143-8v22ibr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116162143-8v22ibr",
+				"updated": "20231116163845"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20231116160307-4097aik",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "回顾通过ScriptableObject创建非持久化数据"
+				}
+			]
+		},
+		{
+			"ID": "20231116163845-hcn9qzw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116163845-hcn9qzw",
+				"updated": "20231116163907"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230810235243-ayb74u9",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "Json数据持久化"
+				}
+			]
+		},
+		{
+			"ID": "20231116162056-7j8zuxk",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231116162056-7j8zuxk",
+				"updated": "20231116162220"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "回顾数据持久化"
+				}
+			]
+		},
+		{
+			"ID": "20231116162225-yfns1l4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116162225-yfns1l4",
+				"updated": "20231116162227"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "硬盘\u003c=\u003e内存\n使用数据时从硬盘中读取，数据改变后保存到硬盘上\n游戏退出程序关闭后，数据信息会被存储到硬盘上，达到持久化的目的"
+				}
+			]
+		},
+		{
+			"ID": "20231116162229-p4ai06u",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116162229-p4ai06u",
+				"updated": "20231116162241"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们之前学习过的数据持久化相关知识"
+				}
+			]
+		},
+		{
+			"ID": "20231116162247-on8f7b9",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20231116162247-on8f7b9",
+				"updated": "20231116162327"
+			},
+			"Children": [
+				{
+					"ID": "20231116162253-cw1hq2j",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20231116162253-cw1hq2j",
+						"updated": "20231116162300"
+					},
+					"Children": [
+						{
+							"ID": "20231116162253-2edtz9e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231116162253-2edtz9e",
+								"updated": "20231116162300"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20230712211049-bmj9zx3",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "PlayerPrefs"
+								},
+								{
+									"Type": "NodeText"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231116162253-2n13i5p",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20231116162253-2n13i5p",
+						"updated": "20231116162302"
+					},
+					"Children": [
+						{
+							"ID": "20231116162253-dfnpi6g",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231116162253-dfnpi6g",
+								"updated": "20231116162302"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20230714234133-o6icpv2",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "XML"
+								},
+								{
+									"Type": "NodeText"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231116162253-uvs3ylk",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20231116162253-uvs3ylk",
+						"updated": "20231116162312"
+					},
+					"Children": [
+						{
+							"ID": "20231116162253-84djux7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231116162253-84djux7",
+								"updated": "20231116162312"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20230810030143-bdl4kzu",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "Json"
+								},
+								{
+									"Type": "NodeText"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231116162253-8ives1q",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20231116162253-8ives1q",
+						"updated": "20231116162327"
+					},
+					"Children": [
+						{
+							"ID": "20231116162253-dk3twtu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231116162253-dk3twtu",
+								"updated": "20231116162327"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20230822030648-nlwzbet",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "2进制"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20231116162247-vontyc9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116162247-vontyc9",
+				"updated": "20231116162341"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ScriptableObject并不适合用来做数据持久化功能\n但是我们可以利用我们学过的数据持久化方案让其持久化"
+				}
+			]
+		},
+		{
+			"ID": "20231116162342-ivoeruo",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231116162342-ivoeruo",
+				"updated": "20231116162355"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "利用Json结合ScriptableObject存储数据"
+				}
+			]
+		},
+		{
+			"ID": "20231116162404-np3dsx1",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231116162404-np3dsx1",
+				"style": "line-height: 22px;",
+				"updated": "20231116163626"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "MyData data = ScriptableObject.CreateInstance\u003cMyData\u003e();\ndata.PrintInfo();\ndata.i = 9999;\ndata.f = 6.6f;\ndata.b = true;\n//把数据对象序列化为json字符串\nstring jsonStr = JsonUtility.ToJson(data);\nprint(jsonStr);\n//把数据序列化后的结果 存入到指定路径当中\nFile.WriteAllText(Application.persistentDataPath + \"/testJson.json\", jsonStr);\nprint(Application.persistentDataPath);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231116162402-5bzw0rs",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231116162402-5bzw0rs",
+				"name": "JsonUtility.FromJsonOverwrite()",
+				"updated": "20231116162403"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "利用Json结合ScriptableObject读取数据"
+				}
+			]
+		},
+		{
+			"ID": "20231116164210-bivojgh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116164210-bivojgh",
+				"updated": "20231116164254"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "传入读取到的json字符串和要接收数据的对象，该对象内的数据将会被json字符串反序列化的数据覆盖"
+				}
+			]
+		},
+		{
+			"ID": "20231116163629-v3n4bxp",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231116163629-v3n4bxp",
+				"style": "line-height: 22px;",
+				"updated": "20231116164414"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "MyData data = ScriptableObject.CreateInstance\u003cMyData\u003e();\ndata.PrintInfo();\nstring str = File.ReadAllText(Application.persistentDataPath + \"/testJson.json\");\n//根据json字符串反序列化出数据 将内容覆盖到数据对象中\nJsonUtility.FromJsonOverwrite(str, data);\ndata.PrintInfo();\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

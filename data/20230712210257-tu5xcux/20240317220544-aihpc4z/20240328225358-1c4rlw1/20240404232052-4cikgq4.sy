@@ -1,0 +1,1286 @@
+{
+	"ID": "20240404232052-4cikgq4",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240404232052-4cikgq4",
+		"title": "UEDL8-4——自由移动、自由旋转",
+		"type": "doc",
+		"updated": "20240405211626"
+	},
+	"Children": [
+		{
+			"ID": "20240405181941-52fx5qp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240405181941-52fx5qp",
+				"updated": "20240405181945"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240405181945-24980vq",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240405181945-24980vq",
+				"style": "line-height: 22px;",
+				"updated": "20240405182219"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "HandleUtility.GetHandleSize()\t//该方法需要传入一个位置，返回一个float值，该值可以用于缩放，使绘制在Scene窗口上的内容相对于摄像机的大小不变\nHandles.FreeMoveHandle()\t\t//为点或者对象添加自由移动的控制器\nHandles.FreeRotateHandle()\t\t//为点或者对象添加自由旋转的控制器\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240405162705-w0rjux4",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240405162705-w0rjux4",
+				"name": "HandleUtility.GetHandleSize()",
+				"updated": "20240405163029"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "让句柄（控制器）在Scene窗口上显示的大小恒定"
+				}
+			]
+		},
+		{
+			"ID": "20240405162514-ancy23w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240405162514-ancy23w",
+				"updated": "20240405163029"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "HandleUtility.GetHandleSize()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法用于获取在 Scene 窗口中的一个单位距离所对应的屏幕空间大小\n这个方法主要用于根据物体的距离来动态调整控制手柄的大小，使其在不同距离下能够在视图中显示合适的大小\n一般我们把对象位置传递进去，他会自动得到一个句柄大小"
+				}
+			]
+		},
+		{
+			"ID": "20240405163249-n2uern2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240405163249-n2uern2",
+				"updated": "20240405182045"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "简单来说，该方法需要传入一个位置，根据这个位置与摄像机的距离返回一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "float"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​值，该值可以用于控制缩放，\n使得某个绘制在Scene窗口上的内容相对于摄像机的大小不变，无论其距离摄像机多远"
+				}
+			]
+		},
+		{
+			"ID": "20240405163405-b38ubtt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240405163405-b38ubtt",
+				"updated": "20240405163029"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "例如下面的这段代码，使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "HandleUtility.GetHandleSize()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​返回的值修改红色线框立方体的缩放，使其相对于摄像机的大小不变"
+				}
+			]
+		},
+		{
+			"ID": "20240405163555-x1okljv",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240405163555-x1okljv",
+				"style": "line-height: 22px;",
+				"updated": "20240405163029"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private Lesson26 targetObj;\n\nprivate void OnEnable()\n{\n    targetObj = target as Lesson26;\n}\n\nprivate void OnSceneGUI()\n{\n    Handles.color = Color.red;\n    Handles.DrawWireCube(targetObj.transform.position, Vector3.one * HandleUtility.GetHandleSize(targetObj.transform.position));\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240405163610-xwqfbfm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240405163610-xwqfbfm",
+				"updated": "20240405163029"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "效果如下："
+				}
+			]
+		},
+		{
+			"ID": "20240405163721-a1hhi9h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240405163721-a1hhi9h",
+				"updated": "20240405163029"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 469px;",
+						"style": "width: 459px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240405163721-lkimpff.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 459px;\" parent-style=\"width: 469px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 471px;",
+						"style": "width: 461px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240405163737-mj3q14t.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 461px;\" parent-style=\"width: 471px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240405163906-ceqsdiv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240405163906-ceqsdiv",
+				"updated": "20240405163029"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 468px;",
+						"style": "width: 458px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240405163906-cgusfdc.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 458px;\" parent-style=\"width: 468px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240405162844-za9h4ht",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240405162844-za9h4ht",
+				"name": "Handles.FreeMoveHandle()",
+				"updated": "20240405162850"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Handles中的自由移动"
+				}
+			]
+		},
+		{
+			"ID": "20240405162855-syo0v2l",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240405162855-syo0v2l",
+				"updated": "20240405175709"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "一个不受约束的移动控制柄，这个把手可以在所有方向上自由移动\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Handles.FreeMoveHandle(位置, 句柄大小, 移动步进值(按住ctrl键时会按该单位移动), 渲染控制手柄的回调函数);"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，返回值为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Vector3"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​、"
+				}
+			]
+		},
+		{
+			"ID": "20240405165540-a2a24gg",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240405165540-a2a24gg",
+				"updated": "20240405181531"
+			},
+			"Children": [
+				{
+					"ID": "20240405181454-ff64qv4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240405181454-ff64qv4",
+						"updated": "20240405181515"
+					},
+					"Children": [
+						{
+							"ID": "20240405181454-nm2dtyl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240405181454-nm2dtyl",
+								"updated": "20240405181515"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "返回值：由移动控制柄控制移动后返回的位置"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240405165541-eyrfcpl",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240405165541-eyrfcpl",
+						"updated": "20240405181531"
+					},
+					"Children": [
+						{
+							"ID": "20240405165541-k5fkat8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240405165541-k5fkat8",
+								"updated": "20240405181531"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数一：要移动的点的位置"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240405165556-ubezgng",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240405165556-ubezgng"
+					},
+					"Children": [
+						{
+							"ID": "20240405165556-j3p38uz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240405165556-j3p38uz",
+								"updated": "20240405180326"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数二：句柄大小，句柄大小一般配合"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240405162705-w0rjux4",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "HandleUtility.GetHandleSize()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​函数使用"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240405175929-bntvvqg",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240405175929-bntvvqg"
+					},
+					"Children": [
+						{
+							"ID": "20240405175929-rsphzvn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240405175929-rsphzvn",
+								"updated": "20240405180014"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数三：移动步进值（按住ctrl键时该单位移动固定距离的值）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240405180014-fbvufev",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240405180014-fbvufev"
+					},
+					"Children": [
+						{
+							"ID": "20240405180014-dmf7v6y",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240405180014-dmf7v6y",
+								"updated": "20240405180057"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数四：渲染控制手柄的回调函数"
+								}
+							]
+						},
+						{
+							"ID": "20240405180102-6qcgo7m",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240405180102-6qcgo7m",
+								"updated": "20240405181103"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "渲染控制手柄的常用回调函数，它们的区别仅在于绘制出来的控制器形状不一样"
+								}
+							]
+						},
+						{
+							"ID": "20240405180102-dqlhgdy",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240405180102-dqlhgdy",
+								"updated": "20240405180102"
+							},
+							"Children": [
+								{
+									"ID": "20240405180102-41mhfvw",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240405180102-41mhfvw",
+										"updated": "20240405180102"
+									},
+									"Children": [
+										{
+											"ID": "20240405180102-ffp5mbb",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240405180102-ffp5mbb",
+												"updated": "20240405180102"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Handles.RectangleHandleCap"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：一个矩形形状的控制手柄，通常用于表示一个平面的控制面"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240405180102-7376mb8",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240405180102-7376mb8",
+										"updated": "20240405180102"
+									},
+									"Children": [
+										{
+											"ID": "20240405180102-2eyqq70",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240405180102-2eyqq70",
+												"updated": "20240405180102"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Handles.CircleHandleCap"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：一个圆形的控制手柄，通常用于表示一个球体的控制面"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240405180102-fmetokn",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240405180102-fmetokn",
+										"updated": "20240405180102"
+									},
+									"Children": [
+										{
+											"ID": "20240405180102-t0xdrfb",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240405180102-t0xdrfb",
+												"updated": "20240405180102"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Handles.ArrowHandleCap"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：一个箭头形状的控制手柄，通常用于表示方向"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240405163014-6sbvzaq",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240405163014-6sbvzaq",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240405211626"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240405180333-e7o7wqv",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240405180333-e7o7wqv",
+						"updated": "20240405211626"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "以上是Unity2022版的"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "Handles.FreeMoveHandle"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​方法的参数列表，\n但值得一提的是，Unity2021版及以前的版本的"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "Handles.FreeMoveHandle"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​方法的参数列表会在"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "strong",
+							"TextMarkTextContent": "参数一后面额外要求一个点的旋转角度的四元数参数"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "\n因此Unity2021版及以前的版本的参数列表为："
+						}
+					]
+				},
+				{
+					"ID": "20240405180704-78ja33b",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20240405180704-78ja33b",
+						"updated": "20240405181629"
+					},
+					"Children": [
+						{
+							"ID": "20240405181629-a3i3y8w",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20240405181629-a3i3y8w",
+								"updated": "20240405181629"
+							},
+							"Children": [
+								{
+									"ID": "20240405181629-jnoxsy0",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240405181629-jnoxsy0",
+										"updated": "20240405181629"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "返回值：由移动控制柄控制移动后返回的位置"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240405180704-rt6423y",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20240405180704-rt6423y",
+								"updated": "20240405180704"
+							},
+							"Children": [
+								{
+									"ID": "20240405180704-catiir0",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240405180704-catiir0",
+										"updated": "20240405180704"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "参数一：移动位置"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240405180721-kcpz1me",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20240405180721-kcpz1me"
+							},
+							"Children": [
+								{
+									"ID": "20240405180721-0s0sc1s",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240405180721-0s0sc1s",
+										"updated": "20240405180736"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "参数二：旋转角度"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240405180704-hvvz3iv",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20240405180704-hvvz3iv",
+								"updated": "20240405180704"
+							},
+							"Children": [
+								{
+									"ID": "20240405180704-m7c4uaq",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240405180704-m7c4uaq",
+										"updated": "20240405180731"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "参数三：句柄大小"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240405180704-1lb6t6a",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20240405180704-1lb6t6a",
+								"updated": "20240405180704"
+							},
+							"Children": [
+								{
+									"ID": "20240405180704-36b7icf",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240405180704-36b7icf",
+										"updated": "20240405180718"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "参数四：移动步进值（按住ctrl键时该单位移动固定距离的值）"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240405180704-a7mdxs1",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20240405180704-a7mdxs1",
+								"updated": "20240405180704"
+							},
+							"Children": [
+								{
+									"ID": "20240405180704-3p89p54",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240405180704-3p89p54",
+										"updated": "20240405180716"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "参数五：渲染控制手柄的回调函数"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240405163959-0c9kue4",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240405163959-0c9kue4",
+				"style": "line-height: 22px;",
+				"updated": "20240405182000"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private Lesson26 targetObj;\n\nprivate void OnEnable()\n{\n    targetObj = target as Lesson26;\n}\n\nprivate void OnSceneGUI()\n{\n    targetObj.transform.position = Handles.FreeMoveHandle(targetObj.transform.position,\n                                                          HandleUtility.GetHandleSize(targetObj.transform.position),\n                                                          Vector3.one,\n                                                          Handles.RectangleHandleCap);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240405180837-syr4cn6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240405180837-syr4cn6",
+				"updated": "20240405181125"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现效果："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 675px;",
+						"style": "width: 665px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240405181124-5ml2y6j.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 665px;\" parent-style=\"width: 675px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240405180910-4e1nvl7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240405180910-4e1nvl7",
+				"updated": "20240405181817"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "拖到该白框可以让点或者对象在（渲染Scene窗口的）摄像机的拍摄范围的横截面上自由移动"
+				}
+			]
+		},
+		{
+			"ID": "20240405181242-ywl7xeq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240405181242-ywl7xeq",
+				"name": "Handles.FreeRotateHandle()",
+				"updated": "20240405181320"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Handles中的自由旋转"
+				}
+			]
+		},
+		{
+			"ID": "20240405181320-lfft6qt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240405181320-lfft6qt",
+				"updated": "20240405181346"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Handles.FreeRotateHandle(角度, 位置, 句柄大小);"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，返回值是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Quaternion"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240405181450-8x6pqj1",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240405181450-8x6pqj1",
+				"updated": "20240405181643"
+			},
+			"Children": [
+				{
+					"ID": "20240405181621-vbh2ob8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240405181621-vbh2ob8",
+						"updated": "20240405181643"
+					},
+					"Children": [
+						{
+							"ID": "20240405181621-nufoij1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240405181621-nufoij1",
+								"updated": "20240405181643"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "返回值：由旋转控制柄控制旋转后返回的四元数"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240405181450-ku3ilnj",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240405181450-ku3ilnj",
+						"updated": "20240405181450"
+					},
+					"Children": [
+						{
+							"ID": "20240405181450-h6uvrbn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240405181450-h6uvrbn",
+								"updated": "20240405181617"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数一：要移动的点的旋转角度（四元数）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240405181539-5h3bpae",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240405181539-5h3bpae"
+					},
+					"Children": [
+						{
+							"ID": "20240405181539-b1qkb24",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240405181539-b1qkb24",
+								"updated": "20240405181557"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数二：句柄的位置"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240405181450-b3otk44",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240405181450-b3otk44",
+						"updated": "20240405181450"
+					},
+					"Children": [
+						{
+							"ID": "20240405181450-uvnzzyp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240405181450-uvnzzyp",
+								"updated": "20240405181602"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数三：句柄大小，句柄大小一般配合"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240405162705-w0rjux4",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "HandleUtility.GetHandleSize()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​函数使用"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240405181645-7x12u0a",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240405181645-7x12u0a",
+				"style": "line-height: 22px;",
+				"updated": "20240405181804"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private Lesson26 targetObj;\n\nprivate void OnEnable()\n{\n    targetObj = target as Lesson26;\n}\n\nprivate void OnSceneGUI()\n{\n    targetObj.transform.rotation = Handles.FreeRotateHandle(targetObj.transform.rotation,\n                                                            targetObj.transform.position,\n                                                            HandleUtility.GetHandleSize(targetObj.transform.position));\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240405181738-jo8vykt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240405181738-jo8vykt",
+				"updated": "20240405181743"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 438px;",
+						"style": "width: 428px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240405181743-t5kuk9y.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 428px;\" parent-style=\"width: 438px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240405181826-unu83tc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240405181826-unu83tc",
+				"updated": "20240405181928"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "拖到该白框可以让点或者对象如转动球体那样让点或者对象自由旋转"
+				}
+			]
+		}
+	]
+}

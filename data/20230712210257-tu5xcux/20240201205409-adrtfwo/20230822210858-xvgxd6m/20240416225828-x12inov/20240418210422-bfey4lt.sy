@@ -1,0 +1,529 @@
+{
+	"ID": "20240418210422-bfey4lt",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240418210422-bfey4lt",
+		"title": "UFL5-5——AB包资源管理器回顾及潜在问题考虑",
+		"type": "doc",
+		"updated": "20240418213654"
+	},
+	"Children": [
+		{
+			"ID": "20240418210514-2wkfvhc",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240418210514-2wkfvhc",
+				"updated": "20240418210616"
+			},
+			"Children": [
+				{
+					"ID": "20240418210523-kpehtrb",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240418210523-kpehtrb",
+						"updated": "20240418210616"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "前置知识点："
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "block-ref",
+							"TextMarkBlockRefID": "20240128134334-zluqe6e",
+							"TextMarkBlockRefSubtype": "d",
+							"TextMarkTextContent": "UH1——AssetBundle"
+						}
+					]
+				},
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e",
+					"Properties": {
+						"updated": "20240418210622"
+					}
+				}
+			]
+		},
+		{
+			"ID": "20240418210601-10j7jjo",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240418210601-10j7jjo",
+				"updated": "20240418210806"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Assetbundle资源加载模块我们主要做什么"
+				}
+			]
+		},
+		{
+			"ID": "20240418210852-vnqmtny",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418210852-vnqmtny",
+				"updated": "20240418210909"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "目前已有的AB包资源管理器："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240128185344-0bn5jbo",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "UH1L4——AB包资源管理器"
+				}
+			]
+		},
+		{
+			"ID": "20240418210747-ku81qvk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418210747-ku81qvk",
+				"updated": "20240418210924"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "目前已有的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ABManager"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​中的异步加载部分，只是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "从AB包中异步加载资源，并没有真正的去异步加载AB包本身，"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n我们要做的事情，就是对"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ABManager"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​进行优化，让"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "其中的异步加载真正意义上的实现异步，就是将AB包本身的加载也变为异步的"
+				}
+			]
+		},
+		{
+			"ID": "20240418210926-irr8772",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240418210926-irr8772",
+				"updated": "20240418211140"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "异步加载AB包可能带来的问题"
+				}
+			]
+		},
+		{
+			"ID": "20240418211146-t8mykti",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418211146-t8mykti",
+				"updated": "20240418211159"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果我们想要将"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ABManager"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​中的异步加载方法改为真正意义上的异步\n所谓真正意义上的异步是指：不仅从AB包中加载资源是异步的，还需要在加载AB包时也采用异步"
+				}
+			]
+		},
+		{
+			"ID": "20240418211146-npecscg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418211146-npecscg",
+				"updated": "20240418211217"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "那么我们就需要考虑一个问题，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "如果当我们正在异步加载AB包时，又进行了一次同步加载AB包是否会报错（因为AB包不允许重复加载）"
+				}
+			]
+		},
+		{
+			"ID": "20240418211258-l0q2hcv",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240418211258-l0q2hcv",
+				"updated": "20240418211304"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "举例说明问题"
+				}
+			]
+		},
+		{
+			"ID": "20240418211305-91fnji0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418211305-91fnji0",
+				"updated": "20240418213058"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设要加载"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Assets/StreamingAssets/PC"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​下的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "test"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​AB包"
+				}
+			]
+		},
+		{
+			"ID": "20240418213109-61q2f5h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418213109-61q2f5h",
+				"updated": "20240418213109"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 229px;",
+						"style": "width: 219px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240418213109-5mol0zz.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 219px;\" parent-style=\"width: 229px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240418213112-kjlu02o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418213112-kjlu02o",
+				"updated": "20240418213401"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果先异步加载再同步加载AB包，则同步加载语句将会报错，因为AB包不可重复加载"
+				}
+			]
+		},
+		{
+			"ID": "20240418213221-c8dyvba",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240418213221-c8dyvba",
+				"style": "line-height: 22px;",
+				"updated": "20240418213242"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Main : MonoBehaviour\n{\n    void Start()\n    {\n        StartCoroutine(TestFun());\n        AssetBundle.LoadFromFile(Application.streamingAssetsPath + \"/PC/test\");\n    }\n\n    IEnumerator TestFun()\n    {\n        AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(Application.streamingAssetsPath + \"/PC/test\");\n        yield return req;\n        print(req.assetBundle.name);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240418213252-qjgx0sf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418213252-qjgx0sf",
+				"updated": "20240418213339"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 887px;",
+						"style": "width: 877px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240418213309-wpf58l7.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 877px;\" parent-style=\"width: 887px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240418213339-zkshi9h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418213339-zkshi9h",
+				"updated": "20240418213515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果先异步加载，然后关闭异步加载的协程，再同步加载，依然会报错"
+				}
+			]
+		},
+		{
+			"ID": "20240418213516-3tsr4nd",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240418213516-3tsr4nd",
+				"style": "line-height: 22px;",
+				"updated": "20240418213533"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Main : MonoBehaviour\n{\n    void Start()\n    {\n        StartCoroutine(TestFun());\n\t\tStopCoroutine(c);\n        AssetBundle.LoadFromFile(Application.streamingAssetsPath + \"/PC/test\");\n    }\n\n    IEnumerator TestFun()\n    {\n        AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(Application.streamingAssetsPath + \"/PC/test\");\n        yield return req;\n        print(req.assetBundle.name);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240418213534-0h2z6gm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418213534-0h2z6gm",
+				"updated": "20240418213544"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 953px;",
+						"style": "width: 943px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240418213544-d4qsiyw.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 943px;\" parent-style=\"width: 953px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240418213602-d4cv1t1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418213602-d4cv1t1",
+				"updated": "20240418213650"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此，只要调用过异步加载的API，之后在加载同名AB包（无论异步同步）都会报错"
+				}
+			]
+		},
+		{
+			"ID": "20240418211155-voofe6m",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240418211155-voofe6m",
+				"updated": "20240418211248"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "修改逻辑时的注意事项"
+				}
+			]
+		},
+		{
+			"ID": "20240418211252-nrcrc2b",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418211252-nrcrc2b",
+				"updated": "20240418213654"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过验证我们得出结论，异步加载AB包时，再同步加载AB包，会因重复加载而报错，因此我们在修改逻辑时应该考虑到这个问题"
+				}
+			]
+		}
+	]
+}

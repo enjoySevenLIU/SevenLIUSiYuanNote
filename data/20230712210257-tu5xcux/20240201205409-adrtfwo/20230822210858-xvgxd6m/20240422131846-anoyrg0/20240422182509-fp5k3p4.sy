@@ -1,0 +1,851 @@
+{
+	"ID": "20240422182509-fp5k3p4",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240422182509-fp5k3p4",
+		"title": "UFL9-2——输入控制模块的改键功能",
+		"type": "doc",
+		"updated": "20240422214031"
+	},
+	"Children": [
+		{
+			"ID": "20240422182509-qetrrjc",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240422182509-qetrrjc",
+				"updated": "20240422203146"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "分析改键功能需求"
+				}
+			]
+		},
+		{
+			"ID": "20240422203115-cpudbqm",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240422203115-cpudbqm",
+				"updated": "20240422203410"
+			},
+			"Children": [
+				{
+					"ID": "20240422203120-a81egrd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240422203120-a81egrd",
+						"updated": "20240422203151"
+					},
+					"Children": [
+						{
+							"ID": "20240422203120-ajpdyhs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422203120-ajpdyhs",
+								"updated": "20240422203151"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "改键功能应该是针对某一个行为的\n"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "游戏中的行为是固定的，我们需要改变的是触发该行为的按键"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n比如：角色有技能1、技能2、技能3，我们改变的是触发这些行为的输入"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240422203120-70dkapa",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240422203120-70dkapa",
+						"updated": "20240422203159"
+					},
+					"Children": [
+						{
+							"ID": "20240422203120-3obv2bw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422203120-3obv2bw",
+								"updated": "20240422203159"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "具体键位的触发不应该写死，而是需要"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "根据存储的键位数据进行初始化或进行修改"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240422203120-ihzne0h",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240422203120-ihzne0h",
+						"updated": "20240422203410"
+					},
+					"Children": [
+						{
+							"ID": "20240422203120-l2ptnvg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422203120-l2ptnvg",
+								"updated": "20240422203410"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "键位的修改"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "可以是键盘输入，也可以是鼠标输入，输入类型也可以是任意的"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n比如：触发技能1，可以修改为键盘输入，也可以修改为鼠标输入\n可以是按下、可以是抬起、也可以是长按，具体是哪种应该根据你的需求变化"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240422203412-zx1f695",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240422203412-zx1f695",
+				"updated": "20240422203422"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "根据需求整理思路并制作"
+				}
+			]
+		},
+		{
+			"ID": "20240422203427-pvschb5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422203427-pvschb5",
+				"updated": "20240422203711"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输入管理器主要做的事情，根据输入的信息，触发对应的事件，其中输入信息可变，触发的事件也可变"
+				}
+			]
+		},
+		{
+			"ID": "20240422203427-j3sc96n",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240422203427-j3sc96n",
+				"updated": "20240422213733"
+			},
+			"Children": [
+				{
+					"ID": "20240422203437-ewxg6ke",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240422203437-ewxg6ke",
+						"updated": "20240422213733"
+					},
+					"Children": [
+						{
+							"ID": "20240422203437-nlw0cdd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422203437-nlw0cdd",
+								"updated": "20240422203603"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "改键功能应该是针对某一个行为的，触发的事件类型应该是针对行为的，因为行为一般在游戏中是固定的"
+								}
+							]
+						},
+						{
+							"ID": "20240422204017-y536afm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422204017-y536afm",
+								"updated": "20240422204258"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "因此，我们在事件中心触发的事件不应该再是某种操作类型，而是某种行为，\n因此我们可以把原来的操作类型事件如："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "E_Mouse"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 等删除或者注释，转而声明各种行为的事件名\n（热键事件诸如水平轴和垂直轴不能删除，因为它们的修改不是在管理器内实现的）"
+								}
+							]
+						},
+						{
+							"ID": "20240422213717-c5df6qs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422213717-c5df6qs",
+								"updated": "20240422213733"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设我们有三种事件需要去监听设备输入"
+								}
+							]
+						},
+						{
+							"ID": "20240422204014-ip3cg40",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422204014-ip3cg40",
+								"style": "line-height: 22px;",
+								"updated": "20240422204224"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public enum E_EventType\n{\n    /// \u003csummary\u003e\n    /// 输入系统触发技能1 行为\n    /// \u003c/summary\u003e\n    E_Input_Skill1,\n    /// \u003csummary\u003e\n    /// 输入系统触发技能1 行为\n    /// \u003c/summary\u003e\n    E_Input_Skill2,\n    /// \u003csummary\u003e\n    /// 输入系统触发技能1 行为\n    /// \u003c/summary\u003e\n    E_Input_Skill3,\n    /// \u003csummary\u003e\n    /// 水平热键\n    /// \u003c/summary\u003e\n    E_Input_Horizontal,\n    /// \u003csummary\u003e\n    /// 竖直热键 -1~1的事件监听\n    /// \u003c/summary\u003e\n    E_Input_Vertical,\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240422204335-swpwbm7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422204335-swpwbm7",
+								"updated": "20240422204506"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "同时，将之前的输入模块内的实现的各种使用原来的操作事件的监听方法删除（监听轴的改变的方法除外）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240422203437-i3xkuxh",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240422203437-i3xkuxh",
+						"updated": "20240422203437"
+					},
+					"Children": [
+						{
+							"ID": "20240422203437-qhao75h",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422203437-qhao75h",
+								"updated": "20240422203608"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "具体键位的触发不应该写死，输入管理器中应该声明字典容器"
+								}
+							]
+						},
+						{
+							"ID": "20240422203608-hjk9s7h",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240422203608-hjk9s7h",
+								"updated": "20240422203608"
+							},
+							"Children": [
+								{
+									"ID": "20240422203608-3of4cxg",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240422203608-3of4cxg",
+										"updated": "20240422203608"
+									},
+									"Children": [
+										{
+											"ID": "20240422203608-t305a45",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240422203608-t305a45",
+												"updated": "20240422203608"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "键：触发事件的类型\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240422203609-cuuq0n2",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240422203609-cuuq0n2"
+									},
+									"Children": [
+										{
+											"ID": "20240422203609-tbvjzpj",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240422203609-tbvjzpj"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "值：具体的输入信息（键盘还是鼠标、按下还是抬起还是长按、那个键）"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240422210646-3v162md",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422210646-3v162md",
+								"updated": "20240422211140"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "首先声明一个输入消息类，用来表示需要监听什么样的输入，"
+								}
+							]
+						},
+						{
+							"ID": "20240422204331-5hhg96g",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422204331-5hhg96g",
+								"style": "line-height: 22px;",
+								"updated": "20240422210730"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\n\n/// \u003csummary\u003e\n/// 输入消息\n/// \u003c/summary\u003e\npublic class InputInfo\n{\n    public enum E_KeyOrMouse\n    {\n        /// \u003csummary\u003e\n        /// 键盘\n        /// \u003c/summary\u003e\n        Key,\n        /// \u003csummary\u003e\n        /// 鼠标\n        /// \u003c/summary\u003e\n        Mouse,\n    }\n\n    public enum E_InputType\n    {\n        /// \u003csummary\u003e\n        /// 按下\n        /// \u003c/summary\u003e\n        Down,\n        /// \u003csummary\u003e\n        /// 抬起\n        /// \u003c/summary\u003e\n        Up,\n        /// \u003csummary\u003e\n        /// 按住\n        /// \u003c/summary\u003e\n        Always,\n    }\n\n    public E_KeyOrMouse keyOrMouse;     //具体输入的类型 —— 键盘还是鼠标\n    public E_InputType inputType;       //输入的类型 —— 抬起、按下、长按\n    public KeyCode key;\n    public int mouseID;\n\n    /// \u003csummary\u003e\n    /// 键盘输入初始化\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"inputType\"\u003e输入类型 —— 抬起、按下、长按\u003c/param\u003e\n    /// \u003cparam name=\"key\"\u003e监听哪个键\u003c/param\u003e\n    public InputInfo(E_InputType inputType, KeyCode key)\n    {\n        this.keyOrMouse = E_KeyOrMouse.Key;\n        this.inputType = inputType;\n        this.key = key;\n    }\n\n    /// \u003csummary\u003e\n    /// 鼠标输入初始化\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"inputType\"\u003e输入类型 —— 抬起、按下、长按\u003c/param\u003e\n    /// \u003cparam name=\"mouseID\"\u003e监听哪个键\u003c/param\u003e\n    public InputInfo(E_InputType inputType, int mouseID)\n    {\n        this.keyOrMouse = E_KeyOrMouse.Mouse;\n        this.inputType = inputType;\n        this.mouseID = mouseID;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240422210921-kzwhmqv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422210921-kzwhmqv",
+								"updated": "20240422211211"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "然后就可以在管理器内声明字典，可用来查找某个事件需要由键盘或者鼠标的哪个按键输入触发"
+								}
+							]
+						},
+						{
+							"ID": "20240422210930-6sjzsal",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422210930-6sjzsal",
+								"style": "line-height: 22px;",
+								"updated": "20240422211133"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private Dictionary\u003cE_EventType, InputInfo\u003e inputDic = new Dictionary\u003cE_EventType, InputInfo\u003e();\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240422203437-6zknzl2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240422203437-6zknzl2",
+						"updated": "20240422203437"
+					},
+					"Children": [
+						{
+							"ID": "20240422203437-ubb95o2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422203437-ubb95o2",
+								"updated": "20240422203614"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "键位的修改可以是键盘输入，也可以是鼠标输入，输入类型也可以是任意的，输入管理器应该提供初始化行为对应的键位方法"
+								}
+							]
+						},
+						{
+							"ID": "20240422211215-hdlpzj3",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422211215-hdlpzj3",
+								"style": "line-height: 22px;",
+								"updated": "20240422211510"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "/// \u003csummary\u003e\n/// 提供给外部改键或初始化的方法（改为键盘事件）\n/// \u003c/summary\u003e\n/// \u003cparam name=\"eventType\"\u003e行为事件类型\u003c/param\u003e\n/// \u003cparam name=\"key\"\u003e要监听哪个键\u003c/param\u003e\n/// \u003cparam name=\"inputType\"\u003e输入类型\u003c/param\u003e\npublic void ChangeKeyboardInfo(E_EventType eventType, KeyCode key, InputInfo.E_InputType inputType)\n{\n    //初始化\n    if (!inputDic.ContainsKey(eventType))\n    {\n        inputDic.Add(eventType, new InputInfo(inputType, key));\n    }\n    //改键\n    else\n    {\n        //如果之前是鼠标，我们必须要修改它的按键类型\n        inputDic[eventType].keyOrMouse = InputInfo.E_KeyOrMouse.Key;\n        inputDic[eventType].key = key;\n        inputDic[eventType].inputType = inputType;\n    }\n}\n\n/// \u003csummary\u003e\n/// 提供给外部改键或初始化的方法（改为鼠标事件）\n/// \u003c/summary\u003e\n/// \u003cparam name=\"eventType\"\u003e行为事件类型\u003c/param\u003e\n/// \u003cparam name=\"mouseID\"\u003e要监听鼠标按键的ID\u003c/param\u003e\n/// \u003cparam name=\"inputType\"\u003e输入类型\u003c/param\u003e\npublic void ChangeMouseInfo(E_EventType eventType, int mouseID, InputInfo.E_InputType inputType)\n{\n    //初始化\n    if (!inputDic.ContainsKey(eventType))\n    {\n        inputDic.Add(eventType, new InputInfo(inputType, mouseID));\n    }\n    //改键\n    else\n    {\n        //如果之前是键盘，我们必须要修改它的按键类型\n        inputDic[eventType].keyOrMouse = InputInfo.E_KeyOrMouse.Mouse;\n        inputDic[eventType].mouseID = mouseID;\n        inputDic[eventType].inputType = inputType;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240422211350-5ljrb0a",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240422211350-5ljrb0a"
+					},
+					"Children": [
+						{
+							"ID": "20240422211350-p9u5ihc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422211350-p9u5ihc",
+								"updated": "20240422211607"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在帧更新方法内的遍历字典去检测输入"
+								}
+							]
+						},
+						{
+							"ID": "20240422212600-pcwu60g",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422212600-pcwu60g",
+								"updated": "20240422212729"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "根据事件对应的输入消息，检测对应的输入，如果这一帧执行了输入，就触发事件，并且无需传递参数"
+								}
+							]
+						},
+						{
+							"ID": "20240422211607-ariuayh",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422211607-ariuayh",
+								"style": "line-height: 22px;",
+								"updated": "20240422212556"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private Dictionary\u003cE_EventType, InputInfo\u003e inputDic = new Dictionary\u003cE_EventType, InputInfo\u003e();\n//当前遍历取出的遍历消息\nprivate InputInfo nowInputInfo;\n\nprivate bool isCheckInput;\n\nprivate InputManager()\n{\n    MonoManager.Instance.AddUpdateListener(InputUpdate);\n}\n\nprivate void InputUpdate()\n{\n    //如果外部未开启检测功能，就不检测输入\n    if (!isCheckInput)\n        return;\n\n    foreach (E_EventType eventType in inputDic.Keys)\n    {\n        nowInputInfo = inputDic[eventType];\n        //如果是键盘输入\n        if (nowInputInfo.keyOrMouse == InputInfo.E_KeyOrMouse.Key)\n        {\n            //根据输入类型检测对应的输入，传入输入消息设置的键位\n            switch (nowInputInfo.inputType)\n            {\n                case InputInfo.E_InputType.Down:\n                    if (Input.GetKeyDown(nowInputInfo.key))\n                        EventCenter.Instance.EventTrigger(eventType);\n                    break;\n                case InputInfo.E_InputType.Up:\n                    if (Input.GetKeyUp(nowInputInfo.key))\n                        EventCenter.Instance.EventTrigger(eventType);\n                    break;\n                case InputInfo.E_InputType.Always:\n                    if (Input.GetKey(nowInputInfo.key))\n                        EventCenter.Instance.EventTrigger(eventType);\n                    break;\n            }\n        }\n        //如果是鼠标输入\n        else if (nowInputInfo.keyOrMouse == InputInfo.E_KeyOrMouse.Mouse)\n        {\n            //根据输入类型检测对应的输入，传入输入消息设置的键位\n            switch (nowInputInfo.inputType)\n            {\n                case InputInfo.E_InputType.Down:\n                    if (Input.GetMouseButtonDown(nowInputInfo.mouseID))\n                        EventCenter.Instance.EventTrigger(eventType);\n                    break;\n                case InputInfo.E_InputType.Up:\n                    if (Input.GetMouseButtonUp(nowInputInfo.mouseID))\n                        EventCenter.Instance.EventTrigger(eventType);\n                    break;\n                case InputInfo.E_InputType.Always:\n                    if (Input.GetMouseButton(nowInputInfo.mouseID))\n                        EventCenter.Instance.EventTrigger(eventType);\n                    break;\n            }\n        }\n    }\n\n    EventCenter.Instance.EventTrigger(E_EventType.E_Input_Horizontal, Input.GetAxis(\"Horizontal\"));\n    EventCenter.Instance.EventTrigger(E_EventType.E_Input_Vertical, Input.GetAxis(\"Vertical\"));\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240422212912-9hk1apv",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20240422212912-9hk1apv"
+					},
+					"Children": [
+						{
+							"ID": "20240422212912-jbikyjp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422212912-jbikyjp",
+								"updated": "20240422212922"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "移除事件的输入监听方法"
+								}
+							]
+						},
+						{
+							"ID": "20240422212935-frlqx0c",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422212935-frlqx0c",
+								"updated": "20240422212955"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "同样我们需要向外部提供一个能够移除某个事件的输入监听的方法"
+								}
+							]
+						},
+						{
+							"ID": "20240422212922-kxorj0t",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422212922-kxorj0t",
+								"style": "line-height: 22px;",
+								"updated": "20240422212933"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private Dictionary\u003cE_EventType, InputInfo\u003e inputDic = new Dictionary\u003cE_EventType, InputInfo\u003e();\n\n/// \u003csummary\u003e\n/// 移除某个事件的输入监听\n/// \u003c/summary\u003e\n/// \u003cparam name=\"eventType\"\u003e要移除输入监听的事件\u003c/param\u003e\npublic void RemoveInputInfo(E_EventType eventType)\n{\n    if (inputDic.ContainsKey(eventType))\n        inputDic.Remove(eventType);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240422213001-b5hx66m",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240422213001-b5hx66m",
+				"updated": "20240422213008"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20240422213739-jv59okl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422213739-jv59okl",
+				"updated": "20240422213833"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们为三个事件分别添加不同输入的监听，然后监听这三个事件是否被输入模块触发"
+				}
+			]
+		},
+		{
+			"ID": "20240422213008-1f40ktf",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240422213008-1f40ktf",
+				"style": "line-height: 22px;",
+				"updated": "20240422213008"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Main : MonoBehaviour\n{\n    void Start()\n    {\n        InputManager.Instance.StartOrCloseInputManager(true);\n        //设置各个事件的监听输入的消息\n        InputManager.Instance.ChangeKeyboardInfo(E_EventType.E_Input_Skill1, KeyCode.J, InputInfo.E_InputType.Down);\n        InputManager.Instance.ChangeKeyboardInfo(E_EventType.E_Input_Skill2, KeyCode.K, InputInfo.E_InputType.Up);\n        InputManager.Instance.ChangeMouseInfo(E_EventType.E_Input_Skill3, 0, InputInfo.E_InputType.Down);\n\t\t//添加事件监听\n        EventCenter.Instance.AddEventListener(E_EventType.E_Input_Skill1, Skill1);\n        EventCenter.Instance.AddEventListener(E_EventType.E_Input_Skill2, Skill2);\n        EventCenter.Instance.AddEventListener(E_EventType.E_Input_Skill3, Skill3);\n    }\n\n    private void Skill1()\n    {\n        print(\"技能1触发\");\n    }\n\n    private void Skill2()\n    {\n        print(\"技能1触发\");\n    }\n\n    private void Skill3()\n    {\n        print(\"技能1触发\");\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240422213818-kw26bth",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422213818-kw26bth",
+				"updated": "20240422214012"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按下J键，鼠标左键，按下K键抬起时分别输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 368px;",
+						"style": "width: 358px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240422214012-7eo5q21.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 358px;\" parent-style=\"width: 368px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240422203637-yjmoxtb",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240422203637-yjmoxtb",
+				"updated": "20240422203643"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "总结"
+				}
+			]
+		},
+		{
+			"ID": "20240422203633-3t7dttb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422203633-3t7dttb",
+				"updated": "20240422214022"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们只需要使用数据持久化、UI相关知识点，再结合这节课的输入管理器 就可以做出完整的改键功能了"
+				}
+			]
+		},
+		{
+			"ID": "20240422203633-ah6tmyb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422203633-ah6tmyb",
+				"updated": "20240422214031"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "遗留问题："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "在真正制作改建功能时，我们应该如何获取到任意键盘或任意鼠标输入来记录对应的输入信息"
+				}
+			]
+		},
+		{
+			"ID": "20240422214031-5mal5oy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422214031-5mal5oy"
+			}
+		}
+	]
+}

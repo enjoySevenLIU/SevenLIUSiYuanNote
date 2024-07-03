@@ -1,0 +1,487 @@
+{
+	"ID": "20230709143509-qn0dgzq",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230709143509-qn0dgzq",
+		"name": "Transform的坐标转换",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230709143509-qn0dgzq\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230709145232-cx6pdd0\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230709151908-awfgkfs\u0026quot;,\u0026quot;scrollTop\u0026quot;:13\u0026#125;",
+		"title": "U1L7-6——坐标转换",
+		"updated": "20230711020003"
+	},
+	"Children": [
+		{
+			"ID": "20230709145232-cx6pdd0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230709145232-cx6pdd0",
+				"updated": "20230709145247"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Transform的坐标转换"
+				}
+			]
+		},
+		{
+			"ID": "20230709145133-kxsz40h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709145133-kxsz40h",
+				"updated": "20230709145216"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "有 世界坐标转本地坐标 和 本地坐标转世界坐标\n其中最重要的就是本地坐标系的点 转世界坐标系的点\n比如 现在玩家要在自己面前n个单位前 释放技能 这时可以无需关系世界坐标系\n通过 相对于本地坐标系的位置 转换为 世界坐标系的点 进行特效的创建"
+				}
+			]
+		},
+		{
+			"ID": "20230709145218-qaqreje",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709145218-qaqreje",
+				"updated": "20230709145421"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20230709145421-qht412m",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709145421-qht412m",
+				"updated": "20230709145902"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "this.transform.InverseTransformPoint()\t\t//受到缩放影响的 世界坐标系的点 转换为 相对本地坐标系的点 的方法\nthis.transform.InverseTransformDirection()\t//不受缩放影响的 世界坐标系的方向 转换为 相对本地坐标系的方向 的方法\nthis.transform.InverseTransformVector()\t\t//受到缩放影响的 世界坐标系的方向 转换为 相对本地坐标系的方向 的方法\nthis.transform.TransformPoint()\t\t\t//受到缩放影响的 本地坐标系的点 转换为 相对世界坐标系的点 的方法\nthis.transform.TransformDirection()\t\t//不受缩放影响的 本地坐标系的方向 转换为 相对世界坐标系的方向 的方法\nthis.transform.TransformVector()\t\t//受到缩放影响的 本地坐标系的方向 转换为 相对世界坐标系的方向 的方法\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709145908-6iecdhy",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709145908-6iecdhy",
+				"updated": "20230709151417"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "世界坐标转本地坐标"
+				}
+			]
+		},
+		{
+			"ID": "20230709151522-df982vf",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709151522-df982vf",
+				"name": "transform.InverseTransformPoint()",
+				"updated": "20230709151732"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "世界坐标系的点 转换 为相对本地坐标系的点"
+				}
+			]
+		},
+		{
+			"ID": "20230709151426-u1u4lkj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709151426-u1u4lkj",
+				"updated": "20230709151737"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "受到缩放影响的 世界坐标系的点 转换为 相对本地坐标系的点 的方法"
+				}
+			]
+		},
+		{
+			"ID": "20230709151447-ujlt143",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709151447-ujlt143",
+				"updated": "20230709151456"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"转换后的点：\" + this.transform.InverseTransformPoint(Vector3.forward));\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709151514-m1407n2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709151514-m1407n2",
+				"updated": "20230709151525"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "世界坐标系的方向 转换 为相对本地坐标系的方向"
+				}
+			]
+		},
+		{
+			"ID": "20230709151525-d9jczlj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230709151525-d9jczlj",
+				"name": "transform.InverseTransformDirection()",
+				"updated": "20230709152048"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "不受缩放影响"
+				}
+			]
+		},
+		{
+			"ID": "20230709151627-thwyhky",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709151627-thwyhky",
+				"updated": "20230709151633"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "不受缩放影响的 世界坐标系的方向 转换为 相对本地坐标系的方向 的方法"
+				}
+			]
+		},
+		{
+			"ID": "20230709151556-1vqgypk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709151556-1vqgypk",
+				"updated": "20230709151609"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"转换后的方向\" + this.transform.InverseTransformDirection(Vector3.forward));\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709151531-06v6fls",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230709151531-06v6fls",
+				"name": "transform.InverseTransformVector()",
+				"updated": "20230709152058"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "受到缩放影响"
+				}
+			]
+		},
+		{
+			"ID": "20230709151634-n3lcru6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709151634-n3lcru6",
+				"updated": "20230709151638"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "受到缩放影响的 世界坐标系的方向 转换为 相对本地坐标系的方向 的方法"
+				}
+			]
+		},
+		{
+			"ID": "20230709151603-gcc0cvd",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709151603-gcc0cvd",
+				"updated": "20230709151615"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"受到缩放影响转换后的方向\" + this.transform.InverseTransformVector(Vector3.forward));\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709151418-341egs0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709151418-341egs0",
+				"updated": "20230709151424"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本地坐标转世界坐标"
+				}
+			]
+		},
+		{
+			"ID": "20230709151804-avvohl1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709151804-avvohl1",
+				"name": "transform.TransformPoint()",
+				"updated": "20230709152010"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本地坐标系的点 转换 为相对世界坐标系的点"
+				}
+			]
+		},
+		{
+			"ID": "20230709151751-tfnkrsl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709151751-tfnkrsl",
+				"updated": "20230709151844"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "受到缩放影响的 本地坐标系的点 转换为 相对世界坐标系的点 的方法"
+				}
+			]
+		},
+		{
+			"ID": "20230709151824-pnig7r7",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709151824-pnig7r7",
+				"updated": "20230709152036"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"本地转换世界后的点：\" + this.transform.TransformPoint(Vector3.forward));\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709151800-agz5pyr",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709151800-agz5pyr",
+				"updated": "20230709151819"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本地坐标系的方向 转换 为相对世界坐标系的方向"
+				}
+			]
+		},
+		{
+			"ID": "20230709151756-d9uwjo0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230709151756-d9uwjo0",
+				"name": "transform.TransformDirection()",
+				"updated": "20230709151959"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "不受缩放影响"
+				}
+			]
+		},
+		{
+			"ID": "20230709151757-9z7ml21",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709151757-9z7ml21",
+				"updated": "20230709151856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "不受缩放影响的 本地坐标系的方向 转换为 相对世界坐标系的方向 的方法"
+				}
+			]
+		},
+		{
+			"ID": "20230709151857-0fmm88b",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709151857-0fmm88b",
+				"updated": "20230709151925"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"本地转换世界后的方向\" + this.transform.TransformDirection(Vector3.forward));\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709151752-fq65qjm",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230709151752-fq65qjm",
+				"name": "transform.TransformVector()",
+				"updated": "20230709152026"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "受到缩放影响"
+				}
+			]
+		},
+		{
+			"ID": "20230709151759-qu6ymzz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709151759-qu6ymzz",
+				"updated": "20230709151904"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "受到缩放影响的 本地坐标系的方向 转换为 相对世界坐标系的方向 的方法"
+				}
+			]
+		},
+		{
+			"ID": "20230709151908-awfgkfs",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709151908-awfgkfs",
+				"updated": "20230709151930"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"受到缩放影响本地转换世界后的方向\" + this.transform.TransformVector(Vector3.forward));\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

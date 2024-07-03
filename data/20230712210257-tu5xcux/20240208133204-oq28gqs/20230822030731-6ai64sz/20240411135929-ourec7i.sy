@@ -1,0 +1,904 @@
+{
+	"ID": "20240411135929-ourec7i",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240411135929-ourec7i",
+		"title": "UG4L17——DrawCall优化",
+		"type": "doc",
+		"updated": "20240411202207"
+	},
+	"Children": [
+		{
+			"ID": "20240411201827-4e15wbb",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240411201827-4e15wbb",
+				"updated": "20240411201832"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240411201832-qzg0slx",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240411201832-qzg0slx",
+				"style": "line-height: 22px;",
+				"updated": "20240411202207"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "gComponent.fairyBatching\t\t\t//开启组件的深度调整以降低该面板的DrawCall\ngObject.InvalidateBatchingState()\t//手动触发深度调整，改变子元件及其子元件的位置、大小，旋转或缩放，并不会自动触发深度调整，因此需要手动触发\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240411135930-5gke34g",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240411135930-5gke34g",
+				"updated": "20240411200023"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "DrawCall"
+				}
+			]
+		},
+		{
+			"ID": "20240411200032-0ygrpsf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240411200032-0ygrpsf",
+				"updated": "20240411200102"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体DrawCall是什么，参见："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230720180634-g2bqb75",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "DrawCall"
+				}
+			]
+		},
+		{
+			"ID": "20240411200032-9vivrqu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240411200032-9vivrqu",
+				"updated": "20240411200114"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "简单回顾DrawCall：\nDC就是CPU通知GPU进行一次渲染的命令，如果DC次数较多会导致游戏卡顿\n我们可以通过打图集，将小图合并成大图，将本应n次的DC变成1次DC来提高性能"
+				}
+			]
+		},
+		{
+			"ID": "20240411200106-tyc35ko",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240411200106-tyc35ko",
+				"updated": "20240411200131"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "FairyGUI 和 UGUI 以及 NGUI 的 DrawCall 优化异同"
+				}
+			]
+		},
+		{
+			"ID": "20240411200144-kzj356v",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240411200144-kzj356v",
+				"updated": "20240411200205"
+			},
+			"Children": [
+				{
+					"ID": "20240411200147-rshhklg",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240411200147-rshhklg",
+						"updated": "20240411200147"
+					},
+					"Children": [
+						{
+							"ID": "20240411200147-zxgb0b0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240411200147-zxgb0b0",
+								"updated": "20240411200150"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "相同点：3种UI都是通过打图集来优化DC"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240411200148-t33gepb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240411200148-t33gepb",
+						"updated": "20240411200205"
+					},
+					"Children": [
+						{
+							"ID": "20240411200148-al1neq0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240411200148-al1neq0",
+								"updated": "20240411200155"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "不同点："
+								}
+							]
+						},
+						{
+							"ID": "20240411200202-m9xcfxe",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240411200202-m9xcfxe",
+								"updated": "20240411200205"
+							},
+							"Children": [
+								{
+									"ID": "20240411200205-8t40g1k",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240411200205-8t40g1k",
+										"updated": "20240411200205"
+									},
+									"Children": [
+										{
+											"ID": "20240411200205-4edapcl",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240411200205-4edapcl",
+												"updated": "20240411200205"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "UGUI和NGUI的UI元素层级会影响DC的数量，我们拼UI时，要注意不同图集的UI元素的层级关系"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240411200209-rq9olud",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240411200209-rq9olud"
+									},
+									"Children": [
+										{
+											"ID": "20240411200209-8oqpe2e",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240411200209-8oqpe2e"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "FairyGUI中不用太过在意UI元素的层级，它会帮助我们进行深度调整\nFairyGUI采用了Unity的动态批处理技术，提供了深度调整技术进行DC优化\n"
+												}
+											]
+										},
+										{
+											"ID": "20240411200222-qvvax5h",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240411200222-qvvax5h"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "动态批处理：cpu每帧把可以进行动态批处理的网格进行合并，再把合并后的数据传给gpu，使用同一个材质对其渲染，达到降低DC的目的"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240411200402-xtd6icx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240411200402-xtd6icx",
+				"name": "gComponent.fairyBatching",
+				"updated": "20240411200437"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "FairyGUI中优化DrawCall的关键步骤"
+				}
+			]
+		},
+		{
+			"ID": "20240411200659-z9wu8pk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240411200659-z9wu8pk",
+				"updated": "20240411200727"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先显示面板，查看DrawCall数量（Batches）"
+				}
+			]
+		},
+		{
+			"ID": "20240411200631-gcneb70",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240411200631-gcneb70",
+				"style": "line-height: 22px;",
+				"updated": "20240411200437"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Start()\n{\n    UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240411200820-pbjjsz7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240411200820-pbjjsz7",
+				"updated": "20240411200820"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 677px;",
+						"style": "width: 667px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240411200820-ci2htny.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 667px;\" parent-style=\"width: 677px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240411200438-e023qx4",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240411200438-e023qx4",
+				"updated": "20240411200447"
+			},
+			"Children": [
+				{
+					"ID": "20240411200447-imz7a4a",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240411200447-imz7a4a",
+						"updated": "20240411200447"
+					},
+					"Children": [
+						{
+							"ID": "20240411200447-0jo3wqd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240411200447-0jo3wqd",
+								"updated": "20240411200452"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "打开Unity中的动态批处理"
+								}
+							]
+						},
+						{
+							"ID": "20240411200452-8yybym1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240411200452-8yybym1",
+								"updated": "20240411200506"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "File ——\u003e Build Setting ——\u003e PlayerSetting ——\u003e Other Setting ——\u003e Dynamic Batching"
+								}
+							]
+						},
+						{
+							"ID": "20240411200946-npj20gm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240411200946-npj20gm",
+								"updated": "20240411200946"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 760px;",
+										"style": "width: 750px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240411200946-czo2ufs.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 750px;\" parent-style=\"width: 760px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240411200447-mm2esui",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240411200447-mm2esui",
+						"updated": "20240411200447"
+					},
+					"Children": [
+						{
+							"ID": "20240411200447-nwhqybo",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240411200447-nwhqybo",
+								"updated": "20240411200629"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将组件的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "fairyBatching"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​属性设置为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "true"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240411201025-d4wi96k",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240411201025-d4wi96k",
+								"style": "line-height: 22px;",
+								"updated": "20240411201033"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\n    panel.fairyBatching = true;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240411201108-gxp9zof",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240411201108-gxp9zof",
+				"updated": "20240411201227"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，Batches（DrawCall）相比未开启"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "fairyBatching"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​时显著的减少了"
+				}
+			]
+		},
+		{
+			"ID": "20240411201102-onx8gvs",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240411201102-onx8gvs",
+				"updated": "20240411201102"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 731px;",
+						"style": "width: 721px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240411201102-shu3m4n.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 721px;\" parent-style=\"width: 731px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240411201448-ycekooi",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240411201448-ycekooi",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240411201547"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：\n某个组件设置了"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "fairyBatching"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，那么无需在 子组件 和 子元件的子元件 再启用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "fairyBatching"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n一般只在顶层组件打开这个功能（面板组件），"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text strong",
+					"TextMarkTextContent": "永远不要在"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\" parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "code text strong",
+					"TextMarkTextContent": "GRoot"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\" parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text strong",
+					"TextMarkTextContent": "上开启"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\" parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "code text strong",
+					"TextMarkTextContent": "fairyBatching"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\" parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text strong",
+					"TextMarkTextContent": "！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\" parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20240411200221-mii2qst",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240411200221-mii2qst",
+				"name": "gObject.InvalidateBatchingState()",
+				"updated": "20240411200248"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "手动触发深度调整"
+				}
+			]
+		},
+		{
+			"ID": "20240411200249-yjelxhw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240411200249-yjelxhw",
+				"updated": "20240411200359"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于打开了"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "fairyBatching"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的组件\n当自己调用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "SetPosition"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​等API改变 子元件 或者 子元件的子元件 的位置、大小，旋转或缩放，并不会自动触发深度调整"
+				}
+			]
+		},
+		{
+			"ID": "20240411200400-rg0mtn1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240411200400-rg0mtn1",
+				"updated": "20240411200400"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "例如一个图片原来显示在一个窗口里的顶层，你将它从原来的位置移到另外一个位置\n这个图片就有可能被窗口里的其他元素遮挡，这时开发者需要手动触发深度调整 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 中的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "InvalidateBatchingState"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法"
+				}
+			]
+		},
+		{
+			"ID": "20240411200418-hdyzy90",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240411200418-hdyzy90",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240411201804"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：这个API并不需要由开启了"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "fairyBatching"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的组件调用，可以是任何一个内含的元件"
+				}
+			]
+		},
+		{
+			"ID": "20240411201558-yhzrv0a",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240411201558-yhzrv0a",
+				"style": "line-height: 22px;",
+				"updated": "20240411201651"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Start()\n{\n    TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\n    panel.fairyBatching = true;\n    panel.InvalidateBatchingState();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

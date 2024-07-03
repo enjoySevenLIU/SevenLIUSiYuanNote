@@ -1,0 +1,591 @@
+{
+	"ID": "20240128185344-0bn5jbo",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240128185344-0bn5jbo",
+		"title": "UH1L4——AB包资源管理器",
+		"type": "doc",
+		"updated": "20240418214127"
+	},
+	"Children": [
+		{
+			"ID": "20240128185344-c9u0ucc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240128185344-c9u0ucc",
+				"updated": "20240128185432"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "前置知识：字典，协程，单例模式，AB包相关API，委托，lambda表达式"
+				}
+			]
+		},
+		{
+			"ID": "20240201234108-6lmx83b",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201234108-6lmx83b",
+				"updated": "20240201234117"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "AB包资源管理器要做的工作"
+				}
+			]
+		},
+		{
+			"ID": "20240201234118-wk7ksc3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201234118-wk7ksc3",
+				"updated": "20240201234342"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "封装"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AssetBundle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的一系列方法，在管理器内部实现加载主包，加载依赖，加载AB包，加载资源的逻辑\n对外提供直接同步和异步加载AB包内资源的接口，以及卸载AB包的接口，减少外部加载资源的代码量"
+				}
+			]
+		},
+		{
+			"ID": "20240128200417-l9lmng1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240128200417-l9lmng1",
+				"updated": "20240128200426"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "继承单例模式基类"
+				}
+			]
+		},
+		{
+			"ID": "20240128200426-18891xu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240128200426-18891xu",
+				"updated": "20240201232231"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这里让"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ABManager"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​继承了"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20231223162523-vxvufy3",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "单例模式基类"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "SingletonAutoMonoBehaviour\u0026lt;T\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，作为单例模式管理器使用"
+				}
+			]
+		},
+		{
+			"ID": "20240128190345-sp45ixm",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240128190345-sp45ixm",
+				"updated": "20240128200355"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "基础成员与属性"
+				}
+			]
+		},
+		{
+			"ID": "20240128201603-g8f4ama",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240128201603-g8f4ama",
+				"updated": "20240128202204"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "每个项目都需要加载其主包以获取依赖信息，因此需要单独的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "mainAB"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "manifest"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​字段装载主包及其依赖配置信息\n为了防止AB包重复加载，这里以包名为键，AB包为值，将加载出来的AB包存储起来，当重新需要该AB包时就直接通过字典获取"
+				}
+			]
+		},
+		{
+			"ID": "20240128201642-46mpoon",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240128201642-46mpoon",
+				"updated": "20240128202519"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "将AB包存放路径直接封装为属性，供内部直接调用，这样当AB包存储位置发生改变时，直接修改该属性返回的值即可\n将主包名字直接封装为属性，供内部直接调用，可以使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "#if"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​来处理不同平台下返回的不同主包"
+				}
+			]
+		},
+		{
+			"ID": "20240128200356-7p0pxcu",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240128200356-7p0pxcu",
+				"style": "line-height: 22px;",
+				"updated": "20240128202035"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//主包\nprivate AssetBundle mainAB = null;\n//依赖包获取用的配置文件\nprivate AssetBundleManifest manifest = null;\n\nprivate Dictionary\u003cstring, AssetBundle\u003e abDic = new Dictionary\u003cstring, AssetBundle\u003e();\n\n/// \u003csummary\u003e\n/// AB包存放路径，随项目修改\n/// \u003c/summary\u003e\nprivate string PathUrl\n{\n    get\n    {\n        return Application.streamingAssetsPath + \"/\";\n    }\n}\n\nprivate string MainABName\n{\n    get\n    {\n#if UNITY_IOS\n        return \"IOS\";\n#elif UNITY_ANDROID\n        return \"Android\";\n#else\n        return \"PC\";\n#endif\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240128202526-xbvnmrt",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240128202526-xbvnmrt",
+				"updated": "20240128202531"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "同步加载方法"
+				}
+			]
+		},
+		{
+			"ID": "20240128202619-xxeo0bc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240128202619-xxeo0bc",
+				"updated": "20240128203539"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "同步加载有三种重载，对应"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AssetBundle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​加载其中的资源也有三种重载那样，三种重载除了参数与返回的类型不同外都差不多\n由于三种重载都需要加载对应的AB包，因此将加载AB包的部分代码直接封装为一个函数供外部及加载方法使用"
+				}
+			]
+		},
+		{
+			"ID": "20240128202925-51h0m0v",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240128202925-51h0m0v",
+				"style": "line-height: 22px;",
+				"updated": "20240128203318"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "LoadAB伪代码：\npublic void LoadAB(string abName)\n{\n\tif 主包未加载\n\t\t加载主包及其依赖配置文件\n\t根据传入的abName获取其所有依赖的包名\n\tfor 遍历所有依赖的包名\n\t\tif 遍历到的依赖包名不存在于AB包字典\n\t\t\t根据遍历到的包名，加载AB包\n\t\t\t将加载的AB包加入到字典\n\tif abName不存在于字典\n\t\t根据abName，加载AB包\n\t\t将加载的AB包加入到字典\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240128203321-lnte83v",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240128203321-lnte83v",
+				"updated": "20240128203450"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "三种加载方法还有一个共同点，即当发现加载出来的对象是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​时就直接实例化它再返回，否则直接返回该对象"
+				}
+			]
+		},
+		{
+			"ID": "20240128202532-n4a31lg",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240128202532-n4a31lg",
+				"style": "line-height: 22px;",
+				"updated": "20240128202531"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public void LoadAB(string abName)\n{\n    //加载主包\n    if (mainAB == null)\n    {\n        mainAB = AssetBundle.LoadFromFile(PathUrl + MainABName);\n        manifest = mainAB.LoadAsset\u003cAssetBundleManifest\u003e(\"AssetBundleManifest\");\n    }\n    //获取依赖包相关信息\n    AssetBundle ab;\n    //加载主包中的关键配置文件 获取依赖包\n    string[] strs = manifest.GetAllDependencies(abName);\n    //加载依赖包\n    for (int i = 0; i \u003c strs.Length; i++)\n    {\n        //判断包是否加载过\n        if (!abDic.ContainsKey(strs[i]))\n        {\n            ab = AssetBundle.LoadFromFile(PathUrl + strs[i]);\n            abDic.Add(strs[i], ab);\n        }\n    }\n    //加载目标包\n    if (!abDic.ContainsKey(abName))\n    {\n        ab = AssetBundle.LoadFromFile(PathUrl + abName);\n        abDic.Add(abName, ab);\n    }\n}\n\n//同步加载，不指定类型\npublic Object LoadRes(string abName, string resName)\n{\n    //加载AB包\n    LoadAB(abName);\n    Object obj = abDic[abName].LoadAsset(resName);\n    //为了外部使用方便，在加载资源时，先判断是否为Object，如果是直接实例化返回出去\n    if (obj is GameObject)\n        return Instantiate(obj);\n    else\n        return obj;\n}\n\n//同步加载，使用type指定类型\npublic Object LoadRes(string abName, string resName, System.Type type)\n{\n    //加载AB包\n    LoadAB(abName);\n    Object obj = abDic[abName].LoadAsset(resName, type);\n    //为了外部使用方便，在加载资源时，先判断是否为Object，如果是直接实例化返回出去\n    if (obj is GameObject)\n        return Instantiate(obj);\n    else\n        return obj;\n}\n\n//同步加载，使用泛型指定类型\npublic T LoadRes\u003cT\u003e(string abName, string resName) where T : Object\n{\n    //加载AB包\n    LoadAB(abName);\n    T obj = abDic[abName].LoadAsset\u003cT\u003e(resName);\n    //为了外部使用方便，在加载资源时，先判断是否为Object，如果是直接实例化返回出去\n    if (obj is GameObject)\n        return Instantiate(obj);\n    else\n        return obj;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240128203458-57uxd77",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240128203458-57uxd77",
+				"updated": "20240128203502"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "异步加载方法"
+				}
+			]
+		},
+		{
+			"ID": "20240128203503-99gf05p",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240128203503-99gf05p",
+				"updated": "20240128203512"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这里的异步加载，AB包并没有使用异步加载，只是从AB包中加载资源时异步加载"
+				}
+			]
+		},
+		{
+			"ID": "20240128203514-0po7c9h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240128203514-0po7c9h",
+				"updated": "20240128204448"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "异步加载有三种重载，对应"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AssetBundle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​加载其中的资源也有三种重载那样，三种重载除了参数与类型不同外都差不多\n与同步加载方法不同的是，它们没有返回值，外部需将加载到对象后作何处理的委托作为参数传入到方法内，委托的参数是加载到的对象\n异步加载的三种重载都是直接开启对应的协程方法，协程方法也是三种重载，参数与异步方法都一样"
+				}
+			]
+		},
+		{
+			"ID": "20240128203705-oer5a4p",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240128203705-oer5a4p",
+				"updated": "20240128204158"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "三种协程都会调用之前声明的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LoadAB"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法以先加载AB包，再调用对应的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AssetBundle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​异步加载方法，将协程挂起等待加载完毕\n加载完毕后，将加载完的对象传入到外部传入的委托内并执行，若发现加载出来的对象是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​时就则先实例化它再返回"
+				}
+			]
+		},
+		{
+			"ID": "20240128203634-k6z434z",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240128203634-k6z434z",
+				"style": "line-height: 22px;",
+				"updated": "20240128204517"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//通过名字异步加载资源\npublic void LoadResAsync(string abName, string resName, UnityAction\u003cObject\u003e callBack)\n{\n    StartCoroutine(LoadResCoroutine(abName, resName, callBack));\n}\n\nprivate IEnumerator LoadResCoroutine(string abName, string resName, UnityAction\u003cObject\u003e callBack)\n{\n    //加载AB包\n    LoadAB(abName);\n    AssetBundleRequest abr = abDic[abName].LoadAssetAsync(resName);\n    yield return abr;\n    //异步加载结束后，通过委托，传递给外部，来使用\n    if (abr.asset is GameObject)\n        callBack(Instantiate(abr.asset));\n    else\n        callBack(abr.asset);\n}\n\n//根据Type异步加载资源\npublic void LoadResAsync(string abName, string resName, System.Type type, UnityAction\u003cObject\u003e callBack)\n{\n    StartCoroutine(LoadResCoroutine(abName, resName, type, callBack));\n}\n\nprivate IEnumerator LoadResCoroutine(string abName, string resName, System.Type type, UnityAction\u003cObject\u003e callBack)\n{\n    //加载AB包\n    LoadAB(abName);\n    AssetBundleRequest abr = abDic[abName].LoadAssetAsync(resName, type);\n    yield return abr;\n    //异步加载结束后，通过委托，传递给外部，来使用\n    if (abr.asset is GameObject)\n        callBack(Instantiate(abr.asset));\n    else\n        callBack(abr.asset);\n}\n\n//根据泛型异步加载\npublic void LoadResAsync\u003cT\u003e(string abName, string resName, UnityAction\u003cT\u003e callBack) where T : Object\n{\n    StartCoroutine(LoadResCoroutine(abName, resName, callBack));\n}\n\nprivate IEnumerator LoadResCoroutine\u003cT\u003e(string abName, string resName, UnityAction\u003cT\u003e callBack) where T : Object\n{\n    //加载AB包\n    LoadAB(abName);\n    AssetBundleRequest abr = abDic[abName].LoadAssetAsync\u003cT\u003e(resName);\n    yield return abr;\n    //异步加载结束后，通过委托，传递给外部，来使用\n    if (abr.asset is GameObject)\n        callBack(Instantiate(abr.asset as T));\n    else\n        callBack(abr.asset as T);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240128204520-1f2weo1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240128204520-1f2weo1",
+				"updated": "20240128204534"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "卸载AB包方法"
+				}
+			]
+		},
+		{
+			"ID": "20240128204535-xljc6q0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240128204535-xljc6q0",
+				"updated": "20240128204650"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "就是将卸载AB包的方法封装了起来，封装的方法还包括了从字典内移除或者清空成员变量等逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240128204651-la70908",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240128204651-la70908",
+				"style": "line-height: 22px;",
+				"updated": "20240418214014"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//单个包卸载\npublic void UnLoad(string abName)\n{\n    if (abDic.ContainsKey(abName))\n    {\n        abDic[abName].Unload(false);\n        abDic.Remove(abName);\n    }\n}\n\n//所有包的卸载\npublic void ClearAB() \n{\n    AssetBundle.UnloadAllAssetBundles(false);\n    abDic.Clear();\n    mainAB = null;\n    manifest = null;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240128204714-vsck9w6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240128204714-vsck9w6",
+				"updated": "20240128204730"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ABManager代码"
+				}
+			]
+		},
+		{
+			"ID": "20240128204730-at4zb3o",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240128204730-at4zb3o",
+				"style": "line-height: 22px;",
+				"updated": "20240418214020"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\n\n/// \u003csummary\u003e\n/// 通过AB包进行资源加载的管理器\n/// \u003c/summary\u003e\npublic class ABManager : SingletonAutoMonoBehaviour\u003cABManager\u003e\n{\n    //主包\n    private AssetBundle mainAB = null;\n    //依赖包获取用的配置文件\n    private AssetBundleManifest manifest = null;\n\n    private Dictionary\u003cstring, AssetBundle\u003e abDic = new Dictionary\u003cstring, AssetBundle\u003e();\n\n    /// \u003csummary\u003e\n    /// AB包存放路径，随项目修改\n    /// \u003c/summary\u003e\n    private string PathUrl\n    {\n        get\n        {\n            return Application.streamingAssetsPath + \"/\";\n        }\n    }\n\n    private string MainABName\n    {\n        get\n        {\n#if UNITY_IOS\n            return \"IOS\";\n#elif UNITY_ANDROID\n            return \"Android\";\n#else\n            return \"PC\";\n#endif\n        }\n    }\n\n    #region 同步加载\n    public void LoadAB(string abName)\n    {\n        //加载主包\n        if (mainAB == null)\n        {\n            mainAB = AssetBundle.LoadFromFile(PathUrl + MainABName);\n            manifest = mainAB.LoadAsset\u003cAssetBundleManifest\u003e(\"AssetBundleManifest\");\n        }\n        //获取依赖包相关信息\n        AssetBundle ab;\n        //加载主包中的关键配置文件 获取依赖包\n        string[] strs = manifest.GetAllDependencies(abName);\n        //加载依赖包\n        for (int i = 0; i \u003c strs.Length; i++)\n        {\n            //判断包是否加载过\n            if (!abDic.ContainsKey(strs[i]))\n            {\n                ab = AssetBundle.LoadFromFile(PathUrl + strs[i]);\n                abDic.Add(strs[i], ab);\n            }\n        }\n        //加载目标包\n        if (!abDic.ContainsKey(abName))\n        {\n            ab = AssetBundle.LoadFromFile(PathUrl + abName);\n            abDic.Add(abName, ab);\n        }\n    }\n\n    //同步加载，不指定类型\n    public Object LoadRes(string abName, string resName)\n    {\n        //加载AB包\n        LoadAB(abName);\n        Object obj = abDic[abName].LoadAsset(resName);\n        //为了外部使用方便，在加载资源时，先判断是否为Object，如果是直接实例化返回出去\n        if (obj is GameObject)\n            return Instantiate(obj);\n        else\n            return obj;\n    }\n\n    //同步加载，使用type指定类型\n    public Object LoadRes(string abName, string resName, System.Type type)\n    {\n        //加载AB包\n        LoadAB(abName);\n        Object obj = abDic[abName].LoadAsset(resName, type);\n        //为了外部使用方便，在加载资源时，先判断是否为Object，如果是直接实例化返回出去\n        if (obj is GameObject)\n            return Instantiate(obj);\n        else\n            return obj;\n    }\n\n    //同步加载，使用泛型指定类型\n    public T LoadRes\u003cT\u003e(string abName, string resName) where T : Object\n    {\n        //加载AB包\n        LoadAB(abName);\n        T obj = abDic[abName].LoadAsset\u003cT\u003e(resName);\n        //为了外部使用方便，在加载资源时，先判断是否为Object，如果是直接实例化返回出去\n        if (obj is GameObject)\n            return Instantiate(obj);\n        else\n            return obj;\n    }\n\n    #endregion\n\n    #region 异步加载\n    //这里的异步加载 AB包并没有使用异步加载，只是从AB包中加载资源时异步加载\n\n    //通过名字异步加载资源\n    public void LoadResAsync(string abName, string resName, UnityAction\u003cObject\u003e callBack)\n    {\n        StartCoroutine(LoadResCoroutine(abName, resName, callBack));\n    }\n\n    private IEnumerator LoadResCoroutine(string abName, string resName, UnityAction\u003cObject\u003e callBack)\n    {\n        //加载AB包\n        LoadAB(abName);\n        AssetBundleRequest abr = abDic[abName].LoadAssetAsync(resName);\n        yield return abr;\n        //异步加载结束后，通过委托，传递给外部，来使用\n        if (abr.asset is GameObject)\n            callBack(Instantiate(abr.asset));\n        else\n            callBack(abr.asset);\n    }\n\n    //根据Type异步加载资源\n    public void LoadResAsync(string abName, string resName, System.Type type, UnityAction\u003cObject\u003e callBack)\n    {\n        StartCoroutine(LoadResCoroutine(abName, resName, type, callBack));\n    }\n\n    private IEnumerator LoadResCoroutine(string abName, string resName, System.Type type, UnityAction\u003cObject\u003e callBack)\n    {\n        //加载AB包\n        LoadAB(abName);\n        AssetBundleRequest abr = abDic[abName].LoadAssetAsync(resName, type);\n        yield return abr;\n        //异步加载结束后，通过委托，传递给外部，来使用\n        if (abr.asset is GameObject)\n            callBack(Instantiate(abr.asset));\n        else\n            callBack(abr.asset);\n    }\n\n    //根据泛型异步加载\n    public void LoadResAsync\u003cT\u003e(string abName, string resName, UnityAction\u003cT\u003e callBack) where T : Object\n    {\n        StartCoroutine(LoadResCoroutine(abName, resName, callBack));\n    }\n\n    private IEnumerator LoadResCoroutine\u003cT\u003e(string abName, string resName, UnityAction\u003cT\u003e callBack) where T : Object\n    {\n        //加载AB包\n        LoadAB(abName);\n        AssetBundleRequest abr = abDic[abName].LoadAssetAsync\u003cT\u003e(resName);\n        yield return abr;\n        //异步加载结束后，通过委托，传递给外部，来使用\n        if (abr.asset is GameObject)\n            callBack(Instantiate(abr.asset as T));\n        else\n            callBack(abr.asset as T);\n    }\n    #endregion\n\n    //单个包卸载\n    public void UnLoad(string abName)\n    {\n        if (abDic.ContainsKey(abName))\n        {\n            abDic[abName].Unload(false);\n            abDic.Remove(abName);\n        }\n    }\n\n    //所有包的卸载\n    public void ClearAB()\n    {\n        AssetBundle.UnloadAllAssetBundles(false);\n        abDic.Clear();\n        mainAB = null;\n        manifest = null;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240418214016-0zdx7px",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240418214016-0zdx7px",
+				"updated": "20240418214031"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "补充：AB包资源管理器的拓展"
+				}
+			]
+		},
+		{
+			"ID": "20240418214032-7vgxw3e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418214032-7vgxw3e",
+				"updated": "20240418214127"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "重置版小框架引用了这里的代码，并进行了拓展（使用的单例基类存在修改）："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240416225828-x12inov",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "UFL5——资源加载模块"
+				}
+			]
+		}
+	]
+}

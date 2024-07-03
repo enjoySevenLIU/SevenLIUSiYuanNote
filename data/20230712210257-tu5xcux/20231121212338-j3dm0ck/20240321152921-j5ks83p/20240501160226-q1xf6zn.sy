@@ -1,0 +1,1825 @@
+{
+	"ID": "20240501160226-q1xf6zn",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240501160226-q1xf6zn",
+		"title": "UH4L21——重定向的书写规则",
+		"type": "doc",
+		"updated": "20240501205741"
+	},
+	"Children": [
+		{
+			"ID": "20240501204313-0333gnx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240501204313-0333gnx",
+				"updated": "20240501204319"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240501204319-arqjtab",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240501204319-arqjtab",
+				"style": "line-height: 22px;",
+				"updated": "20240501205218"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "ILIntepreter.AppDomain\t\t\t\t//通过解释器获取appDomain\nILIntepreter.Minus()\t\t\t\t//移动栈指针，获取不同位置，可用于获取栈底或者指向某个参数的地址\nType.CheckCLRTypes()\t\t\t\t//将StackObject.ToObject()转换出来的对象再为某种类型的对象（返回出来的值可直接强转成对应的类型）\nStackObject.ToObject()\t\t\t\t//将某个栈空间存储的值转换为对象\nCLR.Utils.Extensions.TypeFlags\t\t//要转换的类型枚举，配合Type.CheckCLRTypes()使用\nILIntepreter.Free\t\t\t\t\t//释放某个栈上的内存\nILIntepreter.PushObject()\t\t\t//将复杂类型的返回值压入到栈内\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240501164744-h3tmedc",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240501164744-h3tmedc",
+				"updated": "20240501164754"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "重定向的书写规则"
+				}
+			]
+		},
+		{
+			"ID": "20240501164754-7l6uxdj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240501164754-7l6uxdj",
+				"updated": "20240501164754"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "当我们需要自己实现重定向函数时，我们只需要参考CLR绑定中生成的文档中的内容进行书写即可\n只要我们大概了解了重定向函数的规则套路，我们自然能够看懂和写出我们需要的内容"
+				}
+			]
+		},
+		{
+			"ID": "20240501160226-1mduot2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240501160226-1mduot2",
+				"updated": "20240501164754"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "回顾自定义重定向流程"
+				}
+			]
+		},
+		{
+			"ID": "20240501161141-bkd4yby",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240501161141-bkd4yby",
+				"updated": "20240501164754"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240501161141-ytqhf2m",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240501161141-ytqhf2m",
+						"updated": "20240501161159"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "前置知识："
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "block-ref",
+							"TextMarkBlockRefID": "20240426161157-1ia3bss",
+							"TextMarkBlockRefSubtype": "s",
+							"TextMarkTextContent": "CLR重定向"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240501161026-5oh3vnm",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240501161026-5oh3vnm",
+				"updated": "20240501165109"
+			},
+			"Children": [
+				{
+					"ID": "20240501161028-et4arrn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240501161028-et4arrn",
+						"updated": "20240501161028"
+					},
+					"Children": [
+						{
+							"ID": "20240501161028-0lhuhgu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501161028-0lhuhgu",
+								"updated": "20240501161048"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "得到重定向类的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Type"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240501161028-ulpjouo",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240501161028-ulpjouo",
+						"updated": "20240501161028"
+					},
+					"Children": [
+						{
+							"ID": "20240501161028-fbeaub9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501161028-fbeaub9",
+								"updated": "20240501165105"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "得到想要重定向方法的方法信息 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "MethodInfo"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240501161028-yp8v26e",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240501161028-yp8v26e",
+						"updated": "20240501165109"
+					},
+					"Children": [
+						{
+							"ID": "20240501161028-e43jyum",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501161028-e43jyum",
+								"updated": "20240501165109"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AppDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中的注册重定向方法 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "RegisterCLRMethodRedirection"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，对"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "MethodInfo"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​进行重定向方法关联"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240501161047-o0ahary",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240501161047-o0ahary",
+				"updated": "20240501164754"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "回顾ILRuntime中方法指令的调用"
+				}
+			]
+		},
+		{
+			"ID": "20240501205433-g2uujvo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240501205433-g2uujvo",
+				"updated": "20240501205458"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "前置知识："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240428220512-ct825b2",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "UH4L20——解释器"
+				}
+			]
+		},
+		{
+			"ID": "20240501161107-sc665k2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240501161107-sc665k2",
+				"updated": "20240501164754"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在执行代码时，ILRuntime内部自己实现了的运行栈来管理内存\n方法调用前后，栈的内存分布应该是这样的"
+				}
+			]
+		},
+		{
+			"ID": "20240501161107-x0f89pd",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240501161107-x0f89pd",
+				"style": "line-height: 22px;",
+				"updated": "20240501205536"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "栈的内存分布：\n\t参数1               \t       返回值\n\t参数2      ——方法执行——\u003e     栈指针\n\t栈指针  \n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240501161233-6okkkeh",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240501161233-6okkkeh",
+				"updated": "20240501161239"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "重定向函数的规则套路"
+				}
+			]
+		},
+		{
+			"ID": "20240501203737-egk8yih",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240501203737-egk8yih",
+				"updated": "20240501205348"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "重定向的目的，就是让热更工程内，调用主工程方法"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "从反射调用变成直接调用"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n这就需要我们"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "从ILRuntime的运行栈内获取热更工程内传入参数的值，然后传入到主工程内对应的方法"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n如果"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "有返回值，我们还需要将返回值传递到ILRuntime的运行栈内"
+				}
+			]
+		},
+		{
+			"ID": "20240501173814-x08hi2k",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240501173814-x08hi2k",
+				"updated": "20240501161239"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以自动生成的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UnityEngine_Vector3_Binding"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​中的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Dot_0"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法为例"
+				}
+			]
+		},
+		{
+			"ID": "20240501173850-o7bhdoh",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240501173850-o7bhdoh",
+				"style": "line-height: 22px;",
+				"updated": "20240501161239"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "static StackObject* Dot_0(ILIntepreter __intp, StackObject* __esp, AutoList __mStack, CLRMethod __method, bool isNewObj)\n{\n    ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;\n    StackObject* ptr_of_this_method;\n    //一开始 我们需要获取到 栈底位置 之后用于返回\n    StackObject* __ret = ILIntepreter.Minus(__esp, 2);\n\n    ptr_of_this_method = ILIntepreter.Minus(__esp, 1);\n    UnityEngine.Vector3 @rhs = (UnityEngine.Vector3)typeof(UnityEngine.Vector3).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)16);\n    __intp.Free(ptr_of_this_method);\n\n    ptr_of_this_method = ILIntepreter.Minus(__esp, 2);\n    UnityEngine.Vector3 @lhs = (UnityEngine.Vector3)typeof(UnityEngine.Vector3).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)16);\n    __intp.Free(ptr_of_this_method);\n\n    //真正的重定向相关核心逻辑处理\n    var result_of_this_method = UnityEngine.Vector3.Dot(@lhs, @rhs);\n\n    __ret-\u003eObjectType = ObjectTypes.Float;\n    *(float*)\u0026__ret-\u003eValue = result_of_this_method;\n    return __ret + 1;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240501161238-2vtslgz",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240501161238-2vtslgz",
+				"updated": "20240501205741"
+			},
+			"Children": [
+				{
+					"ID": "20240501161251-h75vg4z",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240501161251-h75vg4z",
+						"name": "ILIntepreter.AppDomain",
+						"updated": "20240501204351"
+					},
+					"Children": [
+						{
+							"ID": "20240501161251-i2ms5wt",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501161251-i2ms5wt",
+								"updated": "20240501170030"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过解析器获取 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "appDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240501173905-9swi3dy",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240501173905-9swi3dy",
+								"style": "line-height: 22px;",
+								"updated": "20240501204351"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "static StackObject* Dot_0(ILIntepreter __intp, StackObject* __esp, AutoList __mStack, CLRMethod __method, bool isNewObj)\n{\n    ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;\n\t// ...后续重定向逻辑\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240501161251-u4yavzz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240501161251-u4yavzz",
+						"name": "ILIntepreter.Minus()",
+						"updated": "20240501205741"
+					},
+					"Children": [
+						{
+							"ID": "20240501161251-hc23uod",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501161251-hc23uod",
+								"updated": "20240501161251"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取栈底指针（根据函数参数数量决定减多少，用于之后返回）"
+								}
+							]
+						},
+						{
+							"ID": "20240501174632-c1den9d",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501174632-c1den9d",
+								"updated": "20240501205741"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数传入的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "__esp"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​是指向栈顶地址的指针，因此通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ILIntepreter.Minus"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​来减"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "__esp"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对应的地址值来获取栈底的地址指针，有多少参数减多少"
+								}
+							]
+						},
+						{
+							"ID": "20240501174134-t6dnjuk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501174134-t6dnjuk",
+								"updated": "20240501195504"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Vector3"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Dot"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法有两个参数："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "float Dot(Vector3 lhs, Vector3 rhs)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，因此"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ILIntepreter.Minus"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​传入的数值是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "2"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240501173914-6p864gr",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240501173914-6p864gr",
+								"style": "line-height: 22px;",
+								"updated": "20240501173928"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "StackObject* ptr_of_this_method;\n//一开始 我们需要获取到 栈底位置 之后用于返回\nStackObject* __ret = ILIntepreter.Minus(__esp, 2);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240501161251-8akm4yj",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240501161251-8akm4yj",
+						"updated": "20240501161251"
+					},
+					"Children": [
+						{
+							"ID": "20240501161251-h8ovltr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501161251-h8ovltr",
+								"updated": "20240501174352"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取函数参数"
+								}
+							]
+						},
+						{
+							"ID": "20240501174527-j33vpzg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501174527-j33vpzg",
+								"updated": "20240501195532"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "提前声明"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "StackObject*"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​变量"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ptr_of_this_method"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，它用于获取指向存储传入函数参数的值的指针消息"
+								}
+							]
+						},
+						{
+							"ID": "20240501174602-r18vui7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501174602-r18vui7",
+								"updated": "20240501174950"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果要指向参数一地址，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "__esp"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​地址减1即可，如果要指向参数二地址，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "__esp"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​地址减2即可"
+								}
+							]
+						},
+						{
+							"ID": "20240501174353-uubagm3",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240501174353-uubagm3",
+								"style": "line-height: 22px;",
+								"updated": "20240501174423"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "StackObject* ptr_of_this_method;\n//获取参数一\nptr_of_this_method = ILIntepreter.Minus(__esp, 1);\n//获取参数二\nptr_of_this_method = ILIntepreter.Minus(__esp, 2);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240501161251-xbwi904",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"alias": "StackObject.ToObject(),CLR.Utils.Extensions.TypeFlags",
+						"id": "20240501161251-xbwi904",
+						"name": "Type.CheckCLRTypes()",
+						"updated": "20240501161251"
+					},
+					"Children": [
+						{
+							"ID": "20240501161251-lvippdi",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501161251-lvippdi",
+								"updated": "20240501161251"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数类型转换"
+								}
+							]
+						},
+						{
+							"ID": "20240501174458-gpcxgnw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501174458-gpcxgnw",
+								"updated": "20240501200654"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "我们需要将 指针指向的地址 所存储的值 转换为 对应类型的变量\n这样才能将热更工程中调用方法时传入的参数值直接传入到重定向的方法内\n因此我们需要对 指向参数地址的指针"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ptr_of_this_method"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 进行类型转换"
+								}
+							]
+						},
+						{
+							"ID": "20240501200659-dmt3np8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501200659-dmt3np8",
+								"updated": "20240501200839"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "这一步会调用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Type.CheckCLRTypes"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法，该方法参数内还需要调用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "StackObject.ToObject"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法，并传入"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CLR.Utils.Extensions.TypeFlags"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​枚举"
+								}
+							]
+						},
+						{
+							"ID": "20240501200539-0kqng4j",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501200539-0kqng4j",
+								"updated": "20240501200539"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "固定写法如下："
+								}
+							]
+						},
+						{
+							"ID": "20240501175309-0id80g8",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240501175309-0id80g8",
+								"style": "line-height: 22px;",
+								"updated": "20240501195629"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "参数类型 变量名 = (参数类型)typeof(参数类型).CheckCLRTypes(\t\t\t\t\t//获取Type，执行拓展方法，返回值需要强转为对应的类型\n\tStackObject.ToObject(指向存储参数值的地址的指针), __domain, __mStack),\t//将解释器的栈上的某个值转换为object对象\n\t(CLR.Utils.Extensions.TypeFlags)枚举值对应的整数\t\t\t\t\t\t//根据转换的类型不同，使用不同的TypeFlags枚举\n)\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240501195350-2nc94rb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501195350-2nc94rb",
+								"updated": "20240501195711"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "其中，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CLR.Utils.Extensions.TypeFlags"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的各个枚举如下："
+								}
+							]
+						},
+						{
+							"ID": "20240501195652-ee2461t",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240501195652-ee2461t",
+								"style": "line-height: 22px;",
+								"updated": "20240501200610"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public enum TypeFlags\n{\n    Default = 0,\t\t\t//默认\n    IsPrimitive = 0x1,\t\t//基本类型\n    IsByRef = 0x2,\t\t\t//引用类型\n    IsEnum = 0x4,\t\t\t//枚举类型\n    IsDelegate = 0x8,\t\t//委托类型\n    IsValueType = 0x10,\t\t//值类型\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240501195854-cgpxwyn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501195854-cgpxwyn",
+								"updated": "20240501200313"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "按照上面的写法，我们即可将 指针指向的地址的存储的值 转为由 对应类型（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Vector3"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​）的变量存储"
+								}
+							]
+						},
+						{
+							"ID": "20240501174105-hj53zxt",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240501174105-hj53zxt",
+								"style": "line-height: 22px;",
+								"updated": "20240501195101"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "StackObject* ptr_of_this_method;\n\nptr_of_this_method = ILIntepreter.Minus(__esp, 1);\nUnityEngine.Vector3 @rhs = (UnityEngine.Vector3)typeof(UnityEngine.Vector3).CheckCLRTypes(\n\tStackObject.ToObject(ptr_of_this_method, __domain, __mStack), \n\t(CLR.Utils.Extensions.TypeFlags)16\n);\n\nptr_of_this_method = ILIntepreter.Minus(__esp, 2);\nUnityEngine.Vector3 @lhs = (UnityEngine.Vector3)typeof(UnityEngine.Vector3).CheckCLRTypes(\n\tStackObject.ToObject(ptr_of_this_method, __domain, __mStack), \n\t(CLR.Utils.Extensions.TypeFlags)16\n);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240501161251-v6u4wd4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20240501161251-v6u4wd4",
+						"name": "ILIntepreter.Free()",
+						"updated": "20240501204535"
+					},
+					"Children": [
+						{
+							"ID": "20240501161251-tx8f3np",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501161251-tx8f3np",
+								"updated": "20240501161251"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "释放对应栈指针内存"
+								}
+							]
+						},
+						{
+							"ID": "20240501195124-4wxj8k4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501195124-4wxj8k4",
+								"updated": "20240501204535"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在将转换出来的变量传入到对应的方法之前，我们必须要释放掉栈上存储的值的内存，\n释放内存方法"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ILIntepreter.Free()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 需要 传入指向需要释放内存的地址的指针\n释放参数的栈的内存后，指向栈底的指针 就会指向 栈顶 或者说 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "返回值应该存储在的地址"
+								}
+							]
+						},
+						{
+							"ID": "20240501195118-sez50hs",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240501195118-sez50hs",
+								"style": "line-height: 22px;",
+								"updated": "20240501200514"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "StackObject* ptr_of_this_method;\n//一开始 我们需要获取到 栈底位置 之后用于返回\nStackObject* __ret = ILIntepreter.Minus(__esp, 2);\n\nptr_of_this_method = ILIntepreter.Minus(__esp, 1);\nUnityEngine.Vector3 @rhs = (UnityEngine.Vector3)typeof(UnityEngine.Vector3).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)16);\n__intp.Free(ptr_of_this_method);\n\nptr_of_this_method = ILIntepreter.Minus(__esp, 2);\nUnityEngine.Vector3 @lhs = (UnityEngine.Vector3)typeof(UnityEngine.Vector3).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)16);\n__intp.Free(ptr_of_this_method);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240501161251-wjd76q7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ni4=",
+						"Num": 6
+					},
+					"Properties": {
+						"id": "20240501161251-wjd76q7",
+						"updated": "20240501203656"
+					},
+					"Children": [
+						{
+							"ID": "20240501161251-ztc8xrd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501161251-ztc8xrd",
+								"updated": "20240501161251"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重定向处理"
+								}
+							]
+						},
+						{
+							"ID": "20240501200852-t4edlr5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501200852-t4edlr5",
+								"updated": "20240501203656"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取到存储参数值的变量后，调用要重定向的方法，传入之前转换出来的参数值，有返回值则还需要一个变量去接收"
+								}
+							]
+						},
+						{
+							"ID": "20240501201018-lor9wjr",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240501201018-lor9wjr",
+								"style": "line-height: 22px;",
+								"updated": "20240501201027"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "var result_of_this_method = UnityEngine.Vector3.Dot(@lhs, @rhs);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240501161251-z3nycfy",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ny4=",
+						"Num": 7
+					},
+					"Properties": {
+						"id": "20240501161251-z3nycfy",
+						"updated": "20240501204629"
+					},
+					"Children": [
+						{
+							"ID": "20240501161251-cvgcs4a",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240501161251-cvgcs4a",
+								"updated": "20240501161310"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "返回当前栈顶（栈指针位置）"
+								}
+							]
+						},
+						{
+							"ID": "20240501161310-gydd4fe",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240501161310-gydd4fe",
+								"updated": "20240501204629"
+							},
+							"Children": [
+								{
+									"ID": "20240501161310-xoej63p",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240501161310-xoej63p",
+										"updated": "20240501201136"
+									},
+									"Children": [
+										{
+											"ID": "20240501161310-y0zmow1",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240501161310-y0zmow1",
+												"updated": "20240501161313"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "无返回值\n"
+												}
+											]
+										},
+										{
+											"ID": "20240501161316-rro2ru8",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240501161316-rro2ru8",
+												"updated": "20240501201136"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "直接返回之前记录的栈底位置的指针即可"
+												}
+											]
+										},
+										{
+											"ID": "20240501201058-pzfip0s",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240501201058-pzfip0s",
+												"style": "line-height: 22px;",
+												"updated": "20240501201130"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "return __ret;\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240501161313-1hv2rsn",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240501161313-1hv2rsn",
+										"updated": "20240501204629"
+									},
+									"Children": [
+										{
+											"ID": "20240501161313-zu7oe74",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240501161313-zu7oe74"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "有返回值\n"
+												}
+											]
+										},
+										{
+											"ID": "20240501161320-jzu8fmr",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240501161320-jzu8fmr",
+												"updated": "20240501204629"
+											},
+											"Children": [
+												{
+													"ID": "20240501203148-l5j4boe",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240501203148-l5j4boe",
+														"updated": "20240501203148"
+													},
+													"Children": [
+														{
+															"ID": "20240501203148-lgv7xsu",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240501203148-lgv7xsu",
+																"updated": "20240501203148"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "如果是简单（基本）类型，直接设置后返回"
+																}
+															]
+														},
+														{
+															"ID": "20240501203153-njh24e4",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240501203153-njh24e4",
+																"updated": "20240501203153"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Vector3.Dot"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​方法返回值的类型是"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "float"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​，这就是简单类型，设置后返回即可"
+																}
+															]
+														},
+														{
+															"ID": "20240501203153-ugj6bnb",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240501203153-ugj6bnb",
+																"updated": "20240501203153"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "我们需要设置"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "__ret"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​指针指向的栈空间"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "StackObject"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​类对象的"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "ValueType"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​（返回值类型）和"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Value"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​（返回值）\n然后返回"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "__ret + 1"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​，即将栈指针移动到存在返回值的地址的下一位，则就代表存在返回值，需要读取这个返回值"
+																}
+															]
+														},
+														{
+															"ID": "20240501203153-qa5l0mb",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240501203153-qa5l0mb",
+																"updated": "20240501203153"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "值得一提的是，对于指针变量，想要调用其指向的对象的成员，需要使用"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "-\u0026gt;"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​，而不是"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "."
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​，例如："
+																}
+															]
+														},
+														{
+															"ID": "20240501203153-h85mlve",
+															"Type": "NodeList",
+															"ListData": {},
+															"Properties": {
+																"id": "20240501203153-h85mlve",
+																"updated": "20240501203153"
+															},
+															"Children": [
+																{
+																	"ID": "20240501203153-4d0w69v",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"BulletChar": 42,
+																		"Marker": "Kg=="
+																	},
+																	"Properties": {
+																		"id": "20240501203153-4d0w69v",
+																		"updated": "20240501203153"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240501203153-o222exd",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240501203153-o222exd",
+																				"updated": "20240501203153"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "如果是存储"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "stackObject"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​对象的变量要调用"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "ValueType"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​成员，就是"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "stackObject.ValueType"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240501203153-aihpj8o",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"BulletChar": 42,
+																		"Marker": "Kg=="
+																	},
+																	"Properties": {
+																		"id": "20240501203153-aihpj8o",
+																		"updated": "20240501203153"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240501203153-gn64pz4",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240501203153-gn64pz4",
+																				"updated": "20240501203153"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "如果是存储指向"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "stackObject"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​对象的指针变量要调用"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "ValueType"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​成员，就是"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "ptr-\u0026gt;ValueType"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​（假设"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "ptr"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​是指针变量）"
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														},
+														{
+															"ID": "20240501203153-5x5041m",
+															"Type": "NodeCodeBlock",
+															"IsFencedCodeBlock": true,
+															"Properties": {
+																"id": "20240501203153-5x5041m",
+																"style": "line-height: 22px;",
+																"updated": "20240501203153"
+															},
+															"Children": [
+																{
+																	"Type": "NodeCodeBlockFenceOpenMarker",
+																	"Data": "```"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceInfoMarker",
+																	"CodeBlockInfo": "YyM="
+																},
+																{
+																	"Type": "NodeCodeBlockCode",
+																	"Data": "var result_of_this_method = UnityEngine.Vector3.Dot(@lhs, @rhs);\n\n__ret-\u003eObjectType = ObjectTypes.Float;\n*(float*)\u0026__ret-\u003eValue = result_of_this_method;\nreturn __ret + 1;\n"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceCloseMarker",
+																	"Data": "```"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240501203156-5gqmnoc",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240501203156-5gqmnoc",
+														"name": "ILIntepreter.PushObject()",
+														"updated": "20240501204629"
+													},
+													"Children": [
+														{
+															"ID": "20240501203157-sdkvhos",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240501203157-sdkvhos",
+																"updated": "20240501203157"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "如果是复杂类型，使用"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "PushObject"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​方法"
+																}
+															]
+														},
+														{
+															"ID": "20240501203157-btdv7lx",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240501203157-btdv7lx",
+																"updated": "20240501204629"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "诸如自己声明的类，结构体等等都是复杂类型，以"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Vector3.up"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​属性为例，它返回的就是"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Vector3"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​类型\n因此需要使用"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "ILIntepreter.PushObject"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​方法，传入"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "__ret"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​（自声明的原本指向栈底的指针），"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "__mStack"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​（参数），重定向的方法的返回值"
+																}
+															]
+														},
+														{
+															"ID": "20240501203336-ff30hol",
+															"Type": "NodeCodeBlock",
+															"IsFencedCodeBlock": true,
+															"Properties": {
+																"id": "20240501203336-ff30hol",
+																"style": "line-height: 22px;",
+																"updated": "20240501203547"
+															},
+															"Children": [
+																{
+																	"Type": "NodeCodeBlockFenceOpenMarker",
+																	"Data": "```"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceInfoMarker",
+																	"CodeBlockInfo": "YyM="
+																},
+																{
+																	"Type": "NodeCodeBlockCode",
+																	"Data": "static StackObject* get_up_1(ILIntepreter __intp, StackObject* __esp, AutoList __mStack, CLRMethod __method, bool isNewObj)\n{\n    ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;\n    StackObject* __ret = ILIntepreter.Minus(__esp, 0);\n\n\n    var result_of_this_method = UnityEngine.Vector3.up;\n\n    return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);\n}\n"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceCloseMarker",
+																	"Data": "```"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240501163520-3ef4p58",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240501163520-3ef4p58",
+				"updated": "20240501161239"
+			}
+		}
+	]
+}

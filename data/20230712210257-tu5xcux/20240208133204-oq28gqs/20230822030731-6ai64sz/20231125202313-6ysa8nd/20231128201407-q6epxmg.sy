@@ -1,0 +1,906 @@
+{
+	"ID": "20231128201407-q6epxmg",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20231128201407-q6epxmg",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20231128201407-q6epxmg\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20231128212110-fdjz3j3\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20231128212000-ieazert\u0026quot;,\u0026quot;scrollTop\u0026quot;:1622,\u0026quot;focusId\u0026quot;:\u0026quot;20231128212104-chv0c1o\u0026quot;,\u0026quot;focusStart\u0026quot;:2,\u0026quot;focusEnd\u0026quot;:29\u0026#125;",
+		"title": "UG4L9-7——关联系统",
+		"type": "doc",
+		"updated": "20240409213117"
+	},
+	"Children": [
+		{
+			"ID": "20231128212110-fdjz3j3",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231128212110-fdjz3j3",
+				"updated": "20231128212115"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20231128212115-dt50jaa",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231128212115-dt50jaa",
+				"style": "line-height: 22px;",
+				"updated": "20231128225108"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "gObject.AddRelation()\t\t\t//添加与某个元件的某种关联\nRelationType\t\t\t\t\t//各种关联类型的枚举，与关联设置内的内容一致\ngObject.RemoveRelation()\t\t//删除与某个元件的某种关联\ngObject.relations.ClearAll()\t//删除所有的关联\ngObject.relations.ClearFor()\t//删除与某个元件的所有关联\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231128201407-pwpbo3u",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20231128201407-pwpbo3u",
+				"name": "RelationType",
+				"updated": "20231128211904"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关联系统"
+				}
+			]
+		},
+		{
+			"ID": "20231128211913-haspnyo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231128211913-haspnyo",
+				"updated": "20231128211927"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关联系统是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "FairyGUI实现自动布局的核心技术"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "。\n其他UI框架提供的布局系统，一般只提供各种固定的layout，或者锚点，都只能定义元件与容器之间的关系\n而"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "FairyGUI的关联能够定义任意两个元件的关系，而且互动方式更多样"
+				}
+			]
+		},
+		{
+			"ID": "20231128211913-58vlc16",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231128211913-58vlc16",
+				"updated": "20231128223958"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "简单说：\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "关联系统就是FGUI中在分辨率自适应时用于9宫格布局的系统（类似于"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong block-ref",
+					"TextMarkBlockRefID": "20230812152617-ny40gnd",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "UGUI中的锚点"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "的概念）"
+				},
+				{
+					"Type": "NodeText"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "它不仅可以设置元件相对容器的位置，还可以设置元件和元件之间相互关联"
+				}
+			]
+		},
+		{
+			"ID": "20231128211932-y62p3mn",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231128211932-y62p3mn",
+				"updated": "20231128214350"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关联系统设置相关"
+				}
+			]
+		},
+		{
+			"ID": "20231128221924-lvnbc6n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231128221924-lvnbc6n",
+				"updated": "20231128221945"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "容器你可以理解为元件当前所在的这个组件"
+				}
+			]
+		},
+		{
+			"ID": "20231128215020-xh6wyvf",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20231128215020-xh6wyvf",
+				"updated": "20240226171709"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20231128214344-yj1o88k",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20231128214344-yj1o88k",
+						"updated": "20231128221850"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Properties": {
+								"parent-style": "width: 525px;",
+								"style": "width: 515px;"
+							},
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20231128221850-9vlkzvh.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"width: 515px;\" parent-style=\"width: 525px;\"}"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​​​​"
+						}
+					]
+				},
+				{
+					"ID": "20231128214651-b45sja2",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20231128214651-b45sja2",
+						"updated": "20240226171709"
+					},
+					"Children": [
+						{
+							"ID": "20231128214656-46bb8y3",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20231128214656-46bb8y3",
+								"updated": "20240226171709"
+							},
+							"Children": [
+								{
+									"ID": "20231128214656-4jnsdk1",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20231128214656-4jnsdk1",
+										"updated": "20231128215230"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "宽 -\u003e 宽 / 高 -\u003e 高"
+										}
+									]
+								},
+								{
+									"ID": "20231128214738-29zhd6q",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20231128214738-29zhd6q",
+										"updated": "20240226171709"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "修改"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "strong",
+											"TextMarkTextContent": "关联对象的宽（高）会使自己的宽（高）也跟着修改"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "\n关联对象的宽（高）增加（减少）多少，自己就增加（减少）多少\n如果选择%的话就会始终与关联对象的宽（高）保持一个相同比例"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20231128215015-18hf93q",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20231128215015-18hf93q",
+								"updated": "20231128220618"
+							},
+							"Children": [
+								{
+									"ID": "20231128215015-523q0dj",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20231128215015-523q0dj",
+										"updated": "20231128215107"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "左右/上下居中"
+										}
+									]
+								},
+								{
+									"ID": "20231128215110-4j25l3r",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20231128215110-4j25l3r",
+										"updated": "20231128220804"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "锚点始终关联对象的左右（上下）中间线保持一个固定的距离。\n如果选择%的话，会先计算锚点到中间线距离与关联对象的宽（高）的比值，在通过这个固定的比值来计算位置"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20231128220006-xsp7fqa",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20231128220006-xsp7fqa",
+								"updated": "20231128220616"
+							},
+							"Children": [
+								{
+									"ID": "20231128220006-f0u059x",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20231128220006-f0u059x",
+										"updated": "20231128220110"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "左/右 -\u003e 左/中/右，顶/底 -\u003e 顶/中/底"
+										}
+									]
+								},
+								{
+									"ID": "20231128220208-drcisuk",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20231128220208-drcisuk",
+										"updated": "20231128220809"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "锚点的左/右（顶/底）始终与关联对象的左/中/右边（顶/中/底边）保持一个固定的距离。\n如果选择%的话，会先计算锚点到中间线距离与关联对象的宽（高）的比值，在通过这个固定的比值来计算位置"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20231128220120-slyzx1g",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20231128220120-slyzx1g",
+								"updated": "20231204102320"
+							},
+							"Children": [
+								{
+									"ID": "20231128220120-04scb61",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20231128220120-04scb61",
+										"updated": "20231128220826"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "左延展/右延展 -\u003e 左/右，顶延展/底延展 -\u003e 顶/底"
+										}
+									]
+								},
+								{
+									"ID": "20231128220210-28kzx3p",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20231128220210-28kzx3p",
+										"updated": "20231204102320"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "锚点的左/右（顶/底）始终与关联对象的左/中/右边（顶/中/底边）保持一个固定的距离。\n与上面的区别是"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "strong",
+											"TextMarkTextContent": "锚点为了保持距离会改变自己的宽高，而不是改变位置"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "\n如果选择%的话，会先计算锚点到中间线距离与关联对象的宽（高）的比值，在通过这个固定的比值来计算延展"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20231128223828-q4f22mx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231128223828-q4f22mx",
+				"updated": "20231128230215"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 54px;",
+						"style": "width: 44px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20231128230212-kzbge7q.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 44px;\" parent-style=\"width: 54px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "这里分别可以快速设置与容器的宽高关联（适合背景），居中关联"
+				}
+			]
+		},
+		{
+			"ID": "20231128224234-7o29pke",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231128224234-7o29pke",
+				"updated": "20231128224234"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用这里的设置即可实现如同UGUI中的九宫格那样的排布"
+				}
+			]
+		},
+		{
+			"ID": "20231128211944-7kfh2rn",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231128211944-7kfh2rn",
+				"updated": "20231128223827"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity中代码设置关联"
+				}
+			]
+		},
+		{
+			"ID": "20231128212000-ieazert",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20231128212000-ieazert",
+				"updated": "20240409213117"
+			},
+			"Children": [
+				{
+					"ID": "20231128212004-lrvlhws",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20231128212004-lrvlhws",
+						"name": "gObject.AddRelation()",
+						"updated": "20240409213117"
+					},
+					"Children": [
+						{
+							"ID": "20231128212004-mj31hvq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231128212004-mj31hvq",
+								"updated": "20231128212010"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "设置关联"
+								}
+							]
+						},
+						{
+							"ID": "20231128212055-aa0k8kl",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231128212055-aa0k8kl",
+								"style": "line-height: 22px;",
+								"updated": "20231128224651"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "GObject gObject = view.GetChild(\"imgTest\");\ngObject.AddRelation(view, RelationType.Left_Left);\ngObject.AddRelation(view, RelationType.Top_Top);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240409212524-97zk7h3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240409212524-97zk7h3",
+								"updated": "20240409213117"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对于一个全屏的UI组件，屏幕分辨率发生变化时（如果会的话），想要让组件下的各个控件能够分辨率自适应，\n就需要为组件添加相对于"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GRoot"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（或者说屏幕）的宽高关联，详细可见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240408225045-00jpgt3",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "UG4L11——分辨率自适应"
+								}
+							]
+						},
+						{
+							"ID": "20240409213057-is7e005",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240409213057-is7e005",
+								"style": "line-height: 22px;",
+								"updated": "20240409213104"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    UIPackage.AddPackage(\"UI/teach\");\n    GRoot.inst.SetContentScaleFactor(1365, 768, UIContentScaler.ScreenMatchMode.MatchHeight);\n    teachBinder.BindAll();\n    RelationPanel panel = RelationPanel.CreateInstance();\n    panel.MakeFullScreen();\n    GRoot.inst.AddChild(panel);\n\t//为面板设置应该相对于GRoot或者说屏幕宽高关联，使得即使屏幕变化控件依然可以分辨率自适应\n    panel.AddRelation(GRoot.inst, RelationType.Size);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231128212010-ysmbw7p",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20231128212010-ysmbw7p",
+						"updated": "20231128224818"
+					},
+					"Children": [
+						{
+							"ID": "20231128212010-su0zzbc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231128212010-su0zzbc",
+								"updated": "20231128212014"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "删除关联"
+								}
+							]
+						},
+						{
+							"ID": "20231128212014-rtg477m",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20231128212014-rtg477m",
+								"updated": "20231128224818"
+							},
+							"Children": [
+								{
+									"ID": "20231128212017-otzwbcd",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20231128212017-otzwbcd",
+										"name": "gObject.RemoveRelation()",
+										"updated": "20231128224818"
+									},
+									"Children": [
+										{
+											"ID": "20231128212017-p01z2ao",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20231128212017-p01z2ao",
+												"updated": "20231128212023"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "删除某种关联"
+												}
+											]
+										},
+										{
+											"ID": "20231128212058-obw72jv",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20231128212058-obw72jv",
+												"style": "line-height: 22px;",
+												"updated": "20231128224818"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "gObject.RemoveRelation(view, RelationType.Left_Left);\ngObject.RemoveRelation(view, RelationType.Top_Top);\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20231128212023-j25biqm",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20231128212023-j25biqm",
+										"updated": "20231128224817"
+									},
+									"Children": [
+										{
+											"ID": "20231128212023-3jk0e6w",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20231128212023-3jk0e6w",
+												"updated": "20231128212028"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "删除所有关联"
+												}
+											]
+										},
+										{
+											"ID": "20231128212028-1nrsbdb",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20231128212028-1nrsbdb",
+												"updated": "20231128224817"
+											},
+											"Children": [
+												{
+													"ID": "20231128212036-0s044ou",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20231128212036-0s044ou",
+														"name": "gObject.relations.ClearAll()",
+														"updated": "20231128224815"
+													},
+													"Children": [
+														{
+															"ID": "20231128212036-5rlzosz",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20231128212036-5rlzosz",
+																"updated": "20231128212046"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "移除和所有对象的关联"
+																}
+															]
+														},
+														{
+															"ID": "20231128212101-d5trtcu",
+															"Type": "NodeCodeBlock",
+															"IsFencedCodeBlock": true,
+															"Properties": {
+																"id": "20231128212101-d5trtcu",
+																"style": "line-height: 22px;",
+																"updated": "20231128224815"
+															},
+															"Children": [
+																{
+																	"Type": "NodeCodeBlockFenceOpenMarker",
+																	"Data": "```"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceInfoMarker",
+																	"CodeBlockInfo": "YyM="
+																},
+																{
+																	"Type": "NodeCodeBlockCode",
+																	"Data": "gObject.relations.ClearAll();\n"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceCloseMarker",
+																	"Data": "```"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20231128212046-lo6dyt9",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20231128212046-lo6dyt9",
+														"name": "gObject.relations.ClearFor()",
+														"updated": "20231128224817"
+													},
+													"Children": [
+														{
+															"ID": "20231128212046-bq1gr2b",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20231128212046-bq1gr2b",
+																"updated": "20231128212053"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "移除和指定对象的关联"
+																}
+															]
+														},
+														{
+															"ID": "20231128212104-chv0c1o",
+															"Type": "NodeCodeBlock",
+															"IsFencedCodeBlock": true,
+															"Properties": {
+																"id": "20231128212104-chv0c1o",
+																"style": "line-height: 22px;",
+																"updated": "20231128224817"
+															},
+															"Children": [
+																{
+																	"Type": "NodeCodeBlockFenceOpenMarker",
+																	"Data": "```"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceInfoMarker",
+																	"CodeBlockInfo": "YyM="
+																},
+																{
+																	"Type": "NodeCodeBlockCode",
+																	"Data": "gObject.relations.ClearFor(view);\n"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceCloseMarker",
+																	"Data": "```"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

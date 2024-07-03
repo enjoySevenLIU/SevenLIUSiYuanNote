@@ -1,0 +1,931 @@
+{
+	"ID": "20240204141117-6qh32ta",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240204141117-6qh32ta",
+		"title": "UH2S2L17——Lua调用委托和事件",
+		"updated": "20240302170614"
+	},
+	"Children": [
+		{
+			"ID": "20240204141508-nwwzy6f",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240204141508-nwwzy6f",
+				"updated": "20240204141517"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用委托"
+				}
+			]
+		},
+		{
+			"ID": "20240204144305-fth9k2d",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240204144305-fth9k2d",
+				"updated": "20240204144519"
+			},
+			"Children": [
+				{
+					"ID": "20240204144309-zu3yyxq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240204144309-zu3yyxq",
+						"updated": "20240204144354"
+					},
+					"Children": [
+						{
+							"ID": "20240204144309-pp9hfoz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240204144309-pp9hfoz",
+								"updated": "20240204144354"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "委托在Lua中和C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "中商业差不多，唯一需要注意的是，当委托为空时不能直接加，要用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "="
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，之后才能加"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240204144346-okzhx9o",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240204144346-okzhx9o",
+						"updated": "20240204144519"
+					},
+					"Children": [
+						{
+							"ID": "20240204144346-0hyousz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240204144346-0hyousz",
+								"updated": "20240204144519"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "事件的方法加减需要使用这种格式"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "对象:事件名(\u0026quot;+/-\u0026quot;, 函数变量)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，且不能直接清空，必须要在C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "类里执行实现清空方法再通过Lua调用"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240204141548-dm6kg07",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204141548-dm6kg07",
+				"updated": "20240204141548"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "先在C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "脚本内声明如下内容"
+				}
+			]
+		},
+		{
+			"ID": "20240204141548-7rrie0m",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204141548-7rrie0m",
+				"style": "line-height: 22px;",
+				"updated": "20240204144149"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Lesson7\n{\n    //申明委托和事件 \n    public UnityAction del;\n\n    public event UnityAction eventAction;\n\n    public void DoEvent()\n    {\n        if (eventAction != null)\n            eventAction();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204141731-40f34tq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204141731-40f34tq",
+				"updated": "20240204141800"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "委托是用来装函数的，使用C#中的委托，就是用来装lua函数的"
+				}
+			]
+		},
+		{
+			"ID": "20240204143126-3bp8jqn",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240204143126-3bp8jqn",
+				"updated": "20240204143135"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "向委托添加函数"
+				}
+			]
+		},
+		{
+			"ID": "20240204141825-uyn8b1r",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204141825-uyn8b1r",
+				"updated": "20240204143135"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Lua中没有复合运算符 不能"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "+="
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，如果第一次往委托中加函数 因为是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "nil"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，不能直接"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "+"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "所以第一次，要先等"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "code strong text",
+					"TextMarkTextContent": "="
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20240204141908-w6eewgm",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204141908-w6eewgm",
+				"style": "line-height: 22px;",
+				"updated": "20240204143135"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local obj = CS.Lesson7()\n\nlocal fun = function()\n    print(\"Lua函数Fun\")\nend\n\n-- obj.del = obj.del + fun          --第一次不能直接+\nobj.del = fun\nobj.del = obj.del + function()\n    print(\"临时申明的函数\")\nend                                 --类似于添加匿名函数，不建议用，因为无法直接移除\nobj.del()\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204142812-5a3i870",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204142812-5a3i870",
+				"updated": "20240204142812"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240204142812-10w0rt9.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240204143139-rq92szh",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240204143139-rq92szh",
+				"updated": "20240204143142"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "向委托移除函数"
+				}
+			]
+		},
+		{
+			"ID": "20240204142832-1oiuiew",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204142832-1oiuiew",
+				"updated": "20240204143142"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "向委托移除方法也和简单，直接减"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "-"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​即可，这也是为什么尽可能不使用匿名函数的原因，因为无法直接移除，只能清空"
+				}
+			]
+		},
+		{
+			"ID": "20240204142950-8ilgqxx",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204142950-8ilgqxx",
+				"style": "line-height: 22px;",
+				"updated": "20240204143142"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"*********开始加函数***********\")\n-- obj.del = obj.del + fun          --第一次不能直接+\nobj.del = fun\nobj.del = obj.del + fun\nobj.del = obj.del + function()\n    print(\"临时申明的函数\")\nend                                 --类似于添加匿名函数，不建议用，因为无法直接移除\nobj.del()\n\nprint(\"*********开始减函数***********\")\nobj.del = obj.del - fun\nobj.del = obj.del - fun\n--委托执行\nobj.del()\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204143009-mkaa9fw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204143009-mkaa9fw",
+				"updated": "20240204143142"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240204143009-6t2achh.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240204143145-3kmtomn",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240204143145-3kmtomn",
+				"updated": "20240204143148"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "清空函数"
+				}
+			]
+		},
+		{
+			"ID": "20240204143224-h5k1xwt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204143224-h5k1xwt",
+				"updated": "20240204143239"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "清空直接将委托赋值为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "nil"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​即可"
+				}
+			]
+		},
+		{
+			"ID": "20240204143221-tchluy6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204143221-tchluy6",
+				"style": "line-height: 22px;",
+				"updated": "20240204143148"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "-- 清空\nobj.del = nil\nobj.del = fun\nobj.del()\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204143253-mlk1dcs",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204143253-mlk1dcs",
+				"updated": "20240204143253"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240204143253-air0hc0.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240204143254-x2pfcff",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240204143254-x2pfcff",
+				"updated": "20240204143300"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用事件"
+				}
+			]
+		},
+		{
+			"ID": "20240204143919-5cve4pc",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240204143919-5cve4pc",
+				"updated": "20240204143929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "事件添加函数"
+				}
+			]
+		},
+		{
+			"ID": "20240204143335-pjbr673",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204143335-pjbr673",
+				"updated": "20240204143929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "事件加减函数，和委托非常不一样\nlua中使用C#事件加函数，有点类似使用成员方法，类似于"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "对象:事件名(\u0026quot;+\u0026quot;, 函数变量)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240204143552-x07rtem",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204143552-x07rtem",
+				"style": "line-height: 22px;",
+				"updated": "20240204143929"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local fun2 = function()\n    print(\"事件加的函数\")\nend\n\nobj:eventAction(\"+\", fun2)\nobj:eventAction(\"+\", fun2)\nobj:eventAction(\"+\", function()\n    print(\"事件加的匿名函数\")\nend)                            --类似于添加匿名函数，不建议用，因为无法直接移除\nobj:DoEvent()"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204143610-wk9si11",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204143610-wk9si11",
+				"updated": "20240204143727"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240204143727-7y61qye.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240204143933-djys4jl",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240204143933-djys4jl",
+				"updated": "20240204143935"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "事件移除函数"
+				}
+			]
+		},
+		{
+			"ID": "20240204143726-zcqg6qz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204143726-zcqg6qz",
+				"updated": "20240204143935"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "移除方法也很简单"
+				}
+			]
+		},
+		{
+			"ID": "20240204143748-ktx2sjt",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204143748-ktx2sjt",
+				"style": "line-height: 22px;",
+				"updated": "20240204143935"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local fun2 = function()\n    print(\"事件加的函数\")\nend\n\nprint(\"*********开始加函数***********\")\nobj:eventAction(\"+\", fun2)\nobj:eventAction(\"+\", fun2)\nobj:eventAction(\"+\", function()\n    print(\"事件加的匿名函数\")\nend)                            --类似于添加匿名函数，不建议用，因为无法直接移除\nobj:DoEvent()\n\nprint(\"*********开始减函数***********\")\nobj:eventAction(\"-\", fun2)\nobj:DoEvent()\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204143901-z81l3nw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204143901-z81l3nw",
+				"updated": "20240204143935"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240204143901-lwag14v.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240204143937-2k2ditu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240204143937-2k2ditu",
+				"updated": "20240204143943"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "清空事件"
+				}
+			]
+		},
+		{
+			"ID": "20240204143958-dn3yzbq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204143958-dn3yzbq",
+				"updated": "20240204144131"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "清事件，不能直接设置为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "nil"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，因为事件一般不能让外部去清空，\n因此我们需要在C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "类内部自行声明清空方法，然后让外部调用这个方法"
+				}
+			]
+		},
+		{
+			"ID": "20240204144144-05xfbjw",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204144144-05xfbjw",
+				"style": "line-height: 22px;",
+				"updated": "20240204144246"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Lesson7\n{\n    //申明委托和事件 \n    public UnityAction del;\n\n    public event UnityAction eventAction;\n\n    public void DoEvent()\n    {\n        if (eventAction != null)\n            eventAction();\n    }\n\n    public void ClearEvent()\n    {\n        eventAction = null;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204144153-qn1x5dy",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204144153-qn1x5dy",
+				"style": "line-height: 22px;",
+				"updated": "20240204144223"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "obj:ClearEvent()\nobj:DoEvent()\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

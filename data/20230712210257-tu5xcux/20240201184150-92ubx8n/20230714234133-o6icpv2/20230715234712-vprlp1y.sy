@@ -1,0 +1,1536 @@
+{
+	"ID": "20230715234712-vprlp1y",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230715234712-vprlp1y",
+		"name": "XML序列化",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230715234712-vprlp1y\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230715235121-ro6o5zh\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230716010206-9lrdmfw\u0026quot;,\u0026quot;scrollTop\u0026quot;:3124,\u0026quot;focusId\u0026quot;:\u0026quot;20230716005141-ztrju65\u0026quot;,\u0026quot;focusStart\u0026quot;:1188,\u0026quot;focusEnd\u0026quot;:1188\u0026#125;",
+		"title": "UD2SL1——XML序列化",
+		"type": "doc",
+		"updated": "20240317172534"
+	},
+	"Children": [
+		{
+			"ID": "20230716010809-x70uein",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230716010809-x70uein",
+				"updated": "20240317172448"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20230716010818-tnyn3k5",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230716010818-tnyn3k5",
+				"updated": "20240317172452"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using () { }                        //用于方便流对象释放和销毁，当大括号的代码块执行完毕时，会自动销毁释放括号内实例化的对象\nStreamWriter                        //用于存储文件的文件流\nXmlSerializer                       //用于序列化对象为xml的关键类\nxmlSerializer.Serialize(, )         //第一个参数填文件流，第二个文件填构造时传入的类型的实例化对象，将该实例化对象序列化\n[XmlElement(\"testPublic123123\")]    //该特性可以修改存储到xml的名字\n[XmlArray(\"IntList\")]               //对于数组，列表，该特性可以修改列表本身存储到xml的名字\n[XmlArrayItem(\"Int32\")]             //对于数组，列表，该特性可以修改列表成员存储到xml的名字\n[XmlAttribute(\"Test1\")]             //该特性将元素节点改为属性，若填入参数还会改名\n[XmlAttribute()]                    //不填参数不会改名\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230715235121-ro6o5zh",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230715235121-ro6o5zh",
+				"updated": "20230716002746"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "何为序列化和反序列化"
+				}
+			]
+		},
+		{
+			"ID": "20230715235124-wfuqodd",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230715235124-wfuqodd",
+				"updated": "20230715235146"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "序列化"
+				}
+			]
+		},
+		{
+			"ID": "20230715235146-ia5xhr1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230715235146-ia5xhr1",
+				"updated": "20230715235303"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "把对象转化为可传输的字节序列过程称为序列化\n简单来说就是：把想要存储的内容转换为字节序列用于存储或传递"
+				}
+			]
+		},
+		{
+			"ID": "20230715235304-lnhewbv",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230715235304-lnhewbv",
+				"updated": "20230715235309"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "反序列化"
+				}
+			]
+		},
+		{
+			"ID": "20230715235309-e1wfsw9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230715235309-e1wfsw9",
+				"updated": "20230715235408"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "把字节序列还原为对象的过程称为反序列化\n简单来说就是：把存储或收到的字节序列信息解析读取出来使用"
+				}
+			]
+		},
+		{
+			"ID": "20230715235058-5vdv0v9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230715235058-5vdv0v9",
+				"updated": "20230716002751"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "XML序列化"
+				}
+			]
+		},
+		{
+			"ID": "20230716002752-x3hvuoa",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230716002752-x3hvuoa",
+				"updated": "20240317170638"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "序列化流程"
+				}
+			]
+		},
+		{
+			"ID": "20240317170638-uqm051a",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240317170638-uqm051a",
+				"updated": "20240317172436"
+			},
+			"Children": [
+				{
+					"ID": "20240317170638-l37umzd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240317170638-l37umzd",
+						"updated": "20240317170638"
+					},
+					"Children": [
+						{
+							"ID": "20240317170638-ohtjyps",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240317170638-ohtjyps",
+								"updated": "20240317170638"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "有一个想要保存的类对象"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240317170638-euv6lwk",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240317170638-euv6lwk",
+						"updated": "20240317172436"
+					},
+					"Children": [
+						{
+							"ID": "20240317170638-6lnkmds",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240317170638-6lnkmds",
+								"updated": "20240317172436"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "XmlSerializer"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 序列化该对象"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240317170638-ygghh7w",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240317170638-ygghh7w",
+						"updated": "20240317172436"
+					},
+					"Children": [
+						{
+							"ID": "20240317170638-4yaufj4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240317170638-4yaufj4",
+								"updated": "20240317172436"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "StreamWriter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 配合 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "using"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​将数据存储 写入文件"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240317170631-o6lf85f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240317170631-o6lf85f",
+				"updated": "20240317170635"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意："
+				}
+			]
+		},
+		{
+			"ID": "20240317170635-40n63lz",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240317170635-40n63lz",
+				"updated": "20240317172321"
+			},
+			"Children": [
+				{
+					"ID": "20240317170635-k06kq8p",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240317170635-k06kq8p",
+						"updated": "20240317170635"
+					},
+					"Children": [
+						{
+							"ID": "20240317170635-k1oaaer",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240317170635-k1oaaer",
+								"updated": "20240317170635"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "只能序列化公共成员"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240317170635-hm80sjd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240317170635-hm80sjd",
+						"updated": "20240317170635"
+					},
+					"Children": [
+						{
+							"ID": "20240317170635-4fdtdyo",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240317170635-4fdtdyo",
+								"updated": "20240317170635"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "不支持字典序列化"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240317170635-fxw2wjq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240317170635-fxw2wjq",
+						"updated": "20240317170635"
+					},
+					"Children": [
+						{
+							"ID": "20240317170635-dkf1wre",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240317170635-dkf1wre",
+								"updated": "20240317170635"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可以通过特性修改节点信息 或者设置属性信息"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240317170635-zaffa12",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240317170635-zaffa12",
+						"updated": "20240317172321"
+					},
+					"Children": [
+						{
+							"ID": "20240317170635-ktse0wl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240317170635-ktse0wl",
+								"updated": "20240317172321"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Stream"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​相关要配合"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "using"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​使用"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240317170635-j9dh7cr",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20240317170635-j9dh7cr",
+						"updated": "20240317170635"
+					},
+					"Children": [
+						{
+							"ID": "20240317170635-maw5ekb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240317170635-maw5ekb",
+								"updated": "20240317170635"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "text",
+									"TextMarkTextContent": "注意！类中"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "text strong",
+									"TextMarkTextContent": "引用类型变量"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "text",
+									"TextMarkTextContent": "如果为null，则序列化时不会为该变量创建节点"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240317170635-eas4g80",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ni4=",
+						"Num": 6
+					},
+					"Properties": {
+						"id": "20240317170635-eas4g80",
+						"updated": "20240317170635"
+					},
+					"Children": [
+						{
+							"ID": "20240317170635-bvttisv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240317170635-bvttisv",
+								"updated": "20240317170635"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+									},
+									"TextMarkType": "strong text",
+									"TextMarkTextContent": "注意！要序列化的类的列表变量不可以初始化！！！因为反序列化时不会覆盖而是增加，这会造成数据重复！！！"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230715235126-p1tqexx",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20230715235126-p1tqexx",
+				"updated": "20240317172525"
+			},
+			"Children": [
+				{
+					"ID": "20240317170710-u17s2n3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240317170710-u17s2n3",
+						"updated": "20240317170710"
+					},
+					"Children": [
+						{
+							"ID": "20240317170710-cox18fx",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240317170710-cox18fx",
+								"updated": "20240317170710"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "准备一个数据结构类"
+								}
+							]
+						},
+						{
+							"ID": "20230716000021-yvzzifm",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20230716000021-yvzzifm",
+								"style": "line-height: 22px;",
+								"updated": "20230716000042"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class Lesson1Test\n{\n    public int testPublic = 10;\n    private int testPrivate = 11;\n    protected int testProtected = 12;\n    internal int testInternal = 13;\n\n    public string testPublicStr = \"123\";\n\n    public int testPro { get; set; }\n\n    public Lesson1Test2 testClass = new Lesson1Test2();\n}\n\npublic class Lesson1Test2\n{\n    public int test1 = 1;\n    public float test2 = 1.1f;\n    public bool test3 = true;\n}\n\nLesson1Test lt = new Lesson1Test();\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240317170720-yh73u7g",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240317170720-yh73u7g",
+						"updated": "20240317172525"
+					},
+					"Children": [
+						{
+							"ID": "20240317170720-mjtnfsw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240317170720-mjtnfsw",
+								"updated": "20240317170722"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "进行序列化"
+								}
+							]
+						},
+						{
+							"ID": "20230716001247-hjye432",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230716001247-hjye432",
+								"updated": "20240317170651"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "关键知识点："
+								}
+							]
+						},
+						{
+							"ID": "20240317170658-104dlsr",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240317170658-104dlsr",
+								"updated": "20240317172511"
+							},
+							"Children": [
+								{
+									"ID": "20240317170659-rho72or",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240317170659-rho72or",
+										"updated": "20240317172507"
+									},
+									"Children": [
+										{
+											"ID": "20240317170659-pfwiw9y",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240317170659-pfwiw9y",
+												"updated": "20240317172507"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref code",
+													"TextMarkBlockRefID": "20230716001802-u77asb7",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "XmlSerializer"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 用于序列化对象为xml的关键类\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240317170700-ygxyrbe",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240317170700-ygxyrbe",
+										"updated": "20240317172509"
+									},
+									"Children": [
+										{
+											"ID": "20240317170700-2mmeiyg",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240317170700-2mmeiyg",
+												"updated": "20240317172509"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref code",
+													"TextMarkBlockRefID": "20230716001802-2d574f8",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "StreamWriter"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 用于存储文件\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240317170701-f5qpyzr",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240317170701-f5qpyzr",
+										"updated": "20240317172511"
+									},
+									"Children": [
+										{
+											"ID": "20240317170701-nvxc5xz",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240317170701-nvxc5xz",
+												"updated": "20240317172511"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref code",
+													"TextMarkBlockRefID": "20230715235537-845my7h",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "using"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 用于方便流对象释放和销毁"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240317170824-u091a1k",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240317170824-u091a1k",
+								"updated": "20240317170832"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "序列化步骤"
+								}
+							]
+						},
+						{
+							"ID": "20240317170737-eq0b1zj",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240317170737-eq0b1zj",
+								"updated": "20240317172525"
+							},
+							"Children": [
+								{
+									"ID": "20240317170750-2gazg1s",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240317170750-2gazg1s",
+										"updated": "20240317170750"
+									},
+									"Children": [
+										{
+											"ID": "20240317170750-sps7kat",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240317170750-sps7kat",
+												"updated": "20240317170750"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "第一步：确定存储路径"
+												}
+											]
+										},
+										{
+											"ID": "20230716000331-cxfgmd1",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20230716000331-cxfgmd1",
+												"style": "line-height: 22px;",
+												"updated": "20230716003643"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "//第一步：确定存储路径\nstring path = Application.persistentDataPath + \"/Lesson1Test.xml\";\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240317170757-67k2qq9",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240317170757-67k2qq9",
+										"updated": "20240317172525"
+									},
+									"Children": [
+										{
+											"ID": "20240317170757-csot1in",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240317170757-csot1in",
+												"updated": "20240317172525"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "第二步：结合 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "using"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 知识点 和 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "StreamWriter"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 这个流对象 来写入文件"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240317170759-qzvadv4",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20240317170759-qzvadv4"
+									},
+									"Children": [
+										{
+											"ID": "20240317170759-7jsndbk",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240317170759-7jsndbk"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "第三步：进行XML文件序列化"
+												}
+											]
+										},
+										{
+											"ID": "20230716001231-t4ep9nr",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20230716001231-t4ep9nr",
+												"style": "line-height: 22px;",
+												"updated": "20230716004314"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "//第二步：结合 using 知识点 和 StreamWriter 这个流对象 来写入文件\nusing (StreamWriter stream = new StreamWriter(path))\n{\n    //第三步：进行XML文件序列化\n    XmlSerializer s = new XmlSerializer(typeof(Lesson1Test));\n    //这句代码的含义 就是通过序列化对象 对我们的类对象进行翻译 将其翻译成我们的xml文件 写入到对象的文件中\n    //第一个参数：文件流对象\n    //第二个参数：想要被翻译的对象\n    //注意！用于翻译（序列化为xml）的对象在构造时传入构造函数的类型 一定要和接下来翻译要传入的对象类型是一致的 不然会报错！！！\n    s.Serialize(stream, lt);\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20230716004215-sg4pi6s",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230716004215-sg4pi6s",
+								"updated": "20230716004425"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "存储结果如下：\n分析储存结果可以发现："
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "text",
+									"TextMarkTextContent": "私有的，保护的，内联的成员变量都没有存储"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "，也就是说只能序列化公共成员"
+								}
+							]
+						},
+						{
+							"ID": "20230716004205-ufnii2v",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20230716004205-ufnii2v",
+								"style": "line-height: 22px;",
+								"updated": "20230716004231"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "eG1s"
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "\u003c?xml version=\"1.0\" encoding=\"utf-8\"?\u003e\n\u003cLesson1Test xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\n  \u003ctestPublic\u003e10\u003c/testPublic\u003e\n  \u003ctestPublicStr\u003e123\u003c/testPublicStr\u003e\n  \u003ctestClass\u003e\n    \u003ctest1\u003e1\u003c/test1\u003e\n    \u003ctest2\u003e1.1\u003c/test2\u003e\n    \u003ctest3\u003etrue\u003c/test3\u003e\n  \u003c/testClass\u003e\n  \u003ctestPro\u003e0\u003c/testPro\u003e\n\u003c/Lesson1Test\u003e\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230716001802-u77asb7",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230716001802-u77asb7",
+				"name": "XmlSerializer",
+				"updated": "20240317172448"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "XmlSerializer 用于序列化对象为xml的关键类"
+				}
+			]
+		},
+		{
+			"ID": "20230716003443-dzjclgt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230716003443-dzjclgt",
+				"updated": "20240317172534"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过序列化对象 对我们的类对象进行翻译 将其翻译成我们的xml文件 写入到对象的文件中\n实例化时要传入 将要被序列化的对象 的类型，实例化出来的对象就"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "能且仅能对该类型进行序列化"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n就像是翻译机器一样\n使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "xmlSerializer.Serialize()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​来完成序列化\n下面代码的含义 就是通过序列化对象 对我们的类对象进行翻译 将其翻译成我们的xml文件 写入到对象的文件中\n第一个参数：文件流对象\n第二个参数：想要被翻译的对象\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "注意！用于翻译（序列化为xml）的对象在构造时传入构造函数的类型 一定要和接下来翻译要传入的对象类型是一致的 不然会报错！！！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230716002821-cd1tzrc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230716002821-cd1tzrc",
+				"updated": "20240317172448"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Lesson1Test lt = new Lesson1Test();\nstring path = Application.persistentDataPath + \"/Lesson1Test.xml\";\nusing (StreamWriter stream = new StreamWriter(path))\n{\n    XmlSerializer s = new XmlSerializer(typeof(Lesson1Test));\n    s.Serialize(stream, lt);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230716001802-2d574f8",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230716001802-2d574f8",
+				"name": "StreamWriter",
+				"updated": "20240317172448"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "StreamWriter 用于存储文件"
+				}
+			]
+		},
+		{
+			"ID": "20230716002819-2kukg7t",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230716002819-2kukg7t",
+				"updated": "20240317172448"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "传入路径，实例化一个文件流 如果有该文件 直接打开并修改 如果没有该文件 直接新建一个文件\n之后就会对该文件进行修改等操作，配合"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref code",
+					"TextMarkBlockRefID": "20230715235537-845my7h",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "using"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref code",
+					"TextMarkBlockRefID": "20230716001802-u77asb7",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "XmlSerializer"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​使用"
+				}
+			]
+		},
+		{
+			"ID": "20230715235537-845my7h",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230715235537-845my7h",
+				"name": "using",
+				"updated": "20240317172448"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "using 用于方便流对象释放和销毁"
+				}
+			]
+		},
+		{
+			"ID": "20230716001249-5x3ck2n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230716001249-5x3ck2n",
+				"updated": "20240317172448"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "using"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​​ 的新用法：\n在之前"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "using"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​​是用来"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "引用"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "命名空间的\n而"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "这里"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "using"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​​，会使"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "括号当中包裹的声明的对象，在大括号语句块结束后 自动释放掉"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n或者说 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "当语句块结束 会自动帮我们调用 对象的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code strong",
+					"TextMarkTextContent": "Dispose"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": " 这个方法 让其进行销毁"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "using"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​​ 一般都是配合 内存占用较大 或者有读写操作时 进行使用的（以防出现问题）\n简单来说，一般读写的对象都会配合它来使用"
+				}
+			]
+		},
+		{
+			"ID": "20230716001459-i2m04nq",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230716001459-i2m04nq",
+				"style": "line-height: 22px;",
+				"updated": "20240317172448"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using (StreamWriter stream = new StreamWriter(path)) { }\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230716005122-3dfc9gn",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230716005122-3dfc9gn",
+				"updated": "20240317172448"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "能否存储更多的类型？"
+				}
+			]
+		},
+		{
+			"ID": "20230716005425-akt54hj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230716005425-akt54hj",
+				"updated": "20240317172448"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "运行下面的代码，可以发现序列化支持数组，列表的序列化，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "但不支持字典的序列化，强行序列化会报错！！！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "注意！要序列化的类的列表变量不可以初始化！！！因为反序列化时不会覆盖而是增加，这会造成数据重复！！！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText"
+				}
+			]
+		},
+		{
+			"ID": "20230716005141-ztrju65",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230716005141-ztrju65",
+				"updated": "20240317172448"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Lesson1Test\n{\n    public int testPublic = 10;\n    private int testPrivate = 11;\n    protected int testProtected = 12;\n    internal int testInternal = 13;\n\n    public string testPublicStr = \"123\";\n\n    public int testPro { get; set; }\n\n    public Lesson1Test2 testClass = new Lesson1Test2();\n\n    public int[] arrayInt = new int[3] { 5, 6, 7 };\n    public List\u003cint\u003e listInt; //= new List\u003cint\u003e() { 1, 2, 3, 4 };切勿在类里直接初始化，因为序列化读取时不会覆盖而是增加，会直接导致数据重复！\n    public List\u003cLesson1Test2\u003e listItem = new List\u003cLesson1Test2\u003e() { new Lesson1Test2(), new Lesson1Test2() };\n    //这种序列化是不支持字典的！！！\n    //public Dictionary\u003cint, string\u003e testdic = new Dictionary\u003cint, string\u003e() { { 1, \"123\" } };\n}\n\npublic class Lesson1Test2\n{\n    public int test1 = 1;\n    public float test2 = 1.1f;\n    public bool test3 = true;\n}\n\npublic class Lesson1 : MonoBehaviour\n{\n    void Start()\n    {\n        Lesson1Test lt = new Lesson1Test();\n        string path = Application.persistentDataPath + \"/Lesson1Test.xml\";\n        using (StreamWriter stream = new StreamWriter(path))\n        {\n            XmlSerializer s = new XmlSerializer(typeof(Lesson1Test));\n            s.Serialize(stream, lt);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230715235104-bovqdmg",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230715235104-bovqdmg",
+				"updated": "20230715235116"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义节点名 或 设置属性"
+				}
+			]
+		},
+		{
+			"ID": "20230715235127-c1exa3l",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230715235127-c1exa3l",
+				"updated": "20230716005528"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以通过特性 设置节点或者设置属性，并且修改名字"
+				}
+			]
+		},
+		{
+			"ID": "20230716010628-da0rd3y",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230716010628-da0rd3y",
+				"updated": "20230716010758"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[XmlElement(\"testPublic123123\")]    //该特性可以修改存储到xml的名字\n[XmlArray(\"IntList\")]               //对于数组，列表，该特性可以修改列表本身存储到xml的名字\n[XmlArrayItem(\"Int32\")]             //对于数组，列表，该特性可以修改列表成员存储到xml的名字\n[XmlAttribute(\"Test1\")]             //该特性将元素节点改为属性，若填入参数还会改名\n[XmlAttribute()]                    //不填参数不会改名\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230716005528-ugaxlul",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230716005528-ugaxlul",
+				"updated": "20230716014057"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Lesson1Test\n{\n    [XmlElement(\"testPublic123123\")]    //该特性可以修改存储到xml的名字\n    public int testPublic = 10;\n    private int testPrivate = 11;\n    protected int testProtected = 12;\n    internal int testInternal = 13;\n\n    public string testPublicStr = \"123\";\n\n    public int testPro { get; set; }\n\n    public Lesson1Test2 testClass = new Lesson1Test2();\n\n    public int[] arrayInt = new int[3] { 5, 6, 7 };\n    [XmlArray(\"IntList\")]        //对于数组，列表，该特性可以修改列表本身存储到xml的名字\n    [XmlArrayItem(\"Int32\")]      //对于数组，列表，该特性可以修改列表成员存储到xml的名字\n    public List\u003cint\u003e listInt //= new List\u003cint\u003e() { 1, 2, 3, 4 };切勿在类里直接初始化，因为序列化读取时不会覆盖而是增加，会直接导致数据重复！\n    public List\u003cLesson1Test2\u003e listItem = new List\u003cLesson1Test2\u003e() { new Lesson1Test2(), new Lesson1Test2() };\n}\n\npublic class Lesson1Test2\n{\n    [XmlAttribute(\"Test1\")]    //该特性将元素节点改为属性，若填入参数还会改名\n    public int test1 = 1;\n    [XmlAttribute()]           //不填参数不会改名\n    public float test2 = 1.1f;\n    [XmlAttribute()]\n    public bool test3 = true;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230715234712-0eyxq44",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230715234712-0eyxq44",
+				"updated": "20230716010206"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "运行结果："
+				}
+			]
+		},
+		{
+			"ID": "20230716010206-9lrdmfw",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230716010206-9lrdmfw",
+				"style": "line-height: 22px;",
+				"updated": "20240317170904"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "eG1s"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "\u003c?xml version=\"1.0\" encoding=\"utf-8\"?\u003e\n\u003cLesson1Test xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\n  \u003ctestPublic123123\u003e10\u003c/testPublic123123\u003e\n  \u003ctestPublicStr\u003e123\u003c/testPublicStr\u003e\n  \u003ctestClass Test1=\"1\" test2=\"1.1\" test3=\"true\" /\u003e\n  \u003carrayInt\u003e\n    \u003cint\u003e5\u003c/int\u003e\n    \u003cint\u003e6\u003c/int\u003e\n    \u003cint\u003e7\u003c/int\u003e\n  \u003c/arrayInt\u003e\n  \u003cIntList\u003e\n    \u003cInt32\u003e1\u003c/Int32\u003e\n    \u003cInt32\u003e2\u003c/Int32\u003e\n    \u003cInt32\u003e3\u003c/Int32\u003e\n    \u003cInt32\u003e4\u003c/Int32\u003e\n  \u003c/IntList\u003e\n  \u003clistItem\u003e\n    \u003cLesson1Test2 Test1=\"1\" test2=\"1.1\" test3=\"true\" /\u003e\n    \u003cLesson1Test2 Test1=\"1\" test2=\"1.1\" test3=\"true\" /\u003e\n  \u003c/listItem\u003e\n  \u003ctestPro\u003e0\u003c/testPro\u003e\n\u003c/Lesson1Test\u003e\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

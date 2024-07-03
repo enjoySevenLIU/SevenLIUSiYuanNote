@@ -1,0 +1,1056 @@
+{
+	"ID": "20240203131640-6npmb39",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240203131640-6npmb39",
+		"title": "UH2S2L11——Lua调用C#类",
+		"updated": "20240302170552"
+	},
+	"Children": [
+		{
+			"ID": "20240203142441-7krv28i",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240203142441-7krv28i",
+				"updated": "20240203142445"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240203142446-urt9pdc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240203142446-urt9pdc",
+				"style": "line-height: 22px;",
+				"updated": "20240203143042"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "--Lua调用C#的类\nCS.命名空间.类名\nCS.UnityEngine.类名\nCS.类名\t\t\t\t\t--不加命名空间\n--实例化对象\nCS.命名空间.类名\n--静态方法与变量\nCS.命名空间.类名.方法\nCS.命名空间.类名.变量\n--成员方法与变量\n实例化对象.变量\n实例化对象:方法\t\t\t--不要忘记加:！！！，因为Lua里表的方法想要调用表本身需要冒号\n--技巧\n别名 = CS.命名空间.类名\t--该变量将执行对应的类，可以简化名称并优化性能\nLua不支持无参泛型方法，因此需要使用对应的传入Type类型参数的方法\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240203134657-auhm60o",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240203134657-auhm60o",
+				"updated": "20240203134706"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "启动Lua脚本"
+				}
+			]
+		},
+		{
+			"ID": "20240203131640-dte3ijm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203131640-dte3ijm",
+				"updated": "20240203134706"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Lua没有办法直接访问C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，一定是先从C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "调用Lua脚本后，才把核心逻辑交给Lua来编写\n因此需要一个Main脚本，通过它来启动一个Lua入口脚本"
+				}
+			]
+		},
+		{
+			"ID": "20240203132724-yv0ml14",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240203132724-yv0ml14",
+				"style": "line-height: 22px;",
+				"updated": "20240203134706"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class Main : MonoBehaviour\n{\n    void Start()\n    {\n        LuaManager.Instance.Init();\n        LuaManager.Instance.DoLuaFile(\"Main\");\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240203131933-y275msa",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203131933-y275msa",
+				"updated": "20240203133142"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "lua中使用C#的类非常简单，固定套路："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "CS.命名空间.类名"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\nUnity的类，比如 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Transform"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 等等 —— "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "CS.UnityEngine.类名"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n例如想要调用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，就需要调用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "CS.UnityEngine.GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240203140342-34wqya6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240203140342-34wqya6",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用Unity相关类"
+				}
+			]
+		},
+		{
+			"ID": "20240203134708-2x0iqw4",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240203134708-2x0iqw4",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用Unity相关类的构造方法"
+				}
+			]
+		},
+		{
+			"ID": "20240203132722-723de63",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203132722-723de63",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过C#中的类，实例化一个对象 lua中没有new 所以我们直接类名括号就是实例化对象，默认调用的，相当于就是无参构造\n如果构造方法需要参数，那就只需要传入对应的参数即可"
+				}
+			]
+		},
+		{
+			"ID": "20240203133407-lhi2sh0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203133407-lhi2sh0",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "下面的代码能创建两个空物体"
+				}
+			]
+		},
+		{
+			"ID": "20240203133203-dbe4u5x",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240203133203-dbe4u5x",
+				"style": "line-height: 22px;",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local obj1 = CS.UnityEngine.GameObject()\nlocal obj2 = CS.UnityEngine.GameObject(\"唐老狮\")\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240203133742-ca4e56d",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203133742-ca4e56d",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "为了方便使用，并且节约性能，可以直接定义全局变量存储C#中的类，相当于取了一个别名"
+				}
+			]
+		},
+		{
+			"ID": "20240203133816-d0rnbpp",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240203133816-d0rnbpp",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "GameObject = CS.UnityEngine.GameObject\nlocal obj3 = GameObject(\"唐老狮好爱同学们\")\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240203140027-udcsq4a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203140027-udcsq4a",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240203140027-fij9i3u.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240203134740-unpjajh",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240203134740-unpjajh",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用Unity相关类的静态成员"
+				}
+			]
+		},
+		{
+			"ID": "20240203134141-3vqrkhm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203134141-3vqrkhm",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "类中的静态对象，可以直接使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "."
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​来调用"
+				}
+			]
+		},
+		{
+			"ID": "20240203134153-qqifs97",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240203134153-qqifs97",
+				"style": "line-height: 22px;",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local obj4 = GameObject.Find(\"唐老狮\")\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240203134800-edqacjw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240203134800-edqacjw",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用Unity相关类对象的成员变量"
+				}
+			]
+		},
+		{
+			"ID": "20240203134209-jojjfr7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203134209-jojjfr7",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "得到对象中的成员变量  直接"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "对象."
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​即可"
+				}
+			]
+		},
+		{
+			"ID": "20240203134222-95g5exl",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240203134222-95g5exl",
+				"style": "line-height: 22px;",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local obj4 = GameObject.Find(\"唐老狮\")\nprint(obj4.transform.position)\nDebug = CS.UnityEngine.Debug\nDebug.Log(obj4.transform.position)"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240203140051-1q2nhtz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203140051-1q2nhtz",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240203140051-iespb47.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240203134852-0jukqa7",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240203134852-0jukqa7",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用Unity相关类对象的成员方法"
+				}
+			]
+		},
+		{
+			"ID": "20240203134857-e923klg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203134857-e923klg",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "如果使用对象中的成员方法！！！！一定要加"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "code strong text",
+					"TextMarkTextContent": ":"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，目的也是为了让成员方法可以调用类对象自己！"
+				}
+			]
+		},
+		{
+			"ID": "20240203134931-3lshmel",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240203134931-3lshmel",
+				"style": "line-height: 22px;",
+				"updated": "20240203140351"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Vector3 = CS.UnityEngine.Vector3\nobj4.transform:Translate(Vector3.right)\nDebug.Log(obj4.transform.position)"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240203140101-fl6wu38",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203140101-fl6wu38",
+				"updated": "20240203140101"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240203140101-2itqzlh.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240203140717-0hzo2er",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240203140717-0hzo2er",
+				"updated": "20240203140806"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用继承MonoBehaviour的类"
+				}
+			]
+		},
+		{
+			"ID": "20240203140729-ibf8pp2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203140729-ibf8pp2",
+				"updated": "20240203140933"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "继承了"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "MonoBehaviour"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的类是不能直接new的，因此我们不能在Lua脚本里执行类似"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "继承MonoBehaviour的类()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​这样的语句"
+				}
+			]
+		},
+		{
+			"ID": "20240203140936-xa8cog0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240203140936-xa8cog0",
+				"updated": "20240203141001"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "添加继承MonoBehaviour的脚本"
+				}
+			]
+		},
+		{
+			"ID": "20240203141001-d0es3oi",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203141001-d0es3oi",
+				"updated": "20240204152340"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以往我们在C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "脚本内为游戏对象添加脚本都是通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "gameObject.AddComponent\u0026lt;\u0026gt;()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​来添加的\n但是因为Lua中不支持无参泛型函数， 所以我们要使用另一个重载"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "gameObject.AddComponent(typeof())"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\nxlua提供了一个重要方法"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "typeof"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，可以通过它得到类的Type"
+				}
+			]
+		},
+		{
+			"ID": "20240203141753-pti9wsy",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240203141753-pti9wsy",
+				"style": "line-height: 22px;",
+				"updated": "20240203142459"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local obj5 = GameObject(\"添加脚本测试\")\nobj5:AddComponent(typeof(CS.LuaCallCSharp))\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240203142311-exg576r",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203142311-exg576r",
+				"updated": "20240203142311"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 448px;",
+						"style": "width: 438px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240203142311-7lgj44u.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 438px;\" parent-style=\"width: 448px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240203140154-pez6jh8",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240203140154-pez6jh8",
+				"updated": "20240203140400"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用自定义类相关"
+				}
+			]
+		},
+		{
+			"ID": "20240203140401-jcf24zt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203140401-jcf24zt",
+				"updated": "20240203140418"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先在C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "脚本声明这些内容"
+				}
+			]
+		},
+		{
+			"ID": "20240203140418-ciiqasf",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240203140418-ciiqasf",
+				"style": "line-height: 22px;",
+				"updated": "20240203140438"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Test\n{\n    public void Speak(string str)\n    {\n        Debug.Log(str);\n    }\n}\n\nnamespace MrTang\n{\n    public class Test2\n    {\n        public void Speak(string str)\n        {\n            Debug.Log(\"Test2:\" + str);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240203140423-dcv3d7y",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203140423-dcv3d7y",
+				"updated": "20240203140709"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "然后如调用Unity相关类那样调用它们即可（如果类在另外一个命名空间，则需要加上命名空间前缀，内部类同理）"
+				}
+			]
+		},
+		{
+			"ID": "20240203140626-35r68e9",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240203140626-35r68e9",
+				"style": "line-height: 22px;",
+				"updated": "20240203142509"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local t = CS.Test()\nt:Speak(\"test说话\")\n\nlocal t2 = CS.MrTang.Test2()\nt2:Speak(\"test2说话\")\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240203140653-43h55h4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203140653-43h55h4",
+				"updated": "20240203140653"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240203140653-r3hi6au.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240203140712-dj4t29r",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203140712-dj4t29r"
+			}
+		}
+	]
+}

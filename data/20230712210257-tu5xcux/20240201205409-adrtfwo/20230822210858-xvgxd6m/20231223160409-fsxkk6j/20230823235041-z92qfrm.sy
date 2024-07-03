@@ -1,0 +1,134 @@
+{
+	"ID": "20230823235041-z92qfrm",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230823235041-z92qfrm",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230823235041-z92qfrm\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230823235041-eo6kib7\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230824003121-88kyvgy\u0026quot;,\u0026quot;scrollTop\u0026quot;:0,\u0026quot;focusId\u0026quot;:\u0026quot;20230823235041-eo6kib7\u0026quot;,\u0026quot;focusStart\u0026quot;:0,\u0026quot;focusEnd\u0026quot;:0\u0026#125;",
+		"title": "UF_OLDL5——场景切换模块",
+		"updated": "20231223160937"
+	},
+	"Children": [
+		{
+			"ID": "20230823235041-eo6kib7",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230823235041-eo6kib7",
+				"updated": "20230823235548"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关于场景切换"
+				}
+			]
+		},
+		{
+			"ID": "20230823235628-wk00a95",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823235628-wk00a95",
+				"updated": "20230823235922"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在游戏项目里，切换场景并不是切换到一个已经放好东西的场景上\n而是切换到一个空场景，通过配置文件去动态的加载场景上的物件，通过玩家消息去动态的创建玩家"
+				}
+			]
+		},
+		{
+			"ID": "20230823235942-so5l658",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823235942-so5l658",
+				"updated": "20230824000216"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "所以，我们需要一个场景切换模块来提供一个场景切换的公共接口来指定切换场景后应该做什么\n知识点涉及到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230713204029-orcysbh",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "场景异步加载"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230712214614-4ja3qtk",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "协同程序"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "、委托"
+				}
+			]
+		},
+		{
+			"ID": "20230824000225-s6bv0mu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230824000225-s6bv0mu",
+				"updated": "20230824000424"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "场景切换模块"
+				}
+			]
+		},
+		{
+			"ID": "20230824000424-u86c0cd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230824000424-u86c0cd",
+				"updated": "20230824003135"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用方法：\n场景同步切换，传入场景名和切换场景结束后要执行的方法\n场景异步切换，传入场景名和切换场景结束后要执行的方法，可以用这个来更新进度条等内容\n异步切换时，事件中心会得到“进度表更新”事件，参数包含场景切换进度，可以使用这个来更新进度条"
+				}
+			]
+		},
+		{
+			"ID": "20230824003121-88kyvgy",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230824003121-88kyvgy",
+				"updated": "20230824003146"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\nusing UnityEngine;\nusing UnityEngine.Events;\nusing UnityEngine.SceneManagement;\n\n/// \u003csummary\u003e\n/// 场景切换模块\n/// \u003c/summary\u003e\npublic class SceneChangeManager : BaseManager\u003cSceneChangeManager\u003e\n{\n\n    /// \u003csummary\u003e\n    /// 提供给外部的同步切换场景的接口方法\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e要切换到的场景名\u003c/param\u003e\n    /// \u003cparam name=\"func\"\u003e切换场景要执行的方法\u003c/param\u003e\n    public void LoadScene(string name, UnityAction func)\n    {\n        SceneManager.LoadScene(name);       //场景同步切换\n        func();                             //场景切换完成后执行方法\n    }\n\n    /// \u003csummary\u003e\n    /// 提供给外部的异步切换场景的接口方法\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e要切换的场景名\u003c/param\u003e\n    /// \u003cparam name=\"func\"\u003e切换场景切换完毕后要执行的方法\u003c/param\u003e\n    public void LoadSceneAsync(string name, UnityAction func)\n    {\n        MonoManager.Instance().StartCoroutine(ReallyLoadSceneAsync(name, func));\n    }\n\n    /// \u003csummary\u003e\n    /// 异步加载场景的协程使用的迭代器函数\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e要切换的场景名\u003c/param\u003e\n    /// \u003cparam name=\"func\"\u003e切换完成后要执行的方法\u003c/param\u003e\n    /// \u003creturns\u003e协程执行暂停后等待多久再执行\u003c/returns\u003e\n    private IEnumerator ReallyLoadSceneAsync(string name, UnityAction func)\n    {\n        AsyncOperation ao = SceneManager.LoadSceneAsync(name);\n        while (!ao.isDone)\n        {\n            //通过事件中心，向外分发进度情况，外面可以通过这个获取当前场景更新进度\n            EventCenter.Instance().EventTrigger(\"进度条更新\", ao.progress);\n            yield return ao.progress;\n        }\n        func();                             //场景切换完成后执行方法\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

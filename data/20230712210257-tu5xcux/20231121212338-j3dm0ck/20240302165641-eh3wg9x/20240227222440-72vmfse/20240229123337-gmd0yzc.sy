@@ -1,0 +1,2536 @@
+{
+	"ID": "20240229123337-gmd0yzc",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240229123337-gmd0yzc",
+		"title": "UH2S3L6——全局函数获取",
+		"updated": "20240302170720"
+	},
+	"Children": [
+		{
+			"ID": "20240229123337-0dfli4o",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240229123337-0dfli4o",
+				"updated": "20240229123650"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240229123650-9a7p2zg",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229123650-9a7p2zg",
+				"style": "line-height: 22px;",
+				"updated": "20240229151902"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "LuaFuntion\t\t\t\t\t\t//可用于装载Lua函数的类\nluaState.GetFunction()\t\t\t//通过lua解析器获取全局函数\nluaFunction.Call\u003c\u003e()\t\t\t//调用Lua的无返回值的函数，适用于不多于9个参数的无返回值的Lua函数\nluaFunction.ToDelegate\u003c\u003e()\t\t//将lua函数类提取到委托中\nlunFunction.Dispose()\t\t\t//销毁lua函数，防止内存泄露\nluaFunction.BeginPCall()\t\t//开始调用lua函数\nluaFunction.Push()\t\t\t\t//传入参数\nluaFunction.PCall()\t\t\t\t//结束参数的传入，调用函数\nluaFunction.CheckNumber()\t\t//获取Number类型的返回值，对于其他类型的返回值需要使用不同名称的Check函数\nluaFunction.CheckBoolean()\t\t//获取Boolean类型的返回值\nluaFunction.CheckString()\t\t//获取String类型的返回值\nluaFunction.EndPCall()\t\t\t//结束调用lua函数\nluaFunction.Invoke\u003c\u003e()\t\t\t//快速调用有参有返回值lua函数，最后的泛型参数为返回值类型，其他为参数类型，适用于不多于6个参数的有返回值Lua函数\nluaState.Invoke\u003c\u003e()\t\t\t\t//直接通过解析器调用lua函数，最后的泛型参数为返回值类型，其他为参数类型，适用于不多于6个参数的有返回值Lua函数\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229130839-p905znp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240229130839-p905znp",
+				"name": "LuaFuntion",
+				"updated": "20240229130845"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "全局函数的获取"
+				}
+			]
+		},
+		{
+			"ID": "20240229123653-krofpyo",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240229123653-krofpyo",
+				"updated": "20240229130845"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "无参无返回值函数"
+				}
+			]
+		},
+		{
+			"ID": "20240229143814-qvt3wrs",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229143814-qvt3wrs",
+				"updated": "20240229143831"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设要调用下面的lua函数"
+				}
+			]
+		},
+		{
+			"ID": "20240229143831-znjz1bk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229143831-znjz1bk",
+				"style": "line-height: 22px;",
+				"updated": "20240229143929"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "-- 无参无返回函数\ntestFun = function()\n    print(\"无参无返回值\")\nend\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229125941-2saqz7a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229125941-2saqz7a",
+				"updated": "20240229130845"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用无参无返回值Lua函数有三种方式："
+				}
+			]
+		},
+		{
+			"ID": "20240229130137-cg92lfn",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240229130137-cg92lfn",
+				"updated": "20240229130137"
+			},
+			"Children": [
+				{
+					"ID": "20240229130137-5bxfcjs",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240229130137-5bxfcjs",
+						"name": "luaState.GetFunction()",
+						"updated": "20240229130303"
+					},
+					"Children": [
+						{
+							"ID": "20240229130137-shh4nsa",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240229130137-shh4nsa",
+								"updated": "20240229151054"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过解析器中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetFunction()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法"
+								}
+							]
+						},
+						{
+							"ID": "20240229130229-e0ihlsq",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240229130229-e0ihlsq",
+								"style": "line-height: 22px;",
+								"updated": "20240229130258"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "LuaFunction function = LuaManager.Instance.LuaState.GetFunction(\"testFun\");\nfunction.Call();\nfunction.Dispose();\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240229130137-s8ciwir",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240229130137-s8ciwir",
+						"updated": "20240229130137"
+					},
+					"Children": [
+						{
+							"ID": "20240229130137-wlvf4li",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240229130137-wlvf4li",
+								"updated": "20240229151056"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过中括号名字再"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "as"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​得到"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LuaFunction"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240229130231-xiaitk4",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240229130231-xiaitk4",
+								"style": "line-height: 22px;",
+								"updated": "20240229130257"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "function = LuaManager.Instance.LuaState[\"testFun\"] as LuaFunction;\nfunction.Call();\nfunction.Dispose();\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240229130214-hmeh2wq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240229130214-hmeh2wq",
+						"name": "luaFunction.ToDelegate\u0026lt;\u0026gt;()",
+						"updated": "20240229130309"
+					},
+					"Children": [
+						{
+							"ID": "20240229130214-f5flv9s",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240229130214-f5flv9s",
+								"updated": "20240229151057"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可以得到"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LuaFunction"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​后再提取到委托中"
+								}
+							]
+						},
+						{
+							"ID": "20240229130234-g2ii752",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240229130234-g2ii752",
+								"style": "line-height: 22px;",
+								"updated": "20240229130255"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "function = LuaManager.Instance.LuaState.GetFunction(\"testFun\");\nUnityAction action = function.ToDelegate\u003cUnityAction\u003e();\naction.Invoke();\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240229151105-tmvusc3",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240229151105-tmvusc3",
+				"updated": "20240229151108"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "销毁"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LuaFunction"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240229151105-mg3o0oe",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229151105-mg3o0oe",
+				"updated": "20240229151108"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LuaFunction"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内的函数使用完毕了，记得执行"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Dispose()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法，否则会持续占用内存"
+				}
+			]
+		},
+		{
+			"ID": "20240229151105-ctli0py",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229151105-ctli0py",
+				"style": "line-height: 22px;",
+				"updated": "20240229151108"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "LuaFunction function = LuaManager.Instance.LuaState.GetFunction(\"testFun\");\nfunction.Call();\nfunction.Dispose();\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229132050-901jf2o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229132050-901jf2o",
+				"updated": "20240229151108"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 452px;",
+						"style": "width: 442px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240229132050-9u3vf02.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 442px;\" parent-style=\"width: 452px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240229132100-sehzvnn",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240229132100-sehzvnn",
+				"name": "DelegateFactory.Init()",
+				"updated": "20240229132116"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ToLua使用委托初始化"
+				}
+			]
+		},
+		{
+			"ID": "20240229130316-97xy53a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229130316-97xy53a",
+				"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);",
+				"updated": "20240229132116"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意！如果要让委托使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LuaFunction"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的内容，必须要执行"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "DelegateFactory.Init()"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​来初始化委托的使用！！！"
+				}
+			]
+		},
+		{
+			"ID": "20240229130433-gwyla2x",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229130433-gwyla2x",
+				"style": "line-height: 22px;",
+				"updated": "20240229132116"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "luaState = new LuaState();\nluaState.Start();\nDelegateFactory.Init();             //委托初始化相关\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229123706-yqq4041",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240229123706-yqq4041",
+				"updated": "20240229123715"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "有参有返回值函数"
+				}
+			]
+		},
+		{
+			"ID": "20240229143903-o7bcqew",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229143903-o7bcqew",
+				"updated": "20240229143903"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设要调用下面的lua函数"
+				}
+			]
+		},
+		{
+			"ID": "20240229143903-kz9bofa",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229143903-kz9bofa",
+				"style": "line-height: 22px;",
+				"updated": "20240229143924"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "-- 有参有返回函数\ntestFun2 = function(a)\n    print(\"有参有返回值\")\n    return a + 100\nend\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229123726-ufzxcfj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229123726-ufzxcfj",
+				"updated": "20240229123715"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用Lua有参有返回值函数有四种方式："
+				}
+			]
+		},
+		{
+			"ID": "20240229133300-evpvmuc",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240229133300-evpvmuc",
+				"updated": "20240229151049"
+			},
+			"Children": [
+				{
+					"ID": "20240229133300-gnsxlr0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"alias": "luaFunction.Push(),luaFunction.PCall(),luaFunction.EndPCall()",
+						"id": "20240229133300-gnsxlr0",
+						"name": "luaFunction.BeginPCall()",
+						"updated": "20240229151039"
+					},
+					"Children": [
+						{
+							"ID": "20240229133300-a5yqu9f",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240229133300-a5yqu9f",
+								"updated": "20240229151039"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "逐步执行各个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Call"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法"
+								}
+							]
+						},
+						{
+							"ID": "20240229133713-40kyt8r",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229133713-40kyt8r",
+								"updated": "20240229151039"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "需要依次执行"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "BeginPCall()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Push()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "PCall()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Checkxxx()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "EndPCall()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​方法\nLua函数参数有多少，就要执行多少次"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Push()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​方法，适用于"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "任意数量的有返回值Lua函数"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Checkxxx()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​用于获取返回值，后面的名称决定获取什么类型的值\n​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CheckNumber()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​就会获取Lua中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Number"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​类型的返回值，在C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "中会返回一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "double"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​类型的值"
+								}
+							]
+						},
+						{
+							"ID": "20240229133400-biv9xp8",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240229133400-biv9xp8",
+								"style": "line-height: 22px;",
+								"updated": "20240229151039"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "luaFunction = LuaManager.Instance.LuaState.GetFunction(\"testFun2\");\nluaFunction.BeginPCall();                       //开始使用\nluaFunction.Push(99);                           //传参\nluaFunction.PCall();                            //传参结束，调用\nint result = (int)luaFunction.CheckNumber();    //得到返回值\nluaFunction.EndPCall();                         //执行结束\nprint(\"有参有返回值 Call: \" + result);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240229133521-lmfdpxr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229133521-lmfdpxr",
+								"updated": "20240229151039"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240229133521-0pqeo2v.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240229133300-8bnwbjj",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240229133300-8bnwbjj",
+						"name": "luaFunction.Invoke\u0026lt;\u0026gt;()",
+						"updated": "20240229151041"
+					},
+					"Children": [
+						{
+							"ID": "20240229133300-browfq6",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240229133300-browfq6",
+								"updated": "20240229151041"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用封装好的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Invoke"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法"
+								}
+							]
+						},
+						{
+							"ID": "20240229133618-p4cekgh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229133618-p4cekgh",
+								"updated": "20240229151041"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LuaFunction"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​内部会将用到的各个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Call"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​方法封装好，外部通过泛型直接调用即可，\n最后一个泛型代表的是返回值类型，前面的都是参数的类型\n​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LuaFunction"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​内封装的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Invoke"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​方法重载可以用于"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "不多于6个参数的有返回值Lua函数"
+								}
+							]
+						},
+						{
+							"ID": "20240229133358-hqriatw",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240229133358-hqriatw",
+								"style": "line-height: 22px;",
+								"updated": "20240229151041"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "result = luaFunction.Invoke\u003cint, int\u003e(199);\nprint(\"有参有返回值 Invoke: \" + result);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240229133542-vuaed52",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229133542-vuaed52",
+								"updated": "20240229151041"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240229133542-gz5ij5e.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240229133300-6pjzix2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240229133300-6pjzix2",
+						"updated": "20240229151046"
+					},
+					"Children": [
+						{
+							"ID": "20240229133300-ztyeptu",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240229133300-ztyeptu",
+								"updated": "20240229151046"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "提取到委托中"
+								}
+							]
+						},
+						{
+							"ID": "20240229134429-fpppri2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229134429-fpppri2",
+								"updated": "20240229151046"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可以使用系统声明好的委托"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Func\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​来承接，最后一个泛型同样是指代返回值类型"
+								}
+							]
+						},
+						{
+							"ID": "20240229133357-kens0tb",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240229133357-kens0tb",
+								"style": "line-height: 22px;",
+								"updated": "20240229151046"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Func\u003cint, int\u003e func = luaFunction.ToDelegate\u003cFunc\u003cint, int\u003e\u003e();\nresult = func(900);\nprint(\"有参有返回值 委托: \" + result);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240229133559-1x31usz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229133559-1x31usz",
+								"updated": "20240229151046"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240229133559-22c8pv2.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240229133300-87icjyx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240229133300-87icjyx",
+						"name": "luaState.Invoke\u0026lt;\u0026gt;()",
+						"updated": "20240229151049"
+					},
+					"Children": [
+						{
+							"ID": "20240229133300-bkjlxir",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240229133300-bkjlxir",
+								"updated": "20240229151049"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用解析器直接"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Invoke"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，类似第二种方法"
+								}
+							]
+						},
+						{
+							"ID": "20240229134535-ldvv5rp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229134535-ldvv5rp",
+								"updated": "20240229151049"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果lua函数是全局的，可以直接通过解析器去调用函数\n最后一个泛型代表的是返回值类型，前面的都是参数的类型\n第一个参数要传入函数名，中间传入Lua函数的参数\n最后一个参数是如果函数调用出错是否报错，默认为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "true"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​即可"
+								}
+							]
+						},
+						{
+							"ID": "20240229133355-jb6qvcu",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240229133355-jb6qvcu",
+								"style": "line-height: 22px;",
+								"updated": "20240229151049"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "result = LuaManager.Instance.LuaState.Invoke\u003cint, int\u003e(\"testFun2\", 800, true);\nprint(\"有参有返回值 luaState直接调用: \" + result);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240229133609-k36cel8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229133609-k36cel8",
+								"updated": "20240229151049"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240229133609-1u78c9e.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240229123707-blbmaqz",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240229123707-blbmaqz",
+				"updated": "20240229123718"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "多返回值函数"
+				}
+			]
+		},
+		{
+			"ID": "20240229143906-4klxilw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229143906-4klxilw",
+				"updated": "20240229143906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设要调用下面的lua函数"
+				}
+			]
+		},
+		{
+			"ID": "20240229143906-y1k7rr3",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229143906-y1k7rr3",
+				"style": "line-height: 22px;",
+				"updated": "20240229143910"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "-- 多返回值函数\ntestFun3 = function(a)\n    print(\"多返回值\")\n    return 1, 2, false, \"123\", a\nend\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229123726-hrwjj81",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229123726-hrwjj81",
+				"updated": "20240229123718"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用Lua多返回值函数有两种方式："
+				}
+			]
+		},
+		{
+			"ID": "20240229143528-0bn9tfd",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240229143528-0bn9tfd",
+				"updated": "20240229151551"
+			},
+			"Children": [
+				{
+					"ID": "20240229143530-xu9jwu3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"alias": "luaFunction.CheckBoolean(),luaFunction.CheckString()",
+						"id": "20240229143530-xu9jwu3",
+						"name": "luaFunction.CheckNumber()",
+						"updated": "20240229151027"
+					},
+					"Children": [
+						{
+							"ID": "20240229143530-nao76kq",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240229143530-nao76kq",
+								"updated": "20240229151027"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "逐步执行各个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Call"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法"
+								}
+							]
+						},
+						{
+							"ID": "20240229143600-940sx8x",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229143600-940sx8x",
+								"updated": "20240229151027"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "需要依次执行"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "BeginPCall()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Push()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "PCall()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Checkxxx()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "EndPCall()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​方法\nLua函数返回值有多少，就要执行多少次"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Checkxxx()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​方法，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Checkxxx()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​用于获取返回值，后面的名称决定获取什么类型的值\n​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CheckNumber()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​就会获取Lua中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Number"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​类型的返回值，在C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "中会返回一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "double"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​类型的值\n​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CheckBoolean()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​就会获取Lua中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Boolean"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​类型的返回值，在C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "中会返回一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "bool"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​类型的值\n​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CheckString()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​就会获取Lua中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "String"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​类型的返回值，在C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "中会返回一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "string"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​类型的值"
+								}
+							]
+						},
+						{
+							"ID": "20240229143646-mvwrjvv",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240229143646-mvwrjvv",
+								"style": "line-height: 22px;",
+								"updated": "20240229151027"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "luaFunction = LuaManager.Instance.LuaState.GetFunction(\"testFun3\");\nluaFunction.BeginPCall();\nluaFunction.Push(1000);\nluaFunction.PCall();\nint a1 = (int)luaFunction.CheckNumber();\nint b1 = (int)luaFunction.CheckNumber();\nbool c1 = luaFunction.CheckBoolean();\nstring d1 = luaFunction.CheckString();\nint e1 = (int)luaFunction.CheckNumber();\nluaFunction.EndPCall();\nprint($\"多返回值 Call: {a1}, {b1}, {c1}, {d1}, {e1}\");\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240229145450-k4z8ilr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229145450-k4z8ilr",
+								"updated": "20240229151027"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240229145450-6rf9f3s.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240229143549-17kzmex",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240229143549-17kzmex",
+						"updated": "20240229151551"
+					},
+					"Children": [
+						{
+							"ID": "20240229143549-lg9p8ef",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240229143549-lg9p8ef",
+								"updated": "20240229151032"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用带"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "out"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​参数的自定义委托"
+								}
+							]
+						},
+						{
+							"ID": "20240229143938-50iqvi9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229143938-50iqvi9",
+								"updated": "20240229151032"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "我们可以使用带"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "out"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​参数的自定义委托来承接多返回值的函数，\n第一个返回值还是以C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "委托的返回值获取，其余返回值通过传入的out参数承接"
+								}
+							]
+						},
+						{
+							"ID": "20240229144115-7st19w6",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240229144115-7st19w6",
+								"style": "line-height: 22px;",
+								"updated": "20240229151032"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public delegate int CustomCallOut(int a, out int b, out bool c, out string d, out int e);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240229144137-g93tg3j",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229144137-g93tg3j",
+								"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);",
+								"updated": "20240229151551"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注意！对于自定义委托，如果要让其能够使用toLua的Lua函数，必须要进行"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"parent-style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+									},
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240229144255-bkb1cms",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "注册操作"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: parent-style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+								}
+							]
+						},
+						{
+							"ID": "20240229145210-rph5lp2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229145210-rph5lp2",
+								"updated": "20240229151032"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "然后就可以将函数提取到委托里，执行委托，通过返回值和传入到out参数中的变量获取所有返回值（这里使用了"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20231031183822-b8y8pf5",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "out内联声明"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​）"
+								}
+							]
+						},
+						{
+							"ID": "20240229144313-wypmtb7",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240229144313-wypmtb7",
+								"style": "line-height: 22px;",
+								"updated": "20240229151032"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "CustomCallOut callOut = luaFunction.ToDelegate\u003cCustomCallOut\u003e();\nresult = callOut(999, out int b2, out bool c2, out string d2, out int e2);\nprint($\"多返回值 委托: {result}, {b2}, {c2}, {d2}, {e2}\");\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240229145501-rhe88ue",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229145501-rhe88ue",
+								"updated": "20240229151032"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240229145501-yjcj44e.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240229144255-bkb1cms",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240229144255-bkb1cms",
+				"updated": "20240229144311"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义委托在toLua注册"
+				}
+			]
+		},
+		{
+			"ID": "20240229144311-2f0j0if",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229144311-2f0j0if",
+				"updated": "20240229144449"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "和xLua需要在自定义委托前加上特定特性并生成代码一样，toLua使用自定义委托也需要进行类似的操作"
+				}
+			]
+		},
+		{
+			"ID": "20240229144449-rzmk7ow",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229144449-rzmk7ow",
+				"updated": "20240229144509"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "例如我们要让toLua可以使用下面的委托："
+				}
+			]
+		},
+		{
+			"ID": "20240229144505-3f8fmyl",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229144505-3f8fmyl",
+				"style": "line-height: 22px;",
+				"updated": "20240229144505"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public delegate int CustomCallOut(int a, out int b, out bool c, out string d, out int e);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229144506-1xz6ox3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229144506-1xz6ox3",
+				"updated": "20240229144801"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们需要先在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240227225546-pvwhjil",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "CustomSettings.cs"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "customDelegateList"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​中写入"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_DT(typeof(自定义委托名))"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240229144802-xxopd34",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229144802-xxopd34",
+				"style": "line-height: 22px;",
+				"updated": "20240229144845"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public static class CustomSettings\n{\n\t//...\n    //附加导出委托类型(在导出委托时, customTypeList 中牵扯的委托类型都会导出， 无需写在这里)\n    public static DelegateType[] customDelegateList = \n    {    \n\t\t//...\n        _DT(typeof(CustomCallOut)),\n    };\n\t//...\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229144851-k4e9w07",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229144851-k4e9w07",
+				"updated": "20240229144958"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "然后，点击工具栏的Lua - Generate All，重新生成代码"
+				}
+			]
+		},
+		{
+			"ID": "20240229145016-z0tmfz2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229145016-z0tmfz2",
+				"updated": "20240229145016"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 324px;",
+						"style": "width: 314px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240229145016-9mxiybb.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 314px;\" parent-style=\"width: 324px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240229123707-z64y8qt",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240229123707-z64y8qt",
+				"updated": "20240229123723"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "变长函数"
+				}
+			]
+		},
+		{
+			"ID": "20240229152137-bff0yak",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229152137-bff0yak",
+				"updated": "20240229152137"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设要调用下面的lua函数"
+				}
+			]
+		},
+		{
+			"ID": "20240229152137-8faldl8",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229152137-8faldl8",
+				"style": "line-height: 22px;",
+				"updated": "20240229152208"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "-- 变长参数函数\ntestFun4 = function(a, ...)\n    print(\"变长参数\")\n    print(a)\n    arg = {...}\n    for key, value in pairs(arg) do\n        print(key, value)\n    end\nend"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229151347-49vp8zj",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240229151347-49vp8zj",
+				"updated": "20240229123723"
+			},
+			"Children": [
+				{
+					"ID": "20240229151347-5oaq4mx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240229151347-5oaq4mx",
+						"updated": "20240229151347"
+					},
+					"Children": [
+						{
+							"ID": "20240229151347-jo7pxvk",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240229151347-jo7pxvk",
+								"updated": "20240229151410"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用带变长参数的自定义委托"
+								}
+							]
+						},
+						{
+							"ID": "20240229151421-nekzu1h",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229151421-nekzu1h",
+								"updated": "20240229151506"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "我们可以使用带变长参数的自定义委托来承接带变长参数的lua函数，直接在参数列表声明变长参数即可"
+								}
+							]
+						},
+						{
+							"ID": "20240229151421-qwvabcg",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240229151421-qwvabcg",
+								"style": "line-height: 22px;",
+								"updated": "20240229151516"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public delegate void CustomCallParams(int a, params object[] objs);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240229151421-uczttkh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229151421-uczttkh",
+								"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);",
+								"updated": "20240229151539"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注意！对于自定义委托，如果要让其能够使用toLua的Lua函数，必须要进行"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"parent-style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+									},
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240229144255-bkb1cms",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "注册操作"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: parent-style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+								}
+							]
+						},
+						{
+							"ID": "20240229151421-5k4sdxz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229151421-5k4sdxz",
+								"updated": "20240229151424"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "然后就可以将函数提取到委托里，执行委托，通过返回值和传入到out参数中的变量获取所有返回值"
+								}
+							]
+						},
+						{
+							"ID": "20240229151421-mlld4pi",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240229151421-mlld4pi",
+								"style": "line-height: 22px;",
+								"updated": "20240229151530"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "luaFunction = LuaManager.Instance.LuaState.GetFunction(\"testFun4\");\nCustomCallParams callParams = luaFunction.ToDelegate\u003cCustomCallParams\u003e();\ncallParams(100, 1, true, \"123\", 0, false);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240229151600-z2woyt4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240229151600-z2woyt4",
+						"name": "luaFunction.Call()",
+						"updated": "20240229151937"
+					},
+					"Children": [
+						{
+							"ID": "20240229151600-jtx9ovs",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240229151600-jtx9ovs",
+								"updated": "20240229151631"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Call"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法"
+								}
+							]
+						},
+						{
+							"ID": "20240229151644-e01hfii",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229151644-e01hfii",
+								"updated": "20240229151937"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "针对无返回值的Lua函数，我们可以直接使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "call"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​函数去调用它，泛型决定参数类型，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "最多传入9个参数"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "（包括定长参数和变长参数函数）"
+								}
+							]
+						},
+						{
+							"ID": "20240229151634-1ebsez8",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240229151634-1ebsez8",
+								"style": "line-height: 22px;",
+								"updated": "20240229151631"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "luaFunction.Call\u003cint, int, bool, string, int\u003e(100, 10, true, \"123\", 0);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240229145149-f9rfs77",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229145149-f9rfs77",
+				"updated": "20240229123723"
+			}
+		}
+	]
+}

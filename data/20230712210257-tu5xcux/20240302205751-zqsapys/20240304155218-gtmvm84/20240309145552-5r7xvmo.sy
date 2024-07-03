@@ -1,0 +1,876 @@
+{
+	"ID": "20240309145552-5r7xvmo",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240309145552-5r7xvmo",
+		"title": "UN2L6——客户端主动断开连接",
+		"updated": "20240309200005"
+	},
+	"Children": [
+		{
+			"ID": "20240309152559-4xhw6qj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240309152559-4xhw6qj",
+				"updated": "20240309152604"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240309152604-g02ran2",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240309152604-g02ran2",
+				"style": "line-height: 22px;",
+				"updated": "20240309170421"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "socket.Disconnect()\t\t\t\t//主动和服务器端断开连接方法，让服务器发现客户端主动断联不能只使用该方法\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240309152220-cs1v6m8",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240309152220-cs1v6m8",
+				"updated": "20240309152228"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "当前存在的问题"
+				}
+			]
+		},
+		{
+			"ID": "20240309152233-vct1uqy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240309152233-vct1uqy",
+				"updated": "20240309152233"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "目前在客户端主动退出时，我们会调用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "socket"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ShutDown"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Close"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法\n但是通过调用这两个方法后，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "服务器端无法得知客户端已经主动断开"
+				}
+			]
+		},
+		{
+			"ID": "20240309152401-bp4ndey",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240309152401-bp4ndey",
+				"updated": "20240309152401"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 474px;",
+						"style": "width: 464px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240309152401-4t5dupb.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 464px;\" parent-style=\"width: 474px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240309145552-r3zbctj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240309145552-r3zbctj",
+				"updated": "20240309152231"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "解决目前断开不及时的问题"
+				}
+			]
+		},
+		{
+			"ID": "20240309151428-6lykdcr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240309151428-6lykdcr",
+				"updated": "20240309152231"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "客户端可以通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Disconnect"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法主动和服务器端断开连接\n服务器端可以通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Conected"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​属性判断连接状态决定是否释放Socket"
+				}
+			]
+		},
+		{
+			"ID": "20240309151428-zu1wbxp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240309151428-zu1wbxp",
+				"updated": "20240309155702"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但是由于服务器端"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Conected"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​变量表示的是上一次收发消息是否成功，所以服务器端无法准确判断客户端的连接状态\n因此，我们需要自定义一条退出消息，用于准确断开和客户端之间的连接"
+				}
+			]
+		},
+		{
+			"ID": "20240309150818-rm5x66u",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240309150818-rm5x66u",
+				"name": "socket.Disconnect()",
+				"updated": "20240309200005"
+			},
+			"Children": [
+				{
+					"ID": "20240309150833-nschy8u",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240309150833-nschy8u",
+						"updated": "20240309200005"
+					},
+					"Children": [
+						{
+							"ID": "20240309150833-drpdhlu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240309150833-drpdhlu",
+								"updated": "20240309150858"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "客户端尝试使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Disconnect"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法主动断开连接\n"
+								}
+							]
+						},
+						{
+							"ID": "20240309150903-yz4qjp2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240309150903-yz4qjp2",
+								"updated": "20240309152453"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Socket"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​当中有一个专门在客户端使用的方法，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Disconect"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法，客户端调用该方法和服务器端断开连接\n看是否是因为之前直接"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Close"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​而没有调用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Disconet"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​造成服务器端无法及时获取状态"
+								}
+							]
+						},
+						{
+							"ID": "20240309152621-dmlaho5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240309152621-dmlaho5",
+								"updated": "20240309152621"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "主要修改的逻辑："
+								}
+							]
+						},
+						{
+							"ID": "20240309150836-meed6v2",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240309150836-meed6v2",
+								"updated": "20240309200005"
+							},
+							"Children": [
+								{
+									"ID": "20240309150836-y1uqbev",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240309150836-y1uqbev",
+										"updated": "20240309150836"
+									},
+									"Children": [
+										{
+											"ID": "20240309150836-nhfv4s9",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240309150836-nhfv4s9",
+												"updated": "20240309150839"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "客户端：主动断开连接"
+												}
+											]
+										},
+										{
+											"ID": "20240309152706-jy1y5pp",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240309152706-jy1y5pp",
+												"updated": "20240309152759"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Disconnent"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​有一个参数，代表接下来"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "socket"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​是否还复用，一般是不再复用的"
+												}
+											]
+										},
+										{
+											"ID": "20240309152622-gh98980",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240309152622-gh98980",
+												"style": "line-height: 22px;",
+												"updated": "20240309152818"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "socket.Shutdown(SocketShutdown.Both);\nsocket.Disconnect(false);\nsocket.Close();\nsocket = null;\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240309150837-9t6ee4o",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240309150837-9t6ee4o",
+										"updated": "20240309200005"
+									},
+									"Children": [
+										{
+											"ID": "20240309150837-7pz33k6",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240309150837-7pz33k6",
+												"updated": "20240309150841"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "服务端："
+												}
+											]
+										},
+										{
+											"ID": "20240309150841-4dj5zrx",
+											"Type": "NodeList",
+											"ListData": {
+												"Typ": 1
+											},
+											"Properties": {
+												"id": "20240309150841-4dj5zrx",
+												"updated": "20240309200005"
+											},
+											"Children": [
+												{
+													"ID": "20240309150841-xl0p52f",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MS4=",
+														"Num": 1
+													},
+													"Properties": {
+														"id": "20240309150841-xl0p52f",
+														"updated": "20240309195723"
+													},
+													"Children": [
+														{
+															"ID": "20240309150841-bsaxosm",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240309150841-bsaxosm",
+																"updated": "20240309195723"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "收发消息时判断"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "socket"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​是否已经断开，使用"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Connented"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​判断\n一旦发现是断开的就直接将其放到一个待销毁的Socket列表内，等待关闭并释放"
+																}
+															]
+														},
+														{
+															"ID": "20240309162518-5lx48gu",
+															"Type": "NodeCodeBlock",
+															"IsFencedCodeBlock": true,
+															"Properties": {
+																"id": "20240309162518-5lx48gu",
+																"style": "line-height: 22px;",
+																"updated": "20240309163234"
+															},
+															"Children": [
+																{
+																	"Type": "NodeCodeBlockFenceOpenMarker",
+																	"Data": "```"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceInfoMarker",
+																	"CodeBlockInfo": "YyM="
+																},
+																{
+																	"Type": "NodeCodeBlockCode",
+																	"Data": "//服务器端 ClientSocket类内部\n//向客户端发送消息方法\npublic void Send(BaseMessage message)\n{\n    if (Connented)\n    {\n        try\n        {\n            socket.Send(message.Writeing());\n        }\n        catch (Exception e)\n        {\n            Console.WriteLine($\"向客户端{socket.RemoteEndPoint}发送消息失败：{e.Message}\");\n            //如果发送报错，就把这个socket断开\n\t\t\t//Program.socket是指向唯一ServerSocket的静态变量\n            Program.socket.AddDelSocket(this);\n        }\n    }\n\t//如果检测到未连接，就把这个socket断开\n    else\n        Program.socket.AddDelSocket(this);\n}\n\npublic void Receive()\n{\n\t//如果检测到未连接，就把这个socket断开，并跳过发消息逻辑\n    if (!Connented)\n    {\n        Program.socket.AddDelSocket(this);\n        return;\n    } \n    try\n    {\n        if (socket.Available \u003e 0)\n        {\n            byte[] result = new byte[1024 * 5];\n            int receiveNum = socket.Receive(result);\n\t\t\t//处理接收到的消息方法，此处省略\n            HandleReceiveMsg(result, receiveNum);\n        }\n    }\n    catch (Exception e)\n    {\n        Console.WriteLine($\"从客户端{clientID}接收消息失败：{e.Message}\");\n        //如果解析错误，就把这个socket断开\n        Program.socket.AddDelSocket(this);\n    }\n}\n"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceCloseMarker",
+																	"Data": "```"
+																}
+															]
+														},
+														{
+															"ID": "20240309163141-yadsvj8",
+															"Type": "NodeCodeBlock",
+															"IsFencedCodeBlock": true,
+															"Properties": {
+																"id": "20240309163141-yadsvj8",
+																"style": "line-height: 22px;",
+																"updated": "20240309163330"
+															},
+															"Children": [
+																{
+																	"Type": "NodeCodeBlockFenceOpenMarker",
+																	"Data": "```"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceInfoMarker",
+																	"CodeBlockInfo": "YyM="
+																},
+																{
+																	"Type": "NodeCodeBlockCode",
+																	"Data": "//服务器端 ServerSocket类内部\n//待移除的客户端Socket\nprivate List\u003cClientSocket\u003e delList = new List\u003cClientSocket\u003e();\n\n//添加待移除的socket内容\npublic void AddDelSocket(ClientSocket socket)\n{\n    if (!delList.Contains(socket))\n        delList.Add(socket);\n}\n"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceCloseMarker",
+																	"Data": "```"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240309150841-frn3s0e",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Mi4=",
+														"Num": 2
+													},
+													"Properties": {
+														"id": "20240309150841-frn3s0e",
+														"updated": "20240309200005"
+													},
+													"Children": [
+														{
+															"ID": "20240309150841-gp8duwj",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240309150841-gp8duwj",
+																"updated": "20240309195912"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "处理删除记录的"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "socket"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​的相关逻辑（会用到线程锁）"
+																}
+															]
+														},
+														{
+															"ID": "20240309195912-kw2760g",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240309195912-kw2760g",
+																"updated": "20240309200005"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "每次监听消息完毕后就检测是否待销毁的Socket列表里是否存在对象，若存在，执行关闭和销毁释放方法"
+																}
+															]
+														},
+														{
+															"ID": "20240309163337-ngw1v0u",
+															"Type": "NodeCodeBlock",
+															"IsFencedCodeBlock": true,
+															"Properties": {
+																"id": "20240309163337-ngw1v0u",
+																"style": "line-height: 22px;",
+																"updated": "20240309163535"
+															},
+															"Children": [
+																{
+																	"Type": "NodeCodeBlockFenceOpenMarker",
+																	"Data": "```"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceInfoMarker",
+																	"CodeBlockInfo": "YyM="
+																},
+																{
+																	"Type": "NodeCodeBlockCode",
+																	"Data": "//服务器端 ServerSocket类内部\n//待移除的客户端Socket\nprivate List\u003cClientSocket\u003e delList = new List\u003cClientSocket\u003e();\n\n//接收客户端消息线程\nprivate void Receive(object? obj)\n{\n    while (!isClose)\n    {\n        lock (clientDic)\n        {\n            if (clientDic.Count \u003e 0)\n            {\n                foreach (ClientSocket client in clientDic.Values)\n                {\n                    client.Receive();\n                }\n\t\t\t\t//每次接收消息后，检查是否delList内是否存在内容\n                CloseDelListSocket();\n            }\n        }\n    }\n}\n\n//将存放到delList的ClientSocket关闭并释放掉\npublic void CloseDelListSocket()\n{\n    //判断有没有断开连接的，将其移除掉\n    for (int i = 0; i \u003c delList.Count; i++)\n        CloseClientSocket(delList[i]);\n    delList.Clear();\n}\n\n//关闭客户端Socket连接，并将其从字典中移除出去\npublic void CloseClientSocket(ClientSocket socket)\n{\n    lock (clientDic)\n    {\n        socket.Close();\n        if (clientDic.ContainsKey(socket.clientID))\n        {\n            clientDic.Remove(socket.clientID);\n            Console.WriteLine($\"客户端{socket.clientID}主动断开连接了\");\n        }\n    }\n}\n"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceCloseMarker",
+																	"Data": "```"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240309150833-6v05eia",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240309150833-6v05eia",
+						"updated": "20240309170256"
+					},
+					"Children": [
+						{
+							"ID": "20240309150833-nqtq5kq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240309150833-nqtq5kq",
+								"updated": "20240309150833"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "自定义退出消息"
+								}
+							]
+						},
+						{
+							"ID": "20240309163600-7lr4qit",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240309163600-7lr4qit",
+								"updated": "20240309163709"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "根据运行结果，会发现服务器端还是无法准确判断客户端的连接状态\n这是因为服务器端"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Conected"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​变量表示的是上一次收发消息是否成功"
+								}
+							]
+						},
+						{
+							"ID": "20240309150925-229rowc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240309150925-229rowc",
+								"updated": "20240309150928"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "让服务器端收到该消息就知道是客户端想要主动断开，然后服务器端处理释放socket相关工作"
+								}
+							]
+						},
+						{
+							"ID": "20240309163713-bkmlsao",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240309163713-bkmlsao",
+								"updated": "20240309165242"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重新声明一个没有消息体的客户端主动断联消息类"
+								}
+							]
+						},
+						{
+							"ID": "20240309165242-66shd8c",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240309165242-66shd8c",
+								"style": "line-height: 22px;",
+								"updated": "20240309165244"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class QuitMessage : BaseMessage\n{\n    public override int GetBytesNum()\n    {\n        //客户端主动断联消息没有额外的数据，因此只包含头消息，ID和消息体长度\n        return 8;\n    }\n\n    public override int Reading(byte[] bytes, int BeginIndex = 0)\n    {\n        //客户端主动断联消息没有额外的数据，因此消息体长度是0，因此不需要做任何操作\n        return 0;\n    }\n\n    public override byte[] Writeing()\n    {\n        int index = 0;\n        byte[] bytes = new byte[GetBytesNum()];\n        WriteInt(bytes, GetID(), ref index);\n        WriteInt(bytes, 0, ref index);\n        return bytes;\n    }\n\n    public override int GetID()\n    {\n        return 1003;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240309165257-e4l0x5q",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240309165257-e4l0x5q",
+								"updated": "20240309165340"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "然后在客户端断开连接时发送该消息，直接使用在主线程同步发送方法，避免因为程序关闭线程中断导致未能发出"
+								}
+							]
+						},
+						{
+							"ID": "20240309165343-whskqbe",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240309165343-whskqbe",
+								"style": "line-height: 22px;",
+								"updated": "20240309165437"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//客户端 NetManager类内部\n\npublic void Close()\n{\n    if (socket != null)\n    {\n        print(\"客户端主动断开连接\");\n        //主动发送一条断开连接的消息给服务端\n        QuitMessage quitMessage = new QuitMessage();\n\t\t//直接使用在主线程同步发送方法，避免因为程序关闭线程中断导致未能发出\n        socket.Send(quitMessage.Writeing());\n        if (socket.Connected)\n        {\n            socket.Shutdown(SocketShutdown.Both);\n            socket.Disconnect(false);\n        }\n        socket.Close();\n        socket = null;\n        isConnented = false;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240309165455-p5r1e4m",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240309165455-p5r1e4m",
+								"updated": "20240309170225"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "服务器端实现收到该消息后的处理方法，将该客户端Socket添加到待移除Socket的列表内"
+								}
+							]
+						},
+						{
+							"ID": "20240309165516-ws1oz5k",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240309165516-ws1oz5k",
+								"style": "line-height: 22px;",
+								"updated": "20240309170256"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//服务器端 ClientSocket类内部\n\nprivate void HandleReceiveMsg(byte[] receiveBytes, int receiveNum)\n{\n    int msgID = 0;\n    int msgLength = 0;\n    int nowIndex = 0;\n\n    //收到消息后，将收到的消息直接拼接到缓存字节数组的后面\n    receiveBytes.CopyTo(cacheBytes, cacheNum);\n    cacheNum += receiveNum;\n    while (true)\n    {\n\t\t//..省略其他逻辑\n        //解析消息体\n        if (cacheNum - nowIndex \u003e= msgLength \u0026\u0026 msgLength != -1)\n        {\n            //消息体是完整的情况\n            BaseMessage? baseMsg = null;\n            switch (msgID)\n            {\n                case 1001:\n\t\t\t\t\t//..省略其他逻辑\n                    break;\n                case 1003:\n                    //由于该消息都没有消息体，因此我们无需反序列化它\n                    baseMsg = new QuitMessage();\n                    break;\n            }\n\t\t\t//处理消息\n\t\t\tif (baseMsg != null)\n    \t\t\tThreadPool.QueueUserWorkItem(MsgHandle, baseMsg);\n\t\t\t//..省略其他逻辑\n        }\n        else\n\t\t\t//..省略其他逻辑\n    }\n}\n\nprivate void MsgHandle(object? obj)\n{\n    if (obj == null) \n        return;\n    BaseMessage? message = obj as BaseMessage;\n    if (message is PlayerMessage)\n    {\n\t\t//..省略其他逻辑\n    }\n    else if (message is QuitMessage)\n    {\n        //收到断开连接消息，把自己添加到待移除的列表中\n        Program.socket.AddDelSocket(this);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,273 @@
+{
+	"ID": "20231116172429-aq3v518",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20231116172429-aq3v518",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20231116172429-aq3v518\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20231116172429-u5744u6\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20231116174452-mjl6vg5\u0026quot;,\u0026quot;scrollTop\u0026quot;:974.6666870117188,\u0026quot;focusId\u0026quot;:\u0026quot;20231116174427-82n3y6s\u0026quot;,\u0026quot;focusStart\u0026quot;:215,\u0026quot;focusEnd\u0026quot;:215\u0026#125;",
+		"title": "U4S2SL2——复用数据",
+		"updated": "20231116174538"
+	},
+	"Children": [
+		{
+			"ID": "20231116172429-u5744u6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231116172429-u5744u6",
+				"updated": "20231116172527"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用预设体对象可能存在的内存浪费问题"
+				}
+			]
+		},
+		{
+			"ID": "20231116172532-v3yot0o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116172532-v3yot0o",
+				"updated": "20231116172536"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于只用不变的数据，以面向对象的思想去声明对象类是可能存在内存浪费的问题的"
+				}
+			]
+		},
+		{
+			"ID": "20231116172532-886c9iz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116172532-886c9iz",
+				"updated": "20231116173738"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们以子弹对象为例\n在以前，子弹对象挂载子弹脚本，子弹脚本包含子弹诸如移动速度和攻击力等数据，然后通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Resources"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​等手段来在场景上创建子弹预设体\n这样每个子弹都会有自己的子弹类对象，每个对象都会占用自己的内存，然而"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "这些子弹脚本的数据其实都是相同且不变的"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n因此没有必要让子弹对象都分配多个的内存，我们完全"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "可以让所有子弹对象共享一个子弹数据"
+				}
+			]
+		},
+		{
+			"ID": "20231116173747-trxl8xz",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231116173747-trxl8xz",
+				"style": "line-height: 22px;",
+				"updated": "20231116173753"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class Bullet : MonoBehaviour\n{\n    public float speed;\n    public int atk;\n\n    void Update()\n    {\n        this.transform.Translate(speed * Time.deltaTime * Vector3.forward);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231116172537-kjw5rfp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231116172537-kjw5rfp",
+				"updated": "20231116172551"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "利用ScriptableObject数据对象更加节约内存"
+				}
+			]
+		},
+		{
+			"ID": "20231116172553-2nnc34w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116172553-2nnc34w",
+				"updated": "20231116172603"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于不同对象，使用相同数据时，我们可以使用ScriptableObject来节约内存"
+				}
+			]
+		},
+		{
+			"ID": "20231116173027-7qbtn34",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231116173027-7qbtn34",
+				"style": "line-height: 22px;",
+				"updated": "20231116174058"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\n[CreateAssetMenu(fileName = \"BulletInfo\", menuName = \"ScriptableObject/BulletInfo\")]\npublic class BulletInfo : ScriptableObject\n{\n    public float speed;\n    public int atk;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231116174059-wmskuyy",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231116174059-wmskuyy",
+				"style": "line-height: 22px;",
+				"updated": "20231116174107"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class Bullet : MonoBehaviour\n{\n    public BulletInfo info;\n\n    void Update()\n    {\n        this.transform.Translate(info.speed * Time.deltaTime * Vector3.forward);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231116174155-lcps50g",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116174155-lcps50g",
+				"updated": "20231116174247"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "再为预设体关联这个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BulletInfo"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，就可以在生成多个预设体但仍然共同使用一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BulletInfo"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​对象"
+				}
+			]
+		},
+		{
+			"ID": "20231116174455-r4trxra",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116174455-r4trxra",
+				"updated": "20231116174538"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以通过下面的代码来观察是否所有的子弹都被加速（都被加速则说明它们共享相同的数据）"
+				}
+			]
+		},
+		{
+			"ID": "20231116174427-82n3y6s",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231116174427-82n3y6s",
+				"style": "line-height: 22px;",
+				"updated": "20231116174453"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class Lesson6 : MonoBehaviour\n{\n    public BulletInfo info;\n\n    void Update()\n    {\n        if (Input.GetKeyDown(KeyCode.Space))\n        {\n            info.speed += 1;\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231116174452-mjl6vg5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116174452-mjl6vg5"
+			}
+		}
+	]
+}

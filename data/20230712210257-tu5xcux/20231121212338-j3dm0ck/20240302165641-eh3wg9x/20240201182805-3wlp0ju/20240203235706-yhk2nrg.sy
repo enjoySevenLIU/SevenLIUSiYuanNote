@@ -1,0 +1,494 @@
+{
+	"ID": "20240203235706-yhk2nrg",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240203235706-yhk2nrg",
+		"title": "UH2S2L16——Lua调用重载函数",
+		"updated": "20240302170610"
+	},
+	"Children": [
+		{
+			"ID": "20240204141045-r73bt4f",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240204141045-r73bt4f",
+				"updated": "20240204141054"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240204140816-prjdtsc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204140816-prjdtsc",
+				"style": "line-height: 22px;",
+				"updated": "20240204141054"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "typeof(CS.类名):GetMethod(方法名, {参数列表})\t--反射获取类的方法信息，通过xlua的方法可以转化为函数\nxlua.tofunction()\t\t\t\t\t\t\t--xlua提供的将通过反射获取的方法信息转化为函数的方法\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204134723-ya30v8y",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240204134723-ya30v8y",
+				"updated": "20240204134729"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用重载函数"
+				}
+			]
+		},
+		{
+			"ID": "20240204134722-3cl5gxb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204134722-3cl5gxb",
+				"updated": "20240204134729"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "先在C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "脚本内声明如下内容"
+				}
+			]
+		},
+		{
+			"ID": "20240204134722-buye64q",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204134722-buye64q",
+				"style": "line-height: 22px;",
+				"updated": "20240204141544"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Lesson6\n{\n    public int Calc()\n    {\n        return 100;\n    }\n\n    public int Calc(int a, int b)\n    {\n        return a + b;\n    }\n\n    public int Calc(int a)\n    {\n        return a;\n    }\n\n    public float Calc(float a)\n    {\n        return a;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204135049-zb4mwrb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204135049-zb4mwrb",
+				"updated": "20240204134729"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "虽然Lua自己不支持写重载函数，但是Lua支持调用C#中的重载函数"
+				}
+			]
+		},
+		{
+			"ID": "20240204135225-hjw19zp",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204135225-hjw19zp",
+				"updated": "20240204134729"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local obj = CS.Lesson6()\n\nprint(obj:Calc())\nprint(obj:Calc(15, 1))\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204135214-1vxrykp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204135214-1vxrykp",
+				"updated": "20240204134729"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240204135214-cnocsy1.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240204135338-c6hpegt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204135338-c6hpegt",
+				"updated": "20240204134729"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Lua虽然支持调用C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "重载函数，但是因为Lua中的数值类型，只有Number\n因此对C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "中多精度的重载函数支持不好，傻傻分不清，在使用时，可能出现意想不到的问题\n因此，如果要给Lua提供重载函数调用，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "需要尽可能避免使用整数参数和浮点数参数（或者说避免因为精度不同导致的重载）的重载"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20240204135416-h397rvf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204135416-h397rvf",
+				"updated": "20240204134729"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "例如下面的例子，后面的语句明显传入的是浮点数"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "10.2"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，但却输出了0"
+				}
+			]
+		},
+		{
+			"ID": "20240204135324-tybm047",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204135324-tybm047",
+				"style": "line-height: 22px;",
+				"updated": "20240204134729"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(obj:Calc(10))\nprint(obj:Calc(10.2))\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204135317-o2r49dh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204135317-o2r49dh",
+				"updated": "20240204134729"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240204135317-0oeyct5.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240204135641-wttpg8v",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240204135641-wttpg8v",
+				"name": "xlua.tofunction()",
+				"updated": "20240204134729"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "解决精度重载调用导致的问题"
+				}
+			]
+		},
+		{
+			"ID": "20240204135632-neg1rid",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204135632-neg1rid",
+				"updated": "20240204134729"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于重载函数含糊的问题，xlua提供了解决方案 反射机制\n这种方法只做了解，尽量别用（效率低）\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Type"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​是反射的关键类，得到指定函数的相关信息"
+				}
+			]
+		},
+		{
+			"ID": "20240204140013-bjsoxyx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204140013-bjsoxyx",
+				"updated": "20240204134729"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过xlua提供的一个方法 把它转成lua函数来使用，一般我们转一次 然后重复使用\n成员方法的第一个参数传调用的对象，静态方法不用传对象"
+				}
+			]
+		},
+		{
+			"ID": "20240204140748-wv5kcfk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204140748-wv5kcfk",
+				"style": "line-height: 22px;",
+				"updated": "20240204134729"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local methodInfo1 = typeof(CS.Lesson6):GetMethod(\"Calc\", {typeof(CS.System.Int32)})\nlocal methodInfo2 = typeof(CS.Lesson6):GetMethod(\"Calc\", {typeof(CS.System.Single)})\n\nlocal f1 = xlua.tofunction(methodInfo1)\nlocal f2 = xlua.tofunction(methodInfo2)\n\nprint(f1(obj, 10))\nprint(f2(obj, 10.2))\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204140746-jitr70o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204140746-jitr70o",
+				"updated": "20240204134729"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240204140746-36oi4pg.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		}
+	]
+}

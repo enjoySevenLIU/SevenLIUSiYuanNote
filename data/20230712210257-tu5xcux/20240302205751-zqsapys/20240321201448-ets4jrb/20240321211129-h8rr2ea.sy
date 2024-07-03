@@ -1,0 +1,944 @@
+{
+	"ID": "20240321211129-h8rr2ea",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240321211129-h8rr2ea",
+		"title": "UN6L1——消息池类和消息处理类",
+		"type": "doc",
+		"updated": "20240321232933"
+	},
+	"Children": [
+		{
+			"ID": "20240321211129-gaktxkj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240321211129-gaktxkj",
+				"updated": "20240321211332"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "要解决的问题"
+				}
+			]
+		},
+		{
+			"ID": "20240321211332-qr3c1f0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321211332-qr3c1f0",
+				"updated": "20240321212752"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在目前的练习题内实现的客户端网络管理器里，我们是将消息的识别，和消息的处理逻辑在网络层实现的\n并且用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "switch...case..."
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​来实现消息的识别，缩略代码如下（省略断联、发消息等逻辑）："
+				}
+			]
+		},
+		{
+			"ID": "20240321211556-ghykdl0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240321211556-ghykdl0",
+				"style": "line-height: 22px;",
+				"updated": "20240321214650"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private Queue\u003cBaseMessage\u003e receiveQueue = new Queue\u003cBaseHandler\u003e();\n\n//连接服务器的代码\npublic void Connect(string ip, int port)\n{\n    if (socket != null \u0026\u0026 socket.Connected)\n        return;\n\t//设置服务器IP和端口号，创建socket\n    IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(ip), port);\n    socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);\n\t//异步连接服务器的方法\n    SocketAsyncEventArgs args = new SocketAsyncEventArgs();\n    args.RemoteEndPoint = ipPoint;\n    args.Completed += (socket, args) =\u003e\n    {\n        if (args.SocketError == SocketError.Success)\n        {\n            print(\"连接成功\");\n            //当连接到服务单后，开始异步接收消息\n            SocketAsyncEventArgs receiveArgs = new SocketAsyncEventArgs();\n            receiveArgs.SetBuffer(cacheBytes, 0, cacheBytes.Length);\n            receiveArgs.Completed += ReceiveCallBack;\n            this.socket.ReceiveAsync(receiveArgs);\n        }\n    };\n    socket.ConnectAsync(args);\n}\n\n//收消息完成的回调函数\nprivate void ReceiveCallBack(object obj, SocketAsyncEventArgs args)\n{\n    if (args.SocketError == SocketError.Success)\n    {\n        HandleReceiveMsg(args.BytesTransferred);\n        args.SetBuffer(cacheNum, args.Buffer.Length - cacheNum);\n        if (this.socket != null \u0026\u0026 this.socket.Connected)\t\t\t//继续异步收消息\n            socket.ReceiveAsync(args);\n    }\n    else\n\t\tprint(\"接受消息出错\" + args.SocketError);\n}\n\n//处理接受消息 分包、黏包问题的方法\nprivate void HandleReceiveMsg(int receiveNum)\n{\n    int msgID = 0;\n    int msgLength = 0;\n    int nowIndex = 0;\n\n    cacheNum += receiveNum;\n\n    while (true)\n    {\n        //每次将长度设置为-1 是避免上一次解析的数据 影响这一次的判断\n        msgLength = -1;\n        //处理解析一条消息\n        if (cacheNum - nowIndex \u003e= 8)\n        {\n            //解析ID\n            msgID = BitConverter.ToInt32(cacheBytes, nowIndex);\n            nowIndex += 4;\n            //解析长度\n            msgLength = BitConverter.ToInt32(cacheBytes, nowIndex);\n            nowIndex += 4;\n        }\n\n        if (cacheNum - nowIndex \u003e= msgLength \u0026\u0026 msgLength != -1)\n        {\n            //解析消息体\n            BaseMsg baseMsg = null;\n            switch (msgID)\n            {\n                case 1001:\n                    baseMsg = new PlayerMsg();\n                    baseMsg.Reading(cacheBytes, nowIndex);\n                    break;\n            }\n            if (baseMsg != null)\n\t\t\t\t//消息反序列化后放入到待处理的队列内\n                receiveQueue.Enqueue(baseMsg);\n            nowIndex += msgLength;\n            if (nowIndex == cacheNum)\n            {\n                cacheNum = 0;\n                break;\n            }\n        }\n        else\n        {\n            if (msgLength != -1)\n                nowIndex -= 8;\n            //就是把剩余没有解析的字节数组内容 移到前面来 用于缓存下次继续解析\n            Array.Copy(cacheBytes, nowIndex, cacheBytes, 0, cacheNum - nowIndex);\n            cacheNum = cacheNum - nowIndex;\n            break;\n        }\n    }\n}\n\nvoid Update()\n{\n    if (receiveQueue.Count \u003e 0)\n    {\n\t\t//处理消息逻辑\n        BaseMsg baseMsg = receiveQueue.Dequeue();\n        switch (baseMsg)\n        {\n            case PlayerMsg msg:\n                print(msg.playerID);\n                break;\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240321212805-s9knncf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321212805-s9knncf",
+				"updated": "20240321213025"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以发现，在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "HandleReceiveMsg"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Update"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法内分别涉及到消息反序列化和消息的处理\n其中消息的识别是根据消息ID使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "switch...case..."
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​来分别执行不同的消息体反序列化和处理逻辑的\n消息的具体如何处理也在网络层内实现"
+				}
+			]
+		},
+		{
+			"ID": "20240321213054-pvk0e5i",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321213054-pvk0e5i",
+				"updated": "20240321213322"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "随着项目的推进，消息类将不可避免的越来越多，如果将所有的消息的识别和处理都在网络层上实现，\n势必会频繁修改网络层代码，工作量和网络层代码量也会越来越大，这不利于我们维护网络层代码\n因此我们需要将消息的识别和处理从网络层上剥离开。"
+				}
+			]
+		},
+		{
+			"ID": "20240321213323-06q780m",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240321213323-06q780m",
+				"updated": "20240321213536"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "解决方案 —— 消息处理类 BaseHandler"
+				}
+			]
+		},
+		{
+			"ID": "20240321213334-vnc1tmp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321213334-vnc1tmp",
+				"updated": "20240321214737"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以为每个消息都声明一个消息处理类，消息处理类有共同的父类"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BaseHandler"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BaseHandler"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类中声明消息类变量"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "message"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，用来装载反序列化出来的消息对象本身，网络层反序列化对象时将消息赋值给该变量\n再声明消息处理方法"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "MsgHandle()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，将"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "message"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内的消息对象进行处理，由网络层调用\n所有的子消息处理类都必须要重写这个方法，其中就可以实现独立的消息处理逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240321213611-zeqz874",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321213611-zeqz874",
+				"updated": "20240321214342"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "网络层在接收到数据并反序列化出消息后，只需要将消息赋值给对应的消息处理类的变量"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "message"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内\n然后，在处理消息时只需要调用装载子类的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BaseHandler"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​变量的处理方法"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "MsgHandle()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，即可执行子类的处理方法处理消息"
+				}
+			]
+		},
+		{
+			"ID": "20240321214430-bpk11zb",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240321214430-bpk11zb",
+				"style": "line-height: 22px;",
+				"updated": "20240321214448"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "/// \u003csummary\u003e\n/// 消息处理器基类，主要用于处理消息的逻辑的\n/// \u003c/summary\u003e\npublic abstract class BaseHandler\n{\n    //处理者处理哪个消息\n    public BaseMessage message;\n\t//处理消息的逻辑\n    public abstract void MsgHandle();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240321213330-j76hj7h",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240321213330-j76hj7h",
+				"style": "line-height: 22px;",
+				"updated": "20240321214500"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using GamePlayer;\nusing UnityEngine;\n\npublic class PlayerMessageHandler : BaseHandler\n{\n    public override void MsgHandle()\n    {\n        PlayerMessage msg = message as PlayerMessage;\n        //以后我们在处理对应某一个消息的逻辑，\n        //只需要在消息处理者对象的消息处理方法中写逻辑就好了\n        Debug.Log(msg.playerID);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240321214517-osr2q0m",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240321214517-osr2q0m",
+				"style": "line-height: 22px;",
+				"updated": "20240321214659"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private Queue\u003cBaseHandler\u003e receiveQueue = new Queue\u003cBaseHandler\u003e();\n\nprivate void HandleReceiveMsg(int receiveNum)\n{\n    int msgID = 0;\n    int msgLength = 0;\n    int nowIndex = 0;\n\n    cacheNum += receiveNum;\n\n    while (true)\n    {\n        //每次将长度设置为-1 是避免上一次解析的数据 影响这一次的判断\n        msgLength = -1;\n        //处理解析一条消息\n        if (cacheNum - nowIndex \u003e= 8)\n        {\n            //解析ID\n            msgID = BitConverter.ToInt32(cacheBytes, nowIndex);\n            nowIndex += 4;\n            //解析长度\n            msgLength = BitConverter.ToInt32(cacheBytes, nowIndex);\n            nowIndex += 4;\n        }\n\n        if (cacheNum - nowIndex \u003e= msgLength \u0026\u0026 msgLength != -1)\n        {\n            //解析消息体\n            BaseMessage baseMsg = null;\n            BaseHandler handler = null;\n            switch (msgID)\n            {\n                case 1001:\n                    baseMsg = new PlayerMessage();\n                    baseMsg.Reading(cacheBytes, nowIndex);\n                    handler = new PlayerMessageHandler();\n                    handler.message = baseMsg;\n                    break;\n            }\n            if (handler != null)\n                receiveQueue.Enqueue(handler);\n            nowIndex += msgLength;\n            if (nowIndex == cacheNum)\n            {\n                cacheNum = 0;\n                break;\n            }\n        }\n        else\n        {\n            if (msgLength != -1)\n                nowIndex -= 8;\n            //就是把剩余没有解析的字节数组内容 移到前面来 用于缓存下次继续解析\n            Array.Copy(cacheBytes, nowIndex, cacheBytes, 0, cacheNum - nowIndex);\n            cacheNum = cacheNum - nowIndex;\n            break;\n        }\n    }\n}\n\nvoid Update()\n{\n    if (receiveQueue.Count \u003e 0)\n\t\treceiveQueue.Dequeue().MsgHandle();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240321214629-k0a8bgr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321214629-k0a8bgr",
+				"updated": "20240321215019"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以发现，反序列化消息后将消息赋值给对应的消息处理类，然后将消息处理类压入到待处理的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BaseHandler"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​队列内\n处理消息时直接取出一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BaseHandler"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类对象执行处理方法即可，由于父类装子类，执行的实际上是子类的方法\n因此，网络层不再需要再实现如何处理各种消息，也不再需要在处理消息时识别消息"
+				}
+			]
+		},
+		{
+			"ID": "20240321215026-h9cr5e6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240321215026-h9cr5e6",
+				"updated": "20240321220222"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "解决方案 —— 消息池类 MessagePool"
+				}
+			]
+		},
+		{
+			"ID": "20240321215043-jrugwht",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321215043-jrugwht",
+				"updated": "20240321220222"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BaseHandler"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​解决了网络层与消息的处理耦合问题后，\n网络层反序列化消息时，还需要通过消息ID识别消息的类型，调用对应的反序列化方法\n调用不同的反序列化逻辑实际上还是使用的是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "switch...case..."
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，因此我们依然需要想办法优化这里的逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240321215338-4isni16",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321215338-4isni16",
+				"updated": "20240321232432"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以使用消息池类 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "MessagePool"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，里面声明两个字典，建立消息ID和消息类与消息处理类的映射关系\n然后在网络层里实例化一个消息池类对象，实例化时，我们需要注册所有的消息ID与消息类和消息映射类的映射关系\n网络层通过将反序列化出来的消息ID传入到消息池类，就可以获取到对应的消息类与消息处理类"
+				}
+			]
+		},
+		{
+			"ID": "20240321215630-2c1et3b",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321215630-2c1et3b",
+				"updated": "20240321220222"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "网络层可以用它们的父类"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BaseMessage"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BaseHandler"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类型变量来装载这些返回的对象\n然后执行"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BaseMessage"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的反序列化方法反序列化数据，再将消息类对象传入到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BaseHandler"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​对象内，\n将"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BaseHandler"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​对象压入到待处理的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BaseHandler"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​队列内"
+				}
+			]
+		},
+		{
+			"ID": "20240321215228-krzxtwn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240321215228-krzxtwn",
+				"style": "line-height: 22px;",
+				"updated": "20240321220222"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using GamePlayer;\nusing System;\nusing System.Collections.Generic;\n\n/// \u003csummary\u003e\n/// 消息池，主要是用于注册ID和消息类型以及消息处理器类型的映射关系\n/// 方便网络层获取对象，进行反序列化和消息处理\n/// \u003c/summary\u003e\npublic class MessagePool\n{\n    private Dictionary\u003cint, Type\u003e messages = new Dictionary\u003cint, Type\u003e();\n    private Dictionary\u003cint, Type\u003e handlers = new Dictionary\u003cint, Type\u003e();\n\n    public MessagePool()\n    {\n        //在构造函数中进行注册，注册映射关系\n        Register(1001, typeof(PlayerMessage), typeof(PlayerMessageHandler));\n    }\n\n    private void Register(int id, Type messageType, Type handlerType)\n    {\n        messages.Add(id, messageType);\n        handlers.Add(id, handlerType);\n    }\n\n    /// \u003csummary\u003e\n    /// 根据ID 得到一个指定的消息类对象\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"id\"\u003e消息ID\u003c/param\u003e\n    /// \u003creturns\u003e消息类对象\u003c/returns\u003e\n    public BaseMessage GetMessage(int id)\n    {\n        if (!messages.ContainsKey(id))\n            return null;\n        return Activator.CreateInstance(messages[id]) as BaseMessage;\n    }\n\n    /// \u003csummary\u003e\n    /// 根据ID 得到一个指定的消息处理类对象\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"id\"\u003e消息ID\u003c/param\u003e\n    /// \u003creturns\u003e消息处理类对象\u003c/returns\u003e\n    public BaseHandler GetHandler(int id)\n    {\n        if (!handlers.ContainsKey(id))\n            return null;\n        return Activator.CreateInstance(handlers[id]) as BaseHandler;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240321215839-y5ykjab",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240321215839-y5ykjab",
+				"style": "line-height: 22px;",
+				"updated": "20240321220222"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private Queue\u003cBaseHandler\u003e receiveQueue = new Queue\u003cBaseHandler\u003e();\n\nprivate void HandleReceiveMsg(int receiveNum)\n{\n    int msgID = 0;\n    int msgLength = 0;\n    int nowIndex = 0;\n\n    cacheNum += receiveNum;\n\n    while (true)\n    {\n        //每次将长度设置为-1 是避免上一次解析的数据 影响这一次的判断\n        msgLength = -1;\n        //处理解析一条消息\n        if (cacheNum - nowIndex \u003e= 8)\n        {\n            //解析ID\n            msgID = BitConverter.ToInt32(cacheBytes, nowIndex);\n            nowIndex += 4;\n            //解析长度\n            msgLength = BitConverter.ToInt32(cacheBytes, nowIndex);\n            nowIndex += 4;\n        }\n\n        if (cacheNum - nowIndex \u003e= msgLength \u0026\u0026 msgLength != -1)\n        {\n            BaseMessage message = messagePool.GetMessage(msgID);\n            if (message != null)\n            {\n                message.Reading(cacheBytes, nowIndex);\n                BaseHandler handler = messagePool.GetHandler(msgID);\n                handler.message = message;\n                receiveQueue.Enqueue(handler);\n            }\n        \n            nowIndex += msgLength;\n            if (nowIndex == cacheNum)\n            {\n                cacheNum = 0;\n                break;\n            }\n        }\n        else\n        {\n            if (msgLength != -1)\n                nowIndex -= 8;\n            //就是把剩余没有解析的字节数组内容 移到前面来 用于缓存下次继续解析\n            Array.Copy(cacheBytes, nowIndex, cacheBytes, 0, cacheNum - nowIndex);\n            cacheNum = cacheNum - nowIndex;\n            break;\n        }\n    }\n}\n\nvoid Update()\n{\n    if (receiveQueue.Count \u003e 0)\n\t\treceiveQueue.Dequeue().MsgHandle();\n}\n\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240321215935-f1qgx58",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321215935-f1qgx58",
+				"updated": "20240321220222"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以发现，网络层在反序列化后消息ID后，就可以通过消息ID获取到对应的消息类和消息处理类，而不需要关心如何识别它们\n因此，网络层不再需要在反序列化时识别消息，消息类的变动不再能够影响网络层"
+				}
+			]
+		},
+		{
+			"ID": "20240321220214-jc3v0e2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240321220214-jc3v0e2",
+				"updated": "20240321220306"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "工具生成Handler"
+				}
+			]
+		},
+		{
+			"ID": "20240321220306-454ghvc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321220306-454ghvc",
+				"updated": "20240321231208"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "每个消息类都会有一个对应的Handler类，而消息类是通过配置文件自动生成的，\n很明显，我们可以在生成消息类时同时生成消息处理类的模板，省去我们创建脚本编写重复内容的工作\n让我们的精力可以更加放在编写处理逻辑上"
+				}
+			]
+		},
+		{
+			"ID": "20240321231450-1jyb3jc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321231450-1jyb3jc",
+				"updated": "20240321231515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们要生成这样的消息处理类模板，我们在自动声明的方法内写逻辑即可"
+				}
+			]
+		},
+		{
+			"ID": "20240321231516-3ao1t13",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240321231516-3ao1t13",
+				"style": "line-height: 22px;",
+				"updated": "20240321231612"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "namespace GamePlayer\n{\n\tpublic class PlayerMessageHandler : BaseHandler\n\t{\n\t\tpublic override void MsgHandle()\n\t\t{\n\t\t\tPlayerMessage msg = message as PlayerMessage;\n\t\t\t//在这里消息处理逻辑\n\t\t}\n\t}\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240321231218-p47mvqc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321231218-p47mvqc",
+				"updated": "20240321231811"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们只需要在之前的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240319152003-a2fmlw6",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "生成消息类"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的基础上，再同时自动生成消息处理类，放在同一文件夹下\n值得一提的是，由于我们生成的是代码文件模板，我们之后会写逻辑，如果此时不加以判断就生成问可能会覆盖掉我们写的逻辑\n因此在追加新的消息处理类文件时，我们必须要检查消息处理类脚本文件是否已存在，如果存在，就不要生成这个代码逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240321231312-g4zlqha",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240321231312-g4zlqha",
+				"style": "line-height: 22px;",
+				"updated": "20240321231438"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public void GenerateMessage(XmlNodeList nodes)\n{\n    string namespaceStr = \"\";\n    string classNameStr = \"\";\n    string idStr = \"\";\n    string fieldStr = \"\";\n    string getBytesNumStr = \"\";\n    string writingStr = \"\";\n    string readingStr = \"\";\n\n    foreach (XmlNode dataNode in nodes)\n    {\n        namespaceStr = dataNode.Attributes[\"namespace\"].Value;\n        classNameStr = dataNode.Attributes[\"name\"].Value;\n\n\t\t//生成消息类相关逻辑，在这里省略掉\n\n        //如果消息处理类文件已存在，就不要覆盖，避免覆盖原有逻辑\n        if (File.Exists(path + classNameStr + \"Handler.cs\"))\n            continue;\n        //生成消息处理类脚本\n        string HandlerStr = $\"namespace {namespaceStr}\\r\\n\" + \n                             \"{\\r\\n\" +\n                            $\"\\tpublic class {classNameStr}Handler : BaseHandler\\r\\n\" +\n                             \"\\t{\\r\\n\" +\n                             \"\\t\\tpublic override void MsgHandle()\\r\\n\" +\n                             \"\\t\\t{\\r\\n\" +\n                            $\"\\t\\t\\t{classNameStr} msg = message as {classNameStr};\\r\\n\" +\n                             \"\\t\\t}\\r\\n\" +\n                             \"\\t}\\r\\n\" +\n                             \"}\\r\\n\";\n        //把消息处理类的内容保存到本地\n        File.WriteAllText(path + classNameStr + \"Handler.cs\", HandlerStr);\n    }\n    Debug.Log(\"消息类生成结束\");\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240321231817-24eqwwk",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240321231817-24eqwwk",
+				"updated": "20240321231831"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "工具生成消息池类"
+				}
+			]
+		},
+		{
+			"ID": "20240321231831-sarf4st",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321231831-sarf4st",
+				"updated": "20240321232506"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于消息池类，每次我们追加了新的消息类和消息处理类时，构造函数内的注册逻辑就需要添加内容，可能还要引用新的命名空间\n因此，我们完全可以在生成消息类和消息处理类的时候顺便生成消息池类\n根据协议配置文件内的消息类节点的多少，就注册多少个消息ID与消息类和消息映射类的映射关系\n同时根据消息类节点的命名空间，在消息池脚本内引用对应的命名空间"
+				}
+			]
+		},
+		{
+			"ID": "20240321232131-0qecrbo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321232131-0qecrbo",
+				"updated": "20240321232508"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们要生成这样的消息池脚本："
+				}
+			]
+		},
+		{
+			"ID": "20240321232147-fhoe91d",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240321232147-fhoe91d",
+				"style": "line-height: 22px;",
+				"updated": "20240321232154"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System;\nusing System.Collections.Generic;\nusing GamePlayer;\nusing GameSystem;\n\npublic class MessagePool\n{\n\tprivate Dictionary\u003cint, Type\u003e messages = new Dictionary\u003cint, Type\u003e();\n\tprivate Dictionary\u003cint, Type\u003e handlers = new Dictionary\u003cint, Type\u003e();\n\n\tpublic MessagePool()\n\t{\n\t\tRegister(1001, typeof(PlayerMessage), typeof(PlayerMessageHandler));\n\t\tRegister(1002, typeof(HeartMessage), typeof(HeartMessageHandler));\n\t\tRegister(1003, typeof(QuitMessage), typeof(QuitMessageHandler));\n\t}\n\n\tprivate void Register(int id, Type messageType, Type handlerType)\n\n\t{\n\t\tmessages.Add(id, messageType);\n\t\thandlers.Add(id, handlerType);\n\t}\n\n\tpublic BaseMessage GetMessage(int id)\n\n\t{\n\t\tif (!messages.ContainsKey(id))\n\t\t\treturn null;\n\t\treturn Activator.CreateInstance(messages[id]) as BaseMessage;\n\t}\n\n\tpublic BaseHandler GetHandler(int id)\n\n\t{\n\t\tif (!handlers.ContainsKey(id))\n\t\t\treturn null;\n\t\treturn Activator.CreateInstance(handlers[id]) as BaseHandler;\n\t}\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240321232558-rzjl7zw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321232558-rzjl7zw",
+				"updated": "20240321232933"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GenerateCSharp"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内再声明一个生成消息池脚本的方法"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GenerateMessagePool()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，在生成C#脚本时调用，传入所有的消息类节点"
+				}
+			]
+		},
+		{
+			"ID": "20240321232553-vw912vz",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240321232553-vw912vz",
+				"style": "line-height: 22px;",
+				"updated": "20240321232720"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[MenuItem(\"ProtocolTool/生成C#脚本\")]\nprivate static void GenerateCSharp()\n{\n    generateCSharp.GenerateEnum(GetNodes(\"enum\"));\n    generateCSharp.GenerateData(GetNodes(\"data\"));\n    generateCSharp.GenerateMessage(GetNodes(\"message\"));\n    generateCSharp.GenerateMessagePool(GetNodes(\"message\"));\n    AssetDatabase.Refresh();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240321232513-iwhejtf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321232513-iwhejtf",
+				"updated": "20240321232552"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "它的可变内容是消息类命名空间的引用，以及构造函数内的注册消息ID与消息类和消息映射类的映射关系语句"
+				}
+			]
+		},
+		{
+			"ID": "20240321232728-7e8vb5w",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240321232728-7e8vb5w",
+				"updated": "20240321232857"
+			},
+			"Children": [
+				{
+					"ID": "20240321232729-1xj62e7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321232729-1xj62e7",
+						"updated": "20240321232848"
+					},
+					"Children": [
+						{
+							"ID": "20240321232729-nxx5du4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321232729-nxx5du4",
+								"updated": "20240321232848"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "遍历所有的消息类节点的命名空间属性，获取它们的命名空间，引用命名空间"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321232752-906d9tm",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321232752-906d9tm",
+						"updated": "20240321232857"
+					},
+					"Children": [
+						{
+							"ID": "20240321232752-czvohat",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321232752-czvohat",
+								"updated": "20240321232857"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "遍历所有的消息类节点的ID、名字属性，在构造函数内生成注册消息ID和消息类与消息处理类的映射关系语句"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240321232832-41ne986",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240321232832-41ne986",
+				"style": "line-height: 22px;",
+				"updated": "20240321232914"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public void GenerateMessagePool(XmlNodeList nodes)\n{\n    List\u003cstring\u003e ids = new List\u003cstring\u003e();\n    List\u003cstring\u003e names = new List\u003cstring\u003e();\n    List\u003cstring\u003e nameSpaces = new List\u003cstring\u003e();\n    foreach (XmlNode dataNode in nodes)\n    {\n        //记录所有消息的ID\n        string id = dataNode.Attributes[\"id\"].Value;\n        if (!ids.Contains(id))\n            ids.Add(id);\n        else\n            Debug.LogError(\"存在相同ID的消息\" + id);\n        //记录所有消息的名字\n        string name = dataNode.Attributes[\"name\"].Value;\n        if (!names.Contains(name))\n            names.Add(name);\n        else\n            Debug.LogError(\"存在同名的消息\" + name + \", 建议即使不在同一命名空间内也不要有同名消息\");\n        //记录所有消息的命名空间\n        string msgNamespace = dataNode.Attributes[\"namespace\"].Value;\n        if (!nameSpaces.Contains(msgNamespace))\n            nameSpaces.Add(msgNamespace);\n    }\n\n    //获取所有需要引用的命名空间拼接好\n    string nameSpacesStr = \"\";\n    for (int i = 0; i \u003c nameSpaces.Count; i++)\n        nameSpacesStr += $\"using {nameSpaces[i]};\\r\\n\";\n    //获取所有消息注册相关的内容\n    string registerStr = \"\";\n    for (int i = 0; i \u003c ids.Count; i++)\n    {\n        registerStr += $\"\\t\\tRegister({ids[i]}, typeof({names[i]}), typeof({names[i]}Handler));\\r\\n\";\n    }\n\n    string msgPoolStr = \"using System;\\r\\n\" +\n                        \"using System.Collections.Generic;\\r\\n\" +\n                        nameSpacesStr + \"\\r\\n\" +\n                        //类声明\n                        \"public class MessagePool\\r\\n\" +\n                        \"{\\r\\n\" +\n                        //变量的声明\n                        \"\\tprivate Dictionary\u003cint, Type\u003e messages = new Dictionary\u003cint, Type\u003e();\\r\\n\" +\n                        \"\\tprivate Dictionary\u003cint, Type\u003e handlers = new Dictionary\u003cint, Type\u003e();\\r\\n\\r\\n\" +\n                        //构造函数的声明\n                        \"\\tpublic MessagePool()\\r\\n\" +\n                        \"\\t{\\r\\n\" +\n                        registerStr +\n                        \"\\t}\\r\\n\\r\\n\" +\n                        //注册方法的声明\n                        \"\\tprivate void Register(int id, Type messageType, Type handlerType)\\r\\n\\r\\n\" +\n                        \"\\t{\\r\\n\" +\n                        \"\\t\\tmessages.Add(id, messageType);\\r\\n\" +\n                        \"\\t\\thandlers.Add(id, handlerType);\\r\\n\" +\n                        \"\\t}\\r\\n\\r\\n\" +\n                        //获取消息的方法声明\n                        \"\\tpublic BaseMessage GetMessage(int id)\\r\\n\\r\\n\" +\n                        \"\\t{\\r\\n\" +\n                        \"\\t\\tif (!messages.ContainsKey(id))\\r\\n\" +\n                        \"\\t\\t\\treturn null;\\r\\n\" +\n                        \"\\t\\treturn Activator.CreateInstance(messages[id]) as BaseMessage;\\r\\n\" +\n                        \"\\t}\\r\\n\\r\\n\" +\n                        //获取消息处理类的方法声明\n                        \"\\tpublic BaseHandler GetHandler(int id)\\r\\n\\r\\n\" +\n                        \"\\t{\\r\\n\" +\n                        \"\\t\\tif (!handlers.ContainsKey(id))\\r\\n\" +\n                        \"\\t\\t\\treturn null;\\r\\n\" +\n                        \"\\t\\treturn Activator.CreateInstance(handlers[id]) as BaseHandler;\\r\\n\" +\n                        \"\\t}\\r\\n\" +\n                        \"}\";\n\n    string path = SAVE_PATH + \"/Pool/\";\n    if (!Directory.Exists(path))\n        Directory.CreateDirectory(path);\n    //保存到本地\n    File.WriteAllText(path + \"MessagePool.cs\", msgPoolStr);\n    Debug.Log(\"生成消息池成功！\");\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240321232858-q9ky8la",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321232858-q9ky8la"
+			}
+		}
+	]
+}

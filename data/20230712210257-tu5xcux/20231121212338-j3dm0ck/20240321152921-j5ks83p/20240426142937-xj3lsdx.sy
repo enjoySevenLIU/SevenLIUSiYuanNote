@@ -1,0 +1,1593 @@
+{
+	"ID": "20240426142937-xj3lsdx",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240426142937-xj3lsdx",
+		"title": "UH4L8——跨域继承Unity中的类",
+		"type": "doc",
+		"updated": "20240427132452"
+	},
+	"Children": [
+		{
+			"ID": "20240426150617-btl525d",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240426150617-btl525d",
+				"updated": "20240426150621"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240426150621-pw2fs5g",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240426150621-pw2fs5g",
+				"style": "line-height: 22px;",
+				"updated": "20240426151001"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "appDomain.RegisterCrossBindingAdaptor()\t\t//注册一个生成出来的适配器类，传入适配器对象\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240426150938-5en4vdz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426150938-5en4vdz",
+				"updated": "20240426150949"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "代码生成模板："
+				}
+			]
+		},
+		{
+			"ID": "20240426150950-fkngm3u",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240426150950-fkngm3u",
+				"style": "line-height: 22px;",
+				"updated": "20240426151738"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//ILRuntimeCrossBinding.GenerateCrossbindAdapter方法内\n\nusing (System.IO.StreamWriter sw = new System.IO.StreamWriter(\"脚本生成路径和文件名\"))\n{\n    sw.WriteLine(ILRuntime.Runtime.Enviorment.CrossBindingCodeGenerator.GenerateCrossBindingAdapterCode(typeof(要跨域继承的类), \"生成的类的命名空间\"));\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240426142937-qt490yw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240426142937-qt490yw",
+				"updated": "20240426143037"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "跨域继承"
+				}
+			]
+		},
+		{
+			"ID": "20240426143043-bqnz3pl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426143043-bqnz3pl",
+				"updated": "20240426143045"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime支持在热更工程中继承Unity主工程中的类，这就是跨域继承"
+				}
+			]
+		},
+		{
+			"ID": "20240426143142-sl62r4n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426143142-sl62r4n",
+				"updated": "20240426143147"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "由于适配器在一些更为复杂的基类时，可能需要我们按照模板来手写一些内容\n相对来说较为麻烦，如果没有特殊需求的情况下，或者是新开项目，都尽量不要出现跨域继承"
+				}
+			]
+		},
+		{
+			"ID": "20240426152225-j6vq7kp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426152225-j6vq7kp",
+				"updated": "20240426152230"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "跨域继承时（ILRuntime工程继承Unity主工程中的类）"
+				}
+			]
+		},
+		{
+			"ID": "20240426152323-4c6figg",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240426152323-4c6figg",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240426161152"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240426152300-m3x6aui",
+					"Type": "NodeHeading",
+					"HeadingLevel": 3,
+					"Properties": {
+						"id": "20240426152300-m3x6aui",
+						"updated": "20240426152309"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "注意"
+						}
+					]
+				},
+				{
+					"ID": "20240426152230-79ke4rp",
+					"Type": "NodeList",
+					"ListData": {
+						"Typ": 1
+					},
+					"Properties": {
+						"id": "20240426152230-79ke4rp",
+						"updated": "20240426161152"
+					},
+					"Children": [
+						{
+							"ID": "20240426152230-omsrh7a",
+							"Type": "NodeListItem",
+							"ListData": {
+								"Typ": 1,
+								"Delimiter": 46,
+								"Marker": "MS4=",
+								"Num": 1
+							},
+							"Properties": {
+								"id": "20240426152230-omsrh7a",
+								"updated": "20240426152230"
+							},
+							"Children": [
+								{
+									"ID": "20240426152230-1wlemzt",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240426152230-1wlemzt",
+										"updated": "20240426152230"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "ILRuntime不支持跨域（ILRuntime继承Unity）多继承"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240426152230-h0wnwcw",
+							"Type": "NodeListItem",
+							"ListData": {
+								"Typ": 1,
+								"Delimiter": 46,
+								"Marker": "Mi4=",
+								"Num": 2
+							},
+							"Properties": {
+								"id": "20240426152230-h0wnwcw",
+								"updated": "20240426161152"
+							},
+							"Children": [
+								{
+									"ID": "20240426152230-3h596lz",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240426152230-3h596lz",
+										"updated": "20240426161152"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "如果一定要跨域（ILRuntime继承Unity）多继承，就在主工程中用一个类将多继承关系梳理继承好，在热更工程中继承该类"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240426152230-h3vbdbt",
+							"Type": "NodeListItem",
+							"ListData": {
+								"Typ": 1,
+								"Delimiter": 46,
+								"Marker": "My4=",
+								"Num": 3
+							},
+							"Properties": {
+								"id": "20240426152230-h3vbdbt",
+								"updated": "20240426152230"
+							},
+							"Children": [
+								{
+									"ID": "20240426152230-8shhfhp",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240426152230-8shhfhp",
+										"updated": "20240426152230"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "跨域继承中，不能在基类的构造函数中调用该类的虚函数，会报错\n"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240426152330-3ssifks",
+							"Type": "NodeListItem",
+							"ListData": {
+								"Typ": 1,
+								"Delimiter": 46,
+								"Marker": "NC4=",
+								"Num": 4
+							},
+							"Properties": {
+								"id": "20240426152330-3ssifks"
+							},
+							"Children": [
+								{
+									"ID": "20240426152330-0hup51p",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240426152330-0hup51p"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "ILRuntime中的跨域继承主要指热更工程继承Unity工程中的类\n不存在Unity继承ILRuntime中的类一说，只需要记住，"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "strong",
+											"TextMarkTextContent": "一般都是可变的（热更工程）使用不变的（Unity工程）内容"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240426143336-1jhu5dh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426143336-1jhu5dh",
+				"updated": "20240426152324"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注：这里讨论的是不继承"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "MonoBehaviour"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的类，继承"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "MonoBehaivour"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的类相关有专门的笔记"
+				}
+			]
+		},
+		{
+			"ID": "20240426143058-yxowtos",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240426143058-yxowtos",
+				"name": "appDomain.RegisterCrossBindingAdaptor()",
+				"updated": "20240426143111"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如何进行跨域继承"
+				}
+			]
+		},
+		{
+			"ID": "20240426143117-cb4bpqj",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240426143117-cb4bpqj",
+				"updated": "20240427132452"
+			},
+			"Children": [
+				{
+					"ID": "20240426143121-y8iy83y",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240426143121-y8iy83y",
+						"updated": "20240426143121"
+					},
+					"Children": [
+						{
+							"ID": "20240426143121-j6e59qi",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426143121-j6e59qi",
+								"updated": "20240426144246"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在Unity工程中实现基类"
+								}
+							]
+						},
+						{
+							"ID": "20240426144225-mjzi5br",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240426144225-mjzi5br",
+								"style": "line-height: 22px;",
+								"updated": "20240426144257"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using UnityEngine;\n\npublic abstract class Lesson11_Test\n{\n    public int valuePublic;\n    protected int valueProtected;\n\n    public virtual int ValuePer\n    {\n        get; set;\n    }\n\n    public virtual void TestFun(string str)\n    {\n        Debug.Log(\"TestFun:\" + str);\n    }\n\n    public abstract void TestAbstract(int i);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240426143121-37ratlu",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240426143121-37ratlu",
+						"updated": "20240426143121"
+					},
+					"Children": [
+						{
+							"ID": "20240426143121-7qmu7du",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426143121-7qmu7du",
+								"updated": "20240426143121"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在ILRuntime工程中继承基类"
+								}
+							]
+						},
+						{
+							"ID": "20240426144259-3eoahif",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240426144259-3eoahif",
+								"style": "line-height: 22px;",
+								"updated": "20240426144307"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using UnityEngine;\n\nnamespace HotFix_Project\n{\n    public class TestLesson11 : Lesson11_Test\n    {\n        public override int ValuePer \n        { \n            get =\u003e valueProtected; \n            set =\u003e valueProtected = value; \n        }\n\n        public override void TestFun(string str)\n        {\n            base.TestFun(str);\n            Debug.Log(\"TestFun2：\" + str);\n        }\n\n        public override void TestAbstract(int i)\n        {\n            Debug.Log(\"TestAbstract: \" + i);\n        }\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240426144449-0xltggp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426144449-0xltggp",
+								"updated": "20240426144708"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "但此时我们并不能直接使用继承出来的类，否则报错"
+								}
+							]
+						},
+						{
+							"ID": "20240426144709-o98fwso",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426144709-o98fwso",
+								"updated": "20240426144709"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240426144709-qmgbo6u.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240426143121-2ctymot",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240426143121-2ctymot",
+						"updated": "20240426143121"
+					},
+					"Children": [
+						{
+							"ID": "20240426143121-41hpcr6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426143121-41hpcr6",
+								"updated": "20240426143124"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过工具生成跨域继承适配器\n​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ILRuntime\\Assets\\Samples\\ILRuntime\\2.1.0\\Demo\\Editor\\ILRuntimeCrossBinding.cs"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n按照其中的模板，填写自己要为哪个类生成跨域继承适配器对象"
+								}
+							]
+						},
+						{
+							"ID": "20240426144823-s4f3qwv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426144823-s4f3qwv",
+								"updated": "20240426144823"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 348px;",
+										"style": "width: 338px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240426144823-vnxegn9.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 338px;\" parent-style=\"width: 348px;\"}"
+								}
+							]
+						},
+						{
+							"ID": "20240426145144-ag86jx1",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240426145144-ag86jx1",
+								"style": "line-height: 22px;",
+								"updated": "20240426145159"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "#if UNITY_EDITOR\nusing UnityEditor;\nusing UnityEngine;\nusing System;\nusing System.Text;\nusing System.Collections.Generic;\n[System.Reflection.Obfuscation(Exclude = true)]\npublic class ILRuntimeCrossBinding\n{\n   [MenuItem(\"ILRuntime/生成跨域继承适配器\")]\n    static void GenerateCrossbindAdapter()\n    {\n        //由于跨域继承特殊性太多，自动生成无法实现完全无副作用生成，所以这里提供的代码自动生成主要是给大家生成个初始模版，简化大家的工作\n        //大多数情况直接使用自动生成的模版即可，如果遇到问题可以手动去修改生成后的文件，因此这里需要大家自行处理是否覆盖的问题\n\n        using(System.IO.StreamWriter sw = new System.IO.StreamWriter(\"Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/04_Inheritance/InheritanceAdapter.cs\"))\n        {\n            sw.WriteLine(ILRuntime.Runtime.Enviorment.CrossBindingCodeGenerator.GenerateCrossBindingAdapterCode(typeof(TestClassBase), \"ILRuntimeDemo\"));\n        }\n        AssetDatabase.Refresh();\n    }\n}\n#endif\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240426145210-fplvo4x",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426145210-fplvo4x",
+								"updated": "20240426145326"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "我们需要在"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GenerateCrossbindAdapter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法内，除了复制里面实现的代码以外，还需要修改如下内容："
+								}
+							]
+						},
+						{
+							"ID": "20240426145326-bx85mp6",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240426145326-bx85mp6",
+								"updated": "20240426145328"
+							},
+							"Children": [
+								{
+									"ID": "20240426145328-qjunm1v",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240426145328-qjunm1v",
+										"updated": "20240426145328"
+									},
+									"Children": [
+										{
+											"ID": "20240426145328-jtkvu78",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240426145328-jtkvu78",
+												"updated": "20240426145803"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "new System.IO.StreamWriter()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​内传入的参数为脚本的保存路径与文件名，路径以"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Assets/.."
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​开头，脚本文件名后最好为"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "..Adapter.cs"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240426145451-jd9omru",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240426145451-jd9omru"
+									},
+									"Children": [
+										{
+											"ID": "20240426145451-m41wkys",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240426145451-m41wkys",
+												"updated": "20240426145524"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "GenerateCrossBindingAdapterCode()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​内，传入的第一个参数是"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "typeof(要继承的类)"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240426145524-lcin8d8",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240426145524-lcin8d8"
+									},
+									"Children": [
+										{
+											"ID": "20240426145524-rbsrb1l",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240426145524-rbsrb1l",
+												"updated": "20240426145544"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "GenerateCrossBindingAdapterCode()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​内，传入的第二个参数是生成的脚本所在的命名空间"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240426145553-2k0p0tx",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426145553-2k0p0tx",
+								"updated": "20240426145741"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "因此为了让"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Lesson11_Test"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​可以在ILRuntime里继承，我们需要向"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GenerateCrossbindAdapter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法内添加如下内容"
+								}
+							]
+						},
+						{
+							"ID": "20240426145741-6j2jnxl",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240426145741-6j2jnxl",
+								"style": "line-height: 22px;",
+								"updated": "20240426145755"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "#if UNITY_EDITOR\nusing UnityEditor;\nusing UnityEngine;\nusing System;\nusing System.Text;\nusing System.Collections.Generic;\n[System.Reflection.Obfuscation(Exclude = true)]\npublic class ILRuntimeCrossBinding\n{\n   [MenuItem(\"ILRuntime/生成跨域继承适配器\")]\n    static void GenerateCrossbindAdapter()\n    {\n        //由于跨域继承特殊性太多，自动生成无法实现完全无副作用生成，所以这里提供的代码自动生成主要是给大家生成个初始模版，简化大家的工作\n        //大多数情况直接使用自动生成的模版即可，如果遇到问题可以手动去修改生成后的文件，因此这里需要大家自行处理是否覆盖的问题\n\n        using(System.IO.StreamWriter sw = new System.IO.StreamWriter(\"Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/04_Inheritance/InheritanceAdapter.cs\"))\n        {\n            sw.WriteLine(ILRuntime.Runtime.Enviorment.CrossBindingCodeGenerator.GenerateCrossBindingAdapterCode(typeof(TestClassBase), \"ILRuntimeDemo\"));\n        }\n\n        using (System.IO.StreamWriter sw = new System.IO.StreamWriter(\"Assets/Scripts/L11_继承/Lesson11_TestAdapter.cs\"))\n        {\n            sw.WriteLine(ILRuntime.Runtime.Enviorment.CrossBindingCodeGenerator.GenerateCrossBindingAdapterCode(typeof(Lesson11_Test), \"ILRuntimeAdapter\"));\n        }\n\n        AssetDatabase.Refresh();\n    }\n}\n#endif\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240426145805-8r1pi0j",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426145805-8r1pi0j",
+								"updated": "20240426145834"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "最后点击菜单栏的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ILRuntime/生成跨域继承适配器"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 选项，即可生成适配器脚本"
+								}
+							]
+						},
+						{
+							"ID": "20240426145910-7ucd2n9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426145910-7ucd2n9",
+								"updated": "20240426145910"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 477px;",
+										"style": "width: 467px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240426145910-9icsn5x.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 467px;\" parent-style=\"width: 477px;\"}"
+								}
+							]
+						},
+						{
+							"ID": "20240426145913-202c2d5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426145913-202c2d5",
+								"updated": "20240426145934"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 261px;",
+										"style": "width: 251px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240426145934-o153320.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 251px;\" parent-style=\"width: 261px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240426143121-ml8jf4j",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240426143121-ml8jf4j",
+						"updated": "20240427132452"
+					},
+					"Children": [
+						{
+							"ID": "20240426143121-7tw15rb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426143121-7tw15rb",
+								"updated": "20240426150213"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在初始化"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AppDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​时，注册跨域继承适配器对象 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "appDomain.RegisterCrossBindingAdaptor(new 适配器类名());"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240427132251-ivs91mf",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240427132251-ivs91mf",
+								"style": "line-height: 22px;",
+								"updated": "20240427132433"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//ILRuntimeMgr内部\n\n//初始化ILRuntime相关的方法\nprivate void InitILRuntime()\n{\n\t//注册跨域继承相关的类\n    appDomain.RegisterCrossBindingAdaptor(new ILRuntimeAdapter.Lesson11_TestAdapter());\n    //初始化ILRuntime相关信息（目前只需要告诉ILRuntime主线程的线程ID，主要目的是能够在Unity的Profiler剖析器窗口中分析问题）\n    appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240427130907-srbwjk4",
+							"Type": "NodeBlockquote",
+							"Properties": {
+								"id": "20240427130907-srbwjk4",
+								"updated": "20240427132452"
+							},
+							"Children": [
+								{
+									"Type": "NodeBlockquoteMarker",
+									"Data": "\u003e"
+								},
+								{
+									"ID": "20240427130947-uwtfq8t",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240427130947-uwtfq8t",
+										"updated": "20240427132452"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "注：关于这一步，除了初始化appDomain需要注册跨域继承相关的类以外\n最好是在Samples\\ILRuntime\\2.1.0\\Demo\\Editor\\ILRuntimeCLRBinding.cs中\n在 "
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "InitILRuntime"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​ 这个方法内再统一注册跨域继承相关的类，具体原因在"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "block-ref",
+											"TextMarkBlockRefID": "20240426161157-1ia3bss",
+											"TextMarkBlockRefSubtype": "s",
+											"TextMarkTextContent": "下一章"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "详细讲解"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240426150019-opfpwid",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240426150019-opfpwid",
+								"style": "line-height: 22px;",
+								"updated": "20240427131600"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class ILRuntimeCLRBinding\n{\n    static void InitILRuntime(ILRuntime.Runtime.Enviorment.AppDomain domain)\n    {\n        //这里需要注册所有热更DLL中用到的跨域继承Adapter，否则无法正确抓取引用\n        domain.RegisterCrossBindingAdaptor(new MonoBehaviourAdapter());\n        domain.RegisterCrossBindingAdaptor(new CoroutineAdapter());\n        domain.RegisterCrossBindingAdaptor(new TestClassBaseAdapter());\n        //在这里注册我们自定义的一些需要跨域继承的类\n        domain.RegisterCrossBindingAdaptor(new ILRuntimeAdapter.Lesson11_TestAdapter());\n\n        domain.RegisterValueTypeBinder(typeof(Vector3), new Vector3Binder());\n        domain.RegisterValueTypeBinder(typeof(Vector2), new Vector2Binder());\n        domain.RegisterValueTypeBinder(typeof(Quaternion), new QuaternionBinder());\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240426143127-lid6s8l",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426143127-lid6s8l",
+				"updated": "20240426150539"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例："
+				}
+			]
+		},
+		{
+			"ID": "20240426150422-ezc5ipj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240426150422-ezc5ipj",
+				"style": "line-height: 22px;",
+				"updated": "20240426150531"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class ILRuntimeMain\n{\n\n    /// \u003csummary\u003e\n    /// 把逻辑处理权交给热更新工程，这是一个启动函数\n    /// \u003c/summary\u003e\n    public static void Main()\n    {\n        TestLesson11 t = new TestLesson11();\n        t.TestFun(\"哈哈哈\");\n        t.TestAbstract(99);\n        t.valuePublic = 100;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240426150540-fgzk405",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426150540-fgzk405",
+				"updated": "20240426150553"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 382px;",
+						"style": "width: 372px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240426150553-ua6ryko.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 372px;\" parent-style=\"width: 382px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240426152034-7rotar8",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240426152034-7rotar8",
+				"updated": "20240426152051"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "跨域继承Unity中类的注意事项"
+				}
+			]
+		},
+		{
+			"ID": "20240426152052-k7943up",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426152052-k7943up",
+				"updated": "20240426152208"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "跨域继承基本原理：ILRuntime中的跨域继承实际上并不是直接继承Unity中的基类，而是继承的适配器类"
+				}
+			]
+		},
+		{
+			"ID": "20240426152200-rg6eh9n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426152200-rg6eh9n",
+				"updated": "20240426152200"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "            基类（Unity中）\n             |\n          适配器类（Unity工程中的实际类型）\n             |\n            子类（ILRuntime中）"
+				}
+			]
+		},
+		{
+			"ID": "20240426155612-blj3jtz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426155612-blj3jtz",
+				"updated": "20240426155734"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "因此，即使是接口类型，也同样会生成一个对应的适配器类，供子类去继承，因此热更新的子类在继承主工程的接口的时候，实际上继承的是类"
+				}
+			]
+		},
+		{
+			"ID": "20240426152202-1eh7ssq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426152202-1eh7ssq"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意事项："
+				}
+			]
+		},
+		{
+			"ID": "20240426152120-vjce4or",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240426152120-vjce4or",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240426160954"
+			},
+			"Children": [
+				{
+					"ID": "20240426152120-7t8yyna",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240426152120-7t8yyna",
+						"updated": "20240426152120"
+					},
+					"Children": [
+						{
+							"ID": "20240426152120-oki3p2u",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426152120-oki3p2u",
+								"updated": "20240426160036"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "跨域继承时，不支持多继承，即同时继承类和接口，即使类和接口都生成了对应的适配器类并完成了注册"
+								}
+							]
+						},
+						{
+							"ID": "20240426155739-j2dk1pq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426155739-j2dk1pq",
+								"updated": "20240426155853"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "因为接口也要生成一个适配器类，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+									},
+									"TextMarkType": "text",
+									"TextMarkTextContent": "热更新的子类在继承主工程的接口的时候，实际上继承的是类，由于C#不允许多继承类，因此它会报错！"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240426152120-refn1gh",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240426152120-refn1gh",
+						"updated": "20240426152135"
+					},
+					"Children": [
+						{
+							"ID": "20240426152120-bu377zp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426152120-bu377zp",
+								"updated": "20240426160316"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果项目框架设计中一定要出现多继承，那么在跨域继承时可以在"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "主工程中声明一个多继承的基类用于跨域继承"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240426152120-50p36t2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240426152120-50p36t2",
+						"updated": "20240426160954"
+					},
+					"Children": [
+						{
+							"ID": "20240426152120-1d9hrme",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426152120-1d9hrme",
+								"updated": "20240426160920"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "跨域继承中，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+									},
+									"TextMarkType": "strong text",
+									"TextMarkTextContent": "不能在基类的构造函数中调用该类的虚函数"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "，例如"
+								}
+							]
+						},
+						{
+							"ID": "20240426160912-dvgkxdy",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240426160912-dvgkxdy",
+								"style": "line-height: 22px;",
+								"updated": "20240426160916"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using UnityEngine;\n\npublic abstract class Lesson11_Test\n{\n    public int valuePublic;\n    protected int valueProtected;\n\n    public Lesson11_Test() \n    {\n        TestFun(\"测试\");\n    }\n\n    public virtual int ValuePer\n    {\n        get; set;\n    }\n\n    public virtual void TestFun(string str)\n    {\n        Debug.Log(\"TestFun:\" + str);\n    }\n\n    public abstract void TestAbstract(int i);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240426160922-r80ivop",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426160922-r80ivop",
+								"updated": "20240426160954"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 756px;",
+										"style": "width: 746px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240426160954-ap5h3pn.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 746px;\" parent-style=\"width: 756px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240426155357-j9pj94n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426155357-j9pj94n"
+			}
+		}
+	]
+}

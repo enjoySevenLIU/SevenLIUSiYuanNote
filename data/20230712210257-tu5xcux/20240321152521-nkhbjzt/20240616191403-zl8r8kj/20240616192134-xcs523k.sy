@@ -1,0 +1,1003 @@
+{
+	"ID": "20240616192134-xcs523k",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"icon": "2600-fe0f",
+		"id": "20240616192134-xcs523k",
+		"title": "US3S1——Shader入门-光照效果",
+		"type": "doc",
+		"updated": "20240625114859"
+	},
+	"Children": [
+		{
+			"ID": "20240616192134-n9yvn8k",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240616192134-n9yvn8k",
+				"updated": "20240625114859"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "光照模型"
+				}
+			]
+		},
+		{
+			"ID": "20240616192735-aqi8sgt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616192735-aqi8sgt",
+				"updated": "20240616194338"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "光照模型指的是用于模拟光照效果的一组数学公式和算法，用于确定在3D场景中的模型表面应该如何对光进行反射和散射，从而实现视觉上逼真的照明效果"
+				}
+			]
+		},
+		{
+			"ID": "20240616193102-3p4m8c4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616193102-3p4m8c4",
+				"updated": "20240616194307"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "之后我们将要学习的光照模型，就是前辈们探索总结出来的计算公式\n通过这些光照计算公式的学习，我们可以让3D物体表现出受光照影响的效果"
+				}
+			]
+		},
+		{
+			"ID": "20240616192735-35k6vzk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616192735-35k6vzk",
+				"updated": "20240616192815"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "说人话：光照模型就是用来计算光照效果的数学公式，是业界前辈们探索出来的计算规则"
+				}
+			]
+		},
+		{
+			"ID": "20240616192833-fy1eg12",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616192833-fy1eg12",
+				"updated": "20240616192952"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在现实生活中，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong u",
+					"TextMarkTextContent": "一个物体的颜色是由射进眼睛里的光线决定的，当光线照射到物体表面时，一部分被物体表面吸收，一部分被反射。"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n对于透明物体，还有一部分光会穿过透明体，产生透射光，只有反射光和透射光才能进入眼镜，从而产生视觉效果（物体呈现出的亮度和颜色）\n因此，物体表面的光照颜色是由入射光、物体材质、以及材质和光的交互规律共同决定的"
+				}
+			]
+		},
+		{
+			"ID": "20240616193035-fy2sdiw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616193035-fy2sdiw",
+				"updated": "20240616193150"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以下是将会学习的光照模型："
+				}
+			]
+		},
+		{
+			"ID": "20240616192839-g47w40x",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240616192839-g47w40x",
+				"updated": "20240616193033"
+			},
+			"Children": [
+				{
+					"ID": "20240616192845-pzgsh2m",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240616192845-pzgsh2m",
+						"updated": "20240616192845"
+					},
+					"Children": [
+						{
+							"ID": "20240616192845-3sn6dp7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240616192845-3sn6dp7",
+								"updated": "20240616192845"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "漫反射光照模型\n"
+								}
+							]
+						},
+						{
+							"ID": "20240616192849-9gl9hzy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240616192849-9gl9hzy",
+								"updated": "20240616192854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "漫反射：指光线被粗糙表面无规则地向各个方向反射的现象，是一种在各个方向上平均反射光线的模型\n比如：墙壁、纸张、布料等等物体的表现效果"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240616192845-3tuyazp",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240616192845-3tuyazp",
+						"updated": "20240616192859"
+					},
+					"Children": [
+						{
+							"ID": "20240616192845-d9j5dzr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240616192845-d9j5dzr",
+								"updated": "20240616192845"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "高光反射光照模型\n"
+								}
+							]
+						},
+						{
+							"ID": "20240616192857-8nh6ptg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240616192857-8nh6ptg",
+								"updated": "20240616192859"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "高光反射：考虑了视角和光源的方向，使物体表面出现高光点\n比如：金属、陶瓷、塑料等等物体的表现效果"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240616192845-0wstmz6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240616192845-0wstmz6",
+						"updated": "20240616192845"
+					},
+					"Children": [
+						{
+							"ID": "20240616192845-fptoo5k",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240616192845-fptoo5k",
+								"updated": "20240616192845"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Unity内置光照函数"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240616192841-35mzllp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616192841-35mzllp",
+				"updated": "20240616192841"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "等等"
+				}
+			]
+		},
+		{
+			"ID": "20240616193153-wuchc7g",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616193153-wuchc7g",
+				"updated": "20240616193205"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本系列学习内容："
+				}
+			]
+		},
+		{
+			"ID": "20240616193217-vd4buip",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240616193217-vd4buip",
+				"updated": "20240625114859"
+			},
+			"Children": [
+				{
+					"ID": "20240616193238-osuxsq9",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240616193238-osuxsq9",
+						"updated": "20240616194204"
+					},
+					"Children": [
+						{
+							"ID": "20240616193238-syek3qo",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240616193238-syek3qo",
+								"updated": "20240616194204"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240616194204-puqg262",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "逐顶点光照和逐片元光照"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240625223457-0qnkr5f",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240625223457-0qnkr5f"
+					},
+					"Children": [
+						{
+							"ID": "20240625223457-9a77rkm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240625223457-9a77rkm",
+								"updated": "20240625223505"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "漫反射光照模型"
+								}
+							]
+						},
+						{
+							"ID": "20240625223508-okzx653",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240625223508-okzx653"
+							},
+							"Children": [
+								{
+									"ID": "20240616193311-mik9vey",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240616193311-mik9vey",
+										"updated": "20240625114859"
+									},
+									"Children": [
+										{
+											"ID": "20240616193311-6otszqc",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240616193311-6otszqc",
+												"updated": "20240625114859"
+											},
+											"Children": [
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref",
+													"TextMarkBlockRefID": "20240625114859-ag9w64z",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "兰伯特光照模型"
+												}
+											]
+										},
+										{
+											"ID": "20240616193319-f07i88r",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240616193319-f07i88r"
+											},
+											"Children": [
+												{
+													"ID": "20240616193335-ycnbzr5",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240616193335-ycnbzr5"
+													},
+													"Children": [
+														{
+															"ID": "20240616193335-5k5h1mj",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240616193335-5k5h1mj",
+																"updated": "20240625170140"
+															},
+															"Children": [
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "block-ref",
+																	"TextMarkBlockRefID": "20240625122416-j2gq3qr",
+																	"TextMarkBlockRefSubtype": "s",
+																	"TextMarkTextContent": "逐顶点光照"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240616193345-7xw7xya",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240616193345-7xw7xya"
+													},
+													"Children": [
+														{
+															"ID": "20240616193345-62sotc8",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240616193345-62sotc8",
+																"updated": "20240625170144"
+															},
+															"Children": [
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "block-ref",
+																	"TextMarkBlockRefID": "20240625133455-ib8bed2",
+																	"TextMarkBlockRefSubtype": "s",
+																	"TextMarkTextContent": "逐片元光照"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240616193349-2ni3wfr",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240616193349-2ni3wfr"
+									},
+									"Children": [
+										{
+											"ID": "20240616193349-6hlrqd7",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240616193349-6hlrqd7",
+												"updated": "20240625170147"
+											},
+											"Children": [
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref",
+													"TextMarkBlockRefID": "20240625170147-7xe5112",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "半兰伯特光照模型"
+												}
+											]
+										},
+										{
+											"ID": "20240616193403-trxnq7e",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240616193403-trxnq7e",
+												"updated": "20240616193403"
+											},
+											"Children": [
+												{
+													"ID": "20240616193403-cevwf3t",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240616193403-cevwf3t",
+														"updated": "20240616193403"
+													},
+													"Children": [
+														{
+															"ID": "20240616193403-gz6mqyx",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240616193403-gz6mqyx",
+																"updated": "20240625181358"
+															},
+															"Children": [
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "block-ref",
+																	"TextMarkBlockRefID": "20240625173340-ar007k4",
+																	"TextMarkBlockRefSubtype": "s",
+																	"TextMarkTextContent": "逐顶点光照"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240616193403-h6fwxsx",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240616193403-h6fwxsx",
+														"updated": "20240616193403"
+													},
+													"Children": [
+														{
+															"ID": "20240616193403-ofco7ol",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240616193403-ofco7ol",
+																"updated": "20240625181401"
+															},
+															"Children": [
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "block-ref",
+																	"TextMarkBlockRefID": "20240625175158-igr4klj",
+																	"TextMarkBlockRefSubtype": "s",
+																	"TextMarkTextContent": "逐片元光照"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240625223514-rh8fva6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240625223514-rh8fva6"
+					},
+					"Children": [
+						{
+							"ID": "20240625223514-ls7e9hb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240625223514-ls7e9hb",
+								"updated": "20240625223522"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "高光反射光照模型"
+								}
+							]
+						},
+						{
+							"ID": "20240625223534-8owxtt1",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240625223534-8owxtt1"
+							},
+							"Children": [
+								{
+									"ID": "20240616193413-yp08qbx",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240616193413-yp08qbx"
+									},
+									"Children": [
+										{
+											"ID": "20240616193413-woqc2yj",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240616193413-woqc2yj",
+												"updated": "20240625181412"
+											},
+											"Children": [
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref",
+													"TextMarkBlockRefID": "20240625181412-8cwmr65",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "Phong式高光反射模型"
+												}
+											]
+										},
+										{
+											"ID": "20240616193556-599k5t6",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240616193556-599k5t6",
+												"updated": "20240616193556"
+											},
+											"Children": [
+												{
+													"ID": "20240616193556-id7gyk7",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240616193556-id7gyk7",
+														"updated": "20240616193556"
+													},
+													"Children": [
+														{
+															"ID": "20240616193556-lda2f0x",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240616193556-lda2f0x",
+																"updated": "20240625223341"
+															},
+															"Children": [
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "block-ref",
+																	"TextMarkBlockRefID": "20240625211605-pi4yz9u",
+																	"TextMarkBlockRefSubtype": "s",
+																	"TextMarkTextContent": "逐顶点光照"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240616193556-dzo2if4",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240616193556-dzo2if4",
+														"updated": "20240616193556"
+													},
+													"Children": [
+														{
+															"ID": "20240616193556-ljr9akl",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240616193556-ljr9akl",
+																"updated": "20240625223353"
+															},
+															"Children": [
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "block-ref",
+																	"TextMarkBlockRefID": "20240625211637-iw1n08i",
+																	"TextMarkBlockRefSubtype": "s",
+																	"TextMarkTextContent": "逐片元光照"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240616193427-94en75c",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240616193427-94en75c"
+									},
+									"Children": [
+										{
+											"ID": "20240616193427-cmgttvu",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240616193427-cmgttvu",
+												"updated": "20240625223357"
+											},
+											"Children": [
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref",
+													"TextMarkBlockRefID": "20240625223357-zmse81n",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "Phong光照模型"
+												}
+											]
+										},
+										{
+											"ID": "20240616193558-huwjr1j",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240616193558-huwjr1j",
+												"updated": "20240616193558"
+											},
+											"Children": [
+												{
+													"ID": "20240616193558-4czgqh7",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240616193558-4czgqh7",
+														"updated": "20240616193558"
+													},
+													"Children": [
+														{
+															"ID": "20240616193558-oi9h63c",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240616193558-oi9h63c",
+																"updated": "20240616193558"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "逐顶点光照"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240616193558-zfttfy6",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240616193558-zfttfy6",
+														"updated": "20240616193558"
+													},
+													"Children": [
+														{
+															"ID": "20240616193558-leqiq5c",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240616193558-leqiq5c",
+																"updated": "20240616193558"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "逐片元光照"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240616193437-niozdg0",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240616193437-niozdg0"
+									},
+									"Children": [
+										{
+											"ID": "20240616193437-5ac6a0x",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240616193437-5ac6a0x",
+												"updated": "20240616193454"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "Blinn Phong式高光反射模型"
+												}
+											]
+										},
+										{
+											"ID": "20240616193609-6x3rsy3",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240616193609-6x3rsy3",
+												"updated": "20240616193609"
+											},
+											"Children": [
+												{
+													"ID": "20240616193609-vdy2a8p",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240616193609-vdy2a8p",
+														"updated": "20240616193609"
+													},
+													"Children": [
+														{
+															"ID": "20240616193609-agpgi1z",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240616193609-agpgi1z",
+																"updated": "20240616193609"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "逐顶点光照"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240616193609-m4dmc2w",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240616193609-m4dmc2w",
+														"updated": "20240616193609"
+													},
+													"Children": [
+														{
+															"ID": "20240616193609-8acuv1j",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240616193609-8acuv1j",
+																"updated": "20240616193609"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "逐片元光照"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240616193502-2wqis7v",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240616193502-2wqis7v",
+										"updated": "20240616193611"
+									},
+									"Children": [
+										{
+											"ID": "20240616193502-34lp60k",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240616193502-34lp60k",
+												"updated": "20240616193505"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "Blinn Phong光照模型"
+												}
+											]
+										},
+										{
+											"ID": "20240616193611-cir5nfe",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240616193611-cir5nfe",
+												"updated": "20240616193611"
+											},
+											"Children": [
+												{
+													"ID": "20240616193611-ne7a1oa",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240616193611-ne7a1oa",
+														"updated": "20240616193611"
+													},
+													"Children": [
+														{
+															"ID": "20240616193611-fqd66z9",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240616193611-fqd66z9",
+																"updated": "20240616193611"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "逐顶点光照"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240616193611-4gfvxr9",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240616193611-4gfvxr9",
+														"updated": "20240616193611"
+													},
+													"Children": [
+														{
+															"ID": "20240616193611-35qrs04",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240616193611-35qrs04",
+																"updated": "20240616193611"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "逐片元光照"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240616193511-v5yyp0t",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240616193511-v5yyp0t"
+					},
+					"Children": [
+						{
+							"ID": "20240616193511-2kmhdp9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240616193511-2kmhdp9",
+								"updated": "20240616193527"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Unity内置光照计算相关函数"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

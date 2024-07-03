@@ -1,0 +1,526 @@
+{
+	"ID": "20240419161044-xa5sy4q",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240419161044-xa5sy4q",
+		"title": "UFL6-3——音效管理模块优化",
+		"type": "doc",
+		"updated": "20240419171629"
+	},
+	"Children": [
+		{
+			"ID": "20240419161044-euyzkc7",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240419161044-euyzkc7",
+				"updated": "20240419161256"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "优化频繁创建删除音效组件"
+				}
+			]
+		},
+		{
+			"ID": "20240419161301-34bsnzh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419161301-34bsnzh",
+				"updated": "20240419161746"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "目前我们音效管理器中的音效组件会频繁的创建和删除\n这样会产生大量的内存垃圾，并且频繁创建对象也会带来性能消耗\n因此我们可以利用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240415173226-4jovay9",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "缓存池"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "对其进行优化"
+				}
+			]
+		},
+		{
+			"ID": "20240419161453-b6vy1uf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419161453-b6vy1uf",
+				"updated": "20240419162725"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按照之前实现的缓存池要求，在场景上创建一个挂载音效源的对象，然后挂载一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "poolObj"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​脚本，然后设置最大存在数量"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "maxNum"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240419162711-hszfb2b",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419162711-hszfb2b",
+				"updated": "20240419162711"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 848px;",
+						"style": "width: 838px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240419162711-z56mokc.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 838px;\" parent-style=\"width: 848px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240419162817-k70j68a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419162817-k70j68a",
+				"updated": "20240419162903"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此，我们不再需要一个专门挂载音效源的对象，而是转为使用缓存池创建挂载音效源的对象"
+				}
+			]
+		},
+		{
+			"ID": "20240419164654-4sdkllr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419164654-4sdkllr",
+				"updated": "20240419165047"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "播放音效时，从缓存池内取出音效对象，停止播放音效（因为该音效可能正在播放其他音效），设置音效切片\n停止播放或者帧更新检测播放停止时，清空关联的音效切片，从管理列表内移除，将音效对象压回对象池内，"
+				}
+			]
+		},
+		{
+			"ID": "20240419162905-t2ubw56",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240419162905-t2ubw56",
+				"style": "line-height: 22px;",
+				"updated": "20240419165143"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//管理正在播放的音效\nprivate List\u003cAudioSource\u003e soundList = new List\u003cAudioSource\u003e();\n\nprivate MusicManager() \n{\n    //固定每一小段时间检测是否有音效播放完毕\n    MonoManager.Instance.AddFixedUpdateListener(Update);\n}\n\nprivate void Update()\n{\n    if (!soundIsPlay)\n        return;\n    //逆向遍历容器，检测是否有音效播放完毕了，如果播放完毕就销毁该组件并移除\n    for (int i = soundList.Count - 1; i \u003e= 0; i--)\n    {\n        if (!soundList[i].isPlaying)\n        {\n            //音效播放完毕，不再使用，将该音效切片置空\n            soundList[i].clip = null;\n            PoolManager.Instance.PushObj(soundList[i].gameObject);\n            soundList.RemoveAt(i);\n        }\n    }\n}\n\npublic void PlaySound(string name, bool isLoop = false, bool isSync = false, UnityAction\u003cAudioSource\u003e callBack = null)\n{\n    //加载音效资源，进行播放\n    ABResManager.Instance.LoadResAsync\u003cAudioClip\u003e(\"sound\", name, (clip) =\u003e\n    {\n        //从缓存池中，取出音效对象，得到对应组件\n        AudioSource source = PoolManager.Instance.GetObj(\"Sound/soundObj\").GetComponent\u003cAudioSource\u003e();\n        //由于取出的音效有可能是之前正在使用的，因此不管什么情况先停止播放\n        source.Stop();\n        source.clip = clip;\n        source.loop = isLoop;\n        source.volume = soundVolume;\n        source.Play();\n        //由于从缓存池内取出的容器是已经存在于列表内的，因此需要判断其是否存在与列表\n        if (!soundList.Contains(source))\n            soundList.Add(source);\n        //传递给外部使用\n        callBack?.Invoke(source);\n    }, isSync);\n}\n\npublic void StopSound(AudioSource source)\n{\n    if (soundList.Contains(source))\n    {\n        source.Stop();\n        soundList.Remove(source);\n        //音效播放完毕，不再使用，将该音效切片置空，将其依附的对象压入缓存池中\n        source.clip = null;\n        PoolManager.Instance.PushObj(source.gameObject);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240419161308-40frk65",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240419161308-40frk65",
+				"updated": "20240419161309"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "优化3D音效问题"
+				}
+			]
+		},
+		{
+			"ID": "20240419161317-uexq9jl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419161317-uexq9jl",
+				"updated": "20240419161325"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "由于我们使用了缓存池，因此"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AudioSource"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​依附的将会是一个个独立的游戏对象，而3D音效主要考虑的问题是："
+				}
+			]
+		},
+		{
+			"ID": "20240419161319-xppla51",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240419161319-xppla51",
+				"updated": "20240419161319"
+			},
+			"Children": [
+				{
+					"ID": "20240419161319-sg0u9gx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240419161319-sg0u9gx",
+						"updated": "20240419161319"
+					},
+					"Children": [
+						{
+							"ID": "20240419161319-ts0lu37",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419161319-ts0lu37",
+								"updated": "20240419161319"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "音效依附在对象上跟随对象移动"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240419161319-n8sdu7w",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240419161319-n8sdu7w",
+						"updated": "20240419161319"
+					},
+					"Children": [
+						{
+							"ID": "20240419161319-q5vzkxz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419161319-q5vzkxz",
+								"updated": "20240419161319"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "音效中3D相关参数的设置"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240419161317-ye2qgn4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419161317-ye2qgn4",
+				"updated": "20240419161330"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果你想要使用3D音效，那么只需要获取到音效组件和它依附的对象就可以迎刃而解了"
+				}
+			]
+		},
+		{
+			"ID": "20240419161330-xvkpvqr",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240419161330-xvkpvqr",
+				"updated": "20240419161330"
+			},
+			"Children": [
+				{
+					"ID": "20240419161330-bq24sd7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240419161330-bq24sd7",
+						"updated": "20240419161330"
+					},
+					"Children": [
+						{
+							"ID": "20240419161330-de32ft7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419161330-de32ft7",
+								"updated": "20240419165616"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "获取音效组件依附的对象，改变它的父对象，设置它的位置，音效便可以跟随对象移动"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240419161330-2z2ojz0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240419161330-2z2ojz0",
+						"updated": "20240419161330"
+					},
+					"Children": [
+						{
+							"ID": "20240419161330-k55wjll",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419161330-k55wjll",
+								"updated": "20240419165634"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取音效组件改变其中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20230710005856-72wwwrj",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "3D音效相关参数"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "即可完成相关设置"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240419165918-hfgg1mj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240419165918-hfgg1mj",
+				"style": "line-height: 22px;",
+				"updated": "20240419170722"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "if (GUILayout.Button(\"播放音效\"))\n{\n    MusicManager.Instance.PlaySound(\"sound_1\", false, false, (source) =\u003e\n    {\n        GameObject soundObj = source.gameObject;\n        source.gameObject.transform.SetParent(soundObj.transform);\n        source.spatialBlend = 1f;       //变为3D音效\n        //设置3D音效相关参数\n\t\t//...\n    });\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240419161415-b9mk770",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240419161415-b9mk770",
+				"updated": "20240419161425"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "提供清除所有音效的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240419161429-6xvl6hn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419161429-6xvl6hn",
+				"updated": "20240419171629"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "目前过场景时，音效相关对象会被自动的删除，但是音效管理器中我们的容器还占着引用，我们应该提供方法清空容器\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "值得一提的是，该方法必须要在清空缓存池前去调用"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20240419170904-yqookal",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240419170904-yqookal",
+				"style": "line-height: 22px;",
+				"updated": "20240419171454"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "/// \u003csummary\u003e\n/// 清空音效相关记录，必须在清空缓存池之前去调用！！！\n/// \u003c/summary\u003e\npublic void ClearSound()\n{\n    for (int i = 0; i \u003c soundList.Count; i++)\n    {\n        soundList[i].Stop();\n        soundList[i].clip = null;\n        PoolManager.Instance.PushObj(soundList[i].gameObject);\n    }\n    //清空音效列表\n    soundList.Clear();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240419161447-uk28o6e",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240419161447-uk28o6e",
+				"updated": "20240419161450"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体代码"
+				}
+			]
+		},
+		{
+			"ID": "20240419161451-nvtvegk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419161451-nvtvegk",
+				"updated": "20240419161451"
+			}
+		}
+	]
+}

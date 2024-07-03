@@ -1,0 +1,519 @@
+{
+	"ID": "20240205152214-y70gun1",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240205152214-y70gun1",
+		"title": "UH2S2L22——多函数替换和构造函数与析构函数替换",
+		"updated": "20240302170631"
+	},
+	"Children": [
+		{
+			"ID": "20240205154212-hxemolc",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240205154212-hxemolc",
+				"updated": "20240205154219"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240205154219-8c701qw",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240205154219-8c701qw",
+				"style": "line-height: 22px;",
+				"updated": "20240205155821"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[\".ctor\"]\t\t--xlua.hotfix内使用，用于添加构造函数逻辑（无法直接替换）\nFinalize\t\t--xlua.hotfix内使用，用于添加析构函数逻辑（无法直接替换）\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240205152214-onspnvr",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240205152214-onspnvr",
+				"updated": "20240205152305"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "多函数替换"
+				}
+			]
+		},
+		{
+			"ID": "20240205152554-94qy0qj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205152554-94qy0qj",
+				"updated": "20240205152747"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以使用另外一种写法，执行一次"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "xlua.hotfix"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，即可对多个方法进行热补丁操作"
+				}
+			]
+		},
+		{
+			"ID": "20240205152810-tggvmnp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205152810-tggvmnp",
+				"updated": "20240205152823"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们要对下面三个方法进行热补丁替换"
+				}
+			]
+		},
+		{
+			"ID": "20240205152808-09royq0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240205152808-09royq0",
+				"style": "line-height: 22px;",
+				"updated": "20240205152907"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class HotfixMain : MonoBehaviour\n{\n\tvoid Update() { }\n\n    public int Add(int a, int b)\n    {\n        return 0;\n    }\n\n    public static void Speak(string s)\n    {\n        Debug.Log(\"C# Speak\");\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240205152934-sdwmesi",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205152934-sdwmesi",
+				"updated": "20240205153008"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们通过固定写法："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "xlua.hotfix(类, {函数名 = 函数, 函数名 = 函数....})"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，即可对多个方法进行热补丁替换"
+				}
+			]
+		},
+		{
+			"ID": "20240205152931-a0y48rs",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240205152931-a0y48rs",
+				"style": "line-height: 22px;",
+				"updated": "20240205153029"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "xlua.hotfix(CS.HotfixMain, {\n    Update = function(self)\n        print(os.time())\n    end,\n    Add = function(self, a, b)\n        return a + b\n    end,\n    Speak = function(a)\n        print(a)\n    end\n})\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240205153029-li9eecl",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240205153029-li9eecl",
+				"name": "[\u0026quot;.ctor\u0026quot;]",
+				"updated": "20240205153509"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "构造函数替换"
+				}
+			]
+		},
+		{
+			"ID": "20240205155452-jqpl9bb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205155452-jqpl9bb",
+				"updated": "20240205155544"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "构造函数不能直接替换，原有的C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "构造函数逻辑还是会执行，不过会在原有逻辑基础上执行Lua脚本代码"
+				}
+			]
+		},
+		{
+			"ID": "20240205153509-174eugr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205153509-174eugr",
+				"updated": "20240205153509"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们要对下面的类的各个方法进行热补丁替换"
+				}
+			]
+		},
+		{
+			"ID": "20240205153548-cfuhitq",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240205153548-cfuhitq",
+				"style": "line-height: 22px;",
+				"updated": "20240205153509"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[Hotfix]\npublic class HotfixTest\n{\n    public HotfixTest() \n    {\n        Debug.Log(\"HotfixTest构造函数\");\n    }\n\n    public void Speak(string str)\n    {\n        Debug.Log(str);\n    }\n}"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240205153623-3ordas2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205153623-3ordas2",
+				"updated": "20240205153509"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于类的构造函数的热补丁替换，其索引为固定写法"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "[\u0026quot;.ctor\u0026quot;]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240205153644-o6w6bwq",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240205153644-o6w6bwq",
+				"style": "line-height: 22px;",
+				"updated": "20240205153509"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "xlua.hotfix(CS.HotfixTest, {\n    -- 构造函数 热补丁固定写法\n    [\".ctor\"] = function()\n        print(\"Lua热补丁构造函数!\")\n    end,\n    Speak = function(self, a)\n        print(\"唐老狮说\" .. a)\n    end,\n})\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240205155355-1q1cg7o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205155355-1q1cg7o",
+				"updated": "20240205153509"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在这里可以发现，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "原来的构造函数方法并没有被替换，lua代码逻辑是在原构造函数的基础上添加的！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20240205155346-evn6f8j",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205155346-evn6f8j",
+				"updated": "20240205153509"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240205155346-lxa9ktp.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240205154446-lojjf9y",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240205154446-lojjf9y",
+				"name": "Finalize",
+				"updated": "20240205155704"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "析构函数替换"
+				}
+			]
+		},
+		{
+			"ID": "20240205155549-7bcowrx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205155549-7bcowrx",
+				"updated": "20240205155704"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "析构函数同样不能直接替换，原有的C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "构造函数逻辑还是会执行，不过会在原有逻辑基础上执行Lua脚本代码"
+				}
+			]
+		},
+		{
+			"ID": "20240205154505-jpxj8kn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205154505-jpxj8kn",
+				"updated": "20240205155704"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于类的构造函数的热补丁替换，其索引为固定写法"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Finalize"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240205155148-d4z6bfk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240205155148-d4z6bfk",
+				"style": "line-height: 22px;",
+				"updated": "20240205155704"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[Hotfix]\npublic class HotfixTest\n{\n    public HotfixTest() \n    {\n        Debug.Log(\"HotfixTest构造函数\");\n    }\n\n    public void Speak(string str)\n    {\n        Debug.Log(str);\n    }\n  \n    //析构函数\n    ~HotfixTest()\n    {\n\n    }\n}"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240205154505-bi62mvs",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240205154505-bi62mvs",
+				"style": "line-height: 22px;",
+				"updated": "20240205155704"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "xlua.hotfix(CS.HotfixTest, {\n    -- 构造函数 热补丁固定写法\n    [\".ctor\"] = function()\n        print(\"Lua热补丁构造函数!\")\n    end,\n    Speak = function(self, a)\n        print(\"唐老狮说\" .. a)\n    end,\n    -- 析构函数固定写法\n    Finalize = function()\n        print(\"对象销毁\")\n    end\n})\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

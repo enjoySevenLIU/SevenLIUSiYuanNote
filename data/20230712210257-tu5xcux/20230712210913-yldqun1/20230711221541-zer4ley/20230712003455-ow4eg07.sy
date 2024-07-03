@@ -1,0 +1,595 @@
+{
+	"ID": "20230712003455-ow4eg07",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230712003455-ow4eg07",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230712003455-ow4eg07\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230802221512-oc0u7zu\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230712005707-4hp4udf\u0026quot;,\u0026quot;scrollTop\u0026quot;:0,\u0026quot;focusId\u0026quot;:\u0026quot;20230802221512-oc0u7zu\u0026quot;,\u0026quot;focusStart\u0026quot;:0,\u0026quot;focusEnd\u0026quot;:0\u0026#125;",
+		"title": "U2L5-2——四元数的概念",
+		"type": "doc",
+		"updated": "20240321171849"
+	},
+	"Children": [
+		{
+			"ID": "20230802221512-oc0u7zu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230802221512-oc0u7zu",
+				"updated": "20240321171711"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "四元数是简单的超复数，由实数加上三个虚数单位组成，主要用于在三维空间中表示旋转\n四元数原理包含大量数学相关知识，较为复杂\n比如：复数、四维空间等等\n因此此处我们只对其基本构成和基本公式进行讲解"
+				}
+			]
+		},
+		{
+			"ID": "20230712005636-os2zsq1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712005636-os2zsq1",
+				"updated": "20230712005652"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "必备知识点：四元数相乘代表旋转四元数"
+				}
+			]
+		},
+		{
+			"ID": "20230712004056-rhvfmdr",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230712004056-rhvfmdr",
+				"updated": "20230712004103"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20230712004103-rgpt7qa",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230712004103-rgpt7qa",
+				"updated": "20230712004536"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "new Quaternion(,,,)\t//按照四元数Q = [cos(β/2), sin(β/2)x, sin(β/2)y, sin(β/2)z]格式填入，构造绕n轴（三维向量）旋转β度的四元数\nQuaternion.AngleAxis(,)\t//以轴角对初始化四元数的方法，更简单更好\nQuaternion.Euler(,,)\t//欧拉角转四元数\nquaternion.eulerAngles\t//四元数转欧拉角\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230712003627-mk02ha2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230712003627-mk02ha2",
+				"updated": "20230712003641"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "四元数的构成"
+				}
+			]
+		},
+		{
+			"ID": "20230712003642-8cqnxup",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712003642-8cqnxup",
+				"updated": "20240321171749"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "一个四元数包含一个标量和一个3D向量\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "[w,v]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": ", "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "w"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "为标量，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "v"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "为3D向量："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "[w, (x,y,z)]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n对于给定的任意一个四元数： 表示3D空间中的一个旋转量\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "注意：我们一般不会直接通过四元数的 w,x,y,z进行修改（你很难通过w,x,y,z反推这个四元数是什么）"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230712003733-6rgg0x6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712003733-6rgg0x6",
+				"updated": "20240321171849"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "简单来说，四元数的构成就是是：\n假设绕 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "n"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 轴（三维向量）旋转 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "β"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 度，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "旋转方向遵循左手螺旋"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n四元数"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "Q = [cos(β/2), sin(β/2)n]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n四元数"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "Q = [cos(β/2), sin(β/2)x, sin(β/2)y, sin(β/2)z]"
+				}
+			]
+		},
+		{
+			"ID": "20230712003715-jagt1q5",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230712003715-jagt1q5",
+				"updated": "20230712003739"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "轴-角对"
+				}
+			]
+		},
+		{
+			"ID": "20230712003740-p08m4iu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712003740-p08m4iu",
+				"updated": "20230712003918"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在3D空间中，任意旋转都可以表示为：\n绕着某个轴旋转一个旋转角得到\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "注意：该轴并不是空间中的x,y,z轴 而是任意一个轴"
+				}
+			]
+		},
+		{
+			"ID": "20230712003900-gh5xjlv",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230712003900-gh5xjlv",
+				"name": "Quaternion",
+				"updated": "20230712004702"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity里的四元数"
+				}
+			]
+		},
+		{
+			"ID": "20230712004645-e2v7ioo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712004645-e2v7ioo",
+				"updated": "20240321171840"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Quaternion"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​是Unity中表示四元数的结构体，有两种初始化方法："
+				}
+			]
+		},
+		{
+			"ID": "20230712004719-bbubdca",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230712004719-bbubdca",
+				"name": "new Quaternion()",
+				"updated": "20230712005322"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按照定义初始化"
+				}
+			]
+		},
+		{
+			"ID": "20230712004818-k3w4vex",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712004818-k3w4vex",
+				"updated": "20240321171813"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "四元数"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "Q = [cos(β/2), sin(β/2)x, sin(β/2)y, sin(β/2)z]"
+				}
+			]
+		},
+		{
+			"ID": "20230712004827-82axi04",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230712004827-82axi04",
+				"updated": "20230712005151"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Quaternino q = new Quaternion(sin(β/2)x, sin(β/2)y, sin(β/2)z, cos(β/2))\n//绕x轴旋转60度\nQuaternion q = new Quaternion(Mathf.Sin(30 * Mathf.Deg2Rad), 0, 0, Mathf.Cos(30 * Mathf.Deg2Rad));\n//创建一个立方体\nGameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);\nobj.transform.rotation = q;\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230712004900-e7f7xkp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712004900-e7f7xkp",
+				"updated": "20230712004900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以上的方法并不常用！（计算太复杂）最好使用下面的方法！"
+				}
+			]
+		},
+		{
+			"ID": "20230712004749-7nc4vsp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230712004749-7nc4vsp",
+				"name": "Quaternion.AngleAxis()",
+				"updated": "20230712005332"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "轴角对构造初始化"
+				}
+			]
+		},
+		{
+			"ID": "20230712004759-1bbbq8h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712004759-1bbbq8h",
+				"updated": "20240321171826"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "四元数"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Q = Quaternion.AngleAxis"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​(旋转角度, 绕的是哪个轴)"
+				}
+			]
+		},
+		{
+			"ID": "20230712004943-zq6qvj6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230712004943-zq6qvj6",
+				"updated": "20230712004952"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Quaternion q2 = Quaternion.AngleAxis(60, Vector3.right);    //第一个参数旋转度数，第二个参数旋转的轴\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230712005332-vm54qq2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230712005332-vm54qq2",
+				"updated": "20230712005401"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "四元数和欧拉角相互转换"
+				}
+			]
+		},
+		{
+			"ID": "20230712005402-1cv6ohe",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230712005402-1cv6ohe",
+				"name": "Quaternion.Euler()",
+				"updated": "20230712005503"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "欧拉角转四元数"
+				}
+			]
+		},
+		{
+			"ID": "20230712005422-d7zb9ph",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230712005422-d7zb9ph",
+				"updated": "20230712005437"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Quaternion q3 = Quaternion.Euler(60, 0, 0);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230712005412-aobmc6b",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230712005412-aobmc6b",
+				"name": "quaternion.eulerAngles",
+				"updated": "20230712005512"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "四元数转欧拉角"
+				}
+			]
+		},
+		{
+			"ID": "20230712005425-64daxvj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230712005425-64daxvj",
+				"updated": "20230712005450"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Quaternion q3 = Quaternion.Euler(60, 0, 0);\nprint(q3.eulerAngles);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230712005703-3ljh3na",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230712005703-3ljh3na",
+				"updated": "20230712005705"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "四元数相乘代表旋转四元数"
+				}
+			]
+		},
+		{
+			"ID": "20230712005844-at6gulf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712005844-at6gulf",
+				"updated": "20230712005917"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "四元数相乘就是按照轴角对进行旋转，旋转方向遵循左手螺旋"
+				}
+			]
+		},
+		{
+			"ID": "20230712005707-4hp4udf",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230712005707-4hp4udf",
+				"updated": "20230712005823"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Update()\n{\n    //四元数相乘代表旋转四元数\n    this.transform.rotation *= Quaternion.AngleAxis(1, Vector3.up);\t//绕着Y轴，每帧旋转1度\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

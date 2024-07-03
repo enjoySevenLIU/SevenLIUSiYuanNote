@@ -1,0 +1,243 @@
+{
+	"ID": "20240625175158-igr4klj",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240625175158-igr4klj",
+		"title": "US3S1L3-2——半兰伯特光照模型的逐片元光照",
+		"type": "doc",
+		"updated": "20240625181233"
+	},
+	"Children": [
+		{
+			"ID": "20240625175215-0eq1wfq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240625175215-0eq1wfq",
+				"updated": "20240625181233"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "利用半兰伯特光照模型实现光照效果（逐片元光照）"
+				}
+			]
+		},
+		{
+			"ID": "20240625175215-jlcp8g2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240625175215-jlcp8g2",
+				"updated": "20240625175229"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "半兰伯特光照模型的逐片元实现，和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240625133455-ib8bed2",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "兰伯特"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "一模一样，唯一的区别就是公式："
+				}
+			]
+		},
+		{
+			"ID": "20240625175215-z136l6v",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240625175215-z136l6v",
+				"updated": "20240625175220"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240625175215-3lyr3qy",
+					"Type": "NodeMathBlock",
+					"Properties": {
+						"id": "20240625175215-3lyr3qy",
+						"updated": "20240625175215"
+					},
+					"Children": [
+						{
+							"Type": "NodeMathBlockOpenMarker"
+						},
+						{
+							"Type": "NodeMathBlockContent",
+							"Data": "Color_{漫反射光照} = Color_{光源} \\times Color_{材质的漫反射} \\times ((\\overrightarrow{标准化后物体表面法线向量} \\cdot \\overrightarrow{标准化后光源方向向量}) \\times 0.5 + 0.5)"
+						},
+						{
+							"Type": "NodeMathBlockCloseMarker"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240625175250-jqojtzx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240625175250-jqojtzx",
+				"updated": "20240625175250"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体Shader实现："
+				}
+			]
+		},
+		{
+			"ID": "20240625175250-goj3rtg",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240625175250-goj3rtg",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240625175250"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240625175250-gqxngdz",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240625175250-gqxngdz",
+						"updated": "20240625175250"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "要注意，尽管半兰伯特光照模型改进了背光面的显示效果，我们为了光照效果更加自然还是会使用 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "UNITY_LIGHTMODEL_AMBIENT"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240625181138-wpgvf35",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240625181138-wpgvf35",
+				"style": "line-height: 22px;",
+				"updated": "20240625181152"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson33\"\n{\n    Properties\n    {\n        _MainColor(\"MainColor\", Color) = (1, 1, 1, 1)\n    }\n    SubShader\n    {\n        Tags { \"LightMode\" = \"ForwardBase\" }\n\n        Pass\n        {\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n\n            fixed4 _MainColor;\n\n            struct v2f\n            {\n                float4 pos : SV_POSITION;\n                float3 normal : NORMAL;\n            };\n\n            v2f vert (appdata_base v)\n            {\n                v2f v2fData;\n                v2fData.pos = UnityObjectToClipPos(v.vertex);\n                v2fData.normal = UnityObjectToWorldNormal(v.normal);\n\n                return v2fData;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);\n            \n                fixed3 color = _LightColor0 * _MainColor * (dot(i.normal, lightDir) * 0.5 + 0.5);\n                color = UNITY_LIGHTMODEL_AMBIENT + color;\n                return fixed4(color.rgb, 1);\n            }\n            ENDCG\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240625175254-9bsg4eb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240625175254-9bsg4eb",
+				"updated": "20240625181127"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果（不同光照模型及他们对应的逐顶点光照和逐片元光照对比）："
+				}
+			]
+		},
+		{
+			"ID": "20240625181028-rc7se4y",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240625181028-rc7se4y",
+				"updated": "20240625181028"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 553px;",
+						"style": "width: 543px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240625181028-loikpoa.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 543px;\" parent-style=\"width: 553px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240625181233-7r85m2l",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240625181233-7r85m2l"
+			}
+		}
+	]
+}

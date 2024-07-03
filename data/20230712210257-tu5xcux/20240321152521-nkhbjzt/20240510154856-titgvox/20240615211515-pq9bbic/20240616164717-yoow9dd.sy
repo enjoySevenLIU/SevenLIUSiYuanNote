@@ -1,0 +1,674 @@
+{
+	"ID": "20240616164717-yoow9dd",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240616164717-yoow9dd",
+		"title": "US2S3L11——ShaderLab属性类型和CG变量类型的匹配关系",
+		"type": "doc",
+		"updated": "20240616171406"
+	},
+	"Children": [
+		{
+			"ID": "20240616164717-h389153",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240616164717-h389153",
+				"updated": "20240616164935"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240616164749-k237777",
+					"Type": "NodeHeading",
+					"HeadingLevel": 2,
+					"Properties": {
+						"id": "20240616164749-k237777",
+						"updated": "20240616164935"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "回顾：ShaderLab属性相关"
+						}
+					]
+				},
+				{
+					"ID": "20240616164811-08ktpex",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240616164811-08ktpex",
+						"updated": "20240616164926"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "关于ShaderLab属性，详见"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "block-ref",
+							"TextMarkBlockRefID": "20240612172335-ffvbsa6",
+							"TextMarkBlockRefSubtype": "d",
+							"TextMarkTextContent": "US2S2L4——Shader的属性"
+						}
+					]
+				},
+				{
+					"ID": "20240616164935-ejyfd4c",
+					"Type": "NodeCodeBlock",
+					"IsFencedCodeBlock": true,
+					"Properties": {
+						"id": "20240616164935-ejyfd4c",
+						"style": "line-height: 22px;",
+						"updated": "20240616164935"
+					},
+					"Children": [
+						{
+							"Type": "NodeCodeBlockFenceOpenMarker",
+							"Data": "```"
+						},
+						{
+							"Type": "NodeCodeBlockFenceInfoMarker",
+							"CodeBlockInfo": "YyM="
+						},
+						{
+							"Type": "NodeCodeBlockCode",
+							"Data": "Properties { }\t//属性在该语句块内声明\n_属性名(\"在Inspector窗口上显示的属性名\", 类型) = 默认值\t\t//属性的声明方法，要注意属性名默认前缀为'_'\n//数值类型，以一个数值作为默认值，数值不需要加f\nInt\t\t\t\t//整形，虽然提供了整数，但是编译时最终都会转换为浮点型\nFloat\t\t\t//浮点型，在ShaderLab里，浮点数字面量不需要加f\nRange(,)\t\t//范围浮点型，需要在括号内()填写最小值和最大值\n//颜色与向量类型，以(num1,num2,num3,num4)作为默认值，其中的数值不需要加f\nColor\t\t\t//颜色，颜色值中的RGBA的取值范围是 0~1 （映射0~255）\nVector\t\t\t//向量，向量值中的XYZW的取值范围没有限制\n//纹理类型，以 \"\"{} 或 \"white\"{} 或 \"black\"{} 或 \"gray\"{} 或 \"bump\"{} 或 \"red\"{} 作为默认值，{}是固定写法\n2D\t\t\t\t//2D贴图类型，最常用的纹理，漫反射贴图、法线贴图都属于2D纹理\nCube\t\t\t//立方体纹理，由前后左右上下6张有联系的2D贴图拼成的立方体，比如天空盒和反射探针\n//不重要的纹理类型\n2DArray\t\t\t//纹理数组，允许在纹理中存储多层图像数据，每层看做一个2D图像，一般使用脚本创建，较少使用，了解即可\n3D\t\t\t\t//一般使用脚本创建，极少使用，了解即可\n"
+						},
+						{
+							"Type": "NodeCodeBlockFenceCloseMarker",
+							"Data": "```"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240616164809-oq0d4e8",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240616164809-oq0d4e8",
+				"updated": "20240616171406"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ShaderLab属性类型和CG变量类型的匹配关系"
+				}
+			]
+		},
+		{
+			"ID": "20240616165604-shb5h57",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616165604-shb5h57",
+				"updated": "20240616165628"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ShaderLab中声明的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240612172335-ffvbsa6",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "属性"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "都是需要在Shader(着色器)逻辑中使用的\n我们需要在CG中声明和属性对应类型的同名变量\n这样就可以在之后的Shader(着色器)逻辑中去利用它实现对应的逻辑了"
+				}
+			]
+		},
+		{
+			"ID": "20240616165604-i3xm8hn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616165604-i3xm8hn",
+				"updated": "20240616165618"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们需要掌握的就是ShaderLab属性类型和CG变量类型的对应关系"
+				}
+			]
+		},
+		{
+			"ID": "20240616165633-4vk7h52",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240616165633-4vk7h52",
+				"updated": "20240616171406"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "CG中变量类型的对应ShaderLab的属性类型"
+				}
+			]
+		},
+		{
+			"ID": "20240616165656-ewunpqe",
+			"Type": "NodeTable",
+			"TableAligns": [
+				0,
+				0
+			],
+			"Properties": {
+				"colgroup": "min-width: 60px;|min-width: 60px;",
+				"id": "20240616165656-ewunpqe",
+				"updated": "20240616165852"
+			},
+			"Children": [
+				{
+					"Type": "NodeTableHead",
+					"Data": "thead",
+					"Children": [
+						{
+							"Type": "NodeTableRow",
+							"Data": "tr",
+							"Children": [
+								{
+									"Type": "NodeTableCell",
+									"Data": "th",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "ShaderLab属性类型"
+										}
+									]
+								},
+								{
+									"Type": "NodeTableCell",
+									"Data": "th",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "CG变量类型"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeTableRow",
+					"Data": "tr",
+					"Children": [
+						{
+							"Type": "NodeTableCell",
+							"Data": "td",
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Color"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Vector"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"Type": "NodeTableCell",
+							"Data": "td",
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "float4"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "half4"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "fixed4"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeTableRow",
+					"Data": "tr",
+					"Children": [
+						{
+							"Type": "NodeTableCell",
+							"Data": "td",
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Range"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Float"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Int"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"Type": "NodeTableCell",
+							"Data": "td",
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "float"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "half"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "fixed"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeTableRow",
+					"Data": "tr",
+					"Children": [
+						{
+							"Type": "NodeTableCell",
+							"Data": "td",
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "2D"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"Type": "NodeTableCell",
+							"Data": "td",
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "sampler2D"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeTableRow",
+					"Data": "tr",
+					"Children": [
+						{
+							"Type": "NodeTableCell",
+							"Data": "td",
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Cube"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"Type": "NodeTableCell",
+							"Data": "td",
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "samplerCube"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeTableRow",
+					"Data": "tr",
+					"Children": [
+						{
+							"Type": "NodeTableCell",
+							"Data": "td",
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "3D"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"Type": "NodeTableCell",
+							"Data": "td",
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "sampler3D"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeTableRow",
+					"Data": "tr",
+					"Children": [
+						{
+							"Type": "NodeTableCell",
+							"Data": "td",
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "2DArray"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"Type": "NodeTableCell",
+							"Data": "td",
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "sampler2DArray"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240616165931-o89nwu2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240616165931-o89nwu2",
+				"updated": "20240616171406"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如何在CG语句块中使用ShaderLab中声明的属性"
+				}
+			]
+		},
+		{
+			"ID": "20240616170000-sxomiq5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616170000-sxomiq5",
+				"updated": "20240616170028"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "直接在CG语句块中声明和属性中对应类型的同名变量即可"
+				}
+			]
+		},
+		{
+			"ID": "20240616171111-5k4jt4p",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616171111-5k4jt4p",
+				"updated": "20240616171133"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们要使用ShaderLab中声明的颜色属性来调整材质显示的颜色："
+				}
+			]
+		},
+		{
+			"ID": "20240616170311-f4eo6on",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240616170311-f4eo6on",
+				"style": "line-height: 22px;",
+				"updated": "20240616171231"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson23\"\n{\n    Properties \n    {\n\t\t_MyColor(\"MyColor\", Color) = (0, 0, 0, 0)\n\n        _MyInt(\"MyInt\", Int) = 1\n        _MyFloat(\"MyFloat\", Float) = 1\n        _MyRange(\"MyRange\", Range(0, 5)) = 1\n        _MyVector(\"MyVector\", Vector) = (1, 2, 0, 0)\n        _My2D(\"My2D\", 2D) = \"\"{}\n        _My2DArray(\"My2DArray\", 2DArray) = \"\"{}\n        _MyCube(\"MyCube\", Cube) = \"\"{}\n        _My3D(\"My3D\", 3D) = \"\"{}\n    }\n\n    SubShader\n    {\n        Pass\n        {\n            CGPROGRAM\n            #pragma vertex myVert\n            #pragma fragment myFrag\n\n\t\t\tfixed4 _MyColor;\n\n            float _MyInt;\n            float _MyFloat;\n            fixed _MyRange;\n            float4 _MyVector;\n            sampler2D _My2D;\n            samplerCUBE _MyCube;\n\n            //从应用阶段获取对应语义数据后，传递给顶点着色器的回调函数的结构体\n            struct a2v { ... };\n\n            //从顶点着色器传递给片元着色器的结构体数据，同样这里的成员也需要用语义去进行修饰\n            struct v2f { ... };\n        \n            v2f myVert(a2v data)\n            {\n                v2f v2fData;                    //需要传递给片元着色器的数据\n\t\t\t\t//...\n                return v2fData;\n            }\n\n            fixed4 myFrag(v2f data) : SV_Target\n            {\n                return _MyColor;\t\t//直接使用声明的颜色属性\n            }\n            ENDCG\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240616171403-6jhf2cl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616171403-6jhf2cl",
+				"updated": "20240616171406"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20240616171359-c2u7y6n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616171359-c2u7y6n",
+				"updated": "20240616171359"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 392px;",
+						"style": "width: 382px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240616171359-cdxkr1n.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 382px;\" parent-style=\"width: 392px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		}
+	]
+}

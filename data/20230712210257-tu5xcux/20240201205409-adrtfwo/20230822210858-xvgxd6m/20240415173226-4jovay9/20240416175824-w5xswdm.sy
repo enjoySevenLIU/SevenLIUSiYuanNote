@@ -1,0 +1,1770 @@
+{
+	"ID": "20240416175824-w5xswdm",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240416175824-w5xswdm",
+		"title": "UFL3-3——对象上限优化",
+		"type": "doc",
+		"updated": "20240422222137"
+	},
+	"Children": [
+		{
+			"ID": "20240416175839-qvaztxr",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240416175839-qvaztxr",
+				"updated": "20240416175839"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对象上限优化"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-2tpifoh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-2tpifoh",
+				"updated": "20240416175854"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "目前我们制作的缓存池模块，理论上来说，当动态创建的对象长时间不放回抽屉\n每次从缓存池中动态获取对象时，会不停的新建对象，那么也就是对象的数量是没有上限的\n场景上的某种对象可以存在n个"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-z6i7on4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-z6i7on4",
+				"updated": "20240416175854"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "而对象上限优化指的就是，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "我们希望控制对象数量有上限，"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong u",
+					"TextMarkTextContent": "对于不重要的资源我们没必要让其无限加量，而是将“使用最久”的资源直接抢来用"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-gilz2qf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-gilz2qf",
+				"updated": "20240416175854"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要目的：\n更加彻底的复用资源，对对象的数量上限加以限制\n可以优化内存空间，甚至优化性能（减少数量上限，可以减小渲染压力）"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-m5ytist",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240416175854-m5ytist",
+				"updated": "20240416175854"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "制作思路和具体实现"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-a2d487m",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240416175854-a2d487m",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"ID": "20240416175854-n7whs30",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240416175854-n7whs30",
+						"updated": "20240416175854"
+					},
+					"Children": [
+						{
+							"ID": "20240416175854-o0knv7d",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416175854-o0knv7d",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在抽屉里声明一个容器"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "usedList"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​用来记录正在使用的资源，\n并开放一个属性"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UsedCount"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​用于获取正在使用的资源的数量，开放一个方法"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "PushUsedList"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​用于将资源放入到"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "usedList"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​内"
+								}
+							]
+						},
+						{
+							"ID": "20240416175854-f01n936",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240416175854-f01n936",
+								"style": "line-height: 22px;",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class PoolData\n{\n    //抽屉根对象，用来就行布局管理的对象\n    private GameObject poolObj;\n    //用来存储抽屉中的对象，记录没有使用的对象\n    private Stack\u003cGameObject\u003e dataStack = new Stack\u003cGameObject\u003e();\n    //记录使用中的对象的列表\n    private List\u003cGameObject\u003e usedList = new List\u003cGameObject\u003e();\n    //获取容器中是否有对象\n    public int Count =\u003e dataStack.Count;\n\n    //获取使用中的对象的数量\n    public int UsedCount =\u003e usedList.Count;\n\n    public PoolData(GameObject poolRootObj, string poolName);\t//..\n\n    // 从抽屉中弹出数据对象\n    public GameObject Pop();\t//..\n\n    // 将数据压入到抽屉内\n    public void Push(GameObject obj); // ..\n\n    /// \u003csummary\u003e\n    /// 将对象添加到使用中的列表\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"obj\"\u003e要添加到使用中列表的对象\u003c/param\u003e\n    public void PushUsedList(GameObject obj)\n    {\n        usedList.Add(obj);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240416175854-7zugmg2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240416175854-7zugmg2",
+						"updated": "20240416175854"
+					},
+					"Children": [
+						{
+							"ID": "20240416175854-nymqlfj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416175854-nymqlfj",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "每次获取对象"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetObj"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​时，传入一个抽屉最大容量值"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "maxNum"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（可以给一个默认值）"
+								}
+							]
+						},
+						{
+							"ID": "20240416175854-x6lckna",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240416175854-x6lckna",
+								"style": "line-height: 22px;",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class PoolManager : BaseManager\u003cPoolManager\u003e\n{\n    //柜子容器当中有抽屉的体现\n    private Dictionary\u003cstring, PoolData\u003e poolDic = new Dictionary\u003cstring, PoolData\u003e();\n\n    //池子根对象\n    private GameObject poolObj;\n\n    //是否开启Hierarchy窗口自动布局功能\n    public static bool isOpenLayout = true;\n\n    private PoolManager() { }\n\n    // 拿东西的方法\n    public GameObject GetObj(string name, int maxNum = 50)\n    {\n        GameObject obj;\n \t\t// TODO.. 根据maxNum，PoolData的是否存在，以及所有中的对象的数量来决定如何取对象\n        return obj;\n    }\n\n    // 往缓存池中放入对象\n    public void PushObj(GameObject obj);\t//..\n    // 清除整个柜子当中的数据\n    public void ClearPool();\t//..\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240416175854-0mkm8ga",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240416175854-0mkm8ga",
+						"updated": "20240416175854"
+					},
+					"Children": [
+						{
+							"ID": "20240416175854-2ssc9a2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416175854-2ssc9a2",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "从缓存池中获取对象"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetObj"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​时就需要创建抽屉"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "PoolData"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，用于记录当前使用着的对象"
+								}
+							]
+						},
+						{
+							"ID": "20240416175854-n4igi2r",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416175854-n4igi2r",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "由于总是是先获取"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetObj"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​后压入"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "PushObj"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，因此"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "PushObj"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​内不再需要检查抽屉是否存在，只需要向抽屉压入对象即可"
+								}
+							]
+						},
+						{
+							"ID": "20240416175854-s5p3u29",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240416175854-s5p3u29",
+								"style": "line-height: 22px;",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class PoolManager : BaseManager\u003cPoolManager\u003e\n{\n    //柜子容器当中有抽屉的体现\n    private Dictionary\u003cstring, PoolData\u003e poolDic = new Dictionary\u003cstring, PoolData\u003e();\n\n    //池子根对象\n    private GameObject poolObj;\n\n    //是否开启Hierarchy窗口自动布局功能\n    public static bool isOpenLayout = true;\n\n    private PoolManager() { }\n\n    // 拿东西的方法\n    public GameObject GetObj(string name, int maxNum = 50)\n    {\n        GameObject obj;\n \t\t// TODO.. 根据maxNum，PoolData的是否存在，以及所有中的对象的数量来决定如何取对象\n\n        return obj;\n    }\n\n    // 往缓存池中放入对象\n    public void PushObj(GameObject obj)\n    {\n        //如果根物体为空且自动排布开启，就创建\n        if (poolObj == null \u0026\u0026 isOpenLayout)\n            poolObj = new GameObject(\"Pool\");\n\n        poolDic[obj.name].Push(obj);\n    }\n\n    // 清除整个柜子当中的数据\n    public void ClearPool();\t//..\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240416175854-lruee79",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240416175854-lruee79",
+						"updated": "20240416175854"
+					},
+					"Children": [
+						{
+							"ID": "20240416175854-ca7s8qx",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416175854-ca7s8qx",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "每次取对象"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetObj"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​时应该分情况考虑"
+								}
+							]
+						},
+						{
+							"ID": "20240416175854-a9jsmyq",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240416175854-a9jsmyq",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"ID": "20240416175854-fsmbkjy",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"fold": "1",
+										"id": "20240416175854-fsmbkjy",
+										"updated": "20240416175854"
+									},
+									"Children": [
+										{
+											"ID": "20240416175854-k8o0l5p",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240416175854-k8o0l5p",
+												"updated": "20240416175854"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "情况1：没有抽屉时"
+												}
+											]
+										},
+										{
+											"ID": "20240416175854-74rkxy7",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240416175854-74rkxy7",
+												"updated": "20240416175854"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "需要创建一个抽屉"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "PoolData"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​和一个对象，抽屉添加到"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "poolDic"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​内，\n这个对象同时需要压入到抽屉的使用中对象的列表"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "usedList"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​内"
+												}
+											]
+										},
+										{
+											"ID": "20240416175854-oqxi3ry",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240416175854-oqxi3ry",
+												"updated": "20240416175854"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "当创建一个抽屉"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "PoolData"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​时，往往还实例化了一个新的对象，因此在实例化"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "PoolData"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​的时候，应该同时将对象压入到"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "usedList"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​内"
+												}
+											]
+										},
+										{
+											"ID": "20240416175854-ztowm0b",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240416175854-ztowm0b",
+												"style": "line-height: 22px;",
+												"updated": "20240416175854"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "public class PoolData\n{\n    //抽屉根对象，用来就行布局管理的对象\n    private GameObject poolObj;\n    //用来存储抽屉中的对象，记录没有使用的对象\n    private Stack\u003cGameObject\u003e dataStack = new Stack\u003cGameObject\u003e();\n    //记录使用中的对象的列表\n    private List\u003cGameObject\u003e usedList = new List\u003cGameObject\u003e();\n    //获取容器中是否有对象\n    public int Count =\u003e dataStack.Count;\n\n    public int UsedCount =\u003e usedList.Count;\n\n    public PoolData(GameObject poolRootObj, string poolName, GameObject usedObj) \n    {\n        //开启功能时，才会动态创建父子关系\n        if (PoolManager.isOpenLayout)\n        {\n            //创建抽屉父对象，和柜子父对象建立父子关系\n            poolObj = new GameObject(poolName);\n            poolObj.transform.SetParent(poolRootObj.transform);\n        }\n        //创建抽屉时，外部肯定是会动态创建一个对象的，我们应该将其记录到使用中的对象容器中\n        PushUsedList(usedObj);\n    }\n\n    // 从抽屉中弹出数据对象\n    public GameObject Pop(); \t//..\n\n\t// 将数据压入到抽屉内\n    public void Push(GameObject obj);\t//..\n\n    /// \u003csummary\u003e\n    /// 将对象添加到使用中的列表\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"obj\"\u003e要添加到使用中列表的对象\u003c/param\u003e\n    public void PushUsedList(GameObject obj)\n    {\n        usedList.Add(obj);\n    }\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240416175854-i1r1abe",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"fold": "1",
+										"id": "20240416175854-i1r1abe",
+										"updated": "20240416175854"
+									},
+									"Children": [
+										{
+											"ID": "20240416175854-sqsj3q3",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240416175854-sqsj3q3",
+												"updated": "20240416175854"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "情况2：有抽屉，并且 抽屉里有没用的对象 或者 使用中对象超过上限时"
+												}
+											]
+										},
+										{
+											"ID": "20240416175854-1sbewa2",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240416175854-1sbewa2",
+												"updated": "20240416175854"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "调用"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "PoolData"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Pop"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​方法取出对象，\n其中，当使用中对象超过上限时，"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Pop"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​方法执行的是从"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "usedList"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​内取出最早放入的对象，并重新放入到"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "usedList"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​内的逻辑\n当抽屉里有没用的对象时，"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Pop"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​方法直接从"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "dataStack"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​内取出一个对象激活即可"
+												}
+											]
+										},
+										{
+											"ID": "20240416175854-kkgqa3q",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240416175854-kkgqa3q",
+												"updated": "20240416175854"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "因此"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "PoolData"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Pop"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​方法需要添加一个当抽屉内没有没用的对象时需要执行的分支："
+												}
+											]
+										},
+										{
+											"ID": "20240416175854-9gx0yxh",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240416175854-9gx0yxh",
+												"style": "line-height: 22px;",
+												"updated": "20240416175854"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "public class PoolData\n{\n    //抽屉根对象，用来就行布局管理的对象\n    private GameObject poolObj;\n    //用来存储抽屉中的对象，记录没有使用的对象\n    private Stack\u003cGameObject\u003e dataStack = new Stack\u003cGameObject\u003e();\n    //记录使用中的对象的列表\n    private List\u003cGameObject\u003e usedList = new List\u003cGameObject\u003e();\n    //获取容器中是否有对象\n    public int Count =\u003e dataStack.Count;\n\n    public int UsedCount =\u003e usedList.Count;\n\n    public PoolData(GameObject poolRootObj, string poolName, GameObject usedObj); //..\n\n    /// \u003csummary\u003e\n    /// 从抽屉中弹出数据对象\n    /// \u003c/summary\u003e\n    /// \u003creturns\u003e弹出的数据对象\u003c/returns\u003e\n    public GameObject Pop()\n    {\n        //从抽屉内取出并激活对象\n        GameObject obj;\n\t\t//如果有未使用的对象，就取出这个对象\n        if (Count \u003e 0)\n\t\t{\n\t\t    obj = dataStack.Pop();\n\t\t    usedList.Add(obj);      //将取出的对象压入到使用中的列表内\n\t\t}\n\t\t//如果没有未使用的对象，就需要从正在使用的对象列表内抢来一个最早使用的\n        else\n        {\n            obj = usedList[0];      //取0索引的对象，它就是使用时间最长的对象\n            usedList.RemoveAt(0);   //并将其从使用中的列表中移除出去\n            usedList.Add(obj);      //由于该对象还需要使用，所以将其移到列表的最尾部使用\n        }\n\n        obj.SetActive(true);\n        //开启布局功能时，才需要断开父子关系\n        if (PoolManager.isOpenLayout)\n            obj.transform.SetParent(null);\n        return obj;\n    }\n\n\t// 将数据压入到抽屉内\n    public void Push(GameObject obj);\t//..\n\n    /// \u003csummary\u003e\n    /// 将对象添加到使用中的列表\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"obj\"\u003e要添加到使用中列表的对象\u003c/param\u003e\n    public void PushUsedList(GameObject obj)\n    {\n        usedList.Add(obj);\n    }\n}\n\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240416175854-hcuc07c",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"fold": "1",
+										"id": "20240416175854-hcuc07c",
+										"updated": "20240416175854"
+									},
+									"Children": [
+										{
+											"ID": "20240416175854-9acsedg",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240416175854-9acsedg",
+												"updated": "20240416175854"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "情况3：有抽屉，但是抽屉里没有对象，使用中对象也没有超过上限时"
+												}
+											]
+										},
+										{
+											"ID": "20240416175854-nq0lh76",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240416175854-nq0lh76",
+												"updated": "20240416175854"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "实例化一个对象出来，并将这个对象添加到抽屉"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "PoolData"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "usedList"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​内"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240416175854-wh2bff8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416175854-wh2bff8",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "最终"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "PoolManager"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetObj"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​修改为："
+								}
+							]
+						},
+						{
+							"ID": "20240416175854-wu7knse",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240416175854-wu7knse",
+								"style": "line-height: 22px;",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "// 缓存池模块 管理器\npublic class PoolManager : BaseManager\u003cPoolManager\u003e\n{\n    //柜子容器当中有抽屉的体现\n    private Dictionary\u003cstring, PoolData\u003e poolDic = new Dictionary\u003cstring, PoolData\u003e();\n\n    //池子根对象\n    private GameObject poolObj;\n\n    //是否开启Hierarchy窗口自动布局功能\n    public static bool isOpenLayout = true;\n\n    private PoolManager() { }\n\n    /// \u003csummary\u003e\n    /// 拿东西的方法\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e抽屉容器的名字\u003c/param\u003e\n    /// \u003creturns\u003e从缓存池中取出的对象\u003c/returns\u003e\n    public GameObject GetObj(string name, int maxNum = 50)\n    {\n        GameObject obj;\n        //无抽屉，或者抽屉无对象且使用中的对象也未超上限，需要新实例化一个对象\n        if (!poolDic.ContainsKey(name) ||\n            (poolDic[name].Count == 0 \u0026\u0026 poolDic[name].UsedCount \u003c maxNum))\n        {\n            obj = GameObject.Instantiate(Resources.Load\u003cGameObject\u003e(name));\n            obj.name = name;\n            //无抽屉时，创建一个抽屉并将新对象传入到构造函数内\n            if (!poolDic.ContainsKey(name))\n                poolDic.Add(name, new PoolData(poolObj, name, obj));\n            //有抽屉时，将新创建的对象传入到使用中的列表内\n            else\n                poolDic[name].PushUsedList(obj);\n        }\n        //当抽屉有对象或者使用中的对象超上限了，就直接从抽屉内取出来使用\n        else    // if (poolDic[name].Count \u003e 0 || poolDic[name].UsedCount \u003e= maxNum)\n        {\n            obj = poolDic[name].Pop();\n        }\n        return obj;\n    }\n\n    // 往缓存池中放入对象\n    public void PushObj(GameObject obj);\t//..\n\n    // 清除整个柜子当中的数据\n    public void ClearPool();\t//..\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240416175854-h8w1osa",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240416175854-h8w1osa",
+						"updated": "20240416175854"
+					},
+					"Children": [
+						{
+							"ID": "20240416175854-t0omf5e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416175854-t0omf5e",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "每次放回对象时"
+								}
+							]
+						},
+						{
+							"ID": "20240416175854-qjs6wl0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416175854-qjs6wl0",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "由于记录了正在使用的资源，因此每次放入抽屉时还需要从记录容器中移除对象"
+								}
+							]
+						},
+						{
+							"ID": "20240416175854-oqoad9g",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240416175854-oqoad9g",
+								"style": "line-height: 22px;",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class PoolData\n{\n    //抽屉根对象，用来就行布局管理的对象\n    private GameObject poolObj;\n    //用来存储抽屉中的对象，记录没有使用的对象\n    private Stack\u003cGameObject\u003e dataStack = new Stack\u003cGameObject\u003e();\n    //记录使用中的对象的列表\n    private List\u003cGameObject\u003e usedList = new List\u003cGameObject\u003e();\n    //获取容器中是否有对象\n    public int Count =\u003e dataStack.Count;\n\n    public int UsedCount =\u003e usedList.Count;\n\n    public PoolData(GameObject poolRootObj, string poolName, GameObject usedObj);\t//..\n\n    // 从抽屉中弹出数据对象\n    public GameObject Pop();\n\n    /// \u003csummary\u003e\n    /// 将数据压入到抽屉内\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"obj\"\u003e压入到抽屉内\u003c/param\u003e\n    public void Push(GameObject obj)\n    {\n        //失活后压入到抽屉内\n        obj.SetActive(false);\n        //开启了布局功能，才需要将要压入的对象设置父子关系\n        if (PoolManager.isOpenLayout)\n            obj.transform.SetParent(poolObj.transform);\n        dataStack.Push(obj);\n        //这个对象不再使用了，因此需要从记录容器中移除出去\n        usedList.Remove(obj);\n    }\n\n    // 将对象添加到使用中的列表\n    public void PushUsedList(GameObject obj);\t//..\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-iem9ptz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-iem9ptz",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "值得一提的是，按照上述思路实现了代码后，在Hierarchy窗口布局优化功能内会存在一个Bug需要我们去修复"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-p5qebjh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-p5qebjh",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "由于我们优化中加入了上限判断，并且在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GetObj"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​时，就会去"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "new PoolData"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，\n当开启布局优化功能时，由于此时"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pool"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​根对象没有创建，会报空，因为原本"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pool"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​根对象的创建逻辑是在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "PushObj"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​中实现的\n因此我们需要将原本在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "PushObj"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​中创建"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pool"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​根对象的判断，移动到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GetObj"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​中"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-vl83df8",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416175854-vl83df8",
+				"style": "line-height: 22px;",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//取东西的方法\npublic GameObject GetObj(string name, int maxNum = 50)\n{\n    //如果根物体为空且自动排布开启，就创建\n    if (poolObj == null \u0026\u0026 isOpenLayout)\n        poolObj = new GameObject(\"Pool\");\n\n    GameObject obj;\n    //无抽屉，或者抽屉无对象且使用中的对象也未超上限，需要新实例化一个对象\n    if (!poolDic.ContainsKey(name) ||\n        (poolDic[name].Count == 0 \u0026\u0026 poolDic[name].UsedCount \u003c maxNum))\n    {\n        obj = GameObject.Instantiate(Resources.Load\u003cGameObject\u003e(name));\n        obj.name = name;\n        //无抽屉时，创建一个抽屉并将新对象传入到构造函数内\n        if (!poolDic.ContainsKey(name))\n            poolDic.Add(name, new PoolData(poolObj, name, obj));\n        //有抽屉时，将新创建的对象传入到使用中的列表内\n        else\n            poolDic[name].PushUsedList(obj);\n    }\n    //当抽屉有对象或者使用中的对象超上限了，就直接从抽屉内取出来使用\n    else    // if (poolDic[name].Count \u003e 0 || poolDic[name].UsedCount \u003e= maxNum)\n    {\n        obj = poolDic[name].Pop();\n    }\n    return obj;\n}\n\n// 往缓存池中放入对象\npublic void PushObj(GameObject obj)\n{\n    //如果根物体为空且自动排布开启，就创建\n    //if (poolObj == null \u0026\u0026 isOpenLayout)\n    //    poolObj = new GameObject(\"Pool\");\n\n    poolDic[obj.name].Push(obj);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-pfonu35",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240416175854-pfonu35",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"ID": "20240416175854-jfamvq1",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240416175854-jfamvq1",
+						"updated": "20240416175854"
+					},
+					"Children": [
+						{
+							"ID": "20240416175854-zzrrpr1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416175854-zzrrpr1",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "至此，缓存池相关代码如下"
+								}
+							]
+						},
+						{
+							"ID": "20240416175854-sjx4fpc",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240416175854-sjx4fpc",
+								"style": "line-height: 22px;",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\n\npublic class PoolData\n{\n    //抽屉根对象，用来就行布局管理的对象\n    private GameObject poolObj;\n    //用来存储抽屉中的对象，记录没有使用的对象\n    private Stack\u003cGameObject\u003e dataStack = new Stack\u003cGameObject\u003e();\n    //记录使用中的对象的列表\n    private List\u003cGameObject\u003e usedList = new List\u003cGameObject\u003e();\n    //获取容器中是否有对象\n    public int Count =\u003e dataStack.Count;\n\n    public int UsedCount =\u003e usedList.Count;\n\n    public PoolData(GameObject poolRootObj, string poolName, GameObject usedObj) \n    {\n        //开启功能时，才会动态创建父子关系\n        if (PoolManager.isOpenLayout)\n        {\n            //创建抽屉父对象，和柜子父对象建立父子关系\n            poolObj = new GameObject(poolName);\n            poolObj.transform.SetParent(poolRootObj.transform);\n        }\n        //创建抽屉时，外部肯定是会动态创建一个对象的，我们应该将其记录到使用中的对象容器中\n        PushUsedList(usedObj);\n    }\n\n    /// \u003csummary\u003e\n    /// 从抽屉中弹出数据对象\n    /// \u003c/summary\u003e\n    /// \u003creturns\u003e弹出的数据对象\u003c/returns\u003e\n    public GameObject Pop()\n    {\n        //从抽屉内取出并激活对象\n        GameObject obj;\n        if (Count \u003e 0)\n        {\n            obj = dataStack.Pop();\n            usedList.Add(obj);      //将取出的对象压入到使用中的列表内\n        }\n        else\n        {\n            obj = usedList[0];      //取0索引的对象，它就是使用时间最长的对象\n            usedList.RemoveAt(0);   //并将其从使用中的列表中移除出去\n            usedList.Add(obj);      //由于该对象还需要使用，所以将其移到列表的最尾部使用\n        }\n\n        obj.SetActive(true);\n        //开启布局功能时，才需要断开父子关系\n        if (PoolManager.isOpenLayout)\n            obj.transform.SetParent(null);\n        return obj;\n    }\n\n    /// \u003csummary\u003e\n    /// 将数据压入到抽屉内\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"obj\"\u003e压入到抽屉内\u003c/param\u003e\n    public void Push(GameObject obj)\n    {\n        //失活后压入到抽屉内\n        obj.SetActive(false);\n        //开启了布局功能，才需要将要压入的对象设置父子关系\n        if (PoolManager.isOpenLayout)\n            obj.transform.SetParent(poolObj.transform);\n        dataStack.Push(obj);\n        //这个对象不再使用了，因此需要从记录容器中移除出去\n        usedList.Remove(obj);\n    }\n\n    /// \u003csummary\u003e\n    /// 将对象添加到使用中的列表\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"obj\"\u003e要添加到使用中列表的对象\u003c/param\u003e\n    public void PushUsedList(GameObject obj)\n    {\n        usedList.Add(obj);\n    }\n}\n\n/// \u003csummary\u003e\n/// 缓存池模块 管理器\n/// \u003c/summary\u003e\npublic class PoolManager : BaseManager\u003cPoolManager\u003e\n{\n    //柜子容器当中有抽屉的体现\n    private Dictionary\u003cstring, PoolData\u003e poolDic = new Dictionary\u003cstring, PoolData\u003e();\n\n    //池子根对象\n    private GameObject poolObj;\n\n    //是否开启Hierarchy窗口自动布局功能\n    public static bool isOpenLayout = false;\n\n    private PoolManager() { }\n\n    /// \u003csummary\u003e\n    /// 拿东西的方法\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e抽屉容器的名字\u003c/param\u003e\n    /// \u003creturns\u003e从缓存池中取出的对象\u003c/returns\u003e\n    public GameObject GetObj(string name, int maxNum = 50)\n    {\n        //如果根物体为空且自动排布开启，就创建\n        if (poolObj == null \u0026\u0026 isOpenLayout)\n            poolObj = new GameObject(\"Pool\");\n\n        GameObject obj;\n        //无抽屉，或者抽屉无对象且使用中的对象也未超上限，需要新实例化一个对象\n        if (!poolDic.ContainsKey(name) ||\n            (poolDic[name].Count == 0 \u0026\u0026 poolDic[name].UsedCount \u003c maxNum))\n        {\n            obj = GameObject.Instantiate(Resources.Load\u003cGameObject\u003e(name));\n            obj.name = name;\n            //无抽屉时，创建一个抽屉并将新对象传入到构造函数内\n            if (!poolDic.ContainsKey(name))\n                poolDic.Add(name, new PoolData(poolObj, name, obj));\n            //有抽屉时，将新创建的对象传入到使用中的列表内\n            else\n                poolDic[name].PushUsedList(obj);\n        }\n        //当抽屉有对象或者使用中的对象超上限了，就直接从抽屉内取出来使用\n        else    // if (poolDic[name].Count \u003e 0 || poolDic[name].UsedCount \u003e= maxNum)\n        {\n            obj = poolDic[name].Pop();\n        }\n        return obj;\n    }\n\n    /// \u003csummary\u003e\n    /// 往缓存池中放入对象\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e抽屉（对象池）的名字\u003c/param\u003e\n    /// \u003cparam name=\"obj\"\u003e要放入的对象\u003c/param\u003e\n    public void PushObj(GameObject obj)\n    {\n        ////如果根物体为空且自动排布开启，就创建\n        //if (poolObj == null \u0026\u0026 isOpenLayout)\n        //    poolObj = new GameObject(\"Pool\");\n\n        poolDic[obj.name].Push(obj);\n    }\n\n    /// \u003csummary\u003e\n    /// 清除整个柜子当中的数据\n    /// \u003c/summary\u003e\n    public void ClearPool()\n    {\n        poolDic.Clear();\n        poolObj = null;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-rrffuek",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240416175854-rrffuek",
+				"updated": "20240416175854"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对象上限测试"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-uxqhrgd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-uxqhrgd",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "设置从缓存池获取的对象上限分别为3和4，其他内容不变"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-j6khdos",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416175854-j6khdos",
+				"style": "line-height: 22px;",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System;\nusing UnityEngine;\n\npublic class Main : MonoBehaviour\n{\n    void Update()\n    {\n        if (Input.GetMouseButtonDown(0))\n        {\n            PoolManager.Instance.GetObj(\"Test/Cube\", 3);\n        }\n\n        if (Input.GetMouseButtonDown(1)) \n        {\n            PoolManager.Instance.GetObj(\"Test/Sphere\", 4);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-hn2nsyj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-hn2nsyj",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按照一定频率反复按下鼠标左键和右键，场景上创建的两种对象数量会限制在3和4"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-ve9bnah",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-ve9bnah",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 262px;",
+						"style": "width: 252px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240416170125-1g4ncq0.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 252px;\" parent-style=\"width: 262px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-46g6e8v",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-46g6e8v",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "将创建出来的对象会执行的逻辑改为向前无限移动而不是延迟删除"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-rv9gmhs",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416175854-rv9gmhs",
+				"style": "line-height: 22px;",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class TestMove : MonoBehaviour\n{\n    void Update()\n    {\n        this.transform.Translate(10 * Time.deltaTime * Vector3.forward);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-gasr2aj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-gasr2aj",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "由于从缓存池拿出来的对象的状态（位置，旋转，缩放等等）是不确定的，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "因此我们必须在拿出来的那一刻就对这个对象进行初始化"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-rf2cdkh",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416175854-rf2cdkh",
+				"style": "line-height: 22px;",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System;\nusing UnityEngine;\n\npublic class Main : MonoBehaviour\n{\n    void Update()\n    {\n        if (Input.GetMouseButtonDown(0))\n        {\n            PoolManager.Instance.GetObj(\"Test/Cube\", 3);\n\t\t\tobj.transform.position = Vector3.zero;\n        }\n\n        if (Input.GetMouseButtonDown(1)) \n        {\n            PoolManager.Instance.GetObj(\"Test/Sphere\", 4);\n\t\t\tobj.transform.position = new Vector3(1, 0, 0);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-vn0kple",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-vn0kple",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按照一定频率反复按下鼠标左键和右键，创建上向前移动的对象数量会恒定在在3和4，当达到上限时在从对象池取出，对象会自动回到起点"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-lplp73m",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-lplp73m",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240416171701-o3vmx60.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-5d8vibu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240416175854-5d8vibu",
+				"updated": "20240416175854"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "上限消息由参数传入改为对象属性"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-dw2925w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-dw2925w",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "现在我们确定最大容量是通过在获取时传入参数"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "maxNum"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，若传入参数出错可能会导致“超上限”\n能否优化下，以其它思路去制作，让我们可以更加方便的处理上限逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-v3q6vb0",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240416175854-v3q6vb0",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"ID": "20240416175854-j03b0h4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240416175854-j03b0h4",
+						"updated": "20240416175854"
+					},
+					"Children": [
+						{
+							"ID": "20240416175854-9u69juj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416175854-9u69juj",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "让使用者不用每次设置上限值"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240416175854-rsxqitw",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240416175854-rsxqitw",
+						"updated": "20240416175854"
+					},
+					"Children": [
+						{
+							"ID": "20240416175854-ru0l8z9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416175854-ru0l8z9",
+								"updated": "20240416175854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "初始化抽屉时，第一次就直接定好上限为多少，之后直接在内部判断即可"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-4yry1zs",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-4yry1zs",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "让缓存池对象挂载一个用于配置上限值的脚本，只需要在制作预设体时，将脚本挂好，设置好上限即可"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-79zuv10",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416175854-79zuv10",
+				"style": "line-height: 22px;",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\n/// \u003csummary\u003e\n/// 该脚本主要用于挂载到需要使用缓存池功能的预设体对象上\n/// \u003c/summary\u003e\npublic class PoolObj : MonoBehaviour\n{\n    public int maxNum;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-uec0ldv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-uec0ldv",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 463px;",
+						"style": "width: 453px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240416173116-70unzcj.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 453px;\" parent-style=\"width: 463px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-415k8qx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-415k8qx",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "然后在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "PoolData"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内声明一个上限值，在构造函数内通过读取预设体上的脚本设置的上限值属性\n在声明一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "NeedCreate"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​属性，当使用中的对象数量小于最大容量时，代表可以创建对象"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-nxhwwm2",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416175854-nxhwwm2",
+				"style": "line-height: 22px;",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class PoolData\n{\n    //抽屉根对象，用来就行布局管理的对象\n    private GameObject poolObj;\n    //用来存储抽屉中的对象，记录没有使用的对象\n    private Stack\u003cGameObject\u003e dataStack = new Stack\u003cGameObject\u003e();\n    //抽屉上限，场景上同时存在的对象的上限个数\n    private int maxNum;\n    //记录使用中的对象的列表\n    private List\u003cGameObject\u003e usedList = new List\u003cGameObject\u003e();\n    //获取容器中是否有对象\n    public int Count =\u003e dataStack.Count;\n  \n    public int UsedCount =\u003e usedList.Count;\n\n    /// \u003csummary\u003e\n    /// 与使用中的对象数量与最大容量进行比较，小于返回true，需要实例化\n    /// \u003c/summary\u003e\n    public bool NeedCreate =\u003e usedList.Count \u003c maxNum;\n\n    public PoolData(GameObject poolRootObj, string poolName, GameObject usedObj) \n    {\n        //开启功能时，才会动态创建父子关系\n        if (PoolManager.isOpenLayout)\n        {\n            //创建抽屉父对象，和柜子父对象建立父子关系\n            poolObj = new GameObject(poolName);\n            poolObj.transform.SetParent(poolRootObj.transform);\n        }\n        //创建抽屉时，外部肯定是会动态创建一个对象的，我们应该将其记录到使用中的对象容器中\n        PushUsedList(usedObj);\n        PoolObj obj = usedObj.GetComponent\u003cPoolObj\u003e();\n        if (obj == null)\n        {\n            Debug.LogError(\"请为缓存池功能的预设体对象挂载PoolObj脚本，用于设置数量上限\");\n            return;\n        }\n        //记录上限数量值\n        this.maxNum = obj.maxNum;\n    }\n\n    // 从抽屉中弹出数据对象\n    public GameObject Pop();\t//..\n\n    // 将数据压入到抽屉内\n    public void Push(GameObject obj);\t//..\n\n    // 将对象添加到使用中的列表\n    public void PushUsedList(GameObject obj);\t//..\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-5jpp3aq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416175854-5jpp3aq",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "同时修改"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "PoolManager"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GetObj"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法，去除"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "maxNum"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数，使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "NeedCreate"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​属性"
+				}
+			]
+		},
+		{
+			"ID": "20240416175854-p3r5bo0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416175854-p3r5bo0",
+				"style": "line-height: 22px;",
+				"updated": "20240416175856"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public GameObject GetObj(string name)\n{\n    //如果根物体为空且自动排布开启，就创建\n    if (poolObj == null \u0026\u0026 isOpenLayout)\n        poolObj = new GameObject(\"Pool\");\n\n    GameObject obj;\n    //无抽屉，或者抽屉无对象且使用中的对象也未超上限，需要新实例化一个对象\n    if (!poolDic.ContainsKey(name) ||\n        (poolDic[name].Count == 0 \u0026\u0026 poolDic[name].NeedCreate))\n    {\n        obj = GameObject.Instantiate(Resources.Load\u003cGameObject\u003e(name));\n        obj.name = name;\n        //无抽屉时，创建一个抽屉并将新对象传入到构造函数内\n        if (!poolDic.ContainsKey(name))\n            poolDic.Add(name, new PoolData(poolObj, name, obj));\n        //有抽屉时，将新创建的对象传入到使用中的列表内\n        else\n            poolDic[name].PushUsedList(obj);\n    }\n    //当抽屉有对象或者使用中的对象超上限了，就直接从抽屉内取出来使用\n    else    // if (poolDic[name].Count \u003e 0 || poolDic[name].UsedCount \u003e= maxNum)\n    {\n        obj = poolDic[name].Pop();\n    }\n    return obj;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

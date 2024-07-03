@@ -1,0 +1,976 @@
+{
+	"ID": "20240422222115-zbe1n4c",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240422222115-zbe1n4c",
+		"title": "UFL3-4——缓存池增加缓存对象种类",
+		"type": "doc",
+		"updated": "20240422230730"
+	},
+	"Children": [
+		{
+			"ID": "20240422222115-4x1dekv",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240422222115-4x1dekv",
+				"updated": "20240422222209"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "缓存池模块(数据结构类、逻辑类)优化 主要目的"
+				}
+			]
+		},
+		{
+			"ID": "20240422222215-rlwii43",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422222215-rlwii43",
+				"updated": "20240422222225"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们目前实现的缓存池，主要是针对场景上的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​对象的，我们只能对场景上的对象进行缓存池功能处理"
+				}
+			]
+		},
+		{
+			"ID": "20240422222215-uxfzwfq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422222215-uxfzwfq",
+				"updated": "20240422222215"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但是在游戏开发中，还会存在大量的不需要挂载到场景上的实例化对象\n比如一些数据结构类、逻辑类，它们并不依附于场景上的对象，而仅仅是被引用"
+				}
+			]
+		},
+		{
+			"ID": "20240422222229-eqypero",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422222229-eqypero",
+				"updated": "20240422222302"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "举例：\n一个自定义数据结构类，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "TestData t = new TestData();"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n当我们不使用它时，往往会将其置空，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "t = null;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n下次又要使用时，再"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "new"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "t = new TestData();"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240422222305-1oy4bwf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422222305-1oy4bwf",
+				"updated": "20240422222305"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "那么对于一些频繁使用的数据结构类或逻辑类，这样做也会产生大量的垃圾\n因此我们完全可以修改缓存池模块，让其也支持对不挂载的类对象也进行复用"
+				}
+			]
+		},
+		{
+			"ID": "20240422222215-r3ibm43",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422222215-r3ibm43",
+				"updated": "20240422222321"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "说人话：\n缓存池模块(数据结构类、逻辑类)优化 主要目的是让缓存池支持回收复用不继承"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "MonoBehaviour"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（不挂载"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​）的类对象"
+				}
+			]
+		},
+		{
+			"ID": "20240422222330-cxfo8j3",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240422222330-cxfo8j3",
+				"updated": "20240422222336"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "缓存池模块(数据结构类、逻辑类)优化 制作思路"
+				}
+			]
+		},
+		{
+			"ID": "20240422222553-g3wyy0a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422222553-g3wyy0a",
+				"updated": "20240422222556"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关键点："
+				}
+			]
+		},
+		{
+			"ID": "20240422222506-1l00alf",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240422222506-1l00alf",
+				"updated": "20240422224639"
+			},
+			"Children": [
+				{
+					"ID": "20240422222546-6nh6sxn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240422222546-6nh6sxn",
+						"updated": "20240422222546"
+					},
+					"Children": [
+						{
+							"ID": "20240422222546-tfcw6q1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422222546-tfcw6q1",
+								"updated": "20240422222546"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "池子容器父类里式替换父类装子类"
+								}
+							]
+						},
+						{
+							"ID": "20240422223416-r4qv8h4",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422223416-r4qv8h4",
+								"style": "line-height: 22px;",
+								"updated": "20240422223428"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "/// \u003csummary\u003e\n/// 各个泛型容器类的基类，用于存储到字典内\n/// \u003c/summary\u003e\npublic abstract class PoolObjectBase { }\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240422222546-zfjum33",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240422222546-zfjum33",
+						"updated": "20240422224639"
+					},
+					"Children": [
+						{
+							"ID": "20240422222546-5zpziuc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422222546-5zpziuc",
+								"updated": "20240422222546"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "池子容器子类泛型类确定对象类型"
+								}
+							]
+						},
+						{
+							"ID": "20240422223456-zo0zatv",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422223456-zo0zatv",
+								"style": "line-height: 22px;",
+								"updated": "20240422224639"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "/// \u003csummary\u003e\n/// 用于存储 数据结构类 和 逻辑类 的 容器类\n/// \u003c/summary\u003e\n/// \u003ctypeparam name=\"T\"\u003e\u003c/typeparam\u003e\npublic class PoolObject\u003cT\u003e : PoolObjectBase where T : class\n{\n    public Queue\u003cT\u003e poolObjs = new Queue\u003cT\u003e();\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240422222546-dnjmjc6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240422222546-dnjmjc6",
+						"updated": "20240422222546"
+					},
+					"Children": [
+						{
+							"ID": "20240422222546-jgq1n6z",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422222546-jgq1n6z",
+								"updated": "20240422222546"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对象父接口，用于实现重置数据方法"
+								}
+							]
+						},
+						{
+							"ID": "20240422223430-bgjrqxx",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422223430-bgjrqxx",
+								"style": "line-height: 22px;",
+								"updated": "20240422223438"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "/// \u003csummary\u003e\n/// 想要被复用的数据结构类、逻辑类、都必须要继承该接口\n/// \u003c/summary\u003e\npublic interface IPoolObject\n{\n    /// \u003csummary\u003e\n    /// 重置数据的方法\n    /// \u003c/summary\u003e\n    void ResetInfo();\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240422222342-dxpgt1w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422222342-dxpgt1w",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240422222748"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：由于这些自定义数据或逻辑类中可能有对其他内容的引用，因此需要让其有一个重置数据的方法，在压入池子时重置数据"
+				}
+			]
+		},
+		{
+			"ID": "20240422222558-6lewh7m",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422222558-6lewh7m",
+				"updated": "20240422222607"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现思路："
+				}
+			]
+		},
+		{
+			"ID": "20240422222342-c5si0sz",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240422222342-c5si0sz",
+				"updated": "20240422230654"
+			},
+			"Children": [
+				{
+					"ID": "20240422222345-230oyy9",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240422222345-230oyy9",
+						"updated": "20240422222345"
+					},
+					"Children": [
+						{
+							"ID": "20240422222345-f9j54i4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422222345-f9j54i4",
+								"updated": "20240422222430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "修改缓存池管理器 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "PoolManager"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240422222345-0hcs63n",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240422222345-0hcs63n",
+						"updated": "20240422223515"
+					},
+					"Children": [
+						{
+							"ID": "20240422222345-us21vbe",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422222345-us21vbe",
+								"updated": "20240422222620"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "添加一个新池子容器，专门用来记录不继承 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "MonoBehaviour"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（不挂载"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GameObject"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​）的类对象"
+								}
+							]
+						},
+						{
+							"ID": "20240422223505-f9p6gjo",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422223505-f9p6gjo",
+								"style": "line-height: 22px;",
+								"updated": "20240422223515"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//用于存储数据结构类，逻辑类对象的池子的字典容器\nprivate Dictionary\u003cstring, PoolObjectBase\u003e poolObjectDic = new Dictionary\u003cstring, PoolObjectBase\u003e();\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240422222345-171s4kh",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240422222345-171s4kh",
+						"updated": "20240422230654"
+					},
+					"Children": [
+						{
+							"ID": "20240422222345-r5v71ag",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422222345-r5v71ag",
+								"updated": "20240422222405"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "提供专门的方法供外部使用"
+								}
+							]
+						},
+						{
+							"ID": "20240422222405-dkg0fvt",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240422222405-dkg0fvt",
+								"updated": "20240422230654"
+							},
+							"Children": [
+								{
+									"ID": "20240422222405-wiar1to",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240422222405-wiar1to",
+										"updated": "20240422222405"
+									},
+									"Children": [
+										{
+											"ID": "20240422222405-q9463sz",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240422222405-q9463sz",
+												"updated": "20240422224246"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "从池子中获取对象的方法"
+												}
+											]
+										},
+										{
+											"ID": "20240422224246-0hgoier",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240422224246-0hgoier",
+												"style": "line-height: 22px;",
+												"updated": "20240422224829"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "/// \u003csummary\u003e\n/// 获取自定义的数据结构类 和 逻辑类对象 放入到池子中 （不继承Mono的）\n/// \u003c/summary\u003e\n/// \u003ctypeparam name=\"T\"\u003e数据类型\u003c/typeparam\u003e\n/// \u003creturns\u003e从池子内获取或新实例化的对象\u003c/returns\u003e\npublic T GetObj\u003cT\u003e(string nameSpace = \"\") where T : class, IPoolObject, new()\n{\n    //池子的名字就是根据类的类名和命名空间名决定的\n    string poolName = nameSpace + \"_\" + typeof(T).Name;\n    //有池子\n    if (poolObjectDic.ContainsKey(poolName))\n    {\n        PoolObject\u003cT\u003e pool = poolObjectDic[poolName] as PoolObject\u003cT\u003e;\n        //池子当中是否存在可复用的内容\n        if (pool.poolObjs.Count \u003e 0)\n        {\n            T obj = pool.poolObjs.Dequeue();\n            return obj;\n        }\n        else\n        {\n            //实例化，该类型必须要有一个无参构造函数\n            T obj = new T();\n            return obj;\n        }\n    }\n    //没有池子\n    else\n    {\n        //实例化，该类型必须要有一个无参构造函数\n        T obj = new T();\n        return obj;\n    }\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240422222405-lw3usoh",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240422222405-lw3usoh",
+										"updated": "20240422230654"
+									},
+									"Children": [
+										{
+											"ID": "20240422222405-e9n24kt",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240422222405-e9n24kt",
+												"updated": "20240422222405"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "压入池子中的方法"
+												}
+											]
+										},
+										{
+											"ID": "20240422224746-bzlng0l",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240422224746-bzlng0l",
+												"style": "line-height: 22px;",
+												"updated": "20240422230654"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "public void PushObj\u003cT\u003e(T obj, string nameSpace = \"\") where T : class, IPoolObject\n{\n\tif (obj == null)\n\t\treturn;\n    //池子的名字就是根据类的类名和命名空间名决定的\n    string poolName = nameSpace + \"_\" + typeof(T).Name;\n    PoolObject\u003cT\u003e pool;\n    //有池子\n    if (poolObjectDic.ContainsKey(poolName))\n    {\n        pool = poolObjectDic[poolName] as PoolObject\u003cT\u003e;\n    }\n    //无池子\n    else\n    {\n        pool = new PoolObject\u003cT\u003e();\n        poolObjectDic.Add(poolName, pool);\n    }\n    obj.ResetInfo();\n    pool.poolObjs.Enqueue(obj);\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240422222405-2w1qj8z",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20240422222405-2w1qj8z",
+										"updated": "20240422225912"
+									},
+									"Children": [
+										{
+											"ID": "20240422222405-rv43ecf",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240422222405-rv43ecf",
+												"updated": "20240422222405"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "清空池子容器的方法"
+												}
+											]
+										},
+										{
+											"ID": "20240422224947-5vf0z6f",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240422224947-5vf0z6f",
+												"updated": "20240422224955"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "直接修改原来的方法即可"
+												}
+											]
+										},
+										{
+											"ID": "20240422224934-ppmmmr9",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240422224934-ppmmmr9",
+												"style": "line-height: 22px;",
+												"updated": "20240422225912"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "/// \u003csummary\u003e\n/// 清除整个柜子当中的数据\n/// \u003c/summary\u003e\npublic void ClearPool()\n{\n    poolDic.Clear();\n    poolObjectDic.Clear();\n    poolObj = null;\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240422224957-uan2306",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240422224957-uan2306",
+				"updated": "20240422225000"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20240422225000-xyp0is8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422225000-xyp0is8",
+				"updated": "20240422225848"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "声明一个由缓存池管理的类"
+				}
+			]
+		},
+		{
+			"ID": "20240422225848-xhqv43h",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240422225848-xhqv43h",
+				"style": "line-height: 22px;",
+				"updated": "20240422230054"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class TestData : IPoolObject\n{\n    public int i;\n    public string str;\n    public object obj;\n\n    public void ResetInfo()\n    {\n        i = 0;\n        str = \"\";\n        obj = null;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240422230055-u36l1am",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422230055-u36l1am",
+				"updated": "20240422230356"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对缓存池特定位置打断点"
+				}
+			]
+		},
+		{
+			"ID": "20240422230315-4xxwljc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422230315-4xxwljc",
+				"updated": "20240422230315"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 564px;",
+						"style": "width: 554px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240422230315-ftier52.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 554px;\" parent-style=\"width: 564px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240422230137-9lpw0hk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240422230137-9lpw0hk",
+				"style": "line-height: 22px;",
+				"updated": "20240422230211"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Main : MonoBehaviour\n{\n    private TestData data;\n\n    void Update()\n    {\n        if (Input.GetKeyDown(KeyCode.G))\n        {\n            data = PoolManager.Instance.GetObj\u003cTestData\u003e();\n            data.i = 11;\n            data.obj = new object();\n            data.str = \"123\";\n        }\n\n        if (Input.GetKeyDown(KeyCode.P))\n        {\n            PoolManager.Instance.PushObj\u003cTestData\u003e(data);\n            data = null;\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240422230417-inc0lk7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422230417-inc0lk7",
+				"updated": "20240422230446"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过缓存池获取对象，再通过将对象压入到缓存池内，通过断点调试，观察代码执行顺序，以及缓存池内对象数量变化"
+				}
+			]
+		},
+		{
+			"ID": "20240422225905-mhbxab1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240422225905-mhbxab1",
+				"updated": "20240422225909"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体代码"
+				}
+			]
+		},
+		{
+			"ID": "20240422225909-d4afkwc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240422225909-d4afkwc",
+				"style": "line-height: 22px;",
+				"updated": "20240422230730"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\n\npublic class PoolData\n{\n    //抽屉根对象，用来就行布局管理的对象\n    private GameObject poolObj;\n    //用来存储抽屉中的对象，记录没有使用的对象\n    private Stack\u003cGameObject\u003e dataStack = new Stack\u003cGameObject\u003e();\n    //抽屉上限，场景上同时存在的对象的上限个数\n    private int maxNum;\n    //记录使用中的对象的列表\n    private List\u003cGameObject\u003e usedList = new List\u003cGameObject\u003e();\n    //获取容器中是否有对象\n    public int Count =\u003e dataStack.Count;\n  \n    public int UsedCount =\u003e usedList.Count;\n\n    /// \u003csummary\u003e\n    /// 与使用中的对象数量与最大容量进行比较，小于返回true，需要实例化\n    /// \u003c/summary\u003e\n    public bool NeedCreate =\u003e usedList.Count \u003c maxNum;\n\n    public PoolData(GameObject poolRootObj, string poolName, GameObject usedObj) \n    {\n        //开启功能时，才会动态创建父子关系\n        if (PoolManager.isOpenLayout)\n        {\n            //创建抽屉父对象，和柜子父对象建立父子关系\n            poolObj = new GameObject(poolName);\n            poolObj.transform.SetParent(poolRootObj.transform);\n        }\n        //创建抽屉时，外部肯定是会动态创建一个对象的，我们应该将其记录到使用中的对象容器中\n        PushUsedList(usedObj);\n        PoolObj obj = usedObj.GetComponent\u003cPoolObj\u003e();\n        if (obj == null)\n        {\n            Debug.LogError(\"请为缓存池功能的预设体对象挂载PoolObj脚本，用于设置数量上限\");\n            return;\n        }\n        //记录上限数量值\n        this.maxNum = obj.maxNum;\n    }\n\n    /// \u003csummary\u003e\n    /// 从抽屉中弹出数据对象\n    /// \u003c/summary\u003e\n    /// \u003creturns\u003e弹出的数据对象\u003c/returns\u003e\n    public GameObject Pop()\n    {\n        //从抽屉内取出并激活对象\n        GameObject obj;\n        if (Count \u003e 0)\n        {\n            obj = dataStack.Pop();\n            usedList.Add(obj);      //将取出的对象压入到使用中的列表内\n        }\n        else\n        {\n            obj = usedList[0];      //取0索引的对象，它就是使用时间最长的对象\n            usedList.RemoveAt(0);   //并将其从使用中的列表中移除出去\n            usedList.Add(obj);      //由于该对象还需要使用，所以将其移到列表的最尾部使用\n        }\n        \n        obj.SetActive(true);\n        //开启布局功能时，才需要断开父子关系\n        if (PoolManager.isOpenLayout)\n            obj.transform.SetParent(null);\n        return obj;\n    }\n\n    /// \u003csummary\u003e\n    /// 将数据压入到抽屉内\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"obj\"\u003e压入到抽屉内\u003c/param\u003e\n    public void Push(GameObject obj)\n    {\n        //失活后压入到抽屉内\n        obj.SetActive(false);\n        //开启了布局功能，才需要将要压入的对象设置父子关系\n        if (PoolManager.isOpenLayout)\n            obj.transform.SetParent(poolObj.transform);\n        dataStack.Push(obj);\n        //这个对象不再使用了，因此需要从记录容器中移除出去\n        usedList.Remove(obj);\n    }\n\n    /// \u003csummary\u003e\n    /// 将对象添加到使用中的列表\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"obj\"\u003e要添加到使用中列表的对象\u003c/param\u003e\n    public void PushUsedList(GameObject obj)\n    {\n        usedList.Add(obj);\n    }\n}\n\n/// \u003csummary\u003e\n/// 各个泛型容器类的基类，用于存储到字典内\n/// \u003c/summary\u003e\npublic abstract class PoolObjectBase { }\n\n/// \u003csummary\u003e\n/// 用于存储 数据结构类 和 逻辑类 的 容器类\n/// \u003c/summary\u003e\n/// \u003ctypeparam name=\"T\"\u003e\u003c/typeparam\u003e\npublic class PoolObject\u003cT\u003e : PoolObjectBase where T : class\n{\n    public Queue\u003cT\u003e poolObjs = new Queue\u003cT\u003e();\n}\n\n/// \u003csummary\u003e\n/// 想要被复用的数据结构类、逻辑类、都必须要继承该接口\n/// \u003c/summary\u003e\npublic interface IPoolObject\n{\n    /// \u003csummary\u003e\n    /// 重置数据的方法\n    /// \u003c/summary\u003e\n    void ResetInfo();\n}\n\n/// \u003csummary\u003e\n/// 缓存池模块 管理器\n/// \u003c/summary\u003e\npublic class PoolManager : BaseManager\u003cPoolManager\u003e\n{\n    //柜子容器当中有抽屉的体现\n    private Dictionary\u003cstring, PoolData\u003e poolDic = new Dictionary\u003cstring, PoolData\u003e();\n    //用于存储数据结构类，逻辑类对象的池子的字典容器\n    private Dictionary\u003cstring, PoolObjectBase\u003e poolObjectDic = new Dictionary\u003cstring, PoolObjectBase\u003e();\n\n    //池子根对象\n    private GameObject poolObj;\n\n    //是否开启Hierarchy窗口自动布局功能\n    public static bool isOpenLayout = true;\n\n    private PoolManager() { }\n\n    /// \u003csummary\u003e\n    /// 拿东西的方法\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e抽屉容器的名字\u003c/param\u003e\n    /// \u003creturns\u003e从缓存池中取出的对象\u003c/returns\u003e\n    public GameObject GetObj(string name)\n    {\n        //如果根物体为空且自动排布开启，就创建\n        if (poolObj == null \u0026\u0026 isOpenLayout)\n            poolObj = new GameObject(\"Pool\");\n\n        GameObject obj;\n        //无抽屉，或者抽屉无对象且使用中的对象也未超上限，需要新实例化一个对象\n        if (!poolDic.ContainsKey(name) ||\n            (poolDic[name].Count == 0 \u0026\u0026 poolDic[name].NeedCreate))\n        {\n            obj = GameObject.Instantiate(Resources.Load\u003cGameObject\u003e(name));\n            obj.name = name;\n            //无抽屉时，创建一个抽屉并将新对象传入到构造函数内\n            if (!poolDic.ContainsKey(name))\n                poolDic.Add(name, new PoolData(poolObj, name, obj));\n            //有抽屉时，将新创建的对象传入到使用中的列表内\n            else\n                poolDic[name].PushUsedList(obj);\n        }\n        //当抽屉有对象或者使用中的对象超上限了，就直接从抽屉内取出来使用\n        else    // if (poolDic[name].Count \u003e 0 || poolDic[name].UsedCount \u003e= maxNum)\n        {\n            obj = poolDic[name].Pop();\n        }\n        return obj;\n    }\n\n    /// \u003csummary\u003e\n    /// 获取自定义的数据结构类 和 逻辑类对象 放入到池子中 （不继承Mono的）\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e数据类型\u003c/typeparam\u003e\n    /// \u003creturns\u003e从池子内获取或新实例化的对象\u003c/returns\u003e\n    public T GetObj\u003cT\u003e(string nameSpace = \"\") where T : class, IPoolObject, new()\n    {\n        //池子的名字就是根据类的类名和命名空间名决定的\n        string poolName = nameSpace + \"_\" + typeof(T).Name;\n        //有池子\n        if (poolObjectDic.ContainsKey(poolName))\n        {\n            PoolObject\u003cT\u003e pool = poolObjectDic[poolName] as PoolObject\u003cT\u003e;\n            //池子当中是否存在可复用的内容\n            if (pool.poolObjs.Count \u003e 0)\n            {\n                T obj = pool.poolObjs.Dequeue();\n                return obj;\n            }\n            else\n            {\n                //实例化，该类型必须要有一个无参构造函数\n                T obj = new T();\n                return obj;\n            }\n        }\n        //没有池子\n        else\n        {\n            //实例化，该类型必须要有一个无参构造函数\n            T obj = new T();\n            return obj;\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 往缓存池中放入对象\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e抽屉（对象池）的名字\u003c/param\u003e\n    /// \u003cparam name=\"obj\"\u003e要放入的对象\u003c/param\u003e\n    public void PushObj(GameObject obj)\n    {\n        ////如果根物体为空且自动排布开启，就创建\n        //if (poolObj == null \u0026\u0026 isOpenLayout)\n        //    poolObj = new GameObject(\"Pool\");\n\n        poolDic[obj.name].Push(obj);\n    }\n\n    public void PushObj\u003cT\u003e(T obj, string nameSpace = \"\") where T : class, IPoolObject\n    {\n        if (obj == null)\n            return;\n        //池子的名字就是根据类的类名和命名空间名决定的\n        string poolName = nameSpace + \"_\" + typeof(T).Name;\n        PoolObject\u003cT\u003e pool;\n        //有池子\n        if (poolObjectDic.ContainsKey(poolName))\n        {\n            pool = poolObjectDic[poolName] as PoolObject\u003cT\u003e;\n        }\n        //无池子\n        else\n        {\n            pool = new PoolObject\u003cT\u003e();\n            poolObjectDic.Add(poolName, pool);\n        }\n        obj.ResetInfo();\n        pool.poolObjs.Enqueue(obj);\n    }\n\n    /// \u003csummary\u003e\n    /// 清除整个柜子当中的数据\n    /// \u003c/summary\u003e\n    public void ClearPool()\n    {\n        poolDic.Clear();\n        poolObjectDic.Clear();\n        poolObj = null;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,711 @@
+{
+	"ID": "20240204202144-yh647nn",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240204202144-yh647nn",
+		"title": "UH2S2L20——Lua调用泛型函数",
+		"updated": "20240302170626"
+	},
+	"Children": [
+		{
+			"ID": "20240204205420-j6abhim",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240204205420-j6abhim",
+				"updated": "20240204205425"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240204205426-ir9ropf",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204205426-ir9ropf",
+				"style": "line-height: 22px;",
+				"updated": "20240204205615"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "xlua.get_generic_method()\t\t--通过类与方法名获取方法信息，之后传入泛型参数即可构建可用的方法，在调用方法既可所有泛型函数\n-- 有一定的局限性\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204202145-0kb5oa1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240204202145-0kb5oa1",
+				"updated": "20240204202237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用泛型函数"
+				}
+			]
+		},
+		{
+			"ID": "20240204205619-grtuklk",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240204205619-grtuklk",
+				"updated": "20240204205824"
+			},
+			"Children": [
+				{
+					"ID": "20240204205620-ssd9vs4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240204205620-ssd9vs4",
+						"updated": "20240204205824"
+					},
+					"Children": [
+						{
+							"ID": "20240204205620-lbc59vh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240204205620-lbc59vh",
+								"updated": "20240204205824"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Lua只有有约束有参数（且约束必须是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "class"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​）的泛型函数才能调用"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240204205645-kslgw8q",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240204205645-kslgw8q",
+						"updated": "20240204205804"
+					},
+					"Children": [
+						{
+							"ID": "20240204205645-0p6l3lc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240204205645-0p6l3lc",
+								"updated": "20240204205804"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "其他情况，需要使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "xlua.get_generic_method()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​获取方法信息，再传入类型，得到可用的函数，即可调用（IL2CPP打包下存在限制）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240204202246-zm2lda5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204202246-zm2lda5",
+				"updated": "20240204202237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "先在C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "脚本内声明如下内容"
+				}
+			]
+		},
+		{
+			"ID": "20240204202246-4oynhjr",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204202246-4oynhjr",
+				"style": "line-height: 22px;",
+				"updated": "20240204202237"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Lesson12\n{\n    public interface ITest { }\n\n    public class TestFather { }\n\n    public class TestChild : TestFather, ITest { }\n\n    public void TestFun1\u003cT\u003e(T a, T b) where T : TestFather\n    {\n        Debug.Log(\"有参数有约束的泛型方法\");\n    }\n\n    public void TestFun2\u003cT\u003e(T a)\n    {\n        Debug.Log(\"有参数 没有约束\");\n    }\n\n    public void TestFun3\u003cT\u003e() where T : TestFather\n    {\n        Debug.Log(\"有约束，但是没有参数的泛型函数\");\n    }\n\n    public void TestFun4\u003cT\u003e(T a) where T : ITest\n    {\n        Debug.Log(\"有约束有参数，但是约束不是类\");\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204203515-s6zxfqp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240204203515-s6zxfqp",
+				"updated": "20240204202237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "有参数有约束的泛型方法"
+				}
+			]
+		},
+		{
+			"ID": "20240204203640-8kjuveh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204203640-8kjuveh",
+				"updated": "20240204202237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "虽然Lua不支持传入泛型参数，但是对于有参数有约束的泛型方法支持直接传入参数并执行的"
+				}
+			]
+		},
+		{
+			"ID": "20240204203525-dretmsq",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204203525-dretmsq",
+				"style": "line-height: 22px;",
+				"updated": "20240204202237"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local obj = CS.Lesson12()\n\nlocal child = CS.Lesson12.TestChild()\nlocal father = CS.Lesson12.TestFather()\n\n-- 支持有约束有参数的泛型函数\nobj:TestFun1(child, father)\nobj:TestFun1(father, child)\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204204948-o75csdb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204204948-o75csdb",
+				"updated": "20240204202237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240204204948-td3wh6f.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240204203628-8dop471",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240204203628-8dop471",
+				"updated": "20240204202237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "有参数无约束的泛型方法"
+				}
+			]
+		},
+		{
+			"ID": "20240204203815-91w6mfn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204203815-91w6mfn",
+				"updated": "20240204202237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Lua不支持有参数无约束的泛型方法"
+				}
+			]
+		},
+		{
+			"ID": "20240204203946-diy4bmy",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204203946-diy4bmy",
+				"style": "line-height: 22px;",
+				"updated": "20240204202237"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "-- obj:TestFun2(child)\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204203944-i1s0wsx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240204203944-i1s0wsx",
+				"updated": "20240204202237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "无参数有约束的泛型方法"
+				}
+			]
+		},
+		{
+			"ID": "20240204204042-g27id2f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204204042-g27id2f",
+				"updated": "20240204202237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Lua不支持无参数有约束的泛型方法"
+				}
+			]
+		},
+		{
+			"ID": "20240204204102-4q13gpi",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204204102-4q13gpi",
+				"style": "line-height: 22px;",
+				"updated": "20240204202237"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "-- obj:TestFun3()\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204204139-3s3vk8g",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240204204139-3s3vk8g",
+				"updated": "20240204202237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "有参数有约束，但是约束不是类的泛型方法"
+				}
+			]
+		},
+		{
+			"ID": "20240204204216-c1gqbqc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204204216-c1gqbqc",
+				"updated": "20240204202237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Lua不支持约束不是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "class"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的泛型方法"
+				}
+			]
+		},
+		{
+			"ID": "20240204204238-9o16cuz",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204204238-9o16cuz",
+				"style": "line-height: 22px;",
+				"updated": "20240204202237"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "-- obj:TestFun4(child)\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204204406-ghm63qz",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240204204406-ghm63qz",
+				"name": "xlua.get_generic_method()",
+				"updated": "20240204205855"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过特定方法使不可用的泛型方法可用"
+				}
+			]
+		},
+		{
+			"ID": "20240204204520-44xdc58",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204204520-44xdc58",
+				"updated": "20240204205855"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先需要得到通用函数，设置泛型的类型再使用"
+				}
+			]
+		},
+		{
+			"ID": "20240204204833-henckod",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204204833-henckod",
+				"updated": "20240204205855"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果反射的是成员方法，则第一个参数需要传入调用函数的对象\n如果反射的是静态方法，则第一个参数不需要传入调用函数的对象"
+				}
+			]
+		},
+		{
+			"ID": "20240204204756-ycm1gya",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240204204756-ycm1gya",
+				"style": "line-height: 22px;",
+				"updated": "20240204205855"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "-- 得到方法信息\nlocal testFun2 = xlua.get_generic_method(CS.Lesson12, \"TestFun2\")\n-- 设置泛型的类型\nlocal testFun2_R = testFun2(CS.System.Int32)\n-- 传入参数调用\ntestFun2_R(obj, 1)\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240204204936-ud9imzg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204204936-ud9imzg",
+				"updated": "20240204205855"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240204204936-g1ff5qd.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240204205000-kvezxol",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204205000-kvezxol",
+				"updated": "20240204205855"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "该方法存在局限性，不是在所有的情况下都可以用，有一定的使用限制，\n原因可见："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20231028214451-lybk1ck",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "CS5L3——Unity跨平台的基本原理之IL2CPP"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20231028222621-xld5hzg",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "IL2CPP打包存在的问题"
+				}
+			]
+		},
+		{
+			"ID": "20240204205206-7o1lcpw",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240204205206-7o1lcpw",
+				"updated": "20240204205855"
+			},
+			"Children": [
+				{
+					"ID": "20240204205206-dojlnuh",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240204205206-dojlnuh",
+						"updated": "20240204205206"
+					},
+					"Children": [
+						{
+							"ID": "20240204205206-su1kofr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240204205206-su1kofr",
+								"updated": "20240204205206"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Mono打包，这种方式支持使用\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240204205210-c1lwbzi",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240204205210-c1lwbzi"
+					},
+					"Children": [
+						{
+							"ID": "20240204205210-7h5jid7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240204205210-7h5jid7"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "il2cpp打包，如果泛型参数是引用类型才可以使用\nil2cpp打包，如果泛型参数是值类型，除非C#那边已经调用过了 同类型的泛型参数 lua中才能够被使用"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

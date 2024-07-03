@@ -1,0 +1,214 @@
+{
+	"ID": "20240205214140-yp4w7mg",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240205214140-yp4w7mg",
+		"title": "UH2S2L26——泛型类替换",
+		"updated": "20240302170641"
+	},
+	"Children": [
+		{
+			"ID": "20240205214140-1dihkpr",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240205214140-1dihkpr",
+				"updated": "20240205214426"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "泛型类替换"
+				}
+			]
+		},
+		{
+			"ID": "20240205214427-u6y91id",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205214427-u6y91id",
+				"updated": "20240205215236"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "泛型类，T是可以变化，而Lua没有泛型，因此，lua中的替换，要一个类型一个类型的来\n你想替换几个类型，就写几个对应类型的补丁"
+				}
+			]
+		},
+		{
+			"ID": "20240205214433-sc1e7tt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205214433-sc1e7tt",
+				"updated": "20240205214621"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "固定语法为："
+				}
+			]
+		},
+		{
+			"ID": "20240205214621-jba3s88",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240205214621-jba3s88",
+				"style": "line-height: 22px;",
+				"updated": "20240205214706"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "xlua.hotfix(CS.泛型类名(类型), {\n\t-- 要替换的方法\n})\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240205214747-lyo8v0n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205214747-lyo8v0n",
+				"updated": "20240205214752"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们要对下面泛型类做热补丁"
+				}
+			]
+		},
+		{
+			"ID": "20240205214747-n8lr1h3",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240205214747-n8lr1h3",
+				"style": "line-height: 22px;",
+				"updated": "20240205215100"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[Hotfix]\npublic class HotfixTest2\u003cT\u003e\n{\n    public void Test(T str)\n    {\n        Debug.Log(str);\n    }\n}\n\npublic class HotfixMain : MonoBehaviour\n{\n    void Start()\n    {\n        LuaManager.Instance.Init();\n        LuaManager.Instance.DoLuaFile(\"Main\");\n\n        HotfixTest2\u003cstring\u003e t1 = new HotfixTest2\u003cstring\u003e();\n        t1.Test(\"123\");\n\n        HotfixTest2\u003cint\u003e t2 = new HotfixTest2\u003cint\u003e();\n        t2.Test(1000);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240205214814-mb66gup",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205214814-mb66gup",
+				"updated": "20240205215050"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "泛型传入字符串和整数，则lua脚本内容如下"
+				}
+			]
+		},
+		{
+			"ID": "20240205214943-3ypp6n4",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240205214943-3ypp6n4",
+				"style": "line-height: 22px;",
+				"updated": "20240205215113"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "xlua.hotfix(CS.HotfixTest2(CS.System.String), {\n    Test = function(self, str)\n        print(\"lua中打的补丁: \" .. str)\n    end\n})\n\nxlua.hotfix(CS.HotfixTest2(CS.System.Int32), {\n    Test = function(self, num)\n\t\tprint(\"lua中打的补丁:\".. num)\n\tend\n})\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240205215143-63mgcj4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205215143-63mgcj4",
+				"updated": "20240205215143"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240205215143-wmnbb80.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		}
+	]
+}

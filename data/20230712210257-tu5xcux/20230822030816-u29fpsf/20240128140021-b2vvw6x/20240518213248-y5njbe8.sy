@@ -1,0 +1,650 @@
+{
+	"ID": "20240518213248-y5njbe8",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240518213248-y5njbe8",
+		"title": "U4S4L18——引用计数规则",
+		"type": "doc",
+		"updated": "20240519161323"
+	},
+	"Children": [
+		{
+			"ID": "20240518213248-3fxt90q",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240518213248-3fxt90q",
+				"updated": "20240519161323"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "引用计数规则"
+				}
+			]
+		},
+		{
+			"ID": "20240518213428-gpbdbbo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240518213428-gpbdbbo",
+				"updated": "20240518213435"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "当我们通过加载使用可寻址资源时，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Addressables"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​会在内部帮助我们进行引用计数\n使用资源时，引用计数+1\n释放资源时，引用计数-1\n当可寻址资源的引用为0时，就可以卸载它了"
+				}
+			]
+		},
+		{
+			"ID": "20240518213428-zzgui01",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240518213428-zzgui01",
+				"updated": "20240519150518"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "为了避免内存泄露（不需要使用的内容残留在内存中不释放），我们要保证"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong u text",
+					"TextMarkTextContent": "加载资源和卸载资源是配对使用的"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20240518213428-qajc03f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240518213428-qajc03f",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240518213845"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：释放的资源不一定立即从内存中卸载，在卸载资源所属的AB包之前，不会释放资源使用的内存\n（比如自己（某个资源）所在的AB包被别人（另一个资源）使用时，这时AB包不会被卸载，所以自己（某个资源）还在内存中）\n我们可以使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+						"style": "background-color: var(--b3-font-background3);"
+					},
+					"TextMarkType": "code block-ref text",
+					"TextMarkBlockRefID": "20230713203525-ac5m674",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "Resources.UnloadUnusedAssets"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-font-background3);\" parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 卸载资源（建议在切换场景时调用）"
+				}
+			]
+		},
+		{
+			"ID": "20240518213428-5crq2gp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240518213428-5crq2gp",
+				"updated": "20240518214303"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "AB包也有自己的引用计数（"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Addressables"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​把它也视为可寻址资源）\n从AB包中加载资源时，引用计数+1\n从AB包中卸载资源时，引用计数-1\n当AB包引用计数为0时，意味着不再使用了，这时会从内存中卸载"
+				}
+			]
+		},
+		{
+			"ID": "20240518213428-8qkz3u9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240518213428-8qkz3u9",
+				"updated": "20240518213614"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "总结："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Addressables"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内部会通过引用计数帮助我们管理内存，我们只需要保证 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text u",
+					"TextMarkTextContent": "加载和卸载资源配对使用"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 即可"
+				}
+			]
+		},
+		{
+			"ID": "20240518213526-zmtit9y",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240518213526-zmtit9y",
+				"updated": "20240519161323"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "举例说明引用计数"
+				}
+			]
+		},
+		{
+			"ID": "20240518214347-hwpp16n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240518214347-hwpp16n",
+				"updated": "20240518214529"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们创建两个一样的资源，然后一个一个的释放他们的资源句柄，观察他们创建出来的对象变化"
+				}
+			]
+		},
+		{
+			"ID": "20240518214347-vrfcvz2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240518214347-vrfcvz2",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240518214347"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：使用第三种模式加载资源（从AB包中加载）"
+				}
+			]
+		},
+		{
+			"ID": "20240518214838-2aegtyp",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240518214838-2aegtyp",
+				"style": "line-height: 22px;",
+				"updated": "20240518223732"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private List\u003cAsyncOperationHandle\u003cGameObject\u003e\u003e list = new List\u003cAsyncOperationHandle\u003cGameObject\u003e\u003e();\n\nvoid Update()\n{\n    //创建对象 记录异步操作句柄\n    if (Input.GetKeyDown(KeyCode.Space))\n    {\n        AsyncOperationHandle\u003cGameObject\u003e handle = Addressables.LoadAssetAsync\u003cGameObject\u003e(\"Cube\");\n        handle.Completed += (obj) =\u003e\n        {\n            Instantiate(obj.Result);\n        };\n        list.Add(handle);\n    }\n\n    //从创建对象中，释放异步操作句柄资源\n    if (Input.GetKeyDown(KeyCode.Q))\n    {\n        if (list.Count \u003e 0)\n        {\n            Addressables.Release(list[0]);\n            list.RemoveAt(0);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240518224233-4exm2gt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240518224233-4exm2gt",
+				"updated": "20240518225237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按下一次空格键，再按下一次Q键，实例化出来的对象的材质会丢失，因为引用计数归0了，AB包及其对应的资源都被卸载"
+				}
+			]
+		},
+		{
+			"ID": "20240518224403-99y6p2c",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240518224403-99y6p2c",
+				"updated": "20240518224403"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 243px;",
+						"style": "width: 233px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240518224403-xfkfp98.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 233px;\" parent-style=\"width: 243px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240518224406-n1c0k4i",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240518224406-n1c0k4i",
+				"updated": "20240518225249"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按下两次空格键，再按下一次Q键，实例化出来的两个对象的材质都不会丢失，因为引用计数不为0，AB包及其对应的资源都没有被卸载"
+				}
+			]
+		},
+		{
+			"ID": "20240518224524-5c0ypz6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240518224524-5c0ypz6",
+				"updated": "20240518224524"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 335px;",
+						"style": "width: 325px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240518224524-g1gk3sk.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 325px;\" parent-style=\"width: 335px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240518224533-pn526ec",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240518224533-pn526ec",
+				"updated": "20240518225232"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但如果再按下一次Q键，实例化出来的两个对象的材质都会丢失，因为引用计数归0了，AB包及其对应的资源都被卸载"
+				}
+			]
+		},
+		{
+			"ID": "20240518224532-q4yowcx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240518224532-q4yowcx",
+				"updated": "20240518224532"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 331px;",
+						"style": "width: 321px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240518224532-nh16ycp.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 321px;\" parent-style=\"width: 331px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240518214357-fgk7o7z",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240518214357-fgk7o7z",
+				"updated": "20240519161323"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "回顾之前写的资源管理器"
+				}
+			]
+		},
+		{
+			"ID": "20240518214403-l27bnd4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240518214403-l27bnd4",
+				"updated": "20240518214556"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们之前写的资源管理器"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AddressablesManager"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n通过自己管理异步加载的返回句柄会让系统自带的引用计数功能不起作用\n因为我们不停的在复用一个句柄"
+				}
+			]
+		},
+		{
+			"ID": "20240518214517-bkz090q",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240518214517-bkz090q",
+				"style": "line-height: 22px;",
+				"updated": "20240519153235"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Update()\n{\n    //创建对象 记录异步操作句柄\n    if (Input.GetKeyDown(KeyCode.Space))\n    {\n        AddressableMgr.Instance.LoadAssetAsync\u003cGameObject\u003e(\"Cube\", (obj) =\u003e\n        {\n            Instantiate(obj.Result);\n        });\n    }\n\n    //从创建对象中，释放异步操作句柄资源\n    if (Input.GetKeyDown(KeyCode.Q))\n    {\n        AddressableMgr.Instance.Release\u003cGameObject\u003e(\"Cube\");\n    }\n}\n\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240519153245-rfmd6kg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240519153245-rfmd6kg",
+				"updated": "20240519153259"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按下两次空格键，再按下一次Q键，实例化出来的两个对象的材质都会丢失，因为引用计数归0了，AB包及其对应的资源都被卸载"
+				}
+			]
+		},
+		{
+			"ID": "20240519153258-pjklo7q",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240519153258-pjklo7q",
+				"updated": "20240519153303"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 331px;",
+						"style": "width: 321px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240518224532-nh16ycp.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 321px;\" parent-style=\"width: 331px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240519153305-rxrvv7s",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240519153305-rxrvv7s",
+				"updated": "20240519153551"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "由于我们自己实现的管理器复用的是一个句柄，且没有实现引用计数\n这导致通过管理器去加载，即使加载了多个资源，只要卸载一次就会完全卸载掉内容"
+				}
+			]
+		},
+		{
+			"ID": "20240519161002-h2dbvia",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240519161002-h2dbvia",
+				"updated": "20240519161025"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果要避免这种情况，我们就必须要在自己的管理器内实现一个引用计数"
+				}
+			]
+		},
+		{
+			"ID": "20240519161026-1d31xco",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240519161026-1d31xco",
+				"style": "line-height: 22px;",
+				"updated": "20240519161323"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System;\nusing System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.AddressableAssets;\nusing UnityEngine.ResourceManagement.AsyncOperations;\n\npublic class AddressablesInfo\n{\n    //记录 异步操作句柄\n    public AsyncOperationHandle handle;\n    //记录 引用计数\n    public uint count;\n\n    public AddressablesInfo(AsyncOperationHandle handle)\n    {\n        this.handle = handle;\n\t\t//实例化时自动引用计数+1\n        this.count += 1;\n    }\n}\n\npublic class AddressableMgr\n{\n    private static AddressableMgr instance;\n    public static AddressableMgr Instance =\u003e instance ??= new AddressableMgr();\n\n    public Dictionary\u003cstring, AddressablesInfo\u003e resDic = new Dictionary\u003cstring, AddressablesInfo\u003e();\n\n    private AddressableMgr() { }\n\n    public void LoadAssetAsync\u003cT\u003e(string name, Action\u003cAsyncOperationHandle\u003cT\u003e\u003e callBack)\n    {\n        string keyName = name + \"_\" + typeof(T).Name;\n        AsyncOperationHandle\u003cT\u003e handle;\n        //如果加载过资源\n        if (resDic.ContainsKey(keyName))\n        {\n            handle = resDic[keyName].handle.Convert\u003cT\u003e();\n\t\t\t//引用计数+1\n            resDic[keyName].count += 1;\n            if (handle.IsDone)\n            {\n                if (handle.Status == AsyncOperationStatus.Succeeded)\n                {\n                  \n                    callBack?.Invoke(handle);\n                }\n                else\n                {\n                    Debug.LogWarning(keyName + \"资源加载失败！\");\n                    resDic.Remove(keyName);\n                }\n            }\n            else\n            {\n                handle.Completed += (obj) =\u003e\n                {\n                    if (obj.Status == AsyncOperationStatus.Succeeded)\n                    {\n                        callBack?.Invoke(obj);\n                    }\n                    else\n                    {\n                        Debug.LogWarning(keyName + \"资源加载失败！\");\n                        if (resDic.ContainsKey(keyName))\n                            resDic.Remove(keyName);\n                    }\n                };\n            }\n            return;\n        }\n        //如果未加载过资源\n        handle = Addressables.LoadAssetAsync\u003cT\u003e(name);\n        handle.Completed += (obj) =\u003e\n        {\n            if (obj.Status == AsyncOperationStatus.Succeeded)\n                callBack?.Invoke(obj);\n            else\n            {\n                Debug.LogWarning(keyName + \"资源加载失败！\");\n                if (resDic.ContainsKey(keyName))\n                    resDic.Remove(keyName);\n            }\n        };\n\t\t//引用计数+1\n        AddressablesInfo info = new AddressablesInfo(handle);\n        resDic.Add(keyName, info);\n    }\n\n    //异步加载多个资源 或者 加载指定资源\n    public void LoadAssetAsync\u003cT\u003e(Addressables.MergeMode mode, Action\u003cT\u003e callBack, params string[] keys)\n    {\n        //构建一个KeyName\n        List\u003cstring\u003e keyList = new List\u003cstring\u003e(keys);\n        string keyName = \"\";\n        foreach (string key in keyList)\n        {\n            keyName += key + \"_\";\n        }\n        keyName += typeof(T).Name;\n\n        //判断是否存在已经加载过的内容\n        AsyncOperationHandle\u003cIList\u003cT\u003e\u003e handle;\n        //如果存在\n        if (resDic.ContainsKey(keyName))\n        {          \n            handle = resDic[keyName].handle.Convert\u003cIList\u003cT\u003e\u003e();\n\t\t\t//引用计数+1\n            resDic[keyName].count++;\n            //如果已经全部加载完毕\n            if (handle.IsDone)\n            {  \n                foreach (T item in handle.Result)\n                {\n                    callBack?.Invoke(item);\n                }\n            }\n            //如果还没有全部加载完毕\n            else\n            {\n                handle.Completed += (obj) =\u003e\n                {\n                    //加载成功才调用外部传入的委托函数\n                    if (obj.Status == AsyncOperationStatus.Succeeded)\n                    {\n                        foreach (T item in handle.Result)\n                        {\n                            callBack?.Invoke(item);\n                        }\n                    }\n                };  //end handle.Completed\n            }\n            return;\n        }\n\n        //如果不存在\n        handle = Addressables.LoadAssetsAsync\u003cT\u003e(keyList, callBack, mode);\n        handle.Completed += (obj) =\u003e\n        {\n            if (obj.Status == AsyncOperationStatus.Failed)\n            {\n                Debug.LogError(\"资源加载失败\" + keyName);\n                if (resDic.ContainsKey(keyName))\n                    resDic.Remove(keyName);\n            }\n            else if (obj.Status == AsyncOperationStatus.Succeeded)\n            {\n                foreach (T item in handle.Result)\n                {\n                    callBack?.Invoke(item);\n                }\n            }\n        };\n\t\t//引用计数+1\n        AddressablesInfo info = new AddressablesInfo(handle);\n        resDic.Add(keyName, info);\n    }\n\n    //异步加载多个资源 或者 加载指定资源\n    public void LoadAssetAsync\u003cT\u003e(Addressables.MergeMode mode, Action\u003cAsyncOperationHandle\u003cIList\u003cT\u003e\u003e\u003e callBack, params string[] keys)\n    {\n        //构建一个KeyName\n        List\u003cstring\u003e keyList = new List\u003cstring\u003e(keys);\n        string keyName = \"\";\n        foreach (string key in keyList)\n        {\n            keyName += key + \"_\";\n        }\n        keyName += typeof(T).Name;\n        //判断是否存在已经加载过的内容\n        AsyncOperationHandle\u003cIList\u003cT\u003e\u003e handle;\n        //如果存在\n        if (resDic.ContainsKey(keyName))\n        {\n            handle = resDic[keyName].handle.Convert\u003cIList\u003cT\u003e\u003e();\n\t\t\t//引用计数+1\n            resDic[keyName].count++;\n            //如果已经全部加载完毕\n            if (handle.IsDone)\n            {\n                callBack?.Invoke(handle);\n            }\n            //如果还没有全部加载完毕\n            else\n            {\n                handle.Completed += (obj) =\u003e\n                {\n                    //加载成功才调用外部传入的委托函数\n                    if (obj.Status == AsyncOperationStatus.Succeeded)\n                    {\n                        callBack?.Invoke(obj);\n                    }\n                };  //end handle.Completed\n            }\n            return;\n        }\n        //如果不存在\n        handle = Addressables.LoadAssetsAsync\u003cT\u003e(keyList, null, mode);\n        handle.Completed += (obj) =\u003e\n        {\n            if (obj.Status == AsyncOperationStatus.Failed)\n            {\n                Debug.LogError(\"资源加载失败\" + keyName);\n                if (resDic.ContainsKey(keyName))\n                    resDic.Remove(keyName);\n            }\n            else if (obj.Status == AsyncOperationStatus.Succeeded)\n            {\n                callBack?.Invoke(obj);\n            }\n        };\n\t\t//引用计数+1\n        AddressablesInfo info = new AddressablesInfo(handle);\n        resDic.Add(keyName, info);\n    }\n\n    public void Release\u003cT\u003e(params string[] keys)\n    {\n        //构建一个KeyName\n        List\u003cstring\u003e keyList = new List\u003cstring\u003e(keys);\n        string keyName = \"\";\n        foreach (string key in keyList)\n        {\n            keyName += key + \"_\";\n        }\n        keyName += typeof(T).Name;\n\n        if (!resDic.ContainsKey(keyName))\n            return;\n        //引用计数-1\n        resDic[keyName].count -= 1;\n        if (resDic[keyName].count == 0)\n        {\n            Addressables.Release(resDic[keyName].handle.Convert\u003cT\u003e());\n            resDic.Remove(keyName);\n        }\n    }\n\n    public void Release\u003cT\u003e(string name)\n    {\n        string keyName = name + \"_\" + typeof(T).Name;\n        if (!resDic.ContainsKey(keyName))\n            return;\n        //引用计数-1\n        resDic[keyName].count -= 1;\n        if (resDic[keyName].count == 0)\n        {\n            Addressables.Release(resDic[keyName].handle.Convert\u003cT\u003e());\n            resDic.Remove(keyName);\n        }\n    }\n\n    public void Clear()\n    {\n        foreach (AddressablesInfo info in resDic.Values)\n        {\n            Addressables.Release(info.handle);\n        }\n        resDic.Clear();\n        AssetBundle.UnloadAllAssetBundles(true);\n        Resources.UnloadUnusedAssets();\n        GC.Collect();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240519161129-5myt55t",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240519161129-5myt55t"
+			}
+		}
+	]
+}

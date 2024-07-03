@@ -1,0 +1,2819 @@
+{
+	"ID": "20240407211559-cdybt7g",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240407211559-cdybt7g",
+		"title": "UEDL16——AssetImporter 和 AssetPostprocessor",
+		"type": "doc",
+		"updated": "20240408170634"
+	},
+	"Children": [
+		{
+			"ID": "20240408130541-w0alr96",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240408130541-w0alr96",
+				"updated": "20240408130545"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240408130546-jvzq27j",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240408130546-jvzq27j",
+				"style": "line-height: 22px;",
+				"updated": "20240408170140"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "AssetPostprocessor\t\t\t\t\t//主要用于处理资源导入时的通用逻辑，我们可以通过继承该类，并实现其中的一些回调方法来自定义处理资源\nassetPostprocessor.assetImporter\t//对应类型的资源导入器对象（AssetImporter类型），通过该属性来设置导入的资源\nassetPostprocessor.assetPath\t\t//导入资源的路径。该属性常用于导入资源时执行了回调函数后获取到导入资源的路径\nOnPreprocessTexture() { }\t\t\t//继承AssetPostprocessor的类声明该方法，导入纹理资源之前会调用，允许修改纹理的导入设置\nOnPostprocessTexture() { }\t\t\t//继承AssetPostprocessor的类声明该方法，导入纹理资源之后调用，允许你对导入后为其进行后处理\nOnPreprocessModel() { }\t\t\t\t//继承AssetPostprocessor的类声明该方法，导入模型资源之前调用，允许修改模型的导入设置\nOnPostprocessModel() { }\t\t\t//继承AssetPostprocessor的类声明该方法，导入模型资源之后调用，允许你对导入后为其进行后处理\nOnPreprocessAudio() { }\t\t\t\t//继承AssetPostprocessor的类声明该方法，导入音频资源之前调用，允许修改音频的导入设置\nOnPostprocessAudio() { }\t\t\t//继承AssetPostprocessor的类声明该方法，导入音频资源之后调用，允许你对导入后为其进行后处理\nAssetImporter\t\t\t\t\t\t//特定资源类型的资源导入程序的基类，它提供了一些方法和属性，用于配置和管理资源的导入设置\nTextureImporter\t\t\t\t\t\t//用于导入纹理资源，并配置纹理的压缩格式、尺寸、平铺方式等设置\nModelImporter\t\t\t\t\t\t//用于导入模型资源，并配置模型的导入设置，如网格、材质、动画等\nAudioImporter\t\t\t\t\t\t//用于导入音频资源，并配置音频的导入设置，如压缩格式、音频质量等\nVideoClipImporter\t\t\t\t\t//用于导入视频资源，并配置视频的导入设置，如视频质量、循环模式等\nScriptedImporter\t\t\t\t\t//用于创建自定义的资源导入器，可以通过编写脚本来实现对特定类型资源的导入设置和处理逻辑\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240407211559-5l9iaeh",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240407211559-5l9iaeh",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "AssetImporter 和 AssetPostprocessor 资源导入设置拓展"
+				}
+			]
+		},
+		{
+			"ID": "20240407230901-5dquovp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240407230901-5dquovp",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AssetImporter"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 和 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AssetPostprocessor"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 是需要配合进行使用的，它们主要是用于处理"
+				}
+			]
+		},
+		{
+			"ID": "20240407230934-omatom3",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240407230934-omatom3",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"ID": "20240407230934-qt5m71w",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240407230934-qt5m71w",
+						"updated": "20240408124927"
+					},
+					"Children": [
+						{
+							"ID": "20240407230934-ruz8kdz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240407230934-ruz8kdz",
+								"updated": "20240407230934"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "资源导入批量设置（对导入的资源进行统一设置）"
+								}
+							]
+						},
+						{
+							"ID": "20240408124800-f25wt2n",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408124800-f25wt2n",
+								"updated": "20240408124927"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "例如将导入的贴图文件纹理类型（Texture Type）统一修改为Sprite（2D and UI）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240407230934-5gul0s2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240407230934-5gul0s2",
+						"updated": "20240408125902"
+					},
+					"Children": [
+						{
+							"ID": "20240407230934-iiiurmr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240407230934-iiiurmr",
+								"updated": "20240407230934"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "资源导入后处理（对导入的资源进行统一的预处理）"
+								}
+							]
+						},
+						{
+							"ID": "20240408124912-khvcalf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408124912-khvcalf",
+								"updated": "20240408125902"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "操作资源文件本身的数据，例如统一将贴图一分为二，修改纹理格式、尺寸、压缩等等"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240408124135-po0t6qg",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240408124135-po0t6qg",
+				"name": "AssetPostprocessor",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "AssetPostprocessor（资源后处理器类）"
+				}
+			]
+		},
+		{
+			"ID": "20240408124205-ak54cmh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408124205-ak54cmh",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "它主要用于处理资源导入时的通用逻辑，我们可以通过继承该类，并实现其中的一些回调方法来自定义处理资源\n我们一般会进行以下处理："
+				}
+			]
+		},
+		{
+			"ID": "20240408124230-4c3vf8j",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240408124230-4c3vf8j",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"ID": "20240408124230-2n376qo",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240408124230-2n376qo",
+						"updated": "20240408124230"
+					},
+					"Children": [
+						{
+							"ID": "20240408124230-3o3tsvs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408124230-3o3tsvs",
+								"updated": "20240408124230"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "进行某种类型资源的通用设置"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240408124230-zwhi5b3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240408124230-zwhi5b3",
+						"updated": "20240408124230"
+					},
+					"Children": [
+						{
+							"ID": "20240408124230-ouhwwfa",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408124230-ouhwwfa",
+								"updated": "20240408124230"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对某种类型资源进行统一批量的处理"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240408124256-stmrtpx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408124256-stmrtpx",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：如果只想对某种资源中的某些内容进行处理，可以自己加命名规则"
+				}
+			]
+		},
+		{
+			"ID": "20240408124551-h320r6q",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408124551-h320r6q",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AssetPostprocessor"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的更多内容："
+				}
+			]
+		},
+		{
+			"ID": "20240408124603-f9p4m7i",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240408124603-f9p4m7i",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"ID": "20240408124624-e2ic5di",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240408124624-e2ic5di",
+						"updated": "20240408124726"
+					},
+					"Children": [
+						{
+							"ID": "20240408124624-mmk920b",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408124624-mmk920b",
+								"updated": "20240408124726"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "a",
+									"TextMarkAHref": "https://docs.unity.cn/cn/2022.3/ScriptReference/AssetPostprocessor.html",
+									"TextMarkTextContent": "AssetPostprocessor - Unity 脚本 API"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "（中文文档，缺失部分翻译）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240408124604-qushcgq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240408124604-qushcgq",
+						"updated": "20240408124604"
+					},
+					"Children": [
+						{
+							"ID": "20240408124604-y5oupwr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408124604-y5oupwr",
+								"updated": "20240408124620"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "a",
+									"TextMarkAHref": "https://docs.unity3d.com/ScriptReference/AssetPostprocessor.html",
+									"TextMarkTextContent": "Unity - Scripting API: AssetPostprocessor (unity3d.com)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "（英文文档）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240408124205-x0bxqn4",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240408124205-x0bxqn4",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "继承AssetPostprocessor后的常用属性"
+				}
+			]
+		},
+		{
+			"ID": "20240408124347-byqpv5u",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240408124347-byqpv5u",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"ID": "20240408130101-9iqlmh1",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240408130101-9iqlmh1",
+						"name": "assetPostprocessor.assetImporter",
+						"updated": "20240408162712"
+					},
+					"Children": [
+						{
+							"ID": "20240408130101-pkhu2y0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408130101-pkhu2y0",
+								"updated": "20240408132247"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "assetImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：对应类型的资源导入器对象（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240408131515-jam7bwy",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "AssetImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​类型）"
+								}
+							]
+						},
+						{
+							"ID": "20240408132250-lm3a89l",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408132250-lm3a89l",
+								"updated": "20240408162712"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "我们可以通过该属性来设置导入的资源，效果就相当于在Inspector窗口上设置资源一样\n假设我们要修改导入的贴图为Sprite，并关闭Mipmap"
+								}
+							]
+						},
+						{
+							"ID": "20240408133145-h77glui",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240408133145-h77glui",
+								"style": "line-height: 22px;",
+								"updated": "20240408133145"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private void OnPreprocessTexture()\n{\n    Debug.Log(\"纹理设置回调\" + assetPath);\n    TextureImporter importer = assetImporter as TextureImporter;\n    //将导入的贴图设置为Sprite(2D and UI)类型的\n    importer.textureType = TextureImporterType.Sprite;\n    //不开启该贴图的Mipmap\n    importer.mipmapEnabled = false;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240408133145-ompb5ep",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408133145-ompb5ep",
+								"updated": "20240408133200"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "贴图被设置为："
+								}
+							]
+						},
+						{
+							"ID": "20240408133145-luo3fdu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408133145-luo3fdu",
+								"updated": "20240408133145"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 593px;",
+										"style": "width: 583px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240408133050-wxibl4g.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 583px;\" parent-style=\"width: 593px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240408130102-kuekf1f",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240408130102-kuekf1f",
+						"name": "assetPostprocessor.assetPath"
+					},
+					"Children": [
+						{
+							"ID": "20240408130102-lvncfm9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408130102-lvncfm9"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "assetPath"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：导入资源的路径（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "string"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​类型）"
+								}
+							]
+						},
+						{
+							"ID": "20240408130449-k99uris",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408130449-k99uris",
+								"updated": "20240408130514"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "该属性常用于导入资源时执行了回调函数后获取到导入资源的路径"
+								}
+							]
+						},
+						{
+							"ID": "20240408130514-7829y2d",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240408130514-7829y2d",
+								"style": "line-height: 22px;",
+								"updated": "20240408130519"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private void OnPreprocessTexture()\n{\n    Debug.Log(\"纹理设置回调\" + assetPath);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240408130525-e06k3cy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408130525-e06k3cy",
+								"updated": "20240408130525"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "当导入一个贴图资源时，会自动执行该方法："
+								}
+							]
+						},
+						{
+							"ID": "20240408130525-1m4wiot",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408130525-1m4wiot",
+								"updated": "20240408130525"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240408130432-bwm1hjx.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240408124205-0xjdpfv",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240408124205-0xjdpfv",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "继承AssetPostprocessor后的常用回调方法"
+				}
+			]
+		},
+		{
+			"ID": "20240408125425-8d5jlga",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240408125425-8d5jlga",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"ID": "20240408125446-rfxuouo",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240408125446-rfxuouo",
+						"updated": "20240408133050"
+					},
+					"Children": [
+						{
+							"ID": "20240408125446-5pn2n47",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408125446-5pn2n47",
+								"updated": "20240408125502"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "纹理相关"
+								}
+							]
+						},
+						{
+							"ID": "20240408125502-7acjgz3",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240408125502-7acjgz3",
+								"updated": "20240408133050"
+							},
+							"Children": [
+								{
+									"ID": "20240408125502-e09fxmr",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240408125502-e09fxmr",
+										"name": "OnPreprocessTexture()",
+										"updated": "20240408133050"
+									},
+									"Children": [
+										{
+											"ID": "20240408125502-2d6gpsw",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408125502-2d6gpsw",
+												"updated": "20240408125505"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "void OnPreprocessTexture()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 导入纹理资源之前调用，允许修改纹理的导入设置"
+												}
+											]
+										},
+										{
+											"ID": "20240408125940-vfiga39",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240408125940-vfiga39",
+												"style": "line-height: 22px;",
+												"updated": "20240408132805"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "private void OnPreprocessTexture()\n{\n    Debug.Log(\"纹理设置回调\" + assetPath);\n    TextureImporter importer = assetImporter as TextureImporter;\n    //将导入的贴图设置为Sprite(2D and UI)类型的\n    importer.textureType = TextureImporterType.Sprite;\n    //不开启该贴图的Mipmap\n    importer.mipmapEnabled = false;\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20240408130341-8nb3jfo",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408130341-8nb3jfo",
+												"updated": "20240408130403"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "当导入一个贴图资源时，会自动执行该方法："
+												}
+											]
+										},
+										{
+											"ID": "20240408130432-3kzb9nn",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408130432-3kzb9nn",
+												"updated": "20240408132812"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20240408130432-bwm1hjx.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20240408132812-8w5ejbg",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408132812-8w5ejbg",
+												"updated": "20240408132828"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "同时，贴图也被设置："
+												}
+											]
+										},
+										{
+											"ID": "20240408133050-3dury9s",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408133050-3dury9s",
+												"updated": "20240408133050"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Properties": {
+														"parent-style": "width: 593px;",
+														"style": "width: 583px;"
+													},
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20240408133050-wxibl4g.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeKramdownSpanIAL",
+													"Data": "{: style=\"width: 583px;\" parent-style=\"width: 593px;\"}"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20240408131054-5li6030",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408131054-5li6030",
+												"updated": "20240408131115"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "在贴图的Inspector窗口内，可以看到回调函数"
+												}
+											]
+										},
+										{
+											"ID": "20240408131116-2iwicrs",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408131116-2iwicrs",
+												"updated": "20240408131116"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20240408131116-wtochdd.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240408125503-9q128r0",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240408125503-9q128r0",
+										"name": "OnPostprocessTexture()",
+										"updated": "20240408131124"
+									},
+									"Children": [
+										{
+											"ID": "20240408125503-bgwwzji",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408125503-bgwwzji",
+												"updated": "20240408125514"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "void OnPostprocessTexture(Texture2D texture)"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 导入纹理资源之后调用，允许你对导入后为其进行后处理\n比如 修改纹理格式、尺寸、压缩等等"
+												}
+											]
+										},
+										{
+											"ID": "20240408130050-22fme1d",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240408130050-22fme1d",
+												"style": "line-height: 22px;",
+												"updated": "20240408130722"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "private void OnPostprocessTexture(Texture2D texture)\n{\n    Debug.Log(\"纹理后处理回调\" + texture.name);\n    //对纹理进行压缩\n    EditorUtility.CompressTexture(texture, TextureFormat.ETC_RGB4, TextureCompressionQuality.Fast);\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20240408130724-5khubxo",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408130724-5khubxo",
+												"updated": "20240408131123"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "执行结果："
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Properties": {
+														"parent-style": "width: 629px;",
+														"style": "width: 619px;"
+													},
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20240408131018-wtmys5i.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeKramdownSpanIAL",
+													"Data": "{: style=\"width: 619px;\" parent-style=\"width: 629px;\"}"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20240408131124-g8lzptc",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408131124-g8lzptc",
+												"updated": "20240408131124"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "在贴图的Inspector窗口内，可以看到回调函数"
+												}
+											]
+										},
+										{
+											"ID": "20240408131124-cwq1rog",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408131124-cwq1rog",
+												"updated": "20240408131124"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20240408131116-wtochdd.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240408125449-vzsrdv7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240408125449-vzsrdv7",
+						"name": "OnPreprocessModel()",
+						"updated": "20240408170012"
+					},
+					"Children": [
+						{
+							"ID": "20240408125449-sryg7bl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408125449-sryg7bl",
+								"updated": "20240408125522"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "模型相关"
+								}
+							]
+						},
+						{
+							"ID": "20240408125522-xqlpxax",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240408125522-xqlpxax",
+								"updated": "20240408170012"
+							},
+							"Children": [
+								{
+									"ID": "20240408125522-k6ukkmk",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240408125522-k6ukkmk",
+										"updated": "20240408165946"
+									},
+									"Children": [
+										{
+											"ID": "20240408125522-ntm590p",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408125522-ntm590p",
+												"updated": "20240408125619"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "void OnPreprocessModel()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 导入模型资源之前调用，允许修改模型的导入设置"
+												}
+											]
+										},
+										{
+											"ID": "20240408133231-m37j2n5",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408133231-m37j2n5",
+												"updated": "20240408165946"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "使用方法参考"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref code",
+													"TextMarkBlockRefID": "20240408125502-e09fxmr",
+													"TextMarkBlockRefSubtype": "d",
+													"TextMarkTextContent": "OnPreprocessTexture()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，可在该函数内使用"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code block-ref",
+													"TextMarkBlockRefID": "20240408131631-eq6rlw9",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "ModelImporter"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20240408125951-ckocb8y",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240408125951-ckocb8y",
+												"style": "line-height: 22px;",
+												"updated": "20240408133224"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "private void OnPreprocessModel() { }\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240408125527-14fw644",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240408125527-14fw644",
+										"name": "OnPostprocessModel()",
+										"updated": "20240408170012"
+									},
+									"Children": [
+										{
+											"ID": "20240408125527-mgr6ury",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408125527-mgr6ury",
+												"updated": "20240408170012"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "void OnPostprocessModel(GameObject obj)"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 导入模型资源之后调用，允许你对导入后为其进行后处理，\n比如 修改网格、材质、动画等，使用方法参考"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref code",
+													"TextMarkBlockRefID": "20240408125503-9q128r0",
+													"TextMarkBlockRefSubtype": "d",
+													"TextMarkTextContent": "OnPostprocessTexture()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20240408133225-762r3uq",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240408133225-762r3uq",
+												"style": "line-height: 22px;",
+												"updated": "20240408133229"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "private void OnPostprocessModel(GameObject gameObject) { }\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240408125450-isjjxqg",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240408125450-isjjxqg",
+						"updated": "20240408170025"
+					},
+					"Children": [
+						{
+							"ID": "20240408125450-xd66hwe",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408125450-xd66hwe",
+								"updated": "20240408125546"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "音频相关"
+								}
+							]
+						},
+						{
+							"ID": "20240408125546-wjn9k3k",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240408125546-wjn9k3k",
+								"updated": "20240408170025"
+							},
+							"Children": [
+								{
+									"ID": "20240408125546-fs9slp5",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240408125546-fs9slp5",
+										"name": "OnPreprocessAudio()",
+										"updated": "20240408170020"
+									},
+									"Children": [
+										{
+											"ID": "20240408125546-nux4kn8",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408125546-nux4kn8",
+												"updated": "20240408125615"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "void OnPreprocessAudio()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 导入音频资源之前调用，允许修改音频的导入设置"
+												}
+											]
+										},
+										{
+											"ID": "20240408133324-ww6kqwn",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408133324-ww6kqwn",
+												"updated": "20240408170020"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "使用方法参考"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref code",
+													"TextMarkBlockRefID": "20240408125502-e09fxmr",
+													"TextMarkBlockRefSubtype": "d",
+													"TextMarkTextContent": "OnPreprocessTexture()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，可在该函数内使用"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref code",
+													"TextMarkBlockRefID": "20240408131634-yukwn2x",
+													"TextMarkBlockRefSubtype": "d",
+													"TextMarkTextContent": "AudioImporter"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20240408125958-n01qpg9",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240408125958-n01qpg9",
+												"style": "line-height: 22px;",
+												"updated": "20240408130026"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "private void OnPreprocessAudio() { }\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240408125547-rtllynw",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240408125547-rtllynw",
+										"name": "OnPostprocessAudio()",
+										"updated": "20240408170025"
+									},
+									"Children": [
+										{
+											"ID": "20240408125547-c2p5k17",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408125547-c2p5k17",
+												"updated": "20240408170025"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "void OnPostprocessAudio(AudioClip clip)"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 导入音频资源之后调用，允许你对导入后为其进行后处理，\n比如 修改音频格式、质量等，使用方法参考"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref code",
+													"TextMarkBlockRefID": "20240408125503-9q128r0",
+													"TextMarkBlockRefSubtype": "d",
+													"TextMarkTextContent": "OnPostprocessTexture()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20240408130021-moqcm7k",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240408130021-moqcm7k",
+												"style": "line-height: 22px;",
+												"updated": "20240408130024"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "private void OnPostprocessAudio(AudioClip clip) { }\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240408125443-em6vk1h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408125443-em6vk1h",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "等等，每一种资源类型都有对应的回调函数，具体可见："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "a",
+					"TextMarkAHref": "https://docs.unity.cn/cn/2022.3/ScriptReference/AssetPostprocessor.html",
+					"TextMarkTextContent": "AssetPostprocessor - Unity 脚本 API"
+				}
+			]
+		},
+		{
+			"ID": "20240408131515-jam7bwy",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240408131515-jam7bwy",
+				"name": "AssetImporter",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "AssetImporter (资源导入器类）"
+				}
+			]
+		},
+		{
+			"ID": "20240408131536-12e7vl1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408131536-12e7vl1",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AssetImporter"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 是 特定资源类型的资源导入程序的基类，它提供了一些方法和属性，用于配置和管理资源的导入设置\n一般"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "我们不会直接使用该类，而是通过使用继承它的子类来设置导入资源的相关信息"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n当我们导入一个资源时，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "在Inspector窗口中进行的相关设置，都是通过继承该类的子类实现的"
+				}
+			]
+		},
+		{
+			"ID": "20240408131608-ajelpy3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408131608-ajelpy3",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "它的子类一般按照资源类型来划分："
+				}
+			]
+		},
+		{
+			"ID": "20240408131628-54mfl7i",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240408131628-54mfl7i",
+				"updated": "20240408170634"
+			},
+			"Children": [
+				{
+					"ID": "20240408131630-96lqk4u",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240408131630-96lqk4u",
+						"name": "TextureImporter",
+						"updated": "20240408163328"
+					},
+					"Children": [
+						{
+							"ID": "20240408131630-m6o5boj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408131630-m6o5boj",
+								"updated": "20240408163328"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "TextureImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：用于导入纹理资源，并配置纹理的压缩格式、尺寸、平铺方式等设置"
+								}
+							]
+						},
+						{
+							"ID": "20240408163331-l5m7zyt",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408163331-l5m7zyt",
+								"updated": "20240408170456"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在纹理被导入时，我们可以在继承"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AssetPostprocessor"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的类中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnPreprocessTexture()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​内\n通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "as"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​成"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "TextureImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "assetImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​属性来批量设置纹理，就像在Inspector窗口上"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20230726022149-s75ymy5",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "设置导入纹理"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "那样"
+								}
+							]
+						},
+						{
+							"ID": "20240408162534-gfrlsd8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408162534-gfrlsd8",
+								"updated": "20240408170456"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "我们可以通过该属性来修改导入的资源的设置，效果就相当于在Inspector窗口上设置资源一样\n假设我们要修改导入的贴图为Sprite，并关闭Mipmap"
+								}
+							]
+						},
+						{
+							"ID": "20240408162534-dowxh77",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240408162534-dowxh77",
+								"style": "line-height: 22px;",
+								"updated": "20240408170456"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private void OnPreprocessTexture()\n{\n    Debug.Log(\"纹理设置回调\" + assetPath);\n    TextureImporter importer = assetImporter as TextureImporter;\n    //将导入的贴图设置为Sprite(2D and UI)类型的\n    importer.textureType = TextureImporterType.Sprite;\n    //不开启该贴图的Mipmap\n    importer.mipmapEnabled = false;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240408162534-5ufvn27",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408162534-5ufvn27",
+								"updated": "20240408170456"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "贴图被设置为："
+								}
+							]
+						},
+						{
+							"ID": "20240408162534-q9tddct",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408162534-q9tddct",
+								"updated": "20240408170456"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 593px;",
+										"style": "width: 583px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240408133050-wxibl4g.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 583px;\" parent-style=\"width: 593px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240408162358-tuwv75f",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408162358-tuwv75f",
+								"updated": "20240408170456"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "API说明："
+								}
+							]
+						},
+						{
+							"ID": "20240408162354-k1bgw7o",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240408162354-k1bgw7o",
+								"updated": "20240408170456"
+							},
+							"Children": [
+								{
+									"ID": "20240408162401-ltqyp4k",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240408162401-ltqyp4k"
+									},
+									"Children": [
+										{
+											"ID": "20240408162401-ooevgnm",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408162401-ooevgnm",
+												"updated": "20240408162434"
+											},
+											"Children": [
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "a",
+													"TextMarkAHref": "https://docs.unity.cn/cn/2022.3/ScriptReference/TextureImporter.html",
+													"TextMarkTextContent": "TextureImporter - Unity 脚本 API"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240408162356-aivgca4",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240408162356-aivgca4",
+										"updated": "20240408162356"
+									},
+									"Children": [
+										{
+											"ID": "20240408162356-5ct56f9",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408162356-5ct56f9",
+												"updated": "20240408162356"
+											},
+											"Children": [
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "a",
+													"TextMarkAHref": "https://docs.unity3d.com/ScriptReference/TextureImporter.html",
+													"TextMarkTextContent": "Unity - Scripting API: TextureImporter (unity3d.com)"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240408131631-eq6rlw9",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240408131631-eq6rlw9",
+						"name": "ModelImporter",
+						"updated": "20240408170326"
+					},
+					"Children": [
+						{
+							"ID": "20240408131631-afwv062",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408131631-afwv062",
+								"updated": "20240408163459"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ModelImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：用于导入模型资源，并配置模型的导入设置，如网格、材质、动画等"
+								}
+							]
+						},
+						{
+							"ID": "20240408163427-xj8yktq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408163427-xj8yktq",
+								"updated": "20240408170326"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在模型被导入时，我们可以在继承"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AssetPostprocessor"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的类中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnPreprocessTexture()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​内\n通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "as"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​成"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ModelImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "assetImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​属性来批量设置模型，就像在Inspector窗口上"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20230807192048-3w78utg",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "设置导入模型"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "那样\n使用方法参考："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref code",
+									"TextMarkBlockRefID": "20240408131630-96lqk4u",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "TextureImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240408162732-p5w35lm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408162732-p5w35lm",
+								"updated": "20240408162858"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "API说明：\n"
+								}
+							]
+						},
+						{
+							"ID": "20240408162900-jws714b",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240408162900-jws714b"
+							},
+							"Children": [
+								{
+									"ID": "20240408162859-ke86wrw",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240408162859-ke86wrw"
+									},
+									"Children": [
+										{
+											"ID": "20240408162859-416tcgg",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408162859-416tcgg",
+												"updated": "20240408162921"
+											},
+											"Children": [
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "a",
+													"TextMarkAHref": "https://docs.unity.cn/cn/2021.3/ScriptReference/ModelImporter.html",
+													"TextMarkTextContent": "ModelImporter - Unity 脚本 API"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240408162930-2wjr735",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240408162930-2wjr735"
+									},
+									"Children": [
+										{
+											"ID": "20240408162930-ehqn220",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408162930-ehqn220",
+												"updated": "20240408162931"
+											},
+											"Children": [
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "a",
+													"TextMarkAHref": "https://docs.unity3d.com/ScriptReference/ModelImporter.html",
+													"TextMarkTextContent": "Unity - Scripting API: ModelImporter (unity3d.com)"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240408131634-yukwn2x",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240408131634-yukwn2x",
+						"name": "AudioImporter",
+						"updated": "20240408170332"
+					},
+					"Children": [
+						{
+							"ID": "20240408131634-yp8e5tc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408131634-yp8e5tc",
+								"updated": "20240408163552"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AudioImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：用于导入音频资源，并配置音频的导入设置，如压缩格式、音频质量等"
+								}
+							]
+						},
+						{
+							"ID": "20240408163504-pn1cbsg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408163504-pn1cbsg",
+								"updated": "20240408170332"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在音频被导入时，我们可以在继承"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AssetPostprocessor"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的类中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnPreprocessTexture()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​内\n通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "as"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​成"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AudioImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "assetImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​属性来批量设置音频，就像在Inspector窗口上"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20230710005845-s9ivdfz",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "设置导入音频"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "那样\n使用方法参考："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref code",
+									"TextMarkBlockRefID": "20240408131630-96lqk4u",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "TextureImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240408162941-5f571hx",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408162941-5f571hx",
+								"updated": "20240408163109"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "API说明：\n"
+								}
+							]
+						},
+						{
+							"ID": "20240408163110-nbo1w1l",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240408163110-nbo1w1l"
+							},
+							"Children": [
+								{
+									"ID": "20240408163110-8su0rt3",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240408163110-8su0rt3"
+									},
+									"Children": [
+										{
+											"ID": "20240408163110-tf649ub",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408163110-tf649ub",
+												"updated": "20240408163131"
+											},
+											"Children": [
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "a",
+													"TextMarkAHref": "https://docs.unity.cn/cn/2022.3/ScriptReference/AudioImporter.html",
+													"TextMarkTextContent": "AudioImporter - Unity 脚本 API"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240408163132-ifseoav",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240408163132-ifseoav"
+									},
+									"Children": [
+										{
+											"ID": "20240408163132-hsirmht",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408163132-hsirmht",
+												"updated": "20240408163137"
+											},
+											"Children": [
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "a",
+													"TextMarkAHref": "https://docs.unity3d.com/ScriptReference/AudioImporter.html",
+													"TextMarkTextContent": "Unity - Scripting API: AudioImporter (unity3d.com)"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240408131636-tkon8dy",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240408131636-tkon8dy",
+						"name": "VideoClipImporter",
+						"updated": "20240408170335"
+					},
+					"Children": [
+						{
+							"ID": "20240408131636-gbm3gu8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408131636-gbm3gu8",
+								"updated": "20240408163611"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "VideoClipImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：用于导入视频资源，并配置视频的导入设置，如视频质量、循环模式等"
+								}
+							]
+						},
+						{
+							"ID": "20240408163609-1qf7vr2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408163609-1qf7vr2",
+								"updated": "20240408170335"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在视频被导入时，我们可以在继承"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AssetPostprocessor"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的类中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnPreprocessTexture()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​内\n通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "as"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​成"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "VideoClipImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "assetImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​属性来批量设置视频，就像在Inspector窗口上"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20231117202342-d8tskpm",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "设置导入视频"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "那样\n使用方法参考："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref code",
+									"TextMarkBlockRefID": "20240408131630-96lqk4u",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "TextureImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240408163141-3npnrn1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408163141-3npnrn1",
+								"updated": "20240408164721"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "API说明：\n"
+								}
+							]
+						},
+						{
+							"ID": "20240408164722-pt6x5pm",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240408164722-pt6x5pm"
+							},
+							"Children": [
+								{
+									"ID": "20240408164739-v6hgib6",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240408164739-v6hgib6"
+									},
+									"Children": [
+										{
+											"ID": "20240408164739-ayy4ge6",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408164739-ayy4ge6",
+												"updated": "20240408164759"
+											},
+											"Children": [
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "a",
+													"TextMarkAHref": "https://docs.unity.cn/cn/2022.3/ScriptReference/VideoClipImporter.html",
+													"TextMarkTextContent": "VideoClipImporter - Unity 脚本 API"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240408164722-96ztyq4",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240408164722-96ztyq4"
+									},
+									"Children": [
+										{
+											"ID": "20240408164722-v29frk1",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408164722-v29frk1",
+												"updated": "20240408164736"
+											},
+											"Children": [
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "a",
+													"TextMarkAHref": "https://docs.unity3d.com/ScriptReference/VideoClipImporter.html",
+													"TextMarkTextContent": "Unity - Scripting API: VideoClipImporter (unity3d.com)"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240408131637-zg07o69",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240408131637-zg07o69",
+						"name": "ScriptedImporter",
+						"updated": "20240408164914"
+					},
+					"Children": [
+						{
+							"ID": "20240408131637-oafiefm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408131637-oafiefm",
+								"updated": "20240408164820"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ScriptedImporter"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：用于创建自定义的资源导入器，可以通过编写脚本来实现对特定类型资源的导入设置和处理逻辑\n如果想要对某些特定格式的资源进行自定义配置处理，可以通过继承该类的方式去实现\n"
+								}
+							]
+						},
+						{
+							"ID": "20240408164906-djbt9yh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408164906-djbt9yh"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "API说明：\n"
+								}
+							]
+						},
+						{
+							"ID": "20240408164904-uibjivj",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240408164904-uibjivj",
+								"updated": "20240408164914"
+							},
+							"Children": [
+								{
+									"ID": "20240408164903-12aolpi",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240408164903-12aolpi"
+									},
+									"Children": [
+										{
+											"ID": "20240408164903-sjn8k8k",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408164903-sjn8k8k",
+												"updated": "20240408164905"
+											},
+											"Children": [
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "a",
+													"TextMarkAHref": "https://docs.unity.cn/cn/2022.3/ScriptReference/AssetImporters.ScriptedImporter.html",
+													"TextMarkTextContent": "AssetImporters.ScriptedImporter - Unity 脚本 API"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240408164913-gfj6m9b",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240408164913-gfj6m9b",
+										"updated": "20240408164914"
+									},
+									"Children": [
+										{
+											"ID": "20240408164913-j45yvxf",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240408164913-j45yvxf",
+												"updated": "20240408164914"
+											},
+											"Children": [
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "a",
+													"TextMarkAHref": "https://docs.unity3d.com/ScriptReference/AssetImporters.ScriptedImporter.html",
+													"TextMarkTextContent": "Unity - Scripting API: ScriptedImporter (unity3d.com)"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

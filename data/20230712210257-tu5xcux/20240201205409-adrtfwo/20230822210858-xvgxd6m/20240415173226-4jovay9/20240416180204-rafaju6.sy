@@ -1,0 +1,902 @@
+{
+	"ID": "20240416180204-rafaju6",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240416180204-rafaju6",
+		"title": "UFL3-2——缓存池具体实现",
+		"type": "doc",
+		"updated": "20240422222131"
+	},
+	"Children": [
+		{
+			"ID": "20240416180204-vk6cx5t",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240416180204-vk6cx5t",
+				"updated": "20240416180216"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "缓存池具体实现"
+				}
+			]
+		},
+		{
+			"ID": "20240416180232-4w9oz2d",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240416180232-4w9oz2d",
+				"updated": "20240416180232"
+			},
+			"Children": [
+				{
+					"ID": "20240416180232-6jiglsu",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240416180232-6jiglsu",
+						"updated": "20240416180232"
+					},
+					"Children": [
+						{
+							"ID": "20240416180232-w0s3lhg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416180232-w0s3lhg",
+								"updated": "20240416180232"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "创建"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "PoolManager"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​继承 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240104151530-3axozd7",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "不继承MonoBehaviour的单例模式基类"
+								}
+							]
+						},
+						{
+							"ID": "20240416180232-8bxfx7w",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240416180232-8bxfx7w",
+								"style": "line-height: 22px;",
+								"updated": "20240416180232"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "/// \u003csummary\u003e\n/// 缓存池模块 管理器\n/// \u003c/summary\u003e\npublic class PoolManager : BaseManager\u003cPoolManager\u003e\n{\n    private PoolManager() { }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240416180232-fny3j1w",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240416180232-fny3j1w",
+						"updated": "20240416180232"
+					},
+					"Children": [
+						{
+							"ID": "20240416180232-f1xtwd7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416180232-f1xtwd7",
+								"updated": "20240416180232"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "声明柜子("
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Dictionary"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​)和抽屉("
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "List"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Stack"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Queue"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​等)容器"
+								}
+							]
+						},
+						{
+							"ID": "20240416180232-2738wbx",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240416180232-2738wbx",
+								"style": "line-height: 22px;",
+								"updated": "20240416180232"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "/// \u003csummary\u003e\n/// 缓存池模块 管理器\n/// \u003c/summary\u003e\npublic class PoolManager : BaseManager\u003cPoolManager\u003e\n{\n\t//柜子容器当中有抽屉的体现\n\tprivate Dictionary\u003cstring, Stack\u003cGameObject\u003e\u003e poolDic = new Dictionary\u003cstring, Stack\u003cGameObject\u003e\u003e();\n\n    private PoolManager() { }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240416180232-e40soah",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240416180232-e40soah",
+						"updated": "20240416180232"
+					},
+					"Children": [
+						{
+							"ID": "20240416180232-tu2jr8w",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416180232-tu2jr8w",
+								"updated": "20240416180232"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "拿东西方法 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetObj"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240416180232-50t65l6",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240416180232-50t65l6",
+								"updated": "20240416180232"
+							},
+							"Children": [
+								{
+									"ID": "20240416180232-wvzmws2",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240416180232-wvzmws2",
+										"updated": "20240416180232"
+									},
+									"Children": [
+										{
+											"ID": "20240416180232-cfzrh1s",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240416180232-cfzrh1s",
+												"updated": "20240416180232"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "有抽屉并且抽屉里有东西 直接获取"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240416180232-cwgjxum",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240416180232-cwgjxum",
+										"updated": "20240416180232"
+									},
+									"Children": [
+										{
+											"ID": "20240416180232-kt2m86w",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240416180232-kt2m86w",
+												"updated": "20240416180232"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "没有抽屉或者抽屉里没东西 创造"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240416180232-po9lfg7",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240416180232-po9lfg7",
+								"style": "line-height: 22px;",
+								"updated": "20240416180232"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\n\n/// \u003csummary\u003e\n/// 缓存池模块 管理器\n/// \u003c/summary\u003e\npublic class PoolManager : BaseManager\u003cPoolManager\u003e\n{\n    //柜子容器当中有抽屉的体现\n    private Dictionary\u003cstring, Stack\u003cGameObject\u003e\u003e poolDic = new Dictionary\u003cstring, Stack\u003cGameObject\u003e\u003e();\n\n    private PoolManager() { }\n\n    /// \u003csummary\u003e\n    /// 拿东西的方法\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e抽屉容器的名字\u003c/param\u003e\n    /// \u003creturns\u003e从缓存池中取出的对象\u003c/returns\u003e\n    public GameObject GetObj(string name)\n    {\n        GameObject obj;\n        //有抽屉，且抽屉内有对象\n        if (poolDic.ContainsKey(name) \u0026\u0026 poolDic[name].Count \u003e 0)\n        {\n            obj = poolDic[name].Pop();\n            obj.SetActive(true);\n        }\n        //否则，就应该去创建对象\n        else\n        {\n            obj = GameObject.Instantiate(Resources.Load\u003cGameObject\u003e(name));\n        }\n        return obj;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240416180232-0uf4vwb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240416180232-0uf4vwb",
+						"updated": "20240416180232"
+					},
+					"Children": [
+						{
+							"ID": "20240416180232-jjyhugy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416180232-jjyhugy",
+								"updated": "20240416180232"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "放东西方法 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "PushObj"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240416180232-1h74olf",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240416180232-1h74olf",
+								"updated": "20240416180232"
+							},
+							"Children": [
+								{
+									"ID": "20240416180232-1u3izl1",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240416180232-1u3izl1",
+										"updated": "20240416180232"
+									},
+									"Children": [
+										{
+											"ID": "20240416180232-wh2ht1i",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240416180232-wh2ht1i",
+												"updated": "20240416180232"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "有抽屉，直接放"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240416180232-syyfxdj",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240416180232-syyfxdj",
+										"updated": "20240416180232"
+									},
+									"Children": [
+										{
+											"ID": "20240416180232-y5dpdz9",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240416180232-y5dpdz9",
+												"updated": "20240416180232"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "没抽屉，创建抽屉，再放"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240416180232-siw4b1i",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240416180232-siw4b1i",
+								"style": "line-height: 22px;",
+								"updated": "20240416180232"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\n\n/// \u003csummary\u003e\n/// 缓存池模块 管理器\n/// \u003c/summary\u003e\npublic class PoolManager : BaseManager\u003cPoolManager\u003e\n{\n    //柜子容器当中有抽屉的体现\n    private Dictionary\u003cstring, Stack\u003cGameObject\u003e\u003e poolDic = new Dictionary\u003cstring, Stack\u003cGameObject\u003e\u003e();\n\n    private PoolManager() { }\n\n    /// \u003csummary\u003e\n    /// 往缓存池中放入对象\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e抽屉（对象池）的名字\u003c/param\u003e\n    /// \u003cparam name=\"obj\"\u003e要放入的对象\u003c/param\u003e\n    public void PushObj(string name, GameObject obj)\n    {\n        //并不是直接移除对象，而是将对象失活一会再用，用的时候再激活它\n        //除了失活对象，还可以通过把对象放到很远的地方等方式来隐藏对象（失活的性能可能偏低一些）\n        obj.SetActive(false);\n        //如果不存在对应的抽屉容器，先创建抽屉，再往抽屉内放\n        if (!poolDic.ContainsKey(name))\n            poolDic.Add(name, new Stack\u003cGameObject\u003e());\n        poolDic[name].Push(obj);\n    }\n\n    /// \u003csummary\u003e\n    /// 拿东西的方法\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e抽屉容器的名字\u003c/param\u003e\n    /// \u003creturns\u003e从缓存池中取出的对象\u003c/returns\u003e\n    public GameObject GetObj(string name)\n    {\n        GameObject obj;\n        //有抽屉，且抽屉内有对象\n        if (poolDic.ContainsKey(name) \u0026\u0026 poolDic[name].Count \u003e 0)\n        {\n            obj = poolDic[name].Pop();\n            obj.SetActive(true);\n        }\n        //否则，就应该去创建对象\n        else\n        {\n            obj = GameObject.Instantiate(Resources.Load\u003cGameObject\u003e(name));\n        }\n        return obj;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240416180232-grvnx5b",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20240416180232-grvnx5b",
+						"updated": "20240416180232"
+					},
+					"Children": [
+						{
+							"ID": "20240416180232-ff3sy8z",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416180232-ff3sy8z",
+								"updated": "20240416180232"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "清空柜子方法 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ClearPool"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240416180232-fnt7wka",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240416180232-fnt7wka",
+								"updated": "20240416180232"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "我们在切场景时，对象都会被移除，这时应该清空柜子，否则会出现内存泄漏，并且下次取东西会出问题"
+								}
+							]
+						},
+						{
+							"ID": "20240416180232-wmzyp3h",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240416180232-wmzyp3h",
+								"style": "line-height: 22px;",
+								"updated": "20240416180232"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\n\n/// \u003csummary\u003e\n/// 缓存池模块 管理器\n/// \u003c/summary\u003e\npublic class PoolManager : BaseManager\u003cPoolManager\u003e\n{\n    //柜子容器当中有抽屉的体现\n    private Dictionary\u003cstring, Stack\u003cGameObject\u003e\u003e poolDic = new Dictionary\u003cstring, Stack\u003cGameObject\u003e\u003e();\n\n    private PoolManager() { }\n\n    /// \u003csummary\u003e\n    /// 清除整个柜子当中的数据\n    /// \u003c/summary\u003e\n    public void ClearPool()\n    {\n        poolDic.Clear();\n    }\n\n    /// \u003csummary\u003e\n    /// 拿东西的方法\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e抽屉容器的名字\u003c/param\u003e\n    /// \u003creturns\u003e从缓存池中取出的对象\u003c/returns\u003e\n    public GameObject GetObj(string name)\n    {\n        GameObject obj;\n        //有抽屉，且抽屉内有对象\n        if (poolDic.ContainsKey(name) \u0026\u0026 poolDic[name].Count \u003e 0)\n        {\n            obj = poolDic[name].Pop();\n            obj.SetActive(true);\n        }\n        //否则，就应该去创建对象\n        else\n        {\n            obj = GameObject.Instantiate(Resources.Load\u003cGameObject\u003e(name));\n        }\n        return obj;\n    }\n\n    /// \u003csummary\u003e\n    /// 往缓存池中放入对象\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e抽屉（对象池）的名字\u003c/param\u003e\n    /// \u003cparam name=\"obj\"\u003e要放入的对象\u003c/param\u003e\n    public void PushObj(string name, GameObject obj)\n    {\n        //并不是直接移除对象，而是将对象失活一会再用，用的时候再激活它\n        //除了失活对象，还可以通过把对象放到很远的地方等方式来隐藏对象（失活的性能可能偏低一些）\n        obj.SetActive(false);\n        //如果不存在对应的抽屉容器，先创建抽屉，再往抽屉内放\n        if (!poolDic.ContainsKey(name))\n            poolDic.Add(name, new Stack\u003cGameObject\u003e());\n        poolDic[name].Push(obj);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240416180232-3u1zfl6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240416180232-3u1zfl6",
+				"updated": "20240416180232"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "缓存池测试"
+				}
+			]
+		},
+		{
+			"ID": "20240416180232-o58t2xz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416180232-o58t2xz",
+				"updated": "20240416180232"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现一个按下鼠标左键或右键就从缓存池内分别取出两种对象，取出的对象过一秒后就压入池内\n按照一定频率反复按下鼠标左键和右键，观察两种对象场景上的数量是否最后是恒定的"
+				}
+			]
+		},
+		{
+			"ID": "20240416180232-n9kduog",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416180232-n9kduog",
+				"updated": "20240416180232"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对象从池内取出时执行的脚本"
+				}
+			]
+		},
+		{
+			"ID": "20240416180232-s7e7lyz",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416180232-s7e7lyz",
+				"style": "line-height: 22px;",
+				"updated": "20240416180232"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class DelayRemove : MonoBehaviour\n{\n    public string poolName;\t\t//在Unity编辑器上输入对象所在路径\n\n    private void OnEnable()\n    {\n\t\t//从池子内取出对象后，过一秒压回池内\n        Invoke(\"RemoveMe\", 1f);\n    }\n\n    private void RemoveMe()\n    {\n        PoolManager.Instance.PushObj(poolName, this.gameObject);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240416180232-avep6hv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416180232-avep6hv",
+				"updated": "20240416180232"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用缓存池的脚本"
+				}
+			]
+		},
+		{
+			"ID": "20240416180232-t95e4jj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416180232-t95e4jj",
+				"style": "line-height: 22px;",
+				"updated": "20240416180232"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System;\nusing UnityEngine;\n\npublic class Main : MonoBehaviour\n{\n    void Update()\n    {\n        if (Input.GetMouseButtonDown(0))\n        {\n            PoolManager.Instance.GetObj(\"Test/Cube\");\n        }\n\n        if (Input.GetMouseButtonDown(1)) \n        {\n            PoolManager.Instance.GetObj(\"Test/Sphere\");\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240416180232-dww6j17",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416180232-dww6j17",
+				"updated": "20240416180232"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按照一定频率反复按下鼠标左键和右键，场景上创建的两种对象数量在一定时间后不再增长，被创建出来的对象不会被销毁而是被复用："
+				}
+			]
+		},
+		{
+			"ID": "20240416180232-srpp3jz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416180232-srpp3jz",
+				"updated": "20240416180232"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240415215337-oanqiod.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240416180232-h01sjmo",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240416180232-h01sjmo",
+				"updated": "20240416180232"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "压入方法参数优化"
+				}
+			]
+		},
+		{
+			"ID": "20240416180232-hettbo6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416180232-hettbo6",
+				"updated": "20240416180232"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设要让 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "PushObj"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法只需要传入需要被压入池内的对象这一个参数，而不需要传入对象所在的名字（路径）\n而原来这个传入的名字（路径）是用来确认对象需要压入到哪个池子的\n因此，我们可以通过传入的对象的名字，来确认压入到哪个池子内，如果没有这个池子，就根据传入的名字创建对应的缓存池"
+				}
+			]
+		},
+		{
+			"ID": "20240416180232-3p91ndh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416180232-3p91ndh",
+				"updated": "20240416180232"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "值得一提的是，由于"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject.Instantiate"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法克隆出来的对象名字会自带一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "(clone)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，\n因此我们需要在创建对象的时候，手动让对象的名字等于"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GetObj"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法传入的对象的名字"
+				}
+			]
+		},
+		{
+			"ID": "20240416180232-7lf5ck9",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416180232-7lf5ck9",
+				"style": "line-height: 22px;",
+				"updated": "20240416180232"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\n\n/// \u003csummary\u003e\n/// 缓存池模块 管理器\n/// \u003c/summary\u003e\npublic class PoolManager : BaseManager\u003cPoolManager\u003e\n{\n    //柜子容器当中有抽屉的体现\n    private Dictionary\u003cstring, Stack\u003cGameObject\u003e\u003e poolDic = new Dictionary\u003cstring, Stack\u003cGameObject\u003e\u003e();\n\n    private PoolManager() { }\n\n    /// \u003csummary\u003e\n    /// 拿东西的方法\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e抽屉容器的名字\u003c/param\u003e\n    /// \u003creturns\u003e从缓存池中取出的对象\u003c/returns\u003e\n    public GameObject GetObj(string name)\n    {\n        GameObject obj;\n        //有抽屉，且抽屉内有对象\n        if (poolDic.ContainsKey(name) \u0026\u0026 poolDic[name].Count \u003e 0)\n        {\n            obj = poolDic[name].Pop();\n            obj.SetActive(true);\n        }\n        //否则，就应该去创建对象\n        else\n        {\n            obj = GameObject.Instantiate(Resources.Load\u003cGameObject\u003e(name));\n            //为了避免实例化出来的对象默认名字带一个\"(clone)\"，我们需要重命名这个对象\n            obj.name = name;\n        }\n        return obj;\n    }\n\n    /// \u003csummary\u003e\n    /// 往缓存池中放入对象\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e抽屉（对象池）的名字\u003c/param\u003e\n    /// \u003cparam name=\"obj\"\u003e要放入的对象\u003c/param\u003e\n    public void PushObj(GameObject obj)\n    {\n        //并不是直接移除对象，而是将对象失活一会再用，用的时候再激活它\n        //除了失活对象，还可以通过把对象放到很远的地方等方式来隐藏对象（失活的性能可能偏低一些）\n        obj.SetActive(false);\n        //如果不存在对应的抽屉容器，先创建抽屉，再往抽屉内放\n        if (!poolDic.ContainsKey(obj.name))\n            poolDic.Add(obj.name, new Stack\u003cGameObject\u003e());\n        poolDic[obj.name].Push(obj);\n    }\n\n    /// \u003csummary\u003e\n    /// 清除整个柜子当中的数据\n    /// \u003c/summary\u003e\n    public void ClearPool()\n    {\n        poolDic.Clear();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240416180232-v8j2bfc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416180232-v8j2bfc",
+				"updated": "20240416180232"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此，调用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "PushObj"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法不再需要额外传入对象的路径"
+				}
+			]
+		},
+		{
+			"ID": "20240416180232-rkhq820",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416180232-rkhq820",
+				"style": "line-height: 22px;",
+				"updated": "20240416180232"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class DelayRemove : MonoBehaviour\n{\n\t//public string poolName\t//不需要这个变量了\n\n    private void OnEnable()\n    {\n        Invoke(\"RemoveMe\", 1f);\n    }\n\n    private void RemoveMe()\n    {\n        PoolManager.Instance.PushObj(this.gameObject);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

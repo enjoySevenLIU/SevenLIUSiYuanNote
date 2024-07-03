@@ -1,0 +1,739 @@
+{
+	"ID": "20230808223358-m7t4esu",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230808223358-m7t4esu",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230808223358-m7t4esu\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230808223358-c9d86rm\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230809235039-tj6phhu\u0026quot;,\u0026quot;scrollTop\u0026quot;:146,\u0026quot;focusId\u0026quot;:\u0026quot;20230809235315-wy149g3\u0026quot;,\u0026quot;focusStart\u0026quot;:2,\u0026quot;focusEnd\u0026quot;:2\u0026#125;",
+		"title": "U3L18-7——动作目标匹配",
+		"type": "doc",
+		"updated": "20240321175816"
+	},
+	"Children": [
+		{
+			"ID": "20230808223358-c9d86rm",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230808223358-c9d86rm",
+				"updated": "20230809224002"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "动作目标匹配"
+				}
+			]
+		},
+		{
+			"ID": "20230809224008-rn964d4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230809224008-rn964d4",
+				"updated": "20230809235307"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "动画目标匹配主要指的是\n当游戏中角色要以某种动作移动，该动作播放完毕后，人物的手或者脚必须落在某一个地方\n比如：角色需要跳过踏脚石或者跳跃并抓住房梁\n那么这时我们就需要动作目标匹配来达到想要的效果"
+				}
+			]
+		},
+		{
+			"ID": "20230809235307-0ylnswz",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230809235307-0ylnswz",
+				"updated": "20230809235314"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20230809235315-wy149g3",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230809235315-wy149g3",
+				"updated": "20230809235522"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "animator.MatchTarget()    //动画目标匹配的方法，使某个动画能让该对象的某个点在动画播放期间精确的移动到某个目标点上\nAvatarTarget              //骨骼目标的枚举，在MatchTarget()方法里用来表示骨骼上的哪个地方的位置用来匹配目标位置\nMatchTargetWeightMask()   //结构体，用来记录XYZ方向以及角度变化的权重\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230809224012-gjt4g19",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230809224012-gjt4g19",
+				"updated": "20230809224021"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如何实现动画目标匹配"
+				}
+			]
+		},
+		{
+			"ID": "20230809224030-tj2k8ns",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230809224030-tj2k8ns",
+				"updated": "20240321175816"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity中的Animator提供了对应的函数来完成该功能，使用步骤是"
+				}
+			]
+		},
+		{
+			"ID": "20230809224023-1obcfkd",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20230809224023-1obcfkd",
+				"updated": "20230809224030"
+			},
+			"Children": [
+				{
+					"ID": "20230809224030-dszviub",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20230809224030-dszviub",
+						"updated": "20230809224030"
+					},
+					"Children": [
+						{
+							"ID": "20230809224030-93rgr3s",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230809224030-93rgr3s",
+								"updated": "20230809224030"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "找到动作关键点位置信息（比如起跳点，落地点，简单理解就是真正可能产生位移的动画表现部分）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20230809224030-pknd72o",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20230809224030-pknd72o",
+						"updated": "20230809224030"
+					},
+					"Children": [
+						{
+							"ID": "20230809224030-9jx85tg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230809224030-9jx85tg",
+								"updated": "20230809224030"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将关键信息传入MatchTargetAPI中"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230809232244-obj307l",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230809232244-obj307l",
+				"name": "MatchTarget()",
+				"updated": "20230809232304"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "MatchTarget"
+				}
+			]
+		},
+		{
+			"ID": "20230809234803-z8jpm4a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230809234803-z8jpm4a",
+				"updated": "20230809234816"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "动画目标匹配的方法"
+				}
+			]
+		},
+		{
+			"ID": "20230809232937-m9k2u4e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230809232937-m9k2u4e",
+				"updated": "20230809233029"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "注意！调用匹配动画的时机有一些限制 ——\u0026gt; "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong block-ref",
+					"TextMarkBlockRefID": "20230809224107-gqll0uj",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "具体看这里"
+				}
+			]
+		},
+		{
+			"ID": "20230809232300-dvb7v2f",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20230809232300-dvb7v2f",
+				"updated": "20240321175803"
+			},
+			"Children": [
+				{
+					"ID": "20240321175803-i6799fz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321175803-i6799fz",
+						"updated": "20240321175803"
+					},
+					"Children": [
+						{
+							"ID": "20240321175803-5ldzczy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321175803-5ldzczy",
+								"updated": "20240321175803"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数一：目标位置\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321175803-7q138rd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321175803-7q138rd"
+					},
+					"Children": [
+						{
+							"ID": "20240321175803-rz68ujk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321175803-rz68ujk"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数二：目标角度\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321175804-5ky01d9",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321175804-5ky01d9"
+					},
+					"Children": [
+						{
+							"ID": "20240321175804-5798oxl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321175804-5798oxl"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数三：匹配的骨骼位置\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321175804-rpyaev1",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321175804-rpyaev1"
+					},
+					"Children": [
+						{
+							"ID": "20240321175804-cuh3gnh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321175804-cuh3gnh"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数四：位置角度权重\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321175804-kowqnrj",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321175804-kowqnrj"
+					},
+					"Children": [
+						{
+							"ID": "20240321175804-cwj6ml6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321175804-cwj6ml6"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数五：开始位移动作的百分比\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321175804-47gtdmm",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321175804-47gtdmm"
+					},
+					"Children": [
+						{
+							"ID": "20240321175804-o4do68s",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321175804-o4do68s"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数六：结束位移动作的百分比"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230809232329-obv8so4",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230809232329-obv8so4",
+				"updated": "20230809234257"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class Lesson56 : MonoBehaviour\n{\n    private Animator animator;\n    public Transform targetPos;\n\n    void Start()\n    {\n        animator = GetComponent\u003cAnimator\u003e();\n    }\n\n    void Update()\n    {\n        if (Input.GetKeyDown(KeyCode.Space))\n        {\n            animator.SetTrigger(\"Jump\");\n        }\n    }\n\n    private void MatchTarget() \n    {\n        animator.MatchTarget(targetPos.position,                            //目标位置\n                             targetPos.rotation,                            //目标角度\n                             AvatarTarget.LeftFoot,                         //匹配的骨骼位置\n                             new MatchTargetWeightMask(Vector3.one, 1),     //位置角度权重\n                             0.4f,                                          //开始位移动作的百分比\n                             0.64f);                                        //结束位移动作的百分比\n    }\n}\n\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230809224107-gqll0uj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230809224107-gqll0uj",
+				"updated": "20230809232248"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意！"
+				}
+			]
+		},
+		{
+			"ID": "20230809224126-k7i7fau",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230809224126-k7i7fau",
+				"updated": "20230809224141"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "调用匹配动画的时机有一些限制"
+				}
+			]
+		},
+		{
+			"ID": "20230809224119-kqoauvd",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20230809224119-kqoauvd",
+				"updated": "20230809234422"
+			},
+			"Children": [
+				{
+					"ID": "20230809224126-5kbc3md",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20230809224126-5kbc3md",
+						"updated": "20230809234422"
+					},
+					"Children": [
+						{
+							"ID": "20230809224126-kgsg332",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230809224126-kgsg332",
+								"updated": "20230809234422"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "必须保证动画"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+									},
+									"TextMarkType": "strong text",
+									"TextMarkTextContent": "已经切换到了目标动画上"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20230809224126-my8ifdk",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20230809224126-my8ifdk",
+						"updated": "20230809234414"
+					},
+					"Children": [
+						{
+							"ID": "20230809224126-silhzq1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230809224126-silhzq1",
+								"updated": "20230809234414"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "必须保证调用时"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+									},
+									"TextMarkType": "strong text",
+									"TextMarkTextContent": "动画并不是处于过度阶段，而真正在播放目标动画"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n如果发现匹配不正确，往往都是这两个原因造成的"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20230809224126-9cg2k5d",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20230809224126-9cg2k5d",
+						"updated": "20230809224330"
+					},
+					"Children": [
+						{
+							"ID": "20230809224126-ycd6qmi",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230809224126-ycd6qmi",
+								"updated": "20230809224330"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "需要开启"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref strong",
+									"TextMarkBlockRefID": "20230804213817-602vmxu",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "Apply Root Motion"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "！"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230809224331-bdrx5sk",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230809224331-bdrx5sk",
+				"name": "AvatarTarget",
+				"updated": "20230809234523"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "AvatarTarget"
+				}
+			]
+		},
+		{
+			"ID": "20230809234524-dzg6by3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230809234524-dzg6by3",
+				"updated": "20230809234856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "骨骼目标的枚举，在MatchTarget()方法里用来表示骨骼上的哪个地方的位置用来匹配目标位置"
+				}
+			]
+		},
+		{
+			"ID": "20230809234538-w5g8knh",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230809234538-w5g8knh",
+				"updated": "20230809234936"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//UnityEngine命名空间内，AvatarTarget的定义\npublic enum AvatarTarget\n{\n    Root,        //根物体\n    Body,        //身体\n    LeftFoot,    //左脚\n    RightFoot,   //右脚\n    LeftHand,    //左手\n    RightHand    //右手\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230809234522-gi0pbae",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230809234522-gi0pbae",
+				"name": "MatchTargetWeightMask",
+				"updated": "20230809234958"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "MatchTargetWeightMask"
+				}
+			]
+		},
+		{
+			"ID": "20230809235000-60dhicx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230809235000-60dhicx",
+				"updated": "20230809235037"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "结构体，用来记录XYZ方向以及角度变化的权重"
+				}
+			]
+		},
+		{
+			"ID": "20230809235050-22168z5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230809235050-22168z5",
+				"updated": "20230809235246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "构造时，参数一是XYZ方向上变化的权重组成的Vector3，三个值范围都是0到1，参数二是角度变化的权重，范围都是0到1"
+				}
+			]
+		},
+		{
+			"ID": "20230809235039-tj6phhu",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230809235039-tj6phhu",
+				"updated": "20230809235300"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "new MatchTargetWeightMask(Vector3.one, 1)\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

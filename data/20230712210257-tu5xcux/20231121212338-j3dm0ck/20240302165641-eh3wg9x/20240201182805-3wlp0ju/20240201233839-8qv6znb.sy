@@ -1,0 +1,680 @@
+{
+	"ID": "20240201233839-8qv6znb",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240201233839-8qv6znb",
+		"title": "UH2S2L5——全局变量获取",
+		"updated": "20240302170536"
+	},
+	"Children": [
+		{
+			"ID": "20240202140642-fahq4f9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240202140642-fahq4f9",
+				"updated": "20240202140649"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240202140649-w4yxn43",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240202140649-w4yxn43",
+				"style": "line-height: 22px;",
+				"updated": "20240202140649"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "luaEnv.Global\t\t\t\t//获取_G表，通过它可以调用Lua脚本中的全局变量\nluaEnv.Global.Get\u003c\u003e()\t\t//获取全局变量\nluaEnv.Global.Set\u003c\u003e()\t\t//修改全局变量\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201233839-ab9j85v",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201233839-ab9j85v",
+				"updated": "20240202131324"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "xLua内的多脚本执行"
+				}
+			]
+		},
+		{
+			"ID": "20240202130613-mlbxk08",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240202130613-mlbxk08",
+				"updated": "20240202131324"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "由xLua的Lua解析器执行Lua脚本时，即使是在Lua脚本里遇到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "require"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​语句，也是由xLua帮我们处理\n只要是执行lua脚本，xLua都会自动的进入我们的重定向函数中查找文件"
+				}
+			]
+		},
+		{
+			"ID": "20240202130810-m6asyqq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240202130810-m6asyqq",
+				"updated": "20240202131324"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "出于这个原因，我们完全可以在Unity里只执行一个入口Main脚本，剩下的脚本启动都在Lua脚本里执行"
+				}
+			]
+		},
+		{
+			"ID": "20240202131159-mzz82rb",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240202131159-mzz82rb",
+				"style": "line-height: 22px;",
+				"updated": "20240202131324"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class L3_LuaMgr : MonoBehaviour\n{\n    void Start()\n    {\n        LuaManager.Instance.Init();\n        LuaManager.Instance.DoLuaFile(\"Main\");\n    }\n}\n\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240202131227-5e0d0u0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240202131227-5e0d0u0",
+				"style": "line-height: 22px;",
+				"updated": "20240202131324"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"主Lua脚本启动\")\nrequire(\"Test\")\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240202131247-r8loxsb",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240202131247-r8loxsb",
+				"style": "line-height: 22px;",
+				"updated": "20240202131324"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"Test.lua\")\nTestNumber = 1\nTestBool = true\nTestFloat = 1.2\nTestString = \"123\"\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240202131303-7el5s3t",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240202131303-7el5s3t",
+				"updated": "20240202131324"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240202131303-ouuzd6j.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240202131329-duzwoiq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240202131329-duzwoiq",
+				"name": "luaEnv.Global",
+				"updated": "20240202131559"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用_G表"
+				}
+			]
+		},
+		{
+			"ID": "20240202131347-yv1si4g",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240202131347-yv1si4g",
+				"updated": "20240202131559"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "由于Lua中全局变量存储在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_G"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​表内，我们可以通过Lua解析器的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Global"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​属性来获取"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_G"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​表"
+				}
+			]
+		},
+		{
+			"ID": "20240202131343-wsc938j",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240202131343-wsc938j",
+				"style": "line-height: 22px;",
+				"updated": "20240202134636"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public LuaTable Global\n{\n    get\n    {\n        if (luaEnv == null)\n        {\n            Debug.LogError(\"Lua解析器未初始化！\");\n            return null;\n        }\n        return luaEnv.Global;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240202131551-4rf974q",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240202131551-4rf974q",
+				"updated": "20240202135931"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用全局变量"
+				}
+			]
+		},
+		{
+			"ID": "20240202140408-5pnzbdn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240202140408-5pnzbdn",
+				"updated": "20240202140500"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们通过C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，无法直接获取本地全局变量"
+				}
+			]
+		},
+		{
+			"ID": "20240202135931-kw3o8r0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240202135931-kw3o8r0",
+				"name": "luaEnv.Global.Get\u0026lt;\u0026gt;()",
+				"updated": "20240202135931"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "获取全局变量"
+				}
+			]
+		},
+		{
+			"ID": "20240202131628-di63zjl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240202131628-di63zjl",
+				"updated": "20240202140630"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过调用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_G"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​表，我们可以通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Get\u0026lt;\u0026gt;()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​传入变量类型与变量名获取全局变量\n虽然整数和浮点数在Lua里都是Number类型，但是我们根据其具体值使用合适的变量类型即可接收，\n例如"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "1.2"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​这个浮点数用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "float"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "double"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​都可以接收"
+				}
+			]
+		},
+		{
+			"ID": "20240202134341-apht2ir",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240202134341-apht2ir",
+				"style": "line-height: 22px;",
+				"updated": "20240202135931"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "int i = LuaManager.Instance.Global.Get\u003cint\u003e(\"TestNumber\");\nDebug.Log(\"TestNumber:\" + i);\n\nbool b = LuaManager.Instance.Global.Get\u003cbool\u003e(\"TestBool\");\nDebug.Log(\"TestBool:\" + b);\n\nfloat f = LuaManager.Instance.Global.Get\u003cfloat\u003e(\"TestFloat\");\nDebug.Log(\"TestFloat:\" + f);\n\ndouble d = LuaManager.Instance.Global.Get\u003cdouble\u003e(\"TestFloat\");\nDebug.Log(\"TestFloat_double:\" + d);\n\nstring s = LuaManager.Instance.Global.Get\u003cstring\u003e(\"TestString\");\nDebug.Log(\"TestString:\" + s);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240202134349-06xzjve",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240202134349-06xzjve",
+				"updated": "20240202135931"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "要注意，这种方式获取的变量都是值拷贝，也就是修改接收到的变量不会影响原来的全局变量"
+				}
+			]
+		},
+		{
+			"ID": "20240202135817-gy7w078",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240202135817-gy7w078",
+				"style": "line-height: 22px;",
+				"updated": "20240202135931"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "int i = LuaManager.Instance.Global.Get\u003cint\u003e(\"TestNumber\");\nDebug.Log(\"TestNumber:\" + i);\ni = 10;\nint i2 = LuaManager.Instance.Global.Get\u003cint\u003e(\"TestNumber\");\nDebug.Log(\"TestNumber:\" + i2);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240202135915-lsmhq5o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240202135915-lsmhq5o",
+				"updated": "20240202135931"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240202135915-q8dwpyv.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240202135916-16moej6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240202135916-16moej6",
+				"name": "luaEnv.Global.Set\u0026lt;\u0026gt;()",
+				"updated": "20240202135931"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "修改全局变量"
+				}
+			]
+		},
+		{
+			"ID": "20240202140212-hjw73q2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240202140212-hjw73q2",
+				"updated": "20240202135931"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Set\u0026lt;\u0026gt;()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​传入变量名和要修改的值获取全局变量（泛型参数可忽略）"
+				}
+			]
+		},
+		{
+			"ID": "20240202135955-fnvm7lx",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240202135955-fnvm7lx",
+				"style": "line-height: 22px;",
+				"updated": "20240202135931"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "int i = LuaManager.Instance.Global.Get\u003cint\u003e(\"TestNumber\");\nDebug.Log(\"TestNumber:\" + i);\nLuaManager.Instance.Global.Set\u003cstring, int\u003e(\"TestNumber\", 55);\nint i2 = LuaManager.Instance.Global.Get\u003cint\u003e(\"TestNumber\");\nDebug.Log(\"TestNumber_i2:\" + i2);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240202140327-98dqhez",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240202140327-98dqhez",
+				"updated": "20240202135931"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240202140327-26v9gh2.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240202140341-14nc4tb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240202140341-14nc4tb",
+				"updated": "20240202135931"
+			}
+		}
+	]
+}

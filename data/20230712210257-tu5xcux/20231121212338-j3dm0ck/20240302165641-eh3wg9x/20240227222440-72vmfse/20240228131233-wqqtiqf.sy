@@ -1,0 +1,852 @@
+{
+	"ID": "20240228131233-wqqtiqf",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240228131233-wqqtiqf",
+		"title": "UH2S3L3——toLua解析器自定义解析方式",
+		"updated": "20240302170706"
+	},
+	"Children": [
+		{
+			"ID": "20240228160758-fake1lm",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240228160758-fake1lm",
+				"updated": "20240228160804"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240228160804-r0a3dxv",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240228160804-r0a3dxv",
+				"style": "line-height: 22px;",
+				"updated": "20240228161011"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "AddSearchPath()\t\t\t\t\t//添加解析路径\nluaState.RemoveSeachPath()\t\t//移除指定读取的路径\nLuaFileUtils.ReadFile()\t\t\t//如果要自定义toLua解析器的解析方法，需要在继承LuaFileUtils的类里重写ReadFile()方法\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240228131233-p7m3v4u",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240228131233-p7m3v4u",
+				"name": "AddSearchPath()",
+				"updated": "20240228131504"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义toLua解析路径"
+				}
+			]
+		},
+		{
+			"ID": "20240228131504-us7x9i1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228131504-us7x9i1",
+				"updated": "20240228133331"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们自己编写的Lua脚本，默认只能找到Assets/Lua文件夹下的，放到其子文件夹下或者其他路径下需要去指定路径\n指定解析路径有以下的方式："
+				}
+			]
+		},
+		{
+			"ID": "20240228131847-uq49d2z",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240228131847-uq49d2z",
+				"updated": "20240228132905"
+			},
+			"Children": [
+				{
+					"ID": "20240228131852-yovf94l",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240228131852-yovf94l",
+						"updated": "20240228132905"
+					},
+					"Children": [
+						{
+							"ID": "20240228131852-sjsytoy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228131852-sjsytoy",
+								"updated": "20240228132905"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果该lua脚本在Assets/Lua文件夹下的文件夹内，则可以加父目录"
+								}
+							]
+						},
+						{
+							"ID": "20240228131933-6gbdi6r",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240228131933-6gbdi6r",
+								"style": "line-height: 22px;",
+								"updated": "20240228132011"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "luaState.Require(\"CSharpCallLua/L2_Loader\");\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240228132013-lr6yh71",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240228132013-lr6yh71",
+						"updated": "20240228132219"
+					},
+					"Children": [
+						{
+							"ID": "20240228132013-uzy0n2g",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228132013-uzy0n2g",
+								"updated": "20240228132103"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LuaState"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中的方法"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AddSearchPath()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240228132104-s0ifzj3",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240228132104-s0ifzj3",
+								"style": "line-height: 22px;",
+								"updated": "20240228132219"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "luaState.AddSearchPath(Application.dataPath + \"/Lua/CSharpCallLua\");\nluaState.Require(\"L2_Loader\");\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240228131508-niwv1mu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240228131508-niwv1mu",
+				"name": "luaState.RemoveSeachPath()",
+				"updated": "20240228133145"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "移除指定路径"
+				}
+			]
+		},
+		{
+			"ID": "20240228133146-lnnssj9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228133146-lnnssj9",
+				"updated": "20240228133212"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "移除一个搜索路径，很少使用"
+				}
+			]
+		},
+		{
+			"ID": "20240228133212-wgxpz2t",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240228133212-wgxpz2t",
+				"style": "line-height: 22px;",
+				"updated": "20240228133254"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "luaState.RemoveSeachPath(Application.dataPath + \"/Lua/CSharpCallLua\");\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240228134426-kvo7stf",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240228134426-kvo7stf",
+				"updated": "20240228134452"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义toLua解析方式"
+				}
+			]
+		},
+		{
+			"ID": "20240228134248-itt09o6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228134248-itt09o6",
+				"updated": "20240228134643"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "目前Lua脚本的解析路径是基于"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Application.dataPath"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，但是打包后我们不能使用这个路径，而且我们还要去解析AB包中的Lua脚本\n这就要求我们自定义toLua解析器的解析方式"
+				}
+			]
+		},
+		{
+			"ID": "20240228134635-r202r38",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240228134635-r202r38",
+				"updated": "20240228141853"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "分析toLua解析Lua脚本逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240228140018-usw146s",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228140018-usw146s",
+				"updated": "20240228141853"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过对Lua解析器的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "require()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​断点查看其逻辑的执行，Lua脚本字符串的读取是在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LuaFileUtils"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ReadFile()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法执行的\n而"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ReadFile()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​是虚方法，这意味着我们可以继承"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LuaFileUtils"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​并重写"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ReadFile()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法，进而自定义toLua的解析方式"
+				}
+			]
+		},
+		{
+			"ID": "20240228140524-lboob3c",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240228140524-lboob3c",
+				"style": "line-height: 22px;",
+				"updated": "20240228141853"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "namespace LuaInterface\n{\n    public class LuaFileUtils\n    {\n\t\t//...\n\t\t//读取Lua脚本文件的方法\n        public virtual byte[] ReadFile(string fileName)\n        {\n            if (!beZip)\n            {\n                string path = FindFile(fileName);\t\t//查找路径\n                byte[] str = null;\t\t\t\t\t\t//声明返回值\n\n                if (!string.IsNullOrEmpty(path) \u0026\u0026 File.Exists(path))\n                {\n#if !UNITY_WEBPLAYER\n                    str = File.ReadAllBytes(path);\t\t//读取文件，返回文件的字节数组\n#else\n                    throw new LuaException(\"can't run in web platform, please switch to other platform\");\n#endif\n                }\n\n                return str;\n            }\n            else\n            {\n                return ReadZipFile(fileName);\n            }\n        }\n\t\t//...\n\t}\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240228140845-bseu697",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228140845-bseu697",
+				"updated": "20240228141853"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "同时，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LuaFileUtils"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​是一个单例模式的类，且"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LuaFileUtils"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​子类可以修改唯一单例"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "instance"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n构造函数"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LuaFileUtils()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内执行"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "instance = this"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，因此如果子类实例化，则"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LuaFileUtils"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的唯一单例会被赋值为实例化出来的子类对象"
+				}
+			]
+		},
+		{
+			"ID": "20240228141006-ghbz04v",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240228141006-ghbz04v",
+				"style": "line-height: 22px;",
+				"updated": "20240228141853"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "namespace LuaInterface\n{\n    public class LuaFileUtils\n    {\n        public static LuaFileUtils Instance\n        {\n            get\n            {\n                if (instance == null)\n                {\n                    instance = new LuaFileUtils();\n                }\n                return instance;\n            }\n\t\t\t//protected set意味着子类可以修改该类的唯一单例\n            protected set\n            {\n                instance = value;\n            }\n        }\n\t\t//...\n\t\tprotected static LuaFileUtils instance = null;\n\t\t//当子类实例化时，会执行这里的构造函数，因此实例化子类时，该类的唯一单例会赋值为实例化出来的子类对象\n        public LuaFileUtils()\n        {\n            instance = this;\n        }\n\t\t//...\n\t}\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240228141624-p3pc8if",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228141624-p3pc8if",
+				"updated": "20240228143204"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "从以上分析结果可知，想要自定义toLua的解析方式，\n需要继承"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LuaFileUtils"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​并重写"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ReadFile()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法，再"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "new"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​一次继承"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LuaFileUtils"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的类\n接下来toLua解析脚本时就会执行子类里重写的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ReadFile()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法\n重写的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ReadFile()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法需要返回Lua脚本文件的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "byte[]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​数组"
+				}
+			]
+		},
+		{
+			"ID": "20240228141649-vyjh44g",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240228141649-vyjh44g",
+				"name": "LuaFileUtils.ReadFile()",
+				"updated": "20240228143453"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义Lua脚本解析方式"
+				}
+			]
+		},
+		{
+			"ID": "20240228150601-jycw2kf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228150601-jycw2kf",
+				"updated": "20240228151612"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "根据以上分析结果，声明一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LuaCustomLoader"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​并继承"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LuaFileUtils"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，然后重写"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ReadFile()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法\n对于打包之后的Unity程序，我们需要添加从Resources文件夹和AB包内加载Lua脚本文件的逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240228151332-rpl3f43",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228151332-rpl3f43",
+				"updated": "20240228151559"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们最好优先从AB包加载Lua脚本，因为AB包用于热更新，而AB包内的Lua脚本往往是会更新的上层逻辑脚本\n然后再读取Resources文件夹下Lua脚本，他们一般是toLua自带的Lua脚本或者不需要热更新的脚本"
+				}
+			]
+		},
+		{
+			"ID": "20240228151623-wpw36kh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228151623-wpw36kh",
+				"updated": "20240228151904"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于Resources和AB包内的Lua脚本，因为读取方法只支持.txt或者.bytes等文件，因此需要在脚本后加上\nResource和AB包的读取方法就需要通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "xxx.lua"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的这种脚本名读取脚本，因此我们还需要提前检测.lua是否加上了"
+				}
+			]
+		},
+		{
+			"ID": "20240228151050-8y6g41z",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240228151050-8y6g41z",
+				"updated": "20240228151431"
+			},
+			"Children": [
+				{
+					"ID": "20240228151051-e4fu140",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240228151051-e4fu140",
+						"updated": "20240228151431"
+					},
+					"Children": [
+						{
+							"ID": "20240228151051-vvechpm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228151051-vvechpm",
+								"updated": "20240228151232"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "快速将Assets/Lua文件夹下的Lua脚本拷贝到Resources下的操作"
+								}
+							]
+						},
+						{
+							"ID": "20240228151126-4ppcn7e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228151126-4ppcn7e",
+								"updated": "20240228151431"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "点击工具栏的Lua - Copy Lua files to Resources选项，会将Lua文件夹下以及toLua自带的文件一并拷贝到Resources文件夹下\n同时会添加.bytes后缀名，以便于"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Resources.Load"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法读取"
+								}
+							]
+						},
+						{
+							"ID": "20240228151306-e8t5wvk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228151306-e8t5wvk",
+								"updated": "20240228151306"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 332px;",
+										"style": "width: 322px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240228151306-7qzp7ws.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 322px;\" parent-style=\"width: 332px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240228150558-bfrorsh",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240228150558-bfrorsh",
+				"style": "line-height: 22px;",
+				"updated": "20240228152008"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using LuaInterface;\nusing UnityEngine;\n\npublic class LuaCustomLoader : LuaFileUtils\n{\n    public override byte[] ReadFile(string fileName)\n    {\n        //传入的文件名检测是否有.lua后缀，没有就加上，确保读取方法可以通过该方法读取到文件\n        if (!fileName.EndsWith(\".lua\"))\n            fileName += \".lua\";\n        byte[] buffer = null;\n\n        // 优先从AB包中加载Lua文件，因为AB包内的Lua文件是热更新文件，一般是自己写的上层Lua逻辑代码\n        string[] strs = fileName.Split('/');        // 因为有可能传入如：xxx/xxx.lua，而AB包加载不需要前面的内容，因此需要拆分取最后一段\n        TextAsset luaCode = ABManager.Instance.LoadRes\u003cTextAsset\u003e(\"lua\", strs[strs.Length - 1]);\n        if (luaCode != null)\n        {\n            buffer = luaCode.bytes;\n            Resources.UnloadAsset(luaCode);\n        }\n        // 如果AB包内加载到了内容就直接返回\n        if (buffer != null)\n            return buffer;\n\n        // 从Resources文件夹中加载Lua文件，toLua自带的逻辑和类一般从这里加载\n        string path = \"Lua/\" + fileName;\n        TextAsset text = Resources.Load\u003cTextAsset\u003e(path);\n        if (text != null)\n        {\n            buffer = text.bytes;\n            Resources.UnloadAsset(text);            // 卸载使用后的文本资源\n        }\n    \n#if UNITY_EDITOR\n        buffer ??= base.ReadFile(fileName);\t\t\t// 当处于编辑环境下时，若以上方法没有找到脚本，就是使用基类方法去查找内容\n#endif\n        return buffer;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240228160754-h25pvg5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228160754-h25pvg5"
+			}
+		}
+	]
+}

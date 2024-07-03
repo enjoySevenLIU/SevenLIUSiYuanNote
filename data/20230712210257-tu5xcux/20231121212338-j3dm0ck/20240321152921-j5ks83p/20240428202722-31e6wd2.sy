@@ -1,0 +1,834 @@
+{
+	"ID": "20240428202722-31e6wd2",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240428202722-31e6wd2",
+		"title": "UH4L16——寄存器模式",
+		"type": "doc",
+		"updated": "20240428210448"
+	},
+	"Children": [
+		{
+			"ID": "20240428204054-yz4w2kr",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240428204054-yz4w2kr",
+				"updated": "20240428204059"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240428204059-2cyr14l",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240428204059-2cyr14l",
+				"style": "line-height: 22px;",
+				"updated": "20240428210448"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "ILRuntimeJITFlags\t\t\t\t\t//ILRuntime的即时编译(JIT)模式\nILRuntimeJITFlags.None\t\t\t\t//不启用寄存器模式\nILRuntimeJITFlags.JITOnDemand\t\t//按需即时编译(JIT)模式，全局开启时，一般只会使用该模式\nILRuntimeJITFlags.JITImmediately\t//立即JIT模式\nILRuntimeJITFlags.NoJIT\t\t\t\t//禁用JIT模式\nILRuntimeJITFlags.ForceInline\t\t//强制内联模式，该模式只对方法的Attribute生效\n[ILRuntimeJIT()]\t\t\t\t\t//对类和方法使用，指定为某个类或者方法开启寄存器模式\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240428202722-5772lwv",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240428202722-5772lwv",
+				"name": "ILRuntimeJITFlags",
+				"updated": "20240428202824"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "寄存器模式"
+				}
+			]
+		},
+		{
+			"ID": "20240428202830-e1ezoev",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428202830-e1ezoev",
+				"updated": "20240428202858"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "寄存器模式是 ILRuntime2.0 版引入的专用于优化大规模数值计算的执行模式\n该模式通过 ILRuntime 自己的 编译器以及指令集(JIT Compiler) 将原始DLL的 微软中间语言(MSIL) 指令集\n转换成一个自定义的基于寄存器的指令集，再进行解释执行"
+				}
+			]
+		},
+		{
+			"ID": "20240428202830-ydhv46a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428202830-ydhv46a",
+				"updated": "20240428202903"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在ILRuntime中使用寄存器模式可以有效的提高性能，主要有以下特点："
+				}
+			]
+		},
+		{
+			"ID": "20240428202832-acfttto",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240428202832-acfttto",
+				"updated": "20240428202840"
+			},
+			"Children": [
+				{
+					"ID": "20240428202832-mll2ncc",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240428202832-mll2ncc",
+						"updated": "20240428202837"
+					},
+					"Children": [
+						{
+							"ID": "20240428202832-5qdtdxz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428202832-5qdtdxz",
+								"updated": "20240428202837"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "数值计算性能会大幅提升，包括 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "for"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 循环等需要数值计算的控制流"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240428202832-ukjmfw8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240428202832-ukjmfw8",
+						"updated": "20240428202840"
+					},
+					"Children": [
+						{
+							"ID": "20240428202832-ro05ast",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428202832-ro05ast",
+								"updated": "20240428202840"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "属性的调用开销，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "for"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 循环里调用其他热更内方法的性能会有所提升"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240428202830-8agq3wh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428202830-8agq3wh",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240428202913"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：如果一个方法即没有数值计算，也没有频繁调用热更内的的方法或者访问属性，\n只是调用系统或UnityAPI，那么不会产生任何优化，甚至一些情况下性能还会低于传统模式"
+				}
+			]
+		},
+		{
+			"ID": "20240428202923-iuldbfi",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240428202923-iuldbfi",
+				"updated": "20240428202930"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "开启寄存器模式"
+				}
+			]
+		},
+		{
+			"ID": "20240428202939-cmi9g3y",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20240428202939-cmi9g3y",
+				"updated": "20240428203157"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "全局开启"
+				}
+			]
+		},
+		{
+			"ID": "20240428202948-nmx4bkj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428202948-nmx4bkj",
+				"updated": "20240428203157"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在初始化 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "appDomain"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 时 调用其有参构造"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "new AppDomain(ILRuntimeJITFlags.JITOnDemand)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ILRuntimeJITFlags"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​代表ILRuntime的 即时编译(JIT)模式"
+				}
+			]
+		},
+		{
+			"ID": "20240428203023-gyr3qhl",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240428203023-gyr3qhl",
+				"updated": "20240428203023"
+			},
+			"Children": [
+				{
+					"ID": "20240428203023-7d9x32t",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240428203023-7d9x32t",
+						"updated": "20240428203023"
+					},
+					"Children": [
+						{
+							"ID": "20240428203023-g0d21h6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428203023-g0d21h6",
+								"updated": "20240428203055"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "None"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：不启用寄存器模式\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240428203033-kg10ji3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240428203033-kg10ji3"
+					},
+					"Children": [
+						{
+							"ID": "20240428203033-rw9u882",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428203033-rw9u882",
+								"updated": "20240428203052"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "JITOnDemand"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：按需即时编译(JIT)模式，\n使用该模式在默认的情况下会按照原始的方式运行，当该方法被反复执行时，会被标记为需要被JIT，\n并在后台线程完成JIT编译后切换到寄存器模式运行"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240428203035-ja7ccpn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240428203035-ja7ccpn"
+					},
+					"Children": [
+						{
+							"ID": "20240428203035-dtyxnun",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428203035-dtyxnun",
+								"updated": "20240428203122"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "JITImmediately"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（全局开启时不推荐）：立即JIT模式，\n使用该模式时，当方法被调用的瞬间即会被执行JIT编译，在第一次执行时即使用寄存器模式运行。\nJIT会在当前线程发生，因此如果方法过于复杂在第一次执行时可能会有较大的初始化时间"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240428203037-d5iriyn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240428203037-d5iriyn"
+					},
+					"Children": [
+						{
+							"ID": "20240428203037-g1l1lad",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428203037-g1l1lad",
+								"updated": "20240428203140"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "NoJIT"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​： 禁用JIT模式，该方法在执行时会始终以传统方式执行\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240428203045-aqvowwe",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240428203045-aqvowwe"
+					},
+					"Children": [
+						{
+							"ID": "20240428203045-nf6b0rz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428203045-nf6b0rz",
+								"updated": "20240428203136"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ForceInline"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（全局开启时不使用）：强制内联模式，该模式只对方法的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Attribute"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​生效，\n标注该模式的方法在被调用时将会无视方法体内容大小，强制被内联"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240428204213-n89o44j",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240428204213-n89o44j",
+				"style": "line-height: 22px;",
+				"updated": "20240428204514"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public void StartILRuntime(UnityAction callBack = null)\n{\n    if (!isStart)\n    {\n        //如果开启全局寄存器模式，则一般只使用JITOnDemand，而不会使用其他模式\n        appDomain = new AppDomain(ILRuntimeJITFlags.JITOnDemand);\n        StartCoroutine(LoadHotUpdateInfo(callBack));\n        isStart = true;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240428203150-uidwg4b",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240428203150-uidwg4b",
+				"name": "[ILRuntimeJIT()]",
+				"updated": "20240428205223"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "指定开启寄存器"
+				}
+			]
+		},
+		{
+			"ID": "20240428203235-5gqr9ce",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428203235-5gqr9ce",
+				"updated": "20240428205223"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在指定的类和方法前加上 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "[ILRuntimeJIT(寄存器模式)]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 特性，自己指定那些类或方法将使用 哪种 寄存器模式"
+				}
+			]
+		},
+		{
+			"ID": "20240428204827-qgdfjmh",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240428204827-qgdfjmh",
+				"style": "line-height: 22px;",
+				"updated": "20240428205223"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[ILRuntimeJIT(ILRuntimeJITFlags.JITImmediately)]\ninternal class Lesson20_Test\n{\n    public void Test1()\n    {\n        //假设该方法全是数值计算相关\n    }\n\n    [ILRuntimeJIT(ILRuntimeJITFlags.NoJIT)]\n    public void Test2()\n    {\n        //假设该方法只有API调用而无数值计算，因此需要特别关闭寄存器模式\n    }\n\n    [ILRuntimeJIT(ILRuntimeJITFlags.JITImmediately)]\n    public void Test3()\n    {\n        //假设这个类会在别的类里面调用\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240428203235-urb3o8b",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428203235-urb3o8b",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240428205223"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：在热更工程中使用该特性，我们需要引用ILRuntime库\n可以在项目工程文件中找到 Library\\ScriptAssemblies\\ILRuntime.dll 进行引用（将复制本地设置为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "false"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，避免生成时导出）"
+				}
+			]
+		},
+		{
+			"ID": "20240428204756-i8rrhpn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428204756-i8rrhpn",
+				"updated": "20240428205223"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 609px;",
+						"style": "width: 599px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240428204756-fl5m093.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 599px;\" parent-style=\"width: 609px;\"}"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 267px;",
+						"style": "width: 257px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240428204819-b34pn11.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 257px;\" parent-style=\"width: 267px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240428203306-7bpxoiu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240428203306-7bpxoiu",
+				"updated": "20240428203317"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "寄存器模式使用建议"
+				}
+			]
+		},
+		{
+			"ID": "20240428203325-jn0sa9h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428203325-jn0sa9h",
+				"updated": "20240428203334"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "推荐使用2种模式："
+				}
+			]
+		},
+		{
+			"ID": "20240428203334-8vh8ojp",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240428203334-8vh8ojp",
+				"updated": "20240428204616"
+			},
+			"Children": [
+				{
+					"ID": "20240428203334-cq3tnua",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240428203334-cq3tnua",
+						"updated": "20240428204041"
+					},
+					"Children": [
+						{
+							"ID": "20240428203334-ojjlz1m",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428203334-ojjlz1m",
+								"updated": "20240428204041"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在初始化"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AppDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​时，将寄存器模式指定为 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "JITOnDemand"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（按需即时编译(JIT)模式）\nILRuntime会自己判断运行模式，在大多数情况下能达到不错的性能平衡"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240428203334-ob1jq3f",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240428203334-ob1jq3f",
+						"updated": "20240428204616"
+					},
+					"Children": [
+						{
+							"ID": "20240428203334-k26eln4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428203334-k26eln4",
+								"updated": "20240428204616"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "初始化"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AppDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​时，不指定寄存器模式，而是通过自己利用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "[ILRuntimeJIT(寄存器模式)]"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​特性来指定精准控制想要优化的方法"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

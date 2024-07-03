@@ -1,0 +1,875 @@
+{
+	"ID": "20240130191310-xu1ccrq",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240130191310-xu1ccrq",
+		"title": "UH2S1L9——多Lua脚本执行",
+		"updated": "20240302170413"
+	},
+	"Children": [
+		{
+			"ID": "20240130194247-wfodre2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240130194247-wfodre2",
+				"updated": "20240130194258"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240130194258-bpvvisd",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240130194258-bpvvisd",
+				"style": "line-height: 22px;",
+				"updated": "20240131130839"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local\t\t\t\t--声明局部变量\nreturn\t\t\t\t--脚本返回值，外部加载该脚本时可以接收这里的返回值\nrequire()\t\t\t--加载一个脚本，若加载脚本有返回值还可以返回出这个值\npackage.loaded[]\t--可以查看某个脚本是否被加载，将其赋值nil可以卸载某个脚本\n_G\t\t\t\t\t--_G表是一个总表，我们申明的所有全局变量都存储在其中\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240130191310-j2bgasj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240130191310-j2bgasj",
+				"updated": "20240130192541"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "全局变量和本地变量"
+				}
+			]
+		},
+		{
+			"ID": "20240130193421-zxqvm0n",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240130193421-zxqvm0n",
+				"updated": "20240130193425"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "全局变量"
+				}
+			]
+		},
+		{
+			"ID": "20240130193053-e9au4om",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240130193053-e9au4om",
+				"updated": "20240130193425"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Lua默认声明出来的变量是全局变量，这是一种声明出来后就可以在脚本里到处调用的变量，\n即使它是在循环体或者函数体内声明的变量，出了循环或者函数仍然可以使用，不会释放内存\n显然到处使用全局变量是很浪费内存的"
+				}
+			]
+		},
+		{
+			"ID": "20240130193341-c8b6hmn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240130193341-c8b6hmn",
+				"style": "line-height: 22px;",
+				"updated": "20240130193801"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "for i = 1, 2 do\n    c = \"唐老狮\"\nend\nprint(c)\t\t--这个c在出了循环体后依然可以调用\n\nfunction Fun()\n    tt = \"123123123\"\nend\nprint(tt)\nFun()\nprint(tt)\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240130193204-4lwtug9",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240130193204-4lwtug9",
+				"style": "line-height: 22px;",
+				"updated": "20240130193853"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "唐老狮\nnil\n123123123\t\t--可见，在执行了函数后，函数内赋值的全局变量在函数执行后也能调用出来了\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240130193427-iugx07f",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240130193427-iugx07f",
+				"name": "local",
+				"updated": "20240130193431"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本地变量"
+				}
+			]
+		},
+		{
+			"ID": "20240130193513-b1a723p",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240130193513-b1a723p",
+				"updated": "20240130193704"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在变量声明前，加上"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "local"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，就是本地（局部）变量，这种变量在出了循环体或者函数体后就会被释放内存"
+				}
+			]
+		},
+		{
+			"ID": "20240130194134-2o0ivke",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240130194134-2o0ivke",
+				"updated": "20240131130157"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "即使在函数体或者函数外声明了本地变量，它依然会在接下来的多脚本执行里起作用，这样的本地变量，外部脚本不能调用它们（除非你将它"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "return"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​出去）"
+				}
+			]
+		},
+		{
+			"ID": "20240130193431-wyjyqax",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240130193431-wyjyqax",
+				"style": "line-height: 22px;",
+				"updated": "20240130193952"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "for i = 1, 2 do\n    local d = \"唐老狮\"\n    print(d)\nend\nprint(d)\n\nfunction Fun()\n    local tt = \"123123123\"\nend\n\nFun()\nprint(tt)\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240130193459-wecnoek",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240130193459-wecnoek",
+				"style": "line-height: 22px;",
+				"updated": "20240130194026"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "唐老狮\n唐老狮\nnil\t\t\t\t--可见，循环结束后。d对应的内存被释放了\nnil\t\t\t\t--可见，即使执行了函数，函数内的局部变量在函数外也不会调用\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240130194054-1aekjk5",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240130194054-1aekjk5",
+				"name": "require()",
+				"updated": "20240130194245"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "多脚本执行"
+				}
+			]
+		},
+		{
+			"ID": "20240131123950-lc6b0uk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131123950-lc6b0uk",
+				"updated": "20240131130210"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "require"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，参数为要加载的脚本名（需要脚本在同一目录下，或者传入路径），执行后会自动执行该脚本内的内容\n加载外部脚本后，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "外部脚本的全局变量在本脚本内依然可以使用，而本地变量不行"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n如果重复加载一个脚本，该脚本在加载一次过后就不会再被执行，除非重复加载前卸载脚本"
+				}
+			]
+		},
+		{
+			"ID": "20240131123939-jdqmyo1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131123939-jdqmyo1",
+				"updated": "20240130194245"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "Lesson11_Test.lua"
+				}
+			]
+		},
+		{
+			"ID": "20240131123935-hfndxhu",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240131123935-hfndxhu",
+				"style": "line-height: 22px;",
+				"updated": "20240131124240"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"Test测试\")\nTestA = \"123\"\nlocal testLocalA = \"456\"\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131124250-m421vvx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131124250-m421vvx",
+				"updated": "20240131124317"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "Lesson11_require.lua"
+				}
+			]
+		},
+		{
+			"ID": "20240130194302-coi1li9",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240130194302-coi1li9",
+				"style": "line-height: 22px;",
+				"updated": "20240131124745"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"**********多脚本执行************\")\nrequire(\"Lesson11_Test\")\nprint(TestA)\nprint(testLocalA)\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240130194314-r6fuj8i",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240130194314-r6fuj8i",
+				"style": "line-height: 22px;",
+				"updated": "20240131124750"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "**********多脚本执行************\nTest测试\n123\nnil\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131131131-enk6y21",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131131131-enk6y21",
+				"updated": "20240131131412"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "若想要外部脚本使用本脚本的局部变量，可以直接"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "return"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​该局部变量，脚本"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "return"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​不能再执行任何脚本\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "require"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​函数加载执行脚本时，还会返回出加载脚本的返回值（即使是本地变量亦可返回），可以用一个变量接收它，"
+				}
+			]
+		},
+		{
+			"ID": "20240131130401-3vwlx7n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131130401-3vwlx7n",
+				"updated": "20240131130401"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "Lesson11_Test.lua"
+				}
+			]
+		},
+		{
+			"ID": "20240131130401-hltp7dr",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240131130401-hltp7dr",
+				"style": "line-height: 22px;",
+				"updated": "20240131130415"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"Test测试\")\nTestA = \"123\"\nlocal testLocalA = \"456\"\n\nreturn testLocalA"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131130407-a2zbrw0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131130407-a2zbrw0",
+				"updated": "20240131130407"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "Lesson11_require.lua"
+				}
+			]
+		},
+		{
+			"ID": "20240131130407-8z518mk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240131130407-8z518mk",
+				"style": "line-height: 22px;",
+				"updated": "20240131130427"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local testLA = require(\"Lesson11_Test\")\nprint(testLA)\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131130407-gj9m2ri",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240131130407-gj9m2ri",
+				"style": "line-height: 22px;",
+				"updated": "20240131130433"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Test测试\n456\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131124823-gjrfzyu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240131124823-gjrfzyu",
+				"name": "package.loaded[]",
+				"updated": "20240131124841"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "脚本卸载"
+				}
+			]
+		},
+		{
+			"ID": "20240131124841-z6vae6o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131124841-z6vae6o",
+				"updated": "20240131125237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "已知重复加载一个脚本，该脚本在加载一次过后就不会再被执行，可以通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "package.loaded[\u0026quot;脚本名\u0026quot;]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​来获取一个脚本是否被加载"
+				}
+			]
+		},
+		{
+			"ID": "20240131125019-bhfg2jw",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240131125019-bhfg2jw",
+				"style": "line-height: 22px;",
+				"updated": "20240131125149"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "require(\"Lesson11_Test\")\nprint(package.loaded[\"Lesson11_Test\"])\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131125149-o6716kg",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240131125149-o6716kg",
+				"style": "line-height: 22px;",
+				"updated": "20240131125210"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Test测试\ntrue\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131125250-ixwiqss",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131125250-ixwiqss",
+				"updated": "20240131125334"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "卸载脚本只需要执行"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "package.loaded[\u0026quot;脚本名\u0026quot;] = nil"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​即可"
+				}
+			]
+		},
+		{
+			"ID": "20240131125432-nlrbc9c",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240131125432-nlrbc9c",
+				"style": "line-height: 22px;",
+				"updated": "20240131125442"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"**********脚本卸载************\")\nrequire(\"Lesson11_Test\")\nprint(package.loaded[\"Lesson11_Test\"])\npackage.loaded[\"Lesson11_Test\"] = nil\nrequire(\"Lesson11_Test\")\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131125443-li1cbj4",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240131125443-li1cbj4",
+				"style": "line-height: 22px;",
+				"updated": "20240131125451"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "**********脚本卸载************\nTest测试\ntrue\nTest测试\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131125450-5t5f8m9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240131125450-5t5f8m9",
+				"name": "_G",
+				"updated": "20240131125612"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "_G表"
+				}
+			]
+		},
+		{
+			"ID": "20240131125457-iiyl7we",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131125457-iiyl7we",
+				"updated": "20240131125947"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_G"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​表是一个总表，他将我们申明的所有全局变量都存储在其中（局部变量则不会存储到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_G"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内）"
+				}
+			]
+		},
+		{
+			"ID": "20240131125548-ty0f672",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240131125548-ty0f672",
+				"style": "line-height: 22px;",
+				"updated": "20240131125925"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"**********大G表************\")\na = 1\nlocal b = 2\nfor key, value in pairs(_G) do\n    print(key, value)\nend\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131125707-75mz8st",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240131125707-75mz8st",
+				"style": "line-height: 22px;",
+				"updated": "20240131125854"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "**********大G表************\na\t1\t\t\t\t\t\t\t\t--可见，之前声明的全局变量都可以在_G表内找到\nstring\ttable: 00579890\nxpcall\tfunction: 005776E8\npackage\ttable: 00577950\ntostring\tfunction: 005773E8\nprint\tfunction: 00577008\nos\ttable: 00579AC0\nunpack\tfunction: 005773A8\nrequire\tfunction: 00578308\ngetfenv\tfunction: 005771C8\nsetmetatable\tfunction: 00577348\nnext\tfunction: 00577188\nassert\tfunction: 00577128\ntonumber\tfunction: 005776C8\nio\ttable: 00579908\nrawequal\tfunction: 00577068\ncollectgarbage\tfunction: 005772C8\narg\ttable: 00579A98\ngetmetatable\tfunction: 00577288\nmodule\tfunction: 005781C8\nrawset\tfunction: 005770E8\nmath\ttable: 00579778\ndebug\ttable: 00579B60\npcall\tfunction: 005772A8\ntable\ttable: 00577978\nnewproxy\tfunction: 00570578\ntype\tfunction: 00577568\ncoroutine\ttable: 005777E8\n_G\ttable: 00573F08\nselect\tfunction: 005771A8\ngcinfo\tfunction: 005771E8\npairs\tfunction: 00570548\nrawget\tfunction: 00577228\nloadstring\tfunction: 00577208\nipairs\tfunction: 00573F30\n_VERSION\tLua 5.1\ndofile\tfunction: 005772E8\nsetfenv\tfunction: 005770A8\nload\tfunction: 005770C8\nerror\tfunction: 00576FE8\nloadfile\tfunction: 00577308\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131125951-slyyl96",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131125951-slyyl96"
+			}
+		}
+	]
+}

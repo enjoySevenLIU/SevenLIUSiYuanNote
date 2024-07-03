@@ -1,0 +1,2491 @@
+{
+	"ID": "20240313195222-vbqa1nn",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240313195222-vbqa1nn",
+		"title": "UN3L3——FTP关键类",
+		"updated": "20240314115701"
+	},
+	"Children": [
+		{
+			"ID": "20240313205501-6qt4t9c",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240313205501-6qt4t9c",
+				"updated": "20240313211300"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过C#提供的这3个FTP关键类，我们便可以完成客户端向FTP服务器操作文件的需求，比如上传、下载、删除文件"
+				}
+			]
+		},
+		{
+			"ID": "20240313204034-rkv6qsx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240313204034-rkv6qsx",
+				"updated": "20240313204038"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240313204038-fwyc5np",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240313204038-fwyc5np",
+				"style": "line-height: 22px;",
+				"updated": "20240314115047"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "NetworkCredential\t\t\t\t\t\t\t//通信凭证类，用于在FTP文件传输时，设置账号密码\n//用于上传、下载、删除服务器上的文件\nFtpWebRequest\t\t\t\t\t\t\t\t//Ftp文件传输协议客户端操作类\nFtpWebRequest.Create()\t\t\t\t\t\t//创建新的WebRequest，用于进行Ftp相关操作\nftpWebRequest.Abort()\t\t\t\t\t\t//如果正在进行文件传输，用此方法可以终止传输\nftpWebRequest.GetRequestStream()\t\t\t//获取用于上传的流\nftpWebRequest.GetResponse()\t\t\t\t\t//返回FTP服务器响应类对象\nftpWebRequest.Credentials \t\t\t\t\t//设置通信凭证，用于FTP服务器验证\nftpWebRequest.Proxy\t\t\t\t\t\t\t//代理相关设置\nftpWebRequest.KeepAlive\t\t\t\t\t\t//当完成请求时是否关闭到FTP服务器的控制连接（默认为true，不关闭）\nftpWebRequest.UseBinary\t\t\t\t\t\t//是否使用2进制传输，如果为False就ASCII发送传输，一般用True\nftpWebRequest.RenameTo\t\t\t\t\t\t//对文件重命名\nftpWebRequest.Method\t\t\t\t\t\t//设置操作命令，都是字符串形式的，可以通过WebRequestMethods.Ftp来调用对应的字符串常量\nWebRequestMethods.Ftp.DeleteFile\t\t\t//删除文件\nWebRequestMethods.Ftp.DownloadFile\t\t\t//下载文件\nWebRequestMethods.Ftp.ListDirectory\t\t\t//获取文件简短列表\nWebRequestMethods.Ftp.ListDirectoryDetails\t//获取文件详细列表\nWebRequestMethods.Ftp.MakeDirectory\t\t\t//创建目录\nWebRequestMethods.Ftp.RemoveDirectory\t\t//删除目录\nWebRequestMethods.Ftp.UploadFile\t\t\t//上传文件\n//用于真正的从服务器获取内容\nFtpWebResponse\t\t\t\t\t\t\t\t//封装FTP服务器对请求的响应，它提供操作状态以及从服务器下载数据，通过它来真正的从服务器获取内容\nftpWebResponse.Close()\t\t\t\t\t\t//关闭响应对象，释放所有资源\nftpWebResponse.GetResponseStream()\t\t\t//返回从FTP服务器下载数据的流的方法\nftpWebResponse.ContentLength\t\t\t\t//接受到数据的长度\nftpWebResponse.ContentType\t\t\t\t\t//接受数据的类型\nftpWebResponse.StatusCode\t\t\t\t\t//FTP服务器下发的最新状态码\nftpWebResponse.StatusDescription\t\t\t//FTP服务器下发的状态代码的文本\nftpWebResponse.BannerMessage\t\t\t\t//登录前建立连接时FTP服务器发送的消息\nftpWebResponse.ExitMessage\t\t\t\t\t//FTP会话结束时服务器发送的消息\nftpWebResponse.LastModified\t\t\t\t\t//FTP服务器上的文件的上次修改日期和时间\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240313195222-uip3o4o",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240313195222-uip3o4o",
+				"updated": "20240313195229"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "NetworkCredential"
+				}
+			]
+		},
+		{
+			"ID": "20240313195253-mck6yvc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240313195253-mck6yvc",
+				"updated": "20240313195831"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "命名空间："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "System.Net"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n通信凭证类："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "NetworkCredential"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n用于在FTP文件传输时，设置账号密码，在构造函数里调用"
+				}
+			]
+		},
+		{
+			"ID": "20240313195336-sy35vrs",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240313195336-sy35vrs",
+				"style": "line-height: 22px;",
+				"updated": "20240313195350"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "NetworkCredential n = new NetworkCredential(\"MrTang\", \"MrTang123\");\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240313195347-17lacc6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240313195347-17lacc6",
+				"updated": "20240313195726"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "FtpWebRequest"
+				}
+			]
+		},
+		{
+			"ID": "20240313195626-soy8f73",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240313195626-soy8f73",
+				"updated": "20240313195826"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "命名空间："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "System.Net"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\nFtp文件传输协议客户端操作类："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "FtpWebRequest"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n主要用于：上传、下载、删除服务器上的文件"
+				}
+			]
+		},
+		{
+			"ID": "20240313195733-gxt7rmh",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240313195733-gxt7rmh",
+				"updated": "20240314115701"
+			},
+			"Children": [
+				{
+					"ID": "20240313195734-qxs3yhb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240313195734-qxs3yhb",
+						"updated": "20240314115701"
+					},
+					"Children": [
+						{
+							"ID": "20240313195734-j3ijj8y",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240313195734-j3ijj8y",
+								"updated": "20240313195740"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重要方法"
+								}
+							]
+						},
+						{
+							"ID": "20240313195740-c50ydvn",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240313195740-c50ydvn",
+								"updated": "20240314115701"
+							},
+							"Children": [
+								{
+									"ID": "20240313195740-0lvetpp",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240313195740-0lvetpp",
+										"name": "FtpWebRequest.Create()",
+										"updated": "20240314115701"
+									},
+									"Children": [
+										{
+											"ID": "20240313195740-3thxa0o",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313195740-3thxa0o",
+												"updated": "20240314115701"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Create()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：创建新的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "WebRequest"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，用于进行Ftp相关操作"
+												}
+											]
+										},
+										{
+											"ID": "20240313195835-wfoo7ha",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313195835-wfoo7ha",
+												"style": "line-height: 22px;",
+												"updated": "20240313203543"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "FtpWebRequest ftpWebRequest = FtpWebRequest.Create(new Uri(\"ftp://127.0.0.1/Test.txt\")) as FtpWebRequest;\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240313195740-f0rbj0c",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240313195740-f0rbj0c",
+										"name": "ftpWebRequest.Abort()",
+										"updated": "20240314115654"
+									},
+									"Children": [
+										{
+											"ID": "20240313195740-9uf9a71",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313195740-9uf9a71",
+												"updated": "20240314115654"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Abort()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：如果正在进行文件传输，用此方法可以终止传输"
+												}
+											]
+										},
+										{
+											"ID": "20240313195837-uawgky2",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313195837-uawgky2",
+												"style": "line-height: 22px;",
+												"updated": "20240313203539"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "ftpWebRequest.Abort();\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240313195740-4ir8whr",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20240313195740-4ir8whr",
+										"name": "ftpWebRequest.GetRequestStream()",
+										"updated": "20240314115651"
+									},
+									"Children": [
+										{
+											"ID": "20240313195740-ord8q6x",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313195740-ord8q6x",
+												"updated": "20240314115651"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "GetRequestStream()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：获取用于上传的流"
+												}
+											]
+										},
+										{
+											"ID": "20240314114541-qqnx7sy",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240314114541-qqnx7sy",
+												"updated": "20240314114700"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果这里是执行上传任务，则执行该方法后上传逻辑会正式开始执行"
+												}
+											]
+										},
+										{
+											"ID": "20240313195838-sgrbb7a",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313195838-sgrbb7a",
+												"style": "line-height: 22px;",
+												"updated": "20240314114648"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "//创建FTP连接\nFtpWebRequest req = FtpWebRequest.Create(new Uri(\"ftp://192.168.1.103/pic.png\")) as FtpWebRequest;\n//将代理相关信息置空，避免服务器同时有http相关服务，造成冲突\nreq.Proxy = null;                                                   //将代理相关信息置空\nreq.Credentials = new NetworkCredential(\"MrTang\", \"MrTang123\");     //设置通信凭证\nreq.KeepAlive = false;                                              //请求完毕后关闭控制连接\nreq.Method = WebRequestMethods.Ftp.UploadFile;                      //设置操作命令\nreq.UseBinary = true;                                               //使用二进制上传\n//等到用于上传的流对象\nStream upLoadStream = req.GetRequestStream();\n//开始上传\nusing (FileStream file = File.OpenRead(Application.streamingAssetsPath + \"/test.png\"))\n{\n    //我们可以一点一点的把这个文件中的字节数组读取出来，然后存入到上传流中\n    byte[] bytes = new byte[1024];\n    //返回值是真正从文件中读了多少个字节\n    int contentLength = file.Read(bytes, 0, bytes.Length);\n    //不停的去读取文件中的字节，除非读取完毕，不然一直读，并写入上传流中\n    while (contentLength != 0)\n    {\n        //写入到上传流中\n        upLoadStream.Write(bytes, 0, contentLength);\n        //写完了继续读\n        contentLength = file.Read(bytes, 0, bytes.Length);\n    }\n    //出循环，证明写完了，就可以关闭流，结束上传\n    file.Close();\n    upLoadStream.Close();\n    print(\"上传完毕\");\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240313195740-3py29ma",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NC4=",
+										"Num": 4
+									},
+									"Properties": {
+										"id": "20240313195740-3py29ma",
+										"name": "ftpWebRequest.GetResponse()",
+										"updated": "20240314115647"
+									},
+									"Children": [
+										{
+											"ID": "20240313195740-3fqqwpu",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313195740-3fqqwpu",
+												"updated": "20240314115647"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "GetResponse()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：返回FTP服务器响应"
+												}
+											]
+										},
+										{
+											"ID": "20240314114754-od2l0gm",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240314114754-od2l0gm",
+												"updated": "20240314114936"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "执行这句代码后，除了上传等任务以外，任务的逻辑会正式执行"
+												}
+											]
+										},
+										{
+											"ID": "20240313195843-8r3sa9n",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313195843-8r3sa9n",
+												"style": "line-height: 22px;",
+												"updated": "20240313203541"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "FtpWebResponse ftpWebResponse = ftpWebRequest.GetResponse() as FtpWebResponse;\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240313195736-7zb09d2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240313195736-7zb09d2",
+						"updated": "20240314115613"
+					},
+					"Children": [
+						{
+							"ID": "20240313195736-vawqxsj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240313195736-vawqxsj",
+								"updated": "20240313195749"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重要成员"
+								}
+							]
+						},
+						{
+							"ID": "20240314114807-u3gexq8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240314114807-u3gexq8",
+								"updated": "20240314114831"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "以下的成员需要在正式开始传输任务前进行创建"
+								}
+							]
+						},
+						{
+							"ID": "20240313195749-vwyh8yj",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240313195749-vwyh8yj",
+								"updated": "20240314115613"
+							},
+							"Children": [
+								{
+									"ID": "20240313195749-ilyhrj5",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240313195749-ilyhrj5",
+										"name": "ftpWebRequest.Credentials",
+										"updated": "20240314115007"
+									},
+									"Children": [
+										{
+											"ID": "20240313195749-rdtcpou",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313195749-rdtcpou",
+												"updated": "20240313203254"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Credentials"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，通信凭证，设置为"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "NetworkCredential"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​对象"
+												}
+											]
+										},
+										{
+											"ID": "20240314114944-5ay1xys",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240314114944-5ay1xys",
+												"updated": "20240314115007"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "对于一些需要输入ID和密码的FTP服务器来说，这一步是必须的"
+												}
+											]
+										},
+										{
+											"ID": "20240313203232-myph2mv",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313203232-myph2mv",
+												"style": "line-height: 22px;",
+												"updated": "20240313203518"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "NetworkCredential networkCredential = new NetworkCredential(\"MrTang\", \"MrTang123\");\nftpWebRequest.Credentials = networkCredential;\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240313195749-sm3txlv",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240313195749-sm3txlv",
+										"name": "ftpWebRequest.KeepAlive",
+										"updated": "20240313203303"
+									},
+									"Children": [
+										{
+											"ID": "20240313195749-y9d9wfu",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313195749-y9d9wfu",
+												"updated": "20240313202943"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "KeepAlive"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​​，"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "bool"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​​值，当完成请求时是否关闭到FTP服务器的控制连接（默认为"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "true"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​​，不关闭）"
+												}
+											]
+										},
+										{
+											"ID": "20240313203301-skrdbi8",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313203301-skrdbi8",
+												"style": "line-height: 22px;",
+												"updated": "20240313203303"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "ftpWebRequest.KeepAlive = false;\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240314114715-zeihsz0",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20240314114715-zeihsz0",
+										"name": "ftpWebRequest.Proxy",
+										"updated": "20240314114730"
+									},
+									"Children": [
+										{
+											"ID": "20240314114715-uuy0g2x",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240314114715-uuy0g2x",
+												"updated": "20240314114730"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Proxy"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：代理相关设置"
+												}
+											]
+										},
+										{
+											"ID": "20240314114730-dwgp4j4",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240314114730-dwgp4j4",
+												"style": "line-height: 22px;",
+												"updated": "20240314114738"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "req.Proxy = null;\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240313195749-w818zoi",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NC4=",
+										"Num": 4
+									},
+									"Properties": {
+										"id": "20240313195749-w818zoi",
+										"name": "ftpWebRequest.Method",
+										"updated": "20240314115613"
+									},
+									"Children": [
+										{
+											"ID": "20240313195749-bb9weuk",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313195749-bb9weuk",
+												"updated": "20240313202945"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Method"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​​，操作命令设置"
+												}
+											]
+										},
+										{
+											"ID": "20240314115502-r1r50o5",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240314115502-r1r50o5",
+												"updated": "20240314115613"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "该属性很重要，决定了我们执行"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ftpWebRequest.GetResponse()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​或"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ftpWebRequest.GetRequestStream()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​后会具体执行什么逻辑\n操作命令都是字符串形式的，我们可以使用"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "WebRequestMethods.Ftp"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​中声明的字符串常量来调用获取这些字符串"
+												}
+											]
+										},
+										{
+											"ID": "20240313203330-lrvjwau",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313203330-lrvjwau",
+												"style": "line-height: 22px;",
+												"updated": "20240313203336"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "ftpWebRequest.Method = WebRequestMethods.Ftp.DeleteFile;\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20240313195752-tftcesc",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240313195752-tftcesc",
+												"updated": "20240313203324"
+											},
+											"Children": [
+												{
+													"ID": "20240313203324-hgstm7z",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240313203324-hgstm7z",
+														"name": "WebRequestMethods.Ftp",
+														"updated": "20240313203324"
+													},
+													"Children": [
+														{
+															"ID": "20240313203324-xaf9stc",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240313203324-xaf9stc",
+																"updated": "20240313203324"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "WebRequestMethods.Ftp"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​​类中的操作命令属性"
+																}
+															]
+														},
+														{
+															"ID": "20240313195752-978ipjy",
+															"Type": "NodeList",
+															"ListData": {},
+															"Properties": {
+																"id": "20240313195752-978ipjy",
+																"updated": "20240313203449"
+															},
+															"Children": [
+																{
+																	"ID": "20240313195752-21n1irj",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"BulletChar": 42,
+																		"Marker": "Kg=="
+																	},
+																	"Properties": {
+																		"id": "20240313195752-21n1irj",
+																		"name": "WebRequestMethods.Ftp.DeleteFile",
+																		"updated": "20240313203449"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240313195752-itqapq1",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240313195752-itqapq1",
+																				"updated": "20240313202951"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "​"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "DeleteFile"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​​ 删除文件"
+																				}
+																			]
+																		},
+																		{
+																			"ID": "20240313202918-2kr1oj4",
+																			"Type": "NodeCodeBlock",
+																			"IsFencedCodeBlock": true,
+																			"Properties": {
+																				"id": "20240313202918-2kr1oj4",
+																				"style": "line-height: 22px;",
+																				"updated": "20240313203449"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeCodeBlockFenceOpenMarker",
+																					"Data": "```"
+																				},
+																				{
+																					"Type": "NodeCodeBlockFenceInfoMarker",
+																					"CodeBlockInfo": "YyM="
+																				},
+																				{
+																					"Type": "NodeCodeBlockCode",
+																					"Data": "ftpWebRequest.Method = WebRequestMethods.Ftp.DeleteFile;\n"
+																				},
+																				{
+																					"Type": "NodeCodeBlockFenceCloseMarker",
+																					"Data": "```"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240313195753-nz2p983",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"BulletChar": 42,
+																		"Marker": "Kg=="
+																	},
+																	"Properties": {
+																		"id": "20240313195753-nz2p983",
+																		"name": "WebRequestMethods.Ftp.DownloadFile",
+																		"updated": "20240313203437"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240313195753-qo7m05x",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240313195753-qo7m05x",
+																				"updated": "20240313202957"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "​"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "DownloadFile"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​​ 下载文件"
+																				}
+																			]
+																		},
+																		{
+																			"ID": "20240313203415-22a3ib2",
+																			"Type": "NodeCodeBlock",
+																			"IsFencedCodeBlock": true,
+																			"Properties": {
+																				"id": "20240313203415-22a3ib2",
+																				"style": "line-height: 22px;",
+																				"updated": "20240313203437"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeCodeBlockFenceOpenMarker",
+																					"Data": "```"
+																				},
+																				{
+																					"Type": "NodeCodeBlockFenceInfoMarker",
+																					"CodeBlockInfo": "YyM="
+																				},
+																				{
+																					"Type": "NodeCodeBlockCode",
+																					"Data": "ftpWebRequest.Method = WebRequestMethods.Ftp.DownloadFile;\n"
+																				},
+																				{
+																					"Type": "NodeCodeBlockFenceCloseMarker",
+																					"Data": "```"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240313195759-oglk1bz",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"BulletChar": 42,
+																		"Marker": "Kg=="
+																	},
+																	"Properties": {
+																		"id": "20240313195759-oglk1bz",
+																		"name": "WebRequestMethods.Ftp.ListDirectory",
+																		"updated": "20240313203439"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240313195759-g41jpmn",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240313195759-g41jpmn",
+																				"updated": "20240313203000"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "​"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "ListDirectory"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​​ 获取文件简短列表"
+																				}
+																			]
+																		},
+																		{
+																			"ID": "20240313203417-esa0tx3",
+																			"Type": "NodeCodeBlock",
+																			"IsFencedCodeBlock": true,
+																			"Properties": {
+																				"id": "20240313203417-esa0tx3",
+																				"style": "line-height: 22px;",
+																				"updated": "20240313203439"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeCodeBlockFenceOpenMarker",
+																					"Data": "```"
+																				},
+																				{
+																					"Type": "NodeCodeBlockFenceInfoMarker",
+																					"CodeBlockInfo": "YyM="
+																				},
+																				{
+																					"Type": "NodeCodeBlockCode",
+																					"Data": "ftpWebRequest.Method = WebRequestMethods.Ftp.ListDirectory;\n"
+																				},
+																				{
+																					"Type": "NodeCodeBlockFenceCloseMarker",
+																					"Data": "```"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240313195753-o8yetkp",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"BulletChar": 42,
+																		"Marker": "Kg=="
+																	},
+																	"Properties": {
+																		"id": "20240313195753-o8yetkp",
+																		"name": "WebRequestMethods.Ftp.ListDirectoryDetails",
+																		"updated": "20240313203441"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240313195753-1rq0gf9",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240313195753-1rq0gf9",
+																				"updated": "20240313203005"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "​"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "ListDirectoryDetails"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​​ 获取文件详细列表"
+																				}
+																			]
+																		},
+																		{
+																			"ID": "20240313203419-ccf1rvd",
+																			"Type": "NodeCodeBlock",
+																			"IsFencedCodeBlock": true,
+																			"Properties": {
+																				"id": "20240313203419-ccf1rvd",
+																				"style": "line-height: 22px;",
+																				"updated": "20240313203441"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeCodeBlockFenceOpenMarker",
+																					"Data": "```"
+																				},
+																				{
+																					"Type": "NodeCodeBlockFenceInfoMarker",
+																					"CodeBlockInfo": "YyM="
+																				},
+																				{
+																					"Type": "NodeCodeBlockCode",
+																					"Data": "ftpWebRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;\n"
+																				},
+																				{
+																					"Type": "NodeCodeBlockFenceCloseMarker",
+																					"Data": "```"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240313195753-isorqj8",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"BulletChar": 42,
+																		"Marker": "Kg=="
+																	},
+																	"Properties": {
+																		"id": "20240313195753-isorqj8",
+																		"name": "WebRequestMethods.Ftp.MakeDirectory",
+																		"updated": "20240313203444"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240313195753-1o6o5eb",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240313195753-1o6o5eb",
+																				"updated": "20240313203008"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "​"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "MakeDirectory"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​​ 创建目录"
+																				}
+																			]
+																		},
+																		{
+																			"ID": "20240313203420-951qgw1",
+																			"Type": "NodeCodeBlock",
+																			"IsFencedCodeBlock": true,
+																			"Properties": {
+																				"id": "20240313203420-951qgw1",
+																				"style": "line-height: 22px;",
+																				"updated": "20240313203444"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeCodeBlockFenceOpenMarker",
+																					"Data": "```"
+																				},
+																				{
+																					"Type": "NodeCodeBlockFenceInfoMarker",
+																					"CodeBlockInfo": "YyM="
+																				},
+																				{
+																					"Type": "NodeCodeBlockCode",
+																					"Data": "ftpWebRequest.Method = WebRequestMethods.Ftp.MakeDirectory;\n"
+																				},
+																				{
+																					"Type": "NodeCodeBlockFenceCloseMarker",
+																					"Data": "```"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240313195753-kvfxytr",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"BulletChar": 42,
+																		"Marker": "Kg=="
+																	},
+																	"Properties": {
+																		"id": "20240313195753-kvfxytr",
+																		"name": "WebRequestMethods.Ftp.RemoveDirectory",
+																		"updated": "20240313203446"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240313195753-woxly58",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240313195753-woxly58",
+																				"updated": "20240313203011"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "​"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "RemoveDirectory"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​​ 删除目录"
+																				}
+																			]
+																		},
+																		{
+																			"ID": "20240313203424-e5qv6k7",
+																			"Type": "NodeCodeBlock",
+																			"IsFencedCodeBlock": true,
+																			"Properties": {
+																				"id": "20240313203424-e5qv6k7",
+																				"style": "line-height: 22px;",
+																				"updated": "20240313203446"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeCodeBlockFenceOpenMarker",
+																					"Data": "```"
+																				},
+																				{
+																					"Type": "NodeCodeBlockFenceInfoMarker",
+																					"CodeBlockInfo": "YyM="
+																				},
+																				{
+																					"Type": "NodeCodeBlockCode",
+																					"Data": "ftpWebRequest.Method = WebRequestMethods.Ftp.RemoveDirectory;\n"
+																				},
+																				{
+																					"Type": "NodeCodeBlockFenceCloseMarker",
+																					"Data": "```"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240313195754-b87ppgw",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"BulletChar": 42,
+																		"Marker": "Kg=="
+																	},
+																	"Properties": {
+																		"id": "20240313195754-b87ppgw",
+																		"name": "WebRequestMethods.Ftp.UploadFile",
+																		"updated": "20240313203447"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240313195754-vi3zf1p",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240313195754-vi3zf1p",
+																				"updated": "20240313203014"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "​"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "UploadFile"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​​ 上传文件"
+																				}
+																			]
+																		},
+																		{
+																			"ID": "20240313203427-ifcumwh",
+																			"Type": "NodeCodeBlock",
+																			"IsFencedCodeBlock": true,
+																			"Properties": {
+																				"id": "20240313203427-ifcumwh",
+																				"style": "line-height: 22px;",
+																				"updated": "20240313203447"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeCodeBlockFenceOpenMarker",
+																					"Data": "```"
+																				},
+																				{
+																					"Type": "NodeCodeBlockFenceInfoMarker",
+																					"CodeBlockInfo": "YyM="
+																				},
+																				{
+																					"Type": "NodeCodeBlockCode",
+																					"Data": "ftpWebRequest.Method = WebRequestMethods.Ftp.UploadFile;\n"
+																				},
+																				{
+																					"Type": "NodeCodeBlockFenceCloseMarker",
+																					"Data": "```"
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240313195749-l5x07f6",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NS4=",
+										"Num": 5
+									},
+									"Properties": {
+										"id": "20240313195749-l5x07f6",
+										"name": "ftpWebRequest.UseBinary",
+										"updated": "20240313210714"
+									},
+									"Children": [
+										{
+											"ID": "20240313195749-0ecvo8j",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313195749-0ecvo8j",
+												"updated": "20240313203017"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "UseBinary"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​​ 是否使用2进制传输"
+												}
+											]
+										},
+										{
+											"ID": "20240313210706-lptjriy",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313210706-lptjriy",
+												"updated": "20240313210714"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果为"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "False"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​​就ASCII发送传输，一般为"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "True"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​​"
+												}
+											]
+										},
+										{
+											"ID": "20240313203109-af5s9pl",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313203109-af5s9pl",
+												"style": "line-height: 22px;",
+												"updated": "20240313203309"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "ftpWebRequest.UseBinary = true;\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240313195749-t0a1igt",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Ni4=",
+										"Num": 6
+									},
+									"Properties": {
+										"id": "20240313195749-t0a1igt",
+										"name": "ftpWebRequest.RenameTo",
+										"updated": "20240313210722"
+									},
+									"Children": [
+										{
+											"ID": "20240313195749-xhd7wlq",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313195749-xhd7wlq",
+												"updated": "20240313203022"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "RenameTo"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​​ 重命名"
+												}
+											]
+										},
+										{
+											"ID": "20240313210718-y6qetka",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313210718-y6qetka",
+												"updated": "20240313210722"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "对文件重命名"
+												}
+											]
+										},
+										{
+											"ID": "20240313203107-t56wd2d",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313203107-t56wd2d",
+												"style": "line-height: 22px;",
+												"updated": "20240313203221"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "ftpWebRequest.RenameTo = \"myTest.txt\";\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240313195614-yh2lmnb",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240313195614-yh2lmnb",
+				"updated": "20240313202356"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "FtpWebResponse"
+				}
+			]
+		},
+		{
+			"ID": "20240313202358-8pv4354",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240313202358-8pv4354",
+				"updated": "20240313203752"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "命名空间："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "System.Net"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n它是用于封装FTP服务器对请求的响应，它提供操作状态以及从服务器下载数据\n我们可以通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "FtpWebRequest"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​对象中的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GetResponse()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法获取，当使用完毕时，要使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Close"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​释放\n我们通过它来真正的从服务器获取内容"
+				}
+			]
+		},
+		{
+			"ID": "20240313205319-lkh7rze",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240313205319-lkh7rze",
+				"style": "line-height: 22px;",
+				"updated": "20240313205447"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "FtpWebResponse ftpWebResponse = ftpWebRequest.GetResponse() as FtpWebResponse;\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240313203750-6lixl9d",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240313203750-6lixl9d",
+				"updated": "20240314115632"
+			},
+			"Children": [
+				{
+					"ID": "20240313203806-yv8yfwo",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240313203806-yv8yfwo",
+						"updated": "20240314115632"
+					},
+					"Children": [
+						{
+							"ID": "20240313203806-5qubudw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240313203806-5qubudw",
+								"updated": "20240313203812"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重要方法："
+								}
+							]
+						},
+						{
+							"ID": "20240313203812-dl4xrq0",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240313203812-dl4xrq0",
+								"updated": "20240314115632"
+							},
+							"Children": [
+								{
+									"ID": "20240313203812-1wzinoe",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240313203812-1wzinoe",
+										"name": "ftpWebResponse.Close()",
+										"updated": "20240314115632"
+									},
+									"Children": [
+										{
+											"ID": "20240313203812-f89zzbf",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313203812-f89zzbf",
+												"updated": "20240314115632"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Close()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：释放所有资源"
+												}
+											]
+										},
+										{
+											"ID": "20240313205325-ccpqq6x",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313205325-ccpqq6x",
+												"style": "line-height: 22px;",
+												"updated": "20240313210402"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "ftpWebResponse.Close();\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240313203812-8r06bo4",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240313203812-8r06bo4",
+										"name": "ftpWebResponse.GetResponseStream()",
+										"updated": "20240314115627"
+									},
+									"Children": [
+										{
+											"ID": "20240313203812-e6fd167",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313203812-e6fd167",
+												"updated": "20240314115627"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "GetResponseStream()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：返回从FTP服务器下载数据的流"
+												}
+											]
+										},
+										{
+											"ID": "20240314115138-qy3iahk",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240314115138-qy3iahk",
+												"updated": "20240314115158"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "执行这句代码后，下载的逻辑会正式执行"
+												}
+											]
+										},
+										{
+											"ID": "20240313205330-s2p01rn",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313205330-s2p01rn",
+												"style": "line-height: 22px;",
+												"updated": "20240314115308"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "//和上传不同，上传的文件名是自己定义的，但是下载的文件名一定是资源服务器上有的\nFtpWebRequest request = FtpWebRequest.Create(new Uri(\"ftp://192.168.1.103/下载测试.png\")) as FtpWebRequest;\n//设置代理，凭证，是否保持连接，操作类型，是否使用二进制传输数据\nrequest.Credentials = new NetworkCredential(\"MrTang\", \"MrTang123\");\nrequest.Proxy = null;\nrequest.KeepAlive = false;\nrequest.Method = WebRequestMethods.Ftp.DownloadFile;\nrequest.UseBinary = true;\nFtpWebResponse response = request.GetResponse() as FtpWebResponse;\n//获取下载的流\nStream downLoadStream = response.GetResponseStream();\n//创建文件流来接收下载流内的数据\nusing (FileStream fileStream = File.Create(Application.persistentDataPath + \"/DownLoadTest.png\"))\n{\n    byte[] bytes = new byte[1024];\n    //读取下载下来的流数据\n    int contentLength = downLoadStream.Read(bytes, 0, bytes.Length);\n    //一点一点的下载到本地流\n    while (contentLength != 0)\n    {\n        //把读取出来的字节数组，写入到本地文件流中\n        fileStream.Write(bytes, 0, contentLength);\n        //如果还有就继续读\n        contentLength = downLoadStream.Read(bytes, 0, bytes.Length);\n    }\n    //下载结束，关闭流\n    downLoadStream.Close();\n    fileStream.Close();\n}\nprint(\"下载结束！\" + Application.persistentDataPath + \"/DownLoadTest.png\");\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240313203807-npb17vw",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240313203807-npb17vw",
+						"updated": "20240314115453"
+					},
+					"Children": [
+						{
+							"ID": "20240313203807-van60bw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240313203807-van60bw",
+								"updated": "20240313203818"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重要成员："
+								}
+							]
+						},
+						{
+							"ID": "20240313203818-9muuv2h",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240313203818-9muuv2h",
+								"updated": "20240314115453"
+							},
+							"Children": [
+								{
+									"ID": "20240313203818-s4vuizq",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240313203818-s4vuizq",
+										"name": "ftpWebResponse.ContentLength",
+										"updated": "20240314115453"
+									},
+									"Children": [
+										{
+											"ID": "20240313203818-y5eeaj3",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313203818-y5eeaj3",
+												"updated": "20240313203833"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ContentLength"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：接受到数据的长度"
+												}
+											]
+										},
+										{
+											"ID": "20240314115429-gtmvb6e",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240314115429-gtmvb6e",
+												"updated": "20240314115453"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "可以用于获取服务器上某个文件的大小，通过"
+												}
+											]
+										},
+										{
+											"ID": "20240313205335-h7bcj9a",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313205335-h7bcj9a",
+												"style": "line-height: 22px;",
+												"updated": "20240314115415"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "//创建一个Ftp连接\nFtpWebRequest request = FtpWebRequest.Create(new Uri(FTP_PATH + fileName)) as FtpWebRequest;\n//设置代理，凭证，是否保持连接，操作类型，是否使用二进制传输数据\nrequest.Proxy = null;\nrequest.Credentials = new NetworkCredential(USER_NAME, PASSWORD);\nrequest.KeepAlive = false;\nrequest.Method = WebRequestMethods.Ftp.GetFileSize;\nrequest.UseBinary = true;\n//获取真正的长度\nFtpWebResponse response = request.GetResponse() as FtpWebResponse;\nresponse.Close();\nprint(response.ContentLength);\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240313203818-g77ktfs",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240313203818-g77ktfs",
+										"name": "ftpWebResponse.ContentType",
+										"updated": "20240313203818"
+									},
+									"Children": [
+										{
+											"ID": "20240313203818-ovmz0h6",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313203818-ovmz0h6",
+												"updated": "20240313203835"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ContentType"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：接受数据的类型"
+												}
+											]
+										},
+										{
+											"ID": "20240313205341-2vzlw6b",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313205341-2vzlw6b",
+												"style": "line-height: 22px;",
+												"updated": "20240313205344"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "print(ftpWebResponse.ContentType);\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240313203818-o339yjb",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20240313203818-o339yjb",
+										"name": "ftpWebResponse.StatusCode",
+										"updated": "20240313203818"
+									},
+									"Children": [
+										{
+											"ID": "20240313203818-ds4idpo",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313203818-ds4idpo",
+												"updated": "20240313205346"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "StatusCode"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：FTP服务器下发的最新状态码"
+												}
+											]
+										},
+										{
+											"ID": "20240313205346-myj2x3x",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313205346-myj2x3x",
+												"style": "line-height: 22px;",
+												"updated": "20240313205350"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "print(ftpWebResponse.StatusCode);\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240313203818-hvdatz5",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NC4=",
+										"Num": 4
+									},
+									"Properties": {
+										"id": "20240313203818-hvdatz5",
+										"name": "ftpWebResponse.StatusDescription",
+										"updated": "20240313203818"
+									},
+									"Children": [
+										{
+											"ID": "20240313203818-dv37j1s",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313203818-dv37j1s",
+												"updated": "20240313203842"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "StatusDescription"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：FTP服务器下发的状态代码的文本"
+												}
+											]
+										},
+										{
+											"ID": "20240313205351-bdjcod4",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313205351-bdjcod4",
+												"style": "line-height: 22px;",
+												"updated": "20240313205355"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "print(ftpWebResponse.StatusDescription);\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240313203818-68wlt3v",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NS4=",
+										"Num": 5
+									},
+									"Properties": {
+										"id": "20240313203818-68wlt3v",
+										"name": "ftpWebResponse.BannerMessage",
+										"updated": "20240313203818"
+									},
+									"Children": [
+										{
+											"ID": "20240313203818-2n0yqyu",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313203818-2n0yqyu",
+												"updated": "20240313203845"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "BannerMessage"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：登录前建立连接时FTP服务器发送的消息"
+												}
+											]
+										},
+										{
+											"ID": "20240313205356-q5w33oo",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313205356-q5w33oo",
+												"style": "line-height: 22px;",
+												"updated": "20240313205400"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "print(ftpWebResponse.BannerMessage);\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240313203818-mj6pm4o",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Ni4=",
+										"Num": 6
+									},
+									"Properties": {
+										"id": "20240313203818-mj6pm4o",
+										"name": "ftpWebResponse.ExitMessage",
+										"updated": "20240313203818"
+									},
+									"Children": [
+										{
+											"ID": "20240313203818-ylfnu46",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313203818-ylfnu46",
+												"updated": "20240313203848"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ExitMessage"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：FTP会话结束时服务器发送的消息"
+												}
+											]
+										},
+										{
+											"ID": "20240313205401-e0q29jn",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313205401-e0q29jn",
+												"style": "line-height: 22px;",
+												"updated": "20240313205406"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "print(ftpWebResponse.ExitMessage);\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240313203818-5efuvr7",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Ny4=",
+										"Num": 7
+									},
+									"Properties": {
+										"id": "20240313203818-5efuvr7",
+										"name": "ftpWebResponse.LastModified",
+										"updated": "20240313205408"
+									},
+									"Children": [
+										{
+											"ID": "20240313203818-kcb138l",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240313203818-kcb138l",
+												"updated": "20240313203852"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "LastModified"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：FTP服务器上的文件的上次修改日期和时间"
+												}
+											]
+										},
+										{
+											"ID": "20240313205407-pdjc5tr",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240313205407-pdjc5tr",
+												"style": "line-height: 22px;",
+												"updated": "20240313205408"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "print(ftpWebResponse.LastModified);\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,670 @@
+{
+	"ID": "20230822214913-pz89lom",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230822214913-pz89lom",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230822214913-pz89lom\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230822224642-hfztff4\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230822230404-xrvfp9c\u0026quot;,\u0026quot;scrollTop\u0026quot;:2456,\u0026quot;focusId\u0026quot;:\u0026quot;20230822230142-u8nva7v\u0026quot;,\u0026quot;focusStart\u0026quot;:6,\u0026quot;focusEnd\u0026quot;:6\u0026#125;",
+		"title": "UF_OLDL1——单例模式基类",
+		"updated": "20231223160915"
+	},
+	"Children": [
+		{
+			"ID": "20230822224642-hfztff4",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230822224642-hfztff4",
+				"updated": "20230822224642"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "单例模式"
+				}
+			]
+		},
+		{
+			"ID": "20230822224642-tso9wnf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230822224642-tso9wnf",
+				"updated": "20230822224642"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "一般的单例模式差不多都会写类似于下面的这种形式，区别几乎只在于类名"
+				}
+			]
+		},
+		{
+			"ID": "20230822224642-gcisii2",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230822224642-gcisii2",
+				"updated": "20230822224642"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class GameManager\n{\n    private static GameManager instance = new GameManager();    //为该类写一个私有静态变量，并调用私有构造函数，装载该类的唯一的实例化对象\n    public static GameManager Instance =\u003e instance;    //为该类写一个静态属性，使唯一装载该类的实例化对象的变量在外部只读，以可以调用该类的各种成员\n    private GameManager() { }    //私有的无参构造函数，确保只有该类的私有静态变量可以构造该类的实例化对象，而外部不能，在外部第一次调用静态属性时会执行\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230822224642-5sfd5i4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230822224642-5sfd5i4",
+				"updated": "20230822224642"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "或者用静态方法来也可以获取私有静态变量"
+				}
+			]
+		},
+		{
+			"ID": "20230822224642-mvpyij2",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230822224642-mvpyij2",
+				"updated": "20230822225451"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class BaseManager\n{\n    private static BaseManager instance;\n    public static BaseManager Instance()\n    {\n        if (instance == null) instance = new BaseManager();\n        return instance;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230822224642-00bvqo2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230822224642-00bvqo2",
+				"updated": "20230822224642"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果是继承MonoBehaviour的类，不能new()，如何让私有静态变量装载该类呢\n在Awake()里instance = this即可"
+				}
+			]
+		},
+		{
+			"ID": "20230822224642-iq2pqii",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230822224642-iq2pqii",
+				"updated": "20230822224642"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class GameManager : MonoBehaviour\n{\n    private static GameManager instance;            //为该类写一个私有静态变量，并调用私有构造函数，装载该类的唯一的实例化对象\n    public static GameManager Instance =\u003e instance; //为该类写一个静态属性，使唯一装载该类的实例化对象的变量在外部只读，由此可以调用该类的各种成员\n    private void Awake()\n    {\n        instance = this;                            //该脚本对象一创建就让私有静态变量等于自己，这样就可以使外部通过静态属性调用唯一的类对象\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230822224642-11jdd4n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230822224642-11jdd4n",
+				"updated": "20230822224642"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "单例模式可以确保该类只能有一个实例化对象，且只能通过静态属性调用它的成员\n类似于 GameManager.Instance.____ 这样的形式"
+				}
+			]
+		},
+		{
+			"ID": "20230822224642-jclm9gu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230822224642-jclm9gu",
+				"updated": "20230822224642"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这种模式尤其适合只需要在程序里存在一个对象的类，例如各种管理器"
+				}
+			]
+		},
+		{
+			"ID": "20230822224642-sl1v5xo",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230822224642-sl1v5xo",
+				"updated": "20230822224642"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "与静态类的区别"
+				}
+			]
+		},
+		{
+			"ID": "20230822224642-o55x831",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230822224642-o55x831",
+				"updated": "20230822224642"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "静态类也是只能用类名调用且不能实例化的类，它和单例模式类有什么区别呢？"
+				}
+			]
+		},
+		{
+			"ID": "20230822224642-iz8ou5q",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20230822224642-iz8ou5q",
+				"updated": "20231204110142"
+			},
+			"Children": [
+				{
+					"ID": "20230822224642-hpvdnt5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20230822224642-hpvdnt5",
+						"updated": "20230822224642"
+					},
+					"Children": [
+						{
+							"ID": "20230822224642-9gd92bl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230822224642-9gd92bl",
+								"updated": "20230822224642"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "静态类的方法适合纯数据处理，不依赖其它对象实例，写入参数就可以，但这也是它的限制，方法里是不可调用它的实例对象的。"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20230822224642-09k07sz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20230822224642-09k07sz",
+						"updated": "20230822224642"
+					},
+					"Children": [
+						{
+							"ID": "20230822224642-fosg5oj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230822224642-fosg5oj",
+								"updated": "20230822224642"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "单例模式，看起来也不用实例化，但实际第一次调用时它在内部创建了实例化对象，之后都是在调用这个实例，他的方法中就可以调用其它实例方法了。"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20230822224642-stpxj7c",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20230822224642-stpxj7c",
+						"updated": "20231204110142"
+					},
+					"Children": [
+						{
+							"ID": "20230822224642-v8r3a17",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230822224642-v8r3a17",
+								"updated": "20231204110142"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "静态类不能过多，他会一开始就需要将方法逻辑编译成本机代码（win,mac,linux），\n这就会在程序启动时形成过多cpu计算。而实例是在实例方法第一次被调用时才编译成本机代码（只编译一次）。"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20230822224642-cp03d03",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20230822224642-cp03d03",
+						"updated": "20230822224642"
+					},
+					"Children": [
+						{
+							"ID": "20230822224642-jma654d",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230822224642-jma654d",
+								"updated": "20230822224642"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "所以应该尽量使用实例，有更好的内存管理gc释放，也会分散编译方法体的本机代码"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230822214913-yiwn7j7",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230822214913-yiwn7j7",
+				"updated": "20230822214944"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "单例模式管理器基类"
+				}
+			]
+		},
+		{
+			"ID": "20230822214946-kvshp09",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230822214946-kvshp09",
+				"updated": "20230822215001"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "涉及知识点：泛型，单例模式"
+				}
+			]
+		},
+		{
+			"ID": "20230822215005-7zrtg6w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230822215005-7zrtg6w",
+				"updated": "20230822215019"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "作用：减少单例模式重复代码的书写"
+				}
+			]
+		},
+		{
+			"ID": "20230822223447-joq6f26",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230822223447-joq6f26",
+				"updated": "20230824011311"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用方法：\n需要作为单例模式的类直接继承该方法，泛型参数填入自己的类，该类即可当作单例模式使用"
+				}
+			]
+		},
+		{
+			"ID": "20230823155221-a817l3j",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823155221-a817l3j",
+				"updated": "20230823155331"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "需要注意的是，这里并没有用私有构造函数来限制外部实例化单例，这里需要注意（由于约束，这里并不方便使用私有构造函数）"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230822223317-5kbltu3",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230822223317-5kbltu3",
+				"updated": "20230822232428"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public abstract class BaseManager\u003cT\u003e where T : new()    //使用泛型方法，使派生类中的私有变量和返回方法能够转载和返回自己类型的类对象\n{\n    private static T instance;    //为该类写一个私有静态变量，并调用私有构造函数，装载该类的唯一的实例化对象\n    public static T Instance()    //这里外部获取使用的是方法而非属性，因为如果之后要加一些锁或其它功能的话，这样更方便修改！\n    {\n        if (instance == null)     //如果私有变量没有自己类的类对象，就先使用构造方法实例化一个，因此这里只能用公开无参构造方法约束\n            instance = new T();\n        return instance;\n    }\n    //由于使用了公开无参构造方法约束，这里不再可以使用私有构造方法，但因此外部可能会构造该类的对象，因此需要注意\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230822223528-jtpovrc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230822223528-jtpovrc",
+				"updated": "20230822223531"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20230822223531-fpx6ti0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230822223531-fpx6ti0",
+				"updated": "20230822223758"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class GameManager : BaseManager\u003cGameManager\u003e\n{\n    public void UseMe()\n    {\n        Debug.Log(\"我是单例模式\");\n    }\n}\n\npublic class Test\n{\n    void Main()\n    {\n        GameManager.Instance().UseMe();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230822224449-usvn9yz",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230822224449-usvn9yz",
+				"updated": "20230822224627"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "继承MonoBehaviour的单例模式基类"
+				}
+			]
+		},
+		{
+			"ID": "20230822224707-9397jse",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230822224707-9397jse",
+				"updated": "20230822225302"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "继承了MonoBehaviour的类，不能直接new()，只能通过拖曳到对象上或"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230708210112-0hytou2",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "GameObject.AddComponent\u0026lt;\u0026gt;()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "来构造\n因此需要在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230708145704-g8qlq01",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "Awake()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "里让私有静态变量等于自己"
+				}
+			]
+		},
+		{
+			"ID": "20230822230142-u8nva7v",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230822230142-u8nva7v",
+				"updated": "20230824011437"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用方法：\n需要作为单例模式的类直接继承该方法，泛型参数填入自己的类，该类即可当作单例模式使用"
+				}
+			]
+		},
+		{
+			"ID": "20230822230215-r1263nj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230822230215-r1263nj",
+				"updated": "20230822230403"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "第一种实现方式"
+				}
+			]
+		},
+		{
+			"ID": "20230822230243-7cgpfbq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230822230243-7cgpfbq",
+				"updated": "20230822230602"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text strong",
+					"TextMarkTextContent": "需要注意的是，这个基类并不能保证类对象只能被创建一次，如果多次创建，则静态方法只能获取到最后一次构建的类对象\n而单例模式的唯一性也会遭到破坏"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230822225121-bi0fyeo",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230822225121-bi0fyeo",
+				"updated": "20230822230631"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class SingletonMonoBehaviour\u003cT\u003e : MonoBehaviour where T : MonoBehaviour\n{\n    private static T instance;\n    public static T Instance()\n    {\n        return instance;\n    }\n\n    protected void Awake()\n    {\n        //该脚本对象一创建就让私有静态变量等于自己，这样就可以使外部通过静态属性调用唯一的类对象\n        instance = this as T;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230822230354-zryphwo",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230822230354-zryphwo",
+				"updated": "20230822230413"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "第二种实现方式"
+				}
+			]
+		},
+		{
+			"ID": "20230822231449-ukoapqm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230822231449-ukoapqm",
+				"updated": "20230822232155"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这个改造避免了我们手动向某个对象添加脚本，当静态私有变量没有该类对象时，自动添加一个挂载该脚本的空对象"
+				}
+			]
+		},
+		{
+			"ID": "20230822230413-lhfmr60",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230822230413-lhfmr60",
+				"updated": "20230822232321"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class SingletonAutoMono\u003cT\u003e : MonoBehaviour where T : MonoBehaviour\n{\n    private static T instance;\n    public static T Instance()\n    {\n        //这个改造避免了我们手动向某个对象添加脚本，当静态私有变量没有该类对象时，自动添加一个挂载该脚本的空对象\n        if (instance == null)\n        {\n            GameObject obj = new GameObject();      //在场景上创建一个空对象\n            obj.name = typeof(T).ToString();        //将该对象名的名字改为自己类的名字，也就是脚本名\n            DontDestroyOnLoad(obj);                 //防止该单例模式对象在切换场景后被销毁\n            instance = obj.AddComponent\u003cT\u003e();       //向该对象添加自己脚本，并让私有静态变量等于自己\n        }\n        return instance;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230822230404-xrvfp9c",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230822230404-xrvfp9c"
+			}
+		}
+	]
+}

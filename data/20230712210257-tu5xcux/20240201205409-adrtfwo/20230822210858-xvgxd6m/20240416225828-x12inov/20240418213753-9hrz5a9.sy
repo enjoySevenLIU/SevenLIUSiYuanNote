@@ -1,0 +1,1172 @@
+{
+	"ID": "20240418213753-9hrz5a9",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240418213753-9hrz5a9",
+		"title": "UFL5-6——AB包资源管理器的异步加载修改",
+		"type": "doc",
+		"updated": "20240418231949"
+	},
+	"Children": [
+		{
+			"ID": "20240418213754-57f3iko",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240418213754-57f3iko",
+				"updated": "20240418213839"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240418213809-5cmtwj0",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240418213809-5cmtwj0",
+						"updated": "20240418213839"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "管理器代码继承自："
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "block-ref",
+							"TextMarkBlockRefID": "20240128185344-0bn5jbo",
+							"TextMarkBlockRefSubtype": "d",
+							"TextMarkTextContent": "UH1L4——AB包资源管理器"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240418214233-7wjac91",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418214233-7wjac91",
+				"updated": "20240418214355"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "重新按照ABMgr中的规则进行AB包打包"
+				}
+			]
+		},
+		{
+			"ID": "20240418214439-yyud8pe",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418214439-yyud8pe",
+				"updated": "20240418214439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 637px;",
+						"style": "width: 627px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240418214439-r8k0bt1.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 627px;\" parent-style=\"width: 637px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240418213854-ulndr14",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240418213854-ulndr14",
+				"updated": "20240418213950"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ABMgr异步加载修改主要目标"
+				}
+			]
+		},
+		{
+			"ID": "20240418213956-kalwmk5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418213956-kalwmk5",
+				"updated": "20240418214530"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "将ABMgr中的异步加载方法彻底异步化，让其中的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "依赖包加载、资源包加载、资源加载都变为异步加载"
+				}
+			]
+		},
+		{
+			"ID": "20240418213956-lapyadk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418213956-lapyadk",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240418213956"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：主包可以保留同步加载"
+				}
+			]
+		},
+		{
+			"ID": "20240418214455-p0449wr",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240418214455-p0449wr",
+				"updated": "20240418214504"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "需要考虑的主要问题"
+				}
+			]
+		},
+		{
+			"ID": "20240418214511-uieg7dr",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240418214511-uieg7dr",
+				"updated": "20240418214515"
+			},
+			"Children": [
+				{
+					"ID": "20240418214515-b2v6o2y",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240418214515-b2v6o2y",
+						"updated": "20240418214515"
+					},
+					"Children": [
+						{
+							"ID": "20240418214515-33efajf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240418214515-33efajf",
+								"updated": "20240418222940"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "某个AB包当正在异步加载时又进行重复加载，遇到这种情况时，我们需要避免重复加载报错\n因此我们不应再次加载，而是等待之前的异步加载结束后直接使用"
+								}
+							]
+						},
+						{
+							"ID": "20240418222943-hvxznf1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240418222943-hvxznf1",
+								"updated": "20240418222943"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "首先将同步加载AB包的方法"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LoadAB"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​进行拆分，将加载主包的逻辑提取出来，新声明一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LoadMainAB"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​去实现"
+								}
+							]
+						},
+						{
+							"ID": "20240418222943-haduuql",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240418222943-haduuql",
+								"style": "line-height: 22px;",
+								"updated": "20240418222943"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private void LoadMainAB()\n{\n    //加载主包\n    if (mainAB == null)\n    {\n        mainAB = AssetBundle.LoadFromFile(PathUrl + MainABName);\n        manifest = mainAB.LoadAsset\u003cAssetBundleManifest\u003e(\"AssetBundleManifest\");\n    }\n}\n\npublic void LoadAB(string abName)\n{\n    LoadMainAB();\n    //获取依赖包相关信息\n    AssetBundle ab;\n    //加载主包中的关键配置文件 获取依赖包\n    string[] strs = manifest.GetAllDependencies(abName);\n    //加载依赖包\n    for (int i = 0; i \u003c strs.Length; i++)\n    {\n        //判断包是否加载过\n        if (!abDic.ContainsKey(strs[i]))\n        {\n            ab = AssetBundle.LoadFromFile(PathUrl + strs[i]);\n            abDic.Add(strs[i], ab);\n        }\n    }\n    //加载目标包\n    if (!abDic.ContainsKey(abName))\n    {\n        ab = AssetBundle.LoadFromFile(PathUrl + abName);\n        abDic.Add(abName, ab);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240418222943-nwcf6og",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240418222943-nwcf6og",
+								"updated": "20240418222953"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "然后将原来协程内的异步加载协程方法内调用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LoadAB"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的部分都替换掉，转为实现新的逻辑"
+								}
+							]
+						},
+						{
+							"ID": "20240418223011-wukxpo8",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240418223011-wukxpo8",
+								"updated": "20240418223012"
+							},
+							"Children": [
+								{
+									"ID": "20240418223012-f1l48va",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240418223012-f1l48va",
+										"updated": "20240418223012"
+									},
+									"Children": [
+										{
+											"ID": "20240418223012-31vtr8c",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240418223012-31vtr8c",
+												"updated": "20240418223024"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "同步加载主包"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240418223029-1r41myg",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240418223029-1r41myg"
+									},
+									"Children": [
+										{
+											"ID": "20240418223029-0xqugtr",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240418223029-0xqugtr",
+												"updated": "20240418223036"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "获取依赖包"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240418223044-mq2ev0z",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20240418223044-mq2ev0z"
+									},
+									"Children": [
+										{
+											"ID": "20240418223044-9e48dll",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240418223044-9e48dll",
+												"updated": "20240418223051"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "循环加载依赖包"
+												}
+											]
+										},
+										{
+											"ID": "20240418223052-kf726tj",
+											"Type": "NodeList",
+											"ListData": {
+												"Typ": 1
+											},
+											"Properties": {
+												"id": "20240418223052-kf726tj"
+											},
+											"Children": [
+												{
+													"ID": "20240418223051-0ndqb4i",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MS4=",
+														"Num": 1
+													},
+													"Properties": {
+														"id": "20240418223051-0ndqb4i"
+													},
+													"Children": [
+														{
+															"ID": "20240418223051-6uv95w4",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240418223051-6uv95w4",
+																"updated": "20240418223111"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "如果字典内不存在记录，说明没有加载过"
+																}
+															]
+														},
+														{
+															"ID": "20240418223150-kamhi2f",
+															"Type": "NodeList",
+															"ListData": {
+																"Typ": 1
+															},
+															"Properties": {
+																"id": "20240418223150-kamhi2f"
+															},
+															"Children": [
+																{
+																	"ID": "20240418223119-nuail7n",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "MS4=",
+																		"Num": 1
+																	},
+																	"Properties": {
+																		"id": "20240418223119-nuail7n"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240418223119-ehcovno",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240418223119-ehcovno",
+																				"updated": "20240418223316"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "加载前就往字典内添加记录，值传入"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "null"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​，然后异步加载AB包，直到加载完毕后才向字典内对应的记录赋值，关联加载出来的AB包"
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240418223317-9zafmsz",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Mi4=",
+														"Num": 2
+													},
+													"Properties": {
+														"id": "20240418223317-9zafmsz"
+													},
+													"Children": [
+														{
+															"ID": "20240418223317-2rg15a8",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240418223317-2rg15a8",
+																"updated": "20240418223331"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "字典内存在记录，说明AB包正在异步加载或者加载已经结束了"
+																}
+															]
+														},
+														{
+															"ID": "20240418223332-ddmds4d",
+															"Type": "NodeList",
+															"ListData": {
+																"Typ": 1
+															},
+															"Properties": {
+																"id": "20240418223332-ddmds4d"
+															},
+															"Children": [
+																{
+																	"ID": "20240418223332-di3zq4s",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "MS4=",
+																		"Num": 1
+																	},
+																	"Properties": {
+																		"id": "20240418223332-di3zq4s"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240418223332-ma76b3v",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240418223332-ma76b3v",
+																				"updated": "20240418223432"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "如果字典内对应的记录值为空，说明正在加载，此时就循环挂起一帧协程，直到发现记录内关联了AB包"
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240418223415-kyomdj9",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NC4=",
+										"Num": 4
+									},
+									"Properties": {
+										"id": "20240418223415-kyomdj9"
+									},
+									"Children": [
+										{
+											"ID": "20240418223415-6esejdk",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240418223415-6esejdk",
+												"updated": "20240418223424"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "加载目标包"
+												}
+											]
+										},
+										{
+											"ID": "20240418223439-1mxwbwa",
+											"Type": "NodeList",
+											"ListData": {
+												"Typ": 1
+											},
+											"Properties": {
+												"id": "20240418223439-1mxwbwa",
+												"updated": "20240418223439"
+											},
+											"Children": [
+												{
+													"ID": "20240418223439-3tlft1d",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MS4=",
+														"Num": 1
+													},
+													"Properties": {
+														"id": "20240418223439-3tlft1d",
+														"updated": "20240418223439"
+													},
+													"Children": [
+														{
+															"ID": "20240418223439-bmlxbu1",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240418223439-bmlxbu1",
+																"updated": "20240418223439"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "如果字典内不存在记录，说明没有加载过"
+																}
+															]
+														},
+														{
+															"ID": "20240418223439-5lmmo5d",
+															"Type": "NodeList",
+															"ListData": {
+																"Typ": 1
+															},
+															"Properties": {
+																"id": "20240418223439-5lmmo5d",
+																"updated": "20240418223439"
+															},
+															"Children": [
+																{
+																	"ID": "20240418223439-3vdc8q3",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "MS4=",
+																		"Num": 1
+																	},
+																	"Properties": {
+																		"id": "20240418223439-3vdc8q3",
+																		"updated": "20240418223439"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240418223439-2t39o2g",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240418223439-2t39o2g",
+																				"updated": "20240418223439"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "加载前就往字典内添加记录，值传入"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "null"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​，然后异步加载AB包，直到加载完毕后才向字典内对应的记录赋值，关联加载出来的AB包"
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240418223439-tw4idu1",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Mi4=",
+														"Num": 2
+													},
+													"Properties": {
+														"id": "20240418223439-tw4idu1",
+														"updated": "20240418223439"
+													},
+													"Children": [
+														{
+															"ID": "20240418223439-mdmby2v",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240418223439-mdmby2v",
+																"updated": "20240418223439"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "字典内存在记录，说明AB包正在异步加载或者加载已经结束了"
+																}
+															]
+														},
+														{
+															"ID": "20240418223439-gq1o1xg",
+															"Type": "NodeList",
+															"ListData": {
+																"Typ": 1
+															},
+															"Properties": {
+																"id": "20240418223439-gq1o1xg",
+																"updated": "20240418223439"
+															},
+															"Children": [
+																{
+																	"ID": "20240418223439-35xdlai",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "MS4=",
+																		"Num": 1
+																	},
+																	"Properties": {
+																		"id": "20240418223439-35xdlai",
+																		"updated": "20240418223439"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240418223439-gklmsak",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240418223439-gklmsak",
+																				"updated": "20240418223439"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "如果字典内对应的记录值为空，说明正在加载，此时就循环挂起一帧协程，直到发现记录内关联了AB包"
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240418223440-feinzgo",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NS4=",
+										"Num": 5
+									},
+									"Properties": {
+										"id": "20240418223440-feinzgo"
+									},
+									"Children": [
+										{
+											"ID": "20240418223440-ub6xm2d",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240418223440-ub6xm2d",
+												"updated": "20240418223538"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "从目标包内加载异步资源，将加载出来的资源传入到回调函数内执行"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240418222954-eajyyzk",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240418222954-eajyyzk",
+								"style": "line-height: 22px;",
+								"updated": "20240418223543"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private IEnumerator LoadResCoroutine\u003cT\u003e(string abName, string resName, UnityAction\u003cT\u003e callBack) where T : Object\n{\n    //加载AB包\n    LoadMainAB();\n    //加载主包中的关键配置文件 获取依赖包\n    string[] strs = manifest.GetAllDependencies(abName);\n    //加载依赖包\n    for (int i = 0; i \u003c strs.Length; i++)\n    {\n        //判断包是否加载过\n        if (!abDic.ContainsKey(strs[i]))\n        {\n            //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n            abDic.Add(strs[i], null);\n            AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + strs[i]);\n            yield return req;\n            //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n            abDic[strs[i]] = req.assetBundle;\n        }\n        //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n        else\n        {\n            //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n            while (abDic[strs[i]] == null)\n            {\n                //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                yield return 0;\n            }\n        }\n    }\n    //加载目标包\n    if (!abDic.ContainsKey(abName))\n    {\n        //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n        abDic.Add(abName, null);\n        AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + abName);\n        yield return req;\n        //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n        abDic[abName] = req.assetBundle;\n    }\n    //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n    else\n    {\n        //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n        while (abDic[abName] == null)\n        {\n            //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n            yield return 0;\n        }\n    }\n    AssetBundleRequest abr = abDic[abName].LoadAssetAsync\u003cT\u003e(resName);\n    yield return abr;\n  \n    //异步加载结束后，通过委托，传递给外部，来使用\n    callBack(abr.asset as T);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240418223544-g0pdnaz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240418223544-g0pdnaz",
+								"updated": "20240418223621"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "其他的异步加载协程的重载也替换掉"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LoadAB"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，换成新的异步加载AB包的逻辑"
+								}
+							]
+						},
+						{
+							"ID": "20240418223621-hhn4r55",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240418223621-hhn4r55",
+								"style": "line-height: 22px;",
+								"updated": "20240418223659"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private IEnumerator LoadResCoroutine(string abName, string resName, UnityAction\u003cObject\u003e callBack)\n{\n    //加载AB包\n    LoadMainAB();\n    //加载主包中的关键配置文件 获取依赖包\n    string[] strs = manifest.GetAllDependencies(abName);\n    //加载依赖包\n    for (int i = 0; i \u003c strs.Length; i++)\n    {\n        //判断包是否加载过\n        if (!abDic.ContainsKey(strs[i]))\n        {\n            //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n            abDic.Add(strs[i], null);\n            AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + strs[i]);\n            yield return req;\n            //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n            abDic[strs[i]] = req.assetBundle;\n        }\n        //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n        else\n        {\n            //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n            while (abDic[strs[i]] == null)\n            {\n                //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                yield return 0;\n            }\n        }\n    }\n    //加载目标包\n    if (!abDic.ContainsKey(abName))\n    {\n        //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n        abDic.Add(abName, null);\n        AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + abName);\n        yield return req;\n        //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n        abDic[abName] = req.assetBundle;\n    }\n    //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n    else\n    {\n        //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n        while (abDic[abName] == null)\n        {\n            //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n            yield return 0;\n        }\n    }\n    AssetBundleRequest abr = abDic[abName].LoadAssetAsync(resName);\n    yield return abr;\n    //异步加载结束后，通过委托，传递给外部，来使用\n    callBack(abr.asset);\n}\n\nprivate IEnumerator LoadResCoroutine(string abName, string resName, System.Type type, UnityAction\u003cObject\u003e callBack)\n{\n    //加载AB包\n    LoadMainAB();\n    //加载主包中的关键配置文件 获取依赖包\n    string[] strs = manifest.GetAllDependencies(abName);\n    //加载依赖包\n    for (int i = 0; i \u003c strs.Length; i++)\n    {\n        //判断包是否加载过\n        if (!abDic.ContainsKey(strs[i]))\n        {\n            //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n            abDic.Add(strs[i], null);\n            AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + strs[i]);\n            yield return req;\n            //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n            abDic[strs[i]] = req.assetBundle;\n        }\n        //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n        else\n        {\n            //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n            while (abDic[strs[i]] == null)\n            {\n                //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                yield return 0;\n            }\n        }\n    }\n    //加载目标包\n    if (!abDic.ContainsKey(abName))\n    {\n        //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n        abDic.Add(abName, null);\n        AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + abName);\n        yield return req;\n        //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n        abDic[abName] = req.assetBundle;\n    }\n    //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n    else\n    {\n        //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n        while (abDic[abName] == null)\n        {\n            //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n            yield return 0;\n        }\n    }\n    AssetBundleRequest abr = abDic[abName].LoadAssetAsync(resName, type);\n    yield return abr;\n    //异步加载结束后，通过委托，传递给外部，来使用\n    callBack(abr.asset);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240418214515-jiuqfvq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240418214515-jiuqfvq",
+						"updated": "20240418214515"
+					},
+					"Children": [
+						{
+							"ID": "20240418214515-0xyxkrl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240418214515-0xyxkrl",
+								"updated": "20240418214536"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "正在加载某个AB包时"
+								}
+							]
+						},
+						{
+							"ID": "20240418214536-9oiefrv",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240418214536-9oiefrv",
+								"updated": "20240418214536"
+							},
+							"Children": [
+								{
+									"ID": "20240418214536-fs0zo3z",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240418214536-fs0zo3z",
+										"updated": "20240418214536"
+									},
+									"Children": [
+										{
+											"ID": "20240418214536-l7z7qtl",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240418214536-l7z7qtl",
+												"updated": "20240418214536"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "卸载AB包：如果正在加载中，不允许卸载"
+												}
+											]
+										},
+										{
+											"ID": "20240418223713-zf5rac5",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240418223713-zf5rac5",
+												"style": "line-height: 22px;",
+												"updated": "20240418224220"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "//单个包卸载\npublic void UnLoad(string abName, UnityAction\u003cbool\u003e callBackResult)\n{\n    if (abDic.ContainsKey(abName))\n    {\n        if (abDic[abName] == null)\n        {\n            //如果发现正在异步加载，则不允许卸载，向回调函数传入false\n            callBackResult?.Invoke(false);\n            return;\n        }\n        abDic[abName].Unload(false);\n        abDic.Remove(abName);\n        //卸载成功，向回调函数传入true\n        callBackResult?.Invoke(true);\n    }\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240418214537-fm04p8h",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240418214537-fm04p8h"
+									},
+									"Children": [
+										{
+											"ID": "20240418214537-ic130bm",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240418214537-ic130bm"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "清空AB包：停止所有协同程序，在清理AB包"
+												}
+											]
+										},
+										{
+											"ID": "20240418224223-615quu2",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240418224223-615quu2",
+												"style": "line-height: 22px;",
+												"updated": "20240418224233"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "//所有包的卸载\npublic void ClearAB()\n{\n    //由于AB包都是异步加载，同时停止所有的异步加载协程\n    StopAllCoroutines();\n    AssetBundle.UnloadAllAssetBundles(false);\n    abDic.Clear();\n    //卸载主包，卸载依赖文件\n    mainAB = null;\n    manifest = null;\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240418231844-2mu1urg",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240418231844-2mu1urg",
+				"updated": "20240418231851"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20240418231855-vxhajr4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418231855-vxhajr4",
+				"updated": "20240418231908"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "两次异步加载同一包下的同一资源"
+				}
+			]
+		},
+		{
+			"ID": "20240418231845-ybqc9j3",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240418231845-ybqc9j3",
+				"style": "line-height: 22px;",
+				"updated": "20240418231925"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Main : MonoBehaviour\n{\n    void Start()\n    {\n        ABManager.Instance.LoadResAsync\u003cGameObject\u003e(\"test\", \"Cube\", (obj) =\u003e\n        {\n            GameObject gameObj = Instantiate(obj);\n            gameObj.name = \"ABMgrCreateObj\";\n        });\n        ABManager.Instance.LoadResAsync\u003cGameObject\u003e(\"test\", \"Cube\", (obj) =\u003e\n        {\n            GameObject gameObj = Instantiate(obj);\n            gameObj.name = \"ABMgrCreateObj\";\n        });\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240418231926-a8zdavz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418231926-a8zdavz",
+				"updated": "20240418231949"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240418231949-3u3wf64.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240418224234-own9zd8",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240418224234-own9zd8",
+				"updated": "20240418224240"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体代码"
+				}
+			]
+		},
+		{
+			"ID": "20240418224241-fqsgbnd",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240418224241-fqsgbnd",
+				"style": "line-height: 22px;",
+				"updated": "20240418224247"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\n\n/// \u003csummary\u003e\n/// 通过AB包进行资源加载的管理器\n/// \u003c/summary\u003e\npublic class ABManager : SingletonAutoMono\u003cABManager\u003e\n{\n    //主包\n    private AssetBundle mainAB = null;\n    //依赖包获取用的配置文件\n    private AssetBundleManifest manifest = null;\n\n    private Dictionary\u003cstring, AssetBundle\u003e abDic = new Dictionary\u003cstring, AssetBundle\u003e();\n\n    /// \u003csummary\u003e\n    /// AB包存放路径，随项目修改\n    /// \u003c/summary\u003e\n    private string PathUrl\n    {\n        get\n        {\n            return Application.streamingAssetsPath + \"/\";\n        }\n    }\n\n    private string MainABName\n    {\n        get\n        {\n#if UNITY_IOS\n            return \"IOS\";\n#elif UNITY_ANDROID\n            return \"Android\";\n#else\n            return \"PC\";\n#endif\n        }\n    }\n\n    #region 同步加载\n    private void LoadMainAB()\n    {\n        //加载主包\n        if (mainAB == null)\n        {\n            mainAB = AssetBundle.LoadFromFile(PathUrl + MainABName);\n            manifest = mainAB.LoadAsset\u003cAssetBundleManifest\u003e(\"AssetBundleManifest\");\n        }\n    }\n\n    public void LoadAB(string abName)\n    {\n        LoadMainAB();\n        //获取依赖包相关信息\n        AssetBundle ab;\n        //加载主包中的关键配置文件 获取依赖包\n        string[] strs = manifest.GetAllDependencies(abName);\n        //加载依赖包\n        for (int i = 0; i \u003c strs.Length; i++)\n        {\n            //判断包是否加载过\n            if (!abDic.ContainsKey(strs[i]))\n            {\n                ab = AssetBundle.LoadFromFile(PathUrl + strs[i]);\n                abDic.Add(strs[i], ab);\n            }\n        }\n        //加载目标包\n        if (!abDic.ContainsKey(abName))\n        {\n            ab = AssetBundle.LoadFromFile(PathUrl + abName);\n            abDic.Add(abName, ab);\n        }\n    }\n\n    //同步加载，不指定类型\n    public Object LoadRes(string abName, string resName)\n    {\n        //加载AB包\n        LoadAB(abName);\n        Object obj = abDic[abName].LoadAsset(resName);\n        //为了外部使用方便，在加载资源时，先判断是否为Object，如果是直接实例化返回出去\n        if (obj is GameObject)\n            return Instantiate(obj);\n        else\n            return obj;\n    }\n\n    //同步加载，使用type指定类型\n    public Object LoadRes(string abName, string resName, System.Type type)\n    {\n        //加载AB包\n        LoadAB(abName);\n        Object obj = abDic[abName].LoadAsset(resName, type);\n        //为了外部使用方便，在加载资源时，先判断是否为Object，如果是直接实例化返回出去\n        if (obj is GameObject)\n            return Instantiate(obj);\n        else\n            return obj;\n    }\n\n    //同步加载，使用泛型指定类型\n    public T LoadRes\u003cT\u003e(string abName, string resName) where T : Object\n    {\n        //加载AB包\n        LoadAB(abName);\n        T obj = abDic[abName].LoadAsset\u003cT\u003e(resName);\n        //为了外部使用方便，在加载资源时，先判断是否为Object，如果是直接实例化返回出去\n        if (obj is GameObject)\n            return Instantiate(obj);\n        else\n            return obj;\n    }\n\n    #endregion\n\n    #region 异步加载\n    //这里的异步加载 AB包并没有使用异步加载，只是从AB包中加载资源时异步加载\n\n    //通过名字异步加载资源\n    public void LoadResAsync(string abName, string resName, UnityAction\u003cObject\u003e callBack)\n    {\n        StartCoroutine(LoadResCoroutine(abName, resName, callBack));\n    }\n\n    private IEnumerator LoadResCoroutine(string abName, string resName, UnityAction\u003cObject\u003e callBack)\n    {\n        //加载AB包\n        LoadMainAB();\n        //加载主包中的关键配置文件 获取依赖包\n        string[] strs = manifest.GetAllDependencies(abName);\n        //加载依赖包\n        for (int i = 0; i \u003c strs.Length; i++)\n        {\n            //判断包是否加载过\n            if (!abDic.ContainsKey(strs[i]))\n            {\n                //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n                abDic.Add(strs[i], null);\n                AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + strs[i]);\n                yield return req;\n                //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n                abDic[strs[i]] = req.assetBundle;\n            }\n            //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n            else\n            {\n                //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n                while (abDic[strs[i]] == null)\n                {\n                    //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                    yield return 0;\n                }\n            }\n        }\n        //加载目标包\n        if (!abDic.ContainsKey(abName))\n        {\n            //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n            abDic.Add(abName, null);\n            AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + abName);\n            yield return req;\n            //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n            abDic[abName] = req.assetBundle;\n        }\n        //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n        else\n        {\n            //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n            while (abDic[abName] == null)\n            {\n                //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                yield return 0;\n            }\n        }\n        AssetBundleRequest abr = abDic[abName].LoadAssetAsync(resName);\n        yield return abr;\n        //异步加载结束后，通过委托，传递给外部，来使用\n        callBack(abr.asset);\n    }\n\n    //根据Type异步加载资源\n    public void LoadResAsync(string abName, string resName, System.Type type, UnityAction\u003cObject\u003e callBack)\n    {\n        StartCoroutine(LoadResCoroutine(abName, resName, type, callBack));\n    }\n\n    private IEnumerator LoadResCoroutine(string abName, string resName, System.Type type, UnityAction\u003cObject\u003e callBack)\n    {\n        //加载AB包\n        LoadMainAB();\n        //加载主包中的关键配置文件 获取依赖包\n        string[] strs = manifest.GetAllDependencies(abName);\n        //加载依赖包\n        for (int i = 0; i \u003c strs.Length; i++)\n        {\n            //判断包是否加载过\n            if (!abDic.ContainsKey(strs[i]))\n            {\n                //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n                abDic.Add(strs[i], null);\n                AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + strs[i]);\n                yield return req;\n                //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n                abDic[strs[i]] = req.assetBundle;\n            }\n            //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n            else\n            {\n                //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n                while (abDic[strs[i]] == null)\n                {\n                    //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                    yield return 0;\n                }\n            }\n        }\n        //加载目标包\n        if (!abDic.ContainsKey(abName))\n        {\n            //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n            abDic.Add(abName, null);\n            AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + abName);\n            yield return req;\n            //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n            abDic[abName] = req.assetBundle;\n        }\n        //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n        else\n        {\n            //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n            while (abDic[abName] == null)\n            {\n                //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                yield return 0;\n            }\n        }\n        AssetBundleRequest abr = abDic[abName].LoadAssetAsync(resName, type);\n        yield return abr;\n        //异步加载结束后，通过委托，传递给外部，来使用\n        callBack(abr.asset);\n    }\n\n    //根据泛型异步加载\n    public void LoadResAsync\u003cT\u003e(string abName, string resName, UnityAction\u003cT\u003e callBack) where T : Object\n    {\n        StartCoroutine(LoadResCoroutine(abName, resName, callBack));\n    }\n\n    private IEnumerator LoadResCoroutine\u003cT\u003e(string abName, string resName, UnityAction\u003cT\u003e callBack) where T : Object\n    {\n        //加载AB包\n        LoadMainAB();\n        //加载主包中的关键配置文件 获取依赖包\n        string[] strs = manifest.GetAllDependencies(abName);\n        //加载依赖包\n        for (int i = 0; i \u003c strs.Length; i++)\n        {\n            //判断包是否加载过\n            if (!abDic.ContainsKey(strs[i]))\n            {\n                //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n                abDic.Add(strs[i], null);\n                AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + strs[i]);\n                yield return req;\n                //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n                abDic[strs[i]] = req.assetBundle;\n            }\n            //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n            else\n            {\n                //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n                while (abDic[strs[i]] == null)\n                {\n                    //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                    yield return 0;\n                }\n            }\n        }\n        //加载目标包\n        if (!abDic.ContainsKey(abName))\n        {\n            //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n            abDic.Add(abName, null);\n            AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + abName);\n            yield return req;\n            //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n            abDic[abName] = req.assetBundle;\n        }\n        //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n        else\n        {\n            //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n            while (abDic[abName] == null)\n            {\n                //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                yield return 0;\n            }\n        }\n        AssetBundleRequest abr = abDic[abName].LoadAssetAsync\u003cT\u003e(resName);\n        yield return abr;\n    \n        //异步加载结束后，通过委托，传递给外部，来使用\n        callBack(abr.asset as T);\n    }\n    #endregion\n\n    //单个包卸载\n    public void UnLoad(string abName, UnityAction\u003cbool\u003e callBackResult)\n    {\n        if (abDic.ContainsKey(abName))\n        {\n            if (abDic[abName] == null)\n            {\n                //如果发现正在异步加载，则不允许卸载，向回调函数传入false\n                callBackResult?.Invoke(false);\n                return;\n            }\n            abDic[abName].Unload(false);\n            abDic.Remove(abName);\n            //卸载成功，向回调函数传入true\n            callBackResult?.Invoke(true);\n        }\n    }\n\n    //所有包的卸载\n    public void ClearAB()\n    {\n        //由于AB包都是异步加载，同时停止所有的异步加载协程\n        StopAllCoroutines();\n        AssetBundle.UnloadAllAssetBundles(false);\n        abDic.Clear();\n        //卸载主包，卸载依赖文件\n        mainAB = null;\n        manifest = null;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

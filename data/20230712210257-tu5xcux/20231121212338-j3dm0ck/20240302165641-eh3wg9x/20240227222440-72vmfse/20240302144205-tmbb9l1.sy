@@ -1,0 +1,720 @@
+{
+	"ID": "20240302144205-tmbb9l1",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240302144205-tmbb9l1",
+		"title": "UH2S3L15——Lua调用函数（重载）",
+		"updated": "20240302170801"
+	},
+	"Children": [
+		{
+			"ID": "20240302150607-6rjxumz",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240302150607-6rjxumz",
+				"updated": "20240302150609"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Lua调用C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的重载方法"
+				}
+			]
+		},
+		{
+			"ID": "20240302150607-peqhhe7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240302150607-peqhhe7",
+				"updated": "20240302150609"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们要调用下面的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240302150607-9ol2ymy",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240302150607-9ol2ymy",
+				"style": "line-height: 22px;",
+				"updated": "20240302151623"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Lesson6\n{\n    public int Calc()\n    {\n        return 100;\n    }\n\n    public int Calc(int a, int b)\n    {\n        return a + b;\n    }\n\n    public int Calc(int a, out int b)\n    {\n        b = 10;\n        return a + b;\n    }\n\n    public int Calc(int a)\n    {\n        Debug.Log(\"Int\");\n        return a;\n    }\n\n    public float Calc(float a)\n    {\n        Debug.Log(\"Float\");\n        return a;\n    }\n\n    public string Calc(string str)\n    {\n        Debug.Log(\"String\");\n        return str;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240302151223-vj5cank",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240302151223-vj5cank",
+				"updated": "20240302151245"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "数值参数重载精度问题"
+				}
+			]
+		},
+		{
+			"ID": "20240302151805-hotuacy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240302151805-hotuacy",
+				"updated": "20240302151809"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于下面的重载"
+				}
+			]
+		},
+		{
+			"ID": "20240302151638-n8e92dn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240302151638-n8e92dn",
+				"style": "line-height: 22px;",
+				"updated": "20240302151245"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public int Calc()\n{\n    return 100;\n}\npublic int Calc(int a)\n{\n    Debug.Log(\"Int\");\n    return a;\n}\npublic float Calc(float a)\n{\n    Debug.Log(\"Float\");\n    return a;\n}\npublic string Calc(string str)\n{\n    Debug.Log(\"String\");\n    return str;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240302151246-8dj207r",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240302151246-8dj207r",
+				"updated": "20240302153506"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "toLua和xLua一样，对重载函数的精度支持不太好，lua中只有"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Number"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​一种数值类型，会导致其分不清该使用何种数值重载，\n因此不建议使用不同精度的数值类型重载函数"
+				}
+			]
+		},
+		{
+			"ID": "20240302151335-eafpv10",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240302151335-eafpv10",
+				"style": "line-height: 22px;",
+				"updated": "20240302151245"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local obj = Lesson6()\nprint(obj:Calc())\nprint(obj:Calc(1))\nprint(obj:Calc(1.2))\nprint(obj:Calc(\"123\"))\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240302151426-k56wsky",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240302151426-k56wsky",
+				"updated": "20240302151245"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以看见，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "obj:Calc(1))"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​默认调用了"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "float"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数重载"
+				}
+			]
+		},
+		{
+			"ID": "20240302151423-z7rc1au",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240302151423-z7rc1au",
+				"updated": "20240302151245"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 511px;",
+						"style": "width: 501px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240302151423-oy5qi48.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 501px;\" parent-style=\"width: 511px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240302151509-5gp8qt6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240302151509-5gp8qt6",
+				"updated": "20240302153438"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用out或ref参数重载问题"
+				}
+			]
+		},
+		{
+			"ID": "20240302151756-hk1kl6t",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240302151756-hk1kl6t",
+				"updated": "20240302153438"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于下面的重载"
+				}
+			]
+		},
+		{
+			"ID": "20240302151831-7k2sk7u",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240302151831-7k2sk7u",
+				"style": "line-height: 22px;",
+				"updated": "20240302153438"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public int Calc(int a, int b)\n{\n    return a + b;\n}\npublic int Calc(int a, out int b)\n{\n    b = 10;\n    return a + b;\n}"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240302151851-opxvwow",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240302151851-opxvwow",
+				"updated": "20240302153438"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "toLua会默认调用非"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "out"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数的函数重载"
+				}
+			]
+		},
+		{
+			"ID": "20240302151844-i5e0iyw",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240302151844-i5e0iyw",
+				"style": "line-height: 22px;",
+				"updated": "20240302153438"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(obj:Calc(10, 1))\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240302151927-zb778dq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240302151927-zb778dq",
+				"updated": "20240302153438"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 535px;",
+						"style": "width: 525px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240302151927-z7vzx2i.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 525px;\" parent-style=\"width: 535px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240302151931-b72jbo9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240302151931-b72jbo9",
+				"updated": "20240302153438"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果想要在toLua中使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "out"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​重载，有一个固定套路，就是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "out"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数传入"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "nil"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​占位即可\n这意味着我们在使用Unity中的一些api中有"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "out"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​时，我们就可以用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "nil"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​占位了"
+				}
+			]
+		},
+		{
+			"ID": "20240302151953-r0lqovu",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240302151953-r0lqovu",
+				"style": "line-height: 22px;",
+				"updated": "20240302153438"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(obj:Calc(10, 1))\nprint(obj:Calc(10, nil))\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240302152025-mbctnu4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240302152025-mbctnu4",
+				"updated": "20240302153438"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 538px;",
+						"style": "width: 528px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240302152025-y81zt8t.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 528px;\" parent-style=\"width: 538px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240302152145-1r3umtu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240302152145-1r3umtu",
+				"updated": "20240302153438"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但是对于"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ref"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​重载："
+				}
+			]
+		},
+		{
+			"ID": "20240302152612-yk7sobv",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240302152612-yk7sobv",
+				"style": "line-height: 22px;",
+				"updated": "20240302153438"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public int Calc(int a, int b)\n{\n    return a + b;\n}\npublic int Calc(int a, ref int b)\n{\n    b = 10;\n    return a + b;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240302152619-yornvkn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240302152619-yornvkn",
+				"updated": "20240302153438"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们就不能传入"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "nil"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，因为ref参数传入的值必须初始化，但如果不传入"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "nil"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，就会默认使用不带"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ref"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数的重载\n因此，在toLua中，我们无法使用带"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ref"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240302152635-p2r01q1",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240302152635-p2r01q1",
+				"style": "line-height: 22px;",
+				"updated": "20240302153438"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(obj:Calc(10, 1))\nprint(obj:Calc(10, nil))\t-- 报错\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240302153422-vewu10w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240302153422-vewu10w",
+				"updated": "20240302153438"
+			}
+		}
+	]
+}

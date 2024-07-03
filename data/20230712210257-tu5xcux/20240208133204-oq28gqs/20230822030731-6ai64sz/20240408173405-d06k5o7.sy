@@ -1,0 +1,1640 @@
+{
+	"ID": "20240408173405-d06k5o7",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240408173405-d06k5o7",
+		"title": "UG4L10——组件拓展类",
+		"type": "doc",
+		"updated": "20240409215813"
+	},
+	"Children": [
+		{
+			"ID": "20240408173405-rum5k9g",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240408173405-rum5k9g",
+				"updated": "20240408174415"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "组件类拓展"
+				}
+			]
+		},
+		{
+			"ID": "20240408174445-me2s51w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408174445-me2s51w",
+				"updated": "20240408175027"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "FairyGUI提供了绑定一个类为组件的扩展类的功能，让我们可以更加面向对象的进行编程\n回顾目前显示面板，处理面板逻辑的方式，目前我们的面板并没有声明一个类与之对应专门处理该面板的逻辑\n这样的写法显然是不够面向对象的"
+				}
+			]
+		},
+		{
+			"ID": "20240408174945-8ktxsek",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408174945-8ktxsek",
+				"updated": "20240408175035"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过view面板获取它的子对象 然后处理子对象 对应逻辑 初始化 或者 事件监听\n组件类拓展就可以将某一个面板的逻辑封装到指定类当中"
+				}
+			]
+		},
+		{
+			"ID": "20240408174950-vmh2krd",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240408174950-vmh2krd",
+				"updated": "20240408175046"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现组件类拓展"
+				}
+			]
+		},
+		{
+			"ID": "20240408175054-phqui19",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240408175054-phqui19",
+				"updated": "20240408181033"
+			},
+			"Children": [
+				{
+					"ID": "20240408175058-nkgrllw",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240408175058-nkgrllw",
+						"updated": "20240408175058"
+					},
+					"Children": [
+						{
+							"ID": "20240408175058-l5ght8e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408175058-l5ght8e",
+								"updated": "20240408175101"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "创建自定义类继承"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GComponent"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240408180641-bgri5s6",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240408180641-bgri5s6",
+								"style": "line-height: 22px;",
+								"updated": "20240408180659"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using FairyGUI;\n\npublic class MyPanel : GComponent { }\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240408175058-wf6ic0l",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240408175058-wf6ic0l",
+						"updated": "20240408175058"
+					},
+					"Children": [
+						{
+							"ID": "20240408175058-xce9mwc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408175058-xce9mwc",
+								"updated": "20240408175103"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重写"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ConstructFromXML"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法，在其中初始化面板相关控件"
+								}
+							]
+						},
+						{
+							"ID": "20240408180632-tybwfvb",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240408180632-tybwfvb",
+								"style": "line-height: 22px;",
+								"updated": "20240408180638"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using FairyGUI;\nusing FairyGUI.Utils;\nusing UnityEngine;\n\npublic class MyPanel : GComponent\n{\n    public GTextInput inputTxt;\n    public GButton btnTest;\n\n    public override void ConstructFromXML(XML xml)\n    {\n        base.ConstructFromXML(xml);\n        //在这里初始化面板相关内容\n        inputTxt = this.GetChild(\"inputTxt\").asTextInput;\n        btnTest = this.GetChild(\"btnTest\").asButton;\n\n        btnTest.onClick.Add(() =\u003e\n        {\n            Debug.Log(\"按钮点击\");\n        });\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240408175058-58msrk2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240408175058-58msrk2",
+						"updated": "20240408175058"
+					},
+					"Children": [
+						{
+							"ID": "20240408175058-lc19y1k",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408175058-lc19y1k",
+								"updated": "20240408175058"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在该类中处理面板逻辑"
+								}
+							]
+						},
+						{
+							"ID": "20240408180627-5ao08i3",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240408180627-5ao08i3",
+								"style": "line-height: 22px;",
+								"updated": "20240408180630"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using FairyGUI;\nusing FairyGUI.Utils;\nusing UnityEngine;\n\npublic class MyPanel : GComponent\n{\n    public GTextInput inputTxt;\n    public GButton btnTest;\n\n    public override void ConstructFromXML(XML xml)\n    {\n        base.ConstructFromXML(xml);\n        //在这里初始化面板相关内容\n        inputTxt = this.GetChild(\"inputTxt\").asTextInput;\n        btnTest = this.GetChild(\"btnTest\").asButton;\n\n        btnTest.onClick.Add(() =\u003e\n        {\n            Debug.Log(\"按钮点击\");\n        });\n    }\n\n    public void ShowInfo(string info)\n    {\n        inputTxt.text = info;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240408175058-y1pvbom",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240408175058-y1pvbom",
+						"updated": "20240408181033"
+					},
+					"Children": [
+						{
+							"ID": "20240408175058-xck557b",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408175058-xck557b",
+								"updated": "20240408180721"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将自定义类和对应组件进行注册关联"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UIObjectFactory.SetPackageItemExtension(\u0026quot;组件URL地址\u0026quot;, typeof(自定义类));"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "这一步要在创建面板前执行"
+								}
+							]
+						},
+						{
+							"ID": "20240408180704-hjor93u",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240408180704-hjor93u",
+								"style": "line-height: 22px;",
+								"updated": "20240408181033"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class Lesson35 : MonoBehaviour\n{\n    // Start is called before the first frame update\n    void Start()\n    {\n        //设置适配相关\n        GRoot.inst.SetContentScaleFactor(1365, 768, UIContentScaler.ScreenMatchMode.MatchHeight);\n        //加载包及其依赖包\n        UIPackage package = UIPackage.AddPackage(\"UI/teach\");\n        foreach (var item in package.dependencies)\n        {\n            UIPackage.AddPackage(item[\"name\"]);\n        }\n\n        //进行面板和自定义类关系的注册\n        UIObjectFactory.SetPackageItemExtension(\"ui://teach/TeachPanel\", typeof(MyPanel));\n        //由于我们注册了，所以我们在创建面板时，他会自动和自定义类进行关联，因此我们可以用自定义去装载它\n        MyPanel panel = (MyPanel)UIPackage.CreateObject(\"teach\", \"TeachPanel\").asCom;\n        //最后将创建出来的面板放到GRoot对象上，显示面板\n        GRoot.inst.AddChild(panel);\n\n        //调用面板类的方法\n        panel.ShowInfo(\"唐老狮的课\");\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240408180702-l8wnv1w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408180702-l8wnv1w",
+				"updated": "20240408180748"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用面板类的方法，显示效果如下："
+				}
+			]
+		},
+		{
+			"ID": "20240408180935-ekred4i",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408180935-ekred4i",
+				"updated": "20240408180935"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 591px;",
+						"style": "width: 581px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240408180935-uje8sdq.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 581px;\" parent-style=\"width: 591px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240408180940-33i2747",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408180940-33i2747",
+				"updated": "20240408181004"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "点击左上角的按钮输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240408180955-gk95o3i.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240408181007-fvn5ttm",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240408181007-fvn5ttm",
+				"updated": "20240408181048"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "FairyGUI编辑器导出代码功能"
+				}
+			]
+		},
+		{
+			"ID": "20240408181118-nfgec19",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408181118-nfgec19",
+				"updated": "20240408182006"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果每多一个面板，就要多拓展一个组件类作为面板类显然是较为麻烦的，不过FairyGUI提供了自动生成代码的功能，它在发布设置内"
+				}
+			]
+		},
+		{
+			"ID": "20240408181725-ueoun6t",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20240408181725-ueoun6t",
+				"updated": "20240408212038"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20240408181514-9awe37u",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240408181514-9awe37u",
+						"updated": "20240408212038"
+					},
+					"Children": [
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20240408212038-1r7pr6s.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20240408181721-08afh2z",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20240408181721-08afh2z",
+						"updated": "20240408181930"
+					},
+					"Children": [
+						{
+							"ID": "20240408181722-3ahglzs",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20240408181722-3ahglzs",
+								"updated": "20240408181722"
+							},
+							"Children": [
+								{
+									"ID": "20240408181722-s7gnks0",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240408181722-s7gnks0",
+										"updated": "20240408181852"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "不生成使用默认名称的成员"
+										}
+									]
+								},
+								{
+									"ID": "20240408181749-be5i2tc",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240408181749-be5i2tc",
+										"updated": "20240408181830"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "对于那些没有修改过名字的n开头的控件，我们往往不需要去获取它\n因此该选项可以默认勾选"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240408181832-a2mo63v",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20240408181832-a2mo63v",
+								"updated": "20240408181930"
+							},
+							"Children": [
+								{
+									"ID": "20240408181832-l9xg61l",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240408181832-l9xg61l",
+										"updated": "20240408181849"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "使用名称获取成员对象"
+										}
+									]
+								},
+								{
+									"ID": "20240408181855-7alrjm5",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240408181855-7alrjm5",
+										"updated": "20240408181930"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "如果不勾选，则生成的代码将会是通过索引去获取控件"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20240408182010-28umfdt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408182010-28umfdt",
+				"updated": "20240408182042"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "全局设置设置了之后，还需要到包设置内勾选为本包生成代码"
+				}
+			]
+		},
+		{
+			"ID": "20240408182403-0i5ytjo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408182403-0i5ytjo",
+				"updated": "20240408182403"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 676px;",
+						"style": "width: 666px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240408182403-bt6k17i.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 666px;\" parent-style=\"width: 676px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240408182045-bwcui5q",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408182045-bwcui5q",
+				"updated": "20240408182329"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "最后点击发布，就会自动生成C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "脚本"
+				}
+			]
+		},
+		{
+			"ID": "20240408212328-p6a49nb",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20240408212328-p6a49nb",
+				"updated": "20240408213814"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20240408212106-9lf7fx5",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240408212106-9lf7fx5",
+						"updated": "20240408212106"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Properties": {
+								"parent-style": "width: 394px;",
+								"style": "width: 384px;"
+							},
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20240408212106-rhst3bm.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"width: 384px;\" parent-style=\"width: 394px;\"}"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20240408212325-qzx2a04",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20240408212325-qzx2a04",
+						"updated": "20240408213814"
+					},
+					"Children": [
+						{
+							"ID": "20240408212335-2prt7p2",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20240408212335-2prt7p2",
+								"updated": "20240408212335"
+							},
+							"Children": [
+								{
+									"ID": "20240408212335-shrkyb1",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240408212335-shrkyb1",
+										"updated": "20240408212345"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "生成的脚本分为两种"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240408212345-wite899",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20240408212345-wite899"
+							},
+							"Children": [
+								{
+									"ID": "20240408212345-iyazx8n",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240408212345-iyazx8n",
+										"updated": "20240408213506"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "一种是"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "包名+Binder"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​绑定类，一个包只有一个"
+										}
+									]
+								},
+								{
+									"ID": "20240408213443-jfhk74h",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240408213443-jfhk74h",
+										"updated": "20240408213521"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "这种类包括："
+										}
+									]
+								},
+								{
+									"ID": "20240408213443-4nbv9u4",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20240408213443-4nbv9u4",
+										"updated": "20240408213443"
+									},
+									"Children": [
+										{
+											"ID": "20240408213119-z4zw6cq",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20240408213119-z4zw6cq"
+											},
+											"Children": [
+												{
+													"ID": "20240408213119-i5xtqay",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20240408213119-i5xtqay",
+														"updated": "20240408213331"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "​"
+														},
+														{
+															"Type": "NodeTextMark",
+															"TextMarkType": "code",
+															"TextMarkTextContent": "BindAll"
+														},
+														{
+															"Type": "NodeText",
+															"Data": "​ 方法"
+														}
+													]
+												},
+												{
+													"ID": "20240408213240-hrbvnb2",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20240408213240-hrbvnb2",
+														"updated": "20240408213323"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "该方法实现了所有生成的组件拓展类脚本注册"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240408212509-8uta9t0",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20240408212509-8uta9t0",
+								"updated": "20240408213814"
+							},
+							"Children": [
+								{
+									"ID": "20240408212509-lvku05h",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240408212509-lvku05h",
+										"updated": "20240408213509"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "另一种"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "组件名前缀+组件名"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​组件拓展类，所有被导出的组件都会生成一个"
+										}
+									]
+								},
+								{
+									"ID": "20240408213450-flp4niw",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240408213450-flp4niw",
+										"updated": "20240408213517"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "这种类包括："
+										}
+									]
+								},
+								{
+									"ID": "20240408213228-fuq9rrn",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20240408213228-fuq9rrn",
+										"updated": "20240408213814"
+									},
+									"Children": [
+										{
+											"ID": "20240408213227-zq39til",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20240408213227-zq39til"
+											},
+											"Children": [
+												{
+													"ID": "20240408213227-jy8g17z",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20240408213227-jy8g17z",
+														"updated": "20240408213533"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "组件内所有的控件的成员变量"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20240408213441-15xsgfj",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20240408213441-15xsgfj"
+											},
+											"Children": [
+												{
+													"ID": "20240408213441-p0euqi5",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20240408213441-p0euqi5",
+														"updated": "20240408213613"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "该组件的url地址常量"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20240408213541-dzobq0v",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20240408213541-dzobq0v"
+											},
+											"Children": [
+												{
+													"ID": "20240408213541-hhbjtsp",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20240408213541-hhbjtsp",
+														"updated": "20240408213607"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "​"
+														},
+														{
+															"Type": "NodeTextMark",
+															"TextMarkType": "code",
+															"TextMarkTextContent": "CreateInstance"
+														},
+														{
+															"Type": "NodeText",
+															"Data": "​方法"
+														}
+													]
+												},
+												{
+													"ID": "20240408213616-ksqyr1j",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20240408213616-ksqyr1j",
+														"updated": "20240408213644"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "从包内创建一个组件对象返回出去"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20240408213647-lolffc1",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20240408213647-lolffc1",
+												"updated": "20240408213814"
+											},
+											"Children": [
+												{
+													"ID": "20240408213647-kmdptl9",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20240408213647-kmdptl9",
+														"updated": "20240408213712"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "​"
+														},
+														{
+															"Type": "NodeTextMark",
+															"TextMarkType": "code",
+															"TextMarkTextContent": "ConstructFromXML"
+														},
+														{
+															"Type": "NodeText",
+															"Data": "​方法"
+														}
+													]
+												},
+												{
+													"ID": "20240408213713-ry4bu70",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20240408213713-ry4bu70",
+														"updated": "20240408213814"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "找到组件下的控件并赋值到对应的成员变量上"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20240408213805-vbnp8sf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408213805-vbnp8sf",
+				"updated": "20240408213825"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如何使用生成的代码："
+				}
+			]
+		},
+		{
+			"ID": "20240408214116-9me6523",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408214116-9me6523",
+				"updated": "20240408214359"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在加载了包之后，调用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "包名+Binder"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​绑定类的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BindAll"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法完成注册，然后调用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "组件名前缀+组件名"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​组件拓展类的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "CreateInstance"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法，\n最后将"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "CreateInstance"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法返回的组件拓展类对象添加到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GRoot"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​对象下，即可完成组件的显示"
+				}
+			]
+		},
+		{
+			"ID": "20240408214419-rgjcdth",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408214419-rgjcdth",
+				"updated": "20240408215634"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果要为诸如按钮，下拉框等组件下的控件添加监听方法，可以在外部的类中添加，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "s",
+					"TextMarkTextContent": "也可以生成的组件拓展类的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code s",
+					"TextMarkTextContent": "ConstructFromXML"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "s",
+					"TextMarkTextContent": "方法添加"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "（不要这样做）\n组件的逻辑可以在外部的类中实现，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "s",
+					"TextMarkTextContent": "也可以在生成的组件拓展类中实现"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "（不要这样做），但是要注意："
+				}
+			]
+		},
+		{
+			"ID": "20240408181057-3eqxydi",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240408181057-3eqxydi",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240408215726"
+			},
+			"Children": [
+				{
+					"ID": "20240408181057-f4b7ahl",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240408181057-f4b7ahl",
+						"updated": "20240408215726"
+					},
+					"Children": [
+						{
+							"ID": "20240408181057-b3h6vw5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408181057-b3h6vw5",
+								"updated": "20240408215726"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "要避免生成的代码 把现有的关键逻辑覆盖了，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+									},
+									"TextMarkType": "strong text",
+									"TextMarkTextContent": "不要将组件逻辑写在生成的组件拓展类中！！！"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240408181057-sijs3sk",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240408181057-sijs3sk",
+						"updated": "20240408181057"
+					},
+					"Children": [
+						{
+							"ID": "20240408181057-8gfgdhp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240408181057-8gfgdhp",
+								"updated": "20240408181057"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "要注意生成的代码 控件名变化了"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240408214926-m3uze4h",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240408214926-m3uze4h",
+				"style": "line-height: 22px;",
+				"updated": "20240409215757"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "/** This is an automatically generated class by FairyGUI. Please do not modify it. **/\n\nusing FairyGUI;\nusing FairyGUI.Utils;\nusing UnityEngine;\n\nnamespace teach\n{\n    public partial class TeachPanel : GComponent\n    {\n\t\t// ..忽略其他控件\n        public GTextInput m_inputTxt;\n        public GButton m_btnTest;\n        public const string URL = \"ui://16zntd2ykeur21\";\n\n        public static TeachPanel CreateInstance()\n        {\n            return (TeachPanel)UIPackage.CreateObject(\"teach\", \"TeachPanel\");\n        }\n\n        public override void ConstructFromXML(XML xml)\n        {\n            base.ConstructFromXML(xml);\n\t\t\t// ..忽略其他控件\n            m_inputTxt = (GTextInput)GetChildAt(14);\n            m_btnTest = (GButton)GetChildAt(18);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240408221824-8subqh3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408221824-8subqh3",
+				"style": "background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);",
+				"updated": "20240408223501"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "值得一提的是，虽然我们不能在生成的组件拓展类脚本内实现逻辑，但由于FairyGUI编辑器生成的组件拓展类声明采用的是分部类"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "partial"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n因此，我们完全可以额外创建一个脚本，再使用分部类"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "partial"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​关键字声明组件拓展类的另一部分，在组件拓展类另一部分实现面板逻辑\n我们将实现面板逻辑的那部分脚本，保存在非生成脚本的路径下，这样即使FairyGUI编辑器重新生成了脚本，另一部分的实现面板逻辑的脚本也不会被覆盖\n不过，我们还是要注意生成的代码 是否会控件名变化的问题"
+				}
+			]
+		},
+		{
+			"ID": "20240408222618-eo9bckn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240408222618-eo9bckn",
+				"style": "line-height: 22px;",
+				"updated": "20240408223052"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using FairyGUI;\nusing UnityEngine;\n\nnamespace teach\n{\n    public partial class TeachPanel : GComponent\n    {\n        public void AddListener()\n        {\n            m_btnTest.onClick.Add(() =\u003e\n            {\n                Debug.Log(\"点击按钮\");\n            });\n        }\n\n        public void ShowInfo(string str)\n        {\n            m_inputTxt.text = str;\n        }\n    }\n}\n\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240408213826-qt3eooo",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240408213826-qt3eooo",
+				"style": "line-height: 22px;",
+				"updated": "20240409215813"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//设置适配相关\nGRoot.inst.SetContentScaleFactor(1365, 768, UIContentScaler.ScreenMatchMode.MatchHeight);\n//加载包及其依赖包\nUIPackage package = UIPackage.AddPackage(\"UI/teach\");\nforeach (var item in package.dependencies)\n{\n    UIPackage.AddPackage(item[\"name\"]);\n}\n\nteachBinder.BindAll();\nTeachPanel panel = TeachPanel.CreateInstance();\nGRoot.inst.AddChild(panel);\npanel.AddListener()\npanel.ShowInfo(\"唐老狮123\");\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240408215229-s1lf2uc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408215229-s1lf2uc",
+				"updated": "20240408215522"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 695px;",
+						"style": "width: 685px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240408215522-njiwy2s.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 685px;\" parent-style=\"width: 695px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240408215526-u928omt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408215526-u928omt",
+				"updated": "20240408215534"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "点击左上角的按钮输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240408180955-gk95o3i.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240408215327-w240bfq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240408215327-w240bfq"
+			}
+		}
+	]
+}

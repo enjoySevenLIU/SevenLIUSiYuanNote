@@ -1,0 +1,832 @@
+{
+	"ID": "20240604134323-f0ac4no",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240604134323-f0ac4no",
+		"title": "US2S1L14——齐次裁剪空间",
+		"type": "doc",
+		"updated": "20240605214945"
+	},
+	"Children": [
+		{
+			"ID": "20240604134323-r5n2tvv",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240604134323-r5n2tvv",
+				"updated": "20240605214945"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "视锥体"
+				}
+			]
+		},
+		{
+			"ID": "20240604134424-ug13q7n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240604134424-ug13q7n",
+				"updated": "20240604143436"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在渲染管线中，顶点、法线等相关模型数据会经过以下的空间变换（详见："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240516125425-jgxvta1",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "US2S1L10——坐标空间的变换"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "）\n模型空间 → 世界空间 → 观察空间 → 裁剪空间 → 屏幕空间"
+				}
+			]
+		},
+		{
+			"ID": "20240604134426-mln9i9p",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240604134426-mln9i9p",
+				"updated": "20240604134557"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过之前的学习，我们已经可以将相关数据在 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240602170039-1i6gpsl",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "模型空间"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " → 世界空间 → "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240604125407-vvez177",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "观察空间"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 之间进行变换\n我们知道"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "观察空间也被称为摄像机空间"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，此时获取到的顶点等数据都是基于摄像机空间中的数据表达，\n而摄像机中有一个非常重要的概念，就是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "视锥体"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "。"
+				}
+			]
+		},
+		{
+			"ID": "20240604134443-0e1h38j",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240604134443-0e1h38j",
+				"updated": "20240604134810"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "摄像机的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "视锥体是在三维空间中表示摄像机可见区域的虚拟体积"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，它类似一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "六面体的形状"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，根据摄像机的属性和投影方式而定。\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "视锥体定义了摄像机在场景中能够看到的物体区域，超出这个区域的物体将在渲染时被裁减掉，从而提高渲染性能。"
+				}
+			]
+		},
+		{
+			"ID": "20240604135321-zrxd8il",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20240604135321-zrxd8il",
+				"updated": "20240604140709"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20240604135317-rtmqjpm",
+					"Type": "NodeSuperBlock",
+					"Properties": {
+						"id": "20240604135317-rtmqjpm",
+						"updated": "20240604140709"
+					},
+					"Children": [
+						{
+							"Type": "NodeSuperBlockOpenMarker"
+						},
+						{
+							"Type": "NodeSuperBlockLayoutMarker",
+							"Data": "row"
+						},
+						{
+							"ID": "20240604134930-840bbvg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240604134930-840bbvg",
+								"updated": "20240604134930"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 494px;",
+										"style": "width: 484px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240604134930-2x0oym8.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 484px;\" parent-style=\"width: 494px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240604134933-rak9kl8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240604134933-rak9kl8",
+								"style": "text-align: center;",
+								"updated": "20240604140709"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "透视投影摄像机（视锥体形似金字塔，一般3D游戏使用）"
+								}
+							]
+						},
+						{
+							"Type": "NodeSuperBlockCloseMarker"
+						}
+					]
+				},
+				{
+					"ID": "20240604135319-yb4lq48",
+					"Type": "NodeSuperBlock",
+					"Properties": {
+						"id": "20240604135319-yb4lq48",
+						"updated": "20240604140709"
+					},
+					"Children": [
+						{
+							"Type": "NodeSuperBlockOpenMarker"
+						},
+						{
+							"Type": "NodeSuperBlockLayoutMarker",
+							"Data": "row"
+						},
+						{
+							"ID": "20240604135012-xdc4yed",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240604135012-xdc4yed",
+								"updated": "20240604135039"
+							},
+							"Children": [
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 491px;",
+										"style": "width: 481px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240604135039-n290m94.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 481px;\" parent-style=\"width: 491px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240604135012-jtitvl0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240604135012-jtitvl0",
+								"style": "text-align: center;",
+								"updated": "20240604140709"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "透视投影摄像机（视锥体形似立方体，一般横板2D游戏使用）"
+								}
+							]
+						},
+						{
+							"Type": "NodeSuperBlockCloseMarker"
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20240604135108-ab1d9vy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240604135108-ab1d9vy",
+				"updated": "20240604140709"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "视锥体主要包含几种重要部分："
+				}
+			]
+		},
+		{
+			"ID": "20240604135535-unvzr80",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240604135535-unvzr80",
+				"updated": "20240604140709"
+			},
+			"Children": [
+				{
+					"ID": "20240604135535-1kuzql5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240604135535-1kuzql5",
+						"updated": "20240604135535"
+					},
+					"Children": [
+						{
+							"ID": "20240604135535-3qk30o9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240604135535-3qk30o9",
+								"updated": "20240604135535"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "远近裁剪平面\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240604135535-ajt03f3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240604135535-ajt03f3"
+					},
+					"Children": [
+						{
+							"ID": "20240604135535-9nkrnmr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240604135535-9nkrnmr"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "左、右、上、下裁剪平面\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240604135536-d9qs8bz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240604135536-d9qs8bz",
+						"updated": "20240604135724"
+					},
+					"Children": [
+						{
+							"ID": "20240604135536-5a63alz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240604135536-5a63alz",
+								"updated": "20240604135724"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "透视投影中，视锥体类似一个金字塔形状，远裁剪面比近裁剪面大，所以产生透视效果，也就是近大远小"
+								}
+							]
+						},
+						{
+							"ID": "20240604135601-bs1kvw2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240604135601-bs1kvw2",
+								"updated": "20240604135602"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 338px;",
+										"style": "width: 328px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240604135602-3gcc49l.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 328px;\" parent-style=\"width: 338px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240604135537-2233gg7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240604135537-2233gg7",
+						"updated": "20240604135739"
+					},
+					"Children": [
+						{
+							"ID": "20240604135537-yfpy64u",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240604135537-yfpy64u",
+								"updated": "20240604135739"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "正交投影中，视锥体类似于长方体的形状，远近裁剪平面大小一致，不会产生透视效果，即无论多远都一样大"
+								}
+							]
+						},
+						{
+							"ID": "20240604135623-b0f4yn0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240604135623-b0f4yn0",
+								"updated": "20240604135623"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 336px;",
+										"style": "width: 326px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240604135623-f3mxmu1.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 326px;\" parent-style=\"width: 336px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240604135810-q0hvbj6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240604135810-q0hvbj6",
+				"updated": "20240604140709"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "之前提到，我们希望根据视锥体围成的区域对顶点等数据进行裁剪，\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "超出视锥体这个范围的坐标在渲染时会被裁减掉，只保留视锥体范围内的坐标。"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n但是，如果直接使用视锥体定义的空间来进行裁剪，那不同的视锥体就需要不同的处理过程，\n而且对于透视投影的视锥体来说，判断顶点是否在范围内相对较麻烦。\n因此，我们"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "希望用更通用、便捷的方式来进行裁剪工作，就需要将观察空间（摄像机空间）中的数据转换到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong u text",
+					"TextMarkTextContent": "齐次裁剪空间"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "中"
+				}
+			]
+		},
+		{
+			"ID": "20240604135832-np7i034",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240604135832-np7i034",
+				"updated": "20240605214945"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "齐次裁剪空间"
+				}
+			]
+		},
+		{
+			"ID": "20240604135909-7tfjbca",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240604135909-7tfjbca",
+				"updated": "20240604140003"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "裁剪空间 也被称为 齐次裁剪空间。"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "齐次裁剪空间（裁剪空间）是一个非常特殊的坐标空间"
+				}
+			]
+		},
+		{
+			"ID": "20240605214831-4g46ikt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240605214831-4g46ikt",
+				"updated": "20240605214945"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong u text",
+					"TextMarkTextContent": "注意，Unity的齐次裁剪空间是左手坐标系，因此从观察空间转换为齐次裁剪空间矩阵时，必须要对z分量取反"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20240604140009-c949aon",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240604140009-c949aon",
+				"updated": "20240604140028"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "很多同学可能都是第一次听到这个名词，在以前的数学学科当中可能都没有学习过。\n齐次裁剪空间 是一个三维空间，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "是在计算机图形学中用于在图形渲染过程中进行裁剪和投影的。"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "它的坐标范围为（-1,-1,-1）到（1,1,1），"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong u",
+					"TextMarkTextContent": "超出这个范围的坐标在渲染时会被裁减掉，只会保留范围内的坐标。"
+				}
+			]
+		},
+		{
+			"ID": "20240604140155-8uze1m9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240604140155-8uze1m9",
+				"updated": "20240604140155"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 417px;",
+						"style": "width: 407px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240604140155-408lr3q.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 407px;\" parent-style=\"width: 417px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240604140201-wpkc98g",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240604140201-wpkc98g",
+				"updated": "20240604140315"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们之后的几节课主要要学习的就是视锥体的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240604140310-6c4v9e8",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "透视投影"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 和 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240604140253-fzw8f8d",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "正交投影"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 对应的裁剪矩阵（投影矩阵）\n通过裁剪矩阵我们就可以将观察空间中的数据转换到齐次裁剪空间中了。"
+				}
+			]
+		},
+		{
+			"ID": "20240604140226-ybvas7a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240604140226-ybvas7a",
+				"updated": "20240604140239"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong u",
+					"TextMarkTextContent": "目前只要知道。齐次裁剪空间是通过将摄像机的视锥体投影到一个规范化的立方体而转换来的。这个立方体就是齐次裁剪空间。"
+				}
+			]
+		},
+		{
+			"ID": "20240604140239-bts03f8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240604140239-bts03f8"
+			}
+		}
+	]
+}

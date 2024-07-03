@@ -1,0 +1,2217 @@
+{
+	"ID": "20240131190243-69tigxc",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240131190243-69tigxc",
+		"title": "UH2S1L12——Lua的面向对象",
+		"updated": "20240302170426"
+	},
+	"Children": [
+		{
+			"ID": "20240131190243-s351ktn",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240131190243-s351ktn",
+				"updated": "20240131190646"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Lua的面向对象"
+				}
+			]
+		},
+		{
+			"ID": "20240131190535-4e5746e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131190535-4e5746e",
+				"updated": "20240201165450"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Lua没有原生的面向对象实现，因此我们必须借助表和元表自行实现面向对象\n我们不仅要实现类（包括成员变量与方法，还要构造方法），还要实现面向对象有三大特性，封装、继承、多态"
+				}
+			]
+		},
+		{
+			"ID": "20240201165451-nqnpbpu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201165451-nqnpbpu",
+				"updated": "20240201165456"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章实现"
+				}
+			]
+		},
+		{
+			"ID": "20240201165456-mmc7cgr",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201165456-mmc7cgr",
+				"style": "line-height: 22px;",
+				"updated": "20240201165503"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "-- 万物之父Object，所有的类都继承自它，提供最基础的继承与实例化方法\nObject = {}\n\n-- 类的实例化方法，返回实例化的对象\nfunction Object:new()\n    local obj = {}\n    self.__index = self\n    setmetatable(obj, self)\n    return obj\nend\n\n-- 声明新的类的方法，需要继承哪个类就让哪个类执行该方法，声明出来的类会自动声明base成员变量，指向其父类\nfunction Object:subClass(className)\n    _G[className] = {}\n    local newClass = _G[className]\n    self.__index = self\n    setmetatable(newClass, self)\n    newClass.base = self\nend\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131190511-v5f5q21",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240131190511-v5f5q21",
+				"updated": "20240131190516"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "封装"
+				}
+			]
+		},
+		{
+			"ID": "20240131192709-r9evplu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131192709-r9evplu",
+				"updated": "20240201003105"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现目标："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "可以通过类实例化对象，并可以调用对象的成员变量与方法"
+				}
+			]
+		},
+		{
+			"ID": "20240131190519-uv3sqam",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131190519-uv3sqam",
+				"updated": "20240131192119"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "将成员变量和方法放入表内，通过表调用这些变量与方法，就已经有了封装\n但由于没有实例化对象，导致我们声明出来的“类”几乎不能复用，因此我们需要自己实现一个实例化方法"
+				}
+			]
+		},
+		{
+			"ID": "20240201002332-9kfop69",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201002332-9kfop69",
+				"updated": "20240201002939"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "值得一提的是，无论是类的声明，还是通过类实例化的对象，它们都是表，实例化对象就是创建一个自动拥有类的成员变量和方法的表\n下面会将：用来声明类的成员的表记为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "类的声明表"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，作为实例化出来的对象的表称为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "类对象表"
+				}
+			]
+		},
+		{
+			"ID": "20240131192846-d81jsto",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131192846-d81jsto",
+				"updated": "20240201002958"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先声明一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "万物之父"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code strong",
+					"TextMarkTextContent": "Object"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "类"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，并向其中添加所有类都必须要的实例化方法，用来实例化对象"
+				}
+			]
+		},
+		{
+			"ID": "20240131202650-m1ccleu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131202650-m1ccleu",
+				"updated": "20240201003004"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实例化方法实现思路："
+				}
+			]
+		},
+		{
+			"ID": "20240131202701-hyel8u0",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240131202701-hyel8u0",
+				"updated": "20240201004206"
+			},
+			"Children": [
+				{
+					"ID": "20240131202702-ktwpdg6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240131202702-ktwpdg6",
+						"updated": "20240131203927"
+					},
+					"Children": [
+						{
+							"ID": "20240131202702-bfo3q9t",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240131202702-bfo3q9t",
+								"updated": "20240201003013"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "function Object:new()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：在万物之父"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Object"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​类声明一个所有类都会用的实例化方法，\n这里"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": ":"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​就是默认声明一个参数"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "self"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，因为类在实例化对象时，都需要把 类的声明表 本身传入进来，以供下面的逻辑使用"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240131202755-moccrcn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240131202755-moccrcn"
+					},
+					"Children": [
+						{
+							"ID": "20240131202755-b1dg5w7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240131202755-b1dg5w7",
+								"updated": "20240201002915"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "local obj = {}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：在Lua里，实例化一个对象本质上也是返回一个新的表给外部"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240131202748-thz7ej5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240131202748-thz7ej5",
+						"updated": "20240201004206"
+					},
+					"Children": [
+						{
+							"ID": "20240131202748-7gdb5p2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240131202748-7gdb5p2",
+								"updated": "20240201003928"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "self.__index = self"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：将类的声明表的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "__index"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​设置为自己，使外部在类对象表找不到某一个索引时，会到类的声明表里去找"
+								}
+							]
+						},
+						{
+							"ID": "20240201003531-gmak2ul",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240201003531-gmak2ul",
+								"updated": "20240201004206"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对象的成员变量重新赋值前，类对象表实际不存在这个成员变量索引，这样设置可以让外部在重新赋值前仍然可以调用对象的成员\n对象的成员变量重新赋值后，类对象表会真正拥有该成员变量索引和值，这时再调用对象的成员变量就是调用类对象表里的值"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240131202905-5iqqo42",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240131202905-5iqqo42",
+						"updated": "20240201003732"
+					},
+					"Children": [
+						{
+							"ID": "20240131202905-8o4m1yf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240131202905-8o4m1yf",
+								"updated": "20240201003732"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "setmetatable(obj, self)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：将 类的声明表 作为 类对象表 的元表，"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240131191948-n3drxp3",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240131191948-n3drxp3",
+				"style": "line-height: 22px;",
+				"updated": "20240131211312"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Object = {}\n\nfunction Object:new()\n    local obj = {}\n    self.__index = self\n    setmetatable(obj, self)\n    return obj\nend\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131194715-urxj894",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131194715-urxj894",
+				"updated": "20240131211312"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这样，调用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Object:new"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法后，就会实例化一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Object"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​对象表（对象可以调用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Object"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的所有成员方法与变量）"
+				}
+			]
+		},
+		{
+			"ID": "20240131195049-tnu9btj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131195049-tnu9btj",
+				"updated": "20240131211312"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Object"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类存在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "id"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Test"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​成员，实例化一个对象出来，为其成员变量赋值，检查赋值前后成员的调用，以及赋值是否会影响原来的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Object"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​表"
+				}
+			]
+		},
+		{
+			"ID": "20240131195131-t8f2dcn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240131195131-t8f2dcn",
+				"style": "line-height: 22px;",
+				"updated": "20240131211312"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"**********面向对象************\")\n\nObject = {}\n\nfunction Object:new()\n    local obj = {}\n    self.__index = self\n    setmetatable(obj, self)\n    return obj\nend\n\nObject.id = 1\nfunction Object:Test()\n    print(self.id)\nend\n\nlocal myObj = Object:new()\nprint(Object)\nprint(myObj)\nprint(myObj.id)\n\nmyObj:Test()\n\nmyObj.id = 2\nmyObj:Test()\n\nprint(Object.id)\nObject:Test()\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131195211-hbvg6nm",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240131195211-hbvg6nm",
+				"style": "line-height: 22px;",
+				"updated": "20240131211312"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "**********面向对象************\ntable: 00A89BC0\ntable: 00A89918\t\t--两者不同，说明声明出来的对象表和作为类的声明的表是不同的，说明确实实例化了对象\n1\t\t\t\t\t--虽然没有初始化，但是实例化出来的myObj调用成员变量与方法没有出现问题\n1\n2\t\t\t\t\t--赋值后，Test()的输出确实改变了，即使Test()实际存储在Object表内，但由于调用者是myObj且使用:调用，因此调用的是myObj.id\n1\t\t\t\t\t--输出Object.id和执行Object:Test()，确认修改myObj值不会影响原来类声明的值\n1\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131195301-zwgnmi2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131195301-zwgnmi2",
+				"updated": "20240131211312"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见："
+				}
+			]
+		},
+		{
+			"ID": "20240131201243-u8gtqb4",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240131201243-u8gtqb4",
+				"updated": "20240131211312"
+			},
+			"Children": [
+				{
+					"ID": "20240131201244-dfcs7w0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240131201244-dfcs7w0",
+						"updated": "20240131201400"
+					},
+					"Children": [
+						{
+							"ID": "20240131201244-m31sd7f",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240131201244-m31sd7f",
+								"updated": "20240131201400"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "一开始未赋值时"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "myObj.id"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​实际调用的是用于声明"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Object"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​类的表内的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "id"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，赋值后调用的就是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "myObj"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​表内自己的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "id"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240131201243-zt4l0i9",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240131201243-zt4l0i9",
+						"updated": "20240131201248"
+					},
+					"Children": [
+						{
+							"ID": "20240131201243-0rpk5wi",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240131201243-0rpk5wi",
+								"updated": "20240131201248"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "虽然"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "myObj:Test()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​调用的实际上是用于声明"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Object"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​类的表内的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Test"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法，\n但由于调用者是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "myObj"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​且使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": ":"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​调用，这使得"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Test"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法实际上传入的是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "myObj"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​自己，因此"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Test"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法内调用的也是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "myObj.id"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240131201227-fd5chrr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131201227-fd5chrr",
+				"updated": "20240131211312"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实践可见，这样实现的封装和实例化对象都没有问题"
+				}
+			]
+		},
+		{
+			"ID": "20240131201205-lf33a6e",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240131201205-lf33a6e",
+				"updated": "20240131201747"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "继承"
+				}
+			]
+		},
+		{
+			"ID": "20240131201747-tt0oa2s",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131201747-tt0oa2s",
+				"updated": "20240201005957"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现目标："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "类声明时需要继承另外一个类，子类实例化出来的对象可以调用父类的成员变量与方法"
+				}
+			]
+		},
+		{
+			"ID": "20240131204524-uxzypcx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131204524-uxzypcx",
+				"updated": "20240201004406"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "前置知识：\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_G"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​表是存储所有全局变量的表，因此为表内添加键与值也算添加全局变量，使用键调用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_G"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​表内的值也算调用全局变量\n这样我们可以通过字符串来添加或者调用全局变量"
+				}
+			]
+		},
+		{
+			"ID": "20240131204503-ixqk7eg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131204503-ixqk7eg",
+				"updated": "20240131204503"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "实现思路："
+				}
+			]
+		},
+		{
+			"ID": "20240131204503-q2pq34o",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240131204503-q2pq34o",
+				"updated": "20240302142225"
+			},
+			"Children": [
+				{
+					"ID": "20240131204503-2ju4blc",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240131204503-2ju4blc",
+						"updated": "20240302142225"
+					},
+					"Children": [
+						{
+							"ID": "20240131204503-vqgmx80",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240131204503-vqgmx80",
+								"updated": "20240302142225"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "function Object:subClass(className)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：在万物之父"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Object"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​类声明一个所有类都会用的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "subClass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​继承方法，\n调用方法是："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "父类名:subclass(子类名)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，它的作用可以类比为C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "public class 子类名 : 父类名 { }"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n这里"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": ":"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​就是默认声明一个参数"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "self"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，因为父类在派生出新子类时，需要把作为父类的表自己传入进来，供下面的逻辑使用\n同时还要传入一个子类名，向"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "_G"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​表添加键值对，子类名为键，空表为值，这样就可以创建子类的声明表的全局变量"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240131204503-o0ad2f6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240131204503-o0ad2f6",
+						"updated": "20240201004731"
+					},
+					"Children": [
+						{
+							"ID": "20240131204503-ewrov17",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240131204503-ewrov17",
+								"updated": "20240201004731"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "_G[className] = {}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：相当于声明了名字为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "className"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的全局变量，赋值为空表，该空表就是子类的声明表，可通过这个全局变量调用"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240131204503-kqrsmax",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240131204503-kqrsmax",
+						"updated": "20240201005133"
+					},
+					"Children": [
+						{
+							"ID": "20240131204503-amxgslf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240131204503-amxgslf",
+								"updated": "20240201005133"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "self.__index = self"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：将父类的声明表的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "__index"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​设置为自己，当子类的声明表找不到某个索引时，回到父类的声明表查找该索引\n这是通过子类调用父类成员变量和方法的关键步骤，因为 子类对象表 和 子类的声明表 在重新赋值前都没有真正的 存储父类的声明表的成员变量索引"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240131204503-k8a645a",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240131204503-k8a645a",
+						"updated": "20240201005157"
+					},
+					"Children": [
+						{
+							"ID": "20240131204503-mjbahgo",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240131204503-mjbahgo",
+								"updated": "20240201005157"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "setmetatable(obj, self)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：将 父类的声明表 作为 子类的声明表 的元表"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240131202058-vv78eoq",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240131202058-vv78eoq",
+				"style": "line-height: 22px;",
+				"updated": "20240201015401"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "function Object:subClass(className)\n    _G[className] = {}\n    local newClass = _G[className]\n    self.__index = self\n    setmetatable(newClass, self)\nend\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201010136-2juc14o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201010136-2juc14o",
+				"updated": "20240201010240"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这样我们就实现了声明类的方法，它必须要继承另外一个类，至少要继承万物之父"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Object"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，通过它声明的类实例化出来的对象可以继承父类的所有成员"
+				}
+			]
+		},
+		{
+			"ID": "20240131210326-d1ejkv7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131210326-d1ejkv7",
+				"updated": "20240201005252"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用该继承方法即可声明一个新的子类，子类会继承父类的所有成员变量与方法"
+				}
+			]
+		},
+		{
+			"ID": "20240131211352-gg80sz6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240131211352-gg80sz6",
+				"style": "line-height: 22px;",
+				"updated": "20240201005637"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Object:subClass(\"Person\")\nlocal p1 = Person:new()\nprint(p1.id)\np1.id = 100\np1:Test()"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131211325-erhj78z",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240131211325-erhj78z",
+				"style": "line-height: 22px;",
+				"updated": "20240201005643"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "1\n100\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240131211855-ojk0mlp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131211855-ojk0mlp",
+				"updated": "20240201005433"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，虽然"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "new"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法存储在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Object"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​声明表内，但是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Person"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的声明表依然可以调用它来实例化对象\n同时，子类实例化出来的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "p1"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​依然可以调用父类"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Object"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​声明的成员变量和方法，\n即使"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "p1"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​表内没有存储"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Object"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​声明的成员变量和方法，可见确实实现了继承的特性"
+				}
+			]
+		},
+		{
+			"ID": "20240131212112-4t8zkc8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240131212112-4t8zkc8",
+				"updated": "20240201011351"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "接下来Person再声明一些成员变量，然后继承Person声明两个类并实例化对象做测试"
+				}
+			]
+		},
+		{
+			"ID": "20240201005521-go9isus",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201005521-go9isus",
+				"style": "line-height: 22px;",
+				"updated": "20240201011126"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Object:subClass(\"Person\")\n-- 声明Person的成员变量\nPerson.age = 0\nPerson.sex = false\n-- 声明Person的成员方法\nfunction Person:Speak()\n    print(\"你好，我今年\" .. self.age .. \"岁\")\nend\n\n-- 声明两个继承Person的类\nPerson:subClass(\"Player\")\nPerson:subClass(\"Monster\")\n\n-- 调用继承自Object的实例化方法\nlocal p1 = Player:new()\nlocal m1 = Monster:new()\n\n-- 调用继承自父类的成员变量\np1.id = 100\np1.age = 20\np1.sex = true\n\nm1.id = 200\nm1.age = 30\nm1.sex = false\n\nprint(p1.sex)\nprint(m1.sex)\n\n-- 调用继承自父类的成员方法\np1:Test()\nm1:Test()\np1:Speak()\nm1:Speak()"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201005645-5xrfawr",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201005645-5xrfawr",
+				"style": "line-height: 22px;",
+				"updated": "20240201011143"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "true\nfalse\n100\n200\n你好，我今年20岁\n你好，我今年30岁\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201011145-9mmez10",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201011145-9mmez10",
+				"updated": "20240201011228"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以看到两个类都继承了父类的成员变量和方法，实例化出来的对象也没有问题"
+				}
+			]
+		},
+		{
+			"ID": "20240201011353-yngqcgw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201011353-yngqcgw",
+				"updated": "20240201011359"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "多态"
+				}
+			]
+		},
+		{
+			"ID": "20240201011415-pvy7g0f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201011415-pvy7g0f",
+				"updated": "20240201012634"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现目标：继承父类的子类，拥有和相同的父类的成员方法，但是两者执行逻辑不同，\n也就是子类可以重写继承自父类的成员方法（还需要可以保留父类的逻辑）"
+				}
+			]
+		},
+		{
+			"ID": "20240201011711-mk79skl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201011711-mk79skl",
+				"updated": "20240201014348"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "重写方法其实非常简单，只需要成员变量重新赋值一样，将成员方法重新赋值一个新的成员方法即可\n这样新的成员方法就会存放在新的子类表内，父类声明的成员变量的初始值也这样可以修改"
+				}
+			]
+		},
+		{
+			"ID": "20240201014350-v4nlc2u",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201014350-v4nlc2u",
+				"style": "line-height: 22px;",
+				"updated": "20240201014749"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Object:subClass(\"GameObject\")\nGameObject.posX = 0;\nGameObject.posY = 0;\nGameObject.id = 1000;\nfunction GameObject:Move()\n    self.posX = self.posX + 1\n    self.posY = self.posY + 1\n    print(string.format(\"玩家移动到(%d, %d)\", self.posX, self.posY))\nend\n\nGameObject:subClass(\"Player\")\nfunction Player:Move()\n    print(tostring(self) .. \": 重写\")\nend\n\nlocal p1 = Player:new()\np1:Move()\np1:Test()\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201014722-20q4p52",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201014722-20q4p52",
+				"style": "line-height: 22px;",
+				"updated": "20240201014757"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "table: 00B39B20: 重写\n1000\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201014757-8fbo4e6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201014757-8fbo4e6",
+				"updated": "20240201014934"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但是，单纯只是这样重写，我们不能像C#使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "base.function()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​保留原来父类实现的逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240201014941-cwg98xy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201014941-cwg98xy",
+				"updated": "20240201015251"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以在继承的方法里为子类声明一个新的成员变量"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "base"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​并赋值父类，这样可以让我们通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "base"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​来调用父类的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240201015252-po4msgn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201015252-po4msgn",
+				"style": "line-height: 22px;",
+				"updated": "20240201015441"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "function Object:subClass(className)\n    _G[className] = {}\n    local newClass = _G[className]\n    self.__index = self\n    newClass.base = self\t\t\t\t--这一句使得子类可以调用自己的父类，进而调用父类的成员方法\n    setmetatable(newClass, self)\nend\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201015528-lw0rffv",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201015528-lw0rffv",
+				"style": "line-height: 22px;",
+				"updated": "20240201015631"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Object:subClass(\"GameObject\")\nGameObject.posX = 0;\nGameObject.posY = 0;\nGameObject.id = 1000;\nfunction GameObject:Move()\n    self.posX = self.posX + 1\n    self.posY = self.posY + 1\n    print(string.format(\"玩家移动到(%d, %d)\", self.posX, self.posY))\nend\n\nGameObject:subClass(\"Player\")\nfunction Player:Move()\n    self.base:Move()\t\t\t\t\t--利用base来调用父类的Move方法，保留父类的逻辑\n    print(tostring(self) .. \": 重写\")\nend\n\nlocal p1 = Player:new()\np1:Move()\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201015548-cxnorlu",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201015548-cxnorlu",
+				"style": "line-height: 22px;",
+				"updated": "20240201015634"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "玩家移动到(1, 1)\ntable: 00C197D8: 重写\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201015635-s6r3zxq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201015635-s6r3zxq",
+				"updated": "20240201015809"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以看见在修改了继承方法后，我们就可以通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "self.base:function()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​保留父类的逻辑了\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "但是！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "code strong text",
+					"TextMarkTextContent": "self.base:function()"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "这一句存在严重的问题！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20240201015809-5po3uam",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201015809-5po3uam",
+				"style": "line-height: 22px;",
+				"updated": "20240201015855"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"**********多态************\")\nObject:subClass(\"GameObject\")\nGameObject.posX = 0;\nGameObject.posY = 0;\nGameObject.id = 1000;\nfunction GameObject:Move()\n    self.posX = self.posX + 1\n    self.posY = self.posY + 1\n    print(string.format(\"玩家移动到(%d, %d)\", self.posX, self.posY))\nend\n\nGameObject:subClass(\"Player\")\nfunction Player:Move()\n    self.base:Move()\n    print(tostring(self) .. \": 重写\")\nend\n\nlocal p1 = Player:new()\nlocal p2 = Player:new()\n\np1:Move()\np2:Move()\np1:Move()\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201015856-u10zzs1",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201015856-u10zzs1",
+				"style": "line-height: 22px;",
+				"updated": "20240201015906"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "玩家移动到(1, 1)\ntable: 006F9850: 重写\n玩家移动到(2, 2)\ntable: 006F98F0: 重写\n玩家移动到(3, 3)\ntable: 006F9850: 重写\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201015909-t3bah7f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201015909-t3bah7f",
+				"updated": "20240201020555"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用不同对象的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Move"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法居然出现了不同对象共用成员变量的情况，这显然违背了面向对象"
+				}
+			]
+		},
+		{
+			"ID": "20240201020029-xfn4s6t",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201020029-xfn4s6t",
+				"updated": "20240201020604"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这是因为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "self.base:function()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​等价于"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "self.base.function(base)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，而"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "base"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​指向的是父类"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的声明表\n这导致"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Move"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法实际上传入了父类"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的声明表，并在此基础上修改了父类"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的声明表的成员变量值\n而实例化出来的子类对象表实际上没有父类"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的声明表的成员变量索引，\n由于我们实现的封装逻辑导致的，这时直接调用子类对象成员变量，实际会调用父类"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的声明表的成员变量\n而父类"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的声明表的成员变量值又被修改了，这就出现了不同对象共用成员变量的现象"
+				}
+			]
+		},
+		{
+			"ID": "20240201020604-ggjkk9a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201020604-ggjkk9a",
+				"updated": "20240201020722"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "解决方法很简单，只需要修改调用父类方法传入的参数即可，\n也就是将"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "self.base:function()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​改为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "self.base.function(self)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240201020726-gop7u3a",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201020726-gop7u3a",
+				"style": "line-height: 22px;",
+				"updated": "20240201020914"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"**********多态************\")\nObject:subClass(\"GameObject\")\nGameObject.posX = 0;\nGameObject.posY = 0;\nGameObject.id = 1000;\nfunction GameObject:Move()\n    self.posX = self.posX + 1\n    self.posY = self.posY + 1\n    print(string.format(\"玩家%s移动到(%d, %d)\", tostring(self), self.posX, self.posY))\nend\n\nGameObject:subClass(\"Player\")\nfunction Player:Move()\n    self.base.Move(self)\n    print(tostring(self) .. \": 重写\")\nend\n\nlocal p1 = Player:new()\nlocal p2 = Player:new()\n\np1:Move()\np2:Move()\np1:Move()"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201015952-ldm2hc7",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201015952-ldm2hc7",
+				"style": "line-height: 22px;",
+				"updated": "20240201020927"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "玩家table: 00AE9DF0移动到(1, 1)\ntable: 00AE9DF0: 重写\n玩家table: 00AE9E40移动到(1, 1)\ntable: 00AE9E40: 重写\n玩家table: 00AE9DF0移动到(2, 2)\ntable: 00AE9DF0: 重写\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201020930-n1z76gp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201020930-n1z76gp",
+				"updated": "20240201021738"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "self.base.function(self)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​是在调用父类的声明表的方法时，传入调用方法的表自己，而不是传入表的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "base"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​变量\n这样，可以确保传入的是子类对象表，为传入的表的变量赋值时，不会修改父类声明的成员变量，而是赋值给子类对象表的变量\n根据我们实现的封装的逻辑，子类对象的成员变量重新赋值后，子类对象表会真正的存储成员变量，外部再调用也不会调用父类的声明表的成员变量"
+				}
+			]
+		},
+		{
+			"ID": "20240228225719-0g630rw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228225719-0g630rw",
+				"updated": "20240228225720"
+			}
+		},
+		{
+			"ID": "20240228225720-t78ib34",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228225720-t78ib34",
+				"updated": "20240228225720"
+			}
+		},
+		{
+			"ID": "20240228225721-cd4x1vp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228225721-cd4x1vp",
+				"updated": "20240228225721"
+			}
+		},
+		{
+			"ID": "20240228225721-vrj974b",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228225721-vrj974b",
+				"updated": "20240228225721"
+			}
+		},
+		{
+			"ID": "20240228225721-c5hgx0k",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228225721-c5hgx0k",
+				"updated": "20240228225721"
+			}
+		},
+		{
+			"ID": "20240228225726-u6dmc8s",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228225726-u6dmc8s",
+				"updated": "20240228225726"
+			}
+		},
+		{
+			"ID": "20240228225726-2vjadv4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228225726-2vjadv4",
+				"updated": "20240228225726"
+			}
+		},
+		{
+			"ID": "20240228225731-czwf47p",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228225731-czwf47p",
+				"updated": "20240228225731"
+			}
+		},
+		{
+			"ID": "20240228225732-s5b2q72",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228225732-s5b2q72",
+				"updated": "20240228225732"
+			}
+		},
+		{
+			"ID": "20240228225732-r9o235z",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228225732-r9o235z",
+				"updated": "20240228225732"
+			}
+		},
+		{
+			"ID": "20240228225732-5z64l9j",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228225732-5z64l9j",
+				"updated": "20240228225732"
+			}
+		},
+		{
+			"ID": "20240201020939-f611b5o",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240201020939-f611b5o",
+				"updated": "20240228230521"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240228225637-kt97wgk",
+					"Type": "NodeHeading",
+					"HeadingLevel": 3,
+					"Properties": {
+						"id": "20240228225637-kt97wgk",
+						"updated": "20240228225717"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "笔者私货"
+						}
+					]
+				},
+				{
+					"ID": "20240228225646-g68rage",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240228225646-g68rage",
+						"updated": "20240228230521"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "就直说吧，"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "strong",
+							"TextMarkTextContent": "语法残废"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "的Lua写面向对象就是依托答辩，用它处处都是坑，还要跑到那才知道有问题，\n元表没写好，"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": ":"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​或者"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "."
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​搞混了，怎么死的都不知道，一点一点调试吖史去吧，把精力浪费在这种东西上简直是对人生的浪费啊！！！\n用这玩意写游戏这种刚需面向对象的项目太痛苦了，赶紧来个热更新新技术彻底替代掉这托构思玩意吧，球球了！！！"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240228225907-f5grp7e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228225907-f5grp7e"
+			}
+		}
+	]
+}

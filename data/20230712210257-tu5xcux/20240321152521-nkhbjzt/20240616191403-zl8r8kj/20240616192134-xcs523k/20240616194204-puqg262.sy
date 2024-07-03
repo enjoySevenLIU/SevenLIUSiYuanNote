@@ -1,0 +1,591 @@
+{
+	"ID": "20240616194204-puqg262",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240616194204-puqg262",
+		"title": "US3S1L1——逐顶点光照和逐片元光照",
+		"type": "doc",
+		"updated": "20240616195438"
+	},
+	"Children": [
+		{
+			"ID": "20240616194442-rdbgxxd",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240616194442-rdbgxxd",
+				"updated": "20240616195438"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "光照在哪里计算？"
+				}
+			]
+		},
+		{
+			"ID": "20240616194447-fcmhek0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616194447-fcmhek0",
+				"updated": "20240616195421"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体的光照效果相关的计算，应该写在顶点还是片元着色器中呢？"
+				}
+			]
+		},
+		{
+			"ID": "20240616195403-jbx8z6p",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616195403-jbx8z6p",
+				"updated": "20240616195426"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "光照效果的计算在顶点着色器和片元着色器中都可以做"
+				}
+			]
+		},
+		{
+			"ID": "20240616195426-rfoj7k4",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240616195426-rfoj7k4",
+				"updated": "20240616195426"
+			},
+			"Children": [
+				{
+					"ID": "20240616195426-0sl4va8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240616195426-0sl4va8",
+						"updated": "20240616195426"
+					},
+					"Children": [
+						{
+							"ID": "20240616195426-tnkpzos",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240616195426-tnkpzos",
+								"updated": "20240616195426"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在顶点着色器回调函数中：消耗低，效果差，适合低配设备\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240616195427-tvpzf5c",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240616195427-tvpzf5c"
+					},
+					"Children": [
+						{
+							"ID": "20240616195427-s8zit7f",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240616195427-s8zit7f",
+								"updated": "20240616195429"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在片元着色器回调函数中：消耗高，效果好，适合高配设备\n"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240616195429-h0xw4tb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616195429-h0xw4tb",
+				"updated": "20240616195430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体在哪里实现，根据项目实际情况而定"
+				}
+			]
+		},
+		{
+			"ID": "20240616195403-i0yi3t6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616195403-i0yi3t6",
+				"updated": "20240616195438"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们之后在学习光照模型时，每一种光照模型都会讲解两种实现，即 逐顶点 和 逐片元 光照"
+				}
+			]
+		},
+		{
+			"ID": "20240616194204-y3sihj1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240616194204-y3sihj1",
+				"updated": "20240616195320"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "逐顶点光照"
+				}
+			]
+		},
+		{
+			"ID": "20240616194513-8b97r7a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616194513-8b97r7a",
+				"updated": "20240616194528"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "光照在哪计算：顶点着色器 回调函数中"
+				}
+			]
+		},
+		{
+			"ID": "20240616194513-5c4chm8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616194513-5c4chm8",
+				"updated": "20240616194920"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "计算方式：逐顶点光照会在每个物体的顶点上进行光照计算\n这意味着"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "u strong",
+					"TextMarkTextContent": "光照计算只在物体的顶点位置上执行，而在顶点之间的内部区域使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "u strong block-ref",
+					"TextMarkBlockRefID": "20240616194825-pespenb",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "插值"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "u strong",
+					"TextMarkTextContent": "来获得颜色信息（因此计算量少）"
+				}
+			]
+		},
+		{
+			"ID": "20240616194513-oe8cz0w",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240616194513-oe8cz0w",
+				"updated": "20240616194540"
+			},
+			"Children": [
+				{
+					"ID": "20240616194535-m34ytka",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240616194535-m34ytka",
+						"style": "background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);",
+						"updated": "20240616194535"
+					},
+					"Children": [
+						{
+							"ID": "20240616194535-ufup5mi",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240616194535-ufup5mi",
+								"updated": "20240616194548"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "优点：逐顶点光照的计算量较小，通常在移动设备上性能较好，适用于移动游戏等要求性能的场景"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240616194540-dhou4d0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240616194540-dhou4d0",
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"Children": [
+						{
+							"ID": "20240616194540-kaf30cd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240616194540-kaf30cd",
+								"updated": "20240616194547"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "缺点：照明效果可能不够精细，特别是在物体表面上的细节区域，因为颜色插值可能不足以捕捉到细微的照明变化"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240616194513-488m14t",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616194513-488m14t",
+				"updated": "20240616194557"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "适用场景："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong u",
+					"TextMarkTextContent": "逐顶点光照适用于需要在有限资源下获得较好性能的场景，例如移动游戏"
+				}
+			]
+		},
+		{
+			"ID": "20240616194554-q6xd0tv",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240616194554-q6xd0tv",
+				"updated": "20240616195320"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "逐片元光照"
+				}
+			]
+		},
+		{
+			"ID": "20240616194652-ekswetg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616194652-ekswetg",
+				"updated": "20240616194659"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "光照在哪计算：片元着色器 回调函数中"
+				}
+			]
+		},
+		{
+			"ID": "20240616194652-3uzjy9s",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616194652-3uzjy9s",
+				"updated": "20240616194819"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "计算方式：逐片元光照会在每个像素（片元）上进行光照计算\n这意味着"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong u",
+					"TextMarkTextContent": "每个像素都会根据其位置、法线、材质等信息独立地进行光照计算（因此计算量大）"
+				}
+			]
+		},
+		{
+			"ID": "20240616194652-84voxul",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240616194652-84voxul",
+				"updated": "20240616194739"
+			},
+			"Children": [
+				{
+					"ID": "20240616194738-ogn23a8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240616194738-ogn23a8",
+						"style": "background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);",
+						"updated": "20240616194738"
+					},
+					"Children": [
+						{
+							"ID": "20240616194738-h5369a0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240616194738-h5369a0",
+								"updated": "20240616194738"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "优点：逐片元光照提供了更高的精细度，可以捕捉到物体表面上的细微照明变化，提供更逼真的效果\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240616194739-7t3zs6l",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240616194739-7t3zs6l",
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"Children": [
+						{
+							"ID": "20240616194739-cum8b20",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240616194739-cum8b20"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "缺点：计算量较大，对于像素密集的场景需要更多的计算资源"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240616194652-7lfq7ds",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616194652-7lfq7ds",
+				"updated": "20240616194825"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "适用场景："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong u",
+					"TextMarkTextContent": "逐片元光照通常用于需要高质量照明效果的PC和主机游戏，以及要求视觉逼真度较高的场景"
+				}
+			]
+		},
+		{
+			"ID": "20240616194825-pespenb",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240616194825-pespenb",
+				"updated": "20240616195320"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关于逐顶点光照的插值运算"
+				}
+			]
+		},
+		{
+			"ID": "20240616194900-mcsltuy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616194900-mcsltuy",
+				"updated": "20240616194904"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们不需要自己去处理这个插值运算，插值运算是由图形硬件（GPU）来执行的\nGPU负责处理3D图形的渲染，包括顶点插值和像素插值等操作\n这个过程在图形硬件中被高度优化过，因此在实时渲染中能够快速而高效地执行"
+				}
+			]
+		},
+		{
+			"ID": "20240616194900-cfemyd3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616194900-cfemyd3",
+				"updated": "20240616194900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们只需要了解插值运算的大概规则即可"
+				}
+			]
+		},
+		{
+			"ID": "20240616195157-67rs7g3",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20240616195157-67rs7g3",
+				"updated": "20240616195155"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20240616194909-nwtz0ff",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240616194909-nwtz0ff",
+						"updated": "20240616195158"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "假设：三角面片的三个顶点A、B、C\n该三角面片中的任何像素P，首先会计算出它相对于3个顶点的位置权重\n然后使用这个权重参与到P点的颜色计算中"
+						}
+					]
+				},
+				{
+					"ID": "20240616195155-oxpvz2h",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240616195155-oxpvz2h",
+						"style": "width: 33%; flex: 0 0 auto;",
+						"updated": "20240616195155"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Properties": {
+								"parent-style": "width: 236px;",
+								"style": "width: 226px;"
+							},
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20240616195140-ctczlqz.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"width: 226px;\" parent-style=\"width: 236px;\"}"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20240616194942-393tjzv",
+			"Type": "NodeMathBlock",
+			"Properties": {
+				"id": "20240616194942-393tjzv",
+				"updated": "20240616195154"
+			},
+			"Children": [
+				{
+					"Type": "NodeMathBlockOpenMarker"
+				},
+				{
+					"Type": "NodeMathBlockContent",
+					"Data": "PixelColorP = WeightA \\times ColorA + WeightB \\times ColorB + WeightC \\times ColorC"
+				},
+				{
+					"Type": "NodeMathBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20240616195320-q82w017",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240616195320-q82w017"
+			}
+		}
+	]
+}

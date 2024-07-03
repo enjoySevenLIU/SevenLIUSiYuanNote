@@ -1,0 +1,93 @@
+{
+	"ID": "20240321211259-tckmi77",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240321211259-tckmi77",
+		"title": "UN6L2——实现断线重连",
+		"type": "doc",
+		"updated": "20240321233600"
+	},
+	"Children": [
+		{
+			"ID": "20240321211259-b9c7nay",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240321211259-b9c7nay",
+				"updated": "20240321232947"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "断线重连"
+				}
+			]
+		},
+		{
+			"ID": "20240321232947-n0tihqh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321232947-n0tihqh",
+				"updated": "20240321233600"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "有时我们会因为遇到意外情况而非自愿的断开与服务器的连接（如网络不好等情况）\n因此，我们为断开连接的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Close"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法添加一个参数，用来表示是否是客户端自己断开连接\n如果不是，就可以弹出一个界面询问客户是否断线重连"
+				}
+			]
+		},
+		{
+			"ID": "20240321233116-wyvksqc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240321233116-wyvksqc",
+				"style": "line-height: 22px;",
+				"updated": "20240321233344"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public void Close(bool isSelf = false)\n{\n    if (socket != null)\n    {\n        QuitMessage msg = new QuitMessage();\n        socket.Send(msg.Writing());\n        socket.Shutdown(SocketShutdown.Both);\n        socket.Disconnect(false);\n        socket.Close();\n        socket = null;\n    }\n    //不是自己主动断开连接的\n    if (!isSelf)\n    {\n        //断线重连，弹出一个面板，选择是否重连\n        //if (是否重连)\n        //  Connect(ip, port)\n    }\n}\n\n//销毁时就是自动断开连接\nprivate void OnDestroy()\n{\n    Close(true);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240321233346-o17162v",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321233346-o17162v",
+				"updated": "20240321233530"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "断线重连与运行时刚开始连接还不同，服务端可能要给重连的客户端发送一些恢复状态的消息（如：上次断开连接时玩家所在的位置）\n因此可能需要特殊的处理逻辑，这取决于你的项目需求"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,3058 @@
+{
+	"ID": "20240412145854-5gs0hfw",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240412145854-5gs0hfw",
+		"title": "UG4L20——树",
+		"type": "doc",
+		"updated": "20240412172254"
+	},
+	"Children": [
+		{
+			"ID": "20240412171904-1w0ta7u",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240412171904-1w0ta7u",
+				"updated": "20240412171909"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240412171910-i1h19bv",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240412171910-i1h19bv",
+				"style": "line-height: 22px;",
+				"updated": "20240412172254"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "GTree\t\t\t\t\t\t//FairyGUI的树类\ngTree.rootNode\t\t\t\t//获取树的根节点，该节点在面板上不可见，只有往该节点添加节点才能将内容显示在面板上\nGTreeNode\t\t\t\t\t//树的节点类\ngRootNode.AddChild()\t\t//向节点添加节点\ngTreeNode.cell\t\t\t\t//获取节点对应的组件，可以修改组件内容，仅限于根节点下的子节点，并且是要AddChild过后才能改，不建议使用这种方式\ngTree.treeNodeRender\t\t//当树的TreeNode需要更新时的回调委托，建议使用这种方式去进行树结构中内容的初始化\ngTree.onClickItem.Add()\t\t//当点击一个子节点 会调用该委托函数\ngTree.treeNodeWillExpand\t//用于监听树的某个节点展开折叠的委托\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240412145854-50gxn1r",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240412145854-50gxn1r",
+				"name": "GTree",
+				"updated": "20240412150646"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "FairyGUI的树"
+				}
+			]
+		},
+		{
+			"ID": "20240412150641-q7u12a0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240412150641-q7u12a0",
+				"updated": "20240412150856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "树是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240227203748-qhhdi45",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "列表"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的一种特例，是组件的一种特殊拓展，利用树我们可以在FGUI中制作出树形结构的UI"
+				}
+			]
+		},
+		{
+			"ID": "20240412150859-iegvxt9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240412150859-iegvxt9",
+				"updated": "20240412150931"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "何为树形结构，类似于Projects窗口内显示的文件树就是一种树形结构"
+				}
+			]
+		},
+		{
+			"ID": "20240412151003-wz3p9cr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240412151003-wz3p9cr",
+				"updated": "20240412151003"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 263px;",
+						"style": "width: 253px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240412151003-kwvpx2t.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 253px;\" parent-style=\"width: 263px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240412150647-yh5jd6e",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240412150647-yh5jd6e",
+				"updated": "20240412150703"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "开启树功能"
+				}
+			]
+		},
+		{
+			"ID": "20240412150802-h9bmnl8",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240412150802-h9bmnl8",
+				"updated": "20240412151136"
+			},
+			"Children": [
+				{
+					"ID": "20240412150808-pmqw9dd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240412150808-pmqw9dd",
+						"updated": "20240412150808"
+					},
+					"Children": [
+						{
+							"ID": "20240412150808-5qga1uc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412150808-5qga1uc",
+								"updated": "20240412150808"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "新建列表"
+								}
+							]
+						},
+						{
+							"ID": "20240412151054-q6txidx",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412151054-q6txidx",
+								"updated": "20240412151054"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 359px;",
+										"style": "width: 349px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412151054-j6ydk9k.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 349px;\" parent-style=\"width: 359px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240412150808-am21qxp",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240412150808-am21qxp",
+						"updated": "20240412151136"
+					},
+					"Children": [
+						{
+							"ID": "20240412150808-avxv3yt",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412150808-avxv3yt",
+								"updated": "20240412151136"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "激活列表中的树视图"
+								}
+							]
+						},
+						{
+							"ID": "20240412151129-3i9oim3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412151129-3i9oim3",
+								"updated": "20240412151129"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 334px;",
+										"style": "width: 324px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412151129-296zws9.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 324px;\" parent-style=\"width: 334px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240412150813-h4vw33h",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240412150813-h4vw33h",
+				"updated": "20240412150814"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "树的相关属性"
+				}
+			]
+		},
+		{
+			"ID": "20240412151309-g4fjjxn",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20240412151309-g4fjjxn",
+				"updated": "20240412151547"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20240412151257-mp25x5m",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240412151257-mp25x5m",
+						"updated": "20240412151310"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20240412151257-zia635m.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20240412150822-3iavoe2",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20240412150822-3iavoe2",
+						"updated": "20240412151547"
+					},
+					"Children": [
+						{
+							"ID": "20240412151302-azi8bfy",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20240412151302-azi8bfy",
+								"updated": "20240412151547"
+							},
+							"Children": [
+								{
+									"ID": "20240412151302-0819t0h",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240412151302-0819t0h",
+										"updated": "20240412151302"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "每级锁紧：树节点的深度每增加一级，向右缩进的像素距离"
+										}
+									]
+								},
+								{
+									"ID": "20240412151452-anahmyb",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240412151452-anahmyb",
+										"updated": "20240412151547"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "相当于："
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"parent-style": "width: 308px;",
+												"style": "width: 298px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20240412151547-k3flbpv.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 298px;\" parent-style=\"width: 308px;\"}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240412151305-pgr4ouj",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20240412151305-pgr4ouj"
+							},
+							"Children": [
+								{
+									"ID": "20240412151305-1jk2tlr",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240412151305-1jk2tlr",
+										"updated": "20240412151336"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "点击文件夹时展开/折叠：\n点击文件夹节点时是否自动展开或者折叠这个这个节点"
+										}
+									]
+								},
+								{
+									"ID": "20240412151347-576og28",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240412151347-576og28",
+										"updated": "20240412151358"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"parent-style": "width: 244px;",
+												"style": "width: 234px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20240412151358-nvkft0a.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 234px;\" parent-style=\"width: 244px;\"}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								},
+								{
+									"ID": "20240412151337-u501grv",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20240412151337-u501grv"
+									},
+									"Children": [
+										{
+											"ID": "20240412151337-rkwyki5",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20240412151337-rkwyki5"
+											},
+											"Children": [
+												{
+													"ID": "20240412151337-cxrcr0y",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20240412151337-cxrcr0y",
+														"updated": "20240412151339"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "否：没有动作"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20240412151340-p7l2g39",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20240412151340-p7l2g39"
+											},
+											"Children": [
+												{
+													"ID": "20240412151340-na5cfsg",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20240412151340-na5cfsg",
+														"updated": "20240412151343"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "单击：单击时执行"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20240412151343-w1lu6da",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20240412151343-w1lu6da"
+											},
+											"Children": [
+												{
+													"ID": "20240412151343-09e4be1",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20240412151343-09e4be1"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "双击：双击时执行"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20240412150822-ft5w23l",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240412150822-ft5w23l",
+				"updated": "20240412151323"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "设置好后，我们可以在编辑列表数据中为每个选项添加层级，0代表最上层，数字相同表示在同一层"
+				}
+			]
+		},
+		{
+			"ID": "20240412150827-7b62yum",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240412150827-7b62yum",
+				"updated": "20240412150828"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "制作树中的内容"
+				}
+			]
+		},
+		{
+			"ID": "20240412152349-5z3gwrk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240412152349-5z3gwrk",
+				"updated": "20240412162747"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先一个创建树的节点组件，按照如下规则创建元件和控制器，树中的节点设计约定规则："
+				}
+			]
+		},
+		{
+			"ID": "20240412152156-vbtmg32",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240412152156-vbtmg32",
+				"updated": "20240412162227"
+			},
+			"Children": [
+				{
+					"ID": "20240412152157-qwtruas",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240412152157-qwtruas",
+						"updated": "20240412152157"
+					},
+					"Children": [
+						{
+							"ID": "20240412152157-0ytbee9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412152157-0ytbee9",
+								"updated": "20240412152213"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "名为expanded的控制器"
+								}
+							]
+						},
+						{
+							"ID": "20240412152214-k1uairz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412152214-k1uairz",
+								"updated": "20240412160454"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "当节点展开状态，控制器切换到页面1；当折叠时，控制器切换到页面0"
+								}
+							]
+						},
+						{
+							"ID": "20240412152821-dlfgwh3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412152821-dlfgwh3",
+								"updated": "20240412153050"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "实现效果类似于：关闭时："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412152839-dkq8mak.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "，展开时："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412152910-crx6zou.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "，左边的图片会切换"
+								}
+							]
+						},
+						{
+							"ID": "20240412153045-54gwkf8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412153045-54gwkf8",
+								"updated": "20240412153045"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412153045-s7l2959.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240412160455-qthfdqs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412160455-qthfdqs",
+								"updated": "20240412160456"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果有放置按钮（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240227113319-0c7yl8g",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "复选按钮"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "）用于展开和折叠节点，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "那么这个按钮应该和控制器连接"
+								}
+							]
+						},
+						{
+							"ID": "20240412160451-6kq7nyl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412160451-6kq7nyl",
+								"updated": "20240412161613"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 270px;",
+										"style": "width: 260px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412160451-5pmrqyi.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 260px;\" parent-style=\"width: 270px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240412160540-fj59b2v",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412160540-fj59b2v",
+								"updated": "20240412160540"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设要实现这样的效果："
+								}
+							]
+						},
+						{
+							"ID": "20240412160540-e8pv8g7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412160540-e8pv8g7",
+								"updated": "20240412160540"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412153826-pkjk4l8.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 208px;",
+										"style": "width: 198px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412153858-y0uuode.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 198px;\" parent-style=\"width: 208px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240412160540-ghl5do6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412160540-ghl5do6",
+								"updated": "20240412160540"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "创建组件后关联expanded的控制器属性即可"
+								}
+							]
+						},
+						{
+							"ID": "20240412160540-l9rkv5w",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412160540-l9rkv5w",
+								"updated": "20240412160540"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "例如图片切换的属性控制和黄色箭头的属性控制"
+								}
+							]
+						},
+						{
+							"ID": "20240412160540-xmgsz9g",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412160540-xmgsz9g",
+								"updated": "20240412160540"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 316px;",
+										"style": "width: 306px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412154723-ewp8u22.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 306px;\" parent-style=\"width: 316px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 323px;",
+										"style": "width: 313px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412154740-a92pb8x.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 313px;\" parent-style=\"width: 323px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 292px;",
+										"style": "width: 282px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412154650-983l4yi.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 282px;\" parent-style=\"width: 292px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240412152200-jgqzrgh",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240412152200-jgqzrgh",
+						"updated": "20240412162227"
+					},
+					"Children": [
+						{
+							"ID": "20240412152200-ap3agsm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412152200-ap3agsm",
+								"updated": "20240412152207"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "名为leaf的控制器"
+								}
+							]
+						},
+						{
+							"ID": "20240412152207-e58a56n",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412152207-e58a56n",
+								"updated": "20240412161526"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果作为根节点（该节点下有节点），控制器切换页面是0；如果作为叶子节点（该节点下无节点），那么控制器切换页面是1"
+								}
+							]
+						},
+						{
+							"ID": "20240412160645-21nyr9h",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412160645-21nyr9h",
+								"updated": "20240412162227"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "实现效果类似于："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 664px;",
+										"style": "width: 654px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412162227-cfpz6ac.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 654px;\" parent-style=\"width: 664px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240412161117-52ur79u",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412161117-52ur79u",
+								"updated": "20240412161357"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "然后将属性控制关联到leaf控制器即可"
+								}
+							]
+						},
+						{
+							"ID": "20240412161359-d9b5cuh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412161359-d9b5cuh",
+								"updated": "20240412161359"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 402px;",
+										"style": "width: 392px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412161359-sf64rut.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 392px;\" parent-style=\"width: 402px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240412152202-3iyesen",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240412152202-3iyesen"
+					},
+					"Children": [
+						{
+							"ID": "20240412152202-p5kagxj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412152202-p5kagxj",
+								"updated": "20240412154303"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "名为indent的对象"
+								}
+							]
+						},
+						{
+							"ID": "20240412152211-h3gizv6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412152211-h3gizv6",
+								"updated": "20240412154413"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "该对象用于设置缩进，位置设置为(0,0)，宽度建议为0，树会控制该缩进宽度，\n假设某节点缩进是15像素，深度为3，那么indent对象宽度会被设置为45\n缩进一般使用空白图形，也可使用其他内容，取决于缩进的表现样式"
+								}
+							]
+						},
+						{
+							"ID": "20240412154337-pnkys3w",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412154337-pnkys3w",
+								"updated": "20240412154337"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 282px;",
+										"style": "width: 272px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412154337-176168p.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 272px;\" parent-style=\"width: 282px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240412154223-yqy2qwi",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412154223-yqy2qwi",
+								"updated": "20240412154444"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "同时，所有要被缩进影响的内容都必须要设置与indent的对象关联"
+								}
+							]
+						},
+						{
+							"ID": "20240412154439-4nnilcf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412154439-4nnilcf",
+								"updated": "20240412154439"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 392px;",
+										"style": "width: 382px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412154439-eznpcba.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 382px;\" parent-style=\"width: 392px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240412154447-hm08dmr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412154447-hm08dmr",
+								"updated": "20240412154533"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "这样，缩进才能影响其他组件的显示（假设缩进45像素）："
+								}
+							]
+						},
+						{
+							"ID": "20240412154554-etz7tdn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412154554-etz7tdn",
+								"updated": "20240412154554"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 214px;",
+										"style": "width: 204px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412154554-lrc9vsu.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 204px;\" parent-style=\"width: 214px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240412161616-14pahyp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240412161616-14pahyp",
+				"updated": "20240412161731"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "最后将创建出来的树节点关联到树的项目资源内，在编辑列表数据，即可看到树的内容"
+				}
+			]
+		},
+		{
+			"ID": "20240412161947-naatvhv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240412161947-naatvhv",
+				"updated": "20240412161947"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 306px;",
+						"style": "width: 296px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240412161947-ncjonyk.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 296px;\" parent-style=\"width: 306px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240412161929-mmtvxo4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240412161929-mmtvxo4",
+				"updated": "20240412161929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 425px;",
+						"style": "width: 415px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240412161929-w5x7zdg.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 415px;\" parent-style=\"width: 425px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240412150845-864gbsm",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240412150845-864gbsm",
+				"name": "GTreeNode",
+				"updated": "20240412164321"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity中的使用树"
+				}
+			]
+		},
+		{
+			"ID": "20240412161534-bbdmqzq",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240412161534-bbdmqzq",
+				"updated": "20240412171834"
+			},
+			"Children": [
+				{
+					"ID": "20240412163927-tuno6m7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240412163927-tuno6m7",
+						"updated": "20240412163927"
+					},
+					"Children": [
+						{
+							"ID": "20240412163927-fxpe54j",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412163927-fxpe54j",
+								"updated": "20240412163938"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取树对象"
+								}
+							]
+						},
+						{
+							"ID": "20240412163938-3gc18z2",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240412163938-3gc18z2",
+								"style": "line-height: 22px;",
+								"updated": "20240412164150"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\nGTree tree = panel.m_tree;\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240412164006-6v30zkx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240412164006-6v30zkx",
+						"name": "gTree.rootNode",
+						"updated": "20240412164246"
+					},
+					"Children": [
+						{
+							"ID": "20240412164006-6bpfcws",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412164006-6bpfcws",
+								"updated": "20240412164050"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取树的根节点，该节点在面板上不可见，只有往该节点添加节点才能将内容显示在面板上"
+								}
+							]
+						},
+						{
+							"ID": "20240412164216-em64o4o",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240412164216-em64o4o",
+								"style": "line-height: 22px;",
+								"updated": "20240412164346"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\nGTree tree = panel.m_tree;\nGTreeNode rootNode = tree.rootNode;     //树的根节点，在面板上不可见，我们需要向该节点添加内容\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240412164346-7qnky97",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240412164346-7qnky97",
+						"name": "gRootNode.AddChild()",
+						"updated": "20240412164425"
+					},
+					"Children": [
+						{
+							"ID": "20240412164346-a4qekvq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412164346-a4qekvq",
+								"updated": "20240412165912"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "新建一个节点类对象并添加节点"
+								}
+							]
+						},
+						{
+							"ID": "20240412164425-7qelvp3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412164425-7qelvp3",
+								"updated": "20240412164456"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "其中，构造函数的参数为："
+								}
+							]
+						},
+						{
+							"ID": "20240412164457-c2wjv1g",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240412164457-c2wjv1g",
+								"updated": "20240412164458"
+							},
+							"Children": [
+								{
+									"ID": "20240412164458-9gus3as",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240412164458-9gus3as",
+										"updated": "20240412164458"
+									},
+									"Children": [
+										{
+											"ID": "20240412164458-j1y3yah",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240412164458-j1y3yah",
+												"updated": "20240412164511"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "参数一：该节点是否会有子节点"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240412164511-wv1fqwq",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240412164511-wv1fqwq"
+									},
+									"Children": [
+										{
+											"ID": "20240412164511-dmr7h86",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240412164511-dmr7h86",
+												"updated": "20240412164601"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "参数二：该节点使用的自定义节点UI对象URL路径（可选，不填则直接使用树的项目资源）"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240412165806-benr1hn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412165806-benr1hn",
+								"updated": "20240412165825"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "然后，通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "gRootNode.AddChild()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​即可添加节点"
+								}
+							]
+						},
+						{
+							"ID": "20240412164414-bvjdn0j",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240412164414-bvjdn0j",
+								"style": "line-height: 22px;",
+								"updated": "20240412165039"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\nGTree tree = panel.m_tree;\nGTreeNode rootNode = tree.rootNode;     //树的根节点，在面板上不可见，我们需要向该节点添加内容\n//添加节点时，先新建一个节点，再加到另一个节点即可\nGTreeNode node = new GTreeNode(true);\nrootNode.AddChild(node);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240412164603-nn5vvod",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412164603-nn5vvod",
+								"updated": "20240412164607"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "显示效果：​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 237px;",
+										"style": "width: 227px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412164619-2kg9t39.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 227px;\" parent-style=\"width: 237px;\"}"
+								}
+							]
+						},
+						{
+							"ID": "20240412164633-x6ziwcq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412164633-x6ziwcq",
+								"updated": "20240412164742"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "只要创建节点时，设置了有子节点，就可以向该节点添加子节点"
+								}
+							]
+						},
+						{
+							"ID": "20240412164742-cbi2f2f",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240412164742-cbi2f2f",
+								"style": "line-height: 22px;",
+								"updated": "20240412165033"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\nGTree tree = panel.m_tree;\nGTreeNode rootNode = tree.rootNode;     //树的根节点，在面板上不可见，我们需要向该节点添加内容\n//添加节点时，先新建一个节点，再加到另一个节点即可\nGTreeNode node = new GTreeNode(true);\nrootNode.AddChild(node);\n//往子节点添加节点（该节点需要是可以添加子节点的），就有了层级关系\nGTreeNode nodeChild = new GTreeNode(false);\nnode.AddChild(nodeChild);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240412164952-8j8zzjz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412164952-8j8zzjz",
+								"updated": "20240412165059"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "显示效果："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 236px;",
+										"style": "width: 226px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412165059-tqpp000.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 226px;\" parent-style=\"width: 236px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240412165436-lyenqos",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240412165436-lyenqos",
+						"name": "gTreeNode.cell",
+						"updated": "20240412170545"
+					},
+					"Children": [
+						{
+							"ID": "20240412165436-3tkaet0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412165436-3tkaet0",
+								"updated": "20240412165446"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "修改节点上的显示内容"
+								}
+							]
+						},
+						{
+							"ID": "20240412165537-wsb8trt",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412165537-wsb8trt",
+								"updated": "20240412165633"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "要修改节点上的显示内容，可以通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "cell"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​属性来获取节点对应的组件，通过组件即可修改显示内容"
+								}
+							]
+						},
+						{
+							"ID": "20240412165723-0xxpjwf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412165723-0xxpjwf",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+								"updated": "20240412165756"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注意！如果想要通过这种方式修改内容 必须 是根节点的子节点 并且是要"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AddChild"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​过后才能改，不建议使用这种方式"
+								}
+							]
+						},
+						{
+							"ID": "20240412165635-xwhq6jn",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240412165635-xwhq6jn",
+								"style": "line-height: 22px;",
+								"updated": "20240412170545"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\nGTree tree = panel.m_tree;\nGTreeNode rootNode = tree.rootNode;     //树的根节点，在面板上不可见，我们需要向该节点添加内容\n//添加节点时，先新建一个节点，再加到另一个节点即可\nGTreeNode node = new GTreeNode(true);\nrootNode.AddChild(node);\nnode.cell.text = \"第一个节点\";\n//nodeChild.cell.text = \"第一个的节点子节点\";\t\t//这一句会报错\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240412165652-1ekjng2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412165652-1ekjng2",
+								"updated": "20240412165713"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "显示效果："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240412165713-cqjj5uk.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240412165918-oal59xb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20240412165918-oal59xb",
+						"updated": "20240412171834"
+					},
+					"Children": [
+						{
+							"ID": "20240412165918-vd7rtcw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240412165918-vd7rtcw",
+								"updated": "20240412165951"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "树的事件监听相关"
+								}
+							]
+						},
+						{
+							"ID": "20240412165930-xvztdwb",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240412165930-xvztdwb",
+								"updated": "20240412171834"
+							},
+							"Children": [
+								{
+									"ID": "20240412170007-441ut8r",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240412170007-441ut8r",
+										"name": "gTree.treeNodeRender",
+										"updated": "20240412170600"
+									},
+									"Children": [
+										{
+											"ID": "20240412170007-4ygsas1",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240412170007-4ygsas1",
+												"updated": "20240412170344"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "当树的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "TreeNode"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​需要更新时的回调委托"
+												}
+											]
+										},
+										{
+											"ID": "20240412170146-l4myiuo",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240412170146-l4myiuo",
+												"updated": "20240412170751"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "每当树上显示的节点变化时（添加移除，或者折叠展开）都会触发该委托，建议使用这种方式去进行树结构中内容的初始化"
+												}
+											]
+										},
+										{
+											"ID": "20240412171405-1viorrw",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240412171405-1viorrw",
+												"updated": "20240412171425"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "该委托要求方法的参数列表为："
+												}
+											]
+										},
+										{
+											"ID": "20240412171415-jucij65",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240412171415-jucij65",
+												"updated": "20240412171416"
+											},
+											"Children": [
+												{
+													"ID": "20240412171416-zzf6imi",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240412171416-zzf6imi",
+														"updated": "20240412171416"
+													},
+													"Children": [
+														{
+															"ID": "20240412171416-r5yf4iu",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240412171416-r5yf4iu",
+																"updated": "20240412171449"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数一：要更新显示的 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "GTreeNode"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240412171453-8nsou4d",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240412171453-8nsou4d"
+													},
+													"Children": [
+														{
+															"ID": "20240412171453-c8l0mjf",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240412171453-c8l0mjf",
+																"updated": "20240412171514"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数二：传入的"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "GTreeNode"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​对应的"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code block-ref",
+																	"TextMarkBlockRefID": "20231124141806-tlqh3j7",
+																	"TextMarkBlockRefSubtype": "s",
+																	"TextMarkTextContent": "GComponent"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20240412170236-gvn2lcy",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240412170236-gvn2lcy",
+												"style": "line-height: 22px;",
+												"updated": "20240412170600"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "void Start()\n{\n    TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\n    GTree tree = panel.m_tree;\n    GTreeNode rootNode = tree.rootNode;     //树的根节点，在面板上不可见，我们需要向该节点添加内容\n    //添加节点时，先新建一个节点，再加到另一个节点即可\n    GTreeNode node = new GTreeNode(true);\n    node.data = \"1\";\n    rootNode.AddChild(node);\n    node.cell.text = \"第一个节点\";\n    //往子节点添加节点（该节点需要是可以添加子节点的），就有了层级关系\n    GTreeNode nodeChild = new GTreeNode(false);\n    nodeChild.data = \"2\";\n    node.AddChild(nodeChild);\n    //nodeChild.cell.text = \"第一个的节点子节点\";\n\n    tree.treeNodeRender = RenderTreeNode;\n}\n\nvoid RenderTreeNode(GTreeNode node, GComponent obj)\n{\n    print(\"TreeNode改变\");\n    if (node.data.ToString() == \"2\")\n        obj.text = \"第一个节点的子节点\";\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20240412170652-94gryes",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240412170652-94gryes",
+												"updated": "20240412170658"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "显示效果："
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Properties": {
+														"parent-style": "width: 383px;",
+														"style": "width: 373px;"
+													},
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20240412170658-jpqy9ce.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeKramdownSpanIAL",
+													"Data": "{: style=\"width: 373px;\" parent-style=\"width: 383px;\"}"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240412170009-gk2g62b",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240412170009-gk2g62b",
+										"name": "gTree.onClickItem.Add()",
+										"updated": "20240412171219"
+									},
+									"Children": [
+										{
+											"ID": "20240412170009-wok6fj7",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240412170009-wok6fj7",
+												"updated": "20240412170009"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "当点击一个子节点 会调用该委托函数"
+												}
+											]
+										},
+										{
+											"ID": "20240412171139-jkhi6us",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240412171139-jkhi6us",
+												"updated": "20240412171219"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "该委托与列表的一致"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref code",
+													"TextMarkBlockRefID": "20240229221420-jt4ettn",
+													"TextMarkBlockRefSubtype": "d",
+													"TextMarkTextContent": "gList.onClickItem.Add()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20240412170852-fcxq2p4",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240412170852-fcxq2p4",
+												"style": "line-height: 22px;",
+												"updated": "20240412171037"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\nGTree tree = panel.m_tree;\nGTreeNode rootNode = tree.rootNode;     //树的根节点，在面板上不可见，我们需要向该节点添加内容\n//添加节点时，先新建一个节点，再加到另一个节点即可\nGTreeNode node = new GTreeNode(true);\nnode.data = \"1\";\nrootNode.AddChild(node);\nnode.cell.text = \"第一个节点\";\n//往子节点添加节点（该节点需要是可以添加子节点的），就有了层级关系\nGTreeNode nodeChild = new GTreeNode(false);\nnodeChild.data = \"2\";\nnode.AddChild(nodeChild);\n\n//当点击一个子节点时，会调用该委托\ntree.onClickItem.Add((obj) =\u003e\n{\n    print(obj.data);\n});\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20240412171038-3ethy92",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240412171038-3ethy92",
+												"updated": "20240412171121"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "输出效果（点击子节点）："
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Properties": {
+														"parent-style": "width: 323px;",
+														"style": "width: 313px;"
+													},
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20240412171121-bjs6hsz.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeKramdownSpanIAL",
+													"Data": "{: style=\"width: 313px;\" parent-style=\"width: 323px;\"}"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240412170009-yyrlhg7",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240412170009-yyrlhg7",
+										"name": "gTree.treeNodeWillExpand",
+										"updated": "20240412171834"
+									},
+									"Children": [
+										{
+											"ID": "20240412170009-ozslfgd",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240412170009-ozslfgd"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "用于监听 展开折叠的 委托"
+												}
+											]
+										},
+										{
+											"ID": "20240412171229-qswbvap",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240412171229-qswbvap",
+												"updated": "20240412171610"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "当树监听到展开折叠时会执行的委托"
+												}
+											]
+										},
+										{
+											"ID": "20240412171603-w92wjjn",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240412171603-w92wjjn",
+												"updated": "20240412171603"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "该委托要求方法的参数列表为："
+												}
+											]
+										},
+										{
+											"ID": "20240412171612-jilzujy",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240412171612-jilzujy",
+												"updated": "20240412171834"
+											},
+											"Children": [
+												{
+													"ID": "20240412171613-i6lj6m0",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240412171613-i6lj6m0",
+														"updated": "20240412171834"
+													},
+													"Children": [
+														{
+															"ID": "20240412171613-bwhsj26",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240412171613-bwhsj26",
+																"updated": "20240412171834"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "执行折叠或展开的 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "GTreeNode"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240412171631-ecg6fhh",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240412171631-ecg6fhh"
+													},
+													"Children": [
+														{
+															"ID": "20240412171631-3dltocc",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240412171631-3dltocc",
+																"updated": "20240412171638"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "是否是展开"
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20240412171639-asizu2p",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240412171639-asizu2p",
+												"style": "line-height: 22px;",
+												"updated": "20240412171755"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "void Start()\n{\n    TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\n    GTree tree = panel.m_tree;\n    GTreeNode rootNode = tree.rootNode;     //树的根节点，在面板上不可见，我们需要向该节点添加内容\n    //添加节点时，先新建一个节点，再加到另一个节点即可\n    GTreeNode node = new GTreeNode(true);\n    node.data = \"1\";\n    rootNode.AddChild(node);\n    node.cell.text = \"第一个节点\";\n    //往子节点添加节点（该节点需要是可以添加子节点的），就有了层级关系\n    GTreeNode nodeChild = new GTreeNode(false);\n    nodeChild.data = \"2\";\n    node.AddChild(nodeChild);\n    tree.treeNodeWillExpand = OnExpand;\n}\n\nvoid OnExpand(GTreeNode node, bool expend)\n{\n    print(node + \"_\" + expend);\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20240412171806-iq4zi75",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240412171806-iq4zi75",
+												"updated": "20240412171830"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "输出结果："
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20240412171830-mrdyyw0.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240412165106-eclw2j6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240412165106-eclw2j6"
+			}
+		}
+	]
+}

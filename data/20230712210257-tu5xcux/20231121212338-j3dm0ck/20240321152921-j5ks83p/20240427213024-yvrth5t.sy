@@ -1,0 +1,559 @@
+{
+	"ID": "20240427213024-yvrth5t",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240427213024-yvrth5t",
+		"title": "UH4L12——协同程序和异步函数",
+		"type": "doc",
+		"updated": "20240427215129"
+	},
+	"Children": [
+		{
+			"ID": "20240427213421-0z39nz4",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240427213421-0z39nz4",
+				"updated": "20240427213434"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "协同程序和异步函数"
+				}
+			]
+		},
+		{
+			"ID": "20240427213434-3yerlgk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427213434-3yerlgk",
+				"updated": "20240427213441"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "之所以需要注册跨域继承适配器，是因为在ILRuntime中的协同程序和异步函数\n编译后本质上是通过状态机利用对象的状态来达到的异步，这里面的对象就用到了跨域继承\n所以我们需要注册他们的跨域继承适配器来让热更新工程正常使用他们"
+				}
+			]
+		},
+		{
+			"ID": "20240427213024-1hk21eo",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240427213024-1hk21eo",
+				"updated": "20240427213358"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在ILRuntime热更工程中使用协同程序"
+				}
+			]
+		},
+		{
+			"ID": "20240427213821-xi77i8s",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427213821-xi77i8s",
+				"updated": "20240427214314"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果不注册就直接在热更工程内开启协程，会报错"
+				}
+			]
+		},
+		{
+			"ID": "20240427214315-fdwts44",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240427214315-fdwts44",
+				"style": "line-height: 22px;",
+				"updated": "20240427214329"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class ILRuntimeMain\n{\n    public static void Main()\n    {\n        Lesson16 lesson16 = Camera.main.GetComponent\u003cLesson16\u003e();\n        lesson16.StartCoroutine(Lesson16Test());\n    }\n\n    public static IEnumerator Lesson16Test()\n    {\n        Debug.Log(0);\n        yield return new WaitForSeconds(1f);\n        Debug.Log(1);\n        yield return new WaitForSeconds(1f);\n        Debug.Log(2);\n        yield return new WaitForSeconds(1f);\n        Debug.Log(3);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240427213923-gq37gbt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427213923-gq37gbt",
+				"updated": "20240427213923"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 765px;",
+						"style": "width: 755px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240427213923-rzm1wty.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 755px;\" parent-style=\"width: 765px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240427213447-tlv4gd9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427213447-tlv4gd9",
+				"updated": "20240427213932"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "需要注册 协同程序的 跨域继承适配器，可以在示例工程中获取"
+				}
+			]
+		},
+		{
+			"ID": "20240427214004-javaipq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427214004-javaipq",
+				"updated": "20240427214004"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 251px;",
+						"style": "width: 241px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240427214004-lbgpomp.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 241px;\" parent-style=\"width: 251px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240427214119-9kyw751",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427214119-9kyw751",
+				"updated": "20240427214209"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "然后，在appDomain加载完dll和pdb文件后的初始化逻辑中加上对"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "CoroutineAdapter"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的跨域继承注册"
+				}
+			]
+		},
+		{
+			"ID": "20240427214209-ypfnrb0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240427214209-ypfnrb0",
+				"style": "line-height: 22px;",
+				"updated": "20240427214240"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private unsafe void InitILRuntime()\n{\n    //注册委托和委托转换器...\n    //注册跨域继承类\n    appDomain.RegisterCrossBindingAdaptor(new ILRuntimeAdapter.Lesson11_TestAdapter());\n    appDomain.RegisterCrossBindingAdaptor(new CoroutineAdapter());\n    //注册值类型\n    appDomain.RegisterValueTypeBinder(typeof(Vector3), new Vector3Binder());\n    appDomain.RegisterValueTypeBinder(typeof(Vector2), new Vector2Binder());\n    appDomain.RegisterValueTypeBinder(typeof(Quaternion), new QuaternionBinder());\n\n    //CLR重定向内容，必须要写到CLR绑定之前！！！\n    System.Type debugType = typeof(Debug);\n    MethodInfo methodInfo = debugType.GetMethod(\"Log\", new System.Type[] { typeof(object) });\n    appDomain.RegisterCLRMethodRedirection(methodInfo, MyLog);\n\n    //注册 CLR绑定相关信息\n    ILRuntime.Runtime.Generated.CLRBindings.Initialize(appDomain);\n    //初始化ILRuntime相关信息（目前只需要告诉ILRuntime主线程的线程ID，主要目的是能够在Unity的Profiler剖析器窗口中分析问题）\n    appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240427214333-lno2typ",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427214333-lno2typ",
+				"updated": "20240427214343"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 423px;",
+						"style": "width: 413px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240427214343-oacgggl.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 413px;\" parent-style=\"width: 423px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240427213408-pqrzqwa",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240427213408-pqrzqwa",
+				"updated": "20240427213410"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在ILRuntime热更工程中使用异步函数"
+				}
+			]
+		},
+		{
+			"ID": "20240427213450-ngx8zoj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427213450-ngx8zoj",
+				"updated": "20240427214439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注册 异步函数的 跨域继承适配器，可以获取别人写好的异步函数跨域适配器："
+				}
+			]
+		},
+		{
+			"ID": "20240427214417-qq6tfxa",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427214417-qq6tfxa",
+				"updated": "20240427214437"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "a",
+					"TextMarkAHref": "https://github.com/jumpst/jumpst.github.io/blob/abc112a1ad718910f39bdd34323ae2633551a650/IAsyncStateMachineClassInheritanceAdaptor",
+					"TextMarkTextContent": "jumpst.github.io/IAsyncStateMachineClassInheritanceAdaptor"
+				}
+			]
+		},
+		{
+			"ID": "20240427214641-sz2f68c",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240427214641-sz2f68c",
+				"style": "line-height: 22px;",
+				"updated": "20240427214642"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System;\nusing ILRuntime.CLR.Method;\nusing ILRuntime.Runtime.Enviorment;\nusing ILRuntime.Runtime.Intepreter;\n\nnamespace ILRuntimeTest.TestFramework\n{\n    public class IAsyncStateMachineClassInheritanceAdaptor : CrossBindingAdaptor\n    {\n        public override Type BaseCLRType\n        {\n            get\n            {\n                return typeof(System.Runtime.CompilerServices.IAsyncStateMachine);\n            }\n        }\n\n        public override Type AdaptorType\n        {\n            get\n            {\n                return typeof(IAsyncStateMachineAdaptor);\n            }\n        }\n\n        public override object CreateCLRInstance(ILRuntime.Runtime.Enviorment.AppDomain appdomain, ILTypeInstance instance)\n        {\n            return new IAsyncStateMachineAdaptor(appdomain, instance);\n        }\n\n        public class IAsyncStateMachineAdaptor : System.Runtime.CompilerServices.IAsyncStateMachine, CrossBindingAdaptorType\n        {\n            ILTypeInstance instance;\n            ILRuntime.Runtime.Enviorment.AppDomain appdomain;\n            CrossBindingMethodInfo mMoveNext_0 = new CrossBindingMethodInfo(\"MoveNext\");\n            CrossBindingMethodInfo\u003cSystem.Runtime.CompilerServices.IAsyncStateMachine\u003e mSetStateMachine_1 = new CrossBindingMethodInfo\u003cSystem.Runtime.CompilerServices.IAsyncStateMachine\u003e(\"SetStateMachine\");\n\n            public IAsyncStateMachineAdaptor()\n            {\n\n            }\n\n            public IAsyncStateMachineAdaptor(ILRuntime.Runtime.Enviorment.AppDomain appdomain, ILTypeInstance instance)\n            {\n                this.appdomain = appdomain;\n                this.instance = instance;\n            }\n\n            public ILTypeInstance ILInstance { get { return instance; } }\n\n            public void MoveNext()\n            {\n                mMoveNext_0.Invoke(this.instance);\n            }\n\n            public void SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine stateMachine)\n            {\n                mSetStateMachine_1.Invoke(this.instance, stateMachine);\n            }\n\n            public override string ToString()\n            {\n                IMethod m = appdomain.ObjectType.GetMethod(\"ToString\", 0);\n                m = instance.Type.GetVirtualMethod(m);\n                if (m == null || m is ILMethod)\n                {\n                    return instance.ToString();\n                }\n                else\n                    return instance.Type.FullName;\n            }\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240427214833-gzsrehl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427214833-gzsrehl",
+				"updated": "20240427214844"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在热更工程内执行异步方法"
+				}
+			]
+		},
+		{
+			"ID": "20240427214844-njvm9mb",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240427214844-njvm9mb",
+				"style": "line-height: 22px;",
+				"updated": "20240427214859"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class ILRuntimeMain\n{\n    public static void Main()\n    {\n        Lesson16Test2();\n    }\n\n    public static async void Lesson16Test2()\n    {\n        Debug.Log(0);\n        await Task.Delay(1000);\n        Debug.Log(1);\n        await Task.Delay(1000);\n        Debug.Log(2);\n        await Task.Delay(1000);\n        Debug.Log(3);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240427214901-3nxipqa",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427214901-3nxipqa",
+				"updated": "20240427215046"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果不提前注册，直接调用同样会报错，因此同样需要在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "appDomain"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​加载完dll和pdb文件后的初始化逻辑中\n加上对"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IAsyncStateMachineClassInheritanceAdaptor"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的跨域继承注册"
+				}
+			]
+		},
+		{
+			"ID": "20240427214957-2q4qwzu",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240427214957-2q4qwzu",
+				"style": "line-height: 22px;",
+				"updated": "20240427215004"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private unsafe void InitILRuntime()\n{\n    //注册委托和委托转换器\n    //注册跨域继承类\n    appDomain.RegisterCrossBindingAdaptor(new ILRuntimeAdapter.Lesson11_TestAdapter());\n    appDomain.RegisterCrossBindingAdaptor(new CoroutineAdapter());\n    appDomain.RegisterCrossBindingAdaptor(new IAsyncStateMachineClassInheritanceAdaptor());\n    //注册值类型\n    appDomain.RegisterValueTypeBinder(typeof(Vector3), new Vector3Binder());\n    appDomain.RegisterValueTypeBinder(typeof(Vector2), new Vector2Binder());\n    appDomain.RegisterValueTypeBinder(typeof(Quaternion), new QuaternionBinder());\n  \n\n    //CLR重定向内容，必须要写到CLR绑定之前！！！\n    System.Type debugType = typeof(Debug);\n    MethodInfo methodInfo = debugType.GetMethod(\"Log\", new System.Type[] { typeof(object) });\n    appDomain.RegisterCLRMethodRedirection(methodInfo, MyLog);\n\n    //注册 CLR绑定相关信息\n    ILRuntime.Runtime.Generated.CLRBindings.Initialize(appDomain);\n    //初始化ILRuntime相关信息（目前只需要告诉ILRuntime主线程的线程ID，主要目的是能够在Unity的Profiler剖析器窗口中分析问题）\n    appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240427214914-2ko248o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427214914-2ko248o",
+				"updated": "20240427215129"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 431px;",
+						"style": "width: 421px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240427215129-mpjxiit.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 421px;\" parent-style=\"width: 431px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		}
+	]
+}

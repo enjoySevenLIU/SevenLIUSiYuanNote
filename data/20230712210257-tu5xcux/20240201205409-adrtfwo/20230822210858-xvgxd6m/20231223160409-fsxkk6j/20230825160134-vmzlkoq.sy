@@ -1,0 +1,97 @@
+{
+	"ID": "20230825160134-vmzlkoq",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230825160134-vmzlkoq",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230825160134-vmzlkoq\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230825160134-343n2hq\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230825161237-j0ffl1p\u0026quot;,\u0026quot;scrollTop\u0026quot;:0,\u0026quot;focusId\u0026quot;:\u0026quot;20230828200928-fmgvarp\u0026quot;,\u0026quot;focusStart\u0026quot;:35,\u0026quot;focusEnd\u0026quot;:35\u0026#125;",
+		"title": "UF_OLDL8——音效管理模块",
+		"updated": "20231223160952"
+	},
+	"Children": [
+		{
+			"ID": "20230825160134-343n2hq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230825160134-343n2hq",
+				"updated": "20230825161103"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "音效管理模块"
+				}
+			]
+		},
+		{
+			"ID": "20230825161104-u003cll",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230825161104-u003cll",
+				"updated": "20230825161219"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在游戏里，各个对象可能都会有各种音效，很明显，为每个对象都单独添加音效源难以统一管理的\n"
+				}
+			]
+		},
+		{
+			"ID": "20230825161240-w09drbs",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230825161240-w09drbs",
+				"updated": "20230828200927"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们需要写一个独立的音效管理模块来统一管理它们"
+				}
+			]
+		},
+		{
+			"ID": "20230828200928-fmgvarp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230828200928-fmgvarp",
+				"updated": "20230828201020"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过这个模块，使得游戏对象不再需要自己控制音效源，只需要调用该模块即可"
+				}
+			]
+		},
+		{
+			"ID": "20230825161237-j0ffl1p",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230825161237-j0ffl1p",
+				"updated": "20230828202030"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\n\npublic class MusicManager : BaseManager\u003cMusicManager\u003e\n{\n    //唯一的背景音乐组件\n    private AudioSource bkMusic = null;\n    //音乐大小\n    private float bkValue = 1;\n\n    //音效依附对象\n    private GameObject soundObj = null;\n    //音效列表\n    private List\u003cAudioSource\u003e soundList = new List\u003cAudioSource\u003e();\n    //音效大小\n    private float soundValue = 1;\n\n\n    public MusicManager()\n    {\n        MonoManager.Instance().AddUpdateListener(Update);\n    }\n\n    private void Update()\n    {\n        for (int i = soundList.Count - 1; i \u003e= 0; i--)\n        {\n            if (soundList[i].isPlaying)\n            {\n                GameObject.Destroy(soundList[i]);\n                soundList.RemoveAt(i);\n            }\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 播放背景音乐\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e\u003c/param\u003e\n    public void PlayBKMusic(string name)\n    {\n        if (bkMusic == null)\n        {\n            GameObject obj = new GameObject(name);\n            obj.name = \"BkMusic\";\n            bkMusic = obj.AddComponent\u003cAudioSource\u003e();\n        }\n        //异步加载背景音乐，加载完成后播放\n        ResourcesManager.Instance().LoadAsync\u003cAudioClip\u003e(\"Music/BK/\" + name, (audioClip) =\u003e\n        {\n            bkMusic.clip = audioClip;\n            bkMusic.volume = bkValue;\n            bkMusic.Play();\n        });\n    }\n  \n    /// \u003csummary\u003e\n    /// 改变背景音乐 音量大小\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"value\"\u003e\u003c/param\u003e\n    public void ChangeBKValue(float value)\n    {\n        bkValue = value;\n        if (bkMusic == null) return;\n        bkMusic.volume = bkValue;\n    }\n\n    /// \u003csummary\u003e\n    /// 暂停背景音乐\n    /// \u003c/summary\u003e\n    public void PauseBKMusic()\n    {\n        if (bkMusic == null) return;\n        bkMusic.Pause();\n    }\n\n    /// \u003csummary\u003e\n    /// 停止背景音乐\n    /// \u003c/summary\u003e\n    public void StopBKMusic()\n    {\n        if (bkMusic == null) return;\n        bkMusic.Stop();\n    }\n\n    /// \u003csummary\u003e\n    /// 播放音效\n    /// \u003c/summary\u003e\n    public void PlaySound(string name, bool isLoop, UnityAction\u003cAudioSource\u003e callBack = null)\n    {\n        if (soundObj == null)\n        {\n            soundObj = new GameObject();\n            soundObj.name = \"Sound\";\n        }\n        //当音效资源异步加载结束后 再添加一个音效\n        ResourcesManager.Instance().LoadAsync\u003cAudioClip\u003e(\"Music/Sound/\" + name, (clip) =\u003e\n        {\n            AudioSource source = soundObj.AddComponent\u003cAudioSource\u003e();\n            source.clip = clip;\n            source.loop = isLoop;\n            source.volume = soundValue;\n            source.Play();\n            soundList.Add(source);\n            if (callBack != null)\n                callBack(source);\n        });\n    }\n\n    /// \u003csummary\u003e\n    /// 改变音效声音大小\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"value\"\u003e\u003c/param\u003e\n    public void ChangeSoundValue(float value)\n    {\n        soundValue = value;\n        for (int i = 0; i \u003c soundList.Count; ++i)\n            soundList[i].volume = value;\n    }\n\n    /// \u003csummary\u003e\n    /// 停止音效\n    /// \u003c/summary\u003e\n    public void StopSound(AudioSource source)\n    {\n        if (soundList.Contains(source))\n        {\n            soundList.Remove(source);\n            source.Stop();\n            GameObject.Destroy(source);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

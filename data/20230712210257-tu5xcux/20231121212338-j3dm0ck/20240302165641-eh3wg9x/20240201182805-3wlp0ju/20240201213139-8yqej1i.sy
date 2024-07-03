@@ -1,0 +1,502 @@
+{
+	"ID": "20240201213139-8yqej1i",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240201213139-8yqej1i",
+		"title": "UH2S2L2——Lua解析器",
+		"updated": "20240302170518"
+	},
+	"Children": [
+		{
+			"ID": "20240201213147-6uutw9j",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240201213147-6uutw9j",
+				"name": "LuaEnv",
+				"updated": "20240201213446"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Lua解析器"
+				}
+			]
+		},
+		{
+			"ID": "20240201215248-udnkddu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201215248-udnkddu",
+				"updated": "20240201215257"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240201215257-xrsmyux",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201215257-xrsmyux",
+				"style": "line-height: 22px;",
+				"updated": "20240201215516"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "LuaEnv\t\t\t\t//Lua解析器类，new它即可创建一个可以执行Lua语句的Lua解释器\nluaEnv.DoString()\t//传入Lua语句字符串，执行Lua语句\nluaEnv.Tick()\t\t//帮助我们清除Lua中我们没有手动释放的对象，执行垃圾回收\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201213139-37elg0u",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201213139-37elg0u",
+				"updated": "20240201215257"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Lua解析器能够让我们在Unity中执行Lua，一般情况下保持它的唯一性"
+				}
+			]
+		},
+		{
+			"ID": "20240201213637-11l9hq3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201213637-11l9hq3",
+				"updated": "20240201215257"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用它需要导入命名空间"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "XLua"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240201213612-uehnia0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201213612-uehnia0",
+				"style": "line-height: 22px;",
+				"updated": "20240201215257"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\nusing XLua;\n\npublic class L1_LuaEnv : MonoBehaviour\n{\n    void Start()\n    {\n        LuaEnv luaEnv = new LuaEnv();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201213651-3ce5p27",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201213651-3ce5p27",
+				"name": "luaEnv.DoString()",
+				"updated": "20240201213446"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "执行Lua语言"
+				}
+			]
+		},
+		{
+			"ID": "20240201213911-fif0dz9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201213911-fif0dz9",
+				"updated": "20240201213446"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "将Lua语句字符串传入方法内，即可让Lua解析器执行这句语句\n还可以传入第二个字符串参数，当Lua解析器执行该语句报错时就可以输出第二个参数的内容"
+				}
+			]
+		},
+		{
+			"ID": "20240201213836-qtm9x5r",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201213836-qtm9x5r",
+				"style": "line-height: 22px;",
+				"updated": "20240201213446"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "luaEnv.DoString(\"print('你好世界')\");\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201214027-2bpsu6o",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201214027-2bpsu6o",
+				"name": "luaEnv.Tick()",
+				"updated": "20240201213446"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "垃圾回收"
+				}
+			]
+		},
+		{
+			"ID": "20240201214140-eebipgo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201214140-eebipgo",
+				"updated": "20240201213446"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "帮助我们清除Lua中我们没有手动释放的对象，执行垃圾回收，帧更新中定时执行，或者切场景时执行"
+				}
+			]
+		},
+		{
+			"ID": "20240201214204-f0hwfkw",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201214204-f0hwfkw",
+				"style": "line-height: 22px;",
+				"updated": "20240201213446"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "luaEnv.Tick();\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201214227-wcx4t05",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201214227-wcx4t05",
+				"name": "luaEnv.Dispose()",
+				"updated": "20240201213446"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "销毁Lua解析器"
+				}
+			]
+		},
+		{
+			"ID": "20240201214311-oqbusb0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201214311-oqbusb0",
+				"updated": "20240201213446"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "除非特殊需求，否则一般不需要去执行这句语句"
+				}
+			]
+		},
+		{
+			"ID": "20240201214238-h2rgmah",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201214238-h2rgmah",
+				"style": "line-height: 22px;",
+				"updated": "20240201213446"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "luaEnv.Dispose();\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201214347-lh7sl85",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201214347-lh7sl85",
+				"updated": "20240201215327"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用require​​执行Lua脚本"
+				}
+			]
+		},
+		{
+			"ID": "20240201214401-mrvf502",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201214401-mrvf502",
+				"updated": "20240201215628"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "想要执行一个Lua脚本，可以执行Lua的多脚本执行语句"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref code",
+					"TextMarkBlockRefID": "20240130194054-1aekjk5",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "require"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​函数\n默认寻找脚本的路径是Resources文件夹，并且因为在这里可能是通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref code",
+					"TextMarkBlockRefID": "20230713151506-m3728ua",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "Resources.Load()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​去加载Lua脚本\n该方法支持加载的文本资源只有.txt、.xml、.bytes等，这导致我们不得不在.lua后缀后再加一个.txt"
+				}
+			]
+		},
+		{
+			"ID": "20240201215016-gqz6tzg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201215016-gqz6tzg",
+				"updated": "20240201215327"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "Main.lua.txt"
+				}
+			]
+		},
+		{
+			"ID": "20240201215002-2polkgo",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201215002-2polkgo",
+				"style": "line-height: 22px;",
+				"updated": "20240201215327"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"第一个Unity调用的Lua脚本\")\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201215057-i8b30dw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201215057-i8b30dw",
+				"updated": "20240201215327"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "Lesson1_LuaEnv.cs"
+				}
+			]
+		},
+		{
+			"ID": "20240201215041-8xrkfeh",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201215041-8xrkfeh",
+				"style": "line-height: 22px;",
+				"updated": "20240201215327"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "luaEnv.DoString(\"require('Main')\");\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201215242-f3o1bl8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201215242-f3o1bl8",
+				"updated": "20240201215327"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240201215241-389be8q.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240201215243-x6nd9vu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201215243-x6nd9vu",
+				"updated": "20240201215327"
+			}
+		}
+	]
+}

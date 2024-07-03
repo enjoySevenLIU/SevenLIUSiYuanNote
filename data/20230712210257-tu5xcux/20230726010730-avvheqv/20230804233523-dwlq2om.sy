@@ -1,0 +1,488 @@
+{
+	"ID": "20230804233523-dwlq2om",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230804233523-dwlq2om",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230804233523-dwlq2om\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230804233523-huclt3h\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230912222141-y1yxxjd\u0026quot;,\u0026quot;scrollTop\u0026quot;:982,\u0026quot;focusId\u0026quot;:\u0026quot;20230804233523-huclt3h\u0026quot;,\u0026quot;focusStart\u0026quot;:0,\u0026quot;focusEnd\u0026quot;:0\u0026#125;",
+		"title": "U3L15——2D序列帧动画",
+		"updated": "20240308224441"
+	},
+	"Children": [
+		{
+			"ID": "20230804233523-huclt3h",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230804233523-huclt3h",
+				"updated": "20230804234618"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "2D序列帧动画"
+				}
+			]
+		},
+		{
+			"ID": "20230804234626-lof6ft9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804234626-lof6ft9",
+				"updated": "20230804234711"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们最常见的序列帧动画就是那些手绘2D动画，例如：常见的日本动画等\n以固定时间间隔 按序列切换图片 就是 序列帧动画的本质\n当固定时间间隔足够短时 我们肉眼就会认为图片是连续动态的 进而形成动画（会动的画面）"
+				}
+			]
+		},
+		{
+			"ID": "20230804234626-7lcd5wn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804234626-7lcd5wn",
+				"updated": "20230804234626"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "它的本质和游戏的帧率概念有点类似"
+				}
+			]
+		},
+		{
+			"ID": "20230804234626-9azomqw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804234626-9azomqw",
+				"updated": "20230804234626"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "原理就是在一个循环中按一定时间间隔不停的切换显示的图片"
+				}
+			]
+		},
+		{
+			"ID": "20230804234724-nyor73d",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230804234724-nyor73d",
+				"updated": "20230804234733"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "代码制作序列帧动画"
+				}
+			]
+		},
+		{
+			"ID": "20230804234827-cilb3lg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804234827-cilb3lg",
+				"updated": "20230804234858"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "先尝试根据原理 通过代码来实现序列帧动画"
+				}
+			]
+		},
+		{
+			"ID": "20230804234901-qxmoezu",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230804234901-qxmoezu",
+				"updated": "20230804235829"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Lesson35 : MonoBehaviour\n{\n    public Sprite[] sprites;\n\n    private SpriteRenderer sr;\n    private float time = 0;\n    private int nowIndex = 0;\n\n    // Start is called before the first frame update\n    void Start()\n    {\n        sr = GetComponent\u003cSpriteRenderer\u003e();\n        sr.sprite = sprites[nowIndex];\n    }\n\n    // Update is called once per frame\n    void Update()\n    {\n        //每一次增加帧间隔时间，增加到满足某一个条件时 就切换图片\n        time += Time.deltaTime;\n        if (time \u003e 0.05)\n        {\n            nowIndex++;\n            if (nowIndex \u003e= sprites.Length)\n                nowIndex = 0;\n            sr.sprite = sprites[nowIndex];\n            time = 0;\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230804235844-n3udieu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230804235844-n3udieu",
+				"updated": "20230804235906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Animation窗口制作序列帧动画"
+				}
+			]
+		},
+		{
+			"ID": "20230804235951-8ikuz1j",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804235951-8ikuz1j",
+				"updated": "20230804235951"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "方法一："
+				}
+			]
+		},
+		{
+			"ID": "20230804235922-cma0pjc",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20230804235922-cma0pjc",
+				"updated": "20230804235951"
+			},
+			"Children": [
+				{
+					"ID": "20230804235951-z9kf2cv",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20230804235951-z9kf2cv",
+						"updated": "20230804235951"
+					},
+					"Children": [
+						{
+							"ID": "20230804235951-875pshc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230804235951-875pshc",
+								"updated": "20230804235951"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "创建一个空物体"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20230804235951-38sl777",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20230804235951-38sl777",
+						"updated": "20230804235951"
+					},
+					"Children": [
+						{
+							"ID": "20230804235951-6vdp0ny",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230804235951-6vdp0ny",
+								"updated": "20230804235951"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "创建一个动画"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20230804235951-824kdwn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20230804235951-824kdwn",
+						"updated": "20230804235951"
+					},
+					"Children": [
+						{
+							"ID": "20230804235951-ap7jzqd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230804235951-ap7jzqd",
+								"updated": "20230804235951"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "直接将某一个动作的序列帧拖入窗口中"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230804235922-attwylt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804235922-attwylt",
+				"updated": "20230804235922"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "方法二：\n直接将图片拖入Hierarchy层级窗口中"
+				}
+			]
+		},
+		{
+			"ID": "20230804235922-vy1n01t",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804235922-vy1n01t",
+				"updated": "20230805000859"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：需要修改动画帧率（Debug和Animation窗口都可以改） 来控制动画的播放速度"
+				}
+			]
+		},
+		{
+			"ID": "20230805000958-eid4yqo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230805000958-eid4yqo",
+				"updated": "20230805001607"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "笔者注：控制播放速度还可以通过拉长序列帧之间的间隔，序列帧有快速拉长间隔的方法"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20230805001405-14jpos2.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20230805000550-ih6y7l0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230805000550-ih6y7l0",
+				"updated": "20230805000558"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "修改动画帧率"
+				}
+			]
+		},
+		{
+			"ID": "20230805000611-bhod1tt",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20230805000611-bhod1tt",
+				"updated": "20230805000701"
+			},
+			"Children": [
+				{
+					"ID": "20230805000611-ll5hmxi",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20230805000611-ll5hmxi",
+						"updated": "20230805000611"
+					},
+					"Children": [
+						{
+							"ID": "20230805000611-ylauxyv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230805000611-ylauxyv",
+								"updated": "20230805000611"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20230804021416-h0ff41v.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n要显示这个，需要先在Animation面板右上角三点菜单选择Show Sample Rate\n该数值决定该动画为一秒多少帧"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20230805000613-r8iql2w",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20230805000613-r8iql2w",
+						"updated": "20230805000701"
+					},
+					"Children": [
+						{
+							"ID": "20230805000613-0kr1te8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230805000613-0kr1te8",
+								"updated": "20230805000701"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20230804021013-r8irg21",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "Debug模式修改动画帧率"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230804235923-3xir6m1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230804235923-3xir6m1",
+				"updated": "20230804235929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "利用Animator进行动画控制"
+				}
+			]
+		},
+		{
+			"ID": "20230912222141-y1yxxjd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230912222141-y1yxxjd",
+				"updated": "20240308224441"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230803225001-deaj6ud",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "U3L14——Animator动画状态机"
+				}
+			]
+		}
+	]
+}

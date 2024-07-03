@@ -1,0 +1,2492 @@
+{
+	"ID": "20240408225118-t2iepyx",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240408225118-t2iepyx",
+		"title": "UG4L12——坐标系统",
+		"type": "doc",
+		"updated": "20240410171336"
+	},
+	"Children": [
+		{
+			"ID": "20240410153118-49wu1oe",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240410153118-49wu1oe",
+				"updated": "20240410153124"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240410153125-pioxtem",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240410153125-pioxtem",
+				"style": "line-height: 22px;",
+				"updated": "20240410163724"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "gObject.LocalToGlobal()\t\t//输出元件在FGUI坐标系下的物理屏幕坐标\ngObject.GlobalToLocal()\t\t//获取物理屏幕坐标在UI元件上的局部坐标\nGRoot.inst.GlobalToLocal()\t//将元件在物理屏幕上的实际坐标转换为FGUI计算使用的逻辑屏幕坐标\ngObject.LocalToRoot()\t\t//将局部坐标转换为FGUI计算会使用的逻辑屏幕坐标（第二个参数必须传入GRoot.inst）\ngObject.RootToLocal()\t\t//逻辑屏幕坐标转换为相对于父元件的局部坐标（第二个参数必须传入GRoot.inst）\ngObject.TransformPoint()\t//计算相对于自己的某个位置相对于另一个元件的位置\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240408225118-iwfch27",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240408225118-iwfch27",
+				"updated": "20240409223420"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "FairyGUI的坐标原点"
+				}
+			]
+		},
+		{
+			"ID": "20240409223239-ho3xctv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240409223239-ho3xctv",
+				"updated": "20240409223636"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "FairyGUI是以"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "屏幕左上角为原点"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的，Unity的屏幕坐标是以左下角为原点"
+				}
+			]
+		},
+		{
+			"ID": "20240409223900-swir48t",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240409223900-swir48t",
+				"updated": "20240409223900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 456px;",
+						"style": "width: 446px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240409223900-wxaodpz.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 446px;\" parent-style=\"width: 456px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240409223239-oqq8wew",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240409223239-oqq8wew",
+				"updated": "20240409223916"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果想转化屏幕坐标和UI坐标："
+				}
+			]
+		},
+		{
+			"ID": "20240409223619-cjg100c",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240409223619-cjg100c",
+				"style": "line-height: 22px;",
+				"updated": "20240409223622"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Update()\n{\n    if (Input.GetMouseButtonDown(0))\n    {\n        Vector3 screenPos = Input.mousePosition;\n        print($\"Unity的屏幕坐标：{screenPos}\");\n        screenPos.y = Screen.height - screenPos.y;\n        print($\"FairyGUI的屏幕坐标：{screenPos}\");\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240409224000-dtm248j",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240409224000-dtm248j",
+				"updated": "20240410145200"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 455px;",
+						"style": "width: 445px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240409224000-18lm8nb.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 445px;\" parent-style=\"width: 455px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240409224040-usnxy3m",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240409224040-usnxy3m",
+				"updated": "20240409224052"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "UI对象和屏幕坐标转换"
+				}
+			]
+		},
+		{
+			"ID": "20240410161312-mwx9smo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240410161312-mwx9smo",
+				"updated": "20240410162029"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在FGUI我们会与三种屏幕坐标打交道："
+				}
+			]
+		},
+		{
+			"ID": "20240410161329-9flmvy5",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240410161329-9flmvy5",
+				"updated": "20240410162122"
+			},
+			"Children": [
+				{
+					"ID": "20240410161330-w1j3oj1",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240410161330-w1j3oj1",
+						"updated": "20240410161946"
+					},
+					"Children": [
+						{
+							"ID": "20240410161330-58u4ypb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410161330-58u4ypb",
+								"updated": "20240410161946"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "相对于父元件的局部坐标"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240410161349-jecwjxl",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240410161349-jecwjxl",
+						"updated": "20240410162122"
+					},
+					"Children": [
+						{
+							"ID": "20240410161349-s0ph640",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410161349-s0ph640",
+								"updated": "20240410162122"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "相对于FGUI坐标系的实际在屏幕上显示的物理屏幕坐标（由于分辨率自适应的存在很可能与逻辑屏幕坐标不一致）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240410161428-55qa7k0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240410161428-55qa7k0",
+						"updated": "20240410162109"
+					},
+					"Children": [
+						{
+							"ID": "20240410161428-okkkzko",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410161428-okkkzko",
+								"updated": "20240410162109"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "相对于FGUI坐标系的FGUI元件真正参与计算的逻辑屏幕坐标（和FGUI编辑器设置的位置一致）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240409224052-hrqirli",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240409224052-hrqirli",
+				"updated": "20240410163923"
+			},
+			"Children": [
+				{
+					"ID": "20240409224121-73z984m",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240409224121-73z984m",
+						"name": "gObject.position",
+						"updated": "20240409224121"
+					},
+					"Children": [
+						{
+							"ID": "20240409224121-ysj3ny8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240409224121-ysj3ny8",
+								"updated": "20240410152254"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GObject"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​里的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "x/y/position"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​值都是局部坐标，也就是相对于"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "父元件的偏移"
+								}
+							]
+						},
+						{
+							"ID": "20240410151559-yzh49p4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410151559-yzh49p4",
+								"updated": "20240410151559"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 577px;",
+										"style": "width: 567px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410151559-c3u6m8w.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 567px;\" parent-style=\"width: 577px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240410150950-9dq0k19",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410150950-9dq0k19",
+								"style": "line-height: 22px;",
+								"updated": "20240410151610"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    //显示面板组件的方法\n    TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\n    //图形相对于面板组件的局部坐标\n    print(panel.m_graphTest.x);\n    print(panel.m_graphTest.position);\n    GObject obj = panel.m_svTest.GetChild(\"n1\");\n    //面板下的滚动视图中的第二个格子相对于滚动视图组件的局部坐标\n    print(obj.x);\n    print(obj.y);\n    print(obj.position);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410151611-tugpjoh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410151611-tugpjoh",
+								"updated": "20240410152211"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 361px;",
+										"style": "width: 351px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410152211-nsa5nix.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 351px;\" parent-style=\"width: 361px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240410151630-ldpomnn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410151630-ldpomnn",
+								"updated": "20240410151645"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对比其在FairyGUI编辑器显示的坐标："
+								}
+							]
+						},
+						{
+							"ID": "20240410151901-klmy665",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410151901-klmy665",
+								"updated": "20240410152233"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 315px;",
+										"style": "width: 305px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410152233-io7wlin.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 305px;\" parent-style=\"width: 315px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 308px;",
+										"style": "width: 298px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410151901-s0zdu8t.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 298px;\" parent-style=\"width: 308px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240409224121-37mg7s1",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240409224121-37mg7s1",
+						"name": "gObject.LocalToGlobal()",
+						"updated": "20240410163854"
+					},
+					"Children": [
+						{
+							"ID": "20240409224121-btiappd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240409224121-btiappd",
+								"updated": "20240410163854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取任何一个元件在屏幕上的坐标（FairyGUI坐标系下，左上角原点，不常用）"
+								}
+							]
+						},
+						{
+							"ID": "20240410152611-skz9n24",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410152611-skz9n24",
+								"updated": "20240410152820"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "该方法的参数和返回值可以是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Vector2"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​也可以是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Rect"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，\n传入的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Vector2"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​参数代表的是与元件锚点的偏移量，如果只是获取位置只需要传入"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Vector2.zero"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​即可"
+								}
+							]
+						},
+						{
+							"ID": "20240410153247-dw2p9ag",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410153247-dw2p9ag",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+								"updated": "20240410155524"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "值得一提的是，该方法得到的是该元件在物理屏幕上的坐标，由于屏幕的分辨率和FGUI处理的设计分辨率不一致，\n因此这里"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "得到的坐标很可能与在FairyGUI编辑器处设置的元件坐标不一致，该坐标不适用于直接与FGUI相关元件交互"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								}
+							]
+						},
+						{
+							"ID": "20240410153014-kfyux2q",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410153014-kfyux2q",
+								"updated": "20240410153014"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 526px;",
+										"style": "width: 516px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410153014-9psq1vv.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 516px;\" parent-style=\"width: 526px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240410152526-8tpvv4c",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410152526-8tpvv4c",
+								"style": "line-height: 22px;",
+								"updated": "20240410152608"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//显示面板组件的方法\nTeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\n//面板下的滚动视图中的第二个格子相对于滚动视图组件的局部坐标\nGObject obj = panel.m_svTest.GetChild(\"n1\");\nprint(\"局部坐标\" + obj.position);\n//转换为FGUI坐标系下的坐标\nVector2 screenPos = obj.LocalToGlobal(Vector2.zero);\nprint(\"相对于FGUI屏幕坐标系的坐标\" + screenPos);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410152828-at51aqe",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410152828-at51aqe",
+								"updated": "20240410152855"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 508px;",
+										"style": "width: 498px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410152855-mnotzjo.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 498px;\" parent-style=\"width: 508px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240409224121-aluq4hp",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240409224121-aluq4hp",
+						"name": "gObject.GlobalToLocal()",
+						"updated": "20240410163904"
+					},
+					"Children": [
+						{
+							"ID": "20240409224121-k87x0ab",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240409224121-k87x0ab",
+								"updated": "20240410163904"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取屏幕坐标在UI元件上的局部坐标（不常用）"
+								}
+							]
+						},
+						{
+							"ID": "20240410153905-wgkg29p",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410153905-wgkg29p",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+								"updated": "20240410154640"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注意，这里的屏幕坐标指的是在物理屏幕上的坐标，而非FGUI计算所采用的逻辑屏幕（设计分辨率）的坐标"
+								}
+							]
+						},
+						{
+							"ID": "20240410153358-2zhduyw",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410153358-2zhduyw",
+								"style": "line-height: 22px;",
+								"updated": "20240410155640"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "GObject obj = panel.m_svTest.GetChild(\"n1\");\nprint(obj.x);\nprint(obj.y);\nprint(\"局部坐标\" + obj.position);\n//把局部坐标转为实际屏幕坐标\nVector2 screenPos = obj.LocalToGlobal(Vector2.zero);\nprint(\"相对于FGUI屏幕坐标系的坐标\" + screenPos);\n//把实际屏幕坐标转为局部坐标\nVector2 localPos = obj.GlobalToLocal(screenPos);\nprint(\"通过FGUI坐标系下的屏幕坐标 转为 相对于某个对象内部的局部坐标\" + localPos);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410153641-2lpwfi2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410153641-2lpwfi2",
+								"updated": "20240410153701"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 625px;",
+										"style": "width: 615px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410153701-0k3qse6.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 615px;\" parent-style=\"width: 625px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240409224121-kmdwk3g",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240409224121-kmdwk3g",
+						"name": "GRoot.inst.GlobalToLocal()",
+						"updated": "20240410163846"
+					},
+					"Children": [
+						{
+							"ID": "20240409224121-b75vgtd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240409224121-b75vgtd",
+								"updated": "20240410163846"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "物理屏幕坐标转换为逻辑屏幕坐标"
+								}
+							]
+						},
+						{
+							"ID": "20240410153946-sy360o5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410153946-sy360o5",
+								"updated": "20240410153946"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果UI适配导致全局缩放，那么逻辑屏幕大小和物理屏幕大小不一致，逻辑屏幕坐标就是GRoot里的坐标\n编辑器里定义和代码中处理的 指的都是逻辑屏幕坐标（UI坐标）"
+								}
+							]
+						},
+						{
+							"ID": "20240410154309-ymbikh0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410154309-ymbikh0",
+								"updated": "20240410155432"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "而"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240409224121-37mg7s1",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "gObject.LocalToGlobal()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​输出的都是物理屏幕坐标，此方法获取的坐标不适合直接用于FGUI相关元件交互，\n例如在某个元件的位置上再添加一个元件，就不适用，需要将其转换为逻辑屏幕坐标"
+								}
+							]
+						},
+						{
+							"ID": "20240410154904-a6v6ip4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410154904-a6v6ip4",
+								"updated": "20240410154909"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 526px;",
+										"style": "width: 516px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410153014-9psq1vv.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 516px;\" parent-style=\"width: 526px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240410154921-2cxfvoc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410154921-2cxfvoc",
+								"updated": "20240410155022"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "实际Unity编辑器下的物理屏幕分辨率为"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410154952-rbowr4u.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n而FairyGUI编辑器下的逻辑屏幕分辨率为"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 224px;",
+										"style": "width: 214px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410155022-esjnrnc.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 214px;\" parent-style=\"width: 224px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240410154750-lu1ufm0",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410154750-lu1ufm0",
+								"style": "line-height: 22px;",
+								"updated": "20240410155615"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//显示面板组件的方法\nTeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\n//面板下的滚动视图中的第二个格子相对于滚动视图组件的局部坐标\nGObject obj = panel.m_svTest.GetChild(\"n1\");\nprint(\"局部坐标\" + obj.position);\n//把局部坐标转为实际屏幕坐标\nVector2 screenPos = obj.LocalToGlobal(Vector2.zero);\nprint(\"相对于FGUI屏幕坐标系的物理屏幕坐标\" + screenPos);\n//把物理屏幕坐标转换为逻辑屏幕坐标\nVector2 logicalPos = GRoot.inst.GlobalToLocal(screenPos);\nprint(\"相对于FGUI屏幕坐标系的逻辑屏幕坐标\" + logicalPos);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410154835-qwhkoep",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410154835-qwhkoep",
+								"updated": "20240410160425"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 493px;",
+										"style": "width: 483px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410154854-z462ijw.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 483px;\" parent-style=\"width: 493px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240410160422-x2k2zpj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410160422-x2k2zpj",
+								"updated": "20240410160422"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对比FairyGUI编辑器设置的位置：\n​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410160346-j7i5rks.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 365px;",
+										"style": "width: 355px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410160356-zki4fti.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 355px;\" parent-style=\"width: 365px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240409224121-np2t8ky",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"alias": "gObject.RootToLocal()",
+						"id": "20240409224121-np2t8ky",
+						"name": "gObject.LocalToRoot()",
+						"updated": "20240410163841"
+					},
+					"Children": [
+						{
+							"ID": "20240409224121-xaucj86",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240409224121-xaucj86",
+								"updated": "20240410163841"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "UI元件坐标与逻辑屏幕坐标之间的转换"
+								}
+							]
+						},
+						{
+							"ID": "20240410160101-jvhop8u",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410160101-jvhop8u",
+								"updated": "20240410160604"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "gObject.LocalToRoot()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​可以直接将局部坐标转换为FGUI计算会使用的逻辑屏幕坐标（第二个参数必须传入"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GRoot.inst"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​）\n该方法得到的坐标可以直接参与FGUI元件的交互，因此它最常用"
+								}
+							]
+						},
+						{
+							"ID": "20240410160607-ofba3b7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410160607-ofba3b7",
+								"updated": "20240410161130"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果要将逻辑屏幕坐标转换为相对于父元件的局部坐标，需要使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "gObject.RootToLocal()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（第二个参数必须传入"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GRoot.inst"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​）"
+								}
+							]
+						},
+						{
+							"ID": "20240410160300-skruvdu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410160300-skruvdu",
+								"updated": "20240410160306"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 542px;",
+										"style": "width: 532px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410153014-9psq1vv.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 532px;\" parent-style=\"width: 542px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240410155812-uf9xpbm",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410155812-uf9xpbm",
+								"style": "line-height: 22px;",
+								"updated": "20240410160854"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\n//面板下的滚动视图中的第二个格子相对于滚动视图组件的局部坐标\nGObject obj = panel.m_svTest.GetChild(\"n1\");\nprint(\"局部坐标\" + obj.position);\nVector2 logicalScreenPos = obj.LocalToRoot(Vector2.zero, GRoot.inst);\nprint(\"对象相对屏幕的逻辑坐标\" + logicalScreenPos);\nprint(\"逻辑坐标转换为局部坐标\" + obj.RootToLocal(logicalScreenPos, GRoot.inst));\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410160015-oyo81cr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410160015-oyo81cr",
+								"updated": "20240410160919"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410160919-eum1j45.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240410160317-mrijdkr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410160317-mrijdkr",
+								"updated": "20240410161229"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对比FairyGUI编辑器设置的位置：\n​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410160346-j7i5rks.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 365px;",
+										"style": "width: 355px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410160356-zki4fti.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 355px;\" parent-style=\"width: 365px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240409224121-1q3f6ba",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ni4=",
+						"Num": 6
+					},
+					"Properties": {
+						"id": "20240409224121-1q3f6ba",
+						"name": "gObject.TransformPoint()",
+						"updated": "20240410163923"
+					},
+					"Children": [
+						{
+							"ID": "20240409224121-p7zuvcc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240409224121-p7zuvcc",
+								"updated": "20240410163923"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "A中相对坐标相对B的位置"
+								}
+							]
+						},
+						{
+							"ID": "20240410163735-g7s2k48",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240410163735-g7s2k48",
+								"updated": "20240410163823"
+							},
+							"Children": [
+								{
+									"ID": "20240410163736-s9eqd4s",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240410163736-s9eqd4s",
+										"updated": "20240410163736"
+									},
+									"Children": [
+										{
+											"ID": "20240410163736-ljiz1di",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240410163736-ljiz1di",
+												"updated": "20240410163752"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "参数一：相对于自己的某个坐标"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240410163754-mkacork",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240410163754-mkacork",
+										"updated": "20240410163823"
+									},
+									"Children": [
+										{
+											"ID": "20240410163754-dfmx1fw",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240410163754-dfmx1fw",
+												"updated": "20240410163823"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "参数二：要计算相对于哪个元件的位置"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240410162728-ipw3y8a",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410162728-ipw3y8a",
+								"updated": "20240410162728"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 628px;",
+										"style": "width: 618px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410162728-vb5g1pw.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 618px;\" parent-style=\"width: 628px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240410163129-vap9140",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410163129-vap9140",
+								"style": "line-height: 22px;",
+								"updated": "20240410163208"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\n//图形相对于面板组件的局部坐标\nprint(panel.m_graphTest.x);\nprint(panel.m_graphTest.position);\n//面板下的滚动视图中的第二个格子相对于滚动视图组件的局部坐标\nGObject obj = panel.m_svTest.GetChild(\"n1\");\n//计算相对于B的位置\nVector2 relativeToBPos = obj.TransformPoint(Vector2.zero, panel.m_imgTest);\nprint(\"A中相对位置(0,0)相对于B的位置\" + relativeToBPos);\nrelativeToBPos = obj.TransformPoint(new Vector2(10, 10), panel.m_imgTest);\nprint(\"A中相对位置(10,10)相对于B的位置\" + relativeToBPos);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410163126-bkrrfm7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410163126-bkrrfm7",
+								"updated": "20240410163219"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 515px;",
+										"style": "width: 505px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410163126-m406ssj.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 505px;\" parent-style=\"width: 515px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240410163213-6jv5kth",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410163213-6jv5kth",
+								"updated": "20240410163308"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对比FairyGUI编辑器设置的位置：\n​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 325px;",
+										"style": "width: 315px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410163308-w81ik7y.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 315px;\" parent-style=\"width: 325px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410160346-j7i5rks.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 365px;",
+										"style": "width: 355px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410160356-zki4fti.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 355px;\" parent-style=\"width: 365px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240410163314-arog3o1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410163314-arog3o1",
+								"updated": "20240410163604"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "计算A中相对位置"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "(0, 0)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​相对于B的位置："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "(725-6, 81-525)=(719, -444)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n计算A中相对位置"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "(10, 10)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​相对于B的位置："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "(725+10-6, 81+10-525)=(729, -434)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240410161229-coub2fs",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240410161229-coub2fs",
+				"updated": "20240410161847"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "世界坐标转换"
+				}
+			]
+		},
+		{
+			"ID": "20240410162008-3m3c5ya",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240410162008-3m3c5ya",
+				"updated": "20240410171336"
+			},
+			"Children": [
+				{
+					"ID": "20240410163944-m48pg5j",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240410163944-m48pg5j",
+						"updated": "20240410163944"
+					},
+					"Children": [
+						{
+							"ID": "20240410163944-dhz6aka",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410163944-dhz6aka",
+								"updated": "20240410163952"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "世界坐标转UI坐标\n"
+								}
+							]
+						},
+						{
+							"ID": "20240410163957-fiums0x",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410163957-fiums0x",
+								"updated": "20240410163957"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "世界 ——\u003e 屏幕 ——\u003e UI"
+								}
+							]
+						},
+						{
+							"ID": "20240410164454-uokfwr2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410164454-uokfwr2",
+								"updated": "20240410164534"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设要得到下面的Cube对象相对于FairyGUI坐标系的逻辑屏幕坐标（UI坐标）"
+								}
+							]
+						},
+						{
+							"ID": "20240410164604-uftq48z",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410164604-uftq48z",
+								"updated": "20240410164604"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 605px;",
+										"style": "width: 595px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410164604-ci4px10.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 595px;\" parent-style=\"width: 605px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240410164617-fuld85d",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410164617-fuld85d",
+								"style": "line-height: 22px;",
+								"updated": "20240410164639"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//得到相对于Unity坐标系的物理屏幕坐标\nVector2 screenPos = Camera.main.WorldToScreenPoint(this.transform.position);\n//得到相对于FairyGUI坐标系的物理屏幕坐标\nscreenPos.y = Screen.height - screenPos.y;\n//得到FairyGUI直接使用计算的逻辑屏幕坐标\nVector2 logicalPos = GRoot.inst.GlobalToLocal(screenPos);\nprint(\"Cube在相对于FairyGUI坐标系的逻辑屏幕坐标(UI坐标)位置\" + logicalPos);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410164451-kwgfwpm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410164451-kwgfwpm",
+								"updated": "20240410164616"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410164616-aluj9oh.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240410163944-gj06ge4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240410163944-gj06ge4",
+						"updated": "20240410171336"
+					},
+					"Children": [
+						{
+							"ID": "20240410163944-ifgt20b",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410163944-ifgt20b",
+								"updated": "20240410163944"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "UI坐标转世界坐标"
+								}
+							]
+						},
+						{
+							"ID": "20240410164710-s5iu11f",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410164710-s5iu11f",
+								"style": "line-height: 22px;",
+								"updated": "20240410171336"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "print(\"世界坐标\" + this.transform.position);\n//得到相对于Unity坐标系的物理屏幕坐标\nVector3 screenPosVector3 = Camera.main.WorldToScreenPoint(this.transform.position);\nfloat distance = screenPosVector3.z;\n//得到相对于FairyGUI坐标系的物理屏幕坐标\nscreenPosVector3.y = Screen.height - screenPosVector3.y;\n//得到FairyGUI直接使用计算的逻辑屏幕坐标\nVector2 logicalPos = GRoot.inst.GlobalToLocal(screenPosVector3);\nprint(\"Cube在相对于FairyGUI坐标系的逻辑屏幕坐标(UI坐标)位置\" + logicalPos);\n//将逻辑屏幕坐标转换为相对于FairyGUI坐标系的物理屏幕坐标\nscreenPosVector3 = GRoot.inst.LocalToGlobal(logicalPos);\n//得到相对于Unity坐标系的屏幕坐标\nscreenPosVector3.y = Screen.height - screenPosVector3.y;\n//一般情况下，还需要提供距离摄像机视野正前方distance长度的参数作为screenPos.z(如果需要，将screenPos改为Vector3类型)\nscreenPosVector3.z = distance;\nVector3 worldPos = Camera.main.ScreenToWorldPoint(screenPosVector3);\nprint(\"从逻辑屏幕坐标转换为世界坐标\" + worldPos);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410165558-cekm7mg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410165558-cekm7mg",
+								"updated": "20240410170240"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410170240-c08nkh7.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240410164449-lowprz0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240410164449-lowprz0"
+			}
+		}
+	]
+}

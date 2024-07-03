@@ -1,0 +1,3973 @@
+{
+	"ID": "20240322211930-2h5vhtj",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240322211930-2h5vhtj",
+		"title": "UH3L10——游戏功能—资源更新删除",
+		"type": "doc",
+		"updated": "20240324171203"
+	},
+	"Children": [
+		{
+			"ID": "20240322211930-5orsn4l",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240322211930-5orsn4l",
+				"updated": "20240322212616"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关于资源对比"
+				}
+			]
+		},
+		{
+			"ID": "20240322212617-0o862d6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322212617-0o862d6",
+				"updated": "20240322213118"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们之前实现的资源对比文件下载并没有执行对比操作就直接覆盖了，因此我们必须要进一步实现本地资源对比消息与远端资源对比消息的比对\n由于需要执行比对操作，因此我们不能在下载到远端资源对比消息后就直接覆盖本地的\n最好的做法是先比对本地与远端的资源对比文件，然后根据不同去更新AB包，确认全部下载正确了，最后才覆盖"
+				}
+			]
+		},
+		{
+			"ID": "20240322213037-8rqdvz2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322213037-8rqdvz2",
+				"updated": "20240322213342"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此，比对资源数据时一定会在内存或者硬盘上存储两份资源对比数据，这里有两种做法："
+				}
+			]
+		},
+		{
+			"ID": "20240322213209-f893wfg",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240322213209-f893wfg",
+				"updated": "20240322213212"
+			},
+			"Children": [
+				{
+					"ID": "20240322213212-ou8s2ez",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240322213212-ou8s2ez",
+						"updated": "20240322213212"
+					},
+					"Children": [
+						{
+							"ID": "20240322213212-9hywlo8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240322213212-9hywlo8",
+								"updated": "20240322213235"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "保存到临时文件中，待AB包下载完成后，再用该临时文件覆盖本地对比文件"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240322213236-vsu1h3t",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240322213236-vsu1h3t"
+					},
+					"Children": [
+						{
+							"ID": "20240322213236-qlfl7t4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240322213236-qlfl7t4",
+								"updated": "20240322213310"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "压根不保存文件，直接通过下载流读取出字节数组数据转存为字符串，待AB包下载完毕后再保存为本地资源对比文件"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240322213310-71kexnu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322213310-71kexnu",
+				"updated": "20240322213544"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "根据我们之前实现的逻辑来看，第一种做法明显对逻辑要求的改动更少，因此采用第一种方法"
+				}
+			]
+		},
+		{
+			"ID": "20240322213544-h0jpixf",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240322213544-h0jpixf",
+				"updated": "20240322213648"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "改动下载资源对比文件的逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240322213649-yj9g1be",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322213649-yj9g1be",
+				"updated": "20240322213807"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先，我们不能下载后直接覆盖本地原有的资源对比文件，因此额外创建一个新的临时文件"
+				}
+			]
+		},
+		{
+			"ID": "20240322213714-p8j92cv",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240322213714-p8j92cv",
+				"style": "line-height: 22px;",
+				"updated": "20240322213840"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public async void DownLoadABCompareFile(UnityAction\u003cbool\u003e overCallBack)\n{\n    //从资源服务器下载资源对比文件\n    bool isOver = false;\n    int reDownloadMaxNum = 5;\n\t//下载下来的文件先存储到临时文件内\n    string path = Application.persistentDataPath + \"/ABCompareInfo_Temp.txt\";\n    while (!isOver \u0026\u0026 reDownloadMaxNum \u003e 0)\n    {\n        await Task.Run(() =\u003e\n        {\n            isOver = DownLoadFile(\"ABCompareInfo.txt\", path);\n        });\n        --reDownloadMaxNum;\n    }\n    overCallBack?.Invoke(isOver);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240322213859-i1b0u7k",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322213859-i1b0u7k",
+				"updated": "20240322214010"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "同时，下载完毕后解析资源对比文件也需要转为先去解析临时文件"
+				}
+			]
+		},
+		{
+			"ID": "20240322213939-nh1b29v",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240322213939-nh1b29v",
+				"style": "line-height: 22px;",
+				"updated": "20240322213942"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "/// \u003csummary\u003e\n/// 获取下载下来的AB包中的消息\n/// \u003c/summary\u003e\npublic void GetRemoteABCompareFileInfo()\n{\n    string info = File.ReadAllText(Application.persistentDataPath + \"/ABCompareInfo_Temp.txt\");\n    //通过分隔符把不同的AB包消息分割开来\n    string[] strs = info.Split('|');\n    string[] infos;\n    for (int i = 0; i \u003c strs.Length; i++)\n    {\n        //通过空格将AB包不同的消息分割开来，实例化AB包消息类对象并加入到字典记录下来\n        infos = strs[i].Split(' ');\n        remoteInfo.Add(infos[0], new ABInfo(infos[0], infos[1], infos[2]));\n    }\n    Debug.Log(\"远端AB包对比文件，内容获取结束\");\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240322222453-h9yspot",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240322222453-h9yspot",
+				"updated": "20240324152437"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "准备本地和远端数据进行对比"
+				}
+			]
+		},
+		{
+			"ID": "20240324145553-p4viu75",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240324145553-p4viu75",
+				"updated": "20240324152608"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "目标：下载远端的资源对比文件，存储为临时文件，解析并读取，读取本地的资源对比文件，解析并读取，准备好对比数据"
+				}
+			]
+		},
+		{
+			"ID": "20240324152207-aj52in3",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240324152207-aj52in3",
+				"updated": "20240324171151"
+			},
+			"Children": [
+				{
+					"ID": "20240324152446-n4jikag",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240324152446-n4jikag",
+						"updated": "20240324152447"
+					},
+					"Children": [
+						{
+							"ID": "20240324152446-9u2r5wv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240324152446-9u2r5wv",
+								"updated": "20240324152447"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "由于下载使用异步执行，因此检查更新方法"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CheckUpdate"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​是异步方法，需要在执行完毕后要执行的回调函数和执行期间输出状态的回调函数"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240324145553-qqa099k",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240324145553-qqa099k",
+						"updated": "20240324145553"
+					},
+					"Children": [
+						{
+							"ID": "20240324145553-9z2ubnl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240324145553-9z2ubnl",
+								"updated": "20240324152112"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Main"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "start"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法内"
+								}
+							]
+						},
+						{
+							"ID": "20240324145553-z8z19yj",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240324145553-z8z19yj",
+								"updated": "20240324145553"
+							},
+							"Children": [
+								{
+									"ID": "20240324145553-mv8b6ja",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240324145553-mv8b6ja",
+										"updated": "20240324145553"
+									},
+									"Children": [
+										{
+											"ID": "20240324145553-vfbs740",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324145553-vfbs740",
+												"updated": "20240324150521"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "程序启动后调用"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ABUpdateManager"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "CheckUpdate"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​方法，传入执行完毕后要执行的回调函数和执行期间输出状态的回调函数\n"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240324145750-wdstnle",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240324145750-wdstnle"
+					},
+					"Children": [
+						{
+							"ID": "20240324145750-4zp6hvd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240324145750-4zp6hvd",
+								"updated": "20240324145751"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ABUpdateManager"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CheckUpdate"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法内"
+								}
+							]
+						},
+						{
+							"ID": "20240324145752-cb246w2",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240324145752-cb246w2",
+								"updated": "20240324145755"
+							},
+							"Children": [
+								{
+									"ID": "20240324164707-552ai5w",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240324164707-552ai5w"
+									},
+									"Children": [
+										{
+											"ID": "20240324164707-rvlwkbm",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324164707-rvlwkbm",
+												"updated": "20240324164759"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "为了避免上一次报错残留消息，因此所以我们需要清空远端对比消息，本地对比消息，以及待下载列表"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324145755-oq83a9m",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240324145755-oq83a9m",
+										"updated": "20240324145755"
+									},
+									"Children": [
+										{
+											"ID": "20240324145755-hs3uhl4",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324145755-hs3uhl4",
+												"updated": "20240324145940"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "调用"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ABUpdateManager"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "DownLoadABCompareFile"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​方法，下载远端资源对比文件，传入执行完毕后要执行的回调函数"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240324145553-k77p3e6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240324145553-k77p3e6",
+						"updated": "20240324145553"
+					},
+					"Children": [
+						{
+							"ID": "20240324145553-5qnffvy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240324145553-5qnffvy",
+								"updated": "20240324145553"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ABUpdateManager"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownLoadABCompareFile"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法内"
+								}
+							]
+						},
+						{
+							"ID": "20240324145553-glq0gba",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240324145553-glq0gba",
+								"updated": "20240324145553"
+							},
+							"Children": [
+								{
+									"ID": "20240324145553-oujh6f4",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240324145553-oujh6f4",
+										"updated": "20240324145553"
+									},
+									"Children": [
+										{
+											"ID": "20240324145553-7rekywi",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324145553-7rekywi",
+												"updated": "20240324150138"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "先声明下载是否完毕，最多重试次数以及下载路径的变量，\n下载到本地保存的文件名是"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ABCompareInfo_Temp.txt"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，与本地的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ABCompareInfo.txt"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​区分开"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324145553-ivexyai",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240324145553-ivexyai",
+										"updated": "20240324145553"
+									},
+									"Children": [
+										{
+											"ID": "20240324145553-yqiwjgu",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324145553-yqiwjgu",
+												"updated": "20240324150057"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "进入循环下载流程，如果没有下载完毕且最多重试次数大于0时就下载资源对比文件"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324145553-dpk4rtg",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20240324145553-dpk4rtg",
+										"updated": "20240324145553"
+									},
+									"Children": [
+										{
+											"ID": "20240324145553-0hw2iua",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324145553-0hw2iua",
+												"updated": "20240324150157"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "创建"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Task"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​任务调用下载方法"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "DownLoadFile"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，传入下载文件名"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ABCompareInfo_Temp.txt"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​（远端还是这个名字）和下载路径"
+												}
+											]
+										},
+										{
+											"ID": "20240324145553-duz9vwp",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240324145553-duz9vwp",
+												"updated": "20240324145553"
+											},
+											"Children": [
+												{
+													"ID": "20240324145553-42rphtw",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"fold": "1",
+														"id": "20240324145553-42rphtw",
+														"updated": "20240324145553"
+													},
+													"Children": [
+														{
+															"ID": "20240324145553-fag37sf",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240324145553-fag37sf",
+																"updated": "20240324145553"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "ABUpdateManager"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​的"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "DownLoadFile"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​内"
+																}
+															]
+														},
+														{
+															"ID": "20240324145553-v7ad606",
+															"Type": "NodeList",
+															"ListData": {
+																"Typ": 1
+															},
+															"Properties": {
+																"id": "20240324145553-v7ad606",
+																"updated": "20240324145553"
+															},
+															"Children": [
+																{
+																	"ID": "20240324145553-opeegw2",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "MS4=",
+																		"Num": 1
+																	},
+																	"Properties": {
+																		"id": "20240324145553-opeegw2",
+																		"updated": "20240324145553"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324145553-gt09h22",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324145553-gt09h22",
+																				"updated": "20240324145553"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "尝试执行下载流程，如果下载报错输出下载失败并返回"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "false"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240324145553-2kb4ppq",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "Mi4=",
+																		"Num": 2
+																	},
+																	"Properties": {
+																		"id": "20240324145553-2kb4ppq",
+																		"updated": "20240324145553"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324145553-40zz7kq",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324145553-40zz7kq",
+																				"updated": "20240324145553"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "传入的文件名和服务器地址拼接为下载地址，创建FTP连接请求"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240324145553-pdt10e0",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "My4=",
+																		"Num": 3
+																	},
+																	"Properties": {
+																		"id": "20240324145553-pdt10e0",
+																		"updated": "20240324145553"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324145553-8vzqwel",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324145553-8vzqwel",
+																				"updated": "20240324145553"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "设置FTP连接请求通信凭证，代理设置为"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "null"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​，请求完毕后关闭控制连接，操作命令设置为下载，指定传输二进制类型数据"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240324145553-69830qo",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "NC4=",
+																		"Num": 4
+																	},
+																	"Properties": {
+																		"id": "20240324145553-69830qo",
+																		"updated": "20240324145553"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324145553-16m3k1w",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324145553-16m3k1w",
+																				"updated": "20240324145553"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "通过FTP连接请求获取连接响应，通过连接响应获取下载流，创建本地文件流，从下载流下载数据到本地流，"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240324145553-7j2uigj",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "NS4=",
+																		"Num": 5
+																	},
+																	"Properties": {
+																		"id": "20240324145553-7j2uigj",
+																		"updated": "20240324145553"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324145553-6lqxfb3",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324145553-6lqxfb3",
+																				"updated": "20240324145553"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "下载完毕，关闭流，返回"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "ture"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​"
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324145553-4dq6mdz",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NC4=",
+										"Num": 4
+									},
+									"Properties": {
+										"id": "20240324145553-4dq6mdz",
+										"updated": "20240324145553"
+									},
+									"Children": [
+										{
+											"ID": "20240324145553-iwt8fmc",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324145553-iwt8fmc",
+												"updated": "20240324145553"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "等待"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "DownLoadFile"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​执行完成，根据其返回值是否为"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "true"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​决定是否下载完毕，如果下载完毕就会跳出循环，下载失败就最多重试次数减一"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324145553-nlts1zu",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NS4=",
+										"Num": 5
+									},
+									"Properties": {
+										"id": "20240324145553-nlts1zu",
+										"updated": "20240324145553"
+									},
+									"Children": [
+										{
+											"ID": "20240324145553-aorwvyz",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324145553-aorwvyz",
+												"updated": "20240324145553"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "下载完毕或者连续下载失败导致最多重试次数归0，就结束方法，执行回调函数，传入下载是否完毕"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240324145553-tlj7c7j",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240324145553-tlj7c7j",
+						"updated": "20240324145553"
+					},
+					"Children": [
+						{
+							"ID": "20240324145553-fq0rgv3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240324145553-fq0rgv3",
+								"updated": "20240324165737"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ABUpdateManager"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CheckUpdate"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法内下载回调函数"
+								}
+							]
+						},
+						{
+							"ID": "20240324145553-j04cvf7",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240324145553-j04cvf7",
+								"updated": "20240324145553"
+							},
+							"Children": [
+								{
+									"ID": "20240324145553-xv7k237",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240324145553-xv7k237",
+										"updated": "20240324145553"
+									},
+									"Children": [
+										{
+											"ID": "20240324145553-jtzq230",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324145553-jtzq230",
+												"updated": "20240324150344"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果传入"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "false"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，则说明下载失败，执行"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Main"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​脚本的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "start"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​方法传入的执行完毕的回调函数，传入"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "false"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324145553-x5l18d4",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240324145553-x5l18d4",
+										"updated": "20240324145553"
+									},
+									"Children": [
+										{
+											"ID": "20240324145553-qc5k312",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324145553-qc5k312",
+												"updated": "20240324150559"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果传入"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ture"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，则说明远端资源对比文件下载成功，执行输出状态的回调函数，输出"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "对比文件下载结束"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324150455-jyf3vqe",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20240324150455-jyf3vqe"
+									},
+									"Children": [
+										{
+											"ID": "20240324150455-v089eg5",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324150455-v089eg5",
+												"updated": "20240324150942"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "读取远端资源对比文件，执行解析方法"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "GetRemoteABCompareFileInfo"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，传入读取出来的字符串和接收存储远端资源信息的字典"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "remoteABInfo"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​\n执行输出状态的回调函数，输出"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "解析远端对比文件"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20240324145553-64xdnf9",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240324145553-64xdnf9",
+												"updated": "20240324145553"
+											},
+											"Children": [
+												{
+													"ID": "20240324145553-0rne1lj",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"fold": "1",
+														"id": "20240324145553-0rne1lj",
+														"updated": "20240324145553"
+													},
+													"Children": [
+														{
+															"ID": "20240324145553-kd2p9rp",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240324145553-kd2p9rp",
+																"updated": "20240324145553"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "ABUpdateManager"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​的"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "GetRemoteABCompareFileInfo"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​内"
+																}
+															]
+														},
+														{
+															"ID": "20240324145553-39t2uqz",
+															"Type": "NodeList",
+															"ListData": {
+																"Typ": 1
+															},
+															"Properties": {
+																"id": "20240324145553-39t2uqz",
+																"updated": "20240324145553"
+															},
+															"Children": [
+																{
+																	"ID": "20240324145553-313990p",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "MS4=",
+																		"Num": 1
+																	},
+																	"Properties": {
+																		"id": "20240324145553-313990p",
+																		"updated": "20240324145553"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324145553-a23yk4z",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324145553-a23yk4z",
+																				"updated": "20240324145553"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "通过"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "'|'"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​来分割不同AB包消息，"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "' '"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​分割同一AB包的不同消息，"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240324145553-8rdzmhf",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "Mi4=",
+																		"Num": 2
+																	},
+																	"Properties": {
+																		"id": "20240324145553-8rdzmhf",
+																		"updated": "20240324145553"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324145553-wfdcfh6",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324145553-wfdcfh6",
+																				"updated": "20240324145553"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "每个AB包消息都有一个"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "ABInfo"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​对象存储，"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "ABInfo"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​对象内有文件名，大小，MD5码字段来存储一个AB包的数据"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240324145553-vneqw42",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "My4=",
+																		"Num": 3
+																	},
+																	"Properties": {
+																		"id": "20240324145553-vneqw42",
+																		"updated": "20240324145553"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324145553-j426qev",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324145553-j426qev",
+																				"updated": "20240324150901"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "将所有的"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "ABInfo"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​对象作为值存入到传入的字典内，以AB包文件名为键，为资源对比作准备"
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324145553-oox1edz",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NC4=",
+										"Num": 4
+									},
+									"Properties": {
+										"id": "20240324145553-oox1edz",
+										"updated": "20240324145553"
+									},
+									"Children": [
+										{
+											"ID": "20240324145553-pkw567e",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324145553-pkw567e",
+												"updated": "20240324151015"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "解析完毕，执行输出状态的回调函数，输出"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "解析远端对比文件完成"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324151016-7k4a6s9",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NS4=",
+										"Num": 5
+									},
+									"Properties": {
+										"id": "20240324151016-7k4a6s9"
+									},
+									"Children": [
+										{
+											"ID": "20240324151016-s1dwrgq",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324151016-s1dwrgq",
+												"updated": "20240324151218"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "调用"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ABUpdateManager"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "GetLocalABCompareFileInfo"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​方法，传入执行完毕的回调函数"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240324151219-92ai7dg",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240324151219-92ai7dg"
+					},
+					"Children": [
+						{
+							"ID": "20240324151219-xfnzxzq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240324151219-xfnzxzq",
+								"updated": "20240324151240"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ABUpdateManager"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetLocalABCompareFileInfo"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法内"
+								}
+							]
+						},
+						{
+							"ID": "20240324151241-zcujid4",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240324151241-zcujid4"
+							},
+							"Children": [
+								{
+									"ID": "20240324151241-hy42umd",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240324151241-hy42umd"
+									},
+									"Children": [
+										{
+											"ID": "20240324151241-036elqo",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324151241-036elqo",
+												"updated": "20240324151528"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "检查可读可写路径是否存在本地资源对比文件，若存在并执行"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "GetLocalABCompareFileInfo"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​协程方法内，传入路径和传入的回调函数"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324151426-9qe1180",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240324151426-9qe1180"
+									},
+									"Children": [
+										{
+											"ID": "20240324151426-1spsvme",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324151426-1spsvme",
+												"updated": "20240324151548"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "不存在则检查可读路径下是否存在本地资源对比文件，若存在并执行"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "GetLocalABCompareFileInfo"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​协程方法内，传入路径和传入的回调函数"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324151501-b11zqhc",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20240324151501-b11zqhc"
+									},
+									"Children": [
+										{
+											"ID": "20240324151501-vrzquvi",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324151501-vrzquvi",
+												"updated": "20240324151603"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果两个路径都不存在，执行回调函数并传入"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "false"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240324151609-y6rtndd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240324151609-y6rtndd"
+					},
+					"Children": [
+						{
+							"ID": "20240324151609-e6qn8wm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240324151609-e6qn8wm",
+								"updated": "20240324151622"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ABUpdateManager"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetLocalABCompareFileInfo"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​协程方法内"
+								}
+							]
+						},
+						{
+							"ID": "20240324151638-lqhz5v5",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240324151638-lqhz5v5"
+							},
+							"Children": [
+								{
+									"ID": "20240324151638-ykcbwms",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240324151638-ykcbwms"
+									},
+									"Children": [
+										{
+											"ID": "20240324151638-oq1i4kb",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324151638-oq1i4kb",
+												"updated": "20240324151716"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "根据传入的路径，创建"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "UnityWebRequest"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​请求，发送请求并挂起协程"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324151716-f4gqd0g",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240324151716-f4gqd0g"
+									},
+									"Children": [
+										{
+											"ID": "20240324151716-h9x6rdj",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324151716-h9x6rdj",
+												"updated": "20240324151742"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "获取文件完毕后，检查是否成功，如果失败执行回调函数并传入"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "false"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324151743-yhq6f6t",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240324151743-yhq6f6t"
+									},
+									"Children": [
+										{
+											"ID": "20240324151743-6eicry5",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324151743-6eicry5",
+												"updated": "20240324151810"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果成功，执行解析方法"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "GetRemoteABCompareFileInfo"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，传入读取出来的字符串和接收存储本地资源信息的字典"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "localABInfo"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20240324151841-okb10di",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240324151841-okb10di"
+											},
+											"Children": [
+												{
+													"ID": "20240324151841-qi7prch",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"fold": "1",
+														"id": "20240324151841-qi7prch"
+													},
+													"Children": [
+														{
+															"ID": "20240324151841-yt6c32b",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240324151841-yt6c32b",
+																"updated": "20240324151841"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "ABUpdateManager"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​的"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "GetRemoteABCompareFileInfo"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​内"
+																}
+															]
+														},
+														{
+															"ID": "20240324151841-qrx1k7s",
+															"Type": "NodeList",
+															"ListData": {
+																"Typ": 1
+															},
+															"Properties": {
+																"id": "20240324151841-qrx1k7s",
+																"updated": "20240324151841"
+															},
+															"Children": [
+																{
+																	"ID": "20240324151841-c9bpe21",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "MS4=",
+																		"Num": 1
+																	},
+																	"Properties": {
+																		"id": "20240324151841-c9bpe21",
+																		"updated": "20240324151841"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324151841-we78udd",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324151841-we78udd",
+																				"updated": "20240324151841"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "通过"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "'|'"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​来分割不同AB包消息，"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "' '"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​分割同一AB包的不同消息，"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240324151841-7s8vayn",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "Mi4=",
+																		"Num": 2
+																	},
+																	"Properties": {
+																		"id": "20240324151841-7s8vayn",
+																		"updated": "20240324151841"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324151841-3ti0r4z",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324151841-3ti0r4z",
+																				"updated": "20240324151841"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "每个AB包消息都有一个"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "ABInfo"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​对象存储，"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "ABInfo"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​对象内有文件名，大小，MD5码字段来存储一个AB包的数据"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240324151841-fxnffc0",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "My4=",
+																		"Num": 3
+																	},
+																	"Properties": {
+																		"id": "20240324151841-fxnffc0",
+																		"updated": "20240324151841"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324151841-zo5umkm",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324151841-zo5umkm",
+																				"updated": "20240324151841"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "将所有的"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "ABInfo"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​对象作为值存入到传入的字典内，以AB包文件名为键，为资源对比作准备"
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324151844-hga0lik",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240324151844-hga0lik"
+									},
+									"Children": [
+										{
+											"ID": "20240324151844-lwhfgqa",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324151844-lwhfgqa",
+												"updated": "20240324151856"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "执行回调函数并传入"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ture"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240324151857-y9wzzkt",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240324151857-y9wzzkt"
+					},
+					"Children": [
+						{
+							"ID": "20240324151857-jlsfa1b",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240324151857-jlsfa1b",
+								"updated": "20240324165735"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ABUpdateManager"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CheckUpdate"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法内获取本地资源对比文件回调函数"
+								}
+							]
+						},
+						{
+							"ID": "20240324151950-tfkbmr3",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240324151950-tfkbmr3"
+							},
+							"Children": [
+								{
+									"ID": "20240324151950-omkxb8z",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240324151950-omkxb8z"
+									},
+									"Children": [
+										{
+											"ID": "20240324151950-z8pz2ib",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324151950-z8pz2ib",
+												"updated": "20240324152003"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果失败，执行"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Main"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​脚本的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "start"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​方法传入的执行完毕的回调函数，传入"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "false"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324152004-mbdr4ed",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240324152004-mbdr4ed"
+									},
+									"Children": [
+										{
+											"ID": "20240324152004-jxhpr9y",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324152004-jxhpr9y",
+												"updated": "20240324165230"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果成功，执行输出状态的回调函数，输出"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "解析对比文件完成"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，至此本地和远端数据准备完毕，"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref",
+													"TextMarkBlockRefID": "20240324152426-7r40th0",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "准备进行对比"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "（下一节）"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240324171058-fucz28b",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240324171058-fucz28b",
+						"updated": "20240324171151"
+					},
+					"Children": [
+						{
+							"ID": "20240324171058-xws8vo4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240324171058-xws8vo4",
+								"updated": "20240324171117"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Main"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "start"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法内"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CheckUpdate"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​执行完毕回调函数"
+								}
+							]
+						},
+						{
+							"ID": "20240324171121-x5muvrk",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240324171121-x5muvrk",
+								"updated": "20240324171151"
+							},
+							"Children": [
+								{
+									"ID": "20240324171117-ya6jri8",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240324171117-ya6jri8"
+									},
+									"Children": [
+										{
+											"ID": "20240324171117-jbh1z7q",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324171117-jbh1z7q",
+												"updated": "20240324171139"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果下载成功，输出检测更新结束"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324171140-y5mk2ip",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240324171140-y5mk2ip",
+										"updated": "20240324171151"
+									},
+									"Children": [
+										{
+											"ID": "20240324171140-cj01p3l",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324171140-cj01p3l",
+												"updated": "20240324171151"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果下载失败，输出网络出错"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240324145435-ny333g2",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240324145435-ny333g2",
+				"style": "line-height: 22px;",
+				"updated": "20240324152437"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class Main : MonoBehaviour\n{\n    void Start()\n    {\n        ABUpdateManager.Instance.CheckUpdate((isOver) =\u003e\n        {\n            if (isOver)\n            {\n                print(\"检测更新结束\");\n            }\n            else\n            {\n                print(\"网络出错\");\n            }\n        }, (str) =\u003e\n        {\n            //以后可以在这里处理更新加载界面上的显示信息相关的逻辑\n            print(str);\n        });\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240322222517-numyj8w",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240322222517-numyj8w",
+				"style": "line-height: 22px;",
+				"updated": "20240324153938"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System;\nusing System.Collections;\nusing System.Collections.Generic;\nusing System.IO;\nusing System.Net;\nusing System.Threading.Tasks;\nusing UnityEngine;\nusing UnityEngine.Events;\nusing UnityEngine.Networking;\n\npublic class ABUpdateManager : MonoBehaviour\n{\n    private static ABUpdateManager instance;\n    public static ABUpdateManager Instance\n    {\n        get\n        {\n            if (instance == null)\n            {\n                GameObject obj = new GameObject(\"ABUpdateManager\");\n                instance = obj.AddComponent\u003cABUpdateManager\u003e();\n            }\n            return instance;\n        }\n    }\n\n    //用于存储远端AB包消息的字典，之后和本地进行对比即可完成更新下载相关逻辑\n    private Dictionary\u003cstring, ABInfo\u003e remoteABInfo = new Dictionary\u003cstring, ABInfo\u003e();\n    //用于存储本地AB包消息的字典，之后和远端消息进行对比\n    private Dictionary\u003cstring, ABInfo\u003e localABInfo = new Dictionary\u003cstring, ABInfo\u003e();\n\n    private void OnDestroy()\n    {\n        instance = null;\n    }\n\n    public void CheckUpdate(UnityAction\u003cbool\u003e overCallBack, UnityAction\u003cstring\u003e updateInfoCallBack)\n    {\n        //加载远端资源对比文件\n        DownLoadABCompareFile((isOver) =\u003e\n        {\n            updateInfoCallBack(\"开始更新资源\");\n            if (isOver)\n            {\n                updateInfoCallBack(\"对比文件下载结束\");\n                string remoteInfo = File.ReadAllText(Application.persistentDataPath + \"/ABCompareInfo_Temp.txt\");\n                updateInfoCallBack(\"解析远端对比文件\");\n                GetRemoteABCompareFileInfo(remoteInfo, remoteABInfo);\n                updateInfoCallBack(\"解析远端对比文件完成\");\n                //加载本地资源对比文件\n                GetLocalABCompareFileInfo((isOver) =\u003e\n                {\n                    if (isOver)\n                    {\n                        updateInfoCallBack(\"解析对比文件完成\");\n                        //TODO.. 对比它们，进行AB包下载\n                    }\n                    else\n                        overCallBack(false);\n                });\n            }\n            else\n            {\n                overCallBack(false);\n            }\n        });\n    }\n\n    public async void DownLoadABCompareFile(UnityAction\u003cbool\u003e overCallBack)\n    {\n        //从资源服务器下载资源对比文件\n        bool isOver = false;\n        int reDownloadMaxNum = 5;\n        string path = Application.persistentDataPath + \"/ABCompareInfo_Temp.txt\";\n        while (!isOver \u0026\u0026 reDownloadMaxNum \u003e 0)\n        {\n            await Task.Run(() =\u003e\n            {\n                isOver = DownLoadFile(\"ABCompareInfo.txt\", path);\n            });\n            --reDownloadMaxNum;\n        }\n        overCallBack?.Invoke(isOver);\n    }\n\n    // 获取下载下来的AB包中的消息\n    public void GetRemoteABCompareFileInfo(string info, Dictionary\u003cstring, ABInfo\u003e abInfo)\n    {\n        //不再读取文件，直接让外部处理好了传进来\n        //string info = File.ReadAllText(Application.persistentDataPath + \"/ABCompareInfo_Temp.txt\");\n        //通过分隔符把不同的AB包消息分割开来\n        string[] strs = info.Split('|');\n        string[] infos;\n        for (int i = 0; i \u003c strs.Length; i++)\n        {\n            //通过空格将AB包不同的消息分割开来，实例化AB包消息类对象并加入到字典记录下来\n            infos = strs[i].Split(' ');\n            abInfo.Add(infos[0], new ABInfo(infos[0], infos[1], infos[2]));\n        }\n    }\n\n    // 本地AB包对比文件加载\n    public void GetLocalABCompareFileInfo(UnityAction\u003cbool\u003e overCallBack)\n    {\n        //如果可读可写文件夹内存在对比文件，说明之前我们已经下载过了\n        if (File.Exists(Application.persistentDataPath + \"/ABCompareInfo.txt\"))\n        {\n            StartCoroutine(GetLocalABCompareFileInfo(Application.persistentDataPath + \"/ABCompareInfo.txt\", overCallBack));\n        }\n        //当可读可写文件夹内不存在对比文件时，才来加载默认的可读可写文件（第一次进游戏才会发生）\n        else if (File.Exists(Application.streamingAssetsPath + \"/ABCompareInfo.txt\"))\n        {\n            StartCoroutine(GetLocalABCompareFileInfo(Application.streamingAssetsPath + \"/ABCompareInfo.txt\", overCallBack));\n        }\n        //如果两个都不进，证明第一次并且无默认资源\n        else\n            overCallBack(false);\n    }\n\n    //本地AB包加载并解析\n    private IEnumerator GetLocalABCompareFileInfo(string filePath, UnityAction\u003cbool\u003e overCallBack)\n    {\n        UnityWebRequest request = UnityWebRequest.Get(filePath);\n        yield return request.SendWebRequest();\n        //获取文件成功，解析本地的资源解析\n        if (request.result == UnityWebRequest.Result.Success)\n        {\n            GetRemoteABCompareFileInfo(request.downloadHandler.text, localABInfo);\n            overCallBack(true);\n        }\n        else\n            overCallBack(false);\n    }\n\n    public async void DownLoadABFile(UnityAction\u003cbool\u003e overCallBack, UnityAction\u003cint, int\u003e updatePro)\n    {\n\t\t//TODO.. 待修改\n\t}\n\n    public bool DownLoadFile(string fileName, string localPath)\n    {\n        try\n        {\n            //创建一个FTP连接 用于下载\n            FtpWebRequest request = FtpWebRequest.Create(new Uri(\"ftp://192.168.1.105/AB/PC/\" + fileName)) as FtpWebRequest;\n            //设置通信凭证 这样才能下载（如果有匿名账号，可以不设置凭证，但是实际开发中建议不要设置匿名账号）\n            NetworkCredential credential = new NetworkCredential(\"MrTang\", \"MrTang123\");\n            request.Credentials = credential;\n            //其他设置：代理设置为null，请求完毕后关闭控制连接，操作命令设置为下载，指定传输二进制类型数据\n            request.Proxy = null;\n            request.KeepAlive = false;\n            request.Method = WebRequestMethods.Ftp.DownloadFile;\n            request.UseBinary = true;\n            FtpWebResponse response = request.GetResponse() as FtpWebResponse;\n            Stream downLoadStream = response.GetResponseStream();\n            using (FileStream file = File.Create(localPath))\n            {\n                byte[] bytes = new byte[2048];\n                int contentLength = downLoadStream.Read(bytes, 0, bytes.Length);\n                while (contentLength \u003e 0)\n                {\n                    file.Write(bytes, 0, contentLength);\n                    contentLength = downLoadStream.Read(bytes, 0, bytes.Length);\n                }\n                file.Close();\n                downLoadStream.Close();\n            }\n            return true;\n        }\n        catch (Exception e)\n        {\n            Debug.Log($\"{fileName}下载失败：{e.Message}\");\n            return false;\n        }\n    }\n\n    //AB包消息类\n    public class ABInfo\n    {\n        public string name;     //AB包名字\n        public long size;       //AB包大小\n        public string md5;      //AB包MD5码\n\n        public ABInfo(string name, string size, string md5)\n        {\n            this.name = name;\n            this.size = long.Parse(size);\n            this.md5 = md5;\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240324152426-7r40th0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240324152426-7r40th0",
+				"updated": "20240324152431"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "资源更新删除"
+				}
+			]
+		},
+		{
+			"ID": "20240324164854-kd0y2lp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240324164854-kd0y2lp",
+				"updated": "20240324165150"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "目标：在获取了远端和本地资源对比消息后，我们需要去对比，检查哪些AB包是需要下载与更新的，哪些AB包是需要移除的（不移除默认资源）"
+				}
+			]
+		},
+		{
+			"ID": "20240324165151-hdin7zz",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240324165151-hdin7zz",
+				"updated": "20240324171203"
+			},
+			"Children": [
+				{
+					"ID": "20240324165648-od8840z",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240324165648-od8840z"
+					},
+					"Children": [
+						{
+							"ID": "20240324165648-x0y8p57",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240324165648-x0y8p57",
+								"updated": "20240324170944"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ABUpdateManager"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CheckUpdate"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法内获取本地资源对比文件回调函数（后半段）"
+								}
+							]
+						},
+						{
+							"ID": "20240324165651-zkyo270",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240324165651-zkyo270"
+							},
+							"Children": [
+								{
+									"ID": "20240324165242-oi7q9fq",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240324165242-oi7q9fq",
+										"updated": "20240324165242"
+									},
+									"Children": [
+										{
+											"ID": "20240324165242-cge0dyh",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324165242-cge0dyh",
+												"updated": "20240324165643"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "在完成了"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref",
+													"TextMarkBlockRefID": "20240322222453-h9yspot",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "远端和本地资源对比消息的获取"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "后，调用执行输出状态的回调函数，输出"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "开始对比"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324165747-gajo43m",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240324165747-gajo43m"
+									},
+									"Children": [
+										{
+											"ID": "20240324165747-4mxrm3z",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324165747-4mxrm3z",
+												"updated": "20240324165919"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "遍历远端资源对比消息字典的所有的键，也就是远端AB包的文件名"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324165820-vrub8p9",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20240324165820-vrub8p9"
+									},
+									"Children": [
+										{
+											"ID": "20240324165820-j4b32p0",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324165820-j4b32p0",
+												"updated": "20240324165944"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果本地资源对比消息字典不存在远端某个AB包文件名，说明需要下载，将该AB包文件名添加到待下载列表内"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324165944-1vjuvuy",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NC4=",
+										"Num": 4
+									},
+									"Properties": {
+										"id": "20240324165944-1vjuvuy"
+									},
+									"Children": [
+										{
+											"ID": "20240324165944-oq4dqjm",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324165944-oq4dqjm",
+												"updated": "20240324170132"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果本地资源对比消息字典存在远端某个AB包文件名，则将其从本地资源对比消息字典移除出去，并对比远端与本地的两个文件的MD5码"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324170109-yu2oern",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NS4=",
+										"Num": 5
+									},
+									"Properties": {
+										"id": "20240324170109-yu2oern"
+									},
+									"Children": [
+										{
+											"ID": "20240324170109-6iwlixh",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324170109-6iwlixh",
+												"updated": "20240324170211"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果本地资源的MD5码与远端资源的MD5码对不上，说明需要更新，将该AB包文件名添加到待下载列表内"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324170211-p9ii4os",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Ni4=",
+										"Num": 6
+									},
+									"Properties": {
+										"id": "20240324170211-p9ii4os"
+									},
+									"Children": [
+										{
+											"ID": "20240324170211-31gvofk",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324170211-31gvofk",
+												"updated": "20240324170302"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "对比完成后，调用执行输出状态的回调函数，输出"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "对比完成"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，然后输出"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "删除无用的AB包文件"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324170303-wekh537",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Ny4=",
+										"Num": 7
+									},
+									"Properties": {
+										"id": "20240324170303-wekh537"
+									},
+									"Children": [
+										{
+											"ID": "20240324170303-huv70xx",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324170303-huv70xx",
+												"updated": "20240324170435"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "在遍历完了远端资源对比消息字典后，在本地资源对比消息字典中未被移除的消息就是需要移除的AB包消息，将对应的AB包删除掉"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324170435-8b1carr",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "OC4=",
+										"Num": 8
+									},
+									"Properties": {
+										"id": "20240324170435-8b1carr"
+									},
+									"Children": [
+										{
+											"ID": "20240324170435-gcebiz4",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324170435-gcebiz4",
+												"updated": "20240324170630"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "执行输出状态的回调函数，输出"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "下载与更新AB包文件"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，执行"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "DownloadABFile"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​方法，传入下载完毕后的回调函数，以及外部传入的输出状态的回调函数"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240324170632-udtj073",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240324170632-udtj073"
+					},
+					"Children": [
+						{
+							"ID": "20240324170700-kebpw59",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240324170700-kebpw59",
+								"updated": "20240324170700"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ABUpdateManager"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownLoadABFile"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法内"
+								}
+							]
+						},
+						{
+							"ID": "20240324170700-5fduoll",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240324170700-5fduoll",
+								"updated": "20240324170700"
+							},
+							"Children": [
+								{
+									"ID": "20240324170700-ofx0t9f",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240324170700-ofx0t9f",
+										"updated": "20240324170700"
+									},
+									"Children": [
+										{
+											"ID": "20240324170700-19xcx8i",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324170700-19xcx8i",
+												"updated": "20240324170700"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "声明变量：下载路径，本轮下载是否成功，下载完毕的AB包文件名列表，最多重试下载次数，下载成功次数，本次下载一共要下载的AB包数量"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324170700-rmswxww",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240324170700-rmswxww",
+										"updated": "20240324170700"
+									},
+									"Children": [
+										{
+											"ID": "20240324170700-zaeabc8",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324170700-zaeabc8",
+												"updated": "20240324170700"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "进入循环下载流程，如果待下载列表内还有内容，且还有重试下载次数，就执行下载流程"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324170700-3of899e",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20240324170700-3of899e",
+										"updated": "20240324170700"
+									},
+									"Children": [
+										{
+											"ID": "20240324170700-v1xvc7t",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324170700-v1xvc7t",
+												"updated": "20240324170700"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "遍历待下载的列表"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "downLoadList"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，根据AB包名字下载文件名"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324170700-3ubp8yk",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NC4=",
+										"Num": 4
+									},
+									"Properties": {
+										"id": "20240324170700-3ubp8yk",
+										"updated": "20240324170700"
+									},
+									"Children": [
+										{
+											"ID": "20240324170700-p5oovo6",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324170700-p5oovo6",
+												"updated": "20240324170700"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "先将本轮下载是否成功赋值为"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "false"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，创建"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Task"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​任务调用下载方法"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "DownLoadFile"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，传入文件名和下载路径"
+												}
+											]
+										},
+										{
+											"ID": "20240324170700-g885tbz",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240324170700-g885tbz",
+												"updated": "20240324170700"
+											},
+											"Children": [
+												{
+													"ID": "20240324170700-lk0v7cl",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"fold": "1",
+														"id": "20240324170700-lk0v7cl",
+														"updated": "20240324170700"
+													},
+													"Children": [
+														{
+															"ID": "20240324170700-6gmiife",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240324170700-6gmiife",
+																"updated": "20240324170700"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "ABUpdateManager"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​的"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "DownLoadFile"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​内"
+																}
+															]
+														},
+														{
+															"ID": "20240324170700-i6e6yc5",
+															"Type": "NodeList",
+															"ListData": {
+																"Typ": 1
+															},
+															"Properties": {
+																"id": "20240324170700-i6e6yc5",
+																"updated": "20240324170700"
+															},
+															"Children": [
+																{
+																	"ID": "20240324170700-qr6ej8n",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "MS4=",
+																		"Num": 1
+																	},
+																	"Properties": {
+																		"id": "20240324170700-qr6ej8n",
+																		"updated": "20240324170700"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324170700-nnjesav",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324170700-nnjesav",
+																				"updated": "20240324170700"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "尝试执行下载流程，如果下载报错输出下载失败并返回"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "false"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240324170700-27dn4fe",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "Mi4=",
+																		"Num": 2
+																	},
+																	"Properties": {
+																		"id": "20240324170700-27dn4fe",
+																		"updated": "20240324170700"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324170700-kdq0ff7",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324170700-kdq0ff7",
+																				"updated": "20240324170700"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "传入的文件名和服务器地址拼接为下载地址，创建FTP连接请求"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240324170700-8bpmqhr",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "My4=",
+																		"Num": 3
+																	},
+																	"Properties": {
+																		"id": "20240324170700-8bpmqhr",
+																		"updated": "20240324170700"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324170700-j3mo07m",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324170700-j3mo07m",
+																				"updated": "20240324170700"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "设置FTP连接请求通信凭证，代理设置为"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "null"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​，请求完毕后关闭控制连接，操作命令设置为下载，指定传输二进制类型数据"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240324170700-iwosqw5",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "NC4=",
+																		"Num": 4
+																	},
+																	"Properties": {
+																		"id": "20240324170700-iwosqw5",
+																		"updated": "20240324170700"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324170700-pnp7gnx",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324170700-pnp7gnx",
+																				"updated": "20240324170700"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "通过FTP连接请求获取连接响应，通过连接响应获取下载流，创建本地文件流，从下载流下载数据到本地流，"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240324170700-190ogvy",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "NS4=",
+																		"Num": 5
+																	},
+																	"Properties": {
+																		"id": "20240324170700-190ogvy",
+																		"updated": "20240324170700"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324170700-k2b5v9p",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324170700-k2b5v9p",
+																				"updated": "20240324170700"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "下载完毕，关闭流，返回"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "ture"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​，根据其返回值是否为"
+																				},
+																				{
+																					"Type": "NodeTextMark",
+																					"TextMarkType": "code",
+																					"TextMarkTextContent": "true"
+																				},
+																				{
+																					"Type": "NodeText",
+																					"Data": "​决定是否下载完毕"
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324170700-rzabgzo",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NS4=",
+										"Num": 5
+									},
+									"Properties": {
+										"id": "20240324170700-rzabgzo",
+										"updated": "20240324170700"
+									},
+									"Children": [
+										{
+											"ID": "20240324170700-iwxvukv",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324170700-iwxvukv",
+												"updated": "20240324170828"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "等待执行"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "DownLoadFile"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​结束，检查下载是否成功，如果成功就执行外部传入的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Main"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​脚本的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "start"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​方法传入的输出状态的回调函数"
+												}
+											]
+										},
+										{
+											"ID": "20240324170700-06nxaz0",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240324170700-06nxaz0",
+												"updated": "20240324170700"
+											},
+											"Children": [
+												{
+													"ID": "20240324170700-q9cxj4m",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240324170700-q9cxj4m",
+														"updated": "20240324170700"
+													},
+													"Children": [
+														{
+															"ID": "20240324170700-piua5cj",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240324170700-piua5cj",
+																"updated": "20240324170835"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Main"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​脚本的"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "start"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​方法内的输出状态的回调函数"
+																}
+															]
+														},
+														{
+															"ID": "20240324170700-jgmnr3m",
+															"Type": "NodeList",
+															"ListData": {
+																"Typ": 1
+															},
+															"Properties": {
+																"id": "20240324170700-jgmnr3m",
+																"updated": "20240324170700"
+															},
+															"Children": [
+																{
+																	"ID": "20240324170700-wn09gf8",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "MS4=",
+																		"Num": 1
+																	},
+																	"Properties": {
+																		"id": "20240324170700-wn09gf8",
+																		"updated": "20240324170700"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240324170700-201hab4",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240324170700-201hab4",
+																				"updated": "20240324170915"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "输出传入的内容，在这里就是输出下载进度"
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324170700-xgjscwf",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Ni4=",
+										"Num": 6
+									},
+									"Properties": {
+										"id": "20240324170700-xgjscwf",
+										"updated": "20240324170700"
+									},
+									"Children": [
+										{
+											"ID": "20240324170700-by8a3rh",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324170700-by8a3rh",
+												"updated": "20240324170700"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "将下载好的AB包文件名添加到下载完毕的AB包文件名列表，回到第5步，开始下一个文件的下载流程"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324170700-dgagnjj",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Ny4=",
+										"Num": 7
+									},
+									"Properties": {
+										"id": "20240324170700-dgagnjj",
+										"updated": "20240324170700"
+									},
+									"Children": [
+										{
+											"ID": "20240324170700-oohrnm4",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324170700-oohrnm4",
+												"updated": "20240324170700"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "等待所有AB包文件都执行过一遍下载流程了，遍历下载完毕的AB包文件名列表，将下载完毕的AB包从待下载列表"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "downLoadList"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​移除出去"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324170700-tx9bdoo",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "OC4=",
+										"Num": 8
+									},
+									"Properties": {
+										"id": "20240324170700-tx9bdoo",
+										"updated": "20240324170700"
+									},
+									"Children": [
+										{
+											"ID": "20240324170700-gx7tw0y",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324170700-gx7tw0y",
+												"updated": "20240324170700"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "最多重试下载次数减一，如果待下载列表已被清空，或者重试下载次数归0，则跳出下载循环"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324170700-4wgoo3n",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "OS4=",
+										"Num": 9
+									},
+									"Properties": {
+										"id": "20240324170700-4wgoo3n",
+										"updated": "20240324170700"
+									},
+									"Children": [
+										{
+											"ID": "20240324170700-d2z8g46",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324170700-d2z8g46",
+												"updated": "20240324170700"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "执行传入的下载好所有AB包要执行的回调函数，将待下载列表是否已被清空传入进去"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240324170900-gbhjuls",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240324170900-gbhjuls",
+						"updated": "20240324171203"
+					},
+					"Children": [
+						{
+							"ID": "20240324170900-1zy1yhz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240324170900-1zy1yhz",
+								"updated": "20240324171026"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ABUpdateManager"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CheckUpdate"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法内下载AB包完毕的回调函数内"
+								}
+							]
+						},
+						{
+							"ID": "20240324171203-vr477ux",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240324171203-vr477ux"
+							},
+							"Children": [
+								{
+									"ID": "20240324171203-tlu8afv",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240324171203-tlu8afv"
+									},
+									"Children": [
+										{
+											"ID": "20240324171203-q2e7668",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324171203-q2e7668",
+												"updated": "20240324171242"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果下载成功，执行输出状态的回调函数，输出"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "更新本地AB包对比文件为最新"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324171243-y122sc5",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240324171243-y122sc5"
+									},
+									"Children": [
+										{
+											"ID": "20240324171243-678wfqr",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324171243-678wfqr",
+												"updated": "20240324171342"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "将之前下载的远端资源对比文件字符串写入到本地资源对比文件内，使其成为最新的本地资源对比文件"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240324170935-3vbb7ej",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"fold": "1",
+						"id": "20240324170935-3vbb7ej"
+					},
+					"Children": [
+						{
+							"ID": "20240324171158-4afsk24",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240324171158-4afsk24",
+								"updated": "20240324171158"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Main"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "start"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法内"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CheckUpdate"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​执行完毕回调函数"
+								}
+							]
+						},
+						{
+							"ID": "20240324171158-awmnrfu",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240324171158-awmnrfu",
+								"updated": "20240324171158"
+							},
+							"Children": [
+								{
+									"ID": "20240324171158-pizbxv6",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240324171158-pizbxv6",
+										"updated": "20240324171158"
+									},
+									"Children": [
+										{
+											"ID": "20240324171158-vc2s5aq",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324171158-vc2s5aq",
+												"updated": "20240324171158"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果下载成功，输出检测更新结束"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240324171158-74c4onu",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240324171158-74c4onu",
+										"updated": "20240324171158"
+									},
+									"Children": [
+										{
+											"ID": "20240324171158-zfiieuv",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240324171158-zfiieuv",
+												"updated": "20240324171158"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果下载失败，输出网络出错"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240324152612-1vgcwbg",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240324152612-1vgcwbg",
+				"style": "line-height: 22px;",
+				"updated": "20240324152431"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class Main : MonoBehaviour\n{\n    void Start()\n    {\n        ABUpdateManager.Instance.CheckUpdate((isOver) =\u003e\n        {\n            if (isOver)\n            {\n                print(\"检测更新结束\");\n            }\n            else\n            {\n                print(\"网络出错\");\n            }\n        }, (str) =\u003e\n        {\n            //以后可以在这里处理更新加载界面上的显示信息相关的逻辑\n            print(str);\n        });\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240324164432-md19vaz",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240324164432-md19vaz",
+				"style": "line-height: 22px;",
+				"updated": "20240324152431"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System;\nusing System.Collections;\nusing System.Collections.Generic;\nusing System.IO;\nusing System.Net;\nusing System.Threading.Tasks;\nusing UnityEngine;\nusing UnityEngine.Events;\nusing UnityEngine.Networking;\n\npublic class ABUpdateManager : MonoBehaviour\n{\n    private static ABUpdateManager instance;\n    public static ABUpdateManager Instance\n    {\n        get\n        {\n            if (instance == null)\n            {\n                GameObject obj = new GameObject(\"ABUpdateManager\");\n                instance = obj.AddComponent\u003cABUpdateManager\u003e();\n            }\n            return instance;\n        }\n    }\n\n    //用于存储远端AB包消息的字典，之后和本地进行对比即可完成更新下载相关逻辑\n    private Dictionary\u003cstring, ABInfo\u003e remoteABInfo = new Dictionary\u003cstring, ABInfo\u003e();\n    //用于存储本地AB包消息的字典，之后和远端消息进行对比\n    private Dictionary\u003cstring, ABInfo\u003e localABInfo = new Dictionary\u003cstring, ABInfo\u003e();\n    //这个是待下载的AB包的列表文件，存储AB包的名字\n    private List\u003cstring\u003e downLoadList = new List\u003cstring\u003e();\n\n    private void OnDestroy()\n    {\n        instance = null;\n    }\n\n    /// \u003csummary\u003e\n    /// 用于检查资源热更新的函数\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"overCallBack\"\u003e\u003c/param\u003e\n    /// \u003cparam name=\"updateInfoCallBack\"\u003e\u003c/param\u003e\n    public void CheckUpdate(UnityAction\u003cbool\u003e overCallBack, UnityAction\u003cstring\u003e updateInfoCallBack)\n    {\n        //为了避免上一次报错残留消息，所以我们清空它\n        remoteABInfo.Clear();\n        localABInfo.Clear();\n        downLoadList.Clear();\n\n        //加载远端资源对比文件\n        DownLoadABCompareFile((isOver) =\u003e\n        {\n            updateInfoCallBack(\"开始更新资源\");\n            if (isOver)\n            {\n                updateInfoCallBack(\"对比文件下载结束\");\n                string remoteInfo = File.ReadAllText(Application.persistentDataPath + \"/ABCompareInfo_Temp.txt\");\n                updateInfoCallBack(\"解析远端对比文件\");\n                GetRemoteABCompareFileInfo(remoteInfo, remoteABInfo);\n                updateInfoCallBack(\"解析远端对比文件完成\");\n                //加载本地资源对比文件\n                GetLocalABCompareFileInfo((isOver) =\u003e\n                {\n                    if (isOver)\n                    {\n                        updateInfoCallBack(\"解析对比文件完成\");\n                        //对比它们，进行AB包下载\n                        updateInfoCallBack(\"开始对比\");\n                        foreach (string abName in remoteABInfo.Keys)\n                        {\n                            //判断，哪些资源是新的，然后记录，之后用于下载\n                            if (!localABInfo.ContainsKey(abName))\n                                //由于本地对比消息中没有叫这个名字的AB包，所以我们下载记录它\n                                downLoadList.Add(abName);\n                            else\n                            {\n                                //判断，哪些资源需要更新的，然后记录，之后用于下载\n                                //如果本地MD5与远端MD5对不上，说明需要更新\n                                if (localABInfo[abName].md5 != remoteABInfo[abName].md5)\n                                    downLoadList.Add(abName);\n                                //判断，哪些资源需要删除, 每次检测完一个名字的AB包，就移除本地的信息，\n                                //最后循环完毕，本地剩下的消息就是远端不再存在的内容，我们就可以剩余消息删除对应的AB包\n                                localABInfo.Remove(abName);\n                            }\n                        }\n                        updateInfoCallBack(\"对比完成\");\n                        updateInfoCallBack(\"删除无用的AB包文件\");\n                        //上面对比完了，那么我们先删除没用的内容，再下载AB包\n                        foreach (string abName in localABInfo.Keys)\n                        {\n                            if (File.Exists(Application.persistentDataPath + \"/\" + abName))\n                                File.Delete(Application.persistentDataPath + \"/\" + abName);\n                        }\n                        updateInfoCallBack(\"下载和更新AB包文件\");\n                        DownLoadABFile((isOver) =\u003e\n                        {\n                            if (isOver)\n                            {\n                                //在下载完所有的AB包文件后，把本地的AB包对比文件，更新为最新\n                                updateInfoCallBack(\"更新本地AB包对比文件为最新\");\n                                File.WriteAllText(Application.persistentDataPath + \"/ABCompareInfo.txt\", remoteInfo);\n                            }\n                            overCallBack(isOver);\n                        }, updateInfoCallBack);\n                    }\n                    else\n                        overCallBack(false);\n                });\n            }\n            else\n            {\n                overCallBack(false);\n            }\n        });\n    }\n\n    public async void DownLoadABCompareFile(UnityAction\u003cbool\u003e overCallBack)\n    {\n        //从资源服务器下载资源对比文件\n        bool isOver = false;\n        int reDownloadMaxNum = 5;\n        string path = Application.persistentDataPath + \"/ABCompareInfo_Temp.txt\";\n        while (!isOver \u0026\u0026 reDownloadMaxNum \u003e 0)\n        {\n            await Task.Run(() =\u003e\n            {\n                isOver = DownLoadFile(\"ABCompareInfo.txt\", path);\n            });\n            --reDownloadMaxNum;\n        }\n        overCallBack?.Invoke(isOver);\n    }\n\n    /// \u003csummary\u003e\n    /// 获取下载下来的AB包中的消息\n    /// \u003c/summary\u003e\n    public void GetRemoteABCompareFileInfo(string info, Dictionary\u003cstring, ABInfo\u003e abInfo)\n    {\n        //不再读取文件，直接让外部处理好了传进来\n        //string info = File.ReadAllText(Application.persistentDataPath + \"/ABCompareInfo_Temp.txt\");\n        //通过分隔符把不同的AB包消息分割开来\n        string[] strs = info.Split('|');\n        string[] infos;\n        for (int i = 0; i \u003c strs.Length; i++)\n        {\n            //通过空格将AB包不同的消息分割开来，实例化AB包消息类对象并加入到字典记录下来\n            infos = strs[i].Split(' ');\n            abInfo.Add(infos[0], new ABInfo(infos[0], infos[1], infos[2]));\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 本地AB包对比文件加载\n    /// \u003c/summary\u003e\n    public void GetLocalABCompareFileInfo(UnityAction\u003cbool\u003e overCallBack)\n    {\n        //如果可读可写文件夹内存在对比文件，说明之前我们已经下载过了\n        if (File.Exists(Application.persistentDataPath + \"/ABCompareInfo.txt\"))\n        {\n            StartCoroutine(GetLocalABCompareFileInfo(Application.persistentDataPath + \"/ABCompareInfo.txt\", overCallBack));\n        }\n        //当可读可写文件夹内不存在对比文件时，才来加载默认的可读可写文件（第一次进游戏才会发生）\n        else if (File.Exists(Application.streamingAssetsPath + \"/ABCompareInfo.txt\"))\n        {\n            StartCoroutine(GetLocalABCompareFileInfo(Application.streamingAssetsPath + \"/ABCompareInfo.txt\", overCallBack));\n        }\n        //如果两个都不进，证明第一次并且无默认资源\n        else\n            overCallBack(false);\n    }\n\n    //本地AB包加载并解析\n    private IEnumerator GetLocalABCompareFileInfo(string filePath, UnityAction\u003cbool\u003e overCallBack)\n    {\n        UnityWebRequest request = UnityWebRequest.Get(filePath);\n        yield return request.SendWebRequest();\n        //获取文件成功，解析本地的资源解析\n        if (request.result == UnityWebRequest.Result.Success)\n        {\n            GetRemoteABCompareFileInfo(request.downloadHandler.text, localABInfo);\n            overCallBack(true);\n        }\n        else\n            overCallBack(false);\n    }\n\n    public async void DownLoadABFile(UnityAction\u003cbool\u003e overCallBack, UnityAction\u003cstring\u003e updatePro)\n    {\n        //我们不再由DownLoadABFile来执行添加待下载列表操作，而是转为外部执行，这里只根据待下载列表下载内容\n        ////遍历字典的键，根据AB名，下载AB包到本地\n        //foreach (string str in remoteABInfo.Keys)\n        //{\n        //    //直接放入，待下载列表内\n        //    downLoadList.Add(str);\n        //}\n        //本地存储的路径，供下载线程读取\n        string localPath = Application.persistentDataPath + \"/\";\n        //本轮下载是否成功\n        bool isOver = false;\n        //临时列表，用来记录哪些内容下载完了，在遍历完待下载列表后根据该列表移除已下载文件名\n        List\u003cstring\u003e tempList = new List\u003cstring\u003e();\n        int redownLoadMaxNum = 5;                       //最多重试下载次数\n        int downLoadOverNum = 0;                        //下载成功次数\n        int downLoadMaxNum = downLoadList.Count;        //本次下载一共要下载AB包的数量\n        //如果待下载列表内还有内容，且还有重试下载次数\n        while (downLoadList.Count \u003e 0 \u0026\u0026 redownLoadMaxNum \u003e 0)\n        {\n            //遍历待下载列表内的内容\n            for (int i = 0; i \u003c downLoadList.Count; i++)\n            {\n                isOver = false;\n                //等待下载完毕\n                await Task.Run(() =\u003e\n                {\n                    isOver = DownLoadFile(downLoadList[i], localPath + downLoadList[i]);\n                });\n                //检查下载是否成功\n                if (isOver)\n                {\n                    updatePro(++downLoadOverNum + \"/\" + downLoadMaxNum);\n                    tempList.Add(downLoadList[i]);      //下载成功就记录到临时列表内\n                }\n            }\n            //待下载列表内下载逻辑执行一轮后，把下载成功的文件名从待下载列表中移除出去，如果待下载列表清空，则下载全部成功，跳出循环\n            for (int i = 0; i \u003c tempList.Count; i++)\n                downLoadList.Remove(tempList[i]);\n            --redownLoadMaxNum;\n        }\n        //所有内容下载完了，告诉外部下载完成，如果待下载列表内还有内容，则说明下载内容缺失，下载失败！\n        overCallBack?.Invoke(downLoadList.Count == 0);\n    }\n\n    public bool DownLoadFile(string fileName, string localPath)\n    {\n        try\n        {\n            //创建一个FTP连接 用于下载\n            FtpWebRequest request = FtpWebRequest.Create(new Uri(\"ftp://192.168.1.101/AB/PC/\" + fileName)) as FtpWebRequest;\n            //设置通信凭证 这样才能下载（如果有匿名账号，可以不设置凭证，但是实际开发中建议不要设置匿名账号）\n            NetworkCredential credential = new NetworkCredential(\"MrTang\", \"MrTang123\");\n            request.Credentials = credential;\n            //其他设置：代理设置为null，请求完毕后关闭控制连接，操作命令设置为下载，指定传输二进制类型数据\n            request.Proxy = null;\n            request.KeepAlive = false;\n            request.Method = WebRequestMethods.Ftp.DownloadFile;\n            request.UseBinary = true;\n            FtpWebResponse response = request.GetResponse() as FtpWebResponse;\n            Stream downLoadStream = response.GetResponseStream();\n            using (FileStream file = File.Create(localPath))\n            {\n                byte[] bytes = new byte[2048];\n                int contentLength = downLoadStream.Read(bytes, 0, bytes.Length);\n                while (contentLength \u003e 0)\n                {\n                    file.Write(bytes, 0, contentLength);\n                    contentLength = downLoadStream.Read(bytes, 0, bytes.Length);\n                }\n                file.Close();\n                downLoadStream.Close();\n            }\n            return true;\n        }\n        catch (Exception e)\n        {\n            Debug.Log($\"{fileName}下载失败：{e.Message}\");\n            return false;\n        }\n    }\n\n    //AB包消息类\n    public class ABInfo\n    {\n        public string name;     //AB包名字\n        public long size;       //AB包大小\n        public string md5;      //AB包MD5码\n\n        public ABInfo(string name, string size, string md5)\n        {\n            this.name = name;\n            this.size = long.Parse(size);\n            this.md5 = md5;\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

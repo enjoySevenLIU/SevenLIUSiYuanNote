@@ -1,0 +1,1458 @@
+{
+	"ID": "20240425215106-5gcaju3",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240425215106-5gcaju3",
+		"title": "UH4L7——委托调用",
+		"type": "doc",
+		"updated": "20240425224905"
+	},
+	"Children": [
+		{
+			"ID": "20240425224627-uz1y5s1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240425224627-uz1y5s1",
+				"updated": "20240425224632"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240425224633-zpj6udx",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240425224633-zpj6udx",
+				"style": "line-height: 22px;",
+				"updated": "20240425224905"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "appDomain.DelegateManager.RegisterFunctionDelegate\u003c\u003e()\t\t//注册一种有参数的Action\u003c\u003e委托，以便于IL2CPP打包裁剪后还可以调用\nappDomain.DelegateManager.RegisterMethodDelegate\u003c\u003e()\t\t//注册一种Func\u003c\u003e委托，以便于IL2CPP打包裁剪后还可以调用\nappDomain.DelegateManager.RegisterDelegateConvertor\u003c\u003e()\t\t//将自定义委托转换为等效的Action\u003c\u003e委托或者Func\u003c\u003e委托，这样才能跨域调用自定义委托\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240425224321-67502yi",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240425224321-67502yi",
+				"updated": "20240425224325"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "委托调用"
+				}
+			]
+		},
+		{
+			"ID": "20240425224326-78kz7p5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240425224326-78kz7p5",
+				"updated": "20240425224423"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在委托的跨域调用中，如果出现Unity中自定义委托跨域关联ILRuntime中函数，需要进行："
+				}
+			]
+		},
+		{
+			"ID": "20240425224400-ijiefeg",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240425224400-ijiefeg",
+				"updated": "20240425224408"
+			},
+			"Children": [
+				{
+					"ID": "20240425224400-nnrvken",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240425224400-nnrvken",
+						"updated": "20240425224400"
+					},
+					"Children": [
+						{
+							"ID": "20240425224400-evsxm3i",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425224400-evsxm3i",
+								"updated": "20240425224400"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注册委托(主要目的，避免IL2CPP打包裁剪报错)"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240425224400-09uhvoa",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240425224400-09uhvoa",
+						"updated": "20240425224408"
+					},
+					"Children": [
+						{
+							"ID": "20240425224400-s5hmdo0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425224400-s5hmdo0",
+								"updated": "20240425224408"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注册委托转换器（主要目的，ILRuntime内部所有的委托都是以"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Action"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​或"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Func"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​来存储的）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240425224336-k2fedai",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240425224336-k2fedai",
+				"updated": "20240425224337"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意："
+				}
+			]
+		},
+		{
+			"ID": "20240425224337-u4jenz6",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240425224337-u4jenz6",
+				"updated": "20240425224357"
+			},
+			"Children": [
+				{
+					"ID": "20240425224337-xx0dyp8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240425224337-xx0dyp8",
+						"updated": "20240425224337"
+					},
+					"Children": [
+						{
+							"ID": "20240425224337-7v2rbkt",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425224337-7v2rbkt",
+								"updated": "20240425224337"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "委托的注册相关流程必须在主工程中完成"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240425224337-deworow",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240425224337-deworow",
+						"updated": "20240425224357"
+					},
+					"Children": [
+						{
+							"ID": "20240425224337-h5f4607",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425224337-h5f4607",
+								"updated": "20240425224357"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "为了避免添加自定义委托转换器\n我们在使用委托时 尽量使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "System"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​命名空间中的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Action"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 和 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Func"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，这样就不需要进行注册委托转换器了，只需要注册即可"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240425215106-wi4poe4",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240425215106-wi4poe4",
+				"updated": "20240425224325"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在Unity中自定义委托后使用"
+				}
+			]
+		},
+		{
+			"ID": "20240425215159-9upb9rh",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240425215159-9upb9rh",
+				"updated": "20240425224325"
+			},
+			"Children": [
+				{
+					"ID": "20240425215216-ndt1mz2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240425215216-ndt1mz2",
+						"updated": "20240425215216"
+					},
+					"Children": [
+						{
+							"ID": "20240425215216-eie7w41",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425215216-eie7w41",
+								"updated": "20240425215218"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "ILRuntime中委托成员 关联ILRuntime工程中函数\n"
+								}
+							]
+						},
+						{
+							"ID": "20240425215228-ky8il7l",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425215228-ky8il7l"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "直接常规使用即可，不会出现报错"
+								}
+							]
+						},
+						{
+							"ID": "20240425215956-u533qwb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425215956-u533qwb",
+								"updated": "20240425220009"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在Unity主工程内声明如下委托"
+								}
+							]
+						},
+						{
+							"ID": "20240425220009-7t7rmqw",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240425220009-7t7rmqw",
+								"style": "line-height: 22px;",
+								"updated": "20240425220016"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public delegate void MyUnityDel1();\npublic delegate int MyUnityDel2(int i, int j);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240425220017-0yat5yg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425220017-0yat5yg",
+								"updated": "20240425220033"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在ILRuntime热更新工程内可以直接使用相关内容"
+								}
+							]
+						},
+						{
+							"ID": "20240425220034-8mbl05l",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240425220034-8mbl05l",
+								"style": "line-height: 22px;",
+								"updated": "20240425220111"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class ILRuntimeMain\n{\n    /// \u003csummary\u003e\n    /// 把逻辑处理权交给热更新工程，这是一个启动函数\n    /// \u003c/summary\u003e\n    public static void Main()\n    {\n        MyUnityDel1 fun = Fun1;\n        fun();\n        MyUnityDel2 fun2 = Fun2;\n        int result = fun2(5, 6);\n        Debug.Log(result);\n    }\n\n    public static void Fun1()\n    {\n        Debug.Log(\"IL_Fun1\");\n    }\n\n    public static int Fun2(int a, int b)\n    {\n        Debug.Log(\"IL_Fun2\");\n        return a + b;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240425220155-2k9y5ea",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425220155-2k9y5ea",
+								"updated": "20240425220158"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 388px;",
+										"style": "width: 378px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240425220158-ne3evmd.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 378px;\" parent-style=\"width: 388px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240425215216-uf5jlul",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240425215216-uf5jlul",
+						"updated": "20240425221220"
+					},
+					"Children": [
+						{
+							"ID": "20240425215216-tsjkj5a",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425215216-tsjkj5a",
+								"updated": "20240425215224"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Unity中委托成员 关联ILRuntime工程中函数\n"
+								}
+							]
+						},
+						{
+							"ID": "20240425215230-5oni8za",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425215230-5oni8za",
+								"updated": "20240425220804"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "直接关联会出现报错，这里就涉及到委托成员的跨域\n"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "相当于Unity中的委托成员中存储了ILRuntime工程中的函数。就存在了跨域调用"
+								}
+							]
+						},
+						{
+							"ID": "20240425220901-aifxlp6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425220901-aifxlp6",
+								"updated": "20240425220917"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在Unity主工程的类内声明委托成员"
+								}
+							]
+						},
+						{
+							"ID": "20240425220807-2rqq1zc",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240425220807-2rqq1zc",
+								"style": "line-height: 22px;",
+								"updated": "20240425220817"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public delegate void MyUnityDel1();\npublic delegate int MyUnityDel2(int i, int j);\n\npublic class Lesson10 : MonoBehaviour\n{\n    public MyUnityDel1 fun1;\n    public MyUnityDel2 fun2;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240425220900-fc53k89",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425220900-fc53k89",
+								"updated": "20240425221220"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "ILRuntime热更工程内向Unity主工程内的类对象的委托成员添加热更工程内声明的方法并调用"
+								}
+							]
+						},
+						{
+							"ID": "20240425221028-g3t9sin",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240425221028-g3t9sin",
+								"style": "line-height: 22px;",
+								"updated": "20240425221129"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using UnityEngine;\n\nnamespace HotFix_Project\n{\n    public class ILRuntimeMain\n    {\n        public static void Main()\n        {\n            //在Unity中声明委托成员，关联ILRuntime工程中的函数\n            Lesson10 lesson10 = Camera.main.GetComponent\u003cLesson10\u003e();   //对象挂载在了摄像机上\n            lesson10.fun1 = Fun1;\n            lesson10.fun1();\n\n            lesson10.fun2 = Fun2;\n            result = lesson10.fun2(7, 7);\n            Debug.Log(result);\n        }\n\n        public static void Fun1()\n        {\n            Debug.Log(\"IL_Fun1\");\n        }\n\n        public static int Fun2(int a, int b)\n        {\n            Debug.Log(\"IL_Fun2\");\n            return a + b;\n        }\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240425221134-vvhjiwk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425221134-vvhjiwk",
+								"updated": "20240425221149"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 546px;",
+										"style": "width: 536px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240425221149-ecmcrqi.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 536px;\" parent-style=\"width: 546px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240425215212-g0r1w85",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240425215212-g0r1w85",
+				"updated": "20240425224325"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们需要进行以下处理：可以通过报错信息中的提示，再进行初始化时进行代码的添加"
+				}
+			]
+		},
+		{
+			"ID": "20240425215236-07xalm4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240425215236-07xalm4",
+				"updated": "20240425224325"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要有两部分："
+				}
+			]
+		},
+		{
+			"ID": "20240425215239-o9ais3j",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240425215239-o9ais3j",
+				"updated": "20240425224325"
+			},
+			"Children": [
+				{
+					"ID": "20240425215239-c65st7q",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"alias": "appDomain.DelegateManager.RegisterMethodDelegate\u0026lt;\u0026gt;()",
+						"id": "20240425215239-c65st7q",
+						"name": "appDomain.DelegateManager.RegisterFunctionDelegate\u0026lt;\u0026gt;()",
+						"updated": "20240425223758"
+					},
+					"Children": [
+						{
+							"ID": "20240425215239-unawxby",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425215239-unawxby",
+								"updated": "20240425221253"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注册委托（主要目的，避免IL2CPP打包裁剪报错）"
+								}
+							]
+						},
+						{
+							"ID": "20240425222608-7a4yum3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425222608-7a4yum3",
+								"updated": "20240425222647"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对于无参无返回值的委托，由于"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Action"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​本身就会被ILRuntime注册，因此不需要去注册"
+								}
+							]
+						},
+						{
+							"ID": "20240425222648-kpb7m0f",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425222648-kpb7m0f",
+								"updated": "20240425223852"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设要跨域调用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "public delegate int MyUnityDel2(int i, int j)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 这样的委托，\n或者跨域使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Func\u0026lt;int, int, int\u0026gt;()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，就需要使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "RegisterFunctionDelegate"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​注册一个对应的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Func\u0026lt;int, int, int\u0026gt;()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240425223754-316z6qi",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425223754-316z6qi",
+								"updated": "20240425223916"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设要跨域调用有参无返回值的自定义委托，或者"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Action\u0026lt;..\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​委托，就需要使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "RegisterMethodDelegate"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​注册一个对应的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Action\u0026lt;..\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240425222605-ssg38sj",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240425222605-ssg38sj",
+								"style": "line-height: 22px;",
+								"updated": "20240425223944"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "appDomain.DelegateManager.RegisterMethodDelegate\u003cint\u003e();\t\t//假设有一个无返回值的int参数的委托\nappDomain.DelegateManager.RegisterFunctionDelegate\u003cint, int, int\u003e();\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240425215239-b8g1spk",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240425215239-b8g1spk",
+						"name": "appDomain.DelegateManager.RegisterDelegateConvertor\u0026lt;\u0026gt;()",
+						"updated": "20240425223259"
+					},
+					"Children": [
+						{
+							"ID": "20240425215239-hbegray",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425215239-hbegray",
+								"updated": "20240425222502"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注册委托转换器（主要目的，ILRuntime内部所有的委托都是以"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Action\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​或"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Func\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​来存储的）"
+								}
+							]
+						},
+						{
+							"ID": "20240425222810-j1ad36v",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425222810-j1ad36v",
+								"updated": "20240425223143"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "我们需要将委托转换为对应的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Action\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 或 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Func\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，例如："
+								}
+							]
+						},
+						{
+							"ID": "20240425222840-6htx3b6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425222840-6htx3b6",
+								"updated": "20240425223044"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设要跨域调用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "public delegate void MyUnityDel1()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 这样的委托，就需要将其转换为 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Action"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n假设要跨域调用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "public delegate int MyUnityDel2(int i, int j)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 这样的委托，就需要将其转换为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Func\u0026lt;int, int, int\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240425223045-rj0yjjn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425223045-rj0yjjn",
+								"updated": "20240425223259"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "其中，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Func\u0026lt;int, int, int\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​我们需要先注册，这样我们才能确保在IL2CPP打包后也可以调用"
+								}
+							]
+						},
+						{
+							"ID": "20240425223458-3up41b5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425223458-3up41b5",
+								"updated": "20240425223507"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "转换的格式如下："
+								}
+							]
+						},
+						{
+							"ID": "20240425222807-dsoka31",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240425222807-dsoka31",
+								"style": "line-height: 22px;",
+								"updated": "20240425223534"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//​public delegate void MyUnityDel1()​\nappDomain.DelegateManager.RegisterDelegateConvertor\u003cMyUnityDel1\u003e((action) =\u003e\n{\n    return new MyUnityDel1(() =\u003e\n    {\n        ((System.Action)action)();\n    });\n});\n\n//​public delegate int MyUnityDel2(int i, int j)​\nappDomain.DelegateManager.RegisterDelegateConvertor\u003cMyUnityDel2\u003e((func) =\u003e\n{\n    return new MyUnityDel2((i, j) =\u003e\n    {\n        return ((System.Func\u003cint, int, int\u003e)func)(i, j);\n    });\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240425224018-jl67d5p",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240425224018-jl67d5p",
+				"updated": "20240425224325"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在将dll和pdb文件以流的形式供"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "appDomain"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​读取后，在初始化"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "appDomain"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​时，根据报错信息依次添加如下代码"
+				}
+			]
+		},
+		{
+			"ID": "20240425224018-idia2r9",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240425224018-idia2r9",
+				"style": "line-height: 22px;",
+				"updated": "20240425224325"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//ILRuntime管理器内\n\n//初始化ILRuntime相关的方法\nprivate void InitILRuntime()\n{\n\t//委托转换器注册（要把自定义委托转换为Action或者Func）\n    appDomain.DelegateManager.RegisterDelegateConvertor\u003cMyUnityDel1\u003e((action) =\u003e\n    {\n        return new MyUnityDel1(() =\u003e\n        {\n            ((System.Action)action)();\n        });\n    });\n\t//委托注册\n    appDomain.DelegateManager.RegisterFunctionDelegate\u003cint, int, int\u003e();\n\t//委托转换器注册（要把自定义委托转换为Action或者Func）\n    appDomain.DelegateManager.RegisterDelegateConvertor\u003cMyUnityDel2\u003e((func) =\u003e\n    {\n        return new MyUnityDel2((i, j) =\u003e\n        {\n            return ((System.Func\u003cint, int, int\u003e)func)(i, j);\n        });\n    });\n\n    //初始化ILRuntime相关信息（目前只需要告诉ILRuntime主线程的线程ID，主要目的是能够在Unity的Profiler剖析器窗口中分析问题）\n    appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240425224018-220zvk4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240425224018-220zvk4",
+				"updated": "20240425224325"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 476px;",
+						"style": "width: 466px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240425222333-g1nyvnm.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 466px;\" parent-style=\"width: 476px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240425215253-gx92mjq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240425215253-gx92mjq",
+				"updated": "20240425224325"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意："
+				}
+			]
+		},
+		{
+			"ID": "20240425215312-d4hqbae",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240425215312-d4hqbae",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240425224325"
+			},
+			"Children": [
+				{
+					"ID": "20240425215312-jg875el",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240425215312-jg875el",
+						"updated": "20240425215312"
+					},
+					"Children": [
+						{
+							"ID": "20240425215312-saohcb7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425215312-saohcb7",
+								"updated": "20240425221237"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "委托的注册相关流程必须在主工程中完成，在ILRuntime热更工程内无效"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240425215312-jhcz8eq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240425215312-jhcz8eq",
+						"updated": "20240425223138"
+					},
+					"Children": [
+						{
+							"ID": "20240425215312-uke9aya",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425215312-uke9aya",
+								"updated": "20240425223138"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "为了避免添加自定义委托转换器，\n我们在使用委托时，可以尽量使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "System"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 命名空间中的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Action\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 和 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Func\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，这样就不需要进行注册委托转换器了，只需要注册即可"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240425215311-g14el09",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240425215311-g14el09",
+				"updated": "20240425224325"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在ILRuntime中自定义委托后使用"
+				}
+			]
+		},
+		{
+			"ID": "20240425224119-d6pz2kd",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240425224119-d6pz2kd",
+				"updated": "20240425224552"
+			},
+			"Children": [
+				{
+					"ID": "20240425224124-l0n8j4i",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240425224124-l0n8j4i",
+						"updated": "20240425224552"
+					},
+					"Children": [
+						{
+							"ID": "20240425224124-dcofc5p",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425224124-dcofc5p",
+								"updated": "20240425224316"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "ILRuntime中委托成员，关联ILRuntime工程中函数，直接使用即可"
+								}
+							]
+						},
+						{
+							"ID": "20240425224220-yf1o2aa",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240425224220-yf1o2aa",
+								"style": "line-height: 22px;",
+								"updated": "20240425224552"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public delegate void MyILRuntimeDel1();\npublic delegate int MyILRuntimeDel2(int i, int j);\n\npublic class ILRuntimeMain\n{\n    public static void Main()\n    {\n        MyILRuntimeDel1 ilFun1 = Fun1;\n        ilFun1();\n        MyUnityDel2 ilFun2 = Fun2;\n        int ilResult = ilFun2(5, 6);\n        Debug.Log(ilResult);\n    }\n\n    public static void Fun1()\n    {\n        Debug.Log(\"IL_Fun1\");\n    }\n\n    public static int Fun2(int a, int b)\n    {\n        Debug.Log(\"IL_Fun2\");\n        return a + b;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240425224124-nadiesd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240425224124-nadiesd",
+						"updated": "20240425224124"
+					},
+					"Children": [
+						{
+							"ID": "20240425224124-vbpg06x",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425224124-vbpg06x",
+								"updated": "20240425224134"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Unity中委托成员 关联ILRuntime工程中函数\n"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "一般不会出现基础工程中，使用还无法预知的可变代码，所以我们不需要考虑这种情况"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240425224318-8erkyny",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240425224318-8erkyny",
+				"updated": "20240425224325"
+			}
+		}
+	]
+}

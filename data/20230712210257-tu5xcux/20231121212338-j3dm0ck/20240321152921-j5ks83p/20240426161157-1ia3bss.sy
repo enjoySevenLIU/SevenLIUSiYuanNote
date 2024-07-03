@@ -1,0 +1,1823 @@
+{
+	"ID": "20240426161157-1ia3bss",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240426161157-1ia3bss",
+		"title": "UH4L9——CLR重定向和CLR绑定",
+		"type": "doc",
+		"updated": "20240512204453"
+	},
+	"Children": [
+		{
+			"ID": "20240426161157-mpx8w7z",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240426161157-mpx8w7z",
+				"updated": "20240427141712"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240426161342-lkedz0b",
+					"Type": "NodeHeading",
+					"HeadingLevel": 2,
+					"Properties": {
+						"id": "20240426161342-lkedz0b",
+						"updated": "20240426161407"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "CLR是什么"
+						}
+					]
+				},
+				{
+					"ID": "20240426161353-ya2n1p3",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240426161353-ya2n1p3",
+						"updated": "20240426161543"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "关于CLR是什么，详见："
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "block-ref",
+							"TextMarkBlockRefID": "20231028204759-lrwnsyg",
+							"TextMarkBlockRefSubtype": "d",
+							"TextMarkTextContent": "CLR —— 让应用程序在操作系统上运行"
+						}
+					]
+				},
+				{
+					"ID": "20240426161416-9zu3742",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240426161416-9zu3742",
+						"updated": "20240426161422"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "CLR（Common Language Runtime）公共语言运行时，它是.Net Framework的基础，\n所有的.Net技术都是建立在此之上的，它帮助我们实现了跨语言和跨平台"
+						}
+					]
+				},
+				{
+					"ID": "20240426161416-ccitci2",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240426161416-ccitci2",
+						"updated": "20240426161601"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "它是一个在执行时管理代码的代码，提供内存管理、线程管理等等核心服务，\n就好像一个小型的操作系统一样，所以形象的把它称为“.Net虚拟机”。\n如果想要应用程序在目标操作系统上能够运行，就必须依靠.Net提供的CLR环境来支持"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240427141712-o7avovo",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240427141712-o7avovo",
+				"updated": "20240427141721"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240427141721-d9549rd",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240427141721-d9549rd",
+				"style": "line-height: 22px;",
+				"updated": "20240427142326"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "appDomain.RegisterCLRMethodRedirection()\t\t\t//对反射出来的方法消息进行重定向，重定向到另外一个方法上，使得反射调用变为直接调用\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240426161604-bzrc6bh",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240426161604-bzrc6bh",
+				"name": "appDomain.RegisterCLRMethodRedirection()",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "CLR重定向和CLR绑定"
+				}
+			]
+		},
+		{
+			"ID": "20240426161623-bknaj28",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426161623-bknaj28",
+				"updated": "20240501195311"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "CLR重定向主要是用于对热更工程中的一些方法进行\"挟持\"，就是将原本的方法\"挟持\"了，重新实现方法里面的逻辑，达到 重定向的目的"
+				}
+			]
+		},
+		{
+			"ID": "20240426161623-sna43gu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426161623-sna43gu",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "说人话：我们可以通过CLR重定向，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "将某一个方法的执行定位到我们的自定义逻辑中，而不是执行原本的方法逻辑，有点类似重写"
+				}
+			]
+		},
+		{
+			"ID": "20240426162004-3ac6h7i",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426162004-3ac6h7i",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "CLR绑定就是利用CLR重定向将原本需要反射调用的内容变为直接调用，可以帮助我们："
+				}
+			]
+		},
+		{
+			"ID": "20240426162020-cmvwdu7",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240426162020-cmvwdu7",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"ID": "20240426162020-ab6yyyg",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240426162020-ab6yyyg",
+						"updated": "20240426162020"
+					},
+					"Children": [
+						{
+							"ID": "20240426162020-8xwfcry",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426162020-8xwfcry",
+								"updated": "20240426162020"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "提升ILRuntime的性能"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240426162020-bukz5sf",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240426162020-bukz5sf",
+						"updated": "20240426162020"
+					},
+					"Children": [
+						{
+							"ID": "20240426162020-r4hamup",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426162020-r4hamup",
+								"updated": "20240426162020"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "避免IL2CPP打包时裁剪我们需要用的内容"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240426161636-kpsje2e",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240426161636-kpsje2e",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "CLR绑定的作用和原理"
+				}
+			]
+		},
+		{
+			"ID": "20240426161653-nkbbl64",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426161653-nkbbl64",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "默认情况下，ILRuntime热更工程调用Unity主工程相关内容都会通过反射来调用，这样有2个缺点："
+				}
+			]
+		},
+		{
+			"ID": "20240426161656-1gul6yz",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240426161656-1gul6yz",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"ID": "20240426161656-ieiig8r",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240426161656-ieiig8r",
+						"updated": "20240426161656"
+					},
+					"Children": [
+						{
+							"ID": "20240426161656-tnihfx1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426161656-tnihfx1",
+								"updated": "20240426161656"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "性能较低，反射调用比直接调用效率低"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240426161656-ifdkjf6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240426161656-ifdkjf6",
+						"updated": "20240426161656"
+					},
+					"Children": [
+						{
+							"ID": "20240426161656-ek5py2p",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426161656-ek5py2p",
+								"updated": "20240426161656"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "IL2CPP打包时容易被裁剪"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240426161653-z50np6m",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426161653-z50np6m",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此ILRuntime提供了自动分析生成CLR绑定的工具，它的作用是："
+				}
+			]
+		},
+		{
+			"ID": "20240426161708-zfh993a",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240426161708-zfh993a",
+				"updated": "20240501195259"
+			},
+			"Children": [
+				{
+					"ID": "20240426161708-9o65ksh",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240426161708-9o65ksh",
+						"updated": "20240501195259"
+					},
+					"Children": [
+						{
+							"ID": "20240426161708-1yhcu3s",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426161708-1yhcu3s",
+								"updated": "20240501195259"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可以提高性能，将反射调用变为了直接调用"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240426161708-ysxsibn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240426161708-ysxsibn",
+						"updated": "20240426161708"
+					},
+					"Children": [
+						{
+							"ID": "20240426161708-l7xm61c",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426161708-l7xm61c",
+								"updated": "20240426161708"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "避免IL2CPP裁剪有用内容"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240426161653-5iuuupg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426161653-5iuuupg",
+				"updated": "20240427135550"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "原理：CLR绑定，就是借助了ILRuntime的CLR重定向机制来实现的，\n本质上就是将"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "方法的反射调用重定向到了我们自定义的方法里面来"
+				}
+			]
+		},
+		{
+			"ID": "20240426161653-1qzfioo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426161653-1qzfioo",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：每次我们打包发布工程之前都要记得生成CLR绑定"
+				}
+			]
+		},
+		{
+			"ID": "20240426161716-dazxxee",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240426161716-dazxxee",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如何进行CLR绑定"
+				}
+			]
+		},
+		{
+			"ID": "20240426161731-gdyqx1r",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240426161731-gdyqx1r",
+				"updated": "20240512204453"
+			},
+			"Children": [
+				{
+					"ID": "20240426161731-ejf0gyt",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240426161731-ejf0gyt",
+						"updated": "20240512204453"
+					},
+					"Children": [
+						{
+							"ID": "20240426161731-jpb7qg1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426161731-jpb7qg1",
+								"updated": "20240512204453"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "打开 Samples\\ILRuntime\\2.1.0\\Demo\\Editor\\ILRuntimeCLRBinding.cs 代码，\n在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "InitILRuntime"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 函数中注册"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240426142937-xj3lsdx",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "跨域继承相关"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "的类 以及 其他内容"
+								}
+							]
+						},
+						{
+							"ID": "20240426163550-vtv1neq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426163550-vtv1neq",
+								"updated": "20240426163550"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 348px;",
+										"style": "width: 338px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240426163550-z5ufq51.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 338px;\" parent-style=\"width: 348px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240427132459-qo5pitj",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240427132459-qo5pitj",
+								"style": "line-height: 22px;",
+								"updated": "20240427132509"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class ILRuntimeCLRBinding\n{\n    static void InitILRuntime(ILRuntime.Runtime.Enviorment.AppDomain domain)\n    {\n        //这里需要注册所有热更DLL中用到的跨域继承Adapter，否则无法正确抓取引用\n        domain.RegisterCrossBindingAdaptor(new MonoBehaviourAdapter());\n        domain.RegisterCrossBindingAdaptor(new CoroutineAdapter());\n        domain.RegisterCrossBindingAdaptor(new TestClassBaseAdapter());\n        //在这里注册我们自定义的一些需要跨域继承的类\n        domain.RegisterCrossBindingAdaptor(new ILRuntimeAdapter.Lesson11_TestAdapter());\n\n        domain.RegisterValueTypeBinder(typeof(Vector3), new Vector3Binder());\n        domain.RegisterValueTypeBinder(typeof(Vector2), new Vector2Binder());\n        domain.RegisterValueTypeBinder(typeof(Quaternion), new QuaternionBinder());\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240426161731-y7y8vvj",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240426161731-y7y8vvj",
+						"updated": "20240426161731"
+					},
+					"Children": [
+						{
+							"ID": "20240426161731-38u9x48",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426161731-38u9x48",
+								"updated": "20240426161815"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "点击 工具栏 ——\u003e ILRuntime ——\u003e 通过自动分析热更DLL生成CLR绑定"
+								}
+							]
+						},
+						{
+							"ID": "20240427131919-jfj36vu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240427131919-jfj36vu",
+								"updated": "20240427131919"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 502px;",
+										"style": "width: 492px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240427131919-rb7bosf.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 492px;\" parent-style=\"width: 502px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240427131900-nwnmu1i",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240427131900-nwnmu1i",
+								"updated": "20240427131900"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "此时就可以在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ILRuntimeCLRBinding.cs"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 代码中设置的到处路径中看到生成的绑定代码"
+								}
+							]
+						},
+						{
+							"ID": "20240427132006-shvnxak",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240427132006-shvnxak",
+								"updated": "20240427132006"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 246px;",
+										"style": "width: 236px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240427132006-cqngrat.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 236px;\" parent-style=\"width: 246px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240426161731-6vwdv3g",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240426161731-6vwdv3g",
+						"updated": "20240427135459"
+					},
+					"Children": [
+						{
+							"ID": "20240426161731-8uxqkgg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426161731-8uxqkgg",
+								"updated": "20240427132045"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在初始化处，添加："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ILRuntime.Runtime.Generated.CLRBindings.Initialize(appDomain);"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240427132947-jwq8yqe",
+							"Type": "NodeBlockquote",
+							"Properties": {
+								"id": "20240427132947-jwq8yqe",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+								"updated": "20240427135442"
+							},
+							"Children": [
+								{
+									"Type": "NodeBlockquoteMarker",
+									"Data": "\u003e"
+								},
+								{
+									"ID": "20240427132947-vr779u5",
+									"Type": "NodeHeading",
+									"HeadingLevel": 3,
+									"Properties": {
+										"id": "20240427132947-vr779u5",
+										"updated": "20240427132950"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "注意"
+										}
+									]
+								},
+								{
+									"ID": "20240427132953-73hnz9w",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240427132953-73hnz9w",
+										"updated": "20240427135442"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "如果在CLR绑定注册前进行了"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "block-ref",
+											"TextMarkBlockRefID": "20240426161858-29mxptp",
+											"TextMarkBlockRefSubtype": "s",
+											"TextMarkTextContent": "CLR重定向"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "相关设置，为了保证自定义的重定向能够正常使用\n初始化CLR绑定一定要放在最后一步，这样就不会影响自己想要保留的重定向等初始化操作了"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240427132049-dv3wx6p",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240427132049-dv3wx6p",
+								"style": "line-height: 22px;",
+								"updated": "20240427135459"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//初始化ILRuntime相关的方法\nprivate void InitILRuntime()\n{\n    //注册委托和委托转换器...\n    //注册跨域继承类\n    appDomain.RegisterCrossBindingAdaptor(new ILRuntimeAdapter.Lesson11_TestAdapter());\n    //注册 CLR绑定相关信息\n    ILRuntime.Runtime.Generated.CLRBindings.Initialize(appDomain);\n    //初始化ILRuntime相关信息（目前只需要告诉ILRuntime主线程的线程ID，主要目的是能够在Unity的Profiler剖析器窗口中分析问题）\n    appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240426161742-odmurpo",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240426161742-odmurpo",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "CLR绑定性能提升测试"
+				}
+			]
+		},
+		{
+			"ID": "20240426161852-onk31qr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426161852-onk31qr",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们在ILRuntime中去调用Unity中的方法，如果不进行CLR绑定，就是通过反射\n如果绑定了，就是直接调用，我们可以通过测试函数来体现出性能的提升"
+				}
+			]
+		},
+		{
+			"ID": "20240427133713-k13r293",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427133713-k13r293",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "测试函数如下："
+				}
+			]
+		},
+		{
+			"ID": "20240427133719-lnbxib2",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240427133719-lnbxib2",
+				"style": "line-height: 22px;",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Lesson13 : MonoBehaviour\n{\n    void Start()\n    {\n        ILRuntimeMgr.Instance.StartILRuntime(() =\u003e\n        {\n            ILRuntimeMgr.Instance.appDomain.Invoke(\"HotFix_Project.ILRuntimeMain\", \"Main\", null, null);\n        });\n    }\n\n    public static int TestFun(int i, int j)\n    {\n        return i + j;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240427133736-s17soiq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427133736-s17soiq",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "热更工程内先记录一次测试前时间，循环执行100000次该函数，然后将测试后时间减去测试前时间，得到消耗时间"
+				}
+			]
+		},
+		{
+			"ID": "20240427133301-pi1nviu",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240427133301-pi1nviu",
+				"style": "line-height: 22px;",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class ILRuntimeMain\n{\n    public static void Main()\n    {\n        //得到当前系统时间\n        System.DateTime currentTime = System.DateTime.Now;\n        for (int i = 0; i \u003c 100000; i++)\n        {\n            Lesson13.TestFun(i, i);\n        }\n        Debug.Log(\"花费的时间：\" + (System.DateTime.Now - currentTime).Milliseconds + \"ms\");\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240427134116-g8yqwhe",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427134116-g8yqwhe",
+				"updated": "20240427135619"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "此时不进行CLR绑定，不对"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Lesson13"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​做CLR绑定，直接反射运行得到的耗时如下："
+				}
+			]
+		},
+		{
+			"ID": "20240427134211-h5truty",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427134211-h5truty",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240427134114-dxdiy6k.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240427134309-wgo7y2q",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427134309-wgo7y2q",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "然后点击 ILRuntime ——\u003e 通过自动分析热更DLL生成CLR绑定，让ILRuntime分析热更工程内使用了哪些类，然后生成绑定，再运行，耗时如下："
+				}
+			]
+		},
+		{
+			"ID": "20240427134339-vms9k1n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427134339-vms9k1n",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 491px;",
+						"style": "width: 481px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240427134329-q7sbwvy.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 481px;\" parent-style=\"width: 491px;\"}"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 224px;",
+						"style": "width: 214px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240427134532-07gi5js.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 214px;\" parent-style=\"width: 224px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240427134619-ruxe6j4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427134619-ruxe6j4",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240427134619-6jruuv1.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240427134621-yu47is5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427134621-yu47is5",
+				"updated": "20240427142239"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，进行CLR绑定带来了至少十倍以上的性能提升，提升效果是极大的"
+				}
+			]
+		},
+		{
+			"ID": "20240426161858-29mxptp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240426161858-29mxptp",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义CLR重定向"
+				}
+			]
+		},
+		{
+			"ID": "20240426161909-34q7hd6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426161909-34q7hd6",
+				"updated": "20240427134931"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们以"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Debug.Log"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​举例，如果再ILRuntime工程中调用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Debug.Log"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n我们是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "无法获取到热更工程中的脚本、行号相关信息的，我们可以通过CLR重定向的形式获取到信息后再打印"
+				}
+			]
+		},
+		{
+			"ID": "20240427140616-wtsz88m",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427140616-wtsz88m",
+				"updated": "20240427140616"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 586px;",
+						"style": "width: 576px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240427140616-9v11pco.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 576px;\" parent-style=\"width: 586px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240427140400-o08j2gy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427140400-o08j2gy",
+				"updated": "20240427140505"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这时，我们可以自定义重定向的方法的逻辑，将显示热更工程中的脚本、行号相关信息的逻辑添加到重定向方法内"
+				}
+			]
+		},
+		{
+			"ID": "20240426161909-8c0564w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240426161909-8c0564w",
+				"updated": "20240427135515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "步骤："
+				}
+			]
+		},
+		{
+			"ID": "20240426161911-8kxsz4f",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240426161911-8kxsz4f",
+				"updated": "20240501203006"
+			},
+			"Children": [
+				{
+					"ID": "20240426161911-ri5gphf",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240426161911-ri5gphf",
+						"name": "appDomain.RegisterCLRMethodRedirection()",
+						"updated": "20240426161920"
+					},
+					"Children": [
+						{
+							"ID": "20240426161911-55mi2xk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426161911-55mi2xk",
+								"updated": "20240427141410"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "仿照CLR绑定中自动生成的绑定代码，反射获取类中的函数，对函数进行CLR重定向，以"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Debug.Log"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​为例"
+								}
+							]
+						},
+						{
+							"ID": "20240427141044-63qt75a",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240427141044-63qt75a",
+								"updated": "20240427141446"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "先获取"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Debug"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​类的类型消息，根据类型消息反射出"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Log"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法的方法消息，\n然后 将 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Log"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 方法消息 和 重定向的方法 一起传入到 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "appDomain.RegisterCLRMethodRedirection"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 方法内，完成重定向"
+								}
+							]
+						},
+						{
+							"ID": "20240427141455-8yqp3jv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240427141455-8yqp3jv",
+								"updated": "20240427141921"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对于重定向的方法，同样可以先复制CLR绑定中自动生成的重定向方法（将其中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AutoList"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​参数改为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "List\u0026lt;Object\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​参数），之后再做修改"
+								}
+							]
+						},
+						{
+							"ID": "20240426161909-tg6bawe",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426161909-tg6bawe",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+								"updated": "20240426162012"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注意：\n要使用CLR重定向时，需要在"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "code",
+									"TextMarkTextContent": "unsafe"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​语句块中使用\n所以我们需要在定义重定向函数和使用重定向函数的地方加上"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "code",
+									"TextMarkTextContent": "unsafe"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​"
+								}
+							]
+						},
+						{
+							"ID": "20240427141014-zjkmc8m",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240427141014-zjkmc8m",
+								"style": "line-height: 22px;",
+								"updated": "20240427141554"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//初始化ILRuntime相关的方法\nprivate unsafe void InitILRuntime()\n{\n    //注册委托和委托转换器...\n    //注册跨域继承类\n    appDomain.RegisterCrossBindingAdaptor(new ILRuntimeAdapter.Lesson11_TestAdapter());\n\n    //CLR重定向内容，必须要写到CLR绑定之前！！！\n    System.Type debugType = typeof(Debug);\n    MethodInfo methodInfo = debugType.GetMethod(\"Log\", new System.Type[] { typeof(object) });\n    appDomain.RegisterCLRMethodRedirection(methodInfo, MyLog);\n\n    //注册 CLR绑定相关信息\n    ILRuntime.Runtime.Generated.CLRBindings.Initialize(appDomain);\n    //初始化ILRuntime相关信息（目前只需要告诉ILRuntime主线程的线程ID，主要目的是能够在Unity的Profiler剖析器窗口中分析问题）\n    appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;\n}\n\nprivate unsafe StackObject* MyLog(ILIntepreter __intp, StackObject* __esp, List\u003cobject\u003e __mStack, CLRMethod __method, bool isNewObj)\n{\n    ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;\n    StackObject* ptr_of_this_method;\n    StackObject* __ret = ILIntepreter.Minus(__esp, 1);\n\n    ptr_of_this_method = ILIntepreter.Minus(__esp, 1);\n    System.Object @message = (System.Object)typeof(System.Object).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (ILRuntime.CLR.Utils.Extensions.TypeFlags)0);\n    __intp.Free(ptr_of_this_method);\n\n    //获取对应的行号等相关消息\n    var stackTrace = __domain.DebugService.GetStackTrace(__intp);\n\n    UnityEngine.Debug.Log(@message + \"\\n\" + stackTrace);\n\n    return __ret;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240426161911-n4lkfhb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240426161911-n4lkfhb",
+						"updated": "20240501203006"
+					},
+					"Children": [
+						{
+							"ID": "20240426161911-67g88k8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240426161911-67g88k8",
+								"updated": "20240427140853"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在重定向中调用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Debug.Log"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​之前，获取DLL内的堆栈信息 最后拼接打印"
+								}
+							]
+						},
+						{
+							"ID": "20240427141749-bugr75z",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240427141749-bugr75z",
+								"updated": "20240427142128"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "调用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "__domain.DebugService.GetStackTrace(__intp)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 并获取其返回值，然后拼接到重定向方法调用的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Debug.Log"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法内"
+								}
+							]
+						},
+						{
+							"ID": "20240427142138-bc7sad4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240427142138-bc7sad4",
+								"updated": "20240501203006"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "关于重定向的原理，详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240501160226-q1xf6zn",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "UH4L21——重定向的书写规则"
+								}
+							]
+						},
+						{
+							"ID": "20240427141617-tcu98hu",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240427141617-tcu98hu",
+								"style": "line-height: 22px;",
+								"updated": "20240427141745"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private unsafe StackObject* MyLog(ILIntepreter __intp, StackObject* __esp, List\u003cobject\u003e __mStack, CLRMethod __method, bool isNewObj)\n{\n    ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;\n    StackObject* ptr_of_this_method;\n    StackObject* __ret = ILIntepreter.Minus(__esp, 1);\n\n    ptr_of_this_method = ILIntepreter.Minus(__esp, 1);\n    System.Object @message = (System.Object)typeof(System.Object).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (ILRuntime.CLR.Utils.Extensions.TypeFlags)0);\n    __intp.Free(ptr_of_this_method);\n\n    //获取对应的行号等相关消息\n    var stackTrace = __domain.DebugService.GetStackTrace(__intp);\n\n    UnityEngine.Debug.Log(@message + \"\\n\" + stackTrace);\n\n    return __ret;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240427142010-um0jpt2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427142010-um0jpt2",
+				"updated": "20240427142031"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "此时执行方法并输出，就可以看到调用消息："
+				}
+			]
+		},
+		{
+			"ID": "20240427142056-2ijq1nr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427142056-2ijq1nr",
+				"updated": "20240427142056"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 730px;",
+						"style": "width: 720px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240427142056-kld2a6v.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 720px;\" parent-style=\"width: 730px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		}
+	]
+}

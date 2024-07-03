@@ -1,0 +1,318 @@
+{
+	"ID": "20240104151530-3axozd7",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240104151530-3axozd7",
+		"title": "UFL1-1——不继承MonoBehaviour的单例模式基类",
+		"type": "doc",
+		"updated": "20240417172939"
+	},
+	"Children": [
+		{
+			"ID": "20240104151612-q2aburi",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240104151612-q2aburi",
+				"updated": "20240104151612"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "不继承MonoBehaviour的基类"
+				}
+			]
+		},
+		{
+			"ID": "20240104151612-qv8p3fb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240104151612-qv8p3fb",
+				"updated": "20240417172857"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "利用泛型相关知识，实现单例模式基类，对于可能存在的安全问题，详见"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240104155311-au2yc9f",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "UFL1-3——安全性问题解决"
+				}
+			]
+		},
+		{
+			"ID": "20240104151612-dg5z2yz",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240104151612-dg5z2yz",
+				"style": "line-height: 22px;",
+				"updated": "20240104151612"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "/// \u003csummary\u003e\n/// 不继承MonoBehaviour的单例模式基类，内部为静态变量和静态属性，单例模式类可以直接继承该类，而无需自行实现单例声明相关内容\n/// \u003c/summary\u003e\n/// \u003ctypeparam name=\"T\"\u003e继承该类的类\u003c/typeparam\u003e\npublic class BaseManager\u003cT\u003e where T : class, new()\n{\n    private static T instance;\n\n    private static T Instance\n    {\n        get\n        {\n            if (instance == null)\n                instance = new T();\n            return instance;\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240409133007-pxc0hio",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240409133007-pxc0hio",
+				"updated": "20240409133023"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用方法"
+				}
+			]
+		},
+		{
+			"ID": "20240409133023-w7lakpk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240409133023-w7lakpk",
+				"style": "line-height: 22px;",
+				"updated": "20240409133427"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class TestMgr : BaseManager\u003cTestMgr\u003e\n{\n    public void Speak()\n    {\n        Debug.Log(\"TestMgr\");\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240409133309-mnhe4ez",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240409133309-mnhe4ez",
+				"style": "line-height: 22px;",
+				"updated": "20240409133340"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class Main : MonoBehaviour\n{\n    void Start()\n    {\n        TestMgr.Instance.Speak();               //如果运行正确，这里会正常输出内容\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240409133341-8y9lmq8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240409133341-8y9lmq8",
+				"updated": "20240409133424"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240409133420-1do5tbz.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240104151612-7f9zki8",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240104151612-7f9zki8",
+				"updated": "20240409133021"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "现在的安全问题"
+				}
+			]
+		},
+		{
+			"ID": "20240104151612-mgt9mj6",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240104151612-mgt9mj6",
+				"updated": "20240417172924"
+			},
+			"Children": [
+				{
+					"ID": "20240104151612-2tc2ofi",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240104151612-2tc2ofi",
+						"updated": "20240417172924"
+					},
+					"Children": [
+						{
+							"ID": "20240104151612-zdacrel",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240104151612-zdacrel",
+								"updated": "20240409133445"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "构造函数问题：由于没有声明私有构造函数，这意味着构造函数可在外部调用，这样的单例可能会破坏唯一性"
+								}
+							]
+						},
+						{
+							"ID": "20240417172903-mnps9e7",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240417172903-mnps9e7",
+								"style": "line-height: 22px;",
+								"updated": "20240417172924"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "TestMgr test = new TestMgr();\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240104151612-vlym5gy",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240104151612-vlym5gy",
+						"updated": "20240104151612"
+					},
+					"Children": [
+						{
+							"ID": "20240104151612-q7hechc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240104151612-q7hechc",
+								"updated": "20240104151612"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "多线程问题：当多个线程同时访问管理器时，可能会出现共享资源的安全访问问题"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240417172939-5tlmv5i",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240417172939-5tlmv5i"
+			}
+		}
+	]
+}

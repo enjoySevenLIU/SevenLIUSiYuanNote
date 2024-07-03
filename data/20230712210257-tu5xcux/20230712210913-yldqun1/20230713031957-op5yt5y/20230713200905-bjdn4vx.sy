@@ -1,0 +1,353 @@
+{
+	"ID": "20230713200905-bjdn4vx",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230713200905-bjdn4vx",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230713200905-bjdn4vx\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230713203823-2cib0x0\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230713203556-hnkqv4k\u0026quot;,\u0026quot;scrollTop\u0026quot;:0,\u0026quot;focusId\u0026quot;:\u0026quot;20230713203832-9hc6e83\u0026quot;,\u0026quot;focusStart\u0026quot;:2,\u0026quot;focusEnd\u0026quot;:2\u0026#125;",
+		"title": "U2L10-3——Resources资源卸载",
+		"type": "doc",
+		"updated": "20240417171233"
+	},
+	"Children": [
+		{
+			"ID": "20230713203823-2cib0x0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230713203823-2cib0x0",
+				"updated": "20230713203832"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20230713203832-9hc6e83",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230713203832-9hc6e83",
+				"style": "line-height: 22px;",
+				"updated": "20230713203957"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Resources.UnloadAsset()\t\t\t//卸载指定的内存内缓存的资源，不能释放GameObject对象\nResources.UnloadUnusedAssets()\t//卸载未使用的资源，一般在过场景时和GC一起使用\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230713200905-khfbpvt",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230713200905-khfbpvt",
+				"updated": "20230713201327"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Resource是重复加载会浪费内存吗？"
+				}
+			]
+		},
+		{
+			"ID": "20230713201328-bo6oib6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713201328-bo6oib6",
+				"updated": "20240417171233"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "其实"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Resources"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​加载过一次资源后，该资源就一直存放在内存中作为缓存\n第二次加载时发现缓存中存在该资源，会直接取出来使用，所以多次重复加载不会浪费内存\n但是会浪费性能（每次加载都会去查找取出，始终伴随一些性能消耗）"
+				}
+			]
+		},
+		{
+			"ID": "20230713201521-rblnfy7",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230713201521-rblnfy7",
+				"updated": "20230713201550"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如何手动释放掉缓存中的资源"
+				}
+			]
+		},
+		{
+			"ID": "20230713201550-7iypmp1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230713201550-7iypmp1",
+				"name": "Resources.UnloadAsset()",
+				"updated": "20230713203522"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "卸载指定资源"
+				}
+			]
+		},
+		{
+			"ID": "20230713201843-bnc6cjg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713201843-bnc6cjg",
+				"updated": "20240321172649"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "注意：该方法不能释放"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "对象 因为它会用于实例化对象"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n它只能用于一些不需要实例化的内容：比如图片 和 音效 文本等\n一般情况下 我们很少单独使用它"
+				}
+			]
+		},
+		{
+			"ID": "20230713201818-frh961j",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230713201818-frh961j",
+				"updated": "20230713201838"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Resources.UnloadAsset()\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230713202500-lfu2ueh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713202500-lfu2ueh",
+				"updated": "20240321172653"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "该方法不能释放"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "对象 因为它会用于实例化对象，即使该对象没有被实例化也会不能卸载！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "运行以下代码会报错！！！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230713202448-78d34xa",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230713202448-78d34xa",
+				"updated": "20230713202530"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "GameObject obj = Resources.Load\u003cGameObject\u003e(\"Cube\");\nResources.UnloadAsset(obj);\t//该方法不能释放GameObject对象!!\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230713203525-ac5m674",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230713203525-ac5m674",
+				"name": "Resources.UnloadUnusedAssets()",
+				"updated": "20230713203626"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "卸载未使用的资源"
+				}
+			]
+		},
+		{
+			"ID": "20230713203537-1v7cjqt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713203537-1v7cjqt",
+				"updated": "20230713203556"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：一般在过场景时和GC一起使用"
+				}
+			]
+		},
+		{
+			"ID": "20230713203556-hnkqv4k",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230713203556-hnkqv4k",
+				"updated": "20230713203635"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Resources.UnloadUnusedAssets();\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

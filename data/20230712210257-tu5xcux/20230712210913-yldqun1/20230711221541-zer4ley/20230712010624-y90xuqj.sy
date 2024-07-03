@@ -1,0 +1,445 @@
+{
+	"ID": "20230712010624-y90xuqj",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230712010624-y90xuqj",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230712010624-y90xuqj\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230712010827-0q22qpz\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230712012756-3zzo9hh\u0026quot;,\u0026quot;scrollTop\u0026quot;:900,\u0026quot;focusId\u0026quot;:\u0026quot;20230712010827-0q22qpz\u0026quot;,\u0026quot;focusStart\u0026quot;:0,\u0026quot;focusEnd\u0026quot;:0\u0026#125;",
+		"title": "U2L5-3——四元数常用方法",
+		"type": "doc",
+		"updated": "20240321171940"
+	},
+	"Children": [
+		{
+			"ID": "20230712010827-0q22qpz",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230712010827-0q22qpz",
+				"updated": "20230712010835"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20230712010835-6uzd503",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230712010835-6uzd503",
+				"updated": "20230712021934"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Quaternion.identity\t\t//单位四元数，可以用于初始化方向\nQuaternion.LookRotation()\t//将一个Vector向量，转换为四元数，可以用于改变面朝向\nQuaternion.Lerp()\t\t//线性插值\nQuaternion.Slerp()\t\t//球形插值，在角度旋转方面建议用球形插值\nQuaternion.LookRotation()\t//用于让对象朝向传入的向量的方向的方法\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230712010624-jzyvrbj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230712010624-jzyvrbj",
+				"name": "Quaternion.identity",
+				"updated": "20230712011408"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "单位"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "四元数"
+				}
+			]
+		},
+		{
+			"ID": "20230712013150-ujm5kd6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712013150-ujm5kd6",
+				"updated": "20230712013200"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "用于对象角度初始化"
+				}
+			]
+		},
+		{
+			"ID": "20230712011409-stgsf85",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712011409-stgsf85",
+				"updated": "20230712011518"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "单位四元数表示没有旋转量时（角位移）\n当角度为0或者360度时\n对于给定轴都会得到单位四元数"
+				}
+			]
+		},
+		{
+			"ID": "20230712011523-h7kiyzd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712011523-h7kiyzd",
+				"updated": "20240321171921"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "[1,(0,0,0)]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 和 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "[-1,(0,0,0)]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 都是四元数，表示没有旋转量"
+				}
+			]
+		},
+		{
+			"ID": "20230712011354-e05bon3",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230712011354-e05bon3",
+				"updated": "20230712011954"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(Quaternion.identity);\ntestObj.rotation = Quaternion.identity;\n//单位四元数可以用于初始化方向\nInstantiate(testObj, Vector3.zero, Quaternion.identity);\t//克隆一个处于世界坐标系原点角度为0，0，0的对象\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230712011955-tkt9o0v",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "Quaternion.Lerp()",
+				"id": "20230712011955-tkt9o0v",
+				"name": "Quaternion.Slerp()",
+				"updated": "20230712012521"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "四元数"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "插值运算"
+				}
+			]
+		},
+		{
+			"ID": "20230712013202-49toa5n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712013202-49toa5n",
+				"updated": "20230712013207"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "用于平滑旋转"
+				}
+			]
+		},
+		{
+			"ID": "20230712012023-u1cc1fj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712012023-u1cc1fj",
+				"updated": "20240321171940"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "前面讲的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230711000636-wm2luaa",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "插值运算"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230711194211-j4divxe",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "向量插值计算"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n四元数也有"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Lerp"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Slerp"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​两种方式\n四元数里"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Lerp"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Slerp"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​只有细微的差别，算法不同\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "但是在这里更推荐使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code strong",
+					"TextMarkTextContent": "Slerp"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "，效果更好"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n无限接近，先快后慢"
+				}
+			]
+		},
+		{
+			"ID": "20230712012344-a1gb267",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230712012344-a1gb267",
+				"updated": "20240321171935"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "A.transform.rotation = Quaternion.Slerp(A.transform.rotation, target.rotation, Time.deltaTime);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230712012419-onsggal",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712012419-onsggal",
+				"updated": "20230712012437"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "匀速接近"
+				}
+			]
+		},
+		{
+			"ID": "20230712012437-pqp9com",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230712012437-pqp9com",
+				"updated": "20230712012445"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "time += Time.deltaTime;\nB.transform.rotation = Quaternion.Slerp(start, target.rotation, time);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230712012606-qhgqxw8",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230712012606-qhgqxw8",
+				"updated": "20230712012616"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "向量指向转"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "四元数"
+				}
+			]
+		},
+		{
+			"ID": "20230712013210-nzl346u",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712013210-nzl346u",
+				"updated": "20230712013223"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "用于让对象朝向某方向"
+				}
+			]
+		},
+		{
+			"ID": "20230712012642-2vwiqps",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712012642-2vwiqps",
+				"updated": "20230712012930"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "将一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230711013705-qw85hvn",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "Vector3向量"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，转换为四元数，可以用于改变面朝向\n举例：\n当人物面朝向想要改变时，只需要把目标面朝向传入该函数，\n便可以得到目标四元数角度信息，\n之后将人物四元数角度信息改为得到的信息即可达到转向。"
+				}
+			]
+		},
+		{
+			"ID": "20230712012617-vezcujy",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230712012617-vezcujy",
+				"updated": "20230712013008"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Quaternion q = Quaternion.LookRotation(lookB.position - lookA.position);\t//A指向B的向量\nlookA.rotation = q;\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230712012756-3zzo9hh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230712012756-3zzo9hh"
+			}
+		}
+	]
+}

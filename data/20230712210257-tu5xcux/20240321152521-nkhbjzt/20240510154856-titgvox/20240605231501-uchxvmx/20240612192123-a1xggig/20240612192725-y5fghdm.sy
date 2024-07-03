@@ -1,0 +1,2067 @@
+{
+	"ID": "20240612192725-y5fghdm",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240612192725-y5fghdm",
+		"title": "US2S2L5-3——Pass-渲染通道",
+		"type": "doc",
+		"updated": "20240616151150"
+	},
+	"Children": [
+		{
+			"ID": "20240615172717-2qzsim2",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240615172717-2qzsim2",
+				"updated": "20240615172751"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240615172717-t3e2hst",
+					"Type": "NodeHeading",
+					"HeadingLevel": 2,
+					"Properties": {
+						"id": "20240615172717-t3e2hst",
+						"updated": "20240615172751"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "回顾：SubShader的基本构成"
+						}
+					]
+				},
+				{
+					"ID": "20240615172717-edhz7ig",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240615172717-edhz7ig",
+						"updated": "20240615172717"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "SubShader语句块中主要由3部分构成：渲染标签，渲染状态，n个渲染通道"
+						}
+					]
+				},
+				{
+					"ID": "20240615172717-7ckjbsd",
+					"Type": "NodeCodeBlock",
+					"IsFencedCodeBlock": true,
+					"Properties": {
+						"id": "20240615172717-7ckjbsd",
+						"style": "line-height: 22px;",
+						"updated": "20240615172717"
+					},
+					"Children": [
+						{
+							"Type": "NodeCodeBlockFenceOpenMarker",
+							"Data": "```"
+						},
+						{
+							"Type": "NodeCodeBlockFenceInfoMarker",
+							"CodeBlockInfo": "YyM="
+						},
+						{
+							"Type": "NodeCodeBlockCode",
+							"Data": "            |--------Tags(渲染标签)\n            |--------States(渲染状态)\nSubShader---|--------Pass(渲染通道1)\n            |--------Pass(渲染通道2)\n            |--------....(渲染通道n)\n"
+						},
+						{
+							"Type": "NodeCodeBlockFenceCloseMarker",
+							"Data": "```"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240615172749-k0ye5dh",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240615172749-k0ye5dh",
+				"updated": "20240616151150"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240615193419-sf0tgg4",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240615193419-sf0tgg4",
+				"style": "line-height: 22px;",
+				"updated": "20240615194648"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "UsePass \"Pass名(大写)\"\t\t//可以调用特定的Shader文件内的有名字的Pass语句，需要使用大写\nPass {}\t\t\t\t\t\t//Pass渲染通道语句块\nName \"Pass名\"\t\t\t\t//为Pass渲染通道语句块命名的关键字\nTags {}\t\t\t\t\t\t//Pass语句块内也可以使用渲染标签，但是Pass语句块的渲染标签是独有的\n\t\"LightMode\"\t\t\t\t//指定了该 Pass 应该在哪个阶段执行，可以将着色器代码分配给适当的渲染阶段，以实现所需的效果\n\t\t\"Always\"\t\t\t//始终渲染；不应用光照\n\t\t\"ForwardBase\"\t\t//在前向渲染中使用；应用环境光、主方向光、顶点/SH 光源和光照贴图\n\t\t\"ForwardAdd\"\t\t//在前向渲染中使用；应用附加的每像素光源（每个光源有一个通道）\n\t\t\"Deferred\"\t\t\t//在延迟渲染中使用；渲染 G 缓冲区\n\t\t\"ShadowCaster\"\t\t//将对象深度渲染到阴影贴图或深度纹理中\n\t\t\"MotionVectors\"\t\t//用于计算每对象运动矢量\n\t\t\"PrepassBase\"\t\t//在旧版延迟光照中使用；渲染法线和镜面反射指数\n\t\t\"PrepassFinal\"\t\t//在旧版延迟光照中使用；通过组合纹理、光照和反光来渲染最终颜色\n\t\t\"Vertex\"\t\t\t//当对象不进行光照贴图时在旧版顶点光照渲染中使用；应用所有顶点光源\n\t\t\"VertexLMRGBM\"\t\t//当对象不进行光照贴图时在旧版顶点光照渲染中使用；在光照贴图为 RGBM 编码的平台上（PC 和游戏主机）\n\t\t\"VertexLM\"\t\t\t//当对象不进行光照贴图时在旧版顶点光照渲染中使用；在光照贴图为双 LDR 编码的平台上（移动平台）\n\t\"RequireOptions\"\t\t//用于指定当满足某些条件时才渲染该 Pass\n\t\t\"SoftVegetation\"\t//仅当 Quality 窗口中开启了 SoftVegetation 时才渲染此通道\n\t\"PassFlags\"\t\t\t\t//一个渲染通道 Pass 可指示一些标志来更改渲染管线向 Pass 传递数据的方式\n\t\t\"OnlyDirectional\"\t//限制一些特殊光源数据给到着色器，这意味着非重要光源的数据将不会传递到顶点光源或球谐函数着色器变量\nGrabPass { \"变量名\"... }\t\t//即将绘制对象时的屏幕内容抓取到纹理中，在后续通道中即可使用此纹理，从而执行基于图像的高级效果。\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240615172724-fmo3aov",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240615172724-fmo3aov",
+				"updated": "20240616151150"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "渲染通道"
+				}
+			]
+		},
+		{
+			"ID": "20240615172947-imsae2a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615172947-imsae2a",
+				"updated": "20240615172952"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体实现着色器代码的地方（每个 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "SubShader"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 语句块中至少有一个渲染通道，可以有多个）"
+				}
+			]
+		},
+		{
+			"ID": "20240615172824-2dcsw58",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615172824-2dcsw58",
+				"updated": "20240615172823"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Pass渲染通道语句块中，主要包含了："
+				}
+			]
+		},
+		{
+			"ID": "20240615172829-ynxv8yv",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240615172829-ynxv8yv",
+				"updated": "20240616151150"
+			},
+			"Children": [
+				{
+					"ID": "20240615172829-gozcy87",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240615172829-gozcy87",
+						"updated": "20240615172837"
+					},
+					"Children": [
+						{
+							"ID": "20240615172829-natu6rd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240615172829-natu6rd",
+								"updated": "20240615172837"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "名字：可以帮助我们复用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 代码"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240615172829-1v92x7k",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240615172829-1v92x7k",
+						"updated": "20240615172842"
+					},
+					"Children": [
+						{
+							"ID": "20240615172829-gxsg0sv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240615172829-gxsg0sv",
+								"updated": "20240615172842"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "渲染标签：不能使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SubShader"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中的渲染标签，有自己独有的渲染标签"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240615172829-j1cpmdr",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240615172829-j1cpmdr",
+						"updated": "20240615172849"
+					},
+					"Children": [
+						{
+							"ID": "20240615172829-tpmq3hn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240615172829-tpmq3hn",
+								"updated": "20240615172849"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "渲染状态："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SubShader"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 当中的渲染状态同样可以在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中使用，影响的区域不同"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240615172829-p4bl2v8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240615172829-p4bl2v8",
+						"updated": "20240616151150"
+					},
+					"Children": [
+						{
+							"ID": "20240615172829-2r5ieu0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240615172829-2r5ieu0",
+								"updated": "20240616151150"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "着色器语言逻辑：我们之后会使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240615211515-pq9bbic",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "CG"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "和HLSL语言编写"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240615172827-175zefc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615172827-175zefc",
+				"updated": "20240615172823"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "四个部分"
+				}
+			]
+		},
+		{
+			"ID": "20240615172737-l3exmon",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240615172737-l3exmon",
+				"style": "line-height: 22px;",
+				"updated": "20240615172823"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Pass {\n  1. Name 名称\n  2. 渲染标签\n  3. 渲染状态\n  4. 其他着色器代码\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240615173000-w7xmejd",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "Name",
+				"id": "20240615173000-w7xmejd",
+				"name": "UsePass",
+				"updated": "20240616151125"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Pass的名字"
+				}
+			]
+		},
+		{
+			"ID": "20240615173330-o18ycke",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615173330-o18ycke",
+				"updated": "20240615173434"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要作用：我们对 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 命名的主要目的\n可以利用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UsePass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 命令在其他Shader当中复用该 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的代码,\n只需要在其他Shader当中使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UsePass \u0026quot;Shader路径/Pass名\u0026quot;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 即可复用"
+				}
+			]
+		},
+		{
+			"ID": "20240615173340-wfoxwos",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615173340-wfoxwos",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240615173613"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：Unity内部会把 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 名称转换为大写字母，因此在使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UsePass"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 命令时必须使用大写形式的名字"
+				}
+			]
+		},
+		{
+			"ID": "20240615173330-t2l2x9b",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240615173330-t2l2x9b",
+				"style": "line-height: 22px;",
+				"updated": "20240615191746"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson8\"\n{\n    Properties {/*...*/}\n    SubShader\n    {\n\t\t// ...\n        Pass\n        {\n            Name \"MYLESSON8PASS\"\n\t\t}\n\t}\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240615173330-g61p0g0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615173330-g61p0g0",
+				"updated": "20240615191823"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在其他Shader中复用该 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 代码时："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UsePass \u0026quot;Pase所在的Shader名/Pass名字(大写)\u0026quot;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240615173545-ocwoz8r",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240615173545-ocwoz8r",
+				"style": "line-height: 22px;",
+				"updated": "20240615191809"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "SubShader\n{\n\t​UsePass \"TeachShader/Lesson8/MYLESSON8PASS\"​\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240615190945-timyw8m",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240615190945-timyw8m",
+				"name": "Tags",
+				"updated": "20240616151125"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Pass中的渲染标签"
+				}
+			]
+		},
+		{
+			"ID": "20240615191016-h21fsvx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615191016-h21fsvx",
+				"updated": "20240615191019"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Pass中的渲染标签语法和SubShader中相同"
+				}
+			]
+		},
+		{
+			"ID": "20240615191021-wsynmxv",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240615191021-wsynmxv",
+				"style": "line-height: 22px;",
+				"updated": "20240615191040"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Pass\n{\n\tTags{ \"标签名1\" = \"标签值1\" \"标签名2\" = \"标签值2\" \"标签名2\" = \"标签值2\" .......}\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240615191020-uxq3vnk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615191020-uxq3vnk",
+				"updated": "20240615191110"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但是我们之前讲解过的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "SubShader"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 语句块中的渲染标签不能够在 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 中使用，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 当中有自己专门的渲染标签"
+				}
+			]
+		},
+		{
+			"ID": "20240615191132-5s8xprx",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240615191132-5s8xprx",
+				"updated": "20240615192721"
+			},
+			"Children": [
+				{
+					"ID": "20240615191133-56z8a1m",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240615191133-56z8a1m",
+						"name": "LightMode",
+						"updated": "20240615191422"
+					},
+					"Children": [
+						{
+							"ID": "20240615191133-3ypqbqq",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240615191133-3ypqbqq",
+								"updated": "20240615192456"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "指定Pass执行阶段"
+								}
+							]
+						},
+						{
+							"ID": "20240615191235-1wmvft9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240615191235-1wmvft9",
+								"updated": "20240615191242"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "主要作用：指定了该 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 应该在哪个阶段执行\n可以将着色器代码分配给适当的渲染阶段，以实现所需的效果"
+								}
+							]
+						},
+						{
+							"ID": "20240615191211-mu3fnaf",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240615191211-mu3fnaf",
+								"style": "line-height: 22px;",
+								"updated": "20240615191220"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Tags{ \"LightMode\" = \"标签值\" }\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240615191224-zcxow3v",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240615191224-zcxow3v",
+								"updated": "20240615191302"
+							},
+							"Children": [
+								{
+									"ID": "20240615191302-t6zohnc",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240615191302-t6zohnc",
+										"updated": "20240615191302"
+									},
+									"Children": [
+										{
+											"ID": "20240615191302-icxr0uy",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240615191302-icxr0uy",
+												"updated": "20240615191306"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Always"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ - 始终渲染；不应用光照"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240615191302-uvos7ed",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240615191302-uvos7ed",
+										"updated": "20240615191302"
+									},
+									"Children": [
+										{
+											"ID": "20240615191302-rdzol40",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240615191302-rdzol40",
+												"updated": "20240615191311"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ForwardBase"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ - 在前向渲染中使用；应用环境光、主方向光、顶点/SH 光源和光照贴图"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240615191302-pugfuez",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20240615191302-pugfuez",
+										"updated": "20240615191302"
+									},
+									"Children": [
+										{
+											"ID": "20240615191302-f0wbldl",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240615191302-f0wbldl",
+												"updated": "20240615191316"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ForwardAdd"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ - 在前向渲染中使用；应用附加的每像素光源（每个光源有一个通道）"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240615191302-jwz5omt",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NC4=",
+										"Num": 4
+									},
+									"Properties": {
+										"id": "20240615191302-jwz5omt",
+										"updated": "20240615191302"
+									},
+									"Children": [
+										{
+											"ID": "20240615191302-4ch9cly",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240615191302-4ch9cly",
+												"updated": "20240615191319"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Deferred"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ - 在延迟渲染中使用；渲染 G 缓冲区"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240615191302-ye6wrjp",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NS4=",
+										"Num": 5
+									},
+									"Properties": {
+										"id": "20240615191302-ye6wrjp",
+										"updated": "20240615191302"
+									},
+									"Children": [
+										{
+											"ID": "20240615191302-3mpxk9n",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240615191302-3mpxk9n",
+												"updated": "20240615191323"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ShadowCaster"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ - 将对象深度渲染到阴影贴图或深度纹理中"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240615191302-lhalfiw",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Ni4=",
+										"Num": 6
+									},
+									"Properties": {
+										"id": "20240615191302-lhalfiw",
+										"updated": "20240615191302"
+									},
+									"Children": [
+										{
+											"ID": "20240615191302-nlvgwlo",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240615191302-nlvgwlo",
+												"updated": "20240615191326"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "MotionVectors"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ - 用于计算每对象运动矢量"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240615191302-lpgyekb",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Ny4=",
+										"Num": 7
+									},
+									"Properties": {
+										"id": "20240615191302-lpgyekb",
+										"updated": "20240615191302"
+									},
+									"Children": [
+										{
+											"ID": "20240615191302-2w0yat6",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240615191302-2w0yat6",
+												"updated": "20240615191330"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "PrepassBase"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ - 在旧版延迟光照中使用；渲染法线和镜面反射指数"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240615191302-cnjz09g",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "OC4=",
+										"Num": 8
+									},
+									"Properties": {
+										"id": "20240615191302-cnjz09g",
+										"updated": "20240615191302"
+									},
+									"Children": [
+										{
+											"ID": "20240615191302-c8zvfqz",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240615191302-c8zvfqz",
+												"updated": "20240615191333"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "PrepassFinal"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ - 在旧版延迟光照中使用；通过组合纹理、光照和反光来渲染最终颜色"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240615191302-yq66rhl",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "OS4=",
+										"Num": 9
+									},
+									"Properties": {
+										"id": "20240615191302-yq66rhl",
+										"updated": "20240615191302"
+									},
+									"Children": [
+										{
+											"ID": "20240615191302-54cu03t",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240615191302-54cu03t",
+												"updated": "20240615191336"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Vertex"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ - 当对象不进行光照贴图时在旧版顶点光照渲染中使用；应用所有顶点光源"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240615191302-bsf3phl",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MTAu",
+										"Num": 10
+									},
+									"Properties": {
+										"id": "20240615191302-bsf3phl",
+										"updated": "20240615191302"
+									},
+									"Children": [
+										{
+											"ID": "20240615191302-rnrsk12",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240615191302-rnrsk12",
+												"updated": "20240615191344"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "VertexLMRGBM"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ - 当对象不进行光照贴图时在旧版顶点光照渲染中使用；在光照贴图为 RGBM 编码的平台上（PC 和游戏主机）"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240615191302-tiz9bdn",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MTEu",
+										"Num": 11
+									},
+									"Properties": {
+										"id": "20240615191302-tiz9bdn",
+										"updated": "20240615191302"
+									},
+									"Children": [
+										{
+											"ID": "20240615191302-n99cb5k",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240615191302-n99cb5k",
+												"updated": "20240615191347"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "VertexLM"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ - 当对象不进行光照贴图时在旧版顶点光照渲染中使用；在光照贴图为双 LDR 编码的平台上（移动平台）"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240615191355-6l051ia",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240615191355-6l051ia",
+								"updated": "20240615191422"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "关于向前渲染、延迟渲染、旧版光照等概念了解："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "a",
+									"TextMarkAHref": "https://docs.unity.cn/cn/2022.3/Manual/RenderingPaths.html",
+									"TextMarkTextContent": "内置渲染管线中的渲染路径 - Unity 手册"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240615191204-mfmwg23",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240615191204-mfmwg23",
+						"name": "RequireOptions",
+						"updated": "20240615192359"
+					},
+					"Children": [
+						{
+							"ID": "20240615191204-0vmi45d",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240615191204-0vmi45d",
+								"updated": "20240615192453"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "指定Pass执行条件"
+								}
+							]
+						},
+						{
+							"ID": "20240615191539-xl5ro35",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240615191539-xl5ro35",
+								"updated": "20240615191544"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "主要作用：用于指定当满足某些条件时才渲染该 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240615191546-sinw6ly",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240615191546-sinw6ly",
+								"style": "line-height: 22px;",
+								"updated": "20240615191553"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Tags{ \"RequireOptions\" = \"标签值\" }\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240615191554-j57zk69",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240615191554-j57zk69",
+								"updated": "20240615191601"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "目前Unity仅支持："
+								}
+							]
+						},
+						{
+							"ID": "20240615191601-vfhq02i",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240615191601-vfhq02i",
+								"style": "line-height: 22px;",
+								"updated": "20240615191605"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Tags{ \"RequireOptions\" = \"SoftVegetation\" }\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240615191606-4d1zmec",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240615191606-4d1zmec",
+								"updated": "20240615192359"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "仅当 Quality 窗口中开启了 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SoftVegetation"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 时才渲染此通道："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "a",
+									"TextMarkAHref": "https://docs.unity.cn/cn/2022.3/ScriptReference/QualitySettings-softVegetation.html",
+									"TextMarkTextContent": "QualitySettings-softVegetation - Unity 脚本 API"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240615192413-bpsjynu",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240615192413-bpsjynu",
+						"name": "PassFlags",
+						"updated": "20240615192721"
+					},
+					"Children": [
+						{
+							"ID": "20240615192413-548y7zy",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240615192413-548y7zy",
+								"updated": "20240615192721"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "指示Pass标志"
+								}
+							]
+						},
+						{
+							"ID": "20240615192435-lgsz6cp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240615192435-lgsz6cp",
+								"updated": "20240615192539"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "主要作用：一个渲染通道 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 可指示一些标志来更改渲染管线向 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 传递数据的方式"
+								}
+							]
+						},
+						{
+							"ID": "20240615192540-bgmxcwi",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240615192540-bgmxcwi",
+								"style": "line-height: 22px;",
+								"updated": "20240615192547"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Tags{ \"PassFlags\" = \"标签值\" }\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240615192553-cdwq1g1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240615192553-cdwq1g1",
+								"updated": "20240615192559"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "目前Unity仅支持："
+								}
+							]
+						},
+						{
+							"ID": "20240615192602-oxip18m",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240615192602-oxip18m",
+								"style": "line-height: 22px;",
+								"updated": "20240615192604"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Tags{ \"PassFlags\" = \"OnlyDirectional\" }\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240615192600-443wsh9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240615192600-443wsh9",
+								"updated": "20240615192721"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ForwardBase"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 向前渲染的通道类型中使用时，此标志的作用是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "u",
+									"TextMarkTextContent": "仅允许主方向光和环境光/光照探针数据传递到着色器"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n简单来说，限制一些特殊光源数据给到着色器，这意味着"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong u",
+									"TextMarkTextContent": "非重要光源的数据将不会传递到顶点光源或球谐函数着色器变量"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240615191436-ukkn06a",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240615191436-ukkn06a",
+				"updated": "20240616151125"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Pass中的渲染状态"
+				}
+			]
+		},
+		{
+			"ID": "20240615192835-b056ihw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615192835-b056ihw",
+				"updated": "20240615192855"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们上节课在 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "SubShader"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 语句块中学习的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240612192702-svpn1gj",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "渲染状态"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "同样适用于 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240615192903-akfepg8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615192903-akfepg8",
+				"updated": "20240615192904"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "比如："
+				}
+			]
+		},
+		{
+			"ID": "20240615192904-xntnfos",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240615192904-xntnfos",
+				"updated": "20240615193021"
+			},
+			"Children": [
+				{
+					"ID": "20240615192904-5l2x6yb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240615192904-5l2x6yb",
+						"updated": "20240615193002"
+					},
+					"Children": [
+						{
+							"ID": "20240615192904-e3yu8ze",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240615192904-e3yu8ze",
+								"updated": "20240615193002"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240612204819-2b0fg9p",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "剔除方式"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "：决定了模型正面背面是否能够被渲染"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240615192905-kym0z75",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240615192905-kym0z75",
+						"updated": "20240615193015"
+					},
+					"Children": [
+						{
+							"ID": "20240615192905-3t691kg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240615192905-3t691kg",
+								"updated": "20240615193015"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240612204920-0vut5cr",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "深度缓冲"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "和"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240612204959-woux783",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "深度测试"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "：决定了景深关系的确定以及透明效果的正确表达等"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240615192906-a3ajpox",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240615192906-a3ajpox",
+						"updated": "20240615193021"
+					},
+					"Children": [
+						{
+							"ID": "20240615192906-ilbijok",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240615192906-ilbijok",
+								"updated": "20240615193021"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240612205005-z6oi75x",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "混合方式"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "：决定了透明半透明颜色的正确表现，以及一些特殊颜色效果的表现"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240615192911-6c4a1ce",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615192911-6c4a1ce",
+				"updated": "20240615192914"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这些渲染状态都可以在单个Pass中进行设置"
+				}
+			]
+		},
+		{
+			"ID": "20240615192916-v6goboq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615192916-v6goboq",
+				"updated": "20240615192944"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "需要注意的是：\n如果在 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "SubShader"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 语句块中使用会影响之后的所有渲染通道 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n如果在 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 语句块中使用只会影响当前 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 渲染通道，不会影响其他的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240615192835-xtkux5n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615192835-xtkux5n",
+				"updated": "20240615192931"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "不仅如此，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 中还可以使用固定管线着色器的命令"
+				}
+			]
+		},
+		{
+			"ID": "20240615193027-mq51c9i",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240615193027-mq51c9i",
+				"updated": "20240616151125"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "其他着色器代码"
+				}
+			]
+		},
+		{
+			"ID": "20240615193036-j328ezm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615193036-j328ezm",
+				"updated": "20240616151125"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "其他代码部分就是实现着色器的核心代码部分\n我们可能会用到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240615211515-pq9bbic",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "CG"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "或HLSL等着色器语言来进行逻辑书写"
+				}
+			]
+		},
+		{
+			"ID": "20240615193058-to6kyd9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240615193058-to6kyd9",
+				"name": "GrabPass",
+				"updated": "20240615194622"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "GrabPass命令"
+				}
+			]
+		},
+		{
+			"ID": "20240615193113-btowycb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615193113-btowycb",
+				"updated": "20240615194622"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以利用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GrabPass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 命令把"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "即将绘制对象时的屏幕内容抓取到纹理中（如同截屏一样）"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n在后续通道中即可使用此纹理，从而执行基于图像的高级效果。（常用于制作一些滤镜）"
+				}
+			]
+		},
+		{
+			"ID": "20240615193120-8tt6uc2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615193120-8tt6uc2",
+				"updated": "20240615193141"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "举例：将绘制该对象之前的屏幕抓取到 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_BackgroundTexture"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 中"
+				}
+			]
+		},
+		{
+			"ID": "20240615193135-vmldx7w",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240615193135-vmldx7w",
+				"style": "line-height: 22px;",
+				"updated": "20240615193150"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "GrabPass\n{\n    \"_BackgroundTexture\"\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240615193156-bvj8s00",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615193156-bvj8s00",
+				"updated": "20240615193213"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：该命令一般写在某个 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 前，在之后的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 代码中可以利用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_BackgroundTexture"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 变量进行处理"
+				}
+			]
+		},
+		{
+			"ID": "20240615193410-dsuqwlw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240615193410-dsuqwlw"
+			}
+		}
+	]
+}

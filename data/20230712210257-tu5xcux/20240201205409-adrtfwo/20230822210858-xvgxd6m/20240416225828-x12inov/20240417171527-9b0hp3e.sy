@@ -1,0 +1,1644 @@
+{
+	"ID": "20240417171527-9b0hp3e",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240417171527-9b0hp3e",
+		"title": "UFL5-2——优化Resources资源加载模块的异步加载",
+		"type": "doc",
+		"updated": "20240417221458"
+	},
+	"Children": [
+		{
+			"ID": "20240417171527-r664yyu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240417171527-r664yyu",
+				"updated": "20240417171548"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "异步加载问题指的是什么"
+				}
+			]
+		},
+		{
+			"ID": "20240417171557-c41goob",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240417171557-c41goob",
+				"updated": "20240417171943"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "每次进行异步加载时，都会开启一个协同程序，虽然"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Resources"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​资源会在内部进行缓存，加载已加载过的资源，性能消耗不会太大\n但是每次开启协程的过程也会浪费性能，因此我们希望对上节课的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ResManager"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​进行优化\n不依赖"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Resources"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内部的缓存机制，而是自己来管理已经加载过的资源，从而解决异步加载时协同程序的频繁开启造成的性能浪费"
+				}
+			]
+		},
+		{
+			"ID": "20240417172026-z2l1qfa",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240417172026-z2l1qfa",
+				"updated": "20240417172135"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "例如下面的代码就是加载的一模一样的资源"
+				}
+			]
+		},
+		{
+			"ID": "20240417172012-oppv0dn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240417172012-oppv0dn",
+				"style": "line-height: 22px;",
+				"updated": "20240417172024"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "ResManager.Instance.LoadAsync\u003cGameObject\u003e(\"Test\", (obj) =\u003e\n{\n    Instantiate(obj);\n});\n\nResManager.Instance.LoadAsync(\"Test\", typeof(GameObject), (obj) =\u003e\n{\n    Instantiate(obj as GameObject);\n});\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240417171557-ry3bvgd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240417171557-ry3bvgd",
+				"updated": "20240417171630"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们想要达到的目的是：通过一个字典记录已经加载过的资源，每次在进行资源加载时，如果发现是已经加载过的资源，我们直接使用即可"
+				}
+			]
+		},
+		{
+			"ID": "20240417171638-alc5qoj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240417171638-alc5qoj",
+				"updated": "20240417171648"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "制作思路和具体实现"
+				}
+			]
+		},
+		{
+			"ID": "20240417171715-c57y1n7",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240417171715-c57y1n7",
+				"updated": "20240417221458"
+			},
+			"Children": [
+				{
+					"ID": "20240417171732-qs6hqwc",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240417171732-qs6hqwc",
+						"updated": "20240417171732"
+					},
+					"Children": [
+						{
+							"ID": "20240417171732-yjzbkge",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240417171732-yjzbkge",
+								"updated": "20240417171825"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "字典容器结构设计"
+								}
+							]
+						},
+						{
+							"ID": "20240417171826-azj1vge",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240417171826-azj1vge",
+								"updated": "20240417171829"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "主要考虑点"
+								}
+							]
+						},
+						{
+							"ID": "20240417171826-njbtb39",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240417171826-njbtb39",
+								"updated": "20240417171826"
+							},
+							"Children": [
+								{
+									"ID": "20240417171738-lr0nbob",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240417171738-lr0nbob",
+										"updated": "20240417171738"
+									},
+									"Children": [
+										{
+											"ID": "20240417171738-9v8c9gw",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240417171738-9v8c9gw",
+												"updated": "20240417174930"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "key"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ - 资源名（路径 + 类型 拼接而成 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "resName = $\u0026quot;{path}_{typeof(T).Name}\u0026quot;"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ ）"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240417171738-c4asvpr",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240417171738-c4asvpr"
+									},
+									"Children": [
+										{
+											"ID": "20240417171738-1aqc03j",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240417171738-1aqc03j",
+												"updated": "20240417175106"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "value"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ - 自定义数据结构类"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ResInfo\u0026lt;T\u0026gt;"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：资源、加载完执行的委托、协程对象等"
+												}
+											]
+										},
+										{
+											"ID": "20240417174949-9pt5ggn",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240417174949-9pt5ggn",
+												"updated": "20240417175328"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "其中，不同类型的资源必然会使用不同的协程参数，为了能够让字典装载他们，需要再声明一个"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ResInfoBase"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​并让"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ResInfo\u0026lt;T\u0026gt;"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​继承"
+												}
+											]
+										},
+										{
+											"ID": "20240417174936-m84o34k",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240417174936-m84o34k",
+												"style": "line-height: 22px;",
+												"updated": "20240417180458"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "/// \u003csummary\u003e\n/// 资源消息基类\n/// \u003c/summary\u003e\npublic abstract class ResInfoBase { }\n\n/// \u003csummary\u003e\n/// 资源消息对象 主要用于存储资源消息，异步加载委托消息，异步加载协程消息\n/// \u003c/summary\u003e\n/// \u003ctypeparam name=\"T\"\u003e\u003c/typeparam\u003e\npublic class ResInfo\u003cT\u003e : ResInfoBase\n{\n    public T asset;                     //资源\n    public UnityAction\u003cT\u003e callBack;     //待异步资源加载完后，传递资源到外部的委托，加载完毕后清空\n    public Coroutine coroutine;         //记录异步加载时 开启的协同程序，加载完毕后清空\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240417175332-gay3wut",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240417175332-gay3wut",
+								"updated": "20240417175502"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "接下来就可以声明字典容器"
+								}
+							]
+						},
+						{
+							"ID": "20240417175341-ml4t4e1",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240417175341-ml4t4e1",
+								"style": "line-height: 22px;",
+								"updated": "20240417175350"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//主要用于存储加载过的资源或者加载中的资源的容器\nprivate Dictionary\u003cstring, ResInfoBase\u003e resDic = new Dictionary\u003cstring, ResInfoBase\u003e();\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240417171732-ilc9nzo",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240417171732-ilc9nzo",
+						"updated": "20240417171732"
+					},
+					"Children": [
+						{
+							"ID": "20240417171732-am8s8oz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240417171732-am8s8oz",
+								"updated": "20240417171805"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "修改异步加载相关逻辑\n"
+								}
+							]
+						},
+						{
+							"ID": "20240417171831-ocq7mv3",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240417171831-ocq7mv3",
+								"updated": "20240417171902"
+							},
+							"Children": [
+								{
+									"ID": "20240417181650-r2swpmm",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240417181650-r2swpmm"
+									},
+									"Children": [
+										{
+											"ID": "20240417181650-hsbgsot",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240417181650-hsbgsot",
+												"updated": "20240417181705"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "LoadAsync\u0026lt;T\u0026gt;"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​内"
+												}
+											]
+										},
+										{
+											"ID": "20240417181651-4h5t3us",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240417181651-4h5t3us"
+											},
+											"Children": [
+												{
+													"ID": "20240417171902-ouvcivz",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240417171902-ouvcivz",
+														"updated": "20240417171902"
+													},
+													"Children": [
+														{
+															"ID": "20240417171902-syz8uk3",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240417171902-syz8uk3",
+																"updated": "20240417171909"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "字典中不存在资源记录时"
+																}
+															]
+														},
+														{
+															"ID": "20240417171909-r50uspz",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240417171909-r50uspz",
+																"updated": "20240417181842"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "声明一个"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "ResInfo\u0026lt;T\u0026gt;"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​，记录回调函数，开启协同程序进行加载，同时将协同程序也记录下来\n并且此时就要将声明出来的"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "ResInfo\u0026lt;T\u0026gt;"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​记录进字典中（这样可以避免重复异步加载）"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240417171903-aptgpwh",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240417171903-aptgpwh"
+													},
+													"Children": [
+														{
+															"ID": "20240417171903-d7u98uh",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240417171903-d7u98uh",
+																"updated": "20240417175801"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "字典中存在资源记录时，通过"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "ResInfo\u0026lt;T\u0026gt;.asset"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​是否为"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "null"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​判断资源是否加载完毕"
+																}
+															]
+														},
+														{
+															"ID": "20240417171800-ui9oq3m",
+															"Type": "NodeList",
+															"ListData": {
+																"Typ": 1
+															},
+															"Properties": {
+																"id": "20240417171800-ui9oq3m",
+																"updated": "20240417171800"
+															},
+															"Children": [
+																{
+																	"ID": "20240417171800-qvws7an",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "MS4=",
+																		"Num": 1
+																	},
+																	"Properties": {
+																		"id": "20240417171800-qvws7an",
+																		"updated": "20240417171800"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240417171800-zxercww",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240417171800-zxercww",
+																				"updated": "20240417175557"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "资源还没加载完 —— 记录委托，等待资源加载完毕后一起执行"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"ID": "20240417171800-m0gi4pq",
+																	"Type": "NodeListItem",
+																	"ListData": {
+																		"Typ": 1,
+																		"Delimiter": 46,
+																		"Marker": "Mi4=",
+																		"Num": 2
+																	},
+																	"Properties": {
+																		"id": "20240417171800-m0gi4pq",
+																		"updated": "20240417171800"
+																	},
+																	"Children": [
+																		{
+																			"ID": "20240417171800-1ab3q46",
+																			"Type": "NodeParagraph",
+																			"Properties": {
+																				"id": "20240417171800-1ab3q46",
+																				"updated": "20240417175554"
+																			},
+																			"Children": [
+																				{
+																					"Type": "NodeText",
+																					"Data": "资源已经加载完 —— 直接执行回调函数，传入加载好的资源"
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240417181743-p01y42y",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240417181743-p01y42y"
+									},
+									"Children": [
+										{
+											"ID": "20240417181743-gjulyzg",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240417181743-gjulyzg",
+												"updated": "20240417181757"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ReallyLoadAsync\u0026lt;T\u0026gt;"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​内"
+												}
+											]
+										},
+										{
+											"ID": "20240417181758-rs94tjo",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240417181758-rs94tjo",
+												"updated": "20240417182326"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "协程不再需要额外传入回调函数，可直接调用字典内的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ResInfo\u0026lt;T\u0026gt;.callBack"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​\n在加载完毕后，将资源记录到"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ResInfo\u0026lt;T\u0026gt;.asset"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​内，\n调用委托将资源传递出去后，将消息记录中的回调函数和协程的引用释放掉，避免内存泄漏"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240417180206-37e1pid",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240417180206-37e1pid",
+								"style": "line-height: 22px;",
+								"updated": "20240417182137"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//主要用于存储加载过的资源或者加载中的资源的容器\nprivate Dictionary\u003cstring, ResInfoBase\u003e resDic = new Dictionary\u003cstring, ResInfoBase\u003e();\n\n// 异步加载资源的方法\npublic void LoadAsync\u003cT\u003e(string path, UnityAction\u003cT\u003e callBack) where T : UnityEngine.Object\n{\n    //资源的唯一ID，通过路径名_资源类型拼接而成\n    string resName = $\"{path}_{typeof(T).Name}\";\n    ResInfo\u003cT\u003e info;\n    //不存在消息记录时，说明资源未加载过\n    if (!resDic.ContainsKey(resName))\n    {\n        info = new ResInfo\u003cT\u003e();        //声明一个 资源信息对象\n        resDic.Add(resName, info);      //将资源记录添加到资源内（资源没有加载成功）\n        info.callBack += callBack;      //记录传入的委托函数，一会加载完成了再使用\n        //通过协同程序去异步加载资源，并记录该协同程序\n        info.coroutine = MonoManager.Instance.StartCoroutine(ReallyLoadAsync\u003cT\u003e(path));\n    }\n    //存在消息记录时，资源已经加载过\n    else\n    {\n        info = resDic[resName] as ResInfo\u003cT\u003e;   //从字典中取出资源信息\n        //资源尚未加载成功\n        if (info.asset == null)\n            info.callBack += callBack;          //将回调函数添加到委托内，等待加载完毕后一起执行\n        //资源已经加载完毕\n        else\n            callBack?.Invoke(info.asset);       //直接执行传入的回调函数\n    }\n}\n\nprivate IEnumerator ReallyLoadAsync\u003cT\u003e(string path) where T : UnityEngine.Object\n{\n    //异步加载资源\n    ResourceRequest req = Resources.LoadAsync\u003cT\u003e(path);\n    //等待资源加载结束后，才会继续执行yield return后面的代码\n    yield return req;\n    string resName = $\"{path}_{typeof(T).Name}\";\n    //资源加载结束，将资源传到外部的委托函数去进行调用\n    if (resDic.ContainsKey(resName))\n    {\n        ResInfo\u003cT\u003e resInfo = resDic[resName] as ResInfo\u003cT\u003e;     //取出资源消息\n        resInfo.asset = req.asset as T;                         //将资源记录到资源信息内\n        resInfo.callBack?.Invoke(resInfo.asset);                //将加载出来的资源传递出去\n        //加载完毕后，这些引用就可以清空，避免引用的占用带来的内存泄露问题\n        resInfo.callBack = null;\n        resInfo.coroutine = null;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240417192509-oxpsaax",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240417192509-oxpsaax",
+								"updated": "20240417192959"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对于非泛型异步加载方法"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LoadAsync"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，该方法使用的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ResInfo\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​泛型参数默认使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityEngine.Object"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​即可\n但是，由于不同泛型参数存储的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ResInfo\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​存储的委托是不同的，因此"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LoadAsync"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​和"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LoadAsync\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​混用很可能出现问题\n因此，我们规定"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LoadAsync"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​和"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LoadAsync\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​不可混用即可"
+								}
+							]
+						},
+						{
+							"ID": "20240417192959-44gu72y",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240417192959-44gu72y",
+								"style": "line-height: 22px;",
+								"updated": "20240417194413"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//主要用于存储加载过的资源或者加载中的资源的容器\nprivate Dictionary\u003cstring, ResInfoBase\u003e resDic = new Dictionary\u003cstring, ResInfoBase\u003e();\n\n[Obsolete(\"注意：建议使用泛型方法，如果需要使用Type加载，请不要和泛型加载混用去加载同类型同名资源\")]\npublic void LoadAsync(string path, Type type, UnityAction\u003cUnityEngine.Object\u003e callBack)\n{\n    //资源的唯一ID，通过路径名_资源类型拼接而成\n    string resName = $\"{path}_{type.Name}\";\n    ResInfo\u003cUnityEngine.Object\u003e info;\n    //不存在消息记录时，说明资源未加载过\n    if (!resDic.ContainsKey(resName))\n    {\n        info = new ResInfo\u003cUnityEngine.Object\u003e();   //声明一个 资源信息对象\n        resDic.Add(resName, info);      //将资源记录添加到资源内（资源没有加载成功）\n        info.callBack += callBack;      //记录传入的委托函数，一会加载完成了再使用\n        //通过协同程序去异步加载资源，并记录该协同程序\n        info.coroutine = MonoManager.Instance.StartCoroutine(ReallyLoadAsync(path, type));\n    }\n    //存在消息记录时，资源已经加载过\n    else\n    {\n        info = resDic[resName] as ResInfo\u003cUnityEngine.Object\u003e;   //从字典中取出资源信息\n        //资源尚未加载成功\n        if (info.asset == null)\n            info.callBack += callBack;          //将回调函数添加到委托内，等待加载完毕后一起执行\n        //资源已经加载完毕\n        else\n            callBack?.Invoke(info.asset);       //直接执行传入的回调函数\n    }\n}\n\nprivate IEnumerator ReallyLoadAsync(string path, Type type)\n{\n    //异步加载资源\n    ResourceRequest req = Resources.LoadAsync(path, type);\n    //等待资源加载结束后，才会继续执行yield return后面的代码\n    yield return req;\n    string resName = $\"{path}_{type.Name}\";\n    //资源加载结束，将资源传到外部的委托函数去进行调用\n    if (resDic.ContainsKey(resName))\n    {\n        ResInfo\u003cUnityEngine.Object\u003e resInfo = resDic[resName] as ResInfo\u003cUnityEngine.Object\u003e;   //取出资源消息\n        resInfo.asset = req.asset;                              //将资源记录到资源信息内\n        resInfo.callBack?.Invoke(resInfo.asset);                //将加载出来的资源传递出去\n        //加载完毕后，这些引用就可以清空，避免引用的占用带来的内存泄露问题\n        resInfo.callBack = null;\n        resInfo.coroutine = null;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240417171732-1falwj0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240417171732-1falwj0",
+						"updated": "20240417221448"
+					},
+					"Children": [
+						{
+							"ID": "20240417171732-3gsrieb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240417171732-3gsrieb",
+								"updated": "20240417221444"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "修改同步加载"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Load"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​相关逻辑"
+								}
+							]
+						},
+						{
+							"ID": "20240417193127-38fows0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240417193127-38fows0",
+								"updated": "20240417221448"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "修改同步加载"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Load"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​逻辑主要是为了解决：已加载过资源但重复加载的情况，和如何处理先执行异步加载，未加载完时又执行同步加载的情况"
+								}
+							]
+						},
+						{
+							"ID": "20240417171843-pb2h528",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240417171843-pb2h528",
+								"updated": "20240417171913"
+							},
+							"Children": [
+								{
+									"ID": "20240417171913-xg4o45m",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240417171913-xg4o45m",
+										"updated": "20240417171913"
+									},
+									"Children": [
+										{
+											"ID": "20240417171913-61wt5jb",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240417171913-61wt5jb",
+												"updated": "20240417171916"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "字典中不存在资源记录时"
+												}
+											]
+										},
+										{
+											"ID": "20240417171916-001ouiw",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240417171916-001ouiw"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "直接同步加载资源记录即可"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240417171914-6g2rzc4",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240417171914-6g2rzc4"
+									},
+									"Children": [
+										{
+											"ID": "20240417171914-kkdz8zy",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240417171914-kkdz8zy"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "字典中存在资源记录时"
+												}
+											]
+										},
+										{
+											"ID": "20240417171855-r9z4no0",
+											"Type": "NodeList",
+											"ListData": {
+												"Typ": 1
+											},
+											"Properties": {
+												"id": "20240417171855-r9z4no0",
+												"updated": "20240417171855"
+											},
+											"Children": [
+												{
+													"ID": "20240417171855-v8hafoi",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MS4=",
+														"Num": 1
+													},
+													"Properties": {
+														"id": "20240417171855-v8hafoi",
+														"updated": "20240417171855"
+													},
+													"Children": [
+														{
+															"ID": "20240417171855-j9gsbm9",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240417171855-j9gsbm9",
+																"updated": "20240417171855"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "资源还没加载完 —— 停止协程"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240417171855-1me0mdw",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Mi4=",
+														"Num": 2
+													},
+													"Properties": {
+														"id": "20240417171855-1me0mdw",
+														"updated": "20240417171855"
+													},
+													"Children": [
+														{
+															"ID": "20240417171855-hco6aq3",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240417171855-hco6aq3",
+																"updated": "20240417171855"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "资源已经加载完 —— 直接使用"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240417194509-tz78opg",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240417194509-tz78opg",
+								"style": "line-height: 22px;",
+								"updated": "20240417194532"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//主要用于存储加载过的资源或者加载中的资源的容器\nprivate Dictionary\u003cstring, ResInfoBase\u003e resDic = new Dictionary\u003cstring, ResInfoBase\u003e();\n\nprivate ResManager() { }\n\n// 同步加载资源的方法\npublic T Load\u003cT\u003e(string path) where T : UnityEngine.Object\n{\n    //资源的唯一ID，通过路径名_资源类型拼接而成\n    string resName = $\"{path}_{typeof(T).Name}\";\n    ResInfo\u003cT\u003e info;\n    //字典中不存在资源时\n    if (!resDic.ContainsKey(resName))\n    {\n        //直接同步加载，并且记录资源消息到字典中，方便下次直接取出来用\n        T res = Resources.Load\u003cT\u003e(path);\n        info = new ResInfo\u003cT\u003e();\n        info.asset = res;\n        resDic.Add(resName, info);\n        return res;\n    }\n    else\n    {\n        //取出字典的记录\n        info = resDic[resName] as ResInfo\u003cT\u003e;\n        //存在异步加载且还在加载中\n        if (info.asset == null)\n        {\n            //停止异步加载，直接采用同步加载的方式加载，并记录\n            MonoManager.Instance.StopCoroutine(info.coroutine);\n            T res = Resources.Load\u003cT\u003e(path);\n            info.asset = res;\n            //将同步加载出来的内容传递到已存在的回调函数内执行\n            info.callBack?.Invoke(res);\n            //执行结束回调，将记录的回调和协程清空，避免内存泄露\n            info.callBack = null;\n            info.coroutine = null;\n            return res;\n        }\n        //已经加载过资源\n        else\n        {\n            return info.asset;\n        }\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240417171732-b9jedua",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240417171732-b9jedua",
+						"updated": "20240417221458"
+					},
+					"Children": [
+						{
+							"ID": "20240417171732-ti1y2wb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240417171732-ti1y2wb",
+								"updated": "20240417221458"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "修改卸载资源"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnloadAsset"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​相关逻辑"
+								}
+							]
+						},
+						{
+							"ID": "20240417171922-pxq7amw",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240417171922-pxq7amw",
+								"updated": "20240417171924"
+							},
+							"Children": [
+								{
+									"ID": "20240417171924-2acylyd",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240417171924-2acylyd",
+										"updated": "20240417171924"
+									},
+									"Children": [
+										{
+											"ID": "20240417171924-8bwjkxx",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240417171924-8bwjkxx",
+												"updated": "20240417171928"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "字典中存在资源记录时"
+												}
+											]
+										},
+										{
+											"ID": "20240417171928-j56xxy9",
+											"Type": "NodeList",
+											"ListData": {
+												"Typ": 1
+											},
+											"Properties": {
+												"id": "20240417171928-j56xxy9",
+												"updated": "20240417171928"
+											},
+											"Children": [
+												{
+													"ID": "20240417171928-n493xvj",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MS4=",
+														"Num": 1
+													},
+													"Properties": {
+														"id": "20240417171928-n493xvj",
+														"updated": "20240417171928"
+													},
+													"Children": [
+														{
+															"ID": "20240417171928-7oz8a40",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240417171928-7oz8a40",
+																"updated": "20240417195825"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "资源还没加载完 —— "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "strong",
+																	"TextMarkTextContent": "记录删除标识，待加载完后真正移除"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": " 或者 停止协程，并且移除"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240417171928-oams5sz",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Mi4=",
+														"Num": 2
+													},
+													"Properties": {
+														"id": "20240417171928-oams5sz",
+														"updated": "20240417171928"
+													},
+													"Children": [
+														{
+															"ID": "20240417171928-083rmx0",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240417171928-083rmx0",
+																"updated": "20240417171928"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "资源已经加载完 —— 直接卸载，并且移除字典中资源记录"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240417202054-app4m2u",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240417202054-app4m2u",
+								"updated": "20240417202126"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "首先为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ResInfo\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​添加一个标识，来表示是否需要移除"
+								}
+							]
+						},
+						{
+							"ID": "20240417202050-9r1xwjo",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240417202050-9r1xwjo",
+								"style": "line-height: 22px;",
+								"updated": "20240417202145"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class ResInfo\u003cT\u003e : ResInfoBase\n{\n    public T asset;                     //资源\n    public UnityAction\u003cT\u003e callBack;     //用于异步资源加载完后 传递资源到外部的委托\n    public Coroutine coroutine;         //用于异步加载时 开启的协同程序\n    public bool isDel;                  //是否需要移除\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240417202147-g9dezw3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240417202147-g9dezw3",
+								"updated": "20240417202238"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "然后，根据以上思路修改"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnloadAsset"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240417202241-a67d8uf",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240417202241-a67d8uf",
+								"style": "line-height: 22px;",
+								"updated": "20240417202804"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//主要用于存储加载过的资源或者加载中的资源的容器\nprivate Dictionary\u003cstring, ResInfoBase\u003e resDic = new Dictionary\u003cstring, ResInfoBase\u003e();\n\n// 指定卸载一个资源\npublic void UnloadAsset\u003cT\u003e(string path)\n{\n    string resName = $\"{path}_{typeof(T).Name}\";\n    //是否存在对应资源\n    if (resDic.ContainsKey(resName))\n    {\n        ResInfo\u003cT\u003e resInfo = resDic[resName] as ResInfo\u003cT\u003e;\n        //资源已经加载结束\n        if (resInfo.asset != null)\n        {\n            //从字典移除，通过api卸载资源\n            resDic.Remove(resName);\n            Resources.UnloadAsset(resInfo.asset as UnityEngine.Object);\n        }\n        //资源正在异步加载中\n        else\n        {\n            resInfo.isDel = true;   //改变标识，代表待移除\n        }\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240417202305-6jgn5ab",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240417202305-6jgn5ab",
+								"updated": "20240417202529"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对于需要卸载但是资源还没加载完的情况，我们需要在修改标识后，在"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ReallyLoadAsync\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中在加载完后重新执行"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnloadAsset\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240417202441-1a7p35u",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240417202441-1a7p35u",
+								"style": "line-height: 22px;",
+								"updated": "20240417202809"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//主要用于存储加载过的资源或者加载中的资源的容器\nprivate Dictionary\u003cstring, ResInfoBase\u003e resDic = new Dictionary\u003cstring, ResInfoBase\u003e();\n\nprivate IEnumerator ReallyLoadAsync\u003cT\u003e(string path) where T : UnityEngine.Object\n{\n    //异步加载资源\n    ResourceRequest req = Resources.LoadAsync\u003cT\u003e(path);\n    //等待资源加载结束后，才会继续执行yield return后面的代码\n    yield return req;\n    string resName = $\"{path}_{typeof(T).Name}\";\n    //资源加载结束，将资源传到外部的委托函数去进行调用\n    if (resDic.ContainsKey(resName))\n    {\n        ResInfo\u003cT\u003e resInfo = resDic[resName] as ResInfo\u003cT\u003e;     //取出资源消息\n        resInfo.asset = req.asset as T;                         //将资源记录到资源信息内\n        //如果发现需要删除，再去移除资源\n        if (resInfo.isDel)\n        {\n            UnloadAsset\u003cT\u003e(path);\n        }\n        else\n        {\n            resInfo.callBack?.Invoke(resInfo.asset);            //将加载出来的资源传递出去\n            //加载完毕后，这些引用就可以清空，避免引用的占用带来的内存泄露问题\n            resInfo.callBack = null;\n            resInfo.coroutine = null;\n        }\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240417202545-lwmji81",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240417202545-lwmji81",
+								"updated": "20240417202659"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对于不需要泛型的资源消息，需要额外声明不需要泛型的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnloadAsset"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，同时修改"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ReallyLoadAsync"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的逻辑"
+								}
+							]
+						},
+						{
+							"ID": "20240417202700-fwui83p",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240417202700-fwui83p",
+								"style": "line-height: 22px;",
+								"updated": "20240417202813"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//主要用于存储加载过的资源或者加载中的资源的容器\nprivate Dictionary\u003cstring, ResInfoBase\u003e resDic = new Dictionary\u003cstring, ResInfoBase\u003e();\n\npublic void UnloadAsset(string path, Type type)\n{\n    string resName = $\"{path}_{type.Name}\";\n    //是否存在对应资源\n    if (resDic.ContainsKey(resName))\n    {\n        ResInfo\u003cUnityEngine.Object\u003e resInfo = resDic[resName] as ResInfo\u003cUnityEngine.Object\u003e;\n        //资源已经加载结束\n        if (resInfo.asset != null)\n        {\n            //从字典移除，通过api卸载资源\n            resDic.Remove(resName);\n            Resources.UnloadAsset(resInfo.asset as UnityEngine.Object);\n        }\n        //资源正在异步加载中\n        else\n        {\n            resInfo.isDel = true;   //改变标识，代表待移除\n        }\n    }\n}\n\nprivate IEnumerator ReallyLoadAsync(string path, Type type)\n{\n    //异步加载资源\n    ResourceRequest req = Resources.LoadAsync(path, type);\n    //等待资源加载结束后，才会继续执行yield return后面的代码\n    yield return req;\n    string resName = $\"{path}_{type.Name}\";\n    //资源加载结束，将资源传到外部的委托函数去进行调用\n    if (resDic.ContainsKey(resName))\n    {\n        ResInfo\u003cUnityEngine.Object\u003e resInfo = resDic[resName] as ResInfo\u003cUnityEngine.Object\u003e;   //取出资源消息\n        resInfo.asset = req.asset;                              //将资源记录到资源信息内\n        //如果发现需要删除，再去移除资源\n        if (resInfo.isDel)\n        {\n            UnloadAsset(path, type);\n        }\n        else\n        {\n            resInfo.callBack?.Invoke(resInfo.asset);            //将加载出来的资源传递出去\n            //加载完毕后，这些引用就可以清空，避免引用的占用带来的内存泄露问题\n            resInfo.callBack = null;\n            resInfo.coroutine = null;\n        }\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240417171654-t3crpq5",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240417171654-t3crpq5",
+				"updated": "20240417171659"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "存在的问题"
+				}
+			]
+		},
+		{
+			"ID": "20240417171704-542o64k",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240417171704-542o64k",
+				"updated": "20240417202840"
+			},
+			"Children": [
+				{
+					"ID": "20240417171706-ao0acmo",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240417171706-ao0acmo",
+						"updated": "20240417202840"
+					},
+					"Children": [
+						{
+							"ID": "20240417171706-7yg1v4p",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240417171706-7yg1v4p",
+								"updated": "20240417202840"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在卸载资源时，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "我们并不知道是否还有地方使用着该资源"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240417171706-9uowcz2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240417171706-9uowcz2",
+						"updated": "20240417172042"
+					},
+					"Children": [
+						{
+							"ID": "20240417171706-0zxunn3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240417171706-0zxunn3",
+								"updated": "20240417172042"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnloadUnusedAssets"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 是卸载没有使用的资源，我们无法判断是否使用"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240417172043-ctroowx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240417172043-ctroowx",
+				"updated": "20240417202905"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体代码"
+				}
+			]
+		},
+		{
+			"ID": "20240417202906-8k3gwvb",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240417202906-8k3gwvb",
+				"style": "line-height: 22px;",
+				"updated": "20240417202915"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System;\nusing System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\n\n/// \u003csummary\u003e\n/// 资源消息基类\n/// \u003c/summary\u003e\npublic abstract class ResInfoBase { }\n\n/// \u003csummary\u003e\n/// 资源消息对象 主要用于存储资源消息，异步加载委托消息，异步加载协程消息\n/// \u003c/summary\u003e\n/// \u003ctypeparam name=\"T\"\u003e\u003c/typeparam\u003e\npublic class ResInfo\u003cT\u003e : ResInfoBase\n{\n    public T asset;                     //资源\n    public UnityAction\u003cT\u003e callBack;     //用于异步资源加载完后 传递资源到外部的委托\n    public Coroutine coroutine;         //用于异步加载时 开启的协同程序\n    public bool isDel;                  //是否需要移除\n}\n\n/// \u003csummary\u003e\n/// Resources 资源加载模块管理器\n/// \u003c/summary\u003e\npublic class ResManager : BaseManager\u003cResManager\u003e\n{\n    //主要用于存储加载过的资源或者加载中的资源的容器\n    private Dictionary\u003cstring, ResInfoBase\u003e resDic = new Dictionary\u003cstring, ResInfoBase\u003e();\n\n    private ResManager() { }\n\n    /// \u003csummary\u003e\n    /// 同步加载资源的方法\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e资源类型\u003c/typeparam\u003e\n    /// \u003cparam name=\"path\"\u003e\u003c/param\u003e\n    /// \u003creturns\u003e\u003c/returns\u003e\n    public T Load\u003cT\u003e(string path) where T : UnityEngine.Object\n    {\n        //资源的唯一ID，通过路径名_资源类型拼接而成\n        string resName = $\"{path}_{typeof(T).Name}\";\n        ResInfo\u003cT\u003e info;\n        //字典中不存在资源时\n        if (!resDic.ContainsKey(resName))\n        {\n            //直接同步加载，并且记录资源消息到字典中，方便下次直接取出来用\n            T res = Resources.Load\u003cT\u003e(path);\n            info = new ResInfo\u003cT\u003e();\n            info.asset = res;\n            resDic.Add(resName, info);\n            return res;\n        }\n        else\n        {\n            //取出字典的记录\n            info = resDic[resName] as ResInfo\u003cT\u003e;\n            //存在异步加载且还在加载中\n            if (info.asset == null)\n            {\n                //停止异步加载，直接采用同步加载的方式加载，并记录\n                MonoManager.Instance.StopCoroutine(info.coroutine);\n                T res = Resources.Load\u003cT\u003e(path);\n                info.asset = res;\n                //将同步加载出来的内容传递到已存在的回调函数内执行\n                info.callBack?.Invoke(res);\n                //执行结束回调，将记录的回调和协程清空，避免内存泄露\n                info.callBack = null;\n                info.coroutine = null;\n                return res;\n            }\n            //已经加载过资源\n            else\n            {\n                return info.asset;\n            }\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 异步加载资源的方法\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e资源类型\u003c/typeparam\u003e\n    /// \u003cparam name=\"path\"\u003e资源路径（Resources下的）\u003c/param\u003e\n    /// \u003cparam name=\"callBack\"\u003e加载结束后的回调函数\u003c/param\u003e\n    public void LoadAsync\u003cT\u003e(string path, UnityAction\u003cT\u003e callBack) where T : UnityEngine.Object\n    {\n        //资源的唯一ID，通过路径名_资源类型拼接而成\n        string resName = $\"{path}_{typeof(T).Name}\";\n        ResInfo\u003cT\u003e info;\n        //不存在消息记录时，说明资源未加载过\n        if (!resDic.ContainsKey(resName))\n        {\n            info = new ResInfo\u003cT\u003e();        //声明一个 资源信息对象\n            resDic.Add(resName, info);      //将资源记录添加到资源内（资源没有加载成功）\n            info.callBack += callBack;      //记录传入的委托函数，一会加载完成了再使用\n            //通过协同程序去异步加载资源，并记录该协同程序\n            info.coroutine = MonoManager.Instance.StartCoroutine(ReallyLoadAsync\u003cT\u003e(path));\n        }\n        //存在消息记录时，资源已经加载过\n        else\n        {\n            info = resDic[resName] as ResInfo\u003cT\u003e;   //从字典中取出资源信息\n            //资源尚未加载成功\n            if (info.asset == null)\n                info.callBack += callBack;          //将回调函数添加到委托内，等待加载完毕后一起执行\n            //资源已经加载完毕\n            else\n                callBack?.Invoke(info.asset);       //直接执行传入的回调函数\n        }\n    }\n\n    private IEnumerator ReallyLoadAsync\u003cT\u003e(string path) where T : UnityEngine.Object\n    {\n        //异步加载资源\n        ResourceRequest req = Resources.LoadAsync\u003cT\u003e(path);\n        //等待资源加载结束后，才会继续执行yield return后面的代码\n        yield return req;\n        string resName = $\"{path}_{typeof(T).Name}\";\n        //资源加载结束，将资源传到外部的委托函数去进行调用\n        if (resDic.ContainsKey(resName))\n        {\n            ResInfo\u003cT\u003e resInfo = resDic[resName] as ResInfo\u003cT\u003e;     //取出资源消息\n            resInfo.asset = req.asset as T;                         //将资源记录到资源信息内\n            //如果发现需要删除，再去移除资源\n            if (resInfo.isDel)\n            {\n                UnloadAsset\u003cT\u003e(path);\n            }\n            else\n            {\n                resInfo.callBack?.Invoke(resInfo.asset);            //将加载出来的资源传递出去\n                //加载完毕后，这些引用就可以清空，避免引用的占用带来的内存泄露问题\n                resInfo.callBack = null;\n                resInfo.coroutine = null;\n            }\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 异步加载资源的方法\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"path\"\u003e资源路径（Resources下的）\u003c/param\u003e\n    /// \u003cparam name=\"type\"\u003e资源类型\u003c/param\u003e\n    /// \u003cparam name=\"callBack\"\u003e加载结束后的回调函数\u003c/param\u003e\n    [Obsolete(\"注意：建议使用泛型方法，如果需要使用Type加载，请不要和泛型加载混用去加载同类型同名资源\")]\n    public void LoadAsync(string path, Type type, UnityAction\u003cUnityEngine.Object\u003e callBack)\n    {\n        //资源的唯一ID，通过路径名_资源类型拼接而成\n        string resName = $\"{path}_{type.Name}\";\n        ResInfo\u003cUnityEngine.Object\u003e info;\n        //不存在消息记录时，说明资源未加载过\n        if (!resDic.ContainsKey(resName))\n        {\n            info = new ResInfo\u003cUnityEngine.Object\u003e();   //声明一个 资源信息对象\n            resDic.Add(resName, info);      //将资源记录添加到资源内（资源没有加载成功）\n            info.callBack += callBack;      //记录传入的委托函数，一会加载完成了再使用\n            //通过协同程序去异步加载资源，并记录该协同程序\n            info.coroutine = MonoManager.Instance.StartCoroutine(ReallyLoadAsync(path, type));\n        }\n        //存在消息记录时，资源已经加载过\n        else\n        {\n            info = resDic[resName] as ResInfo\u003cUnityEngine.Object\u003e;   //从字典中取出资源信息\n            //资源尚未加载成功\n            if (info.asset == null)\n                info.callBack += callBack;          //将回调函数添加到委托内，等待加载完毕后一起执行\n            //资源已经加载完毕\n            else\n                callBack?.Invoke(info.asset);       //直接执行传入的回调函数\n        }\n    }\n\n    private IEnumerator ReallyLoadAsync(string path, Type type)\n    {\n        //异步加载资源\n        ResourceRequest req = Resources.LoadAsync(path, type);\n        //等待资源加载结束后，才会继续执行yield return后面的代码\n        yield return req;\n        string resName = $\"{path}_{type.Name}\";\n        //资源加载结束，将资源传到外部的委托函数去进行调用\n        if (resDic.ContainsKey(resName))\n        {\n            ResInfo\u003cUnityEngine.Object\u003e resInfo = resDic[resName] as ResInfo\u003cUnityEngine.Object\u003e;   //取出资源消息\n            resInfo.asset = req.asset;                              //将资源记录到资源信息内\n            //如果发现需要删除，再去移除资源\n            if (resInfo.isDel)\n            {\n                UnloadAsset(path, type);\n            }\n            else\n            {\n                resInfo.callBack?.Invoke(resInfo.asset);            //将加载出来的资源传递出去\n                //加载完毕后，这些引用就可以清空，避免引用的占用带来的内存泄露问题\n                resInfo.callBack = null;\n                resInfo.coroutine = null;\n            }\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 指定卸载一个资源\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"path\"\u003e要卸载的资源的路径\u003c/param\u003e\n    public void UnloadAsset\u003cT\u003e(string path)\n    {\n        string resName = $\"{path}_{typeof(T).Name}\";\n        //是否存在对应资源\n        if (resDic.ContainsKey(resName))\n        {\n            ResInfo\u003cT\u003e resInfo = resDic[resName] as ResInfo\u003cT\u003e;\n            //资源已经加载结束\n            if (resInfo.asset != null)\n            {\n                //从字典移除，通过api卸载资源\n                resDic.Remove(resName);\n                Resources.UnloadAsset(resInfo.asset as UnityEngine.Object);\n            }\n            //资源正在异步加载中\n            else\n            {\n                resInfo.isDel = true;   //改变标识，代表待移除\n            }\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 指定卸载一个资源\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"path\"\u003e要卸载的资源的路径\u003c/param\u003e\n    public void UnloadAsset(string path, Type type)\n    {\n        string resName = $\"{path}_{type.Name}\";\n        //是否存在对应资源\n        if (resDic.ContainsKey(resName))\n        {\n            ResInfo\u003cUnityEngine.Object\u003e resInfo = resDic[resName] as ResInfo\u003cUnityEngine.Object\u003e;\n            //资源已经加载结束\n            if (resInfo.asset != null)\n            {\n                //从字典移除，通过api卸载资源\n                resDic.Remove(resName);\n                Resources.UnloadAsset(resInfo.asset as UnityEngine.Object);\n            }\n            //资源正在异步加载中\n            else\n            {\n                resInfo.isDel = true;   //改变标识，代表待移除\n            }\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 异步卸载对应没有使用的Resources相关资源\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"callBack\"\u003e回调函数\u003c/param\u003e\n    public void UnloadUnusedAssets(UnityAction callBack)\n    {\n        MonoManager.Instance.StartCoroutine(ReallyUnloadUnusedAssets(callBack));\n    }\n\n    private IEnumerator ReallyUnloadUnusedAssets(UnityAction callBack)\n    {\n        AsyncOperation ao = Resources.UnloadUnusedAssets();\n        yield return ao;\n        callBack?.Invoke();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

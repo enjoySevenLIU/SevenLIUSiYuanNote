@@ -1,0 +1,4157 @@
+{
+	"ID": "20240316161106-5rxcjzu",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240316161106-5rxcjzu",
+		"title": "UN4L9——UnityWebRequest高级操作",
+		"type": "doc",
+		"updated": "20240316221903"
+	},
+	"Children": [
+		{
+			"ID": "20240316162843-k49csh3",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240316162843-k49csh3",
+				"updated": "20240316162850"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240316162850-hpodgnq",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240316162850-hpodgnq",
+				"style": "line-height: 22px;",
+				"updated": "20240317152226"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//下载请求属性相关\nnew UnityWebRequest()\t\t\t\t\t\t\t//UnityWebRequest的构造函数，可以在实例化时就指定上传下载地址，请求类型，下载上传处理逻辑\nunityWebRequest.url\t\t\t\t\t\t\t\t//请求地址，从下载服务端哪个数据或者将数据上传到服务端的哪个位置\nunityWebRequest.method\t\t\t\t\t\t\t//请求类型，决定UnityWebRequest的操作，Unity内部声明了一系列的常量便于调用请求类型字符串\nUnityWebRequest.kHttpVerbGET\t\t\t\t\t//获取操作命令\nUnityWebRequest.kHttpVerbPOST\t\t\t\t\t//发送操作命令\nunityWebRequest.timeout\t\t\t\t\t\t\t//设置上传和下载的请求时间，超时就报错\nunityWebRequest.redirectLimit\t\t\t\t\t//重定向指的是，设置的连接让你跳转到别的连接上，设置次数可以限制重定向的次数\n//下载处理派生类相关\nunityWebRequest.downloadHandler\t\t\t\t\t//UnityWebRequest在下载完数据后，会调用该属性上类对象来处理下载数据\nDownloadHandler\t\t\t\t\t\t\t\t\t//下载处理基类，unityWebRequest.downloadHandler属性限定该基类及其派生类\nDownloadHandlerBuffer\t\t\t\t\t\t\t//用于简单的数据存储，得到对应的2进制数据\ndownloadHandlerBuffer.data\t\t\t\t\t\t//获取下载到的二进制数据\nDownloadHandlerFile\t\t\t\t\t\t\t\t//用于下载文件并将文件保存到磁盘，实例化时需要传入下载到哪个位置上\nDownloadHandlerTexture\t\t\t\t\t\t\t//用于下载图像\ndownloadHandlerTexture.texture\t\t\t\t\t//图像下载完毕后，从该属性获取图像\nDownloadHandlerAssetBundle\t\t\t\t\t\t//用于提取AssetBundle\ndownloadHandlerAssetBundle.assetBundle\t\t\t//AssetBundle下载完毕后，从该属性获取AssetBundle\nDownloadHandlerAudioClip\t\t\t\t\t\t//用于下载音频文件\nUnityWebRequestMultimedia.GetAudioClip()\t\t//返回一个用于下载音频的UnityWebRequest请求\nDownloadHandlerAudioClip.GetContent()\t\t\t//下载完毕后，从UnityWebRequest请求中获取音频\n//自定义下载处理派生类重写相关\nDownloadHandlerScript\t\t\t\t\t\t\t//​就其本身而言，不会执行任何操作。但是，此类可由用户定义的类继承，用于自定义处理下载数据逻辑\nDownloadHandlerScript()\t\t\t\t\t\t\t//DownloadHandlerScript的构造函数，声明派生类的构造函数时同时要调用这个构造函数\ndownloadHandler.GetData()\t\t\t\t\t\t//返回下载数据对应的字节数组\ndownloadHandler.ReceiveContentLengthHeader()\t//从服务器收到Content-Length表头时会调用的方法，即正式下载前会调用的方法\ndownloadHandler.ReceiveData()\t\t\t\t\t//从网络收到数据后，每帧会自动调用的方法，参数为本帧收到的数据的字节数组，以及该字节数组长度\ndownloadHandler.CompleteContent()\t\t\t\t//当消息全部接收完了，会自动调用的方法\n//上传处理派生类相关\nunityWebRequest.uploadHandler\t\t\t\t\t//UnityWebRequest在上传数据前，会调用该属性上类对象来处理传入的数据\nUploadHandlerRaw\t\t\t\t\t\t\t\t//用于上传字节数组，实例化时传入要上传的字节数组即可\nUploadHandlerFile\t\t\t\t\t\t\t\t//用于上传文件，实例化时传入要上传的文件路径即可\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240316161106-5hae0k9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240316161106-5hae0k9",
+				"updated": "20240316162257"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "UnityWebRequest高级操作"
+				}
+			]
+		},
+		{
+			"ID": "20240316162316-qestv0t",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316162316-qestv0t",
+				"updated": "20240316163128"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在常用操作中我们使用的是Unity为我们封装好的一些方法，我们可以方便的进行一些指定类型的数据获取，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240315161607-74r8gjr",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "之前学习的常规操作"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "："
+				}
+			]
+		},
+		{
+			"ID": "20240316163122-2ndb73s",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240316163122-2ndb73s",
+				"style": "line-height: 22px;",
+				"updated": "20240316203917"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//已经学习过的内容\nUnityWebRequest request = UnityWebRequest.Get(\"\");\nUnityWebRequest request = UnityWebRequestTexture.GetTexture(\"\");\nUnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(\"\");\nUnityWebRequest request = UnityWebRequest.Put()\nUnityWebRequest request = UnityWebRequest.Post\nrequest.isDone\nrequest.downloadProgress;\nrequest.downloadedBytes;\nrequest.uploadProgress;\nrequest.uploadedBytes\nrequest.SendWebRequest()\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240316162316-y2gpivv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316162316-y2gpivv",
+				"updated": "20240316162328"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "比如，下载数据时："
+				}
+			]
+		},
+		{
+			"ID": "20240316162328-okh31bi",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240316162328-okh31bi",
+				"updated": "20240316162328"
+			},
+			"Children": [
+				{
+					"ID": "20240316162328-58u1m2m",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240316162328-58u1m2m",
+						"updated": "20240316162328"
+					},
+					"Children": [
+						{
+							"ID": "20240316162328-8ay8v3k",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316162328-8ay8v3k",
+								"updated": "20240316162328"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "文本和2进制"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240316162328-6gpt72s",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240316162328-6gpt72s",
+						"updated": "20240316162328"
+					},
+					"Children": [
+						{
+							"ID": "20240316162328-qzurp51",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316162328-qzurp51",
+								"updated": "20240316162328"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "图片"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240316162328-saw6puq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240316162328-saw6puq",
+						"updated": "20240316162328"
+					},
+					"Children": [
+						{
+							"ID": "20240316162328-m8qaqvd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316162328-m8qaqvd",
+								"updated": "20240316162328"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "AB包"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240316162326-e04bngz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316162326-e04bngz",
+				"updated": "20240316162432"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "如果我们想要获取其它类型的数据应该如何处理呢？"
+				}
+			]
+		},
+		{
+			"ID": "20240316162316-anof226",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316162316-anof226",
+				"updated": "20240316162334"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "上传数据时："
+				}
+			]
+		},
+		{
+			"ID": "20240316162334-dm3a1m6",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240316162334-dm3a1m6",
+				"updated": "20240316162334"
+			},
+			"Children": [
+				{
+					"ID": "20240316162334-rwnsm8r",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240316162334-rwnsm8r",
+						"updated": "20240316162334"
+					},
+					"Children": [
+						{
+							"ID": "20240316162334-oo7sclq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316162334-oo7sclq",
+								"updated": "20240316162334"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可以指定参数和值"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240316162334-f4d65sh",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240316162334-f4d65sh",
+						"updated": "20240316162334"
+					},
+					"Children": [
+						{
+							"ID": "20240316162334-3bxqusq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316162334-3bxqusq",
+								"updated": "20240316162334"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可以上传文件"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240316162332-cqn6db7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316162332-cqn6db7",
+				"updated": "20240316162435"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "如果想要上传一些基于HTTP规则的其它数据应该如何处理呢？"
+				}
+			]
+		},
+		{
+			"ID": "20240316162316-kk0e83x",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316162316-kk0e83x",
+				"updated": "20240316162443"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "高级操作就是用来"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "处理常用操作不能完成的需求的，"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "它的核心思想就是："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "UnityWebRequest中可以将数据处理分离开"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n比如常规操作中我们用到的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "DownloadHandlerTexture"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 和 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "DownloadHandlerAssetBundle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 两个类，就是用来将二进制字节数组转换成对应类型进行处理的"
+				}
+			]
+		},
+		{
+			"ID": "20240316162316-ler4gr8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316162316-ler4gr8",
+				"updated": "20240316163155"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "所以高级操作是指："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "让你按照规则来实现更多的数据获取、上传等功能"
+				}
+			]
+		},
+		{
+			"ID": "20240316174226-9lwk8af",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316174226-9lwk8af",
+				"updated": "20240316174231"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以自己设置UnityWebRequest当中的下载处理对象，当设置后，下载数据后它会使用该对象中对应的函数处理数据\n让我们更方便的获取我们想要的数据，方便我们对数据下载或获取进行拓展"
+				}
+			]
+		},
+		{
+			"ID": "20240316162422-v2v6yks",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240316162422-v2v6yks",
+				"updated": "20240316204125"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "UnityWebRequest类的更多内容"
+				}
+			]
+		},
+		{
+			"ID": "20240316204125-lwgejml",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240316204125-lwgejml",
+				"updated": "20240316204454"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240316204127-7en86r5",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240316204127-7en86r5",
+						"updated": "20240316204454"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "注：这里与上篇笔记存在完全重复的部分，因此已经在上篇记录过的内容被笔者删去，相关内容请去"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "block-ref",
+							"TextMarkBlockRefID": "20240315161607-74r8gjr",
+							"TextMarkBlockRefSubtype": "s",
+							"TextMarkTextContent": "上篇"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "查阅"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240316163104-7mll7da",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240316163104-7mll7da",
+				"updated": "20240317143930"
+			},
+			"Children": [
+				{
+					"ID": "20240316163228-n5q06ew",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240316163228-n5q06ew",
+						"name": "new UnityWebRequest()",
+						"updated": "20240316163829"
+					},
+					"Children": [
+						{
+							"ID": "20240316163228-d22yhxm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316163228-d22yhxm",
+								"updated": "20240316163228"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "构造函数"
+								}
+							]
+						},
+						{
+							"ID": "20240316163309-u8ljw0z",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316163309-u8ljw0z",
+								"updated": "20240316163602"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "除了"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Get"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Post"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​等一系列静态方法可以创建"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​以外，构造函数同样可以创建"
+								}
+							]
+						},
+						{
+							"ID": "20240316163602-1seafv3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316163602-1seafv3",
+								"updated": "20240316204323"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "构造函数有多种重载，对应不同的情况，构造函数不传入任何值也可以，因为构造函数内设置的值也可以在实例化后对相应的属性进行设置"
+								}
+							]
+						},
+						{
+							"ID": "20240316170644-6iauz30",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240316170644-6iauz30",
+								"updated": "20240316170644"
+							},
+							"Children": [
+								{
+									"ID": "20240316170644-2ml7flw",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240316170644-2ml7flw",
+										"updated": "20240316170644"
+									},
+									"Children": [
+										{
+											"ID": "20240316170644-uf0xesc",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240316170644-uf0xesc",
+												"updated": "20240316170712"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "参数一：上传/下载地址，可以使用字符串也可以使用"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Uri"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240316170713-vbsz7po",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240316170713-vbsz7po"
+									},
+									"Children": [
+										{
+											"ID": "20240316170713-d8sbfzh",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240316170713-d8sbfzh",
+												"updated": "20240316170902"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "参数二：请求类型，类似于设置操作命令，传入字符串，可以使用"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "UnityWebRequest"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​内部声明好的常量来调用"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240316170903-rsrg4nk",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240316170903-rsrg4nk"
+									},
+									"Children": [
+										{
+											"ID": "20240316170903-sccj7gw",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240316170903-sccj7gw",
+												"updated": "20240316171025"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "参数三：下载处理类，设置何种处理类来处理下载数据"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240316170947-xkxvm0c",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240316170947-xkxvm0c"
+									},
+									"Children": [
+										{
+											"ID": "20240316170947-h24iwh6",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240316170947-h24iwh6",
+												"updated": "20240316171027"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "参数四：上传处理类，设置何种处理类来处理上传数据"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240316163437-e13hgsy",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240316163437-e13hgsy",
+								"style": "line-height: 22px;",
+								"updated": "20240316163829"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "UnityWebRequest request = new UnityWebRequest();\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240316163228-8ggdy29",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"fold": "0",
+						"id": "20240316163228-8ggdy29",
+						"name": "unityWebRequest.url",
+						"updated": "20240316163228"
+					},
+					"Children": [
+						{
+							"ID": "20240316163228-r79nxq3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316163228-r79nxq3",
+								"updated": "20240316163228"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "请求地址"
+								}
+							]
+						},
+						{
+							"ID": "20240316171129-4go5nwb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316171129-4go5nwb",
+								"updated": "20240316204255"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "该属性可以在使用构造函数实例化对象时就设置好，上传或者下载使用的地址"
+								}
+							]
+						},
+						{
+							"ID": "20240316163831-uphv29r",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240316163831-uphv29r",
+								"style": "line-height: 22px;",
+								"updated": "20240316163848"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "request.url = \"服务器地址\";\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240316163228-zj8946k",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240316163228-zj8946k",
+						"name": "unityWebRequest.method",
+						"updated": "20240316163228"
+					},
+					"Children": [
+						{
+							"ID": "20240316163228-muup3vo",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316163228-muup3vo",
+								"updated": "20240316163228"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "请求类型"
+								}
+							]
+						},
+						{
+							"ID": "20240316163923-ewpqtne",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316163923-ewpqtne",
+								"updated": "20240316171209"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "该属性可以在使用构造函数实例化对象时就设置好，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​内部声明了一系列的常量便于我们调用请求类型字符串"
+								}
+							]
+						},
+						{
+							"ID": "20240316163850-ffg0xam",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240316163850-ffg0xam",
+								"style": "line-height: 22px;",
+								"updated": "20240316164034"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "request.method = UnityWebRequest.kHttpVerbPOST;\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240316163228-v3t5bgz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240316163228-v3t5bgz",
+						"name": "unityWebRequest.timeout",
+						"updated": "20240316163228"
+					},
+					"Children": [
+						{
+							"ID": "20240316163228-gp16ynr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316163228-gp16ynr",
+								"updated": "20240316163228"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "超时设置"
+								}
+							]
+						},
+						{
+							"ID": "20240316204341-lmrkzyg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316204341-lmrkzyg",
+								"updated": "20240316204353"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "设置上传和下载的请求时间，超时就报错"
+								}
+							]
+						},
+						{
+							"ID": "20240316164059-yu39elz",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240316164059-yu39elz",
+								"style": "line-height: 22px;",
+								"updated": "20240316164112"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "request.timeout = 2000;\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240316163228-tf1o1la",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20240316163228-tf1o1la",
+						"name": "unityWebRequest.redirectLimit",
+						"updated": "20240317143930"
+					},
+					"Children": [
+						{
+							"ID": "20240316163228-c027x5s",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316163228-c027x5s",
+								"updated": "20240316163228"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重定向次数 设置为0表示不进行重定向 可以设置次数"
+								}
+							]
+						},
+						{
+							"ID": "20240316164141-4cey5vx",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316164141-4cey5vx",
+								"updated": "20240316204523"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重定向指的是，设置的连接让你跳转到别的连接上，设置次数可以限制重定向的次数，设置为0就是不允许重定向"
+								}
+							]
+						},
+						{
+							"ID": "20240316164139-wddqadi",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240316164139-wddqadi",
+								"style": "line-height: 22px;",
+								"updated": "20240317143930"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "unityWebRequest.redirectLimit = 10;\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240316163228-pr34fgc",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ni4=",
+						"Num": 6
+					},
+					"Properties": {
+						"id": "20240316163228-pr34fgc",
+						"name": "unityWebRequest.downloadHandler",
+						"updated": "20240317143910"
+					},
+					"Children": [
+						{
+							"ID": "20240316163228-0oibu95",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316163228-0oibu95",
+								"updated": "20240316163228"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "下载、上传处理对象"
+								}
+							]
+						},
+						{
+							"ID": "20240316171215-nkif0nt",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316171215-nkif0nt",
+								"updated": "20240316204527"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "该属性可以在使用构造函数实例化对象时就设置好"
+								}
+							]
+						},
+						{
+							"ID": "20240316204531-178r9ee",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316204531-178r9ee",
+								"updated": "20240317143830"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "本课的核心内容，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "unityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​从服务端下载到的数据"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "如何处理，就取决于"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code strong",
+									"TextMarkTextContent": "unityWebRequest.downloadHandler"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "设置的类中的实现"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n该属性需要的类是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandler"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​派生类，派生类如何实现决定了如何处理下载到的数据"
+								}
+							]
+						},
+						{
+							"ID": "20240317143835-o2pn0vo",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240317143835-o2pn0vo",
+								"updated": "20240317143910"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "而对于上传，我们同样也可以使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UploadHandler"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​派生类来直接上传字节数据或文件，而不使用Unity实现的处理逻辑"
+								}
+							]
+						},
+						{
+							"ID": "20240316205300-xk0qvqf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316205300-xk0qvqf",
+								"updated": "20240317143854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "这就是下载/上传数据和数据处理分离的体现"
+								}
+							]
+						},
+						{
+							"ID": "20240316164413-ek2xs1t",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240316164413-ek2xs1t",
+								"style": "line-height: 22px;",
+								"updated": "20240317143526"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "unityWebRequest.downloadHandler = new DownloadHandlerBuffer();\nunityWebRequest.uploadHandler = new UploadHandlerFile(Application.streamingAssetsPath + \"/test.png\");\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240316163228-zs5kris",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ny4=",
+						"Num": 7
+					},
+					"Properties": {
+						"id": "20240316163228-zs5kris",
+						"updated": "20240316163228"
+					},
+					"Children": [
+						{
+							"ID": "20240316163228-nq4uex6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316163228-nq4uex6",
+								"updated": "20240316163254"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "更多内容："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "a",
+									"TextMarkAHref": "https://docs.unity.cn/cn/2021.3/ScriptReference/Networking.UnityWebRequest.html",
+									"TextMarkTextContent": "Networking.UnityWebRequest - Unity 脚本 API"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240316164901-9ew0253",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240316164901-9ew0253",
+				"name": "DownloadHandler",
+				"updated": "20240316221022"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义获取数据的类——DownloadHandler派生类"
+				}
+			]
+		},
+		{
+			"ID": "20240316174748-k7c5n84",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316174748-k7c5n84",
+				"updated": "20240316221022"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以下的这些类，其实就是Unity帮助我们实现好的，用于解析下载下来的数据的类\n使用对应的类处理下载数据，他们就会在内部将下载的数据处理为对应的类型，方便我们使用"
+				}
+			]
+		},
+		{
+			"ID": "20240316165104-1dk16uf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316165104-1dk16uf",
+				"updated": "20240316221022"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关键类："
+				}
+			]
+		},
+		{
+			"ID": "20240316165114-sc32ad1",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240316165114-sc32ad1",
+				"updated": "20240317150640"
+			},
+			"Children": [
+				{
+					"ID": "20240316165114-8izja92",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240316165114-8izja92",
+						"name": "DownloadHandlerBuffer",
+						"updated": "20240316165114"
+					},
+					"Children": [
+						{
+							"ID": "20240316165114-q9malfw",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240316165114-q9malfw",
+								"updated": "20240317144529"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerBuffer"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：用于简单的数据存储，得到对应的2进制数据"
+								}
+							]
+						},
+						{
+							"ID": "20240316205925-vfrcfo8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316205925-vfrcfo8",
+								"updated": "20240316211633"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设我们要从服务端中的一个文本文档内读取字符串并输出出来，且不调用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest.Get()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​来创建请求"
+								}
+							]
+						},
+						{
+							"ID": "20240316210103-poq4o1l",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316210103-poq4o1l",
+								"updated": "20240316210319"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "我们直接使用构造方法实例化一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象，传入获取地址和请求类型，\n也可以不在构造函数里直接设置以上的内容，可以在实例化之后直接对相应的属性赋值，如"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "url"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "method"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​"
+								}
+							]
+						},
+						{
+							"ID": "20240316210602-k0ddvuy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316210602-k0ddvuy",
+								"updated": "20240316210642"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "然后将"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象的下载处理类属性"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "downloadHandler"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​赋值为一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerBuffer"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象"
+								}
+							]
+						},
+						{
+							"ID": "20240316210644-l45msm2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316210644-l45msm2",
+								"updated": "20240316210902"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "之后在下载完数据后，我们就可以通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerBuffer"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象直接获取下载到的二进制数据，对其进行处理就可以输出字符串"
+								}
+							]
+						},
+						{
+							"ID": "20240316210903-o8ofyzr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316210903-o8ofyzr",
+								"updated": "20240316211057"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "相比常规操作获取二进制数据，这里我们是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "直接从我们自己声明的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code strong",
+									"TextMarkTextContent": "DownloadHandlerBuffer"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "对象中获取数据"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "，没有通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象获取"
+								}
+							]
+						},
+						{
+							"ID": "20240316211017-r73r63h",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316211017-r73r63h",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+								"updated": "20240316211556"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "实际上，常规操作中获取二进制数据本质也是通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "code",
+									"TextMarkTextContent": "unityWebRequest.downloadHandler"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​属性中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerBuffer"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象获取的\n只不过，常规操作中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerBuffer"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象是在调用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest.Get()"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​时实例化的\n​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 576px;",
+										"style": "width: 566px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240316211542-03fwlpr.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 566px;\" parent-style=\"width: 576px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240316171934-oiefw74",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240316171934-oiefw74",
+								"style": "line-height: 22px;",
+								"updated": "20240316210823"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    StartCoroutine(DownLoadString());\n}\n\nIEnumerator DownLoadString()\n{\n\t//地址、请求类型、上传下载方法可以在实例化后设置，也可以在构造函数内直接一步到位\n\t//UnityWebRequest request = new UnityWebRequest()\n\t//request.url = \"http://192.168.1.102/Http_Server/test.txt\"\n\t//request.method = UnityWebRequest.kHttpVerbGET\n    //从服务器的一个文本文件里读取字符串并输出出来\n    UnityWebRequest request = new UnityWebRequest(\"http://192.168.1.102/Http_Server/test.txt\",\n                                                  UnityWebRequest.kHttpVerbGET);\n\t//实例化一个​DownloadHandlerBuffer​对象，在这里使用局部变量的原因是后面还需要调用\n    DownloadHandlerBuffer bufferHandler = new DownloadHandlerBuffer();\n    request.downloadHandler = bufferHandler;\n    yield return request.SendWebRequest();\n    if (request.result == UnityWebRequest.Result.Success)\n    {\n\t\t//数据下载完毕后，就可以从DownloadHandlerBuffer对象取出下载到的数据\n        byte[] bytes = bufferHandler.data;\n        print(Encoding.UTF8.GetString(bytes));\n    }\n    else\n    {\n        print(\"获取数据失败\" + request.result + request.error + request.responseCode);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240316165114-v9akym1",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240316165114-v9akym1",
+						"name": "DownloadHandlerFile",
+						"updated": "20240316165114"
+					},
+					"Children": [
+						{
+							"ID": "20240316165114-hke2dv0",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240316165114-hke2dv0",
+								"updated": "20240317144536"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerFile"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：用于下载文件并将文件保存到磁盘（内存占用少）"
+								}
+							]
+						},
+						{
+							"ID": "20240316210837-jw535re",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316210837-jw535re",
+								"updated": "20240316211823"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设我们要从服务端下载图片（或者任意文件）到本地磁盘上，靠原来的常规操作不能一步到位"
+								}
+							]
+						},
+						{
+							"ID": "20240316211824-6kfozd5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316211824-6kfozd5",
+								"updated": "20240316212037"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "先直接使用构造方法实例化一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象，传入获取文件地址和请求类型"
+								}
+							]
+						},
+						{
+							"ID": "20240316212038-f2xbbxy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316212038-f2xbbxy",
+								"updated": "20240316212846"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "然后实例化一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerFile"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象，赋值到"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "downloadHandler"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​属性上，构造函数的参数为："
+								}
+							]
+						},
+						{
+							"ID": "20240316212358-8oe1d08",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240316212358-8oe1d08",
+								"updated": "20240316212358"
+							},
+							"Children": [
+								{
+									"ID": "20240316212358-9mt4p5a",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240316212358-9mt4p5a",
+										"updated": "20240316212358"
+									},
+									"Children": [
+										{
+											"ID": "20240316212358-rpketzk",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240316212358-rpketzk",
+												"updated": "20240316212403"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "参数一：下载文件到哪个路径下"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240316212400-ny2kj7a",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240316212400-ny2kj7a"
+									},
+									"Children": [
+										{
+											"ID": "20240316212400-qntq534",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240316212400-qntq534",
+												"updated": "20240316212408"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "参数二：是否在已下载文件的后面追加（可选），主要用于在原来已经下载好的文件上添加内容，如果要覆盖则填"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "false"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​​或者不填"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240316212657-1ywuhhb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316212657-1ywuhhb",
+								"updated": "20240316212702"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "下载完毕后，下载好的文件会自动保存到指定的路径下，无需做额外操作"
+								}
+							]
+						},
+						{
+							"ID": "20240316172454-qww5a82",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240316172454-qww5a82",
+								"style": "line-height: 22px;",
+								"updated": "20240316172500"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    StartCoroutine(DownLoadTex());\n}\n\nIEnumerator DownLoadTex()\n{\n    UnityWebRequest unityWebRequest = new UnityWebRequest(\"http://192.168.1.102/Http_Server/下载测试.png\",\n                                                          UnityWebRequest.kHttpVerbGET);\n    unityWebRequest.downloadHandler = new DownloadHandlerFile(Application.persistentDataPath + \"/downloadFile.jpg\");\n\n    yield return unityWebRequest.SendWebRequest();\n    if (unityWebRequest.result == UnityWebRequest.Result.Success)\n    {\n        //byte[] bytes = bufferHandler.data;\n        print(Application.persistentDataPath + \"/downloadFile.jpg\");\n    }\n    else\n    {\n        print(\"获取数据失败\" + unityWebRequest.result + unityWebRequest.error + unityWebRequest.responseCode);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240316165114-0ars0ko",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240316165114-0ars0ko",
+						"name": "DownloadHandlerTexture",
+						"updated": "20240316165114"
+					},
+					"Children": [
+						{
+							"ID": "20240316165114-7o9r0c4",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240316165114-7o9r0c4",
+								"updated": "20240317144542"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerTexture"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：用于下载图像"
+								}
+							]
+						},
+						{
+							"ID": "20240316212509-h2jko8n",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316212509-h2jko8n",
+								"updated": "20240316212555"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设我们要从服务端下载贴图，将贴图使用在UI上，且不使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequestTexture.GetTexture()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​方法"
+								}
+							]
+						},
+						{
+							"ID": "20240316212556-3hygws9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316212556-3hygws9",
+								"updated": "20240316212842"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "先直接使用构造方法实例化一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象，传入获取文件地址和请求类型\n然后实例化一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerTexture"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象，赋值到"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "downloadHandler"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​属性上"
+								}
+							]
+						},
+						{
+							"ID": "20240316212711-v8p928a",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316212711-v8p928a",
+								"updated": "20240316212914"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "等待下载完毕后，就可以直接调用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerTexture"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "texture"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​属性上获取贴图"
+								}
+							]
+						},
+						{
+							"ID": "20240316212933-wg4pj2s",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316212933-wg4pj2s",
+								"updated": "20240316213014"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "相比常规操作，同样我们是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "直接从我们自己声明的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerTexture"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "中获取贴图"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "，没有通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象获取"
+								}
+							]
+						},
+						{
+							"ID": "20240316213018-ls1qzhl",
+							"Type": "NodeBlockquote",
+							"Properties": {
+								"id": "20240316213018-ls1qzhl",
+								"updated": "20240316213210"
+							},
+							"Children": [
+								{
+									"Type": "NodeBlockquoteMarker",
+									"Data": "\u003e"
+								},
+								{
+									"ID": "20240316213210-twkbp4p",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240316213210-twkbp4p",
+										"updated": "20240316213210"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "实际上，常规操作中获取贴图本质也是通过"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "unityWebRequest.downloadHandler"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​​属性中的"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "DownloadHandlerTexture"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​​对象获取的"
+										}
+									]
+								},
+								{
+									"ID": "20240316213442-iqefbld",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240316213442-iqefbld",
+										"updated": "20240316213523"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"parent-style": "width: 500px;",
+												"style": "width: 490px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20240316213442-41hm8zf.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 490px;\" parent-style=\"width: 500px;\"}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "\n​"
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"parent-style": "width: 653px;",
+												"style": "width: 643px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20240316213523-hh0wiw3.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 643px;\" parent-style=\"width: 653px;\"}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								},
+								{
+									"ID": "20240316213212-r6nt7k0",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240316213212-r6nt7k0",
+										"updated": "20240316213403"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "只不过，常规操作中的"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "DownloadHandlerTexture"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​​对象是在调用"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "UnityWebRequestTexture.GetTexture()"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​​时实例化的"
+										}
+									]
+								},
+								{
+									"ID": "20240316213320-eok9gt8",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240316213320-eok9gt8",
+										"updated": "20240316213336"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"parent-style": "width: 383px;",
+												"style": "width: 373px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20240316213320-10nczkx.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 373px;\" parent-style=\"width: 383px;\"}"
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"parent-style": "width: 649px;",
+												"style": "width: 639px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20240316213336-tbnj2aq.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 639px;\" parent-style=\"width: 649px;\"}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240316173858-sh1rvue",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240316173858-sh1rvue",
+								"style": "line-height: 22px;",
+								"updated": "20240316212817"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public RawImage image;\n\nvoid Start()\n{\n    StartCoroutine(DownLoadAB());\n}\n\nIEnumerator DownLoadTex()\n{\n    UnityWebRequest request = new UnityWebRequest(\"http://192.168.1.102/Http_Server/下载测试.png\",\n                                                          UnityWebRequest.kHttpVerbGET);\n\t//实例化一个DownloadHandlerTexture对象，在这里使用局部变量的原因是后面还需要调用\n    DownloadHandlerTexture textureHandler = new DownloadHandlerTexture();\n    request.downloadHandler = textureHandler;\n\n    yield return request.SendWebRequest();\n    if (request.result == UnityWebRequest.Result.Success)\n    {\n\t\t//数据下载完毕后，就可以从DownloadHandlerTexture对象的texture属性取出下载到的贴图\n        image.texture = textureHandler.texture;\n    }\n    else\n    {\n        print(\"获取数据失败\" + request.result + request.error + request.responseCode);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240316165114-k6kdd40",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"fold": "0",
+						"id": "20240316165114-k6kdd40",
+						"name": "DownloadHandlerAssetBundle",
+						"updated": "20240316165114"
+					},
+					"Children": [
+						{
+							"ID": "20240316165114-047dxt1",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240316165114-047dxt1",
+								"updated": "20240317144546"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerAssetBundle"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：用于提取 AssetBundle。"
+								}
+							]
+						},
+						{
+							"ID": "20240316213630-xq4nmqb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316213630-xq4nmqb",
+								"updated": "20240316213653"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设我们要从服务端AB包，且不使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequestAssetBundle.GetAssetBundle()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​方法"
+								}
+							]
+						},
+						{
+							"ID": "20240316213630-rzybahl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316213630-rzybahl",
+								"updated": "20240316213712"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "先直接使用构造方法实例化一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象，传入获取文件地址和请求类型\n然后实例化一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerAssetBundle"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象，赋值到"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "downloadHandler"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​属性上"
+								}
+							]
+						},
+						{
+							"ID": "20240316213630-wbi6feq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316213630-wbi6feq",
+								"updated": "20240316213734"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "等待下载完毕后，就可以直接调用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerAssetBundle"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "assetBundle"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​属性上获取AB包"
+								}
+							]
+						},
+						{
+							"ID": "20240316213630-oiepkcv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316213630-oiepkcv",
+								"updated": "20240316213749"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "相比常规操作，同样我们是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "直接从我们自己声明的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerAssetBundle"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "中获取贴图"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "，没有通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象获取"
+								}
+							]
+						},
+						{
+							"ID": "20240316213739-5xvon2r",
+							"Type": "NodeBlockquote",
+							"Properties": {
+								"id": "20240316213739-5xvon2r",
+								"updated": "20240316213920"
+							},
+							"Children": [
+								{
+									"Type": "NodeBlockquoteMarker",
+									"Data": "\u003e"
+								},
+								{
+									"ID": "20240316213942-uvlkyek",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240316213942-uvlkyek",
+										"updated": "20240316214005"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "同样，常规操作中获取贴图本质也是通过"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "unityWebRequest.downloadHandler"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​​属性中的"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "DownloadHandlerAssetBundle"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​​对象获取的"
+										}
+									]
+								},
+								{
+									"ID": "20240316213921-dug5122",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20240316213921-dug5122",
+										"updated": "20240316213932"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"parent-style": "width: 638px;",
+												"style": "width: 628px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20240316213921-mcktsmn.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 628px;\" parent-style=\"width: 638px;\"}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "\n​"
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"parent-style": "width: 653px;",
+												"style": "width: 643px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20240316213523-hh0wiw3.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 643px;\" parent-style=\"width: 653px;\"}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240316173923-um3sdsy",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240316173923-um3sdsy",
+								"style": "line-height: 22px;",
+								"updated": "20240316174012"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    StartCoroutine(DownLoadAB());\n}\n\nIEnumerator DownLoadAB()\n{\n    UnityWebRequest request = new UnityWebRequest(\"http://192.168.1.102/Http_Server/lua\",\n                                                  UnityWebRequest.kHttpVerbGET);\n    //第二个参数是校验码，用于比较文件完整性，但是校验码必须已知才能检验，如果不校验，传入0，即不进行检查\n    //一般只有在进行AB包热更新时，服务器发送了对应的文件列表中，包含了校验码，才能进行检查\n    DownloadHandlerAssetBundle assetBundleHandler = new DownloadHandlerAssetBundle(request.url, 0);\n    request.downloadHandler = assetBundleHandler;\n    yield return request.SendWebRequest();\n    if (request.result == UnityWebRequest.Result.Success)\n    {\n        AssetBundle ab = assetBundleHandler.assetBundle;\n        print(ab.name);\n    }\n    else\n    {\n        print(\"获取数据失败\" + request.result + request.error + request.responseCode);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240316165114-1xhzm9n",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20240316165114-1xhzm9n",
+						"name": "DownloadHandlerAudioClip",
+						"updated": "20240316165114"
+					},
+					"Children": [
+						{
+							"ID": "20240316165114-y4zlaki",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240316165114-y4zlaki",
+								"updated": "20240317144549"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerAudioClip"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：用于下载音频文件"
+								}
+							]
+						},
+						{
+							"ID": "20240316214032-hoqwg90",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316214032-hoqwg90",
+								"updated": "20240316214144"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "与上述四个类需要我们自行声明不同，这里的获取请求方法更类似于常规方法里获取纹理、AB包那样"
+								}
+							]
+						},
+						{
+							"ID": "20240316214144-tlb6erf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316214144-tlb6erf",
+								"updated": "20240316214216"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequestMultimedia.GetAudioClip()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​创建"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象，该方法的参数是："
+								}
+							]
+						},
+						{
+							"ID": "20240316214217-2zav01b",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240316214217-2zav01b",
+								"updated": "20240316214218"
+							},
+							"Children": [
+								{
+									"ID": "20240316214218-m3kl3kz",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240316214218-m3kl3kz",
+										"updated": "20240316214218"
+									},
+									"Children": [
+										{
+											"ID": "20240316214218-azbggdp",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240316214218-azbggdp",
+												"updated": "20240316214223"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "参数一：文件地址"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240316214223-to7hmvw",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240316214223-to7hmvw"
+									},
+									"Children": [
+										{
+											"ID": "20240316214223-59kiz2h",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240316214223-59kiz2h",
+												"updated": "20240316214242"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "参数二：媒体类型，由下载的音频决定"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240316214243-31sqb5e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316214243-31sqb5e",
+								"updated": "20240316214314"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "下载完毕后，通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerAudioClip.GetContent()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​传入"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​对象来获取音频文件"
+								}
+							]
+						},
+						{
+							"ID": "20240316174729-h7unfhy",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240316174729-h7unfhy",
+								"style": "line-height: 22px;",
+								"updated": "20240316215052"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "IEnumerator DownLoadAudioClip()\n{\n    UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip(\"http://192.168.1.102/Http_Server/音效文件.mp3\",\n                                                                     AudioType.MPEG);\n    yield return request.SendWebRequest();\n    if (request.result == UnityWebRequest.Result.Success)\n    {\n        AudioClip clip = DownloadHandlerAudioClip.GetContent(request);\n    }\n    else\n    {\n        print(\"获取数据失败\" + request.result + request.error + request.responseCode);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240316215054-097eqlu",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ni4=",
+						"Num": 6
+					},
+					"Properties": {
+						"id": "20240316215054-097eqlu",
+						"name": "DownloadHandlerScript",
+						"updated": "20240317150640"
+					},
+					"Children": [
+						{
+							"ID": "20240316215054-yno82np",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240316215054-yno82np",
+								"updated": "20240317144552"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerScript"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：可自定义数据处理的基类"
+								}
+							]
+						},
+						{
+							"ID": "20240316215121-wioipyz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316215121-wioipyz",
+								"updated": "20240316215125"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerScript"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​是一个特殊类。就其本身而言，不会执行任何操作。\n但是，此类可由用户定义的类继承。此类接收来自"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityWebRequest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​系统的回调，\n然后可以使用这些回调在数据"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "从网络到达时执行完全自定义的数据处理。"
+								}
+							]
+						},
+						{
+							"ID": "20240317144619-x9m4swp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240317144619-x9m4swp",
+								"updated": "20240317144708"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在继承"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DownloadHandlerScript"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​后，我们需要自己重写对应的成员，以下是常用的会重写的成员："
+								}
+							]
+						},
+						{
+							"ID": "20240317144659-zvdg9cv",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240317144659-zvdg9cv",
+								"updated": "20240317144659"
+							},
+							"Children": [
+								{
+									"ID": "20240317144659-73swyc3",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240317144659-73swyc3",
+										"name": "DownloadHandlerScript()",
+										"updated": "20240317144659"
+									},
+									"Children": [
+										{
+											"ID": "20240317144659-m3816k6",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240317144659-m3816k6",
+												"updated": "20240317145429"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "构造函数：我们可以根据需求，去声明多种构造函数，\n"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "strong",
+													"TextMarkTextContent": "但是在调用构造函数的时候一定要调用基类的构造函数！！"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "\n如："
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "public CustomDownLoadFileHandler() : base() { }"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，我们必须调用这个"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "base()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​\n如果构造函数的参数有"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "byte[]"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，则需要调用对应参数为"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "byte[]"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​的基类构造函数\n如："
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "public CustomDownLoadFileHandler(byte[] bytes) : base(bytes) { }"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240317145348-pivqjjw",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240317145348-pivqjjw",
+										"name": "downloadHandler.GetData()"
+									},
+									"Children": [
+										{
+											"ID": "20240317145348-s5uv2m3",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240317145348-s5uv2m3",
+												"updated": "20240317145454"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "GetData()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：返回下载数据对应的字节数组"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240317145517-kxwomzt",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240317145517-kxwomzt",
+										"name": "downloadHandler.ReceiveContentLengthHeader()"
+									},
+									"Children": [
+										{
+											"ID": "20240317145517-u3mf4ap",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240317145517-u3mf4ap",
+												"updated": "20240317150454"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ReceiveContentLengthHeader()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：从服务器收到Content-Length表头时会调用的方法，即"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "strong",
+													"TextMarkTextContent": "正式下载前会调用的方法"
+												},
+												{
+													"Type": "NodeText"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "strong",
+													"TextMarkTextContent": "参数为接下来要下载的数据大小，可用于初始化接收数据的容器"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240317145456-8ypjlnz",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240317145456-8ypjlnz",
+										"name": "downloadHandler.ReceiveData()"
+									},
+									"Children": [
+										{
+											"ID": "20240317145456-o9wlf71",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240317145456-o9wlf71",
+												"updated": "20240317145829"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ReceiveData()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：从网络收到数据后，"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "strong",
+													"TextMarkTextContent": "每帧"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "会自动调用的方法，参数为"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "strong",
+													"TextMarkTextContent": "本帧收到的数据的字节数组，以及该字节数组长度"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240317145800-k2g72ir",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240317145800-k2g72ir",
+										"name": "downloadHandler.CompleteContent()"
+									},
+									"Children": [
+										{
+											"ID": "20240317145800-z86oy41",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240317145800-z86oy41",
+												"updated": "20240317145834"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "CompleteContent()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：当"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "strong",
+													"TextMarkTextContent": "消息全部接收完了"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "，会自动调用的方法"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240317150640-0lkwno3",
+							"Type": "NodeThematicBreak",
+							"Properties": {
+								"id": "20240317150640-0lkwno3"
+							}
+						},
+						{
+							"ID": "20240317144958-zw5qcvz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240317144958-zw5qcvz",
+								"updated": "20240317150635"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设我们要自己实现一个能够将下载下来的数据处理为文件并保存到本地硬盘上，我们主要这样重写："
+								}
+							]
+						},
+						{
+							"ID": "20240317150107-flfea3i",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240317150107-flfea3i",
+								"updated": "20240317150109"
+							},
+							"Children": [
+								{
+									"ID": "20240317150109-p9x1g6c",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240317150109-p9x1g6c",
+										"updated": "20240317150109"
+									},
+									"Children": [
+										{
+											"ID": "20240317150109-hdk25b5",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240317150109-hdk25b5",
+												"updated": "20240317150225"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "CustomDownLoadFileHandler(string path) : base()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：外部实例化时可指定下载文件到哪里的路径，为"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "savePath"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​赋值"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240317150209-1tzfhz1",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240317150209-1tzfhz1"
+									},
+									"Children": [
+										{
+											"ID": "20240317150209-h6itues",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240317150209-h6itues",
+												"updated": "20240317150303"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "GetData()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：不使用基类的返回结果，而是返回派生类里声明的缓存字节数组"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "cacheBytes"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240317150304-0sdo3s3",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240317150304-0sdo3s3"
+									},
+									"Children": [
+										{
+											"ID": "20240317150304-99vyifr",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240317150304-99vyifr",
+												"updated": "20240317150437"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ReceiveData()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：根据传入的本帧下载数据和长度，将下载的内容拷贝到缓存字节数组"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "cacheBytes"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​中，同时输出本帧下载数据的长度"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240317150358-o8cc9p7",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240317150358-o8cc9p7"
+									},
+									"Children": [
+										{
+											"ID": "20240317150358-jmi3rcn",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240317150358-jmi3rcn",
+												"updated": "20240317150554"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ReceiveContentLengthHeader()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：根据传入的接下来要下载的数据大小，为"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "cacheBytes"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​赋值相等长度的字节数组，确保其可以完整接收数据"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240317150550-g4m3ciy",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240317150550-g4m3ciy"
+									},
+									"Children": [
+										{
+											"ID": "20240317150550-fv2z1qu",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240317150550-fv2z1qu",
+												"updated": "20240317150624"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "CompleteContent()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：下载完所有数据后，将下载到的数据写到本地硬盘上"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240316215303-5sl7p3i",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240316215303-5sl7p3i",
+								"style": "line-height: 22px;",
+								"updated": "20240317150118"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//using ...\npublic class Lesson32 : MonoBehaviour\n{\n    void Start()\n    {\n        StartCoroutine(DownLoadCustomHandler());\n    }\n\n    IEnumerator DownLoadCustomHandler()\n    {\n        UnityWebRequest request = new UnityWebRequest(\"http://192.168.1.102/Http_Server/下载测试2.png\",\n                                                      UnityWebRequest.kHttpVerbGET);\n        request.downloadHandler = new CustomDownLoadFileHandler(Application.persistentDataPath + \"/CustomHandler.jpg\");\n        yield return request.SendWebRequest();\n        if (request.result == UnityWebRequest.Result.Success)\n        {\n            print(\"存储到本地成功！\" + Application.persistentDataPath + \"/CustomHandler.jpg\");\n        }\n        else\n        {\n            print(\"获取数据失败\" + request.result + request.error + request.responseCode);\n        }\n    }\n}\n\npublic class CustomDownLoadFileHandler : DownloadHandlerScript\n{\n    private string savePath;            //用于保存本地存储时的路径\n\n    private byte[] cacheBytes;          //用于缓存收到的数据的容器\n    private int index = 0;              //当前已收到的数据长度\n\n    public CustomDownLoadFileHandler() : base() { }\n\n    public CustomDownLoadFileHandler(byte[] bytes) : base(bytes) { }\n\n    public CustomDownLoadFileHandler(string path) : base()\n    {\n        savePath = path;\n    }\n\n    protected override byte[] GetData()\n    {\n        //return base.GetData();\n        return cacheBytes;\n    }\n\n    /// \u003csummary\u003e\n    /// 从网络收到数据后，每帧会自动调用的方法\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"data\"\u003e\u003c/param\u003e\n    /// \u003cparam name=\"dataLength\"\u003e\u003c/param\u003e\n    /// \u003creturns\u003e\u003c/returns\u003e\n    protected override bool ReceiveData(byte[] data, int dataLength)\n    {\n        //return base.ReceiveData(data, dataLength);\n        Debug.Log(\"收到数据长度（取字节数组长度）：\" + data.Length);\n        Debug.Log(\"收到数据长度（取dataLength）:\" + dataLength);\n        data.CopyTo(cacheBytes, index);\n        index += dataLength;\n        return true;\n    }\n\n    /// \u003csummary\u003e\n    /// 从服务器收到Content-Length表头时会调用的方法\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"contentLength\"\u003e\u003c/param\u003e\n    protected override void ReceiveContentLengthHeader(ulong contentLength)\n    {\n        //base.ReceiveContentLengthHeader(contentLength);\n        Debug.Log(\"收到数据的长度：\" + contentLength);\n        //根据收到的标头，决定字节数组容器的大小\n        cacheBytes = new byte[contentLength];\n    }\n\n    /// \u003csummary\u003e\n    /// 当消息收完了，会自动调用的方法\n    /// \u003c/summary\u003e\n    protected override void CompleteContent()\n    {\n        Debug.Log(\"消息收完\");\n        //把收到的字节数组进行自定义处理，我们在这里存储到本地\n        File.WriteAllBytes(savePath, cacheBytes);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240316214324-lkodat8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316214324-lkodat8",
+				"updated": "20240316221903"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以发现，在使用上述的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "DownloadHandler"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​​派生类处理下载的不同的数据时，\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UnityWebRequest"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​​对象的实例化，赋值，执行的方法等逻辑基本是一致的\n不同的点主要是在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UnityWebRequest"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​​对象的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "downloadHandler"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​​属性中，不同的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "DownloadHandler"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​​派生类所导致的"
+				}
+			]
+		},
+		{
+			"ID": "20240316214658-8674w6q",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316214658-8674w6q",
+				"updated": "20240316221022"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UnityWebRequest"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的下载数据和处理下载数据逻辑是分开的，\n发送请求，下载数据的逻辑是在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UnityWebRequest"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内部实现的，\n而"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "下载到的数据的具体如何处理是由不同的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code strong",
+					"TextMarkTextContent": "DownloadHandler"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "派生类决定的"
+				}
+			]
+		},
+		{
+			"ID": "20240316220831-sf09de9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316220831-sf09de9",
+				"style": "background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);",
+				"updated": "20240316221913"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此，通过为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UnityWebRequest"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​对象"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "downloadHandler"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​属性赋值特定的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "DownloadHandler"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​派生类对象，即可选择特定的处理逻辑对下载的数据进行处理"
+				}
+			]
+		},
+		{
+			"ID": "20240316220942-p0yc1i0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316220942-p0yc1i0",
+				"updated": "20240316221022"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于自定义的数据，以及它如何处理，我们可以继承"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "DownloadHandlerScript"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，在派生类自己实现处理逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240316221744-pf5vlso",
+			"Type": "NodeThematicBreak",
+			"Properties": {
+				"id": "20240316221744-pf5vlso"
+			}
+		},
+		{
+			"ID": "20240316221313-y7foddq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240316221313-y7foddq",
+				"updated": "20240316221358"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义上传数据的类——UploadHandler派生类"
+				}
+			]
+		},
+		{
+			"ID": "20240316221359-hqi64yr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316221359-hqi64yr",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240316221808"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：由于"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UnityWebRequest"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类的常用操作中，上传数据相关内容已经封装的很好了\n我们可以很方便的上传参数和文件，我们使用常用操作已经能够满足常用需求了，所以对于"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UploadHandler"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​相关类的内容主要做了解"
+				}
+			]
+		},
+		{
+			"ID": "20240316221510-lnlq60e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316221510-lnlq60e",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240316221612"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "下面的各个方法，需要由后端程序员配合，对上传的数据进行处理，它们才能生效，否则是不起作用的"
+				}
+			]
+		},
+		{
+			"ID": "20240316221425-g7cw8vi",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316221425-g7cw8vi",
+				"updated": "20240316222940"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UploadHandler"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​派生类中比较重要的变量是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "contentType"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内容类型，\n如果不设置，模式是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "application/octet-stream"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，2进制流的形式，\n关于该变量可以传入什么内容，请看："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240315120452-doc0vqf",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "ContentType的常用类型"
+				}
+			]
+		},
+		{
+			"ID": "20240316221427-ps9txla",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240316221427-ps9txla",
+				"updated": "20240317144558"
+			},
+			"Children": [
+				{
+					"ID": "20240316221427-z5en7gl",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240316221427-z5en7gl",
+						"name": "UploadHandlerRaw",
+						"updated": "20240317144555"
+					},
+					"Children": [
+						{
+							"ID": "20240316221427-0q37g0l",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240316221427-0q37g0l",
+								"updated": "20240317144555"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UploadHandlerRaw"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 用于上传字节数组"
+								}
+							]
+						},
+						{
+							"ID": "20240316222312-m13ymek",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316222312-m13ymek",
+								"updated": "20240317144555"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "值得一提的是，也可以像"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240314220827-dcqdpzt",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "C#中按照Http的规则"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "来生成字节数组，可以达到上传文件的目的（但是并没有这个必要）\n将要上传的消息序列化为字节数组，然后在使用构造函数实例化"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UploadHandlerRaw"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象时，传入这个字节数组即可"
+								}
+							]
+						},
+						{
+							"ID": "20240316222455-ynp1n8p",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240316222455-ynp1n8p",
+								"style": "line-height: 22px;",
+								"updated": "20240317144555"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    StartCoroutine(UpLoad());\n}\n\nIEnumerator UpLoad()\n{\n    UnityWebRequest request = new UnityWebRequest(\"http://192.168.1.102/Http_Server/\",\n                                                  UnityWebRequest.kHttpVerbPOST);\n    byte[] bytes = Encoding.UTF8.GetBytes(\"123123123123123\");\n    request.uploadHandler = new UploadHandlerRaw(bytes);\n    //request.uploadHandler.contentType = \"类型/细分类型\";\n    yield return request.SendWebRequest();\n    print(request.result);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240316221427-5hxdntd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240316221427-5hxdntd",
+						"name": "UploadHandlerFile",
+						"updated": "20240317144558"
+					},
+					"Children": [
+						{
+							"ID": "20240316221427-0jl20g5",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240316221427-0jl20g5",
+								"updated": "20240317144558"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UploadHandlerFile"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 用于上传文件"
+								}
+							]
+						},
+						{
+							"ID": "20240316222852-876ab35",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240316222852-876ab35",
+								"updated": "20240317144558"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在使用构造函数实例化"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UploadHandlerRaw"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象时，传入要上传的文件路径即可，对于不同的文件类型可以设置"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "contentType"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240316222614-8nt4ri6",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240316222614-8nt4ri6",
+								"style": "line-height: 22px;",
+								"updated": "20240317144558"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    StartCoroutine(UpLoad());\n}\n\nIEnumerator UpLoad()\n{\n    UnityWebRequest request = new UnityWebRequest(\"http://192.168.1.102/Http_Server/\",\n                                                  UnityWebRequest.kHttpVerbPOST);\n    request.uploadHandler = new UploadHandlerFile(Application.streamingAssetsPath + \"/test.png\");\n    //request.uploadHandler.contentType = \"类型/细分类型\";\n    yield return request.SendWebRequest();\n    print(request.result);\n}\n\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240316221753-brw9q7x",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240316221753-brw9q7x"
+			}
+		}
+	]
+}

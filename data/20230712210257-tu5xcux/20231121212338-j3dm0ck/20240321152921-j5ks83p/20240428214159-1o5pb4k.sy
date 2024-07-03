@@ -1,0 +1,1472 @@
+{
+	"ID": "20240428214159-1o5pb4k",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240428214159-1o5pb4k",
+		"title": "UH4L19——类型系统",
+		"type": "doc",
+		"updated": "20240501145849"
+	},
+	"Children": [
+		{
+			"ID": "20240428214159-1lf6fmw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240428214159-1lf6fmw",
+				"updated": "20240428214305"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "类型系统的作用"
+				}
+			]
+		},
+		{
+			"ID": "20240428214311-25ygyoa",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428214311-25ygyoa",
+				"updated": "20240501142201"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "类型系统"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "用于表示热更工程中的各种类型、方法、成员、实例对象等等信息\n相当于，ILRuntime帮助我们利用它内部的解释器，将我们实现的代码解释翻译为了自己的一套类型规则\n在真正执行代码时，都是基于ILRuntime自己的类型系统中的规则来执行的"
+				}
+			]
+		},
+		{
+			"ID": "20240428214311-ds4b1s4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428214311-ds4b1s4",
+				"updated": "20240428215639"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "说人话："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "类型系统 是 热更工程中的类、方法、成员等信息 的载体"
+				}
+			]
+		},
+		{
+			"ID": "20240501142611-5y6vjjq",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240501142611-5y6vjjq",
+				"updated": "20240501145849"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240501142611-4yokp49",
+					"Type": "NodeHeading",
+					"HeadingLevel": 3,
+					"Properties": {
+						"id": "20240501142611-4yokp49",
+						"updated": "20240501145323"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "如何理解这个所谓载体"
+						}
+					]
+				},
+				{
+					"ID": "20240501142637-46zolti",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240501142637-46zolti",
+						"updated": "20240501145323"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "假设我们在ILRuntime的热更新工程内创建了一个"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "Test"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​类，里面有成员属性"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "A"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​和成员方法"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "TestFun"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​\n这个类随热更新工程会被编译为DLL文件，在DLL文件内部就包含了编译出来的"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "Test"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​类的IL中间代码，\n我们并不能直接在主工程内调用这个DLL文件内部的类，因此需要使用ILRuntime来帮助我们获取、记录并执行其中的IL中间代码"
+						}
+					]
+				},
+				{
+					"ID": "20240501143130-92ouqnz",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240501143130-92ouqnz",
+						"updated": "20240501145323"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "而ILRuntime会借助"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "Mono.Cecil"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​读取DLL文件内部的IL中间代码，获取其中的类型和元消息，这里面就包括"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "Test"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​类和它的成员\nILRuntime在读取到类型消息和元消息后，就会翻译这些信息，然后使用类型系统下继承"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "IType"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​的类对象记录的翻译出来的消息\n而"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "Test"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​类消息就会被一个继承"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "IType"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​的类对象记录，而它的成员属性"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "A"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​和方法"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "TestFun"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​也会被对应的继承"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "IMethod"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​的对象记录"
+						}
+					]
+				},
+				{
+					"ID": "20240501143804-q36b8g8",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240501143804-q36b8g8",
+						"updated": "20240501145323"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "这也是为什么我们需要通过"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "IType"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​接口获取构造方法，属性，方法等"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "IMethod"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​消息然后调用，才能执行热更DLL文件内的逻辑"
+						}
+					]
+				},
+				{
+					"ID": "20240501144925-so6xnyl",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240501144925-so6xnyl",
+						"updated": "20240501145849"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "因此，准确来说，我们在主工程内调用的热更工程相关的类和方法实际上都是由ILRuntime类型系统去记录消息"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240428220227-gupq0g3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428220227-gupq0g3",
+				"updated": "20240501142225"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "类型系统就是 ILRuntime 用于 解释 热更工程中所有类、方法、属性等信息后 逻辑的载体\nILRuntime 读取 DLL 后，通过解释器，将其中的 IL 中间代码信息翻译为符合类型系统规则信息\n我们可以利用它来执行 DLL 当中的代码逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240428214314-635al3n",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240428214314-635al3n",
+				"updated": "20240428215159"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "类型系统中的关键接口"
+				}
+			]
+		},
+		{
+			"ID": "20240428215739-tyk53px",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240428215739-tyk53px",
+				"updated": "20240501144325"
+			},
+			"Children": [
+				{
+					"ID": "20240428215739-sg139p9",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240428215739-sg139p9",
+						"updated": "20240501144325"
+					},
+					"Children": [
+						{
+							"ID": "20240428215739-npitmhe",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428215739-npitmhe",
+								"updated": "20240501144325"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "IType"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 所有ILRuntime内类型的基类，它下面的内容就会记录"
+								}
+							]
+						},
+						{
+							"ID": "20240428215739-4sy178s",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240428215739-4sy178s",
+								"updated": "20240428220118"
+							},
+							"Children": [
+								{
+									"ID": "20240428215739-8ybpczz",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240428215739-8ybpczz",
+										"updated": "20240428215739"
+									},
+									"Children": [
+										{
+											"ID": "20240428215739-ckarpvh",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240428215739-ckarpvh",
+												"updated": "20240428215929"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "CLRType"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：代表主工程中的类型"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240428215739-xj7w5jp",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240428215739-xj7w5jp",
+										"updated": "20240428215739"
+									},
+									"Children": [
+										{
+											"ID": "20240428215739-hvs9b76",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240428215739-hvs9b76",
+												"updated": "20240428215750"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ILType"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​： 热更工程中的类型"
+												}
+											]
+										},
+										{
+											"ID": "20240428215739-py60m5y",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240428215739-py60m5y",
+												"updated": "20240428215739"
+											},
+											"Children": [
+												{
+													"ID": "20240428215739-67s5q19",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240428215739-67s5q19",
+														"updated": "20240428215739"
+													},
+													"Children": [
+														{
+															"ID": "20240428215739-7opwzaa",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240428215739-7opwzaa",
+																"updated": "20240428215752"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "StaticInstance"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​（类型静态实例，用于保存该类型静态字段）"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240428215739-han642y",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240428215739-han642y",
+										"updated": "20240428215739"
+									},
+									"Children": [
+										{
+											"ID": "20240428215739-b7hq9yd",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240428215739-b7hq9yd",
+												"updated": "20240428215756"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ReflectedType"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​： 对应的反射类型"
+												}
+											]
+										},
+										{
+											"ID": "20240428215739-6awzib9",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240428215739-6awzib9",
+												"updated": "20240428215739"
+											},
+											"Children": [
+												{
+													"ID": "20240428215739-xbubkp3",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240428215739-xbubkp3",
+														"updated": "20240428215739"
+													},
+													"Children": [
+														{
+															"ID": "20240428215739-9xkfzzm",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240428215739-9xkfzzm",
+																"updated": "20240428215757"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "ILRuntimeType"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​： 热更工程中的类型对应的反射类型"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240428215739-liux3ij",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240428215739-liux3ij",
+														"updated": "20240428215739"
+													},
+													"Children": [
+														{
+															"ID": "20240428215739-ipp9smt",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240428215739-ipp9smt",
+																"updated": "20240428215758"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "ILRuntimeWraperType"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​： 主工程中的类型对应的反射类型"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240428215739-2m9ujpy",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240428215739-2m9ujpy",
+										"updated": "20240428220118"
+									},
+									"Children": [
+										{
+											"ID": "20240428215739-6kd72p7",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240428215739-6kd72p7",
+												"updated": "20240428220118"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "TypeForCLR"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​： "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "IType"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 在主工程中对应的真实类型"
+												}
+											]
+										},
+										{
+											"ID": "20240428220042-n7u98uu",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240428220042-n7u98uu",
+												"updated": "20240428220048"
+											},
+											"Children": [
+												{
+													"ID": "20240428220041-9vdn152",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240428220041-9vdn152",
+														"updated": "20240428220048"
+													},
+													"Children": [
+														{
+															"ID": "20240428220041-2sxvz2k",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240428220041-2sxvz2k",
+																"updated": "20240428220048"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "没有跨域继承——拿到的类型会是 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "ILTypeInstance"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ "
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240428220044-65h7yd9",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240428220044-65h7yd9"
+													},
+													"Children": [
+														{
+															"ID": "20240428220044-wl4tdy2",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240428220044-wl4tdy2"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "有跨域继承——拿到的类型会是 适配器类型"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240428215739-5sx3117",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240428215739-5sx3117",
+						"updated": "20240428215808"
+					},
+					"Children": [
+						{
+							"ID": "20240428215739-uj53vzh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428215739-uj53vzh",
+								"updated": "20240428215803"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "IMethod"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 所有方法的基类"
+								}
+							]
+						},
+						{
+							"ID": "20240428215739-fp3mow1",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240428215739-fp3mow1",
+								"updated": "20240428215808"
+							},
+							"Children": [
+								{
+									"ID": "20240428215739-bq2uyw8",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240428215739-bq2uyw8",
+										"updated": "20240428215805"
+									},
+									"Children": [
+										{
+											"ID": "20240428215739-0a059k3",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240428215739-0a059k3",
+												"updated": "20240428215805"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "CLRMethod"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 主工程中定义的方法"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240428215739-mdsbdok",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240428215739-mdsbdok",
+										"updated": "20240428215808"
+									},
+									"Children": [
+										{
+											"ID": "20240428215739-mr6yn9e",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240428215739-mr6yn9e",
+												"updated": "20240428215808"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ILMethod"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 热更工程中定义的方法"
+												}
+											]
+										},
+										{
+											"ID": "20240428215739-5890vjv",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240428215739-5890vjv",
+												"updated": "20240428215739"
+											},
+											"Children": [
+												{
+													"ID": "20240428215739-0q6qzho",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240428215739-0q6qzho",
+														"updated": "20240428215739"
+													},
+													"Children": [
+														{
+															"ID": "20240428215739-dr3qq9h",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240428215739-dr3qq9h",
+																"updated": "20240428215739"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "Method Body（方法体）"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240428215739-suvtb52",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240428215739-suvtb52",
+														"updated": "20240428215739"
+													},
+													"Children": [
+														{
+															"ID": "20240428215739-dkcfx4m",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240428215739-dkcfx4m",
+																"updated": "20240428215739"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "Instruction（指令相关）"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240428215739-hoppht0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240428215739-hoppht0",
+						"updated": "20240428215827"
+					},
+					"Children": [
+						{
+							"ID": "20240428215739-sgqs6ym",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428215739-sgqs6ym",
+								"updated": "20240428215815"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ILTypeInstance"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 热更内类型的实例均为该类型 委托和装箱后的枚举均为此类型派生"
+								}
+							]
+						},
+						{
+							"ID": "20240428215739-4e5ct9s",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240428215739-4e5ct9s",
+								"updated": "20240428215827"
+							},
+							"Children": [
+								{
+									"ID": "20240428215739-j0e50xp",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240428215739-j0e50xp",
+										"updated": "20240428215817"
+									},
+									"Children": [
+										{
+											"ID": "20240428215739-5vmzapt",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240428215739-5vmzapt",
+												"updated": "20240428215817"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ILTypeStaticInstance"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 静态字段"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240428215739-1s8kzer",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240428215739-1s8kzer",
+										"updated": "20240428215819"
+									},
+									"Children": [
+										{
+											"ID": "20240428215739-oa919yu",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240428215739-oa919yu",
+												"updated": "20240428215819"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ILEnumTypeInstance"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 枚举字段"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240428215739-0u24j9a",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240428215739-0u24j9a",
+										"updated": "20240428215822"
+									},
+									"Children": [
+										{
+											"ID": "20240428215739-jg3bjhr",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240428215739-jg3bjhr",
+												"updated": "20240428215822"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "DelegateAdapter"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 委托适配器"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240428215739-dfkbqcr",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240428215739-dfkbqcr",
+										"updated": "20240428215823"
+									},
+									"Children": [
+										{
+											"ID": "20240428215739-ry0vsfo",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240428215739-ry0vsfo",
+												"updated": "20240428215823"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Fields"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 所有字段"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240428215739-kph9h0d",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240428215739-kph9h0d",
+										"updated": "20240428215827"
+									},
+									"Children": [
+										{
+											"ID": "20240428215739-2abgroq",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240428215739-2abgroq",
+												"updated": "20240428215827"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ManagedObjects"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 引用类型对象实例"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240428215739-1i39cj4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240428215739-1i39cj4",
+						"updated": "20240428220323"
+					},
+					"Children": [
+						{
+							"ID": "20240428215739-r9ilj0u",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428215739-r9ilj0u",
+								"updated": "20240428215739"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "委托"
+								}
+							]
+						},
+						{
+							"ID": "20240428215739-0tt05sw",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240428215739-0tt05sw",
+								"updated": "20240428220323"
+							},
+							"Children": [
+								{
+									"ID": "20240428215739-6lrim5u",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240428215739-6lrim5u",
+										"updated": "20240428215829"
+									},
+									"Children": [
+										{
+											"ID": "20240428215739-z79ct6x",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240428215739-z79ct6x",
+												"updated": "20240428215829"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "DelegateAdapter"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 委托适配器"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240428215739-m5tvbqc",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240428215739-m5tvbqc",
+										"updated": "20240428215831"
+									},
+									"Children": [
+										{
+											"ID": "20240428215739-805no0e",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240428215739-805no0e",
+												"updated": "20240428215831"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "DummyDelegateAdapter"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 热更中的委托，没有跨域调用 对应该类型"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240428215739-n8p6k81",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240428215739-n8p6k81",
+										"updated": "20240428220323"
+									},
+									"Children": [
+										{
+											"ID": "20240428215739-os94ujj",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240428215739-os94ujj",
+												"updated": "20240428220323"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Delegate"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 转换"
+												}
+											]
+										},
+										{
+											"ID": "20240428215739-k10xbau",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240428215739-k10xbau",
+												"updated": "20240428220320"
+											},
+											"Children": [
+												{
+													"ID": "20240428215739-mtb1hx6",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240428215739-mtb1hx6",
+														"updated": "20240428220320"
+													},
+													"Children": [
+														{
+															"ID": "20240428215739-dlm7e33",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240428215739-dlm7e33",
+																"updated": "20240428220320"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "转换为 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Action"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ / "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Func"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240428215739-v83o5lo",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240428215739-v83o5lo",
+														"updated": "20240428215739"
+													},
+													"Children": [
+														{
+															"ID": "20240428215739-le41pim",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240428215739-le41pim",
+																"updated": "20240428215739"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "转换为自定义委托类型"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240428215733-ngh3isy",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240428215733-ngh3isy",
+				"updated": "20240428220211"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "学习类型系统的目的"
+				}
+			]
+		},
+		{
+			"ID": "20240428220215-x0rvp2f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428220215-x0rvp2f",
+				"updated": "20240501141704"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "大概了解了类型系统的作用和构成后，我们再反观之前学习的知识点，我们能够明白之前为什么要那样做"
+				}
+			]
+		},
+		{
+			"ID": "20240428220219-iao48qh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428220219-iao48qh",
+				"updated": "20240501145521"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "例如我们要通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AppDomain"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​去获取"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IType"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，然后实例化出一个继承"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ILTypeInstance"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的对象，然后通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IMethod"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​调用属性和方法等等"
+				}
+			]
+		},
+		{
+			"ID": "20240501145459-ezzsgpm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240501145459-ezzsgpm"
+			}
+		}
+	]
+}

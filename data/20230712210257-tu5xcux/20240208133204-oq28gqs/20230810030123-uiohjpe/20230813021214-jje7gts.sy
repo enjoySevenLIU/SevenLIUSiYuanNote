@@ -1,0 +1,156 @@
+{
+	"ID": "20230813021214-jje7gts",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230813021214-jje7gts",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230813021214-jje7gts\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230814185436-d11f02i\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230815025351-qg02td9\u0026quot;,\u0026quot;scrollTop\u0026quot;:0,\u0026quot;focusId\u0026quot;:\u0026quot;20230814185702-sgjiqmn\u0026quot;,\u0026quot;focusStart\u0026quot;:248,\u0026quot;focusEnd\u0026quot;:248\u0026#125;",
+		"title": "UG3L13——屏幕坐标转UI相对坐标",
+		"updated": "20230815032619"
+	},
+	"Children": [
+		{
+			"ID": "20230814185436-d11f02i",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230814185436-d11f02i",
+				"updated": "20230814185442"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "RectTransformUtility"
+				}
+			]
+		},
+		{
+			"ID": "20230813021214-a1lcog0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230813021214-a1lcog0",
+				"updated": "20230814185434"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "RectTransformUtility 公共类是一个RectTransform的辅助类\n主要用于进行一些 坐标的转换等等操作\n其中对于我们目前来说 最重要的函数是 将屏幕空间上的点，转换成UI本地坐标下的点"
+				}
+			]
+		},
+		{
+			"ID": "20230814185443-xmye1p9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230814185443-xmye1p9",
+				"name": "RectTransformUtility.ScreenPointToLocalPointInRectangle()",
+				"updated": "20230814185527"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "将屏幕坐标转换为UI本地坐标系下的点"
+				}
+			]
+		},
+		{
+			"ID": "20230815030208-c2h1jch",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230815030208-c2h1jch",
+				"updated": "20230815030208"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "RectTransformUtility.ScreenPointToLocalPointInRectangle()"
+				}
+			]
+		},
+		{
+			"ID": "20230814185702-sgjiqmn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230814185702-sgjiqmn",
+				"updated": "20230815032619"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "参数一：相对父对象的坐标系（需要RectTransform类型，"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "且一定是自己的父对象，否则转换可能出现偏差！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "）"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n参数二：屏幕点（要转换的相对于屏幕坐标系的点，使用PointerEventData的position会更准确）\n参数三：摄像机（需要为UI的摄像机，可以直接用PointerEventData的enterEventCamara）\n参数四：最终得到的点（Vector2类型，使用out关键字，需要在使用该函数前就声明好，转换完成后该变量就会转载转换好的点）\n一般配合拖拽事件使用，效果远比 位置增加拖拽的变化量 更好"
+				}
+			]
+		},
+		{
+			"ID": "20230814185631-2hr02jb",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230814185631-2hr02jb",
+				"updated": "20230815030707"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\nusing UnityEngine.EventSystems;\n\npublic class Lesson20 : MonoBehaviour, IDragHandler\n{\n    public void OnDrag(PointerEventData eventData)\n    {\n        Vector2 nowPos;\n        RectTransformUtility.ScreenPointToLocalPointInRectangle(this.transform.parent as RectTransform,\n                                                                eventData.position,\n                                                                eventData.enterEventCamera,\n                                                                out nowPos);\n        this.transform.localPosition = nowPos;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230815025351-qg02td9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230815025351-qg02td9"
+			}
+		}
+	]
+}

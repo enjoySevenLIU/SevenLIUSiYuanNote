@@ -1,0 +1,380 @@
+{
+	"ID": "20240421221648-4kyo09t",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240421221648-4kyo09t",
+		"title": "UFL8——UI管理器的隐藏面板可选销毁优化",
+		"type": "doc",
+		"updated": "20240421223058"
+	},
+	"Children": [
+		{
+			"ID": "20240421221657-pefka37",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240421221657-pefka37",
+				"updated": "20240421221702"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "为什么要进行 隐藏面板可选销毁 优化"
+				}
+			]
+		},
+		{
+			"ID": "20240421221710-kzmu8vr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240421221710-kzmu8vr",
+				"updated": "20240421221738"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们目前隐藏面板时，会直接将面板销毁，下次创建时再重新创建"
+				}
+			]
+		},
+		{
+			"ID": "20240421221714-kxnz39r",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240421221714-kxnz39r",
+				"updated": "20240421221734"
+			},
+			"Children": [
+				{
+					"ID": "20240421221715-8qj3cbq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240421221715-8qj3cbq",
+						"updated": "20240421221734"
+					},
+					"Children": [
+						{
+							"ID": "20240421221715-hidmc8y",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240421221715-hidmc8y",
+								"updated": "20240421221734"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "优点：当存在内存压力时，直接销毁面板后，当内存不足时会触发GC，不会因为存在没有使用的面板引用而造成内存崩溃"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240421221716-41swc2c",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240421221716-41swc2c"
+					},
+					"Children": [
+						{
+							"ID": "20240421221716-wl9uync",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240421221716-wl9uync",
+								"updated": "20240421221725"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "缺点：会产生内存垃圾加快GC的触发，频繁的销毁创建会增加性能消耗"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240421221710-4htxptn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240421221710-4htxptn",
+				"updated": "20240421221801"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "也就是说我们不能直接将面板隐藏改成不销毁，而应该改为可以让我们自己控制最好\n我们可以根据项目的实际情况 选择性的使用失活或销毁"
+				}
+			]
+		},
+		{
+			"ID": "20240421221659-cs7fe9y",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240421221659-cs7fe9y",
+				"updated": "20240421221822"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "隐藏面板可选销毁实现"
+				}
+			]
+		},
+		{
+			"ID": "20240421221918-br9ut3c",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240421221918-br9ut3c",
+				"updated": "20240421221927"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要制作思路"
+				}
+			]
+		},
+		{
+			"ID": "20240421221929-f2q1ixv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240421221929-f2q1ixv",
+				"updated": "20240421221937"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "无需使用缓存池，因为缓存池主要是提供给非唯一对象使用的，UI面板大部分情况下是唯一的，因此我们直接在UI管理器中修改逻辑即可"
+				}
+			]
+		},
+		{
+			"ID": "20240421221926-xgu6ogp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240421221926-xgu6ogp",
+				"updated": "20240421221930"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要实现内容"
+				}
+			]
+		},
+		{
+			"ID": "20240421221929-nztyu2v",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240421221929-nztyu2v",
+				"updated": "20240421221933"
+			},
+			"Children": [
+				{
+					"ID": "20240421221933-yw4gwzf",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240421221933-yw4gwzf",
+						"updated": "20240421221933"
+					},
+					"Children": [
+						{
+							"ID": "20240421221933-73ca2br",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240421221933-73ca2br",
+								"updated": "20240421221933"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "隐藏面板时，可以选择销毁还是失活"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240421221933-ye6l9iq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240421221933-ye6l9iq",
+						"updated": "20240421221933"
+					},
+					"Children": [
+						{
+							"ID": "20240421221933-9hg7lpo",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240421221933-9hg7lpo",
+								"updated": "20240421221933"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "显示面板时，如果存在直接激活，如果不存在再重新创建"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240421222451-mal2caf",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240421222451-mal2caf",
+				"style": "line-height: 22px;",
+				"updated": "20240421222856"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private Dictionary\u003cstring, BasePanelInfo\u003e panelDic = new Dictionary\u003cstring, BasePanelInfo\u003e();\n\npublic void HidePanel\u003cT\u003e(bool isDestroy = false) where T : BasePanel\n{\n    string panelName = typeof(T).Name;\n    if (panelDic.ContainsKey(panelName))\n    {\n        //取出消息\n        PanelInfo\u003cT\u003e panelInfo = panelDic[panelName] as PanelInfo\u003cT\u003e;\n        //如果存在，但正在加载\n        if (panelInfo.panel == null) \n        {\n            //修改隐藏标识，标识这个面板将要隐藏，因为要隐藏，因此将回调置空\n            panelInfo.isHide = true;\n            panelInfo.callBack = null;\n        }\n        //已经加载结束\n        else\n        {\n            panelInfo.panel.HideMe();\n            //销毁后从容器中移除\n            if (isDestroy)\n            {\n                GameObject.Destroy(panelInfo.panel.gameObject);\n                panelDic.Remove(panelName);\n            }\n            //如果不销毁，那么就只是失活，下次再显示时\n            else\n                panelInfo.panel.gameObject.SetActive(false);\n        }\n    }\n}\n\npublic void ShowPanel\u003cT\u003e(E_UILayer layer = E_UILayer.Middle, UnityAction\u003cT\u003e callBack = null, bool isSync = false) where T : BasePanel\n{\n    //获取面板名，预设体名必须与面板类名一致\n    string panelName = typeof(T).Name;\n    //存在面板\n    if (panelDic.ContainsKey(panelName)) \n    {\n        //取出消息\n        PanelInfo\u003cT\u003e panelInfo = panelDic[panelName] as PanelInfo\u003cT\u003e;\n        //正在异步加载中\n        if (panelInfo.panel == null)\n        {\n            //将回调添加到记录中\n            panelInfo.isHide = false;\n            if (callBack != null)\n                panelInfo.callBack += callBack;\n        }\n        //已经加载结束\n        else\n        {\n            //如果是失活状态，直接激活面板，就可以显示了\n            if (panelInfo.panel.gameObject.activeSelf)\n                panelInfo.panel.gameObject.SetActive(true);\n            //如果要显示面板，会执行一次面板的默认显示逻辑\n            panelInfo.panel.ShowMe();\n            //直接执行回调，直接传递出去即可\n            callBack?.Invoke(panelInfo.panel);\n        }\n        return;\n    }\n\n    //不存在面板，先存入字典当中占位，之后如果又显示，我才能得到字典中的消息进行判断\n    panelDic.Add(panelName, new PanelInfo\u003cT\u003e(callBack));\n    ABResManager.Instance.LoadResAsync\u003cGameObject\u003e(\"ui\", panelName, (res) =\u003e\n    {\n        //取出消息\n        PanelInfo\u003cT\u003e panelInfo = panelDic[panelName] as PanelInfo\u003cT\u003e;\n        if (panelInfo.isHide)\n        {\n            panelDic.Remove(panelName);\n            return;\n        }\n        //层级的处理\n        Transform layerObj = GetLayerObj(layer);\n        //避免没有按照指定规则传递参数，避免为空\n        if (layerObj == null)\n            layerObj = middleLayer;\n        //将面板预设体创建到对应父对象下，并且保持原本的缩放大小\n        GameObject panelObj = GameObject.Instantiate(res, layerObj, false);\n        T panel = panelObj.GetComponent\u003cT\u003e();   //获取对应的UI控件返回出去\n        panel.ShowMe();                         //显示面板时执行的默认方法\n        panelInfo.panel = panel;                //将加载出来的panel记录到panelInfo内\n        panelInfo.callBack?.Invoke(panel);      //传递到外部使用\n        panelInfo.callBack = null;              //清空回调，避免内存泄露\n    }, isSync);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240421222901-pr6bg4e",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240421222901-pr6bg4e",
+				"updated": "20240421222906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20240421222907-tpxrph1",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240421222907-tpxrph1",
+				"style": "line-height: 22px;",
+				"updated": "20240421223021"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Update()\n{\n    if (Input.GetKeyDown(KeyCode.S))\n    {\n        UIManager.Instance.ShowPanel\u003cBeginPanel\u003e(E_UILayer.System, (panel) =\u003e\n        {\n            panel.TestFun();\n        });\n    }\n    if (Input.GetKeyDown(KeyCode.H))\n    {\n        UIManager.Instance.HidePanel\u003cBeginPanel\u003e();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240421223022-n6ypbe4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240421223022-n6ypbe4",
+				"updated": "20240421223058"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按下H键隐藏面板时，面板不会销毁而是隐藏："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 306px;",
+						"style": "width: 296px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240421223048-w656elt.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 296px;\" parent-style=\"width: 306px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		}
+	]
+}

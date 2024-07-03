@@ -1,0 +1,652 @@
+{
+	"ID": "20240425175023-pv51ocv",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240425175023-pv51ocv",
+		"title": "UFL12-3——秒转时间字符串相关",
+		"type": "doc",
+		"updated": "20240425183506"
+	},
+	"Children": [
+		{
+			"ID": "20240425175024-q897fvq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240425175024-q897fvq",
+				"updated": "20240425175128"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "秒转时分秒 的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240425175140-nkhtszg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240425175140-nkhtszg",
+				"updated": "20240425181303"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们在游戏开发中界面显示时，经常可能会有这样的需求，要在界面中显示 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "n时n分n秒"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的倒计时，\n而一般都是根据倒计时剩余秒数进行转换的，因此我们可以将其封装为一个常用方法"
+				}
+			]
+		},
+		{
+			"ID": "20240425175140-0lx8lfj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240425175140-0lx8lfj",
+				"updated": "20240425175128"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "需求："
+				}
+			]
+		},
+		{
+			"ID": "20240425175142-9gt4h0m",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240425175142-9gt4h0m",
+				"updated": "20240425175142"
+			},
+			"Children": [
+				{
+					"ID": "20240425175142-l5w3lbg",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240425175142-l5w3lbg",
+						"updated": "20240425175142"
+					},
+					"Children": [
+						{
+							"ID": "20240425175142-hw1t74m",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425175142-hw1t74m",
+								"updated": "20240425175142"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "函数有两个参数：秒数 和 是否忽略0（若为 0时0分53秒 前面的0应该不拼接 直接显示53秒）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240425175142-xid87n6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240425175142-xid87n6",
+						"updated": "20240425175142"
+					},
+					"Children": [
+						{
+							"ID": "20240425175142-ednx4vl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425175142-ednx4vl",
+								"updated": "20240425175142"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可以传入用于拼接的 时分秒 字符"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240425175142-jui3p70",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240425175142-jui3p70",
+						"updated": "20240425175142"
+					},
+					"Children": [
+						{
+							"ID": "20240425175142-pbpcz7x",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425175142-pbpcz7x",
+								"updated": "20240425175142"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "当忽略0时，如果存在时，分和秒也必须显示；如果存在分，秒也必须显示（避免出现 1时53秒、1时5分 这种显示）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240425181141-sqh8xy9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240425181141-sqh8xy9",
+				"updated": "20240425181221"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "由于常常会拼接字符串，为了节约性能，我们在这里可以使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "StringBuilder"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，返回时再转为字符串传递出去"
+				}
+			]
+		},
+		{
+			"ID": "20240425180859-50p8iny",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240425180859-50p8iny",
+				"style": "line-height: 22px;",
+				"updated": "20240425181138"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private static StringBuilder resultStr = new StringBuilder(\"\");\n\n/// \u003csummary\u003e\n/// 将秒数转换为时分秒字符串\n/// \u003c/summary\u003e\n/// \u003cparam name=\"timeSec\"\u003e秒数\u003c/param\u003e\n/// \u003cparam name=\"egZero\"\u003e是否忽略0\u003c/param\u003e\n/// \u003cparam name=\"hourStr\"\u003e显示小时使用的字符\u003c/param\u003e\n/// \u003cparam name=\"minuteStr\"\u003e显示分钟使用的字符\u003c/param\u003e\n/// \u003cparam name=\"secondStr\"\u003e显示秒数使用的字符\u003c/param\u003e\n/// \u003creturns\u003e转换好的字符串\u003c/returns\u003e\npublic static string SecondTOHMS(int timeSec, bool egZero = false, string hourStr = \"时\", string minuteStr = \"分\", string secondStr = \"秒\")\n{\n\n    //计算小时\n    int hour = timeSec / 3600;\n    //计算分钟\n    //除去小时后的剩余秒\n    int second = timeSec % 3600;\n    //剩余秒转分钟数\n    int minute = second / 60;\n    //计算秒\n    second = timeSec % 60;\n    //拼接\n    resultStr.Clear();\n    //如果小时不为0，或者不忽略0\n    if (hour != 0 || !egZero)\n    {\n        resultStr.Append(hour);     //具体几个小时\n        resultStr.Append(hourStr);\n    }\n    //如果分钟不为0，或者不忽略0，或者小时不为0\n    if (minute != 0 || !egZero || hour != 0)\n    {\n        resultStr.Append(minute);   //具体几分钟\n        resultStr.Append(minuteStr);\n    }\n    //如果秒不为0 或者 不忽略0 或者 小时和分钟都不为0\n    if (second != 0 || !egZero || hour != 0 || minute != 0)\n    {\n        resultStr.Append(second);       //具体多少秒\n        resultStr.Append(secondStr);\n    }\n\n    //如果传入的是0秒，则需要特别输出一个0秒\n    if (resultStr.Length == 0)\n    {\n        resultStr.Append(0);\n        resultStr.Append(secondStr);\n    }\n\n    return resultStr.ToString();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240425181235-p2gq1ba",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240425181235-p2gq1ba",
+				"updated": "20240425181240"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20240425181240-7t5iag7",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240425181240-7t5iag7",
+				"style": "line-height: 22px;",
+				"updated": "20240425181251"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Start()\n{\n    print(TextUtil.SecondTOHMS(0, true));\n    print(TextUtil.SecondTOHMS(3600, true));\n    print(TextUtil.SecondTOHMS(60, true));\n    print(TextUtil.SecondTOHMS(123456789));\n    print(TextUtil.SecondTOHMS(34645));\n    print(TextUtil.SecondTOHMS(98796, false, \"h\", \"m\", \"s\"));\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240425175313-6culpua",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240425175313-6culpua",
+				"updated": "20240425181240"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 389px;",
+						"style": "width: 379px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240425181124-t9c6ll7.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 379px;\" parent-style=\"width: 389px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240425181413-535968z",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240425181413-535968z",
+				"updated": "20240425181415"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "秒转 00:00:00 的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240425181420-3i7xzmx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240425181420-3i7xzmx",
+				"updated": "20240425181452"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以基于秒转时分秒的方法的代码进行修改 提供一个 秒转 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "00:00:00"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240425181420-yodcl8e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240425181420-yodcl8e",
+				"updated": "20240425181453"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "需求：在上节课的需求基础上加入"
+				}
+			]
+		},
+		{
+			"ID": "20240425181423-w2l34yo",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240425181423-w2l34yo",
+				"updated": "20240425181423"
+			},
+			"Children": [
+				{
+					"ID": "20240425181423-jq496hf",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240425181423-jq496hf",
+						"updated": "20240425181423"
+					},
+					"Children": [
+						{
+							"ID": "20240425181423-m6ka5zu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425181423-m6ka5zu",
+								"updated": "20240425181458"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": ":"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 作为间隔符进行封装"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240425181423-vff0jke",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240425181423-vff0jke",
+						"updated": "20240425181423"
+					},
+					"Children": [
+						{
+							"ID": "20240425181423-qf45pt4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240425181423-qf45pt4",
+								"updated": "20240425181509"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "每个位置的格式为最少2位（即存在这样的格式 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "01:05:35"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 秒）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240425182847-n7m48nl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240425182847-n7m48nl",
+				"updated": "20240425183048"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "现在原来的秒转时分秒的基础上添加一个可以控制是否最短显示两位的参数，再基于秒转时分秒封装一个 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "00:00:00"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240425183050-zc6qyfc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240425183050-zc6qyfc",
+				"style": "line-height: 22px;",
+				"updated": "20240425183351"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private static StringBuilder resultStr = new StringBuilder(\"\");\n\n/// \u003csummary\u003e\n/// 返回类似于00:00:00这样格式的时间字符串\n/// \u003c/summary\u003e\n/// \u003cparam name=\"s\"\u003e要转换的字符串\u003c/param\u003e\n/// \u003cparam name=\"egZero\"\u003e是否忽略0\u003c/param\u003e\n/// \u003creturns\u003e转换出来的字符串\u003c/returns\u003e\npublic static string SecondToColonStr(int s, bool egZero = false)\n{\n    return SecondToHMS(s, egZero, true, \":\", \":\", \"\");\n}\n\n/// \u003csummary\u003e\n/// 将秒数转换为时分秒字符串\n/// \u003c/summary\u003e\n/// \u003cparam name=\"timeSec\"\u003e秒数\u003c/param\u003e\n/// \u003cparam name=\"egZero\"\u003e是否忽略0\u003c/param\u003e\n/// \u003cparam name=\"isKeepLength\"\u003e是否保留最短两位长度，即存在类似与这样的格式\"01:05:35\"\u003c/param\u003e\n/// \u003cparam name=\"hourStr\"\u003e小时的拼接字符\u003c/param\u003e\n/// \u003cparam name=\"minuteStr\"\u003e分钟的拼接字符\u003c/param\u003e\n/// \u003cparam name=\"secondStr\"\u003e秒数的拼接字符\u003c/param\u003e\n/// \u003creturns\u003e转换好的时间字符串\u003c/returns\u003e\npublic static string SecondToHMS(int timeSec, bool egZero = false, bool isKeepLength = false, string hourStr = \"时\", string minuteStr = \"分\", string secondStr = \"秒\")\n{\n    //时间不会有负数，如果发现了负数，就直接归0\n    if (timeSec \u003c 0)\n        timeSec = 0;\n\n    //计算小时\n    int hour = timeSec / 3600;\n    //计算分钟\n    //除去小时后的剩余秒\n    int second = timeSec % 3600;\n    //剩余秒转分钟数\n    int minute = second / 60;\n    //计算秒\n    second = timeSec % 60;\n    //拼接\n    resultStr.Clear();\n    //如果小时不为0，或者不忽略0\n    if (hour != 0 || !egZero)\n    {\n        //具体几个小时\n        resultStr.Append(isKeepLength ? GetNumStr(hour, 2) : hour);\n        resultStr.Append(hourStr);\n    }\n    //如果分钟不为0，或者不忽略0，或者小时不为0\n    if (minute != 0 || !egZero || hour != 0)\n    {\n        //具体几分钟\n        resultStr.Append(isKeepLength ? GetNumStr(minute, 2) : minute);\n        resultStr.Append(minuteStr);\n    }\n    //如果秒不为0 或者 不忽略0 或者 小时和分钟都不为0\n    if (second != 0 || !egZero || hour != 0 || minute != 0)\n    {\n        //具体多少秒\n        resultStr.Append(isKeepLength ? GetNumStr(second, 2) : second);\n        resultStr.Append(secondStr);\n    }\n\n    //如果传入的是0秒，则需要特别输出一个0秒\n    if (resultStr.Length == 0)\n    {\n        resultStr.Append(0);\n        resultStr.Append(secondStr);\n    }\n\n    return resultStr.ToString();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240425181512-sffymf2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240425181512-sffymf2",
+				"updated": "20240425182851"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20240425182737-3uc5eh2",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240425182737-3uc5eh2",
+				"style": "line-height: 22px;",
+				"updated": "20240425182851"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Start()\n{\n    print(TextUtil.SecondToColonStr(0));\n    print(TextUtil.SecondToColonStr(60, true));\n    print(TextUtil.SecondToColonStr(3600));\n    print(TextUtil.SecondToColonStr(5742381));\n    print(TextUtil.SecondToColonStr(82781));\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240425182741-q09m8pa",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240425182741-q09m8pa",
+				"updated": "20240425182841"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 378px;",
+						"style": "width: 368px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240425182841-wczncd5.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 368px;\" parent-style=\"width: 378px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240425183455-l0sfwy8",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240425183455-l0sfwy8",
+				"updated": "20240425183458"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体代码"
+				}
+			]
+		},
+		{
+			"ID": "20240425183459-zozwv14",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240425183459-zozwv14",
+				"style": "line-height: 22px;",
+				"updated": "20240425183506"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System;\nusing System.Collections;\nusing System.Collections.Generic;\nusing System.Text;\nusing UnityEngine;\nusing UnityEngine.Events;\n\n/// \u003csummary\u003e\n/// 用于处理字符串的一些公共功能\n/// \u003c/summary\u003e\npublic class TextUtil\n{\n    #region 字符串拆分相关\n    /// \u003csummary\u003e\n    /// 拆分字符串，返回字符串数组\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"str\"\u003e想要被拆分的字符串\u003c/param\u003e\n    /// \u003cparam name=\"type\"\u003e拆分字符类型：1-; 2-, 3-% 4-: 5-空格 6-| 7-_\u003c/param\u003e\n    /// \u003creturns\u003e拆分出来的数组\u003c/returns\u003e\n    public static string[] SplitStr(string str, int type = 1)\n    {\n        if (str == \"\")\n            return new string[0];\n        string newStr = str;\n        if (type == 1)\n        {\n            //为了避免英文符号填成中文符号，我们先进行一个替换\n            while (newStr.IndexOf(\"；\") != -1)\n            {\n                newStr = newStr.Replace(\"；\", \";\");\n            }\n            return newStr.Split(';');\n        }\n        else if (type == 2)\n        {\n            //为了避免英文符号填成中文符号，我们先进行一个替换\n            while (newStr.IndexOf(\"，\") != -1)\n            {\n                newStr = newStr.Replace(\"，\", \",\");\n            }\n            return newStr.Split(',');\n        }\n        else if (type == 3)\n        {\n            return newStr.Split('%');\n        }\n        else if (type == 4)\n        {\n            //为了避免英文符号填成中文符号，我们先进行一个替换\n            while (newStr.IndexOf(\"：\") != -1)\n            {\n                newStr = newStr.Replace(\"：\", \":\");\n            }\n            return newStr.Split(':');\n        }\n        else if (type == 5)\n        {\n            return newStr.Split(' ');\n        }\n        else if (type == 6)\n        {\n            return newStr.Split('|');\n        }\n        else if (type == 7)\n        {\n            return newStr.Split('_');\n        }\n        return new string[0];\n    }\n\n    /// \u003csummary\u003e\n    /// 拆分字符串 返回整形数组\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"str\"\u003e想要被拆分的字符串\u003c/param\u003e\n    /// \u003cparam name=\"type\"\u003e拆分字符类型：1-; 2-, 3-% 4-: 5-空格 6-| 7-_\u003c/param\u003e\n    /// \u003creturns\u003e拆分出来的数组\u003c/returns\u003e\n    public static int[] SplitStrToIntArr(string str, int type = 1)\n    {\n        string[] strs = SplitStr(str, type);\n        if (str.Length == 0)\n            return new int[0];\n        //将字符串数组转换为整形数组\n        return Array.ConvertAll\u003cstring, int\u003e(strs, (str) =\u003e\n        {\n            return int.Parse(str);\n        });\n    }\n\n    /// \u003csummary\u003e\n    /// 专门用来处理拆分类似于\"1,10;2,20;3,30\"这样的数值对信息，并将其转换为整形数\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"str\"\u003e待拆分的字符串\u003c/param\u003e\n    /// \u003cparam name=\"typeOne\"\u003e数值对的分隔符，拆分字符类型：1-; 2-, 3-% 4-: 5-空格 6-| 7-_\u003c/param\u003e\n    /// \u003cparam name=\"typeTwo\"\u003e数值对内部的分隔符，拆分字符类型：1-; 2-, 3-% 4-: 5-空格 6-| 7-_\u003c/param\u003e\n    /// \u003cparam name=\"callBack\"\u003e传递数值对的回调函数\u003c/param\u003e\n    public static void SplitStrToIntArrTwice(string str, int typeOne, int typeTwo, UnityAction\u003cint, int\u003e callBack)\n    {\n        string[] strs = SplitStr(str, typeOne);\n        if (strs.Length == 0)\n            return;\n        int[] ints;\n        for (int i = 0; i \u003c strs.Length; i++)\n        {\n            ints = SplitStrToIntArr(strs[i], typeTwo);\n            if (ints.Length == 0)\n                continue;\n            callBack.Invoke(ints[0], ints[1]);\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 专门用来处理拆分类似于\"1,10;2,20;3,30\"这样的键值对信息，拆分为字符串\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"str\"\u003e待拆分的字符串\u003c/param\u003e\n    /// \u003cparam name=\"typeOne\"\u003e键值对分隔符，拆分字符类型：1-; 2-, 3-% 4-: 5-空格 6-| 7-_\u003c/param\u003e\n    /// \u003cparam name=\"typeTwo\"\u003e键值对内部的分隔符，拆分字符类型：1-; 2-, 3-% 4-: 5-空格 6-| 7-_\u003c/param\u003e\n    /// \u003cparam name=\"callBack\"\u003e传递字符串对的回调函数\u003c/param\u003e\n    public static void SplitStrwice(string str, int typeOne, int typeTwo, UnityAction\u003cstring, string\u003e callBack)\n    {\n        string[] strs1 = SplitStr(str, typeOne);\n        if (strs1.Length == 0)\n            return;\n        string[] strs2;\n        for (int i = 0; i \u003c strs1.Length; i++)\n        {\n            strs2 = SplitStr(strs1[i], typeTwo);\n            if (strs2.Length == 0)\n                continue;\n            callBack.Invoke(strs2[0], strs2[1]);\n        }\n    }\n    #endregion\n\n    #region 数值转字符串相关\n    /// \u003csummary\u003e\n    /// 将数值转换为字符串，可以指定长度，长度不足时自动在前面补充0\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"value\"\u003e要转换的数值\u003c/param\u003e\n    /// \u003cparam name=\"len\"\u003e最短长度，传入的数值长度不足时会补充0\u003c/param\u003e\n    /// \u003creturns\u003e转换出来的字符串\u003c/returns\u003e\n    public static string GetNumStr(int value, int len)\n    {\n        //int.ToString如果传入一个\"Dn\"（n是数值）的字符串，\n        //代表想要将数值转换为长度为n的字符串，如果长度不够，会在前面补充0\n        return value.ToString($\"D{len}\");\n    }\n\n    /// \u003csummary\u003e\n    /// 让指定的浮点数保留小数点后n位\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"value\"\u003e要转换的浮点数\u003c/param\u003e\n    /// \u003cparam name=\"len\"\u003e保留小数位数\u003c/param\u003e\n    /// \u003creturns\u003e转换出来的字符串\u003c/returns\u003e\n    public static string GetDecimalStr(float value, int len)\n    {\n        //float.ToString如果传入一个\"Fn\"（n是数值）的字符串，\n        //代表想要保留小数点后几位小数\n        return value.ToString($\"F{len}\");\n    }\n    #endregion\n\n    #region 时间转化相关\n    private static StringBuilder resultStr = new StringBuilder(\"\");\n\n    /// \u003csummary\u003e\n    /// 将秒数转换为时分秒字符串\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"timeSec\"\u003e秒数\u003c/param\u003e\n    /// \u003cparam name=\"egZero\"\u003e是否忽略0\u003c/param\u003e\n    /// \u003cparam name=\"isKeepLength\"\u003e是否保留最短两位长度，即存在类似与这样的格式\"01:05:35\"\u003c/param\u003e\n    /// \u003cparam name=\"hourStr\"\u003e小时的拼接字符\u003c/param\u003e\n    /// \u003cparam name=\"minuteStr\"\u003e分钟的拼接字符\u003c/param\u003e\n    /// \u003cparam name=\"secondStr\"\u003e秒数的拼接字符\u003c/param\u003e\n    /// \u003creturns\u003e转换好的时间字符串\u003c/returns\u003e\n    public static string SecondToHMS(int timeSec, bool egZero = false, bool isKeepLength = false, string hourStr = \"时\", string minuteStr = \"分\", string secondStr = \"秒\")\n    {\n        //时间不会有负数，如果发现了负数，就直接归0\n        if (timeSec \u003c 0)\n            timeSec = 0;\n\n        //计算小时\n        int hour = timeSec / 3600;\n        //计算分钟\n        //除去小时后的剩余秒\n        int second = timeSec % 3600;\n        //剩余秒转分钟数\n        int minute = second / 60;\n        //计算秒\n        second = timeSec % 60;\n        //拼接\n        resultStr.Clear();\n        //如果小时不为0，或者不忽略0\n        if (hour != 0 || !egZero)\n        {\n            //具体几个小时\n            resultStr.Append(isKeepLength ? GetNumStr(hour, 2) : hour);\n            resultStr.Append(hourStr);\n        }\n        //如果分钟不为0，或者不忽略0，或者小时不为0\n        if (minute != 0 || !egZero || hour != 0)\n        {\n            //具体几分钟\n            resultStr.Append(isKeepLength ? GetNumStr(minute, 2) : minute);\n            resultStr.Append(minuteStr);\n        }\n        //如果秒不为0 或者 不忽略0 或者 小时和分钟都不为0\n        if (second != 0 || !egZero || hour != 0 || minute != 0)\n        {\n            //具体多少秒\n            resultStr.Append(isKeepLength ? GetNumStr(second, 2) : second);\n            resultStr.Append(secondStr);\n        }\n\n        //如果传入的是0秒，则需要特别输出一个0秒\n        if (resultStr.Length == 0)\n        {\n            resultStr.Append(0);\n            resultStr.Append(secondStr);\n        }\n\n        return resultStr.ToString();\n    }\n\n    /// \u003csummary\u003e\n    /// 返回类似于00:00:00这样格式的时间字符串\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"s\"\u003e要转换的字符串\u003c/param\u003e\n    /// \u003cparam name=\"egZero\"\u003e是否忽略0\u003c/param\u003e\n    /// \u003creturns\u003e转换出来的字符串\u003c/returns\u003e\n    public static string SecondToColonStr(int s, bool egZero = false)\n    {\n        return SecondToHMS(s, egZero, true, \":\", \":\", \"\");\n    }\n    #endregion\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

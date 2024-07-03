@@ -1,0 +1,693 @@
+{
+	"ID": "20240301134225-ypeaez2",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240301134225-ypeaez2",
+		"title": "UH2S3L12——Lua调用枚举",
+		"updated": "20240302170743"
+	},
+	"Children": [
+		{
+			"ID": "20240301140359-h29n84n",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240301140359-h29n84n",
+				"updated": "20240301140411"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240301140411-do5zr5w",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240301140411-do5zr5w",
+				"style": "line-height: 22px;",
+				"updated": "20240301140607"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "tostring()\t\t\t\t--枚举转字符串，传入要转换的枚举值\n枚举值:ToInt()\t\t\t--枚举值转数字\n枚举.IntToEnum()\t\t\t--数字转枚举值，传入数字\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240301134903-hdy7jsi",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240301134903-hdy7jsi",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Lua调用C#枚举"
+				}
+			]
+		},
+		{
+			"ID": "20240301141322-h484y11",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240301141322-h484y11",
+				"updated": "20240301141334"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们要调用下面这个枚举"
+				}
+			]
+		},
+		{
+			"ID": "20240301141334-e0oszlp",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240301141334-e0oszlp",
+				"style": "line-height: 22px;",
+				"updated": "20240301141351"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//枚举\n#region Lesson2 Enum\n/// \u003csummary\u003e\n/// 自定义测试枚举\n/// \u003c/summary\u003e\npublic enum E_MyEnum\n{\n    Idle,\n    Move,\n    Atk,\n}\n#endregion\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240301134225-1teoijj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240301134225-1teoijj",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用Unity当中的枚举，枚举的调用规则 和 类的调用规则是一样的，\n即"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "命名空间.枚举名.枚举成员"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，也支持取别名"
+				}
+			]
+		},
+		{
+			"ID": "20240301135359-hx519xw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240301135359-hx519xw",
+				"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "同样，如果报错，需要在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "CustomSetting"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​中去加上 然后生成代码"
+				}
+			]
+		},
+		{
+			"ID": "20240301140340-vz5a6ev",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240301140340-vz5a6ev",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "xLua的区别是，没有提供字符串转枚举的功能"
+				}
+			]
+		},
+		{
+			"ID": "20240301134854-ph9nsdl",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240301134854-ph9nsdl",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用Unity自带的枚举"
+				}
+			]
+		},
+		{
+			"ID": "20240301135345-ow8xe60",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240301135345-ow8xe60",
+				"style": "line-height: 22px;",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "PrimitiveType = UnityEngine.PrimitiveType\nGameObject = UnityEngine.GameObject\n-- GameObject中的创建几何体静态方法\nlocal obj = GameObject.CreatePrimitive(PrimitiveType.Cube)\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240301135344-ho8ktd2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240301135344-ho8ktd2",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240301135344-mwlsme9.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240301134936-pqsv4n5",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240301134936-pqsv4n5",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用我们自定义的枚举"
+				}
+			]
+		},
+		{
+			"ID": "20240301135834-5ikmu0t",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240301135834-5ikmu0t",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "打印出的是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "userdata"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类型，也就是保留了语言中的数据类型\n这样的枚举依然是可以比较的"
+				}
+			]
+		},
+		{
+			"ID": "20240301134928-fgi1bce",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240301134928-fgi1bce",
+				"style": "line-height: 22px;",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local c = E_MyEnum.Idle\nlocal d = E_MyEnum.Move\n-- 打印出的是userdat类型，也就是保留了语言中的数据类型\nprint(c)\nif c == d then\n    print(\"枚举比较相等\")\nelse\n    print(\"枚举比较不相等\")\nend\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240301135828-aa50ufb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240301135828-aa50ufb",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 501px;",
+						"style": "width: 491px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240301135828-y3av0jo.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 491px;\" parent-style=\"width: 501px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240301135903-d439s01",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240301135903-d439s01",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "枚举转字符串"
+				}
+			]
+		},
+		{
+			"ID": "20240301135959-q3yloqo",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240301135959-q3yloqo",
+				"style": "line-height: 22px;",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"枚举转字符串\")\nprint(tostring(c))\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240301140051-5lgaoek",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240301140051-5lgaoek",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 487px;",
+						"style": "width: 477px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240301140051-x8ym55c.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 477px;\" parent-style=\"width: 487px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240301140052-gime3hp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240301140052-gime3hp",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "枚举转数字"
+				}
+			]
+		},
+		{
+			"ID": "20240301140057-xbq9zur",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240301140057-xbq9zur",
+				"style": "line-height: 22px;",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"枚举转数字\")\nprint(c:ToInt())\nprint(d:ToInt())\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240301140114-ido7r1k",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240301140114-ido7r1k",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 484px;",
+						"style": "width: 474px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240301140114-tuhdgob.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 474px;\" parent-style=\"width: 484px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240301140119-8dtbvkg",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240301140119-8dtbvkg",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "数字转枚举"
+				}
+			]
+		},
+		{
+			"ID": "20240301140215-w4i4qs9",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240301140215-w4i4qs9",
+				"style": "line-height: 22px;",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(\"数字转枚举\")\nprint(E_MyEnum.IntToEnum(0))\nprint(tostring(E_MyEnum.IntToEnum(0)))\nprint(E_MyEnum.IntToEnum(1))\nprint(tostring(E_MyEnum.IntToEnum(0)))"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240301140329-4bs0vx1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240301140329-4bs0vx1",
+				"updated": "20240301134906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 489px;",
+						"style": "width: 479px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240301140329-nwdmkkp.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 479px;\" parent-style=\"width: 489px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240301140337-lohy5sx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240301140337-lohy5sx",
+				"updated": "20240301134906"
+			}
+		}
+	]
+}

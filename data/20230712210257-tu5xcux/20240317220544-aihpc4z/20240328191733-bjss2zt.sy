@@ -1,0 +1,3852 @@
+{
+	"ID": "20240328191733-bjss2zt",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240328191733-bjss2zt",
+		"title": "UEDL7——Inspector窗口拓展",
+		"type": "doc",
+		"updated": "20240406133229"
+	},
+	"Children": [
+		{
+			"ID": "20240328203303-9ri5sd1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240328203303-9ri5sd1",
+				"updated": "20240328203308"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240328203308-yk8nm9s",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240328203308-yk8nm9s",
+				"style": "line-height: 22px;",
+				"updated": "20240404224621"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[CustomEditor()]\t\t\t\t\t\t\t\t\t//如要让类为另外一个类拓展在Inspector窗口的显示，需要添加该特性\nEditor\t\t\t\t\t\t\t\t\t\t\t\t//编辑器类，如要让类为另外一个类拓展在Inspector窗口的显示，需要继承它\nSerializedProperty\t\t\t\t\t\t\t\t\t//代表被拓展的脚本对象中的属性，我们可以通过它来修改被拓展的脚本对象中的属性\nSerializedObject\t\t\t\t\t\t\t\t\t//代表被拓展的脚本对象，可获取被拓展的脚本对象中的属性，修改其在Inspector窗口的显示内容\neditor.serializedObject\t\t\t\t\t\t\t\t//该类拓展显示的脚本对象，通过它获取属性，或者更新显示Inspector窗口的逻辑\neditor.serializedObject.FindProperty()\t\t\t\t//将SerializedProperty变量与脚本对象的属性关联起来\nOnInspectorGUI()\t\t\t\t\t\t\t\t\t//绘制Inspector窗口上控件的生命周期函数，在这里重写各个控件的绘制逻辑\neditor.serializedObject.Update()\t\t\t\t\t//更新序列化对象的表示形式，绘制各个控件的逻辑在该方法下面写\neditor.serializedObject.ApplyModifiedProperties()\t//应用属性显示的修改，与上一个语句一起，将绘制各个控件的逻辑包裹起来\nserializedProperty.floatValue\t\t\t\t\t\t//被拓展的脚本对象中的float属性的值，可以通过它来修改\neditor.target\t\t\t\t\t\t\t\t\t\t//获取脚本依附的对象（被拓展显示内容的脚本对象，而不是依附的GameObject）\nEditorGUILayout.PropertyField()\t\t\t\t\t\t//按照属性类型自己去处理控件绘制的逻辑，其实就是默认的属性控件绘制方法\nserializedProperty.arraySize\t\t\t\t\t\t//获取序列化属性对应的数组或者列表的真实元素数量\nserializedProperty.InsertArrayElementAtIndex()\t\t//为序列化属性对应的数组或者列表在某个索引处插入元素\nserializedProperty.DeleteArrayElementAtIndex()\t\t//为序列化属性对应的数组或者列表删除某个索引处元素\nserializedProperty.GetArrayElementAtIndex()\t\t\t//通过序列化属性，来获取其对应的数组或者列表中的某个元素的序列化属性\nISerializationCallbackReceiver\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240328191733-baaurqt",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240328191733-baaurqt",
+				"name": "[CustomEditor()]",
+				"updated": "20240328191953"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Inspector窗口自定义显示"
+				}
+			]
+		},
+		{
+			"ID": "20240328191911-9gd21ln",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328191911-9gd21ln",
+				"updated": "20240404214053"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以完全自定义某一个脚本在Inspector窗口的相关显示"
+				}
+			]
+		},
+		{
+			"ID": "20240328201924-le9yyok",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328201924-le9yyok",
+				"updated": "20240328203535"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们为继承"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Editor"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的脚本，添加"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "[CustomEditor(typeof(想要自定义Inspector窗口的脚本))]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​特性\n在该脚本中按照一定的规则进行编写，便可为Inspector窗口中的某个脚本自定义窗口布局"
+				}
+			]
+		},
+		{
+			"ID": "20240406133053-dzfdrfo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240406133053-dzfdrfo",
+				"updated": "20240406133229"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "[CustomEditor()]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​特性还可用于拓展Scene窗口的显示，具体可看："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref code",
+					"TextMarkBlockRefID": "20240328225358-4d866y4",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "Handles"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240328191933-xmonqpf",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "SerializedObject",
+				"id": "20240328191933-xmonqpf",
+				"name": "SerializedProperty",
+				"updated": "20240328191953"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "SerializedObject和SerializedProperty的作用"
+				}
+			]
+		},
+		{
+			"ID": "20240328192003-mrcvz42",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328192003-mrcvz42",
+				"updated": "20240328192133"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "SerializedObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 和 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "SerializedProperty"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 主要用于在 Unity 编辑器中操作和修改序列化对象的属性。\n它们通常在自定义编辑器中使用，以创建更灵活、可定制的属性面板"
+				}
+			]
+		},
+		{
+			"ID": "20240328192142-t5qcm6f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328192142-t5qcm6f",
+				"updated": "20240328192208"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们只需要记住简单的规则："
+				}
+			]
+		},
+		{
+			"ID": "20240328192204-j8vrlij",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240328192204-j8vrlij",
+				"updated": "20240404211259"
+			},
+			"Children": [
+				{
+					"ID": "20240328192204-lpz3exu",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240328192204-lpz3exu",
+						"updated": "20240328192204"
+					},
+					"Children": [
+						{
+							"ID": "20240328192204-4yifg2h",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328192204-4yifg2h",
+								"updated": "20240328203721"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SerializedObject"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 代表被拓展的脚本对象，我们可以从该属性获取被拓展的脚本对象中的属性，或者修改其在Inspector窗口的显示内容"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328192204-o93oqxw",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240328192204-o93oqxw",
+						"updated": "20240404211259"
+					},
+					"Children": [
+						{
+							"ID": "20240328192204-voipoag",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328192204-voipoag",
+								"updated": "20240404211259"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SerializedProperty"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 代表被拓展的脚本对象中的属性（成员变量），我们可以通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SerializedProperty"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​来修改被拓展的脚本对象中的属性，\n也需要通过这个序列化属性，来自定义被拓展的脚本对象的属性在Inspector窗口上的显示"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240328192211-fljqrpr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328192211-fljqrpr",
+				"updated": "20240328192218"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关于它们的详细内容："
+				}
+			]
+		},
+		{
+			"ID": "20240328192017-3jyfmb5",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240328192017-3jyfmb5",
+				"updated": "20240328201945"
+			},
+			"Children": [
+				{
+					"ID": "20240328192029-j4mcxi0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240328192029-j4mcxi0",
+						"updated": "20240328201945"
+					},
+					"Children": [
+						{
+							"ID": "20240328192029-a9mwvw2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328192029-a9mwvw2",
+								"updated": "20240328201945"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SerializedObject"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 的详细内容："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "a",
+									"TextMarkAHref": "https://docs.unity.cn/cn/2022.1/ScriptReference/SerializedObject.html",
+									"TextMarkTextContent": "SerializedObject - Unity 脚本 API"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328192029-n6pxmwk",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240328192029-n6pxmwk",
+						"updated": "20240328201945"
+					},
+					"Children": [
+						{
+							"ID": "20240328192029-91tt5w7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328192029-91tt5w7",
+								"updated": "20240328201945"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SerializedProperty"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 的详细内容："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "a",
+									"TextMarkAHref": "https://docs.unity.cn/cn/2022.1/ScriptReference/SerializedProperty.html",
+									"TextMarkTextContent": "SerializedProperty - Unity 脚本 API"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240328192237-0elhjfd",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240328192237-0elhjfd",
+				"updated": "20240328203740"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义脚本在Inspector窗口中显示的内容"
+				}
+			]
+		},
+		{
+			"ID": "20240328192247-dpt9oht",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328192247-dpt9oht",
+				"updated": "20240328203740"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关键步骤："
+				}
+			]
+		},
+		{
+			"ID": "20240328192309-omf9zfv",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240328192309-omf9zfv",
+				"updated": "20240404211755"
+			},
+			"Children": [
+				{
+					"ID": "20240328192309-rztzrxp",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240328192309-rztzrxp",
+						"updated": "20240328192309"
+					},
+					"Children": [
+						{
+							"ID": "20240328192309-0vn8z7a",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328192309-0vn8z7a",
+								"updated": "20240328192759"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "单独为某一个脚本实现一个自定义脚本，并且脚本需要继承 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Editor"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n一般该脚本命名为 自定义脚本名 + "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Editor"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240328193700-7k8fcnl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328193700-7k8fcnl",
+								"updated": "20240328193723"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设我们要对下面这个脚本进行Inspector窗口的拓展："
+								}
+							]
+						},
+						{
+							"ID": "20240328193723-1too5xj",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240328193723-1too5xj",
+								"style": "line-height: 22px;",
+								"updated": "20240328193737"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using UnityEngine;\n\npublic class Lesson22 : MonoBehaviour\n{\n    public int atk;             //攻击力\n    public float def;           //防御力\n    public GameObject obj;      //敌对目标对象依附的GameObject\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328192309-ztctae3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240328192309-ztctae3",
+						"updated": "20240328192309"
+					},
+					"Children": [
+						{
+							"ID": "20240328192309-z4v5mcb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328192309-z4v5mcb",
+								"updated": "20240328192810"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在该脚本前加上特性\n"
+								}
+							]
+						},
+						{
+							"ID": "20240328193743-imvliwf",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240328193743-imvliwf",
+								"updated": "20240328193744"
+							},
+							"Children": [
+								{
+									"ID": "20240328193744-ui2krbb",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240328193744-ui2krbb",
+										"updated": "20240328193744"
+									},
+									"Children": [
+										{
+											"ID": "20240328193744-lkv4r2c",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240328193744-lkv4r2c",
+												"updated": "20240328193744"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "命名空间："
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "UnityEditor"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240328193745-rt2r4hi",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240328193745-rt2r4hi"
+									},
+									"Children": [
+										{
+											"ID": "20240328193745-we2fraz",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240328193745-we2fraz"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "特性名："
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "[CustomEditor(想要自定义脚本类名的Type)]"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240328194110-b2djkcv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328194110-b2djkcv",
+								"updated": "20240328194145"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "因此，声明一个这样的类，继承"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Editor"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​并加上特性"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "[CustomEditor()]"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240328193747-xnypwtv",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240328193747-xnypwtv",
+								"style": "line-height: 22px;",
+								"updated": "20240328193804"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using UnityEditor;\n\n[CustomEditor(typeof(Lesson22))]\npublic class Lesson22Editor : Editor { }\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328192309-zclaeg4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240328192309-zclaeg4",
+						"name": "editor.serializedObject.FindProperty()",
+						"updated": "20240328192309"
+					},
+					"Children": [
+						{
+							"ID": "20240328192309-1cixhxi",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328192309-1cixhxi",
+								"updated": "20240328193643"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "声明对应"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SerializedProperty"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​序列化属性 对象，主要通过它和自定义脚本中的成员进行关联\n"
+								}
+							]
+						},
+						{
+							"ID": "20240328193650-q53o1pc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328193650-q53o1pc",
+								"updated": "20240328194048"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可以利用继承"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Editor"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​后的父类成员"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "serializedObject"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "FindProperty(\u0026quot;成员变量名\u0026quot;)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法关联对应成员;\n比如："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SerializedProperty mySerializedProperty;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "mySerializedProperty = serializedObject.FindProperty(\u0026quot;自定义脚本中的成员名\u0026quot;);"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，一般在"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnEnable"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​函数中初始化"
+								}
+							]
+						},
+						{
+							"ID": "20240328194021-godvnu2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328194021-godvnu2",
+								"updated": "20240328194103"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "因此，对于"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Lesson22"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​这个脚本的成员关联写法如下："
+								}
+							]
+						},
+						{
+							"ID": "20240328194010-wuwybcg",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240328194010-wuwybcg",
+								"style": "line-height: 22px;",
+								"updated": "20240328194018"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using UnityEditor;\n\n[CustomEditor(typeof(Lesson22))]\npublic class Lesson22Editor : Editor\n{\n    private SerializedProperty atk;\n    private SerializedProperty def;\n    private SerializedProperty obj;\n\n    private void OnEnable()\n    {\n        atk = serializedObject.FindProperty(\"atk\");\n        def = serializedObject.FindProperty(\"def\");\n        obj = serializedObject.FindProperty(\"obj\");\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328192309-efahxvn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"alias": "editor.serializedObject.Update(),editor.serializedObject.ApplyModifiedProperties()",
+						"id": "20240328192309-efahxvn",
+						"name": "OnInspectorGUI()",
+						"updated": "20240404211755"
+					},
+					"Children": [
+						{
+							"ID": "20240328192309-flzsfrs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328192309-flzsfrs",
+								"updated": "20240328220706"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重写"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnInspectorGUI()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​函数，该函数控制了Inspector窗口中显示的内容\n只需要在其中重写绘制逻辑，便可以自定义窗口，重写的逻辑和编写编辑器窗口逻辑很相似"
+								}
+							]
+						},
+						{
+							"ID": "20240328192909-k5pitns",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328192909-k5pitns",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+								"updated": "20240404211755"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注意：重写的绘制各个控件的逻辑需要包裹在下面两句代码之间\n更新序列化对象的表示形式 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "code",
+									"TextMarkTextContent": "serializedObject.Update();"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，在调用该方法后就要编写自定义的Inspector窗口上显示的逻辑\n应用属性修改 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "code",
+									"TextMarkTextContent": "serializedObject.ApplyModifiedProperties();"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，执行了自定义的Inspector窗口上显示的逻辑后，最后就要执行该方法"
+								}
+							]
+						},
+						{
+							"ID": "20240328200144-pbu9bnz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328200144-pbu9bnz",
+								"updated": "20240328200215"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "例如我们要使用各种"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "EditorGUI"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的控件去控制脚本的属性："
+								}
+							]
+						},
+						{
+							"ID": "20240328200215-xfwh2e4",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240328200215-xfwh2e4",
+								"style": "line-height: 22px;",
+								"updated": "20240328200224"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using UnityEditor;\nusing UnityEngine;\n\n[CustomEditor(typeof(Lesson22))]\npublic class Lesson22Editor : Editor\n{\n    private SerializedProperty atk;\n    private SerializedProperty def;\n    private SerializedProperty obj;\n\n    private bool foldOut;\n\n    private void OnEnable()\n    {\n        atk = serializedObject.FindProperty(\"atk\");\n        def = serializedObject.FindProperty(\"def\");\n        obj = serializedObject.FindProperty(\"obj\");\n    }\n\n    public override void OnInspectorGUI()\n    {\n        //base.OnInspectorGUI();            //这是原本的绘制脚本在Inspector窗口内的方法\n        serializedObject.Update();\n        //在这里写自定义Inspector窗口的内容\n        foldOut = EditorGUILayout.BeginFoldoutHeaderGroup(foldOut, \"基础属性\");\n        if (foldOut)\n        {\n            GUILayout.Button(\"测试自定义Inspector窗口\");\n            EditorGUILayout.IntSlider(atk, 0, 100, \"攻击力\");\n            def.floatValue = EditorGUILayout.FloatField(\"防御力\", def.floatValue);\n            EditorGUILayout.ObjectField(obj, new GUIContent(\"敌对对象\"));\n        }\n        EditorGUILayout.EndFoldoutHeaderGroup();\n        serializedObject.ApplyModifiedProperties();\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240328213822-q1pjtiv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328213822-q1pjtiv",
+				"updated": "20240328213822"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20240328213822-czdokjh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328213822-czdokjh",
+				"updated": "20240328213822"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 484px;",
+						"style": "width: 474px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240328200241-5qyoohc.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 474px;\" parent-style=\"width: 484px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240328200409-4ocmhzy",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240328200409-4ocmhzy",
+				"name": "editor.target",
+				"updated": "20240328205240"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "获取脚本依附的对象（被拓展显示内容的脚本对象）"
+				}
+			]
+		},
+		{
+			"ID": "20240328200505-1eov42m",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328200505-1eov42m",
+				"updated": "20240405125913"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：此处的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "target"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​成员得到的并不是依附的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​对象，而是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "被拓展显示的组件对象"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n这里的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "target"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​其实是依附在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​上的组件对象"
+				}
+			]
+		},
+		{
+			"ID": "20240328201632-1yv38ol",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240328201632-1yv38ol",
+				"style": "line-height: 22px;",
+				"updated": "20240328205240"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Lesson22Editor : Editor\n{\n    private SerializedProperty atk;\n    private SerializedProperty def;\n    private SerializedProperty obj;\n\n    private bool foldOut;\n\n    private void OnEnable()\n    {\n        atk = serializedObject.FindProperty(\"atk\");\n        def = serializedObject.FindProperty(\"def\");\n        obj = serializedObject.FindProperty(\"obj\");\n    }\n\n    public override void OnInspectorGUI()\n    {\n        serializedObject.Update();\n        //在这里写自定义Inspector窗口的内容\n        foldOut = EditorGUILayout.BeginFoldoutHeaderGroup(foldOut, \"基础属性\");\n        if (foldOut)\n        {\n            if (GUILayout.Button(\"测试自定义Inspector窗口\"))\n            {\n                Debug.Log(target.name);\n            }\n        }\n        serializedObject.ApplyModifiedProperties();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240328203818-wq0hgjy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328203818-wq0hgjy",
+				"updated": "20240328205240"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按下"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "\u0026quot;测试自定义Inspector窗口\u0026quot;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​按钮后，输出的内容："
+				}
+			]
+		},
+		{
+			"ID": "20240328203907-bpkxm0w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328203907-bpkxm0w",
+				"updated": "20240328205240"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240328203907-8xhcsua.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240328201606-ii8ft09",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240328201606-ii8ft09",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "数组和List属性的显示方式"
+				}
+			]
+		},
+		{
+			"ID": "20240404212008-4wgicr6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240404212008-4wgicr6",
+				"updated": "20240404212528"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果想要自定义数组和List属性在Inspector窗口上的显示，就需要在获取到自定义数组和List属性的同时，\n获取其中所有的元素的序列化属性，这样，我们才可以自定义数组或者列表属性中的各个元素的显示\n同时，我们可能还需要根据用户在Inspector窗口上的输入，动态的调整数组和List属性的元素数量"
+				}
+			]
+		},
+		{
+			"ID": "20240328212538-6dsmh8v",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240328212538-6dsmh8v",
+				"name": "EditorGUILayout.PropertyField()",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "数组、List属性在Inspector窗口显示的基础方式"
+				}
+			]
+		},
+		{
+			"ID": "20240328213153-mew3w91",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328213153-mew3w91",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要知识点："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "EditorGUILayout.PropertyField(SerializedProperty对象, 标题);"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，该API会按照属性类型自己去处理控件绘制的逻辑，"
+				}
+			]
+		},
+		{
+			"ID": "20240328213457-c29vlw4",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240328213457-c29vlw4",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"ID": "20240328213458-5icenar",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240328213458-5icenar",
+						"updated": "20240328213504"
+					},
+					"Children": [
+						{
+							"ID": "20240328213458-czpwtm3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328213458-czpwtm3",
+								"updated": "20240328213504"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数一：要显示的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SerializedProperty"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328213501-l9gskwa",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240328213501-l9gskwa",
+						"updated": "20240328213510"
+					},
+					"Children": [
+						{
+							"ID": "20240328213501-e93ugly",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328213501-e93ugly",
+								"updated": "20240328213510"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数二："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GUIContent"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​标题"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240328222618-1mwc0fj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328222618-1mwc0fj",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于如何绘制自定义属性 ——\u003e "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240328222544-bc0jv2a",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "自定义类属性在Inspector窗口显示的基础方式"
+				}
+			]
+		},
+		{
+			"ID": "20240328213334-pe103az",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328213334-pe103az",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们要在Inspector窗口上显示如下的属性："
+				}
+			]
+		},
+		{
+			"ID": "20240328213354-0ub6fb2",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240328213354-0ub6fb2",
+				"style": "line-height: 22px;",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Lesson22 : MonoBehaviour\n{\n\tpublic string[] strs;\n    public int[] ints;\n    public GameObject[] gameObjects;\n    public List\u003cGameObject\u003e listObjs;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240328213302-322cmmu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328213302-322cmmu",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们就需要在对应的显示拓展类里这样写："
+				}
+			]
+		},
+		{
+			"ID": "20240328213535-e33arbh",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240328213535-e33arbh",
+				"style": "line-height: 22px;",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEditor;\nusing UnityEngine;\n\n[CustomEditor(typeof(Lesson22))]\npublic class Lesson22Editor : Editor\n{\n    private SerializedProperty strs;\n    private SerializedProperty ints;\n    private SerializedProperty gameObjects;\n\n    private SerializedProperty listObjs;\n\n    private void OnEnable()\n    {\n        strs = serializedObject.FindProperty(\"strs\");\n        ints = serializedObject.FindProperty(\"ints\");\n        gameObjects = serializedObject.FindProperty(\"gameObjects\");\n        listObjs = serializedObject.FindProperty(\"listObjs\");\n    }\n\n    public override void OnInspectorGUI()\n    {\n        serializedObject.Update();\n        EditorGUILayout.PropertyField(strs, new GUIContent(\"字符串数组\"));\n        EditorGUILayout.PropertyField(ints, new GUIContent(\"整形数组\"));\n        EditorGUILayout.PropertyField(gameObjects, new GUIContent(\"GameObject数组\"));\n        EditorGUILayout.PropertyField(listObjs, new GUIContent(\"GameObject列表\"));\n        serializedObject.ApplyModifiedProperties();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240328213622-5w1unw1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328213622-5w1unw1",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果如下："
+				}
+			]
+		},
+		{
+			"ID": "20240328213638-u4pk6b5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328213638-u4pk6b5",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 450px;",
+						"style": "width: 440px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240328213638-3g3x0qc.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 440px;\" parent-style=\"width: 450px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240328213646-v0cvor3",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240328213646-v0cvor3",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "数组、List属性在Inspector窗口显示的自定义方式"
+				}
+			]
+		},
+		{
+			"ID": "20240328213659-kh24pd3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328213659-kh24pd3",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果我们不想要Unity默认的绘制方式去显示数组、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "List"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 相关内容，想要使用自己的逻辑绘制各个元素\n我们也可以完全自定义布局方式"
+				}
+			]
+		},
+		{
+			"ID": "20240328213712-r06win0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328213712-r06win0",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要知识点：利用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "SerializedProperty"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​中数组相关的API来完成自定义"
+				}
+			]
+		},
+		{
+			"ID": "20240328213709-6kin4zl",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240328213709-6kin4zl",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"ID": "20240328213709-y8d9ec2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240328213709-y8d9ec2",
+						"name": "serializedProperty.arraySize",
+						"updated": "20240328213709"
+					},
+					"Children": [
+						{
+							"ID": "20240328213709-2009zvt",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328213709-2009zvt",
+								"updated": "20240328215414"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "arraySize"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 获取序列化属性对应的数组或"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "List"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​实际容量"
+								}
+							]
+						},
+						{
+							"ID": "20240328215528-hai9f5t",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328215528-hai9f5t",
+								"updated": "20240328215800"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在遍历各个元素时，需要通过这里获取的实际容量，判断数组或者列表是否需要扩容，或者判断缩减数组或者列表多少元素"
+								}
+							]
+						},
+						{
+							"ID": "20240328222025-ktieeru",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240328222025-ktieeru",
+								"style": "line-height: 22px;",
+								"updated": "20240328222032"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "count = listObjs.arraySize;\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328213709-yv1if72",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240328213709-yv1if72",
+						"name": "serializedProperty.InsertArrayElementAtIndex()",
+						"updated": "20240328213709"
+					},
+					"Children": [
+						{
+							"ID": "20240328213709-no0igmm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328213709-no0igmm",
+								"updated": "20240328215421"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "InsertArrayElementAtIndex(索引)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 为数组或者列表在指定索引插入默认元素（容量"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "arraySize"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​会变化）"
+								}
+							]
+						},
+						{
+							"ID": "20240328215719-sqhke84",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328215719-sqhke84",
+								"updated": "20240328222011"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "我们通过这个方法来为序列化属性对应的数组或者列表扩充容量"
+								}
+							]
+						},
+						{
+							"ID": "20240328221931-7du7wv3",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240328221931-7du7wv3",
+								"style": "line-height: 22px;",
+								"updated": "20240328222023"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "if (listObjs.arraySize \u003c= i)\n    listObjs.InsertArrayElementAtIndex(i);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328213709-26xu4ri",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240328213709-26xu4ri",
+						"name": "serializedProperty.DeleteArrayElementAtIndex()",
+						"updated": "20240328213709"
+					},
+					"Children": [
+						{
+							"ID": "20240328213709-2yxjv1b",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328213709-2yxjv1b",
+								"updated": "20240328215425"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DeleteArrayElementAtIndex(索引)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 为数组或者列表在指定索引删除元素（容量"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "arraySize"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​会变化）"
+								}
+							]
+						},
+						{
+							"ID": "20240328215749-ntbldu5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328215749-ntbldu5",
+								"updated": "20240328222008"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "我们通过这个方法来为序列化属性对应的数组或者列表缩减容量"
+								}
+							]
+						},
+						{
+							"ID": "20240328221955-tn3q2t0",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240328221955-tn3q2t0",
+								"style": "line-height: 22px;",
+								"updated": "20240328222014"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "for (int i = listObjs.arraySize - 1; i \u003e= count; i--)\n{\n    listObjs.DeleteArrayElementAtIndex(i);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328213709-f5g6leu",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240328213709-f5g6leu",
+						"name": "serializedProperty.GetArrayElementAtIndex()",
+						"updated": "20240328222100"
+					},
+					"Children": [
+						{
+							"ID": "20240328213709-9ysakea",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328213709-9ysakea",
+								"updated": "20240328215429"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetArrayElementAtIndex(索引)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 获取数组或者列表中指定索引位置的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SerializedProperty"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 对象"
+								}
+							]
+						},
+						{
+							"ID": "20240328215433-99pu4qy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328215433-99pu4qy",
+								"updated": "20240328215912"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过该方法，我们可以获取到数组或者列表内的元素，我们可以通过获取到的元素来绘制自定义控件，\n"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "使得各个数组或者列表的各个元素在Inspector窗口上的显示可以更加的自定义化"
+								}
+							]
+						},
+						{
+							"ID": "20240328222040-s7wp9d3",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240328222040-s7wp9d3",
+								"style": "line-height: 22px;",
+								"updated": "20240328222100"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//根据容量绘制需要设置的每一个索引位置的对象\nfor (int i = 0; i \u003c count; i++)\n{\n    SerializedProperty indexProperty = listObjs.GetArrayElementAtIndex(i);\n    EditorGUILayout.ObjectField(indexProperty, new GUIContent($\"索引{i}\"));\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240328213741-xn58vba",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328213741-xn58vba",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们要让"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "listObjs"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​在Inspector窗口上这样显示：\nList容量，数组或列表内的各元素的显示使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IntField"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​或者"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "objectField"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​控件显示\n修改List容量可以修改元素控件绘制的数量"
+				}
+			]
+		},
+		{
+			"ID": "20240328220031-e68248h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328220031-e68248h",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240328220031-qjxiu52.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240328220320-z49f2t3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328220320-z49f2t3",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们需要这样实现："
+				}
+			]
+		},
+		{
+			"ID": "20240328220416-d7balg9",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240328220416-d7balg9",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"ID": "20240328220416-san1490",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240328220416-san1490",
+						"updated": "20240328221628"
+					},
+					"Children": [
+						{
+							"ID": "20240328220416-09iyu87",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328220416-09iyu87",
+								"updated": "20240328221628"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "要显示List容量，我们需要使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "EditorGUILayout.IntField"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​来绘制一个输入整数控件，并配套一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "count"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​变量"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328220719-okj41f7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240328220719-okj41f7"
+					},
+					"Children": [
+						{
+							"ID": "20240328220719-ghqab3d",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328220719-ghqab3d",
+								"updated": "20240328221544"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "每次在Inspector窗口上显示脚本内容时，都需要初始化"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "count"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​变量，使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "arraySize"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​这个数组或者列表的实际容量来赋值\n否则当我们重新显示脚本内容时，就会因为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "count"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的值被清零，而导致实际存在的元素被隐藏，不被绘制出来"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328220844-1vzvmg4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240328220844-1vzvmg4",
+						"updated": "20240328221622"
+					},
+					"Children": [
+						{
+							"ID": "20240328220844-tgnh7vd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328220844-tgnh7vd",
+								"updated": "20240328221622"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "当我们将List容量的数字改小时，我们需要从尾遍历List，调用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DeleteArrayElementAtIndex"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​将那些多余的元素删除掉\n直到"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "arraySize"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的值等于List容量设置的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "count"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​值，这样就实现了修改List容量来缩减数组或者列表容量"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328221036-bbve6k7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240328221036-bbve6k7"
+					},
+					"Children": [
+						{
+							"ID": "20240328221036-14yxxw6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328221036-14yxxw6",
+								"updated": "20240328221112"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "绘制List容量控件"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328221113-8ru1vji",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240328221113-8ru1vji",
+						"updated": "20240328221625"
+					},
+					"Children": [
+						{
+							"ID": "20240328221113-uazh2rv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328221113-uazh2rv",
+								"updated": "20240328221625"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "由于最开始通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "serializedObject"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​得到的数组和list元素数量是0，因此直接根据"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "count"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​变量遍历会抛出空引用错误\n因此当"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "arraySize"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的值小于"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "count"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​变量值时，我们需要进行扩容，从"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "count"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​开始，调用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "InsertArrayElementAtIndex"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​添加元素\n这样我们同时实现了修改List容量来扩充数组或者列表容量"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328221609-0t7vds5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240328221609-0t7vds5",
+						"updated": "20240328221710"
+					},
+					"Children": [
+						{
+							"ID": "20240328221609-i1u55rp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328221609-i1u55rp",
+								"updated": "20240328221710"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "count"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​变量，遍历获取列表内各个元素的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SerializedProperty"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象，根据这个对象来绘制控件"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240328220327-jx0ihwr",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240328220327-jx0ihwr",
+				"style": "line-height: 22px;",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private SerializedProperty listObjs;\n\nprivate int count;\n\nprivate bool foldOut;\n\nprivate void OnEnable()\n{\n    //默认得到的数组和list元素为空\n    listObjs = serializedObject.FindProperty(\"listObjs\");\n\n    //初始化当前容量，否则，每次显示脚本的窗口时，count都会清零，导致显示不全\n    count = listObjs.arraySize;\n}\n\npublic override void OnInspectorGUI()\n{\n    serializedObject.Update();\n    //在这里写自定义Inspector窗口的内容\n    foldOut = EditorGUILayout.BeginFoldoutHeaderGroup(foldOut, \"基础属性\");\n    if (foldOut)\n    {\n        //容量设置\n        count = EditorGUILayout.IntField(\"List容量\", count);\n\n        //每帧绘制之前，判断是否要缩减容量，移除尾部的元素\n        //因此需要从尾部往前去清理，当我们将外部设置的count减少时，就需要清除多出来的内容\n        for (int i = listObjs.arraySize - 1; i \u003e= count; i--)\n        {\n            listObjs.DeleteArrayElementAtIndex(i);\n        }\n\n        //根据容量绘制需要设置的每一个索引位置的对象\n        for (int i = 0; i \u003c count; i++)\n        {\n            //因为默认得到的数组和list元素为空，直接通过索引去获取这些不存在的元素将会报错\n            //因此我们需要通过arraySize来判断当前索引对应的元素是否存在，\n            //若不存在，就插入一个默认元素来扩容\n            if (listObjs.arraySize \u003c= i)\n                listObjs.InsertArrayElementAtIndex(i);\n\n            SerializedProperty indexProperty = listObjs.GetArrayElementAtIndex(i);\n\t\t\t//根据获取到的数组或者列表内的元素的序列化属性，自定义其在Inspector窗口上的显示\n            EditorGUILayout.ObjectField(indexProperty, new GUIContent($\"索引{i}\"));\n        }\n    }\n    EditorGUILayout.EndFoldoutHeaderGroup();\n    serializedObject.ApplyModifiedProperties();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240328221713-700fcdl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328221713-700fcdl",
+				"updated": "20240328224439"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以根据以上代码，修改元素控件的绘制逻辑，达到自定义数组和List显示方式的目的"
+				}
+			]
+		},
+		{
+			"ID": "20240328222535-72ww380",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240328222535-72ww380",
+				"updated": "20240328224428"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义类属性的显示方式"
+				}
+			]
+		},
+		{
+			"ID": "20240328223159-jlgx0cl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328223159-jlgx0cl",
+				"updated": "20240404212718"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这里的自定义类属性，是指的是用户自己声明的类对应的变量的显示方式\n如果想要自定义类属性在Inspector窗口上的显示，就需要在获取到自定义类属性的同时，\n获取该类对象所有的属性（成员变量）的序列化属性，这样，我们才可以自定义数组或者列表属性中的各个元素的显示"
+				}
+			]
+		},
+		{
+			"ID": "20240328222544-bc0jv2a",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240328222544-bc0jv2a",
+				"updated": "20240404212557"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义类属性在Inspector窗口显示的基础方式"
+				}
+			]
+		},
+		{
+			"ID": "20240328222609-w3x1jad",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328222609-w3x1jad",
+				"updated": "20240404212557"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要知识点：\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "EditorGUILayout.PropertyField(SerializedProperty对象, 标题);"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n该API会按照属性类型自己去处理控件绘制的逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240328223010-sjxlccg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328223010-sjxlccg",
+				"updated": "20240404212557"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们要在Inspector窗口上显示如下的属性："
+				}
+			]
+		},
+		{
+			"ID": "20240328223010-0nm0bme",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240328223010-0nm0bme",
+				"style": "line-height: 22px;",
+				"updated": "20240404212557"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[Serializable]\npublic class MyCustomPro\n{\n    public int i;\n    public float f;\n}\n\npublic class Lesson22 : MonoBehaviour\n{\n\tpublic MyCustomPro myCustom;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240328223010-byapa3m",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328223010-byapa3m",
+				"updated": "20240404212557"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们就需要在对应的显示拓展类里这样写："
+				}
+			]
+		},
+		{
+			"ID": "20240328223010-4welgzi",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240328223010-4welgzi",
+				"style": "line-height: 22px;",
+				"updated": "20240404212557"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEditor;\nusing UnityEngine;\n\n[CustomEditor(typeof(Lesson22))]\npublic class Lesson22Editor : Editor\n{\n    private SerializedProperty myCustom;\n\n    private void OnEnable()\n    {\n        myCustom = serializedObject.FindProperty(\"myCustom\");\n    }\n\n    public override void OnInspectorGUI()\n    {\n        serializedObject.Update();\n        EditorGUILayout.PropertyField(myCustom, new GUIContent(\"我的自定义属性\"));\n        serializedObject.ApplyModifiedProperties();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240328223111-n2j5vcl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328223111-n2j5vcl",
+				"updated": "20240404212557"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果如下：​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240328223130-vx9keu7.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240328222558-diqhoj5",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240328222558-diqhoj5",
+				"updated": "20240328224435"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义类属性在Inspector窗口显示的自定义方式"
+				}
+			]
+		},
+		{
+			"ID": "20240328223009-6i768hk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328223009-6i768hk",
+				"updated": "20240328224435"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果我们不想要Unity默认的绘制方式去显示 自定义数据结构类 相关内容，想要通过自己的逻辑来绘制自定义数据结构类的显示\n我们也可以完全自定义布局方式"
+				}
+			]
+		},
+		{
+			"ID": "20240328223535-ahklgp9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328223535-ahklgp9",
+				"updated": "20240328224435"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要知识点："
+				}
+			]
+		},
+		{
+			"ID": "20240328223145-3hryrot",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240328223145-3hryrot",
+				"updated": "20240328224435"
+			},
+			"Children": [
+				{
+					"ID": "20240328223145-2p4qpo5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240328223145-2p4qpo5",
+						"updated": "20240328224038"
+					},
+					"Children": [
+						{
+							"ID": "20240328223145-5zwayyr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328223145-5zwayyr",
+								"updated": "20240328224038"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SerializedProperty.FindPropertyRelative(\u0026quot;属性\u0026quot;)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：通过属性的序列化对象来寻找相对属性"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328223145-6610lmx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240328223145-6610lmx",
+						"updated": "20240328224029"
+					},
+					"Children": [
+						{
+							"ID": "20240328223145-q4bv38f",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328223145-q4bv38f",
+								"updated": "20240328224029"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "serializedObject.FindProperty(\u0026quot;属性.子属性\u0026quot;)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：直接获取属性的子属性"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240328224048-4yjqb2r",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328224048-4yjqb2r",
+				"updated": "20240328224435"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以上两个方法都可以获取某个自定义类属性的子属性的序列化对象，\n只是一个需要先获取自定义类属性，另一个可以直接通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "serializedObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​获取"
+				}
+			]
+		},
+		{
+			"ID": "20240328224209-sbpo8uw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328224209-sbpo8uw",
+				"updated": "20240328224435"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "得到自定义类属性的子属性的序列化对象后，我们就可以自己编写绘制逻辑，达到自定义显示的效果"
+				}
+			]
+		},
+		{
+			"ID": "20240328224249-xsouo5p",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328224249-xsouo5p",
+				"updated": "20240328224435"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们还是要在Inspector窗口上显示如下的属性："
+				}
+			]
+		},
+		{
+			"ID": "20240328224249-rvh1lf9",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240328224249-rvh1lf9",
+				"style": "line-height: 22px;",
+				"updated": "20240328224435"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[Serializable]\npublic class MyCustomPro\n{\n    public int i;\n    public float f;\n}\n\npublic class Lesson22 : MonoBehaviour\n{\n\tpublic MyCustomPro myCustom;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240328224258-507tl3u",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328224258-507tl3u",
+				"updated": "20240328224435"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们就需要在对应的显示拓展类里这样写（两种方法都使用）："
+				}
+			]
+		},
+		{
+			"ID": "20240328224313-yo1owcu",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240328224313-yo1owcu",
+				"style": "line-height: 22px;",
+				"updated": "20240404211126"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEditor;\nusing UnityEngine;\n\n[CustomEditor(typeof(Lesson22))]\npublic class Lesson22Editor : Editor\n{\n    private SerializedProperty myCustomI;\n    private SerializedProperty myCustomF;\n\n    private void OnEnable()\n    {\n\t\t//使用两种方式获取自定义类属性的属性\n        myCustomI = myCustom.FindPropertyRelative(\"i\");\n        myCustomF = serializedObject.FindProperty(\"myCustom.f\");\n    }\n\n    public override void OnInspectorGUI()\n    {\n        serializedObject.Update();\n\t\t//根据获取到的自定义类属性的属性的序列化属性，自定义其在Inspector窗口上的显示\n        myCustomI.intValue = EditorGUILayout.IntField(\"自定义属性中的I\", myCustomI.intValue);\n        myCustomF.floatValue = EditorGUILayout.FloatField(\"自定义属性中的F\", myCustomF.floatValue);\n\n        serializedObject.ApplyModifiedProperties();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240328224345-b4e6ajc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328224345-b4e6ajc",
+				"updated": "20240328224435"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果如下："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240328224400-3n0p5si.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240328224420-9joxqvq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240328224420-9joxqvq",
+				"updated": "20240328224449"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "字典属性的显示方式"
+				}
+			]
+		},
+		{
+			"ID": "20240328224553-0euz74f",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240328224553-0euz74f",
+				"updated": "20240328225006"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "[SerializeField]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​特性"
+				}
+			]
+		},
+		{
+			"ID": "20240328224601-kcqh5nk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328224601-kcqh5nk",
+				"updated": "20240328225006"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "让私有字段可以被序列化（能够在Unity的Inspector窗口被看到），回顾请看："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref code",
+					"TextMarkBlockRefID": "20230708153534-580p4vj",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "[SerializeField]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240328224627-qj0rorf",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240328224627-qj0rorf",
+				"updated": "20240328225008"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在Inspector窗口编辑字典成员"
+				}
+			]
+		},
+		{
+			"ID": "20240328225015-mk2puvv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328225015-mk2puvv",
+				"updated": "20240404212805"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity默认是不支持"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Dictionary"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​在Inspector窗口被显示的，我们只有利用两个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "List"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（或数组）成员来间接设置"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Dictionary"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240328225024-xj6g6m0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240328225024-xj6g6m0",
+				"name": "ISerializationCallbackReceiver",
+				"updated": "20240328225750"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ISerializationCallbackReceiver接口"
+				}
+			]
+		},
+		{
+			"ID": "20240328225158-8hdbp75",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328225158-8hdbp75",
+				"updated": "20240404212818"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ISerializationCallbackReceiver"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​接口是Unity提供的用于序列化和反序列化时执行自定义逻辑的接口\n实现该接口的类能够在对象被序列化到磁盘或从磁盘反序列化时执行一些额外代码"
+				}
+			]
+		},
+		{
+			"ID": "20240328225258-xpb26ku",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328225258-xpb26ku",
+				"updated": "20240328225750"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "接口中包括如下函数："
+				}
+			]
+		},
+		{
+			"ID": "20240328225201-hwaibxe",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240328225201-hwaibxe",
+				"updated": "20240404222521"
+			},
+			"Children": [
+				{
+					"ID": "20240328225201-35w2v33",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240328225201-35w2v33",
+						"updated": "20240404222521"
+					},
+					"Children": [
+						{
+							"ID": "20240328225201-ogsz1t3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328225201-ogsz1t3",
+								"updated": "20240404222521"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnBeforeSerialize()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：在对象被序列化之前调用，当Inspector窗口上显示类对象的属性时，就会每帧执行序列化操作"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328225202-e78h2lc",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240328225202-e78h2lc",
+						"updated": "20240404222432"
+					},
+					"Children": [
+						{
+							"ID": "20240328225202-kyvsqjm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328225202-kyvsqjm",
+								"updated": "20240404222432"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnAfterDeserialize()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：在对象从磁盘反序列化后调用，当我们通过Inspector窗口修改类对象的属性时，就会执行反序列化操作"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240328225158-66zoaxj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240328225158-66zoaxj",
+				"updated": "20240328225750"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "由于我们需要用两个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "List"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​存储"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Dictionary"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的具体值，相当于字典中的真正内容是存储在两个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "List"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​中的，所以我们需要在"
+				}
+			]
+		},
+		{
+			"ID": "20240328225241-hw1oi1t",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240328225241-hw1oi1t",
+				"updated": "20240328225750"
+			},
+			"Children": [
+				{
+					"ID": "20240328225241-i57lgkm",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240328225241-i57lgkm",
+						"updated": "20240328225244"
+					},
+					"Children": [
+						{
+							"ID": "20240328225241-4t9qytf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328225241-4t9qytf",
+								"updated": "20240404212938"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnBeforeSerialize()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​序列化之前：将"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Dictionary"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​里的数据存入"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "List"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中进行序列化"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240328225242-5imzli9",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240328225242-5imzli9"
+					},
+					"Children": [
+						{
+							"ID": "20240328225242-n0ifdo2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240328225242-n0ifdo2",
+								"updated": "20240404212942"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnAfterDeserialize()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​反序列化之后：将"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "List"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中反序列化出来的数据存储到"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Dictionary"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240404214634-mxx4gi5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240404214634-mxx4gi5",
+				"updated": "20240404214741"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设要让被拓展Inspector显示的脚本中的字典属性与两个列表之间相互关联，就需要继承该接口并实现方法，方法内关联列表与字典"
+				}
+			]
+		},
+		{
+			"ID": "20240404214741-utni37c",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240404214741-utni37c",
+				"style": "line-height: 22px;",
+				"updated": "20240404221428"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System;\nusing System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\n\npublic class Lesson22 : MonoBehaviour, ISerializationCallbackReceiver\n{\n    public Dictionary\u003cint, string\u003e myDic = new Dictionary\u003cint, string\u003e() { { 1, \"123\" }, { 2, \"234\" } };\n\n    //这两个属性用于辅助字典在Inspector窗口上的显示\n    [SerializeField]private List\u003cint\u003e keys = new List\u003cint\u003e();\n    [SerializeField]private List\u003cstring\u003e values = new List\u003cstring\u003e();\n\n    public void OnBeforeSerialize()\n    {\n        //在序列化该类之前，清空两个列表，然后将字典的键和值分别存储到列表内\n        keys.Clear();\n        values.Clear();\n        foreach (var item in myDic)\n        {\n            keys.Add(item.Key);\n            values.Add(item.Value);\n        }\n    }\n\n    public void OnAfterDeserialize()\n    {\n        //在反序列化该类之后，将字典清空，将两个列表内存储的键值对存储到字典内\n        myDic.Clear();\n        for (int i = 0; i \u003c keys.Count; i++)\n        {\n            if (!myDic.ContainsKey(keys[i]))\n                myDic.Add(keys[i], values[i]);\n            else\n                Debug.LogWarning(\"字典Dictionary容器中不允许有相同的键\");\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240404221429-0grxaxx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240404221429-0grxaxx",
+				"updated": "20240404223604"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以上的代码就将"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "keys"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "values"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​这两个列表与"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "myDic"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​这个字典关联起来了，具体关联的原理是：\n在Inspector窗口上显示的字典相关内容，实际上读取和修改的是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "keys"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "values"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​这两个列表的序列化数据，因此："
+				}
+			]
+		},
+		{
+			"ID": "20240404223035-yzzvanv",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240404223035-yzzvanv",
+				"updated": "20240404223933"
+			},
+			"Children": [
+				{
+					"ID": "20240404223035-kggwxgr",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240404223035-kggwxgr",
+						"updated": "20240404223933"
+					},
+					"Children": [
+						{
+							"ID": "20240404223035-os8yr5d",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240404223035-os8yr5d",
+								"updated": "20240404223933"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "当在Inspector窗口上修改"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "keys"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​和"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "values"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​这两个列表的数据时，或者运行Unity程序时，会触发反序列化，\n反序列化后会执行"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnAfterDeserialize()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，此时就会将两个列表的反序列化出来的数据，写入到字典内"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240404223036-esw1mtl",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240404223036-esw1mtl"
+					},
+					"Children": [
+						{
+							"ID": "20240404223036-mljfk94",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240404223036-mljfk94",
+								"updated": "20240404223540"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Inspector窗口上显示该类的对象时，会执行序列化，序列化前会执行"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnBeforeSerialize()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n将字典内存储的数据写入到两个列表内，这样字典的数据就可以通过列表序列化存储起来"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240404223553-pmdzwnr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240404223553-pmdzwnr",
+				"updated": "20240404223944"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这样，不可序列化的字典就可以通过两个可序列化的列表，存储数据，在Inspector窗口上显示，或者通过Inspector窗口修改内容"
+				}
+			]
+		},
+		{
+			"ID": "20240404214914-hlaq5j0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240404214914-hlaq5j0",
+				"updated": "20240404215117"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "接下来，我们只需要在实现自定义显示的类中根据这两个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "List"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的序列化属性，自定义显示方式，使其看起来像是在编辑字典"
+				}
+			]
+		},
+		{
+			"ID": "20240329164204-phhbnlu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240329164204-phhbnlu",
+				"updated": "20240404221255"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "利用两个List在Inspector窗口中自定义Dictionary显示"
+				}
+			]
+		},
+		{
+			"ID": "20240404214524-8fifd3q",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240404214524-8fifd3q",
+				"updated": "20240404224019"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "由于我们在Inspector窗口中显示的信息的数据来源是两个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "List"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n因此我们只需要利用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "List"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240328213646-v0cvor3",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "在Inspector窗口中自定义显示"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的内容即可"
+				}
+			]
+		},
+		{
+			"ID": "20240404223955-awi5k6y",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240404223955-awi5k6y",
+				"updated": "20240404224434"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "与自定义"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "List"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​在Inspector窗口上的显示相比，\n与字典相关联的两个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "List"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​只需要一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "int"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​变量表示长度即可，当"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "int"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​变量变化时，需要同时修改两个List的元素\n再根据两个List的元素，绘制显示键值对的控件"
+				}
+			]
+		},
+		{
+			"ID": "20240404215121-x7j4jee",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240404215121-x7j4jee",
+				"style": "line-height: 22px;",
+				"updated": "20240404221255"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using PlasticPipe.Certificates;\nusing UnityEditor;\nusing UnityEngine;\n\n[CustomEditor(typeof(Lesson22))]\npublic class Lesson22Editor : Editor\n{\n    private SerializedProperty keys;\n    private SerializedProperty values;\n    private int dicCount;\n\n    private void OnEnable()\n    {\n        keys = serializedObject.FindProperty(\"keys\");\n        values = serializedObject.FindProperty(\"values\");\n        dicCount = keys.arraySize;\n    }\n\n    public override void OnInspectorGUI()\n    {\n        serializedObject.Update();\n        dicCount = EditorGUILayout.IntField(\"字典容量\", dicCount);\n        //当设置的字典容量变少时，把两个列表内多出来的元素删除掉\n        for (int i = keys.arraySize - 1; i \u003e= dicCount; i--)\n        {\n            keys.DeleteArrayElementAtIndex(i);\n            values.DeleteArrayElementAtIndex(i);\n        }\n\t\t//自定义字典在Inspector上的显示\n        for (int i = 0; i \u003c dicCount; i++)\n        {\n            //当两个列表的元素数量小于设置的字典容量时，就需要为列表扩容\n            if (keys.arraySize \u003c= i)\n            {\n                keys.InsertArrayElementAtIndex(i);\n                values.InsertArrayElementAtIndex(i);\n            }\n            //自定义键值对的显示\n            SerializedProperty indexKey = keys.GetArrayElementAtIndex(i);\n            SerializedProperty indexValue = values.GetArrayElementAtIndex(i);\n            //让键与值的显示水平并排\n            EditorGUILayout.BeginHorizontal();\n            indexKey.intValue = EditorGUILayout.IntField($\"键值对{i}\", indexKey.intValue);\n            indexValue.stringValue = EditorGUILayout.TextField(indexValue.stringValue);\n            EditorGUILayout.EndHorizontal();\n        }\n\n        serializedObject.ApplyModifiedProperties();\n    }\n}\n\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240404221123-fd7vf3f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240404221123-fd7vf3f",
+				"updated": "20240404221328"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果如下："
+				}
+			]
+		},
+		{
+			"ID": "20240404221337-0gh90uf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240404221337-0gh90uf",
+				"updated": "20240404221337"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240404221337-jp2r823.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		}
+	]
+}

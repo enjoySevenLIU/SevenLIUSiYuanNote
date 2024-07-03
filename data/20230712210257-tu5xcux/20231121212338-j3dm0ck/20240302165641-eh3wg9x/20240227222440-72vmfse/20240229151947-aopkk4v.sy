@@ -1,0 +1,1060 @@
+{
+	"ID": "20240229151947-aopkk4v",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240229151947-aopkk4v",
+		"title": "UH2S3L7——访问Lua中table表现List和Dictionary",
+		"updated": "20240302170723"
+	},
+	"Children": [
+		{
+			"ID": "20240229151947-jwcx3e2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240229151947-jwcx3e2",
+				"updated": "20240229152115"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240229152115-3k088kk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229152115-3k088kk",
+				"style": "line-height: 22px;",
+				"updated": "20240229161422"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "luaState.GetTable()\t\t\t//获取全局table变量，为引用拷贝\nLuaTable\t\t\t\t\t//Lua的table类型\nluaTable[]\t\t\t\t\t//可以通过索引获取table的值，只支持int和string类型\nluaTable.ToArray()\t\t\t//将LuaTable转换为数组形式\nluaTable.ToDictTable\u003c\u003e()\t//将LuaTable转换为LuaDictTable\u003c\u003e形式\nLuaDictTable\u003c\u003e\t\t\t\t//toLua的table模拟字典类，可以通过它去通过键获取值，键的类型不限\nLuaDictEntry\u003c\u003e\t\t\t\t//LuaDictTable的键值对，可以通过迭代器遍历获取键与值\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229153821-s4dosxa",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240229153821-s4dosxa",
+				"name": "luaState.GetTable()",
+				"updated": "20240229153827"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "获取Table"
+				}
+			]
+		},
+		{
+			"ID": "20240229153845-3tq5i0m",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229153845-3tq5i0m",
+				"updated": "20240229153958"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "和xLua的表映射为某种数据结构不同，toLua我们需要使用专门获取表的方法"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GetTable()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240229153835-r03mzw4",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229153835-r03mzw4",
+				"style": "line-height: 22px;",
+				"updated": "20240229153827"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "LuaTable luaTable = LuaManager.Instance.LuaState.GetTable(\"testList\");\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229153844-rw7fl2c",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229153844-rw7fl2c",
+				"updated": "20240229154041"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "然后再通过获取到的表去表现其他的数据结构"
+				}
+			]
+		},
+		{
+			"ID": "20240229154417-k8tnjqk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229154417-k8tnjqk",
+				"updated": "20240229154501"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "值得一提的是，通过这种方式获取的Table是引用拷贝，修改其中的值会修改到Lua中table的值"
+				}
+			]
+		},
+		{
+			"ID": "20240229154502-3k946it",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229154502-3k946it",
+				"style": "line-height: 22px;",
+				"updated": "20240229160821"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "LuaTable luaTable = LuaManager.Instance.LuaState.GetTable(\"testList\");\nluaTable[1] = 999;\nLuaTable luaTableTmp = LuaManager.Instance.LuaState.GetTable(\"testList\");\nprint(\"测试是否为引用拷贝：\" + luaTable[1]);\n\nLuaTable dic = LuaManager.Instance.LuaState.GetTable(\"testDic\");\ndic[\"1\"] = 9999;\nLuaTable dicTmp = LuaManager.Instance.LuaState.GetTable(\"testDic\");\nprint(\"引用拷贝测试：\" + dicTmp[\"1\"]);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229154528-p7vsoyy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229154528-p7vsoyy",
+				"updated": "20240229154528"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240229154528-unr1sjc.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240229160847-8xc10m6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229160847-8xc10m6",
+				"updated": "20240229160847"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240229160847-zka4nsm.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240229163540-tsg6nl0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229163540-tsg6nl0",
+				"updated": "20240229163628"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "还可以通过下面的方式获取表，原理就是以获取全局变量的方式获取表，再"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "as"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​成"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LuaTable"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240229163549-vqa0dvr",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229163549-vqa0dvr",
+				"style": "line-height: 22px;",
+				"updated": "20240229163554"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "LuaTable table = LuaManager.Instance.LuaState[\"testClass\"] as LuaTable;\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229152229-nxncw08",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240229152229-nxncw08",
+				"updated": "20240229152849"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "table表现List"
+				}
+			]
+		},
+		{
+			"ID": "20240229153642-twtnthq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229153642-twtnthq",
+				"updated": "20240229153746"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于下面用table模拟的list"
+				}
+			]
+		},
+		{
+			"ID": "20240229153642-eqealpl",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229153642-eqealpl",
+				"style": "line-height: 22px;",
+				"updated": "20240229153708"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "-- table表现的list\ntestList = {10, 20, 30, 40, 50, 60}\ntestList2 = {\"123\", \"234\", true, 1, 1.2}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229153715-vl4q4v0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229153715-vl4q4v0",
+				"updated": "20240229154210"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果我们要在C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "中如列表那样调用其中的元素，我们需要先获取table，然后通过索引去获取其中的值，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "索引和Lua一样从1开始"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20240229154121-xkq1om6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229154121-xkq1om6",
+				"style": "line-height: 22px;",
+				"updated": "20240229154154"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "LuaTable luaTable = LuaManager.Instance.LuaState.GetTable(\"testList\");\nprint(luaTable[1]);\nprint(luaTable[2]);\nprint(luaTable[3]);\nprint(luaTable[4]);\nprint(luaTable[5]);\nprint(luaTable[6]);\n\nLuaTable luaTable2 = LuaManager.Instance.LuaState.GetTable(\"testList2\");\nprint(luaTable2[1]);\nprint(luaTable2[2]);\nprint(luaTable2[3]);\nprint(luaTable2[4]);\nprint(luaTable2[5]);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229154237-ttelynw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229154237-ttelynw",
+				"updated": "20240229154247"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 367px;",
+						"style": "width: 357px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240229154237-84watu4.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 357px;\" parent-style=\"width: 367px;\"}"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240229154247-qd8vpmz.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240229154326-ydxi3rv",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240229154326-ydxi3rv",
+				"name": "luaTable.ToArray()",
+				"updated": "20240229154350"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "遍历table表现的List"
+				}
+			]
+		},
+		{
+			"ID": "20240229154251-nqcanqo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229154251-nqcanqo",
+				"updated": "20240229154603"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果要遍历table模拟的List，需要先通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ToArray()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法，去转换成数组，再遍历"
+				}
+			]
+		},
+		{
+			"ID": "20240229154603-rylyk0q",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229154603-rylyk0q",
+				"style": "line-height: 22px;",
+				"updated": "20240229154610"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "object[] objs = luaTable.ToArray();\nfor (int i = 0; i \u003c objs.Length; i++)\n{\n    print(\"遍历打印：\" + objs[i]);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229154611-ixm5o2e",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "LuaDictTable",
+				"id": "20240229154611-ixm5o2e",
+				"name": "luaTable.ToDictTable\u0026lt;\u0026gt;()",
+				"updated": "20240229154649"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "table表现Dictionary"
+				}
+			]
+		},
+		{
+			"ID": "20240229154755-t6kg1by",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229154755-t6kg1by",
+				"updated": "20240229154901"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于下面用table模拟的Dictionary"
+				}
+			]
+		},
+		{
+			"ID": "20240229154755-ylbqemp",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229154755-ylbqemp",
+				"style": "line-height: 22px;",
+				"updated": "20240229154804"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "-- table表现的Dictionary\ntestDic = {\n    [\"1\"] = 1,\n    [\"2\"] = 10,\n    [\"3\"] = 20,\n    [\"4\"] = 30,\n}\n\ntestDic2 = {\n    [\"1\"] = 1,\n    [true] = 1,\n    [false] = true,\n    [\"123\"] = false,\n}"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229154806-gic99vp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229154806-gic99vp",
+				"updated": "20240229154925"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果我们要在C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "中如字典那样调用其中的值，我们需要先获取table，然后通过键去获取对应的值"
+				}
+			]
+		},
+		{
+			"ID": "20240229154927-n9tbjbn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229154927-n9tbjbn",
+				"style": "line-height: 22px;",
+				"updated": "20240229154930"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "LuaTable dic = LuaManager.Instance.LuaState.GetTable(\"testDic\");\nprint(dic[\"1\"]);\nprint(dic[\"2\"]);\nprint(dic[\"3\"]);\nprint(dic[\"4\"]);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229154954-k32ycls",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229154954-k32ycls",
+				"updated": "20240229154954"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 355px;",
+						"style": "width: 345px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240229154954-xquq2ww.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 345px;\" parent-style=\"width: 355px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240229155112-3nur0n1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229155112-3nur0n1",
+				"updated": "20240229155811"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但是，通过中括号传入键获取值，只支持"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "int"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "string"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，其他类型的键没办法直接获取，\n对于这种情况，我们需要先使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ToDictTable\u0026lt;\u0026gt;()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法转换为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LuaDictTable"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，声明和使用方法与一般的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Dictionary\u0026lt;\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​一致\n这样就能使用非"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "int"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "string"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类型的键去获取值"
+				}
+			]
+		},
+		{
+			"ID": "20240229155555-3uo42rx",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229155555-3uo42rx",
+				"style": "line-height: 22px;",
+				"updated": "20240229160025"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "LuaDictTable\u003cstring, int\u003e luaDic = dic.ToDictTable\u003cstring, int\u003e();\nprint(\"LuaDic: \" + luaDic[\"1\"]);\nprint(\"LuaDic: \" + luaDic[\"2\"]);\nprint(\"LuaDic: \" + luaDic[\"3\"]);\nprint(\"LuaDic: \" + luaDic[\"4\"]);\n\nLuaTable dic2 = LuaManager.Instance.LuaState.GetTable(\"testDic2\");\nLuaDictTable\u003cobject, object\u003e luaDic2 = dic2.ToDictTable\u003cobject, object\u003e();\nprint(luaDic2[\"1\"]);\nprint(luaDic2[true]);\nprint(luaDic2[false]);\nprint(luaDic2[\"123\"]);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229160037-48ll5il",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229160037-48ll5il",
+				"updated": "20240229160037"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 364px;",
+						"style": "width: 354px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240229160037-rveo841.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 354px;\" parent-style=\"width: 364px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240229155554-rmyxpjw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229155554-rmyxpjw",
+				"updated": "20240229155554"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 365px;",
+						"style": "width: 355px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240229155554-syy6gqu.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 355px;\" parent-style=\"width: 365px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240229155818-gv9i9iq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240229155818-gv9i9iq",
+				"name": "LuaDictEntry\u0026lt;\u0026gt;",
+				"updated": "20240229160414"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "遍历table表现的dictionary"
+				}
+			]
+		},
+		{
+			"ID": "20240229160415-jx2qyxr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229160415-jx2qyxr",
+				"updated": "20240229160512"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LuaDictTable"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，最好使用迭代器去遍历"
+				}
+			]
+		},
+		{
+			"ID": "20240229160452-1p3vips",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229160452-1p3vips",
+				"style": "line-height: 22px;",
+				"updated": "20240229160457"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "IEnumerator\u003cLuaDictEntry\u003cobject, object\u003e\u003e ie = luaDic2.GetEnumerator();\nwhile (ie.MoveNext())\n{\n    print(ie.Current.Key + \"_\" + ie.Current.Value);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

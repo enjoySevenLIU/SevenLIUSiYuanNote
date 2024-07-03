@@ -1,0 +1,167 @@
+{
+	"ID": "20240205161821-ybi7o1g",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240205161821-ybi7o1g",
+		"title": "UH2S2L24——索引器和属性替换",
+		"updated": "20240302170636"
+	},
+	"Children": [
+		{
+			"ID": "20240205162330-qw4bpdy",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240205162330-qw4bpdy",
+				"updated": "20240205162340"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "索引器和属性替换"
+				}
+			]
+		},
+		{
+			"ID": "20240205162451-zpph37z",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205162451-zpph37z",
+				"updated": "20240205162824"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "索引器和属性的固定写法如下"
+				}
+			]
+		},
+		{
+			"ID": "20240205162517-j9x1ylm",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240205162517-j9x1ylm",
+				"style": "line-height: 22px;",
+				"updated": "20240205162819"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "xlua.hotfix(CS.类名, {\n\t--如果是属性进行热补丁重定向\n\tset_属性名 = function(self, v)\n\t\t-- v是传入的值\n\t\t-- 设置属性 的方法\n\tend,\n\tget_属性名 = function(self)\n\t\t-- 得到属性 的方法\n\t\treturn 对应属性的值\n\tend,\n\t--索引器固定写法\n\t--set_Item 通说索引器设置\n\t--get_Item 通过索引器获取\n\tset_Item = function(self, index, v)\n\t\t-- index是传入的索引\n\t\t-- v是传入的值\n\tend,\n\tget_Item = function(self, index)\n\t\t-- index是传入的索引\n\t\treturn 对应索引的值\n\tend\n})\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240205162100-jed1iru",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205162100-jed1iru",
+				"updated": "20240205162340"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们要对下面索引器和属性做热补丁"
+				}
+			]
+		},
+		{
+			"ID": "20240205162100-tj24a5r",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240205162100-tj24a5r",
+				"style": "line-height: 22px;",
+				"updated": "20240205162340"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[Hotfix]\npublic class HotfixMain : MonoBehaviour\n{\n    public int[] array = new int[] { 1, 2, 3 };\n\n    void Start()\n    {\n        this.Age = 100;\n        Debug.Log(this.Age);\n\n        this[99] = 100;\n        Debug.Log(this[9999]);\n    }\n\n    //属性\n    public int Age\n    {\n        get { return 0; }\n        set { Debug.Log(value); }\n    }\n\n    //索引器\n    public int this[int index]\n    {\n        get\n        {\n            if (index \u003e= array.Length || index \u003c 0)\n            {\n                Debug.Log(\"索引不正确\");\n                return 0;\n            }\n\n            return array[index];\n        }\n        set\n        {\n            if (index \u003e= array.Length || index \u003c 0)\n            {\n                Debug.Log(\"索引不正确\");\n                return;\n            }\n            array[index] = value;\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240205163140-1hwhgay",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205163140-1hwhgay",
+				"updated": "20240205163146"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按照固定写法写为"
+				}
+			]
+		},
+		{
+			"ID": "20240205162826-25ugbfv",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240205162826-25ugbfv",
+				"style": "line-height: 22px;",
+				"updated": "20240205163738"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "xlua.hotfix(CS.HotfixMain, {\n    set_Age = function(self, v)\n        print(\"Lua重定向的属性\" .. v)\n    end,\n    get_Age = function(self)\n        return 10\n    end,\n    set_Item = function(self, index, v)\n        print(\"Lua重定向索引器，索引：\"..index ..\"，值：\" ..v)\n    end,\n    get_Item = function(self, index)\n        print(\"Lua重定向索引器\")\n\t\treturn 999\n    end\n})\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240205163732-rxgr7pf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240205163732-rxgr7pf",
+				"updated": "20240205163732"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​​"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,885 @@
+{
+	"ID": "20240423214953-6kya03v",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240423214953-6kya03v",
+		"title": "UH4L2——Unity中启动ILRuntime",
+		"type": "doc",
+		"updated": "20240424130449"
+	},
+	"Children": [
+		{
+			"ID": "20240424123401-iw8teje",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240424123401-iw8teje",
+				"updated": "20240424123410"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240424123410-kik0v47",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240424123410-kik0v47",
+				"style": "line-height: 22px;",
+				"updated": "20240424124455"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "AppDomain\t\t\t\t\t\t\t\t//用于解释执行dll和pdb文件的类\nappDomain.LoadAssembly()\t\t\t\t//传入dll和pdb的流，读取热更内容\nPdbReaderProvider\t\t\t\t\t\t//读取Pdb相关内容，使用appDomain.LoadAssembly()读取pdb时需要实例化该类并传入\nappDomain.UnityMainThreadID\t\t\t\t//向AppDomain设置Unity的主线程的线程ID，以便于让ILRuntime相关可以在Unity的Profiler窗口内查看\nThread.CurrentThread.ManagedThreadId\t//当前托管线程的主线程\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240423214953-pyb4f4g",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240423214953-pyb4f4g",
+				"name": "AppDomain",
+				"updated": "20240423215035"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime关键类AppDomain"
+				}
+			]
+		},
+		{
+			"ID": "20240423215040-9l30anw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423215040-9l30anw",
+				"updated": "20240423215130"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime的开发方式，是在Unity主工程和ILRuntime热更工程中进行开发的，两个工程之间可以相互访问调用\nILRuntime热更代码最终会生成一个dll文件和一个pdb文件，这里面就包含了我们热更代码的相关信息\n而ILRuntime提供了"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AppDomain"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类，是ILRuntime提供的用于解释执行dll和pdb文件的，通过它我们才能解释执行我们的热更代码\n它的作用就有点类似xLua中的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref code",
+					"TextMarkBlockRefID": "20240201213147-6uutw9j",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "LuaEnv"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ lua解析器"
+				}
+			]
+		},
+		{
+			"ID": "20240423222551-ua4vg77",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423222551-ua4vg77",
+				"updated": "20240423222600"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "从本节Unity中启动ILRuntime我们更能够感受到，ILRuntime热更新的内容其实就是热更工程中的dll文件和pdb文件\n这两个文件中就包含了我们所有的热更C#代码信息，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "以后如果我们要做远端热更新，只需要把他们放入AB包下载即可"
+				}
+			]
+		},
+		{
+			"ID": "20240423215126-yn8rdli",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240423215126-yn8rdli",
+				"name": "appDomain.LoadAssembly()",
+				"updated": "20240423215148"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity中启动ILRuntime"
+				}
+			]
+		},
+		{
+			"ID": "20240423215409-7w9aopq",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240423215409-7w9aopq",
+				"updated": "20240424124402"
+			},
+			"Children": [
+				{
+					"ID": "20240423215409-tm0opnt",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240423215409-tm0opnt",
+						"updated": "20240423215409"
+					},
+					"Children": [
+						{
+							"ID": "20240423215409-ryvz579",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423215409-ryvz579",
+								"updated": "20240423215409"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "声明"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AppDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象（命名空间 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ILRuntime.Runtime.Enviorment"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​）"
+								}
+							]
+						},
+						{
+							"ID": "20240423215647-aq7y44r",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240423215647-aq7y44r",
+								"style": "line-height: 22px;",
+								"updated": "20240423215706"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private AppDomain appDomain;\n\nvoid Start()\n{\n    appDomain = new AppDomain();\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423215409-q658fw9",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240423215409-q658fw9",
+						"updated": "20240423222612"
+					},
+					"Children": [
+						{
+							"ID": "20240423215409-f4kyokk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423215409-f4kyokk",
+								"updated": "20240423215409"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "加载本地或远端下载的dll和pdb文件"
+								}
+							]
+						},
+						{
+							"ID": "20240423215710-1i4a3sk",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240423215710-1i4a3sk",
+								"style": "line-height: 22px;",
+								"updated": "20240423222612"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class Lesson2 : MonoBehaviour\n{\n    private AppDomain appDomain;\n\n    void Start()\n    {\n        appDomain = new AppDomain();\n        StartCoroutine(LoadHotUpdateInfo());\n    }\n\n    /// \u003csummary\u003e\n    /// 去异步加载我们的热更新相关的dll和pdb文件\n    /// \u003c/summary\u003e\n    /// \u003creturns\u003e\u003c/returns\u003e\n    IEnumerator LoadHotUpdateInfo()\n    {\n        //异步加载DLL文件\n#if UNITY_ANDROID\n        UnityWebRequest reqDll = UnityWebRequest.Get(Application.streamingAssetsPath + \"/HotFix_Project.dll\");\n#else\n        UnityWebRequest reqDll = UnityWebRequest.Get(\"file://\" + Application.streamingAssetsPath + \"/HotFix_Project.dll\");\n#endif\n        yield return reqDll.SendWebRequest();\n        if (reqDll.result != UnityWebRequest.Result.Success)\n            print(\"加载DLL文件失败\" + reqDll.responseCode + reqDll.result);\n        //读取加载的DLL数据\n        byte[] dll = reqDll.downloadHandler.data;\n        reqDll.Dispose();\n        //我们还可以加载调试用的pdb文件\n        UnityWebRequest reqpdb = UnityWebRequest.Get(Application.streamingAssetsPath + \"/HotFix_Project.pdb\");\n        yield return reqpdb.SendWebRequest();\n        if (reqpdb.result != UnityWebRequest.Result.Success)\n            print(\"加载DLL文件失败\" + reqpdb.responseCode + reqpdb.result);\n        //读取加载的DLL数据\n        byte[] pdb = reqpdb.downloadHandler.data;\n        reqpdb.Dispose();\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423215409-j79pa8t",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240423215409-j79pa8t",
+						"updated": "20240423221802"
+					},
+					"Children": [
+						{
+							"ID": "20240423215409-pyku9dn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423215409-pyku9dn",
+								"updated": "20240423215430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将加载的数据以流的形式（文件流或者内存流对象）传递给"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AppDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LoadAssembly"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423215409-udn2thk",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"alias": "Thread.CurrentThread.ManagedThreadId",
+						"id": "20240423215409-udn2thk",
+						"name": "appDomain.UnityMainThreadID",
+						"updated": "20240424124402"
+					},
+					"Children": [
+						{
+							"ID": "20240423215409-isoeh2x",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423215409-isoeh2x",
+								"updated": "20240424124402"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "初始化ILRuntime相关信息（目前只需要告诉ILRuntimeUnity的主线程的线程ID，主要目的是能够在Unity的Profiler剖析器窗口中分析问题）"
+								}
+							]
+						},
+						{
+							"ID": "20240423221750-q7lbhlv",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240423221750-q7lbhlv",
+								"style": "line-height: 22px;",
+								"updated": "20240423221808"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using ILRuntime.Mono.Cecil.Pdb;\nusing ILRuntime.Runtime.Enviorment;\nusing System.Collections;\nusing System.IO;\nusing System.Threading;\nusing UnityEngine;\nusing UnityEngine.Networking;\n\npublic class Lesson2 : MonoBehaviour\n{\n    private AppDomain appDomain;\n    //用于存储加载出来的两个文件的内存流对象\n    private MemoryStream dllStream;\n    private MemoryStream pdbStream;\n\n    // Start is called before the first frame update\n    void Start()\n    {\n        appDomain = new AppDomain();\n        StartCoroutine(LoadHotUpdateInfo());\n    }\n\n    /// \u003csummary\u003e\n    /// 去异步加载我们的热更新相关的dll和pdb文件\n    /// \u003c/summary\u003e\n    /// \u003creturns\u003e\u003c/returns\u003e\n    IEnumerator LoadHotUpdateInfo()\n    {\n        //异步加载DLL文件\n#if UNITY_ANDROID\n        UnityWebRequest reqDll = UnityWebRequest.Get(Application.streamingAssetsPath + \"/HotFix_Project.dll\");\n#else\n        UnityWebRequest reqDll = UnityWebRequest.Get(\"file://\" + Application.streamingAssetsPath + \"/HotFix_Project.dll\");\n#endif\n        yield return reqDll.SendWebRequest();\n        if (reqDll.result != UnityWebRequest.Result.Success)\n            print(\"加载DLL文件失败\" + reqDll.responseCode + reqDll.result);\n        //读取加载的DLL数据\n        byte[] dll = reqDll.downloadHandler.data;\n        reqDll.Dispose();\n        //编辑器环境下，我们可以加载调试用的pdb文件\n        UnityWebRequest reqpdb = UnityWebRequest.Get(Application.streamingAssetsPath + \"/HotFix_Project.pdb\");\n        yield return reqpdb.SendWebRequest();\n        if (reqpdb.result != UnityWebRequest.Result.Success)\n            print(\"加载DLL文件失败\" + reqpdb.responseCode + reqpdb.result);\n        //读取加载的DLL数据\n        byte[] pdb = reqpdb.downloadHandler.data;\n        reqpdb.Dispose();\n        pdbStream = new MemoryStream(pdb);\n        dllStream = new MemoryStream(dll);\n        //将我们两个文件的内存流用于初始化 appDomain 我们之后就可以通过该对象来执行我们对应的热更代码了\n        appDomain.LoadAssembly(dllStream, pdbStream, new PdbReaderProvider());\n        //初始化ILRuntime相关信息（目前只需要告诉ILRuntime主线程的线程ID，主要目的是能够在Unity的Profiler剖析器窗口中分析问题）\n        appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423215409-5s5ypk6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20240423215409-5s5ypk6",
+						"updated": "20240423215409"
+					},
+					"Children": [
+						{
+							"ID": "20240423215409-ntte2kk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423215409-ntte2kk",
+								"updated": "20240423215411"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "执行热更代码中的逻辑\n"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240423215411-l7856sc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423215411-l7856sc",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240423215148"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：一般在一个项目中，大多数情况下只需要一个 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AppDomain"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 对象"
+				}
+			]
+		},
+		{
+			"ID": "20240423221838-wq4xt0l",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240423221838-wq4xt0l",
+				"updated": "20240423222338"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关于ILRuntime相关内容的释放"
+				}
+			]
+		},
+		{
+			"ID": "20240423222339-lxtnhrn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423222339-lxtnhrn",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240423222354"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意！为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AppDomain"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​读取dll文件和pdb文件而创建的两个内存流不可以随意关闭，只有在热更相关内容不再使用时才可用关闭"
+				}
+			]
+		},
+		{
+			"ID": "20240423222359-62r0d9g",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240423222359-62r0d9g",
+				"style": "line-height: 22px;",
+				"updated": "20240423222519"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private void OnDestroy()\n{\n    if (dllStream != null)\n        dllStream.Dispose();\n    if (pdbStream != null)\n        pdbStream = null;\n    dllStream = null;\n    pdbStream = null;\n    appDomain = null;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240423222524-svkbhkj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240423222524-svkbhkj",
+				"updated": "20240423225056"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "声明一个管理ILRuntime相关的管理器"
+				}
+			]
+		},
+		{
+			"ID": "20240424123054-jggdx7v",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240424123054-jggdx7v",
+				"updated": "20240424125228"
+			},
+			"Children": [
+				{
+					"ID": "20240424123054-p7h19ke",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240424123054-p7h19ke",
+						"updated": "20240424123054"
+					},
+					"Children": [
+						{
+							"ID": "20240424123054-rzqdvla",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424123054-rzqdvla",
+								"updated": "20240424123239"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "由于会使用协程相关内容加载dll和pdb文件，因此该管理器是继承"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "MonoBehaviour"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240424123239-ob5dax7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240424123239-ob5dax7",
+						"updated": "20240424123338"
+					},
+					"Children": [
+						{
+							"ID": "20240424123239-si8ccmb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424123239-si8ccmb",
+								"updated": "20240424124715"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "为了外部可以使用ILRuntime相关内容，因此管理器的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AppDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 是公开的，供外部调用"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240424124727-0e859e5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240424124727-0e859e5"
+					},
+					"Children": [
+						{
+							"ID": "20240424124727-aity6l3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424124727-aity6l3",
+								"updated": "20240424125018"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "StartILRuntime"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：调用该方法会异步加载dll文件和pdb文件，然后将其作为内存流由"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AppDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​读取，异步执行完毕后会执行传入的回调方法"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240424124834-xpji62o",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240424124834-xpji62o"
+					},
+					"Children": [
+						{
+							"ID": "20240424124834-drbiyz4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424124834-drbiyz4",
+								"updated": "20240424124858"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "StopILRuntime"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：会释放两个内存流和"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AppDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240424124902-u9hs3ps",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240424124902-u9hs3ps"
+					},
+					"Children": [
+						{
+							"ID": "20240424124902-wh21aem",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424124902-wh21aem",
+								"updated": "20240424124955"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "InitILRuntime"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：初始化"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AppDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的方法，在"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AppDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象读取了两个流之后就会调用"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240424124956-4rl2cy2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240424124956-4rl2cy2"
+					},
+					"Children": [
+						{
+							"ID": "20240424124956-t46pyu4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424124956-t46pyu4",
+								"updated": "20240424125054"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ILRuntimeLoadOverDo"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：在加载完dll文件和pdb文件并初始化"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AppDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​后，会执行的方法"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240424125054-mu09635",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240424125054-mu09635",
+						"updated": "20240424125228"
+					},
+					"Children": [
+						{
+							"ID": "20240424125054-9u6g6cs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424125054-9u6g6cs",
+								"updated": "20240424125228"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LoadHotUpdateInfo"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：异步加载dll文件和pdb文件并执行初始化方法的协程"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240423225056-930y74b",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240423225056-930y74b",
+				"style": "line-height: 22px;",
+				"updated": "20240424130449"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using ILRuntime.Mono.Cecil.Pdb;\nusing ILRuntime.Runtime.Enviorment;\nusing System.Collections;\nusing System.IO;\nusing System.Threading;\nusing UnityEngine;\nusing UnityEngine.Events;\nusing UnityEngine.Networking;\n\npublic class ILRuntimeMgr : MonoBehaviour\n{\n    private static ILRuntimeMgr instance;\n    public static ILRuntimeMgr Instance\n    {\n        get\n        {\n            if (instance == null)\n            {\n                GameObject obj = new GameObject(\"Manager_ILRuntime\");\n                instance = obj.AddComponent\u003cILRuntimeMgr\u003e();\n                DontDestroyOnLoad(obj);\n            }\n            return instance;\n        }\n    }\n\n    private MemoryStream dllStream;\n    private MemoryStream pdbStream;\n    public AppDomain appDomain;\n    private bool isStart = false;\n\n    /// \u003csummary\u003e\n    /// 启动ILRuntime的初始化方法\n    /// \u003c/summary\u003e\n    public void StartILRuntime(UnityAction callBack = null)\n    {\n        if (!isStart)\n        {\n            appDomain = new AppDomain();\n            StartCoroutine(LoadHotUpdateInfo(callBack));\n            isStart = true;\n        }\n    }\n\n    public void StopILRuntime()\n    {\n        if (dllStream != null)\n            dllStream.Dispose();\n        if (pdbStream != null)\n            pdbStream = null;\n        dllStream = null;\n        pdbStream = null;\n        appDomain = null;\n    }\n\n    //初始化ILRuntime相关的方法\n    private void InitILRuntime()\n    {\n        //其他方法\n        //初始化ILRuntime相关信息（目前只需要告诉ILRuntime主线程的线程ID，主要目的是能够在Unity的Profiler剖析器窗口中分析问题）\n        appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;\n    }\n\n    //ILRuntime初始化完毕时会执行的方法\n    private void ILRuntimeLoadOverDo()\n    {\n\n    }\n\n    private IEnumerator LoadHotUpdateInfo(UnityAction callBack)\n    {\n        //异步加载DLL文件\n#if UNITY_ANDROID\n        UnityWebRequest reqDll = UnityWebRequest.Get(Application.streamingAssetsPath + \"/HotFix_Project.dll\");\n#else\n        UnityWebRequest reqDll = UnityWebRequest.Get(\"file:///\" + Application.streamingAssetsPath + \"/HotFix_Project.dll\");\n#endif\n        yield return reqDll.SendWebRequest();\n        if (reqDll.result != UnityWebRequest.Result.Success)\n            Debug.Log(\"加载DLL文件失败\" + reqDll.responseCode + reqDll.result);\n        //读取加载的DLL数据\n        byte[] dll = reqDll.downloadHandler.data;\n        reqDll.Dispose();\n        //编辑器环境下，我们可以加载调试用的pdb文件\n        UnityWebRequest reqpdb = UnityWebRequest.Get(Application.streamingAssetsPath + \"/HotFix_Project.pdb\");\n        yield return reqpdb.SendWebRequest();\n        //如果加载失败\n        if (reqpdb.result != UnityWebRequest.Result.Success)\n        {\n            Debug.LogError(\"加载DLL文件失败\" + reqpdb.responseCode + reqpdb.result);\n            StopILRuntime();\n            yield break;\n        }\n        //读取加载的DLL数据\n        byte[] pdb = reqpdb.downloadHandler.data;\n        reqpdb.Dispose();\n        pdbStream = new MemoryStream(pdb);\n        dllStream = new MemoryStream(dll);\n        //将我们两个文件的内存流用于初始化 appDomain 我们之后就可以通过该对象来执行我们对应的热更代码了\n        appDomain.LoadAssembly(dllStream, pdbStream, new PdbReaderProvider());\n        InitILRuntime();\n        ILRuntimeLoadOverDo();\n        callBack?.Invoke();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

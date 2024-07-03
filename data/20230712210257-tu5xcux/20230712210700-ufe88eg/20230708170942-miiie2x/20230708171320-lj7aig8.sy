@@ -1,0 +1,925 @@
+{
+	"ID": "20230708171320-lj7aig8",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230708171320-lj7aig8",
+		"name": "Transform的角度与旋转",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230708171320-lj7aig8\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230708171320-dr282gj\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230709142427-00mc3cf\u0026quot;,\u0026quot;scrollTop\u0026quot;:0,\u0026quot;focusId\u0026quot;:\u0026quot;20230708171320-dr282gj\u0026quot;,\u0026quot;focusStart\u0026quot;:0,\u0026quot;focusEnd\u0026quot;:0\u0026#125;",
+		"title": "U1L7-3——角度与旋转",
+		"type": "doc",
+		"updated": "20240321163714"
+	},
+	"Children": [
+		{
+			"ID": "20230708171320-dr282gj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230708171320-dr282gj",
+				"updated": "20230709140401"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Transform中的角度与旋转相关"
+				}
+			]
+		},
+		{
+			"ID": "20230709140415-vfs5gly",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709140415-vfs5gly",
+				"updated": "20240321163622"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "角度相关和位置相关差不多，通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Transform"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​可以得到相对于世界坐标系和相对于父对象坐标系的角度，旋转也分为自转和公转"
+				}
+			]
+		},
+		{
+			"ID": "20230709140601-dpjc6k3",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709140601-dpjc6k3",
+				"updated": "20230709140615"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20230709140615-rx1qfai",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709140615-rx1qfai",
+				"updated": "20230711230007"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "this.transform.eulerAngles\t\t//游戏对象相对于世界坐标系的角度的属性，用欧拉角表示\nthis.transform.localEulerAngles\t\t//游戏对象相对于父对象的坐标系的角度的属性，用欧拉角表示，这里得到的角度范围一定是0~360，这和面板显示的角度是不同的\nthis.transform.rotation\t\t\t//游戏对象相对于世界坐标系的角度的属性，用四元数表示，注意，和面板表现形式不同！\nthis.transform.localRotation\t\t//游戏对象相对于父对象的坐标系的角度的属性，用四元数表示，注意，和面板表现形式不同！\nthis.transform.Rotate(, , )\t\t//让游戏对象自转\nthis.transform.RotateAround(, , )\t//让游戏对象绕某个点公转\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709140534-6xl65s4",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709140534-6xl65s4",
+				"updated": "20230711230138"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "角度相关（欧拉角）"
+				}
+			]
+		},
+		{
+			"ID": "20230711231055-vgobzwj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230711231055-vgobzwj",
+				"updated": "20240321163653"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "入门阶段，先了解Inspector面板中用来表示物体角度的欧拉角，并用欧拉角来描述物体的角度与旋转（"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230711232530-8eaxds3",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "欧拉角"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "）\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "要注意！脚本里的 "
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text code",
+					"TextMarkTextContent": "transform.rotation"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": " 和 "
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text code",
+					"TextMarkTextContent": "transform.localRotation"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": " 都不使用和面板一致的 欧拉角 来表示物体的角度，而是用四元数！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n得到物体的欧拉角数据需要用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "transform.eulerAngles"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 或者 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "transform.localEulerAngles"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n在程序里，由于欧拉角描述的旋转存在不可避免且致命的缺陷，因此实际情况下描述旋转的数一般都是四元数，之后在基础阶段的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230711221541-zer4ley",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "四元数"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "里解释这一切"
+				}
+			]
+		},
+		{
+			"ID": "20230709140539-gtrttb0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709140539-gtrttb0",
+				"name": "transform.eulerAngles",
+				"updated": "20230711230142"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "相对世界坐标角度（欧拉角）"
+				}
+			]
+		},
+		{
+			"ID": "20230709141225-lbsxmg6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709141225-lbsxmg6",
+				"updated": "20230709141234"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "this.transform.eulerAngles;\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709141242-uy9ajvp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709141242-uy9ajvp",
+				"name": "transform.localEulerAngles",
+				"updated": "20230711230147"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "相对父对象角度（欧拉角）"
+				}
+			]
+		},
+		{
+			"ID": "20230709141251-zyg49dc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709141251-zyg49dc",
+				"updated": "20230709141304"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "this.transform.localEulerAngles;\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709141319-d5esfmq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709141319-d5esfmq",
+				"updated": "20240321163659"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "color: var(--b3-card-error-color); background-color: var(--b3-card-error-background);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "警告！！！通过"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"color: var(--b3-card-error-color); background-color: var(--b3-card-error-background);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "color: var(--b3-card-error-color); background-color: var(--b3-card-error-background);"
+					},
+					"TextMarkType": "text code",
+					"TextMarkTextContent": ".localEulerAngles"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"color: var(--b3-card-error-color); background-color: var(--b3-card-error-background);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "color: var(--b3-card-error-color); background-color: var(--b3-card-error-background);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "得到的角度不可能有负数，一定是0~360，这和面板显示的角度是不同的！！！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"color: var(--b3-card-error-color); background-color: var(--b3-card-error-background);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230709141330-mw6l1h9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709141330-mw6l1h9",
+				"updated": "20230709141418"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "注意：设置角度和设置位置一样 不能单独设置xyz 要一起设置"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230709141418-gv44o3g",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709141418-gv44o3g",
+				"updated": "20230709141419"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果我们希望改变的 角度 是面板上显示的内容 那一定是改变 相对父对象的角"
+				}
+			]
+		},
+		{
+			"ID": "20230709141401-qiecun3",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709141401-qiecun3",
+				"updated": "20230709141410"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "this.transform.localEulerAngles = new Vector3 (10, 10, 10);\nprint(this.transform.localEulerAngles);\n//如果我们希望改变的 角度 是面板上显示的内容 那一定是改变 相对父对象的角度\nthis.transform.eulerAngles = new Vector3(10, 10, 10);\nprint(this.transform.localEulerAngles);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709141441-j5jgb9x",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709141441-j5jgb9x",
+				"updated": "20230709141448"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "旋转相关"
+				}
+			]
+		},
+		{
+			"ID": "20230709141448-xc5wqic",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709141448-xc5wqic",
+				"updated": "20230709141645"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以自己计算，在这里省略，方法和位置一样，参考自己改变位置方式（"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230709135628-5z18ydi",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "自己计算位移"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "）即可，一般都是使用API来旋转"
+				}
+			]
+		},
+		{
+			"ID": "20230709141635-paw90dy",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709141635-paw90dy",
+				"name": "transform.Rotate()",
+				"updated": "20230709141937"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自转"
+				}
+			]
+		},
+		{
+			"ID": "20230709141807-qwx1q1b",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709141807-qwx1q1b",
+				"updated": "20240321163704"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "第一种自转的重载方法："
+				}
+			]
+		},
+		{
+			"ID": "20240321163704-kkdqdar",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240321163704-kkdqdar",
+				"updated": "20240321163704"
+			},
+			"Children": [
+				{
+					"ID": "20240321163704-rabue1x",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321163704-rabue1x",
+						"updated": "20240321163704"
+					},
+					"Children": [
+						{
+							"ID": "20240321163704-79t5cuh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321163704-79t5cuh",
+								"updated": "20240321163704"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "第一个参数 相当于 每一帧旋转的角度\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321163704-o21sg8o",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321163704-o21sg8o"
+					},
+					"Children": [
+						{
+							"ID": "20240321163704-q23eell",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321163704-q23eell"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "第二个参数 默认不填 就是相对于自己的坐标系 进行的旋转"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230709141458-ys8wwry",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709141458-ys8wwry",
+				"updated": "20230709141918"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "this.transform.Rotate(new Vector3(0, 10 * Time.deltaTime, 0));\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709141951-wsno9e4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709141951-wsno9e4",
+				"updated": "20230709141958"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "相对于世界坐标系旋转"
+				}
+			]
+		},
+		{
+			"ID": "20230709142012-v38n3w6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709142012-v38n3w6",
+				"updated": "20230709142019"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "this.transform.Rotate(new Vector3(0, 10, 0) * Time.deltaTime, Space.World);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709142021-mu7g3mw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709142021-mu7g3mw",
+				"updated": "20240321163707"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "第二种自转的重载方法：\n相对于某个轴 转多少度"
+				}
+			]
+		},
+		{
+			"ID": "20240321163707-wxsl1g3",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240321163707-wxsl1g3",
+				"updated": "20240321163707"
+			},
+			"Children": [
+				{
+					"ID": "20240321163707-qoiqa8o",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321163707-qoiqa8o",
+						"updated": "20240321163707"
+					},
+					"Children": [
+						{
+							"ID": "20240321163707-fd9lgj4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321163707-fd9lgj4",
+								"updated": "20240321163707"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数一 相对哪个轴进行转动\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321163708-ymurohv",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321163708-ymurohv"
+					},
+					"Children": [
+						{
+							"ID": "20240321163708-58zqmib",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321163708-58zqmib"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数二 转动的 角度 是多少\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321163708-1az3lek",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321163708-1az3lek"
+					},
+					"Children": [
+						{
+							"ID": "20240321163708-y2kfzvf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321163708-y2kfzvf"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数三 默认不填 就是相对于自己的坐标系 进行旋转\n如果填 可以填写相对于 世界坐标系进行旋转"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230709142058-uhc4fmw",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709142058-uhc4fmw",
+				"updated": "20230709142414"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "this.transform.Rotate(Vector3.up, 10 * Time.deltaTime);\t\t\t//绕自己z轴每秒旋转10度\nthis.transform.Rotate(Vector3.right, 10 * Time.deltaTime);\t\t//绕自己x轴每秒旋转10度\nthis.transform.Rotate(Vector3.right, 10 * Time.deltaTime, Space.World);\t//绕世界坐标系x轴每秒旋转10度\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709142231-mi1gn75",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709142231-mi1gn75",
+				"name": "transform.RotateAround()",
+				"updated": "20230709142319"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "公转"
+				}
+			]
+		},
+		{
+			"ID": "20230709142250-rhzdbf9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709142250-rhzdbf9",
+				"updated": "20240321163714"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "相对于某一点转（公转）"
+				}
+			]
+		},
+		{
+			"ID": "20240321163714-uilf4l6",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240321163714-uilf4l6",
+				"updated": "20240321163714"
+			},
+			"Children": [
+				{
+					"ID": "20240321163714-5fvwfbz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321163714-5fvwfbz",
+						"updated": "20240321163714"
+					},
+					"Children": [
+						{
+							"ID": "20240321163714-67jse3g",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321163714-67jse3g",
+								"updated": "20240321163714"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数一：绕着哪一个点 转圈圈\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321163714-i3jfy3a",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321163714-i3jfy3a"
+					},
+					"Children": [
+						{
+							"ID": "20240321163714-m38v5fu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321163714-m38v5fu"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数二：相对于点的哪一个轴转圈\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321163715-ni239r5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321163715-ni239r5"
+					},
+					"Children": [
+						{
+							"ID": "20240321163715-t9itbg9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321163715-t9itbg9"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数三：转的度数 旋转速度 * 时间"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230709142256-qux03ep",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709142256-qux03ep",
+				"updated": "20230709142427"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "this.transform.RotateAround(Vector3.zero, Vector3.up, 10 * Time.deltaTime);\t//绕原点的z轴每秒旋转10度\nthis.transform.RotateAround(Vector3.zero, Vector3.right, 10 * Time.deltaTime);\t//绕原点的x轴每秒旋转10度\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709142427-00mc3cf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709142427-00mc3cf"
+			}
+		}
+	]
+}

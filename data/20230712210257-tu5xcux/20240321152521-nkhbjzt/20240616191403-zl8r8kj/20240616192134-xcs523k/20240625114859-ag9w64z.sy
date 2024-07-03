@@ -1,0 +1,1147 @@
+{
+	"ID": "20240625114859-ag9w64z",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240625114859-ag9w64z",
+		"title": "US3S1L2——兰伯特光照模型",
+		"type": "doc",
+		"updated": "20240625182801"
+	},
+	"Children": [
+		{
+			"ID": "20240625174209-7qd2xd2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240625174209-7qd2xd2",
+				"updated": "20240625182801"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240625174215-z888595",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240625174215-z888595",
+				"style": "line-height: 22px;",
+				"updated": "20240625182731"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "UNITY_LIGHTMODEL_AMBIENT\t\t//兰伯特光照模型环境光变量，对计算出来的结果加上该变量、用于模拟环境光对物体的影响，避免物体阴影部分完全黑暗\n​_WorldSpaceLightPos0​\t\t\t//表示光源0在世界坐标系下的位置\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240625121929-jzonh9g",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240625121929-jzonh9g",
+				"updated": "20240625182801"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "兰伯特光照模型"
+				}
+			]
+		},
+		{
+			"ID": "20240625170805-nkzrwxw",
+			"Type": "NodeMathBlock",
+			"Properties": {
+				"id": "20240625170805-nkzrwxw",
+				"updated": "20240625182121"
+			},
+			"Children": [
+				{
+					"Type": "NodeMathBlockOpenMarker"
+				},
+				{
+					"Type": "NodeMathBlockContent",
+					"Data": "Color_{漫反射光}=Color_{光源} \\times Color_{材质的漫反射} \\times \\max(0,\\overrightarrow{标准化后物体表面法线向量} \\cdot \\overrightarrow{标准化后光源方向向量})"
+				},
+				{
+					"Type": "NodeMathBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20240625170805-75em4zv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240625170805-75em4zv",
+				"updated": "20240625170805"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "其中，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "\\overrightarrow{标准化后物体表面法线向量} \\cdot \\overrightarrow{标准化后光源方向向量}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 等于物体表面法线与光源方向向量的夹角的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "\\cos"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 值"
+				}
+			]
+		},
+		{
+			"ID": "20240625114859-38os1sl",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240625114859-38os1sl",
+				"updated": "20240625182801"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "两个颜色相乘"
+				}
+			]
+		},
+		{
+			"ID": "20240625115006-zjjugur",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240625115006-zjjugur",
+				"updated": "20240625121930"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "两个颜色变量相乘，通常用于计算光照、材质混合、纹理混合等等需求\n它是一种用于混合颜色的操作，计算结果可以理解为两种颜色叠加在一起的效果\n在颜色相乘中，通常是使用颜色通道的值来执行逐通道的乘法"
+				}
+			]
+		},
+		{
+			"ID": "20240625115014-5hyrjx6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240625115014-5hyrjx6",
+				"updated": "20240625121930"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "举例：颜色A、B都是 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "fixed4"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 类型的变量\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "颜色A * 颜色B = (A.r * B.r, A.g * B.g, A.b * B.b, A.a * B.a);"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n那么得到的这个结果就是A、B颜色叠加后的结果"
+				}
+			]
+		},
+		{
+			"ID": "20240625115006-b1cu898",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240625115006-b1cu898",
+				"updated": "20240625121930"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "总结：两个颜色变量相乘，得到的结果表示两个颜色叠加在一起"
+				}
+			]
+		},
+		{
+			"ID": "20240625115125-atxtvqq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240625115125-atxtvqq",
+				"updated": "20240625182801"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "漫反射基本概念"
+				}
+			]
+		},
+		{
+			"ID": "20240625115241-b74kjtm",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20240625115241-b74kjtm",
+				"updated": "20240625121930"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20240625115134-rzmttmy",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240625115134-rzmttmy",
+						"updated": "20240625115241"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "漫反射（Diffuse Reflection）是光线撞击一个物体表面后以各个方向均匀地反射出去的过程\n在漫反射下，光线以无规律的方式散射，而不像镜面反射那样按照特定的角度反射。\n这种散射导致了物体表面看起来均匀而不闪烁的效果。"
+						}
+					]
+				},
+				{
+					"ID": "20240625115235-prs5z6m",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240625115235-prs5z6m",
+						"style": "width: 33%; flex: 0 0 auto;",
+						"updated": "20240625115250"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Properties": {
+								"parent-style": "width: 338px;",
+								"style": "width: 328px;"
+							},
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20240625115235-dbh6u94.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"width: 328px;\" parent-style=\"width: 338px;\"}"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20240625115140-e21xnkk",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240625115140-e21xnkk",
+				"updated": "20240625182801"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "兰伯特光照模型的来历和原理"
+				}
+			]
+		},
+		{
+			"ID": "20240625115156-wkm7l2e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240625115156-wkm7l2e",
+				"updated": "20240625121930"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "兰伯特(Lambert)光照模型，也称为朗伯反射模型\n是由瑞士数学家约翰·海因里希·朗伯（Johann Heinrich Lambert）于1760年左右首次提出\n朗伯是18世纪的一个杰出科学家，他在光学和数学领域作出了众多贡献。\n兰伯特光照模型描述了"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "漫反射表面对光线的反射行为"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，它成为计算机图形学和渲染中重要的基础模型之一"
+				}
+			]
+		},
+		{
+			"ID": "20240625115156-zu2msji",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240625115156-zu2msji",
+				"updated": "20240625121930"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "原理：兰伯特光照模型的理论是认为：\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong u",
+					"TextMarkTextContent": "漫反射光的强度仅与入射光的方向和反射点处表面法线的夹角的余弦成正比"
+				}
+			]
+		},
+		{
+			"ID": "20240625115901-3iofmoz",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20240625115901-3iofmoz",
+				"updated": "20240625121930"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20240625115536-3sgdzqx",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240625115536-3sgdzqx",
+						"updated": "20240625115908"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "假设：\n入射光线的光强度为 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "inline-math",
+							"TextMarkInlineMathContent": "L"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "\n入射光线和某顶点法线的夹角为 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "inline-math",
+							"TextMarkInlineMathContent": "\\theta"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "\n则反射光线的强度为："
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "inline-math",
+							"TextMarkInlineMathContent": "L\\cos\\theta"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "\n"
+						}
+					]
+				},
+				{
+					"ID": "20240625115859-tocmcy7",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240625115859-tocmcy7",
+						"style": "width: 33%; flex: 0 0 auto;",
+						"updated": "20240625115859"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Properties": {
+								"parent-style": "width: 339px;",
+								"style": "width: 329px;"
+							},
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20240625115859-97wpb2v.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"width: 329px;\" parent-style=\"width: 339px;\"}"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20240625115912-gzoac1y",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240625115912-gzoac1y",
+				"updated": "20240625121930"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "也就是说，在兰伯特光照模型中，光源射向表面的光线越接近于法线，反射光线的强度越大，越接近于 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "L"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " ，即 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "\\theta"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 越小，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "\\cos\\theta"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 越大，反射光线强度越大"
+				}
+			]
+		},
+		{
+			"ID": "20240625120107-msxlqd1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240625120107-msxlqd1",
+				"updated": "20240625182801"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "兰伯特光照模型的公式"
+				}
+			]
+		},
+		{
+			"ID": "20240625120417-niq19qd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240625120417-niq19qd",
+				"updated": "20240625121930"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "公式："
+				}
+			]
+		},
+		{
+			"ID": "20240625120426-6dt5v9g",
+			"Type": "NodeMathBlock",
+			"Properties": {
+				"id": "20240625120426-6dt5v9g",
+				"updated": "20240625121930"
+			},
+			"Children": [
+				{
+					"Type": "NodeMathBlockOpenMarker"
+				},
+				{
+					"Type": "NodeMathBlockContent",
+					"Data": "漫反射光照颜色 = 光源的颜色 \\times 材质的漫反射颜色 \\times \\max(0,\\ 标准化后物体表面法线向量\\cdot标准化后光源方向向量)"
+				},
+				{
+					"Type": "NodeMathBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20240625120420-dsopmri",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240625120420-dsopmri",
+				"updated": "20240625121930"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "其中："
+				}
+			]
+		},
+		{
+			"ID": "20240625120424-5sbv0af",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240625120424-5sbv0af",
+				"updated": "20240625121930"
+			},
+			"Children": [
+				{
+					"ID": "20240625120424-1zy6ofx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240625120424-1zy6ofx",
+						"updated": "20240625121453"
+					},
+					"Children": [
+						{
+							"ID": "20240625120424-7nkayds",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240625120424-7nkayds",
+								"updated": "20240625121453"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "标准化后物体表面法线向量 \\cdot 标准化后光源方向向量"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "注意，这里是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong block-ref",
+									"TextMarkBlockRefID": "20230711193939-5kfq4wq",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "向量点乘"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "），得到的结果就是 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "\\cos\\theta"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240625120424-wr2sa2y",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240625120424-wr2sa2y",
+						"updated": "20240625121459"
+					},
+					"Children": [
+						{
+							"ID": "20240625120424-iw06n11",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240625120424-iw06n11",
+								"updated": "20240625121459"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "\\max(0, \\cos\\theta)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 的目的是避免负数，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "对于模型背面的部分，认为找不到光，直接乘以0，变为黑色"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240625120515-6slr2u6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240625120515-6slr2u6",
+				"updated": "20240625182801"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如何在Shader中获取公式中的关键信息"
+				}
+			]
+		},
+		{
+			"ID": "20240625121532-7qjh9no",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240625121532-7qjh9no",
+				"updated": "20240625182801"
+			},
+			"Children": [
+				{
+					"ID": "20240625121547-4ran0bx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240625121547-4ran0bx",
+						"updated": "20240625121547"
+					},
+					"Children": [
+						{
+							"ID": "20240625121547-af18m76",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240625121547-af18m76",
+								"updated": "20240625121556"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "光源的颜色\n"
+								}
+							]
+						},
+						{
+							"ID": "20240625121601-uzq4hyv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240625121601-uzq4hyv",
+								"updated": "20240625121640"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240616181725-lhyuacy",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "Lighting.cginc"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 内置文件中的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240616185553-hqtgl7k",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "_LightColor0"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240625121547-kzgt8b8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240625121547-kzgt8b8",
+						"updated": "20240625121547"
+					},
+					"Children": [
+						{
+							"ID": "20240625121547-zkuegga",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240625121547-zkuegga",
+								"updated": "20240625121547"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "光源的方向\n"
+								}
+							]
+						},
+						{
+							"ID": "20240625121612-7t9334e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240625121612-7t9334e",
+								"updated": "20240625121614"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "_WorldSpaceLightPos0"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 表示光源0在世界坐标系下的位置"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240625121547-qo761nj",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240625121547-qo761nj",
+						"updated": "20240625121547"
+					},
+					"Children": [
+						{
+							"ID": "20240625121547-o0y1bvg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240625121547-o0y1bvg",
+								"updated": "20240625121803"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "向量归一化（标准化）方法 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "normalize()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240625121547-2sk5unr",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240625121547-2sk5unr",
+						"updated": "20240625182801"
+					},
+					"Children": [
+						{
+							"ID": "20240625121547-sy6q2qz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240625121547-sy6q2qz",
+								"updated": "20240625182801"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "取最大值方法 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "max(,)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240625121547-etv36ht",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20240625121547-etv36ht",
+						"updated": "20240625182759"
+					},
+					"Children": [
+						{
+							"ID": "20240625121547-vgskxiz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240625121547-vgskxiz",
+								"updated": "20240625182759"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "点乘方法 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "dot(,)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240625121547-8zbpdlj",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ni4=",
+						"Num": 6
+					},
+					"Properties": {
+						"id": "20240625121547-8zbpdlj",
+						"updated": "20240625121814"
+					},
+					"Children": [
+						{
+							"ID": "20240625121547-88zhq1q",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240625121547-88zhq1q",
+								"updated": "20240625121547"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "兰伯特光照模型环境光变量（用于模拟环境光对物体的影响，避免物体阴影部分完全黑暗）\n"
+								}
+							]
+						},
+						{
+							"ID": "20240625121812-gdkv4nt",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240625121812-gdkv4nt",
+								"updated": "20240625121814"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UNITY_LIGHTMODEL_AMBIENT.rgb"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240625121547-h4t7q2k",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ny4=",
+						"Num": 7
+					},
+					"Properties": {
+						"id": "20240625121547-h4t7q2k",
+						"updated": "20240625121828"
+					},
+					"Children": [
+						{
+							"ID": "20240625121547-yo7p8kr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240625121547-yo7p8kr",
+								"updated": "20240625121828"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将法线从模型空间转换到世界空间 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240616182923-hz02j9a",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "UnityObjectToWorldNormal"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240625121847-08xu7yi",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240625121847-08xu7yi",
+				"updated": "20240625173208"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "兰伯特光照模型的实现"
+				}
+			]
+		},
+		{
+			"ID": "20240625122333-zlp54iw",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240625122333-zlp54iw",
+				"updated": "20240625133456"
+			},
+			"Children": [
+				{
+					"ID": "20240625122335-zgf7kmi",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240625122335-zgf7kmi",
+						"updated": "20240625122416"
+					},
+					"Children": [
+						{
+							"ID": "20240625122335-5b4mhot",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240625122335-5b4mhot",
+								"updated": "20240625122416"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240625122416-j2gq3qr",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "逐顶点光照"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240625122400-oq2sntr",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240625122400-oq2sntr",
+						"updated": "20240625133456"
+					},
+					"Children": [
+						{
+							"ID": "20240625122400-2prog6d",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240625122400-2prog6d",
+								"updated": "20240625133456"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240625133455-ib8bed2",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "逐片元光照"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240625173208-a3quouu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240625173208-a3quouu"
+			}
+		}
+	]
+}

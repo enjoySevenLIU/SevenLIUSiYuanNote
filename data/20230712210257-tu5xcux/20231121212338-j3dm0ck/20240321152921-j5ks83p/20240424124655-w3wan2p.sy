@@ -1,0 +1,841 @@
+{
+	"ID": "20240424124655-w3wan2p",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240424124655-w3wan2p",
+		"title": "UH4L3——实例化ILRuntime中对象",
+		"type": "doc",
+		"updated": "20240426142855"
+	},
+	"Children": [
+		{
+			"ID": "20240424131945-bcnk37v",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240424131945-bcnk37v",
+				"updated": "20240424131950"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240424131950-e6kuv3t",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240424131950-e6kuv3t",
+				"style": "line-height: 22px;",
+				"updated": "20240424133230"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "appDomain.Instantiate()\t\t//通过appDomain去实例化热更工程内的一个对象\nIType\t\t\t\t\t\t//ILRuntime封装的类型相关的接口\nappDomain.LoadedTypes[]\t\t//通过\"命名空间.类名\"获取一个IType对象，提供它可以获取对象\nILType.Instantiate()\t\t//将IType强转为ILType后可以获取该方法实例化对象\nIType.ReflectionType\t\t//获取热更新工程内的Type消息，之后可以基于这个Type反射构造函数再实例化方法\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240424124655-7v5bpa4",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240424124655-7v5bpa4",
+				"updated": "20240424125656"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在ILRuntime热更工程中新建一个类"
+				}
+			]
+		},
+		{
+			"ID": "20240424133152-kv1oxm5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424133152-kv1oxm5",
+				"updated": "20240424133203"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity中实例化ILRuntime中类对象主要有三种方式"
+				}
+			]
+		},
+		{
+			"ID": "20240424133203-eaxdrdr",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240424133203-eaxdrdr",
+				"updated": "20240424133314"
+			},
+			"Children": [
+				{
+					"ID": "20240424133203-clq3jw4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240424133203-clq3jw4",
+						"updated": "20240424133303"
+					},
+					"Children": [
+						{
+							"ID": "20240424133203-xzkntnk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424133203-xzkntnk",
+								"updated": "20240424133303"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "appDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Instantiate"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240424133203-ftdvjsn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240424133203-ftdvjsn",
+						"updated": "20240424133314"
+					},
+					"Children": [
+						{
+							"ID": "20240424133203-83g2jsv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424133203-83g2jsv",
+								"updated": "20240424133314"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "appDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LoadedTypes"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​字典获取"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "IType"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​类型后, 强转为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ILType"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​后调用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Instantiate"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240424133203-cuhcnxa",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240424133203-cuhcnxa",
+						"updated": "20240424133307"
+					},
+					"Children": [
+						{
+							"ID": "20240424133203-6k934uk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424133203-6k934uk",
+								"updated": "20240424133307"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "appDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LoadedTypes"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​字典获取"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "IType"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​类型后, 再去获取它的构造函数信息用于实例化对象"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240424133152-n7y8zdv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424133152-n7y8zdv",
+				"updated": "20240424133152"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "推荐使用方式2或者3，因为他们都需要先获取IType，之后调用对象中成员时更方便"
+				}
+			]
+		},
+		{
+			"ID": "20240424125701-gws23my",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424125701-gws23my",
+				"updated": "20240424133200"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "先在ILRuntime的工程中新建一个类，并为该类声明几个构造函数重载，然后重新生成dll和pdb文件"
+				}
+			]
+		},
+		{
+			"ID": "20240424125733-pe17xpy",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240424125733-pe17xpy",
+				"style": "line-height: 22px;",
+				"updated": "20240424125656"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "namespace HotFix_Project\n{\n    public class Lesson3_Test\n    {\n        public string str;\n\n        public Lesson3_Test() { }\n\n        public Lesson3_Test(string str)\n        {\n            this.str = str;\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240424125705-9n7vwx6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240424125705-9n7vwx6",
+				"updated": "20240424125710"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在Unity中跨域调用ILRuntime中的类"
+				}
+			]
+		},
+		{
+			"ID": "20240424130142-yd04vxx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424130142-yd04vxx",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240424130147"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "更推荐方式二，因为之后在调用对象方法变量时，通过方式二更方便"
+				}
+			]
+		},
+		{
+			"ID": "20240424130053-tyzjkou",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240424130053-tyzjkou",
+				"updated": "20240424132747"
+			},
+			"Children": [
+				{
+					"ID": "20240424130131-txt4t2z",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240424130131-txt4t2z",
+						"name": "appDomain.Instantiate()",
+						"updated": "20240424130131"
+					},
+					"Children": [
+						{
+							"ID": "20240424130131-x680tyt",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424130131-x680tyt",
+								"updated": "20240424130209"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "方式一："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "appdomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Instantiate"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法\n"
+								}
+							]
+						},
+						{
+							"ID": "20240424131018-9vekjyy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424131018-9vekjyy",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+								"updated": "20240424131510"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注意，我们无法在Unity主工程内直接使用ILRuntime热更新工程内的类型变量，我们只能使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "code",
+									"TextMarkTextContent": "object"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​来装载实例化出来的内容"
+								}
+							]
+						},
+						{
+							"ID": "20240424130201-zl156rr",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240424130201-zl156rr",
+								"updated": "20240424130202"
+							},
+							"Children": [
+								{
+									"ID": "20240424130202-otnexe4",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240424130202-otnexe4",
+										"updated": "20240424130202"
+									},
+									"Children": [
+										{
+											"ID": "20240424130202-1da706d",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240424130202-1da706d",
+												"updated": "20240424130213"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "参数一："
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "类的命名空间.类名"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240424130203-69rmzn9",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240424130203-69rmzn9"
+									},
+									"Children": [
+										{
+											"ID": "20240424130203-p00g94q",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240424130203-p00g94q",
+												"updated": "20240424130916"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "参数二：参数列表，如果不传入，则默认调用无参构造函数"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240424130820-72p83bn",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240424130820-72p83bn",
+								"style": "line-height: 22px;",
+								"updated": "20240424131438"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    ILRuntimeMgr.Instance.StartILRuntime(() =\u003e\n    {\n        AppDomain appDomain = ILRuntimeMgr.Instance.appDomain;\n        object obj = appDomain.Instantiate(\"HotFix_Project.Lesson3_Test\");\n        print(obj);\n        obj = appDomain.Instantiate(\"HotFix_Project.Lesson3_Test\", new object[] { \"123\" });\n        print(obj);\n    });\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240424130813-ccq4e7g",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424130813-ccq4e7g",
+								"updated": "20240424131416"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240424131416-6areote.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240424130133-7wmf3jd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240424130133-7wmf3jd",
+						"name": "ILType.Instantiate()"
+					},
+					"Children": [
+						{
+							"ID": "20240424130133-zk8z16w",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424130133-zk8z16w",
+								"updated": "20240424130235"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "方式二："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "appdomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LoadedTypes"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​字典获取"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "IType"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​类型后，强转为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ILType"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​后调用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Instantiate"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法，该方式类似反射"
+								}
+							]
+						},
+						{
+							"ID": "20240424131754-7ek5z7i",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424131754-7ek5z7i",
+								"updated": "20240424131840"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果要调用有参构造，则"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ILType"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​需要传入"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "object[]"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，内部就是有参构造需要的参数"
+								}
+							]
+						},
+						{
+							"ID": "20240424131516-skk7a40",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240424131516-skk7a40",
+								"style": "line-height: 22px;",
+								"updated": "20240424131905"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    ILRuntimeMgr.Instance.StartILRuntime(() =\u003e\n    {\n        IType type = appDomain.LoadedTypes[\"HotFix_Project.Lesson3_Test\"];\n        object obj = ((ILType)type).Instantiate();\n        print(obj);\n        obj = ((ILType)type).Instantiate(new object[] { \"234\" });\n        print(obj);\n    });\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240424130135-hhdoy9v",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240424130135-hhdoy9v",
+						"name": "IType.ReflectionType",
+						"updated": "20240424132747"
+					},
+					"Children": [
+						{
+							"ID": "20240424130135-jjty8zx",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424130135-jjty8zx",
+								"updated": "20240424130236"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "方式三：通过方式二中得到的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "IType"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象，再去得到它的构造函数进行实例化，该方式类似反射"
+								}
+							]
+						},
+						{
+							"ID": "20240424132459-zns5q7x",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240424132459-zns5q7x",
+								"updated": "20240424132651"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "这里更多的是通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "IType.ReflectionType"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​获取"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Type"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，再反射出的构造函数的消息，然后反射出的构造函数消息实例化出对象"
+								}
+							]
+						},
+						{
+							"ID": "20240424131923-4gzc2rb",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240424131923-4gzc2rb",
+								"style": "line-height: 22px;",
+								"updated": "20240424132747"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    ILRuntimeMgr.Instance.StartILRuntime(() =\u003e\n    {\n        IType type = appDomain.LoadedTypes[\"HotFix_Project.Lesson3_Test\"];\n        ConstructorInfo info = type.ReflectionType.GetConstructor(new System.Type[0]);\n        obj = info.Invoke(null);\n        print(obj);\n        info = type.ReflectionType.GetConstructor(new System.Type[] { typeof(string) });\n        obj = info.Invoke(new object[] { \"345\" });\n        print(obj);\n    });\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240424130718-gvz4s62",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424130718-gvz4s62"
+			}
+		}
+	]
+}

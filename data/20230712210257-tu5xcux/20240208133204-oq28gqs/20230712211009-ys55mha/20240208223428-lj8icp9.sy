@@ -1,0 +1,328 @@
+{
+	"ID": "20240208223428-lj8icp9",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240208223428-lj8icp9",
+		"title": "UG1L10——GUILayout",
+		"updated": "20240208230122"
+	},
+	"Children": [
+		{
+			"ID": "20240208223428-vwimtkv",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240208223428-vwimtkv",
+				"updated": "20240208223842"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240208223842-yl6sjpj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240208223842-yl6sjpj",
+				"style": "line-height: 22px;",
+				"updated": "20240208230059"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "GUILayout\t\t\t\t\t//由它绘制的UI控件会自动布局，由它绘制的\nGUILayout.BeginArea()  \t\t//确定自动布局的位置和可见范围\nGUILayout.EndArea()   \t\t//一定是与GUILayout.BeginArea()成对出现！将需要确定自动布局的位置和可见范围的部分包裹起来\nGUILayout.BeginHorizontal()\t//使控件横向布局\nGUILayout.EndHorizontal()\t//一定是与GUILayout.BeginHorizontal()成对出现！将需要横向布局的UI绘制部分代码包裹起来\n//下面的函数都可以传入到GUILayout的UI控件绘制参数内，原来控制控件的样式\nGUILayout.Width()\t\t\t//控件的固定宽\nGUILayout.Height()\t\t\t//控件的固定高\nGUILayout.MinWidth()\t\t//允许控件的最小宽\nGUILayout.MinHeight()\t\t//允许控件的最小高\nGUILayout.MaxWidth()\t\t//允许控件的最大宽\nGUILayout.MaxHeight()\t\t//允许控件的最大高\nGUILayout.ExpandWidth()\t\t//允许或禁止水平扩展，也就是不会为了和某个UI控件对齐而拓展尺寸\nGUILayout.ExpandHeight()\t//允许或禁止垂直扩展，也就是不会为了和某个UI控件对齐而拓展尺寸\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240208224040-kgzlnwj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240208224040-kgzlnwj",
+				"name": "GUILayout",
+				"updated": "20240208224044"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自动布局"
+				}
+			]
+		},
+		{
+			"ID": "20240208224050-iszjby1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240208224050-iszjby1",
+				"updated": "20240208224551"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUILayout"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​可以绘制所有之前提过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUI"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的UI控件，\n相对于原来"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUI"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的绘制相比，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUILayout"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​绘制UI控件不需要传入"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Rect"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数，它会自动设置\n也就是说，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUILayout"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​会自动对UI控件从上到下进行布局，而无需自己编写位置逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240208224719-1bcobal",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240208224719-1bcobal",
+				"style": "line-height: 22px;",
+				"updated": "20240208225117"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private void OnGUI()\n{\n    //无需再手动填入坐标信息，会自动布局\n    //主要用于编辑器开发 用来做游戏UI不太合适\n    GUILayout.BeginArea(new Rect(100, 100, 100, 100));  //确定自动布局的位置和可见范围\n    GUILayout.BeginHorizontal();    //使控件横向布局\n\n    GUILayout.Button(\"123\", GUILayout.Height(300));\n    GUILayout.Button(\"1234\");\n    GUILayout.Button(\"12345\");\n\n    GUILayout.EndHorizontal();  //一定是与GUILayout.BeginHorizontal();成对出现！将需要横向布局的部分包裹起来\n    GUILayout.EndArea();    //一定是与GUILayout.BeginArea();成对出现！将需要确定自动布局的位置和可见范围的部分包裹起来\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240208224551-pusf0va",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240208224551-pusf0va",
+				"updated": "20240208224957"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要用于制作编辑器界面，因为编辑器界面相对简单，类似于下面的界面："
+				}
+			]
+		},
+		{
+			"ID": "20240208224711-7b2m1g6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240208224711-7b2m1g6",
+				"updated": "20240318162620"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 518px;",
+						"style": "width: 508px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240208224711-0g1hwv4.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 508px;\" parent-style=\"width: 518px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240208224045-bt1n6em",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240208224045-bt1n6em",
+				"name": "GUILayoutOption",
+				"updated": "20240208224049"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "布局选项"
+				}
+			]
+		},
+		{
+			"ID": "20240208225746-dsq4ku7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240208225746-dsq4ku7",
+				"updated": "20240208230122"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以下方法返回的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUILayoutOpiton"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​值都可以传入到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUILayout"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的UI控件绘制方法内\n原来控制"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUILayout"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​对UI控件的自动布局的细节"
+				}
+			]
+		},
+		{
+			"ID": "20240208225052-gu84wxk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240208225052-gu84wxk",
+				"style": "line-height: 22px;",
+				"updated": "20240318164848"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//控件的固定宽高\nGUILayout.Width(300);\nGUILayout.Height(200);\n//允许控件的最小宽高\nGUILayout.MinWidth(50);\nGUILayout.MinHeight(50);\n//允许控件的最大宽高\nGUILayout.MaxWidth(100);\nGUILayout.MaxHeight(100);\n//允许或禁止水平或垂直扩展，也就是UI控件不会为了和某个UI控件对齐而拓展尺寸\nGUILayout.ExpandWidth(false);   //禁止\nGUILayout.ExpandWidth(true);    //允许\nGUILayout.ExpandHeight(false);  //禁止\nGUILayout.ExpandHeight(true);   //允许\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240318164843-m5xx3d9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240318164843-m5xx3d9"
+			}
+		}
+	]
+}

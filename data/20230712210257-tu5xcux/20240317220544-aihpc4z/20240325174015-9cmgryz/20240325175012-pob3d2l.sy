@@ -1,0 +1,1275 @@
+{
+	"ID": "20240325175012-pob3d2l",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240325175012-pob3d2l",
+		"title": "UEDL4-3——窗口事件传递、坐标转换",
+		"type": "doc",
+		"updated": "20240415135458"
+	},
+	"Children": [
+		{
+			"ID": "20240326104900-xiqtmad",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240326104900-xiqtmad",
+				"updated": "20240326104905"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240326104906-rtvpn51",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240326104906-rtvpn51",
+				"style": "line-height: 22px;",
+				"updated": "20240326111827"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "EditorGUIUtility.CommandEvent()\t\t\t//生成一个命令事件，需要传入事件名\neditorWindow.SendEvent()\t\t\t\t//向窗口发送消息\nEvent.current.type\t\t\t\t\t\t//获取当前事件的类型\nEventType.ExecuteCommand\t\t\t\t//事件类型为执行命令\nEvent.current.commandName\t\t\t\t//获取当前的事件名，可用于确认是否是监听事件\nEditorGUIUtility.GUIToScreenPoint()\t\t//将点从GUI位置转换为屏幕空间\nEditorGUIUtility.GUIToScreenRect()\t\t//将rect从GUI位置转换为屏幕空间\nEditorGUIUtility.ScreenToGUIPoint()\t\t//将点从屏幕空间转换为GUI位置\nEditorGUIUtility.ScreenToGUIRect()\t\t//将rect从屏幕空间转换为GUI位置\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240325175012-ob3iips",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "editorWindow.SendEvent()",
+				"id": "20240325175012-ob3iips",
+				"name": "EditorGUIUtility.CommandEvent()",
+				"updated": "20240325230940"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "窗口事件传递"
+				}
+			]
+		},
+		{
+			"ID": "20240325233245-gev5rmo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240325233245-gev5rmo",
+				"updated": "20240326105339"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "编辑器窗口可以向特定的编辑器窗口发送消息"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "SendEvent"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，窗口在监听到接收的消息后可以执行对应逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240326105346-ot4ghkm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240326105346-ot4ghkm",
+				"updated": "20240326105811"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先需要使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "EditorGUIUtility.CommandEvent"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​来获取一个命令事件，需要传入事件名，然后使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "SendEvent"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​对目标窗口发送消息\n窗口需要监听当前事件类型是否是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "EventType.ExecuteCommand"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的，并判断名字是否是传入到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "CommandEvent()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内的名字，如果是即可执行监听逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240325231134-oxkxxy5",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240325231134-oxkxxy5",
+				"style": "line-height: 22px;",
+				"updated": "20240325230940"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEditor;\nusing UnityEngine;\n\npublic class Lesson12 : EditorWindow\n{\n    private void OnGUI()\n    {\n        if (GUILayout.Button(\"传递事件\"))\n        {\n            Event e = EditorGUIUtility.CommandEvent(\"唐老狮的事件\");\n            Lesson12 win = EditorWindow.GetWindow\u003cLesson12\u003e();\n            win.SendEvent(e);\n        }\n\n        if (Event.current.type == EventType.ExecuteCommand)\n        {\n            if (Event.current.commandName == \"唐老狮的事件\")\n            {\n                Debug.Log($\"{nameof(Lesson12)}: 收到唐老狮的事件\");\n            }\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240325233154-7q6ekhn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240325233154-7q6ekhn",
+				"updated": "20240325230940"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "点击“事件传递”按钮效果："
+				}
+			]
+		},
+		{
+			"ID": "20240325233211-m73reow",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240325233211-m73reow",
+				"updated": "20240325230940"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240325233211-ny3foty.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240325232601-5yqdlxc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240325232601-5yqdlxc",
+				"updated": "20240415135458"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "该方法可用于其他窗口，将消息发送到对应窗口即可，如果窗口有对应监听逻辑，可以根据事件名执行逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240325232626-wurwxx2",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240325232626-wurwxx2",
+				"style": "line-height: 22px;",
+				"updated": "20240325233428"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEditor;\nusing UnityEngine;\n\npublic class Lesson12 : EditorWindow\n{\n    private void OnGUI()\n    {\n        if (GUILayout.Button(\"传递事件\"))\n        {\n            Event e = EditorGUIUtility.CommandEvent(\"唐老狮的事件\");\n            Lesson12 win = EditorWindow.GetWindow\u003cLesson12\u003e();\n            win.SendEvent(e);\n            Lesson3 winL3 = EditorWindow.GetWindow\u003cLesson3\u003e();\n            winL3.SendEvent(e);\n        }\n\n        if (Event.current.type == EventType.ExecuteCommand)\n        {\n            if (Event.current.commandName == \"唐老狮的事件\")\n            {\n                Debug.Log($\"{nameof(Lesson12)}: 收到唐老狮的事件\");\n            }\n        }\n    }\n}\n\n\npublic class Lesson3 : EditorWindow\n{\n    private void OnGUI()\n    {\n        if (Event.current.type == EventType.ExecuteCommand)\n        {\n            if (Event.current.commandName == \"唐老狮的事件\")\n            {\n                Debug.Log($\"{nameof(Lesson3)}: 收到唐老狮的事件\");\n            }\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240325232930-03n9tcl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240325232930-03n9tcl",
+				"updated": "20240325230940"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "点击“传递事件”后效果：（Lesson3窗口弹出，Lesson12和Lesson3都输出消息）"
+				}
+			]
+		},
+		{
+			"ID": "20240325233104-7g9xf93",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240325233104-7g9xf93",
+				"updated": "20240325233104"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 944px;",
+						"style": "width: 934px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240325233104-qgqb2mw.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 934px;\" parent-style=\"width: 944px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240325233946-7vtz8z0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240325233946-7vtz8z0",
+				"updated": "20240325233950"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "坐标转换"
+				}
+			]
+		},
+		{
+			"ID": "20240325233956-3r21q1k",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240325233956-3r21q1k",
+				"updated": "20240325235624"
+			},
+			"Children": [
+				{
+					"ID": "20240325234008-i96f74s",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240325234008-i96f74s",
+						"updated": "20240325235533"
+					},
+					"Children": [
+						{
+							"ID": "20240325234008-1md1983",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240325234008-1md1983",
+								"updated": "20240325235533"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "屏幕坐标系：原点为屏幕左上角（下图是部分屏幕）"
+								}
+							]
+						},
+						{
+							"ID": "20240325235524-e9tak7a",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240325235524-e9tak7a",
+								"updated": "20240325235524"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 471px;",
+										"style": "width: 461px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240325235524-5pthcdq.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 461px;\" parent-style=\"width: 471px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240325234008-x5z940b",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240325234008-x5z940b",
+						"updated": "20240325235624"
+					},
+					"Children": [
+						{
+							"ID": "20240325234008-rb4x6u0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240325234008-rb4x6u0"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "GUI坐标系：原点为当前窗口左上角"
+								}
+							]
+						},
+						{
+							"ID": "20240325235624-qhdbad5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240325235624-qhdbad5",
+								"updated": "20240325235624"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 352px;",
+										"style": "width: 342px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240325235623-bavi4q6.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 342px;\" parent-style=\"width: 352px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240325234044-07rle5d",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240325234044-07rle5d",
+				"updated": "20240325234051"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体转换方法："
+				}
+			]
+		},
+		{
+			"ID": "20240325234041-4uyj7g7",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240325234041-4uyj7g7",
+				"updated": "20240326111614"
+			},
+			"Children": [
+				{
+					"ID": "20240325234041-h6cuuo4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240325234041-h6cuuo4",
+						"name": "EditorGUIUtility.GUIToScreenPoint()",
+						"updated": "20240325235716"
+					},
+					"Children": [
+						{
+							"ID": "20240325234041-6rhj5ep",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240325234041-6rhj5ep",
+								"updated": "20240325234041"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GUIToScreenPoint()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：将点从GUI位置转换为屏幕空间"
+								}
+							]
+						},
+						{
+							"ID": "20240325234654-q6e5smh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240325234654-q6e5smh",
+								"updated": "20240326110430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设要将当前GUI坐标系的（10, 10）的位置转换为屏幕空间的位置"
+								}
+							]
+						},
+						{
+							"ID": "20240325234052-qhh8kcc",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240325234052-qhh8kcc",
+								"style": "line-height: 22px;",
+								"updated": "20240325234420"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "if (GUILayout.Button(\"坐标转换测试\"))\n{\n    Vector2 v = new Vector2(10, 10);\n    Vector2 screenPos = EditorGUIUtility.GUIToScreenPoint(v);\n    Debug.Log($\"GUI坐标:{v}, 屏幕坐标:{screenPos}\");\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240325234356-i9hb0i4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240325234356-i9hb0i4",
+								"updated": "20240325234520"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "点击“坐标转换测试”输出结果："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 732px;",
+										"style": "width: 722px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240325234356-15350ll.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 722px;\" parent-style=\"width: 732px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240325234616-jj1s7is",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240325234616-jj1s7is",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+								"updated": "20240325235716"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "值得一提的是，这里的转换函数如果被包裹在布局的方法里则转换的值是会到布局的影响的"
+								}
+							]
+						},
+						{
+							"ID": "20240325234522-xxqg2lp",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240325234522-xxqg2lp",
+								"style": "line-height: 22px;",
+								"updated": "20240325235004"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private void OnGUI()\n{\n    if (GUILayout.Button(\"坐标转换测试\"))\n    {\n        Vector2 v = new Vector2(10, 10);\n        Vector2 screenPos = EditorGUIUtility.GUIToScreenPoint(v);\n        Debug.Log($\"GUI坐标:{v}, 屏幕坐标:{screenPos}\");\n    }\n\n    if (GUILayout.Button(\"受到布局影响的坐标转换测试\"))\n    {\n        Vector2 v = new Vector2(10, 10);\n        GUI.BeginGroup(new Rect(10, 10, 100, 100));\n        Vector2 screenPos = EditorGUIUtility.GUIToScreenPoint(v);\n        GUI.EndGroup();\n        Debug.Log($\"受到布局影响的转换的屏幕坐标:{screenPos}\");\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240325234605-34zlaf0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240325234605-34zlaf0",
+								"updated": "20240325235036"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "依次点击两个按钮后的输出结果："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 761px;",
+										"style": "width: 751px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240325235036-n81qecl.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 751px;\" parent-style=\"width: 761px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240325235049-shgeoi8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240325235049-shgeoi8",
+								"updated": "20240325235108"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可见，受到布局影响的转换加上了（10，10）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240325234613-kqwb1mp",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240325234613-kqwb1mp",
+						"name": "EditorGUIUtility.GUIToScreenRect()",
+						"updated": "20240326111614"
+					},
+					"Children": [
+						{
+							"ID": "20240325234613-sqx3nk8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240325234613-sqx3nk8",
+								"updated": "20240326111614"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GUIToScreenRect()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：将"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "rect"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​从GUI位置转换为屏幕空间"
+								}
+							]
+						},
+						{
+							"ID": "20240326110440-z4iya7l",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240326110440-z4iya7l",
+								"updated": "20240326110510"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设要将当前GUI坐标系的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Rect"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（10, 20, 100, 150）转换为屏幕空间的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Rect"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240326105849-um26k91",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240326105849-um26k91",
+								"style": "line-height: 22px;",
+								"updated": "20240326110827"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private void OnGUI()\n{\n    if (GUILayout.Button(\"Rect转换测试\"))\n    {\n        var guiRect = new Rect(10, 20, 100, 150);\n        var screenRect = EditorGUIUtility.GUIToScreenRect(guiRect);\n        Debug.Log($\"GUIRect:{guiRect}, 屏幕GUIRect:{screenRect}\");\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240326110349-4ihdv7v",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240326110349-4ihdv7v",
+								"updated": "20240326111028"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "测试转换结果："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 914px;",
+										"style": "width: 904px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240326111028-q1tc3cc.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 904px;\" parent-style=\"width: 914px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240326110513-d5j0tpa",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240326110513-d5j0tpa",
+								"updated": "20240326110624"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可见，转换"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Rect"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​只会影响前两个有关位置值，而不会影响后两个与尺寸相关的值"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240325234041-z7z5psv",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240325234041-z7z5psv",
+						"name": "EditorGUIUtility.ScreenToGUIPoint()",
+						"updated": "20240326111123"
+					},
+					"Children": [
+						{
+							"ID": "20240325234041-glqmzjv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240325234041-glqmzjv",
+								"updated": "20240325234041"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ScreenToGUIPoint()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：将点从屏幕空间转换为GUI位置"
+								}
+							]
+						},
+						{
+							"ID": "20240326110625-66m85fg",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240326110625-66m85fg",
+								"style": "line-height: 22px;",
+								"updated": "20240326110808"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private void OnGUI()\n{\n    if (GUILayout.Button(\"屏幕坐标转换测试\"))\n    {\n        var screenPos = new Vector2(800, 600);\n        var guiPos = EditorGUIUtility.ScreenToGUIPoint(screenPos);\n        Debug.Log($\"屏幕坐标:{screenPos}，GUI坐标:{guiPos}, \");\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240326111121-nsxif6m",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240326111121-nsxif6m",
+								"updated": "20240326111123"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "测试转换结果：​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 725px;",
+										"style": "width: 715px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240326111118-0ba5c1u.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 715px;\" parent-style=\"width: 725px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240325234041-kmklxu5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240325234041-kmklxu5",
+						"name": "EditorGUIUtility.ScreenToGUIRect()",
+						"updated": "20240326111230"
+					},
+					"Children": [
+						{
+							"ID": "20240325234041-eh9qjqy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240325234041-eh9qjqy",
+								"updated": "20240326111230"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ScreenToGUIRect()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：将"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "rect"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​从屏幕空间转换为GUI位置"
+								}
+							]
+						},
+						{
+							"ID": "20240326110812-8jhd3lq",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240326110812-8jhd3lq",
+								"style": "line-height: 22px;",
+								"updated": "20240326111226"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private void OnGUI()\n{\n    if (GUILayout.Button(\"屏幕Rect转换测试\"))\n    {\n        var screenRect = new Rect(800, 600, 200, 250);\n        var guiRect = EditorGUIUtility.ScreenToGUIRect(screenRect);\n        Debug.Log($\"屏幕GUIRect:{screenRect}，GUIRect:{guiRect}\");\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240326111150-sf2jh6t",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240326111150-sf2jh6t",
+								"updated": "20240326111200"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "测试转换结果："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 908px;",
+										"style": "width: 898px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240326111200-7ehc22o.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 898px;\" parent-style=\"width: 908px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240326111205-609s22j",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240326111205-609s22j",
+								"updated": "20240326111215"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "同样的，转换"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Rect"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​只会影响前两个有关位置值，而不会影响后两个与尺寸相关的值"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240326111149-tpbqmta",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240326111149-tpbqmta"
+			}
+		}
+	]
+}

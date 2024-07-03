@@ -1,0 +1,651 @@
+{
+	"ID": "20240510142655-96jqksb",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240510142655-96jqksb",
+		"title": "US1L3——渲染管线-几何阶段",
+		"type": "doc",
+		"updated": "20240510151317"
+	},
+	"Children": [
+		{
+			"ID": "20240510142709-z8vz25p",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240510142709-z8vz25p",
+				"updated": "20240510142722"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "知识必备——图元"
+				}
+			]
+		},
+		{
+			"ID": "20240510142655-9o24gtf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240510142655-9o24gtf",
+				"updated": "20240510142928"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "图元：在渲染管线中，图元是指几何数据的基本单元，它是构成几何体的最小可绘制的单元\n图元可以是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "点、线、三角形"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，在渲染管线的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "几何阶段，顶点数据会被组合为图元"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong u",
+					"TextMarkTextContent": "这些图元将在后续的光栅化阶段转换为像素"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，最终呈现在屏幕上"
+				}
+			]
+		},
+		{
+			"ID": "20240510142913-rosgunp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240510142913-rosgunp",
+				"updated": "20240510144709"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "渲染管线的几何阶段"
+				}
+			]
+		},
+		{
+			"ID": "20240510143824-uqz1m17",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240510143824-uqz1m17",
+				"updated": "20240510144709"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "渲染管线（流水线）中的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "几何阶段"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，主要是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "GPU主导的阶段"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "它为渲染完成的最主要的工作就是 顶点处理，坐标转换，裁剪画面外图元等等"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n在几何阶段中，我们主要通过自定义 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong u",
+					"TextMarkTextContent": "顶点着色器"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 阶段，为我们带来一些不同的画面表现效果"
+				}
+			]
+		},
+		{
+			"ID": "20240510143058-3tbi9w0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240510143058-3tbi9w0",
+				"updated": "20240510144709"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 666px;",
+						"style": "width: 656px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240510143058-vogoz3q.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 656px;\" parent-style=\"width: 666px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240510143020-6km8p3u",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240510143020-6km8p3u",
+				"updated": "20240510144709"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "渲染管线的几何阶段主要由GPU主导，因此我们无法拥有绝对的控制权，但是GPU为我们开放了部分控制权\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "几何阶段主要做的事情是，根据应用阶段输入的数据信息，进行顶点坐标转换，以及裁剪不可见图元等工作"
+				}
+			]
+		},
+		{
+			"ID": "20240510143110-g2ff7t4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240510143110-g2ff7t4",
+				"updated": "20240510144709"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 1070px;",
+						"style": "width: 1060px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240510143110-jen1sfe.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 1060px;\" parent-style=\"width: 1070px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240510143115-e2sdie0",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240510143115-e2sdie0",
+				"updated": "20240510144709"
+			},
+			"Children": [
+				{
+					"ID": "20240510143130-mqdbv8c",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240510143130-mqdbv8c",
+						"name": "顶点着色器",
+						"updated": "20240510143130"
+					},
+					"Children": [
+						{
+							"ID": "20240510143130-4bnumid",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240510143130-4bnumid",
+								"updated": "20240510143435"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong u",
+									"TextMarkTextContent": "顶点着色器"
+								}
+							]
+						},
+						{
+							"ID": "20240510143143-440vivj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240510143143-440vivj"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "它处理来自应用阶段由CPU传递过来的顶点相关数据，输入进来的每一个顶点都会调用一次顶点着色器中的逻辑\n顶点着色器需要完成的工作主要有：\n"
+								}
+							]
+						},
+						{
+							"ID": "20240510143148-dryedus",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240510143148-dryedus",
+								"style": "background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);",
+								"updated": "20240510143156"
+							},
+							"Children": [
+								{
+									"ID": "20240510143156-6kd8z4f",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240510143156-6kd8z4f",
+										"updated": "20240510143156"
+									},
+									"Children": [
+										{
+											"ID": "20240510143156-gaec30t",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240510143156-gaec30t",
+												"updated": "20240510143156"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "坐标变换 —— 顶点变换、法线变换、纹理坐标变换等"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240510143156-7zllg6u",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240510143156-7zllg6u",
+										"updated": "20240510143156"
+									},
+									"Children": [
+										{
+											"ID": "20240510143156-xgbggul",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240510143156-xgbggul",
+												"updated": "20240510143234"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "顶点属性处理 —— 对顶点的其他属性进行处理，比如顶点颜色、透明度、切线向量等，可以用于实现顶点动画、着色、光照等效果"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240510143156-zzmq8dc",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20240510143156-zzmq8dc",
+										"updated": "20240510143156"
+									},
+									"Children": [
+										{
+											"ID": "20240510143156-57zlumy",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240510143156-57zlumy",
+												"updated": "20240510143156"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "顶点插值 —— 计算顶点属性的插值值"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240510143150-9clyj1t",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240510143150-9clyj1t",
+								"updated": "20240510143522"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "等等，对于我们来说"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong u",
+									"TextMarkTextContent": "顶点着色器是完全可编程的"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240510143359-746ogt1",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240510143359-746ogt1"
+					},
+					"Children": [
+						{
+							"ID": "20240510143359-4cy4yyg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240510143359-4cy4yyg",
+								"updated": "20240510143409"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "曲面细分着色器、几何着色器"
+								}
+							]
+						},
+						{
+							"ID": "20240510143416-mddk35l",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240510143416-mddk35l",
+								"updated": "20240510143528"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "它们对于对于我们来说是可选的着色器，并且他们需要硬件和驱动程序的支持才能使用，因此，我们在学习过程中不做详细讲解"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240510143608-bukropa",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240510143608-bukropa"
+					},
+					"Children": [
+						{
+							"ID": "20240510143609-axwqp3w",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240510143609-axwqp3w",
+								"updated": "20240510143609"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "裁剪："
+								}
+							]
+						},
+						{
+							"ID": "20240510143609-1ceab1v",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240510143609-1ceab1v",
+								"updated": "20240510143609"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "裁剪阶段会自动的将不在视野内和部分在视野内的图元（点、线、三角形）进行裁剪，我们可以进行一些配置，\n但是一般我们不需要进行任何处理，渲染管线会自动帮助我们进行处理"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240510143612-w62n5mq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240510143612-w62n5mq",
+						"updated": "20240510143612"
+					},
+					"Children": [
+						{
+							"ID": "20240510143612-yqb6208",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240510143612-yqb6208",
+								"updated": "20240510143612"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "屏幕映射："
+								}
+							]
+						},
+						{
+							"ID": "20240510143612-46c4fbu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240510143612-46c4fbu",
+								"updated": "20240510143612"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将输入的三维坐标系下的图元坐标转换到屏幕坐标系中"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240510143638-4l8ptni",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240510143638-4l8ptni",
+				"updated": "20240510144709"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "几何阶段为渲染准备了些什么"
+				}
+			]
+		},
+		{
+			"ID": "20240510143701-wea1fw9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240510143701-wea1fw9",
+				"updated": "20240510143833"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在渲染管线（流水线）的几何阶段，最主要做的工作就是，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "对顶点进行处理，并进行坐标转换，裁剪画面外的图元"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n最主要完成的就是将 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "模型的顶点"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 从其 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "本地坐标"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 转换到最终的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "屏幕坐标"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 中"
+				}
+			]
+		},
+		{
+			"ID": "20240510151317-4g61gsz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240510151317-4g61gsz",
+				"updated": "20240510151317"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于我们来说，我们只要在顶点着色器中进行一些操作就可以带来不同的表现效果的体现\n比如：水波纹、布料等等"
+				}
+			]
+		},
+		{
+			"ID": "20240510143751-vk8mjp5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240510143751-vk8mjp5",
+				"updated": "20240510144709"
+			}
+		}
+	]
+}

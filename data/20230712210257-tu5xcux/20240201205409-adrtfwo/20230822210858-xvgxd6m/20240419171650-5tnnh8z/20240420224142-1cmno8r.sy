@@ -1,0 +1,1580 @@
+{
+	"ID": "20240420224142-1cmno8r",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240420224142-1cmno8r",
+		"title": "UFL7-3——UI管理器的异步加载优化",
+		"type": "doc",
+		"updated": "20240421222445"
+	},
+	"Children": [
+		{
+			"ID": "20240420224142-we2h36h",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240420224142-we2h36h",
+				"updated": "20240420224252"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "为什么要进行异步加载优化"
+				}
+			]
+		},
+		{
+			"ID": "20240420224257-253lwgj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240420224257-253lwgj",
+				"updated": "20240420224303"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们之前制作UI管理器时，加载资源时是在测试模式下，始终使用的是编辑器同步加载模式\n若真正使用异步加载时，可能会存在报错风险"
+				}
+			]
+		},
+		{
+			"ID": "20240420224257-2qlpplp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240420224257-2qlpplp",
+				"updated": "20240420224312"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "举例重现问题："
+				}
+			]
+		},
+		{
+			"ID": "20240420224312-oueff48",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240420224312-oueff48",
+				"updated": "20240420225725"
+			},
+			"Children": [
+				{
+					"ID": "20240420224312-b77fifg",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240420224312-b77fifg",
+						"updated": "20240420224312"
+					},
+					"Children": [
+						{
+							"ID": "20240420224312-f8u4kev",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420224312-f8u4kev",
+								"updated": "20240420224312"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "构建AB包"
+								}
+							]
+						},
+						{
+							"ID": "20240420224813-1vmow0x",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420224813-1vmow0x",
+								"updated": "20240420224813"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 225px;",
+										"style": "width: 215px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240420224813-0lvgaw7.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 215px;\" parent-style=\"width: 225px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240420224312-x21h5tr",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240420224312-x21h5tr",
+						"updated": "20240420224312"
+					},
+					"Children": [
+						{
+							"ID": "20240420224312-qqfiixj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420224312-qqfiixj",
+								"updated": "20240420224312"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "采用异步加载方式加载AB包中的UI面板资源"
+								}
+							]
+						},
+						{
+							"ID": "20240420224829-hnf1a1m",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420224829-hnf1a1m",
+								"updated": "20240420224935"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ABResManager"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "isDebug"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​设置为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "false"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，使得加载会选择AB包加载"
+								}
+							]
+						},
+						{
+							"ID": "20240420224816-dfzg5x6",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240420224816-dfzg5x6",
+								"style": "line-height: 22px;",
+								"updated": "20240420224827"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using UnityEngine;\nusing UnityEngine.Events;\n\n/// \u003csummary\u003e\n/// 用于进行加载AB相关资源的整合，在开发中可以通过EditorResManager去加载对应资源去进行测试\n/// \u003c/summary\u003e\npublic class ABResManager : BaseManager\u003cABResManager\u003e\n{\n    private bool isDebug = false;\n\n    private ABResManager() { }\n\n    public void LoadResAsync\u003cT\u003e(string abName, string resName, UnityAction\u003cT\u003e callBack, bool isSync = false) where T : Object\n    {\n#if UNITY_EDITOR\n        if (isDebug)\n        {\n            //我们自定义了一个AB包中资源的管理方式，对应文件夹名就是包名\n            T res = EditorResManager.Instance.LoadEditorRes\u003cT\u003e($\"{abName}/{resName}\");\n            callBack?.Invoke(res as T);\n        }\n        else\n        {\n            ABManager.Instance.LoadResAsync\u003cT\u003e(abName, resName, callBack, isSync);\n        }\n#else\n        ABManager.Instance.LoadResAsync\u003cT\u003e(abName, resName, callBack, isSync);\n#endif\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240420224312-r35yqth",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240420224312-r35yqth",
+						"updated": "20240420224312"
+					},
+					"Children": [
+						{
+							"ID": "20240420224312-cymrg0p",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420224312-cymrg0p",
+								"updated": "20240420224312"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "同一帧显示两次UI面板"
+								}
+							]
+						},
+						{
+							"ID": "20240420225053-jb9j4ft",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420225053-jb9j4ft",
+								"updated": "20240420225458"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在实际开发时，有可能会不同地方出现先显示UI面板，然后加载尚未结束的时候再次调用显示同一面板的方法，\n这里使用最极端的情况，在同一帧加载两次UI面板"
+								}
+							]
+						},
+						{
+							"ID": "20240420225158-gj1lwrp",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240420225158-gj1lwrp",
+								"style": "line-height: 22px;",
+								"updated": "20240420225215"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    UIManager.Instance.ShowPanel\u003cBeginPanel\u003e();\n    UIManager.Instance.ShowPanel\u003cBeginPanel\u003e();\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240420225258-vpmhxft",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420225258-vpmhxft",
+								"updated": "20240420225321"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 967px;",
+										"style": "width: 957px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240420225321-u08pvsm.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 957px;\" parent-style=\"width: 967px;\"}"
+								}
+							]
+						},
+						{
+							"ID": "20240420225328-jvutp9t",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420225328-jvutp9t",
+								"updated": "20240420225450"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可以发现，这样调用会导致重复加载和重复添加的问题，字典会因为重复加载而报错，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Canvas"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象上会挂载两个同一面板"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240420224312-9k3jgvp",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240420224312-9k3jgvp",
+						"updated": "20240420225725"
+					},
+					"Children": [
+						{
+							"ID": "20240420224312-4atayu3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420224312-4atayu3",
+								"updated": "20240420224312"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "同一帧显示又隐藏UI面板"
+								}
+							]
+						},
+						{
+							"ID": "20240420225637-u2bo7s5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420225637-u2bo7s5",
+								"updated": "20240420225646"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在实际开发时，有可能会不同地方出现先显示UI面板，然后加载尚未结束的时候调用隐藏同一面板的方法，"
+								}
+							]
+						},
+						{
+							"ID": "20240420225523-2pn040l",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240420225523-2pn040l",
+								"style": "line-height: 22px;",
+								"updated": "20240420225633"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    UIManager.Instance.ShowPanel\u003cBeginPanel\u003e();\n    UIManager.Instance.HidePanel\u003cBeginPanel\u003e();\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240420225550-1drnyv6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420225550-1drnyv6",
+								"updated": "20240420225617"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "面板会无视隐藏面板方法继续显示："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 553px;",
+										"style": "width: 543px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240420225617-7jw9v7u.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 543px;\" parent-style=\"width: 553px;\"}"
+								}
+							]
+						},
+						{
+							"ID": "20240420225654-378rmf1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420225654-378rmf1",
+								"updated": "20240420225725"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "由于尚未加载成功，因此隐藏不会生效，面板依然会加载出来"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240420224313-ol785f8",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240420224313-ol785f8",
+				"updated": "20240420224322"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "优化异步加载问题"
+				}
+			]
+		},
+		{
+			"ID": "20240420224329-86tlijt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240420224329-86tlijt",
+				"updated": "20240420224346"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要制作思路："
+				}
+			]
+		},
+		{
+			"ID": "20240420224346-4qfumjg",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240420224346-4qfumjg",
+				"updated": "20240420224447"
+			},
+			"Children": [
+				{
+					"ID": "20240420224346-jra5ysn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240420224346-jra5ysn",
+						"updated": "20240420224447"
+					},
+					"Children": [
+						{
+							"ID": "20240420224346-xw9weer",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420224346-xw9weer",
+								"updated": "20240420224346"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "造成问题的关键点\n"
+								}
+							]
+						},
+						{
+							"ID": "20240420224443-wq0n1ay",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420224443-wq0n1ay",
+								"updated": "20240421210644"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "由于异步加载，字典容器中没有及时存储将要显示的面板对象，我们需要在显示面板时，一开始就存储面板的相关信息\n这样不管是二次显示还是隐藏，都能够知道是否已经在加载面板了"
+								}
+							]
+						},
+						{
+							"ID": "20240421210646-zlraezy",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240421210646-zlraezy",
+								"style": "line-height: 22px;",
+								"updated": "20240421213219"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "// 主要是用于里氏替换原则，在字典中，用父类容器装载子类对象\nprivate abstract class BasePanelInfo { }\n\n// 用于存储面板消息和加载完成的回调函数\nprivate class PanelInfo\u003cT\u003e : BasePanelInfo where T : BasePanel\n{\n    public T panel;\n    public UnityAction\u003cT\u003e callBack;\n\n    public PanelInfo(UnityAction\u003cT\u003e callBack)\n    {\n        this.callBack += callBack;\n    }\n}\n\n// 用于存储所有的面板对象\nprivate Dictionary\u003cstring, BasePanelInfo\u003e panelDic = new Dictionary\u003cstring, BasePanelInfo\u003e();\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240420224346-luytzbz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240420224346-luytzbz",
+						"updated": "20240420224346"
+					},
+					"Children": [
+						{
+							"ID": "20240420224346-y90vo5v",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420224346-y90vo5v",
+								"updated": "20240420224425"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "分情况考虑问题（异步加载中 和 异步加载结束）"
+								}
+							]
+						},
+						{
+							"ID": "20240420224425-twk0nnw",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240420224425-twk0nnw",
+								"updated": "20240420224425"
+							},
+							"Children": [
+								{
+									"ID": "20240420224425-mnbmyzj",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240420224425-mnbmyzj",
+										"updated": "20240420224425"
+									},
+									"Children": [
+										{
+											"ID": "20240420224425-7dpoabj",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240420224425-7dpoabj",
+												"updated": "20240420224439"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "显示相关"
+												}
+											]
+										},
+										{
+											"ID": "20240420224439-5a5gkqm",
+											"Type": "NodeList",
+											"ListData": {
+												"Typ": 1
+											},
+											"Properties": {
+												"id": "20240420224439-5a5gkqm",
+												"updated": "20240420224439"
+											},
+											"Children": [
+												{
+													"ID": "20240420224439-yw3xuaj",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MS4=",
+														"Num": 1
+													},
+													"Properties": {
+														"id": "20240420224439-yw3xuaj",
+														"updated": "20240420224439"
+													},
+													"Children": [
+														{
+															"ID": "20240420224439-wphg1xx",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240420224439-wphg1xx",
+																"updated": "20240420224439"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "若加载中想要显示，应该记录回调，加载结束后统一调用"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240420224439-jdlqbb6",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Mi4=",
+														"Num": 2
+													},
+													"Properties": {
+														"id": "20240420224439-jdlqbb6",
+														"updated": "20240420224439"
+													},
+													"Children": [
+														{
+															"ID": "20240420224439-o61dhte",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240420224439-o61dhte",
+																"updated": "20240420224439"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "若加载结束后想显示，直接显示"
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20240421214320-sp1srrl",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240421214320-sp1srrl",
+												"style": "line-height: 22px;",
+												"updated": "20240421215535"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "// 用于存储面板消息和加载完成的回调函数\nprivate class PanelInfo\u003cT\u003e : BasePanelInfo where T : BasePanel\n{\n    public T panel;\n    public UnityAction\u003cT\u003e callBack;\n\n    public PanelInfo(UnityAction\u003cT\u003e callBack)\n    {\n        this.callBack += callBack;\n    }\n}\n\n// 用于存储所有的面板对象\nprivate Dictionary\u003cstring, BasePanelInfo\u003e panelDic = new Dictionary\u003cstring, BasePanelInfo\u003e();\n\npublic void ShowPanel\u003cT\u003e(E_UILayer layer = E_UILayer.Middle,\n                         UnityAction\u003cT\u003e callBack = null,\n                         bool isSync = false) where T : BasePanel\n{\n    //获取面板名，预设体名必须与面板类名一致\n    string panelName = typeof(T).Name;\n    //存在面板\n    if (panelDic.ContainsKey(panelName)) \n    {\n        //取出消息\n        PanelInfo\u003cT\u003e panelInfo = panelDic[panelName] as PanelInfo\u003cT\u003e;\n        //正在异步加载中\n        if (panelInfo.panel == null)\n        {\n            //将回调添加到记录中\n            if (callBack != null)\n                panelInfo.callBack += callBack;\n        }\n        //已经加载结束\n        else\n        {\n            panelInfo.panel.ShowMe();\n            //直接执行回调，直接传递出去即可\n            callBack?.Invoke(panelInfo.panel);\n        }\n        return;\n    }\n\n    //不存在面板，先存入字典当中占位，之后如果又显示，我才能得到字典中的消息进行判断\n    panelDic.Add(panelName, new PanelInfo\u003cT\u003e(callBack));\n    ABResManager.Instance.LoadResAsync\u003cGameObject\u003e(\"ui\", panelName, (res) =\u003e\n    {\n        //层级的处理\n        Transform layerObj = GetLayerObj(layer);\n        //避免没有按照指定规则传递参数，避免为空\n        if (layerObj == null)\n            layerObj = middleLayer;\n        //将面板预设体创建到对应父对象下，并且保持原本的缩放大小\n        GameObject panelObj = GameObject.Instantiate(res, layerObj, false);\n        PanelInfo\u003cT\u003e panelInfo = panelDic[panelName] as PanelInfo\u003cT\u003e;       //取出消息\n        T panel = panelObj.GetComponent\u003cT\u003e();   //获取对应的UI控件返回出去\n        panel.ShowMe();                         //显示面板时执行的默认方法\n        panelInfo.panel = panel;                //将加载出来的panel记录到panelInfo内\n        panelInfo.callBack?.Invoke(panel);      //传递到外部使用\n        panelInfo.callBack = null;              //清空回调，避免内存泄露\n    }, isSync);\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240420224426-u9gdzx6",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240420224426-u9gdzx6"
+									},
+									"Children": [
+										{
+											"ID": "20240420224426-gq1izud",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240420224426-gq1izud",
+												"updated": "20240420224437"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "隐藏相关"
+												}
+											]
+										},
+										{
+											"ID": "20240420224437-6z60zs2",
+											"Type": "NodeList",
+											"ListData": {
+												"Typ": 1
+											},
+											"Properties": {
+												"id": "20240420224437-6z60zs2",
+												"updated": "20240420224437"
+											},
+											"Children": [
+												{
+													"ID": "20240420224437-yrxxo53",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MS4=",
+														"Num": 1
+													},
+													"Properties": {
+														"id": "20240420224437-yrxxo53",
+														"updated": "20240420224437"
+													},
+													"Children": [
+														{
+															"ID": "20240420224437-69gan4c",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240420224437-69gan4c",
+																"updated": "20240421215132"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "若加载中想要隐藏，应该改变标识，并清空回调"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240420224437-iphxfbp",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Mi4=",
+														"Num": 2
+													},
+													"Properties": {
+														"id": "20240420224437-iphxfbp",
+														"updated": "20240420224437"
+													},
+													"Children": [
+														{
+															"ID": "20240420224437-uzwn4vk",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240420224437-uzwn4vk",
+																"updated": "20240420224437"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "若加载结束想要隐藏，直接隐藏"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240420224437-4jj5ca8",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "My4=",
+														"Num": 3
+													},
+													"Properties": {
+														"id": "20240420224437-4jj5ca8",
+														"updated": "20240420224437"
+													},
+													"Children": [
+														{
+															"ID": "20240420224437-h5d5oty",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240420224437-h5d5oty",
+																"updated": "20240420224437"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "若压根没有，不用处理"
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20240421214432-zyfv2wt",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240421214432-zyfv2wt",
+												"updated": "20240421215259"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "同时，也要修改显示的逻辑，如果加载完毕后发现隐藏标识为"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "true"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，则不执行后续逻辑\n如果在加载期间，隐藏后又执行了显示方法，则将隐藏标识设置为"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "false"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，并添加回调，这样加载出来过后不会忽略后续隐藏逻辑"
+												}
+											]
+										},
+										{
+											"ID": "20240421215032-4gdi6nh",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240421215032-4gdi6nh",
+												"style": "line-height: 22px;",
+												"updated": "20240421215531"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "// 用于存储面板消息和加载完成的回调函数\nprivate class PanelInfo\u003cT\u003e : BasePanelInfo where T : BasePanel\n{\n    public T panel;\n    public UnityAction\u003cT\u003e callBack;\n\n    public PanelInfo(UnityAction\u003cT\u003e callBack)\n    {\n        this.callBack += callBack;\n    }\n}\n\n// 用于存储所有的面板对象\nprivate Dictionary\u003cstring, BasePanelInfo\u003e panelDic = new Dictionary\u003cstring, BasePanelInfo\u003e();\n\npublic void HidePanel\u003cT\u003e() where T : BasePanel\n{\n    string panelName = typeof(T).Name;\n    if (panelDic.ContainsKey(panelName))\n    {\n        //取出消息\n        PanelInfo\u003cT\u003e panelInfo = panelDic[panelName] as PanelInfo\u003cT\u003e;\n        //如果存在，但正在加载\n        if (panelInfo.panel == null) \n        {\n            //修改隐藏标识，标识这个面板将要隐藏，因为要隐藏，因此将回调置空\n            panelInfo.isHide = true;\n            panelInfo.callBack = null;\n        }\n        //已经加载结束\n        else\n        {\n            //销毁后从容器中移除\n            panelInfo.panel.HideMe();\n            GameObject.Destroy(panelInfo.panel.gameObject);\n            panelDic.Remove(panelName);\n        }\n    }\n}\n\npublic void ShowPanel\u003cT\u003e(E_UILayer layer = E_UILayer.Middle,\n                         UnityAction\u003cT\u003e callBack = null,\n                         bool isSync = false) where T : BasePanel\n{\n    //获取面板名，预设体名必须与面板类名一致\n    string panelName = typeof(T).Name;\n    //存在面板\n    if (panelDic.ContainsKey(panelName)) \n    {\n        //取出消息\n        PanelInfo\u003cT\u003e panelInfo = panelDic[panelName] as PanelInfo\u003cT\u003e;\n        //正在异步加载中\n        if (panelInfo.panel == null)\n        {\n            //将回调添加到记录中\n            panelInfo.isHide = false;\n            if (callBack != null)\n                panelInfo.callBack += callBack;\n        }\n        //已经加载结束\n        else\n        {\n            panelInfo.panel.ShowMe();\n            //直接执行回调，直接传递出去即可\n            callBack?.Invoke(panelInfo.panel);\n        }\n        return;\n    }\n\n    //不存在面板，先存入字典当中占位，之后如果又显示，我才能得到字典中的消息进行判断\n    panelDic.Add(panelName, new PanelInfo\u003cT\u003e(callBack));\n    ABResManager.Instance.LoadResAsync\u003cGameObject\u003e(\"ui\", panelName, (res) =\u003e\n    {\n        //取出消息\n        PanelInfo\u003cT\u003e panelInfo = panelDic[panelName] as PanelInfo\u003cT\u003e;\n        if (panelInfo.isHide)\n        {\n            panelDic.Remove(panelName);\n            return;\n        }\n        //层级的处理\n        Transform layerObj = GetLayerObj(layer);\n        //避免没有按照指定规则传递参数，避免为空\n        if (layerObj == null)\n            layerObj = middleLayer;\n        //将面板预设体创建到对应父对象下，并且保持原本的缩放大小\n        GameObject panelObj = GameObject.Instantiate(res, layerObj, false);\n      \n        T panel = panelObj.GetComponent\u003cT\u003e();   //获取对应的UI控件返回出去\n        panel.ShowMe();                         //显示面板时执行的默认方法\n        panelInfo.panel = panel;                //将加载出来的panel记录到panelInfo内\n        panelInfo.callBack?.Invoke(panel);      //传递到外部使用\n        panelInfo.callBack = null;              //清空回调，避免内存泄露\n    }, isSync);\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240420224428-uodg6zc",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240420224428-uodg6zc"
+									},
+									"Children": [
+										{
+											"ID": "20240420224428-s8u4fsj",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240420224428-s8u4fsj",
+												"updated": "20240420224434"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "获取相关"
+												}
+											]
+										},
+										{
+											"ID": "20240420224434-ktf34pr",
+											"Type": "NodeList",
+											"ListData": {
+												"Typ": 1
+											},
+											"Properties": {
+												"id": "20240420224434-ktf34pr",
+												"updated": "20240420224434"
+											},
+											"Children": [
+												{
+													"ID": "20240420224434-ocnpwgg",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MS4=",
+														"Num": 1
+													},
+													"Properties": {
+														"id": "20240420224434-ocnpwgg",
+														"updated": "20240420224434"
+													},
+													"Children": [
+														{
+															"ID": "20240420224434-i29gg5h",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240420224434-i29gg5h",
+																"updated": "20240420224434"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "若加载中想要获取，应该等待加载结束后再处理获取逻辑"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240420224434-ggxares",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Mi4=",
+														"Num": 2
+													},
+													"Properties": {
+														"id": "20240420224434-ggxares",
+														"updated": "20240420224434"
+													},
+													"Children": [
+														{
+															"ID": "20240420224434-b5wi80m",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240420224434-b5wi80m",
+																"updated": "20240420224434"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "若加载结束想要获取，直接获取"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240420224434-pqp7vjg",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "My4=",
+														"Num": 3
+													},
+													"Properties": {
+														"id": "20240420224434-pqp7vjg",
+														"updated": "20240420224434"
+													},
+													"Children": [
+														{
+															"ID": "20240420224434-34c170s",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240420224434-34c170s",
+																"updated": "20240420224434"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "若压根没有，不用处理"
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20240421215539-xw8e4af",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240421215539-xw8e4af",
+												"style": "line-height: 22px;",
+												"updated": "20240421220231"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "// 用于存储面板消息和加载完成的回调函数\nprivate class PanelInfo\u003cT\u003e : BasePanelInfo where T : BasePanel\n{\n    public T panel;\n    public UnityAction\u003cT\u003e callBack;\n\n    public PanelInfo(UnityAction\u003cT\u003e callBack)\n    {\n        this.callBack += callBack;\n    }\n}\n\npublic void GetPanel\u003cT\u003e(UnityAction\u003cT\u003e callBack) where T : BasePanel\n{\n    string panelName = typeof(T).Name;\n  \n    if (panelDic.ContainsKey(panelName))\n    {\n        //取出消息\n        PanelInfo\u003cT\u003e panelInfo = panelDic[panelName] as PanelInfo\u003cT\u003e;\n        if (panelInfo.panel == null)\n        {\n            //加载中，应该等待加载结束，再通过回调传递给外部去使用\n            panelInfo.callBack += callBack;\n        }\n        //加载结束，并且不处于将要隐藏的状态\n        else if (!panelInfo.isHide)\n        {\n            callBack?.Invoke(panelInfo.panel as T);\n        }\n      \n    }\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240421220420-vh414o9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240421220420-vh414o9",
+				"updated": "20240421220425"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20240421220502-5qco8e7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240421220502-5qco8e7",
+				"updated": "20240421220657"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在同一帧调用显示面板方法，面板只会加载和显示一次，但两个回调函数都会执行，并且不会报错"
+				}
+			]
+		},
+		{
+			"ID": "20240421220425-nw1mw8t",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240421220425-nw1mw8t",
+				"style": "line-height: 22px;",
+				"updated": "20240421220425"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Start()\n{\n    UIManager.Instance.ShowPanel\u003cBeginPanel\u003e(callBack: (panel) =\u003e\n    {\n        print(\"第一次调用：\" + panel.name);\n    });\n    UIManager.Instance.ShowPanel\u003cBeginPanel\u003e(callBack: (panel) =\u003e\n    {\n        print(\"第二次调用：\" + panel.name);\n    });\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240421220459-5j8v327",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240421220459-5j8v327",
+				"updated": "20240421220649"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 648px;",
+						"style": "width: 638px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240421220649-fzhvrv4.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 638px;\" parent-style=\"width: 648px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240421220703-lfnk7s0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240421220703-lfnk7s0",
+				"updated": "20240421220830"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在同一帧调用完显示方法后，再去隐藏面板，面板不会显示，并且回调也不执行"
+				}
+			]
+		},
+		{
+			"ID": "20240421220731-m7ez85a",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240421220731-m7ez85a",
+				"style": "line-height: 22px;",
+				"updated": "20240421220814"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Start()\n{\n    UIManager.Instance.ShowPanel\u003cBeginPanel\u003e(callBack: (panel) =\u003e\n    {\n        print(\"第一次调用：\" + panel.name);\n    });\n    UIManager.Instance.ShowPanel\u003cBeginPanel\u003e(callBack: (panel) =\u003e\n    {\n        print(\"第二次调用：\" + panel.name);\n    });\n    UIManager.Instance.HidePanel\u003cBeginPanel\u003e();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240421220904-4qln1ed",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240421220904-4qln1ed",
+				"updated": "20240421221208"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在同一帧调用完显示方法后，再去隐藏面板，再去显示面板，面板依然会显示，前面的回调不执行，后面的回调会执行\n在面板加载时调用获取面板，则获取面板传入的回调方法会在面板加载完后执行"
+				}
+			]
+		},
+		{
+			"ID": "20240421220552-fs3fb3x",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240421220552-fs3fb3x",
+				"style": "line-height: 22px;",
+				"updated": "20240421220902"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Start()\n{\n    UIManager.Instance.ShowPanel\u003cBeginPanel\u003e(callBack: (panel) =\u003e\n    {\n        print(\"第一次调用：\" + panel.name);\n    });\n    UIManager.Instance.ShowPanel\u003cBeginPanel\u003e(callBack: (panel) =\u003e\n    {\n        print(\"第二次调用：\" + panel.name);\n    });\n    UIManager.Instance.HidePanel\u003cBeginPanel\u003e();\n    UIManager.Instance.ShowPanel\u003cBeginPanel\u003e(callBack: (panel) =\u003e\n    {\n        print(\"隐藏后重新调用：\" + panel.name);\n    });\n    UIManager.Instance.GetPanel\u003cBeginPanel\u003e((panel) =\u003e\n    {\n        print(\"获取到面板要执行的逻辑：\" + panel.name);\n    });\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240421221209-vbu4e61",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240421221209-vbu4e61",
+				"updated": "20240421221242"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 487px;",
+						"style": "width: 477px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240421221242-q7rcq3u.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 477px;\" parent-style=\"width: 487px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240420224329-36iogsd",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240420224329-36iogsd",
+				"updated": "20240420224338"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要解决的问题"
+				}
+			]
+		},
+		{
+			"ID": "20240420224333-46cce4g",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240420224333-46cce4g",
+				"updated": "20240421221252"
+			},
+			"Children": [
+				{
+					"ID": "20240420224333-fjp6y1l",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240420224333-fjp6y1l",
+						"updated": "20240420224333"
+					},
+					"Children": [
+						{
+							"ID": "20240420224333-9a6uu04",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420224333-9a6uu04",
+								"updated": "20240420224333"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "同一帧连续显示同一面板，避免重复进行异步加载后回调重复往字典中添加面板数据"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240420224333-wk363dy",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240420224333-wk363dy",
+						"updated": "20240421221252"
+					},
+					"Children": [
+						{
+							"ID": "20240420224333-hlmzgs0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420224333-hlmzgs0",
+								"updated": "20240421221252"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "同一帧 显示 ——\u003e 隐藏 ——\u003e 显示 同一面板问题，面板能够正常显示"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240420224333-xrr97w7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240420224333-xrr97w7",
+						"updated": "20240420224333"
+					},
+					"Children": [
+						{
+							"ID": "20240420224333-4snfwf7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240420224333-4snfwf7",
+								"updated": "20240420224333"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取面板时如果正在加载中，等加载结束后再获取处理逻辑"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240421222410-jln8b3p",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240421222410-jln8b3p",
+				"updated": "20240421222415"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体代码"
+				}
+			]
+		},
+		{
+			"ID": "20240421222415-ojp8vpe",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240421222415-ojp8vpe",
+				"style": "line-height: 22px;",
+				"updated": "20240421222445"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\nusing UnityEngine.EventSystems;\n\n/// \u003csummary\u003e\n/// 层级枚举\n/// \u003c/summary\u003e\npublic enum E_UILayer\n{\n    Bottom,\n    Middle,\n    Top,\n    System,\n}\n\n/// \u003csummary\u003e\n/// 管理所有UI面板的管理器，注意：面板预设体名要和面板名一致\n/// \u003c/summary\u003e\npublic class UIManager : BaseManager\u003cUIManager\u003e\n{\n    /// \u003csummary\u003e\n    /// 主要是用于里氏替换原则，在字典中，用父类容器装载子类对象\n    /// \u003c/summary\u003e\n    private abstract class BasePanelInfo { }\n\n    /// \u003csummary\u003e\n    /// 用于存储面板消息和加载完成的回调函数\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e面板的类型\u003c/typeparam\u003e\n    private class PanelInfo\u003cT\u003e : BasePanelInfo where T : BasePanel\n    {\n        public T panel;\n        public UnityAction\u003cT\u003e callBack;\n        public bool isHide;\n\n        public PanelInfo(UnityAction\u003cT\u003e callBack)\n        {\n            this.callBack += callBack;\n        }\n    }\n\n    private Camera uiCamara;\n    private Canvas uiCanvas;\n    private EventSystem uiEventSystem;\n    //层级父对象\n    private Transform bottomLayer;\n    private Transform middleLayer;\n    private Transform topLayer;\n    private Transform systemLayer;\n\n    /// \u003csummary\u003e\n    /// 用于存储所有的面板对象\n    /// \u003c/summary\u003e\n    private Dictionary\u003cstring, BasePanelInfo\u003e panelDic = new Dictionary\u003cstring, BasePanelInfo\u003e();\n\n    private UIManager()\n    {\n        //动态创建唯一的Canvas和EventSystem（摄像机）\n        uiCamara = GameObject.Instantiate(ResManager.Instance.Load\u003cGameObject\u003e(\"UI/UICamera\")).GetComponent\u003cCamera\u003e();\n        //UI摄像机过场景不可移除，它专门用来渲染UI面板\n        GameObject.DontDestroyOnLoad(uiCamara);\n        //动态创建Canvas，并设置使用的UI摄像机，设置过场景不可移除\n        uiCanvas = GameObject.Instantiate(ResManager.Instance.Load\u003cGameObject\u003e(\"UI/Canvas\")).GetComponent\u003cCanvas\u003e();\n        uiCanvas.worldCamera = uiCamara;\n        GameObject.DontDestroyOnLoad(uiCanvas);\n        //找到层级父对象\n        bottomLayer = uiCanvas.transform.Find(\"Bottom\");\n        middleLayer = uiCanvas.transform.Find(\"Middle\");\n        topLayer = uiCanvas.transform.Find(\"Top\");\n        systemLayer = uiCanvas.transform.Find(\"System\");\n        //动态创建EventSystem\n        uiEventSystem = GameObject.Instantiate(ResManager.Instance.Load\u003cGameObject\u003e(\"UI/EventSystem\")).GetComponent\u003cEventSystem\u003e();\n        GameObject.DontDestroyOnLoad(uiEventSystem);\n    }\n\n    /// \u003csummary\u003e\n    /// 获取对应层级的父对象\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"layer\"\u003e层级枚举值\u003c/param\u003e\n    /// \u003creturns\u003e层级父对象\u003c/returns\u003e\n    public Transform GetLayerObj(E_UILayer layer)\n    {\n        switch (layer)\n        {\n            case E_UILayer.Bottom:\n                return bottomLayer;\n            case E_UILayer.Middle:\n                return middleLayer;\n            case E_UILayer.Top:\n                return topLayer;\n            case E_UILayer.System:\n                return systemLayer;\n            default:\n                return null;\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 显示面板\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e面板的类型\u003c/typeparam\u003e\n    /// \u003cparam name=\"layer\"\u003e面板要显示在哪个层级下\u003c/param\u003e\n    /// \u003cparam name=\"callBack\"\u003e面板加载出来后的接收面板的回调函数\u003c/param\u003e\n    /// \u003cparam name=\"isSync\"\u003e是否同步加载 默认为false\u003c/param\u003e\n    public void ShowPanel\u003cT\u003e(E_UILayer layer = E_UILayer.Middle, UnityAction\u003cT\u003e callBack = null, bool isSync = false) where T : BasePanel\n    {\n        //获取面板名，预设体名必须与面板类名一致\n        string panelName = typeof(T).Name;\n        //存在面板\n        if (panelDic.ContainsKey(panelName)) \n        {\n            //取出消息\n            PanelInfo\u003cT\u003e panelInfo = panelDic[panelName] as PanelInfo\u003cT\u003e;\n            //正在异步加载中\n            if (panelInfo.panel == null)\n            {\n                //将回调添加到记录中\n                panelInfo.isHide = false;\n                if (callBack != null)\n                    panelInfo.callBack += callBack;\n            }\n            //已经加载结束\n            else\n            {\n                panelInfo.panel.ShowMe();\n                //直接执行回调，直接传递出去即可\n                callBack?.Invoke(panelInfo.panel);\n            }\n            return;\n        }\n\n        //不存在面板，先存入字典当中占位，之后如果又显示，我才能得到字典中的消息进行判断\n        panelDic.Add(panelName, new PanelInfo\u003cT\u003e(callBack));\n        ABResManager.Instance.LoadResAsync\u003cGameObject\u003e(\"ui\", panelName, (res) =\u003e\n        {\n            //取出消息\n            PanelInfo\u003cT\u003e panelInfo = panelDic[panelName] as PanelInfo\u003cT\u003e;\n            if (panelInfo.isHide)\n            {\n                panelDic.Remove(panelName);\n                return;\n            }\n            //层级的处理\n            Transform layerObj = GetLayerObj(layer);\n            //避免没有按照指定规则传递参数，避免为空\n            if (layerObj == null)\n                layerObj = middleLayer;\n            //将面板预设体创建到对应父对象下，并且保持原本的缩放大小\n            GameObject panelObj = GameObject.Instantiate(res, layerObj, false);\n            T panel = panelObj.GetComponent\u003cT\u003e();   //获取对应的UI控件返回出去\n            panel.ShowMe();                         //显示面板时执行的默认方法\n            panelInfo.panel = panel;                //将加载出来的panel记录到panelInfo内\n            panelInfo.callBack?.Invoke(panel);      //传递到外部使用\n            panelInfo.callBack = null;              //清空回调，避免内存泄露\n        }, isSync);\n    }\n\n    /// \u003csummary\u003e\n    /// 隐藏面板\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e面板名\u003c/typeparam\u003e\n    public void HidePanel\u003cT\u003e() where T : BasePanel\n    {\n        string panelName = typeof(T).Name;\n        if (panelDic.ContainsKey(panelName))\n        {\n            //取出消息\n            PanelInfo\u003cT\u003e panelInfo = panelDic[panelName] as PanelInfo\u003cT\u003e;\n            //如果存在，但正在加载\n            if (panelInfo.panel == null) \n            {\n                //修改隐藏标识，标识这个面板将要隐藏，因为要隐藏，因此将回调置空\n                panelInfo.isHide = true;\n                panelInfo.callBack = null;\n            }\n            //已经加载结束\n            else\n            {\n                //销毁后从容器中移除\n                panelInfo.panel.HideMe();\n                GameObject.Destroy(panelInfo.panel.gameObject);\n                panelDic.Remove(panelName);\n            }\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 获取面板\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e面板名\u003c/typeparam\u003e\n    public void GetPanel\u003cT\u003e(UnityAction\u003cT\u003e callBack) where T : BasePanel\n    {\n        string panelName = typeof(T).Name;\n    \n        if (panelDic.ContainsKey(panelName))\n        {\n            //取出消息\n            PanelInfo\u003cT\u003e panelInfo = panelDic[panelName] as PanelInfo\u003cT\u003e;\n            if (panelInfo.panel == null)\n            {\n                //加载中，应该等待加载结束，再通过回调传递给外部去使用\n                panelInfo.callBack += callBack;\n            }\n            //加载结束，并且不处于将要隐藏的状态\n            else if (!panelInfo.isHide)\n            {\n                callBack?.Invoke(panelInfo.panel as T);\n            }\n        \n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

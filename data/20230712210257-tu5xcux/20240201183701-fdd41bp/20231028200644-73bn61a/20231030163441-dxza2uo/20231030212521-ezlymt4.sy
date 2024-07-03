@@ -1,0 +1,2353 @@
+{
+	"ID": "20231030212521-ezlymt4",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20231030212521-ezlymt4",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20231030212521-ezlymt4\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20231030215930-zunrxad\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20231030225126-zo3yr3o\u0026quot;,\u0026quot;scrollTop\u0026quot;:200,\u0026quot;focusId\u0026quot;:\u0026quot;20231030215930-zunrxad\u0026quot;,\u0026quot;focusStart\u0026quot;:0,\u0026quot;focusEnd\u0026quot;:0\u0026#125;",
+		"title": "CS5L7-2——Task类",
+		"type": "doc",
+		"updated": "20231030232501"
+	},
+	"Children": [
+		{
+			"ID": "20231030215930-zunrxad",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231030215930-zunrxad",
+				"updated": "20231030215935"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20231030215935-f40h7ll",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231030215935-f40h7ll",
+				"style": "line-height: 22px;",
+				"updated": "20231030232501"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "System.Threading.Tasks            //Task类的命名空间\nTask                              //Task类，任务类，基于线程池的对Thread类的封装\nTask()                            //Task的构造函数，传入多线程要执行的方法\ntask.Start()                      //运行该对象的多线程，不过该多线程基于线程池\nTask.Run()                        //运行多线程的静态方法，不过该多线程基于线程池，直接传入多线程要执行的方法即可\nTask.Factory.StartNew()           //运行多线程的静态方法，不过该多线程基于线程池，直接传入多线程要执行的方法即可\nTask\u003c\u003e()                          //Task\u003c\u003e的构造函数，传入多线程要执行的方法，该方法需要返回值，返回值类型由传入的泛型参数决定\nTask.Run\u003c\u003e()                      //运行多线程的静态方法，直接传入多线程要执行的方法即可，该方法需要返回值，返回值类型由传入的泛型参数决定\nTask.Factory.StartNew\u003c\u003e()         //运行多线程的静态方法，直接传入多线程要执行的方法即可，该方法需要返回值，返回值类型由传入的泛型参数决定\ntask.Result                       //获取task对象对应的多线程执行完毕的返回值，注意，使用该属性时如果没有返回值会卡死线程，直到多线程的方法执行return\ntask.RunSynchronously()           //同步执行Task对象里的多线程方法\ntask.Wait()                       //使执行该方法的线程等待任务执行完毕，再执行后面的内容\nTask.WaitAny()                    //传入任务中任意一个任务结束就继续执行\nTask.WaitAll()                    //任务列表中所有任务执行结束就继续执行\nTask.WhenAll().ContinueWith()     //其实是两个方法，第一个方法是等待传入的所有Task执行完毕后返回一个Task对象，第二个方法是让返回的Task对象继续执行新的任务\nTask.Factory.ContinueWhenAll()    //将上面两个方法融合起来的方法，即当第一个参数传入的Task数组内所有Task都执行完毕时，执行第二个参数的新任务\nTask.WhenAny().ContinueWith()     //其实是两个方法，第一个方法是等待传入的Task有一个执行完毕后返回一个Task对象，第二个方法是让返回的Task对象继续执行新的任务\nTask.Factory.ContinueWhenAny()    //将上面两个方法融合起来的方法，即当第一个参数传入的Task数组内中其中一个Task执行完毕时，执行第二个参数的新任务\nCancellationTokenSource                             //取消标识源类，相比单纯的用bool来标识多了更多的额外处理方法\ncancellationTokenSource.IsCancellationRequested     //是否取消请求的属性，使用该属性来表示是否已经取消，可以用于替代原本控制线程循环的bool值，默认为false\ncancellationTokenSource.Cancel()                    //使是否取消请求的属性为true的方法\ncancellationTokenSource.CancelAfter()               //延迟使是否取消请求的属性为true的方法，传入延迟的时间，单位是毫秒\ncancellationTokenSource.Token.Register()            //当使是否取消请求的属性为true的方法被执行后要执行的回调函数\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231030212521-qg0rrgl",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20231030212521-qg0rrgl",
+				"updated": "20231030212640"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Task"
+				}
+			]
+		},
+		{
+			"ID": "20231030230212-6h7ox4u",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20231030230212-6h7ox4u",
+				"updated": "20231030230216"
+			},
+			"Children": [
+				{
+					"ID": "20231030230216-jvyiaob",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20231030230216-jvyiaob",
+						"updated": "20231030230216"
+					},
+					"Children": [
+						{
+							"ID": "20231030230216-gu9dulu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030230216-gu9dulu",
+								"updated": "20231030230216"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Task类是基于Thread的封装"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231030230216-urj6ar5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20231030230216-urj6ar5",
+						"updated": "20231030230216"
+					},
+					"Children": [
+						{
+							"ID": "20231030230216-mrf8jxi",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030230216-mrf8jxi",
+								"updated": "20231030230216"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Task类可以有返回值，Thread没有返回值"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231030230216-au95a8g",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20231030230216-au95a8g",
+						"updated": "20231030230216"
+					},
+					"Children": [
+						{
+							"ID": "20231030230216-2cnxbu9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030230216-2cnxbu9",
+								"updated": "20231030230216"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Task类可以执行后续操作，Thread没有这个功能"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231030230216-yawk8yd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20231030230216-yawk8yd",
+						"updated": "20231030230216"
+					},
+					"Children": [
+						{
+							"ID": "20231030230216-oke0fi8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030230216-oke0fi8",
+								"updated": "20231030230216"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Task可以更加方便的取消任务，Thread相对更加单一"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231030230216-4ug38vv",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20231030230216-4ug38vv",
+						"updated": "20231030230216"
+					},
+					"Children": [
+						{
+							"ID": "20231030230216-fiixwfu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030230216-fiixwfu",
+								"updated": "20231030230216"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Task具备ThreadPool线程池的优点，更节约性能"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20231030212723-iaq33hl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231030212723-iaq33hl",
+				"updated": "20231030212858"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "命名空间："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "System.Threading.Tasks"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n类名："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Task"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Task"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​顾名思义就是任务的意思，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Task"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​是在线程池基础上进行的改进，它拥有"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20231030163741-bcmpvyx",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "线程池"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的优点，同时解决了使用线程池不易控制的弊端\n它是基于线程池的优点对线程的封装，可以让我们更方便高效的进行多线程开发"
+				}
+			]
+		},
+		{
+			"ID": "20231030212723-ait9pap",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231030212723-ait9pap",
+				"updated": "20231030212759"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "简单理解：\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Task"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的本质是对线程"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Thread"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的封装，它的创建遵循线程池的优点，并且可以更方便的让我们控制线程\n一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Task"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​对象就是一个线程"
+				}
+			]
+		},
+		{
+			"ID": "20231030212802-4k6pzov",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231030212802-4k6pzov",
+				"updated": "20231030212933"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "创建无返回值Task的三种方式"
+				}
+			]
+		},
+		{
+			"ID": "20231030212934-hal8bx6",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20231030212934-hal8bx6",
+				"updated": "20231030220034"
+			},
+			"Children": [
+				{
+					"ID": "20231030212936-cmxpxgv",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20231030212936-cmxpxgv",
+						"name": "Task()",
+						"updated": "20231030212936"
+					},
+					"Children": [
+						{
+							"ID": "20231030212936-wkh5j09",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030212936-wkh5j09",
+								"updated": "20231030213134"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "new"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Task"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象传入委托函数并启动\n"
+								}
+							]
+						},
+						{
+							"ID": "20231030213515-vqv8mmc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030213515-vqv8mmc",
+								"updated": "20231030213743"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "传入的这个委托函数就是多线程要执行的方法\n值得一提的是，虽然"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Task"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的启动和"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Thread"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​很相似，这里的Task运行是基于线程池的运行，因此它的性能会比直接开启线程更好\n以及，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+									},
+									"TextMarkType": "strong text",
+									"TextMarkTextContent": "由Task打开的多线程仍然需要自行关闭，否则会与编辑器共生"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+								}
+							]
+						},
+						{
+							"ID": "20231030213019-m5n6jd1",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231030213019-m5n6jd1",
+								"style": "line-height: 22px;",
+								"updated": "20231030213510"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private bool isRunning = true;\n\nvoid Start()\n{\n    Task t1 = new Task(() =\u003e\n    {\n        int i = 0;\n        while (isRunning)\n        {\n            print(\"方法一：\" + i);\n            i++;\n            Thread.Sleep(1000);\n        }\n    });\n    t1.Start();\n}\n\nprivate void OnDestroy()\n{\n    isRunning = false;\n}\n\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231030212948-j2u975m",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20231030212948-j2u975m",
+						"name": "Task.Run()"
+					},
+					"Children": [
+						{
+							"ID": "20231030212948-vkvhe03",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030212948-vkvhe03",
+								"updated": "20231030213849"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Task"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Run"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​静态方法传入委托函数"
+								}
+							]
+						},
+						{
+							"ID": "20231030213804-lq1wb5c",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231030213804-lq1wb5c",
+								"style": "line-height: 22px;",
+								"updated": "20231030213847"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Task t2 = Task.Run(() =\u003e\n{\n    int i = 0;\n    while (isRunning)\n    {\n        print(\"方法二：\" + i);\n        i++;\n        Thread.Sleep(1000);\n    }\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231030212949-9qhb990",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20231030212949-9qhb990",
+						"name": "Task.Factory.StartNew()",
+						"updated": "20231030220034"
+					},
+					"Children": [
+						{
+							"ID": "20231030212949-g5i3l2z",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030212949-g5i3l2z",
+								"updated": "20231030213013"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Task.Factory"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "StartNew"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​静态方法传入委托函数"
+								}
+							]
+						},
+						{
+							"ID": "20231030213916-2rtkjie",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231030213916-2rtkjie",
+								"style": "line-height: 22px;",
+								"updated": "20231030220034"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Task t3 = Task.Factory.StartNew(() =\u003e\n{\n    int i = 0;\n    while (isRunning)\n    {\n        print(\"方法三：\" + i);\n        i++;\n        Thread.Sleep(1000);\n    }\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20231030213014-ahjj6z0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231030213014-ahjj6z0",
+				"updated": "20231030214113"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "创建有返回值的Task"
+				}
+			]
+		},
+		{
+			"ID": "20231030214321-q07zklc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231030214321-q07zklc",
+				"updated": "20231030214524"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "创建有返回值的Task，只需要使用泛型方法即可"
+				}
+			]
+		},
+		{
+			"ID": "20231030214126-zrt4v03",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20231030214126-zrt4v03",
+				"updated": "20231030220517"
+			},
+			"Children": [
+				{
+					"ID": "20231030214126-fxz6ji0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20231030214126-fxz6ji0",
+						"name": "Task\u0026lt;\u0026gt;()",
+						"updated": "20231030220517"
+					},
+					"Children": [
+						{
+							"ID": "20231030214126-mfcedcp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030214126-mfcedcp",
+								"updated": "20231030214641"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "new"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Task\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象传入委托函数并启动"
+								}
+							]
+						},
+						{
+							"ID": "20231030214126-tsv84j7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030214126-tsv84j7",
+								"updated": "20231030214506"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "传入的这个委托函数就是多线程要执行的方法\n泛型填入返回值的类型，在委托里加上返回值"
+								}
+							]
+						},
+						{
+							"ID": "20231030214126-nvbf3a0",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231030214126-nvbf3a0",
+								"style": "line-height: 22px;",
+								"updated": "20231030220517"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Task\u003cint\u003e t1 = new Task\u003cint\u003e(() =\u003e\n{\n    int i = 0;\n    while (isRunning)\n    {\n        print(\"方法一：\" + i);\n        i++;\n        Thread.Sleep(1000);\n    }\n    return 1;\n});\nt1.Start();\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231030214126-cuneltr",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20231030214126-cuneltr",
+						"name": "Task.Run\u0026lt;string\u0026gt;()",
+						"updated": "20231030214632"
+					},
+					"Children": [
+						{
+							"ID": "20231030214126-p0785c6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030214126-p0785c6",
+								"updated": "20231030214632"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Task"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Run\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​静态泛型方法传入委托函数"
+								}
+							]
+						},
+						{
+							"ID": "20231030214126-d6e4tyk",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231030214126-d6e4tyk",
+								"style": "line-height: 22px;",
+								"updated": "20231030214441"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Task\u003cstring\u003e t2 = Task.Run\u003cstring\u003e(() =\u003e\n{\n    int i = 0;\n    while (isRunning)\n    {\n        print(\"方法二：\" + i);\n        i++;\n        Thread.Sleep(1000);\n    }\n    return \"任务完成\";\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231030214126-y3ooeym",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20231030214126-y3ooeym",
+						"name": "Task.Factory.StartNew\u0026lt;\u0026gt;()",
+						"updated": "20231030214619"
+					},
+					"Children": [
+						{
+							"ID": "20231030214126-g2bm67m",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030214126-g2bm67m",
+								"updated": "20231030214619"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Task.Factory"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "StartNew\u0026lt;\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​静态泛型方法传入委托函数"
+								}
+							]
+						},
+						{
+							"ID": "20231030214126-3wyb9gk",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231030214126-3wyb9gk",
+								"style": "line-height: 22px;",
+								"updated": "20231030214608"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Task\u003cfloat\u003e t3 = Task.Factory.StartNew\u003cfloat\u003e(() =\u003e\n{\n    int i = 0;\n    while (isRunning)\n    {\n        print(\"方法三：\" + i);\n        i++;\n        Thread.Sleep(1000);\n    }\n    return 4.5f;\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20231030215023-6vzi5gd",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20231030215023-6vzi5gd",
+				"name": "task.Result",
+				"updated": "20231030215155"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "获取传入Task方法的返回值"
+				}
+			]
+		},
+		{
+			"ID": "20231030215033-da7wcgu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231030215033-da7wcgu",
+				"updated": "20231030223455"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "注意！！！："
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text code",
+					"TextMarkTextContent": "task.Result"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "获取结果时会阻塞线程！即如果"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text code",
+					"TextMarkTextContent": "task"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "没有执行完成，会等待"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text code",
+					"TextMarkTextContent": "task"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "执行完成获取到"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text code",
+					"TextMarkTextContent": "Result"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "，然后再执行后边的代码，"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "text strong",
+					"TextMarkTextContent": "也就是说执行到这句代码时，由于我们的"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "text strong code",
+					"TextMarkTextContent": "Task"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "text strong",
+					"TextMarkTextContent": "中是死循环，所以执行"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "code text",
+					"TextMarkTextContent": "task.Result"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "text strong",
+					"TextMarkTextContent": "的线程就会被卡死"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "这意味着，如果我们编写逻辑不当，造成多线程内执行的方法始终没有"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "code strong text",
+					"TextMarkTextContent": "return"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "，可能导致整个主程序卡死，例如，Unity无法继续运行等问题"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20231030215037-ua0hof9",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231030215037-ua0hof9",
+				"style": "line-height: 22px;",
+				"updated": "20231030223549"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private void Start()\n{\n    Task\u003cstring\u003e t1 = Task.Run\u003cstring\u003e(() =\u003e\n    {\n        int i = 0;\n        while (isRunning)\n        {\n            print(\"方法一：\" + i);\n            i++;\n            Thread.Sleep(1000);\n        }\n        return \"方法一任务完成\";\n    });\n\n    Task t2 = Task.Run(() =\u003e\n    {\n        for (int i = 0; i \u003c 20; i++)\n        {\n            print(\"t2: \" + i);\n            print(t1.Result);            //在这里我们如果没有按下空格结束t1的死循环，t2将会被一直卡死在这里无法继续向下执行\n        }\n        print(\"方法二任务完成\");\n    });\n    print(\"主线程执行\");\n}\n\nprivate void Update()\n{\n    if (Input.GetKeyDown(KeyCode.Space))\n    {\n        isRunning = false;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231030215126-mwn61il",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231030215126-mwn61il",
+				"name": "task.RunSynchronously()",
+				"updated": "20231030215817"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "同步执行Task"
+				}
+			]
+		},
+		{
+			"ID": "20231030220301-qg4oeu2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231030220301-qg4oeu2",
+				"updated": "20231030220506"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "刚才我们举的例子都是通过多线程异步执行的\n（举个例子，下面这段代码里，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "print(\u0026quot;主线程执行\u0026quot;);"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​会先于线程开启）"
+				}
+			]
+		},
+		{
+			"ID": "20231030215816-k8izwzp",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231030215816-k8izwzp",
+				"style": "line-height: 22px;",
+				"updated": "20231030220836"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private void Start()\n{\n    Task t = new Task(() =\u003e\n    {\n        Thread.Sleep(1000);\n        print(\"线程开启\");\n    });\n    t.Start();\n    print(\"主线程执行\");    //线程的开启并不会影响主线程的执行，这就是异步执行\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231030220259-8juc1rc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231030220259-8juc1rc"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果你希望Task能够同步执行，只需要调用Task对象中的RunSynchronously方法\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "text strong",
+					"TextMarkTextContent": "注意：需要使用 new Task对象的方式，因为Run和StartNew在创建时就会启动"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20231030220218-oussmgi",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231030220218-oussmgi",
+				"style": "line-height: 22px;",
+				"updated": "20231030221008"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private void Start()\n{\n    Task t = new Task(() =\u003e\n    {\n        Thread.Sleep(1000);\n        print(\"线程开启\");\n    });\n    t.RunSynchronously();\n    print(\"主线程执行\");\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231030221043-wqaye36",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231030221043-wqaye36",
+				"updated": "20231030221045"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Task中线程阻塞的方式（任务阻塞）"
+				}
+			]
+		},
+		{
+			"ID": "20231030221047-m5x9zj9",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20231030221047-m5x9zj9",
+				"updated": "20231030221856"
+			},
+			"Children": [
+				{
+					"ID": "20231030221111-ndcpkfv",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20231030221111-ndcpkfv",
+						"name": "task.Wait()",
+						"updated": "20231030221111"
+					},
+					"Children": [
+						{
+							"ID": "20231030221111-q91ouva",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030221111-q91ouva",
+								"updated": "20231030221539"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Wait()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法：使执行该方法的线程等待任务执行完毕，再执行后面的内容"
+								}
+							]
+						},
+						{
+							"ID": "20231030221133-yy9vo8u",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231030221133-yy9vo8u",
+								"style": "line-height: 22px;",
+								"updated": "20231030221509"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Task t1 = Task.Run(() =\u003e\n{\n    for (int i = 0; i \u003c 5; i++)\n    {\n        print(\"t1: \" + i);\n    }\n});\n\nTask t2 = Task.Run(() =\u003e\n{\n    for (int i = 0; i \u003c 20; i++)\n    {\n        print(\"t2: \" + i);\n    }\n});\nt1.Wait();\nprint(\"主线程执行\");\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231030221622-hplfejz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20231030221622-hplfejz",
+						"name": "Task.WaitAny()",
+						"updated": "20231030221847"
+					},
+					"Children": [
+						{
+							"ID": "20231030221622-ailqn50",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030221622-ailqn50",
+								"updated": "20231030221847"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "WaitAny()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​静态方法：传入任务中任意一个任务结束就继续执行"
+								}
+							]
+						},
+						{
+							"ID": "20231030221637-jtdamh5",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231030221637-jtdamh5",
+								"style": "line-height: 22px;",
+								"updated": "20231030221726"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Task.WaitAny(t1, t2);\nprint(\"主线程执行\");\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231030221805-99j5hrr",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20231030221805-99j5hrr",
+						"name": "Task.WaitAll()",
+						"updated": "20231030221856"
+					},
+					"Children": [
+						{
+							"ID": "20231030221805-89cxtgm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030221805-89cxtgm",
+								"updated": "20231030221850"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "WaitAll()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​静态方法：任务列表中所有任务执行结束就继续执行"
+								}
+							]
+						},
+						{
+							"ID": "20231030221819-6bon2wg",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231030221819-6bon2wg",
+								"style": "line-height: 22px;",
+								"updated": "20231030221856"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Task.WaitAll(t1, t2);\nprint(\"主线程执行\");\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20231030223609-9c7abgf",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231030223609-9c7abgf",
+				"updated": "20231030223623"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Task完成后继续其它Task（任务延续）"
+				}
+			]
+		},
+		{
+			"ID": "20231030224328-h2oxbe8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231030224328-h2oxbe8",
+				"updated": "20231030224347"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "先声明并执行两个线程"
+				}
+			]
+		},
+		{
+			"ID": "20231030224324-lihtja1",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231030224324-lihtja1",
+				"style": "line-height: 22px;",
+				"updated": "20231030224327"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Task t1 = Task.Run(() =\u003e\n{\n    for (int i = 0; i \u003c 5; i++)\n    {\n        print(\"t1:\" + i);\n    }\n});\n\nTask t2 = Task.Run(() =\u003e\n{\n    for (int i = 0; i \u003c 20; i++)\n    {\n        print(\"t2:\" + i);\n    }\n});\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231030223624-0sve8cv",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20231030223624-0sve8cv",
+				"updated": "20231030224915"
+			},
+			"Children": [
+				{
+					"ID": "20231030223745-wk26o6m",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20231030223745-wk26o6m",
+						"name": "Task.WhenAll().ContinueWith()",
+						"updated": "20231030223745"
+					},
+					"Children": [
+						{
+							"ID": "20231030223745-ykudrxs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030223745-ykudrxs",
+								"updated": "20231030224739"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "WhenAll()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​静态方法 + "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ContinueWith()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法：传入的任务都完毕后再执行某任务，需要一个以"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "task"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​参数的方法，传入新开始的task"
+								}
+							]
+						},
+						{
+							"ID": "20231030223829-eipuc5w",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231030223829-eipuc5w",
+								"style": "line-height: 22px;",
+								"updated": "20231030224323"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Task.WhenAll(t1, t2).ContinueWith((t) =\u003e\n{\n    print(\"一个新的任务开始了\");\n    int i = 0;\n    while (isRunning)\n    {\n        print(i);\n        i++;\n        Thread.Sleep(1000);\n    }\n    print(\"任务结束\");\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231030224210-hq08ih0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20231030224210-hq08ih0",
+						"name": "Task.Factory.ContinueWhenAll()"
+					},
+					"Children": [
+						{
+							"ID": "20231030224210-6xy6bis",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030224210-6xy6bis",
+								"updated": "20231030224716"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Task.Factory.ContinueWhenAll()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​静态方法：相当于上面两个方法的融合\n参数一：Task数组，要等待完成的所有Task任务\n参数二：参数一的所有任务完成后要执行的方法"
+								}
+							]
+						},
+						{
+							"ID": "20231030224353-1wiv0s5",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231030224353-1wiv0s5",
+								"style": "line-height: 22px;",
+								"updated": "20231030224405"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Task.Factory.ContinueWhenAll(new Task[] { t1, t2 }, (t) =\u003e\n{\n    print(\"一个新的任务开始了\");\n    int i = 0;\n    while (isRunning)\n    {\n        print(i);\n        i++;\n        Thread.Sleep(1000);\n    }\n    print(\"任务结束\");\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231030223805-yd7mxew",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20231030223805-yd7mxew",
+						"name": "Task.WhenAny().ContinueWith()"
+					},
+					"Children": [
+						{
+							"ID": "20231030223805-ldpkfkb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030223805-ldpkfkb",
+								"updated": "20231030223827"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "WhenAny()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​静态方法 + "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ContinueWith()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法：传入任务只要有一个执行完毕后再执行某任务"
+								}
+							]
+						},
+						{
+							"ID": "20231030223833-t2e5stp",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231030223833-t2e5stp",
+								"style": "line-height: 22px;",
+								"updated": "20231030224851"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Task.WhenAny(t1, t2).ContinueWith((t) =\u003e\n{\n    print(\"一个新的任务开始了\");\n    int i = 0;\n    while (isRunning)\n    {\n        print(i);\n        i++;\n        Thread.Sleep(1000);\n    }\n    print(\"任务结束\");\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231030224853-lyr3vyd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20231030224853-lyr3vyd",
+						"name": "Task.Factory.ContinueWhenAny()",
+						"updated": "20231030224915"
+					},
+					"Children": [
+						{
+							"ID": "20231030224853-kzga9iv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030224853-kzga9iv",
+								"updated": "20231030224915"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Task.Factory.ContinueWhenAny()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​静态方法：相当于上面两个方法的融合\n参数一：Task数组，要等待完成的所有Task任务\n参数二：参数一的只要有一个任务完成后要执行的方法"
+								}
+							]
+						},
+						{
+							"ID": "20231030224917-92ajpah",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231030224917-92ajpah",
+								"style": "line-height: 22px;",
+								"updated": "20231030224930"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Task.Factory.ContinueWhenAny(new Task[] { t1, t2 }, (t) =\u003e\n{\n    print(\"一个新的任务开始了\");\n    int i = 0;\n    while (isRunning)\n    {\n        print(i);\n        i++;\n        Thread.Sleep(1000);\n    }\n    print(\"任务结束\");\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20231030225107-6qg4l3f",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231030225107-6qg4l3f",
+				"updated": "20231030225125"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "取消Task执行"
+				}
+			]
+		},
+		{
+			"ID": "20231030225126-zo3yr3o",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20231030225126-zo3yr3o",
+				"updated": "20231030231005"
+			},
+			"Children": [
+				{
+					"ID": "20231030225129-m1qlum5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20231030225129-m1qlum5",
+						"updated": "20231030225129"
+					},
+					"Children": [
+						{
+							"ID": "20231030225129-oj12dyr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030225129-oj12dyr",
+								"updated": "20231030225800"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过加入"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "bool"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​标识 控制线程内死循环的结束"
+								}
+							]
+						},
+						{
+							"ID": "20231030225134-s1fv0ud",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030225134-s1fv0ud",
+								"updated": "20231030225249"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "上面已经有诸多的例子使用了这种方法，这里是其中一个例子："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20231030212936-cmxpxgv",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "Task()"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231030225304-wxe785g",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20231030225304-wxe785g",
+						"name": "CancellationTokenSource",
+						"updated": "20231030231005"
+					},
+					"Children": [
+						{
+							"ID": "20231030230943-et5x0gk",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20231030230943-et5x0gk",
+								"updated": "20231030230943"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "取消标识源类"
+								}
+							]
+						},
+						{
+							"ID": "20231030225304-kp3bvvq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231030225304-kp3bvvq",
+								"updated": "20231030230943"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CancellationTokenSource"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​取消标识源类，来控制"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CancellationTokenSource"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象可以达到"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "延迟取消、取消回调"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "等功能"
+								}
+							]
+						},
+						{
+							"ID": "20231030225341-mfiytbv",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231030225341-mfiytbv",
+								"style": "line-height: 22px;",
+								"updated": "20231030230816"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "CancellationTokenSource c;\n\nprivate void Start()\n{\n    c = new CancellationTokenSource();\n    c.CancelAfter(5000);                        //延迟5000毫秒也就是5秒后使IsCancellationRequested属性为true\n    c.Token.Register(() =\u003e                      //当IsCancellationRequested属性为true了要执行的回调函数\n    {\n        print(\"任务取消了\");\n    });\n\n    Task.Run(() =\u003e\n    {\n        int i = 0;\n        while (!c.IsCancellationRequested)      //这是该取消标识源对象的是否取消请求的bool值，可以用这个来控制线程循环的结束，默认为false\n        {\n            print(\"计时：\" + i);\n            i++;\n            Thread.Sleep(1000);\n        }\n    });\n}\n\nprivate void Update()\n{\n    if (Input.GetKeyDown(KeyCode.Space))\n    {\n        c.Cancel();                             //这会使IsCancellationRequested属性为true\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20231030225815-5izfzim",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20231030225815-5izfzim",
+								"updated": "20231030231005"
+							},
+							"Children": [
+								{
+									"ID": "20231030230745-42twxpj",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20231030230745-42twxpj",
+										"name": "cancellationTokenSource.IsCancellationRequested",
+										"updated": "20231030231005"
+									},
+									"Children": [
+										{
+											"ID": "20231030230915-7vyi6rz",
+											"Type": "NodeHeading",
+											"HeadingLevel": 4,
+											"Properties": {
+												"id": "20231030230915-7vyi6rz",
+												"updated": "20231030230934"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "是否取消请求属性"
+												}
+											]
+										},
+										{
+											"ID": "20231030230745-l8hjzfu",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20231030230745-l8hjzfu",
+												"updated": "20231030230915"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "这是该取消标识源对象的是否取消请求的bool值，可以用这个来控制线程循环的结束，默认为false"
+												}
+											]
+										},
+										{
+											"ID": "20231030230757-bbiwpew",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20231030230757-bbiwpew",
+												"style": "line-height: 22px;",
+												"updated": "20231030231005"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "c.IsCancellationRequested\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20231030225816-vvgvflq",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20231030225816-vvgvflq",
+										"name": "cancellationTokenSource.CancelAfter()",
+										"updated": "20231030225816"
+									},
+									"Children": [
+										{
+											"ID": "20231030230908-7zqm2wm",
+											"Type": "NodeHeading",
+											"HeadingLevel": 4,
+											"Properties": {
+												"id": "20231030230908-7zqm2wm",
+												"updated": "20231030230932"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "延迟取消方法"
+												}
+											]
+										},
+										{
+											"ID": "20231030225816-nrvdxjr",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20231030225816-nrvdxjr",
+												"updated": "20231030230908"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "传入延迟多少毫秒取消"
+												}
+											]
+										},
+										{
+											"ID": "20231030225829-im1gzw2",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20231030225829-im1gzw2",
+												"style": "line-height: 22px;",
+												"updated": "20231030230112"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "c.CancelAfter(5000);\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20231030230947-l5rl0lb",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20231030230947-l5rl0lb",
+										"name": "cancellationTokenSource.Token.Register()",
+										"updated": "20231030231001"
+									},
+									"Children": [
+										{
+											"ID": "20231030230947-lp3mtp4",
+											"Type": "NodeHeading",
+											"HeadingLevel": 4,
+											"Properties": {
+												"id": "20231030230947-lp3mtp4",
+												"updated": "20231030231001"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "取消回调"
+												}
+											]
+										},
+										{
+											"ID": "20231030225822-urgapnb",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20231030225822-urgapnb",
+												"updated": "20231030230947"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "取消后的回调方法"
+												}
+											]
+										},
+										{
+											"ID": "20231030230114-iumbhpr",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20231030230114-iumbhpr",
+												"style": "line-height: 22px;",
+												"updated": "20231030230126"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "c.Token.Register(() =\u003e\n{\n    print(\"任务取消了\");\n});\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

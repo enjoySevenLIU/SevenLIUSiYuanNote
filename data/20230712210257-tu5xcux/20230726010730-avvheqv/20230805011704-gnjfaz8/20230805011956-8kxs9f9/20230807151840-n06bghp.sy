@@ -1,0 +1,1170 @@
+{
+	"ID": "20230807151840-n06bghp",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230807151840-n06bghp",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230807151840-n06bghp\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230807151840-oh7qb6b\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230807174209-aj8c67d\u0026quot;,\u0026quot;scrollTop\u0026quot;:0,\u0026quot;focusId\u0026quot;:\u0026quot;20230807163235-rvwkgqa\u0026quot;,\u0026quot;focusStart\u0026quot;:1003,\u0026quot;focusEnd\u0026quot;:1003\u0026#125;",
+		"title": "U3L16-2-c——Spine骨骼动画代码相关",
+		"updated": "20231125201915"
+	},
+	"Children": [
+		{
+			"ID": "20230807151840-oh7qb6b",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230807151840-oh7qb6b",
+				"updated": "20230807163233"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20230807163235-rvwkgqa",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230807163235-rvwkgqa",
+				"style": "line-height: 22px;",
+				"updated": "20231125201915"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Spine.Unity\t\t\t\t\t\t\t\t\t\t\t//Spine代码相关命名空间\nSkeletonAnimation\t\t\t\t\t\t\t\t\t//Spine骨骼动画类\nskeletonAnimation.loop\t\t\t\t\t\t\t\t//Spine骨骼动画的循环属性\nskeletonAnimation.AnimationName\t\t\t\t\t\t//Spine骨骼动画的动画名\nskeletonAnimation.AnimationState.SetAnimation()\t\t//立刻播放某个动画的方法\nskeletonAnimation.AnimationState.AddAnimation()\t\t//队列播放某个动画的方法\nskeletonAnimation.skeleton.ScaleX\t\t\t\t\t//X轴方向缩放，可以用于翻转\nskeletonAnimation.skeleton.ScaleY\t\t\t\t\t//Y轴方向缩放，可以用于翻转\nskeletonAnimation.AnimationState.Start\t\t\t\t//动画开始播放时执行的事件\nskeletonAnimation.AnimationState.End\t\t\t\t//动画中断或者清除时的事件\nskeletonAnimation.AnimationState.Complete\t\t\t//动画播放完成的事件\nskeletonAnimation.AnimationState.Event\t\t\t\t//做动画时添加的自定义事件\n[SpineAnimation]\t\t\t\t\t\t\t\t\t//动画特性，使用该特性的成员变量，在inspector窗口上可以直接选择动画\n[SpineBone]\t\t\t\t\t\t\t\t\t\t\t//骨骼特性，使用该特性的成员变量，在inspector窗口上可以直接选择骨骼或者IK点\n[SpineSlot]\t\t\t\t\t\t\t\t\t\t\t//插件特性，使用该特性的成员变量，在inspector窗口上可以直接选择插槽\n[SpineAttachment]\t\t\t\t\t\t\t\t\t//附件特性，使用该特性的成员变量，在inspector窗口上可以直接选择附件\nskeletonAnimation.skeleton.FindBone()\t\t\t\t//获取骨骼方法\nskeletonAnimation.skeleton.SetAttachment()\t\t\t//获取插槽附件方法\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230807163237-096efwe",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230807163237-096efwe",
+				"updated": "20230807163245"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "动画播放"
+				}
+			]
+		},
+		{
+			"ID": "20230807164029-87u7qqx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807164029-87u7qqx",
+				"updated": "20230807164106"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "引用 Spine代码相关 需要先引入命名空间 Spine.Unity"
+				}
+			]
+		},
+		{
+			"ID": "20230807163737-mfao406",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230807163737-mfao406",
+				"updated": "20230807164115"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using Spine.Unity;\nusing UnityEngine;\n\npublic class Lesson45 : MonoBehaviour\n{\n    private SkeletonAnimation skeletonAnimation;\n\n    void Start()\n    {\n        skeletonAnimation = GetComponent\u003cSkeletonAnimation\u003e();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230807164137-tyjmocc",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230807164137-tyjmocc",
+				"updated": "20230807164209"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "直接改变SkeletonAnimation中参数"
+				}
+			]
+		},
+		{
+			"ID": "20230807164234-3jr739k",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807164234-3jr739k",
+				"updated": "20230807164307"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "注意！一定要先设置循环，再修改动画名，循环设置才会成功！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230807164119-f10fiqu",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230807164119-f10fiqu",
+				"updated": "20230807164230"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "skeletonAnimation.loop = true;\nskeletonAnimation.AnimationName = \"jump\";\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230807164119-sgn3ew2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230807164119-sgn3ew2",
+				"updated": "20230807164331"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用SkeletonAnimation中动画状态改变的函数"
+				}
+			]
+		},
+		{
+			"ID": "20230807164333-4v7e917",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230807164333-4v7e917",
+				"name": "skeletonAnimation.AnimationState.SetAnimation()",
+				"updated": "20230807164816"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "立刻播放"
+				}
+			]
+		},
+		{
+			"ID": "20230807165357-qiui6ai",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807165357-qiui6ai",
+				"updated": "20230807165459"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "第一个参数是索引，一般是0；第二个参数是动画名；第三个参数是是否循环"
+				}
+			]
+		},
+		{
+			"ID": "20230807164817-50hdf8f",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230807164817-50hdf8f",
+				"updated": "20230807164852"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "skeletonAnimation.AnimationState.SetAnimation(0, \"jump\", false);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230807164817-cc5mjg7",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230807164817-cc5mjg7",
+				"name": "skeletonAnimation.AnimationState.AddAnimation()",
+				"updated": "20230807164831"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "队列播放"
+				}
+			]
+		},
+		{
+			"ID": "20230807165501-pefaarq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807165501-pefaarq",
+				"updated": "20230807165522"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "顾名思义，就是等待上一个动画播放完成后再播放动画"
+				}
+			]
+		},
+		{
+			"ID": "20230807165524-875gxte",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807165524-875gxte",
+				"updated": "20230807165532"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "第四个参数是延迟时间"
+				}
+			]
+		},
+		{
+			"ID": "20230807164832-blm8xs2",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230807164832-blm8xs2",
+				"updated": "20230807164858"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "skeletonAnimation.AnimationState.AddAnimation(0, \"walk\", true, 0);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230807163245-f3dkv31",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230807163245-f3dkv31",
+				"name": "skeletonAnimation.skeleton.ScaleX",
+				"updated": "20230807163249"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "转向"
+				}
+			]
+		},
+		{
+			"ID": "20230807165703-12ehzmz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807165703-12ehzmz",
+				"updated": "20230807165733"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "1是正向，-1就是负向，ScaleY同理"
+				}
+			]
+		},
+		{
+			"ID": "20230807165639-un6q3x1",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230807165639-un6q3x1",
+				"updated": "20230807165741"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "skeletonAnimation.skeleton.ScaleX = -1;\nskeletonAnimation.skeleton.ScaleY = 1;\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230807163249-prg0fk1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230807163249-prg0fk1",
+				"updated": "20230807165747"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "动画事件"
+				}
+			]
+		},
+		{
+			"ID": "20230807170808-bsdyunc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807170808-bsdyunc",
+				"updated": "20230807171938"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以下的每个事件添加的函数都需要一个参数t"
+				}
+			]
+		},
+		{
+			"ID": "20230807165747-72x9ek0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230807165747-72x9ek0",
+				"name": "skeletonAnimation.AnimationState.Start",
+				"updated": "20230807165819"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "动画开始播放"
+				}
+			]
+		},
+		{
+			"ID": "20230807165819-5m8tcjx",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230807165819-5m8tcjx",
+				"updated": "20230807170756"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "skeletonAnimation.AnimationState.Start += (t) =\u003e\n{\n    print(skeletonAnimation.AnimationName + \"动画开始播放\");\n};\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230807165751-fi35tyn",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230807165751-fi35tyn",
+				"name": "skeletonAnimation.AnimationState.End",
+				"updated": "20230807165829"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "动画被中断或者清除"
+				}
+			]
+		},
+		{
+			"ID": "20230807165832-9ghw39l",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230807165832-9ghw39l",
+				"updated": "20230807170754"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "skeletonAnimation.AnimationState.End += (t) =\u003e\n{\n    print(skeletonAnimation.AnimationName + \"动画中断或者清除\");\n};\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230807165753-zdqz4br",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230807165753-zdqz4br",
+				"name": "skeletonAnimation.AnimationState.Complete",
+				"updated": "20230807165836"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "播放完成"
+				}
+			]
+		},
+		{
+			"ID": "20230807165836-dk1kexg",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230807165836-dk1kexg",
+				"updated": "20230807170752"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "skeletonAnimation.AnimationState.Complete += (t) =\u003e\n{\n    print(skeletonAnimation.AnimationName + \"动画播放完成\");\n};\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230807165837-48rhgxx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230807165837-48rhgxx",
+				"name": "skeletonAnimation.AnimationState.Event",
+				"updated": "20230807165850"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "做动画时添加的自定义事件"
+				}
+			]
+		},
+		{
+			"ID": "20230807171955-xdqqkee",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807171955-xdqqkee",
+				"updated": "20230807172045"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义事件的Spine动画制作时添加的事件，我们可以在第二个参数里使用它"
+				}
+			]
+		},
+		{
+			"ID": "20230807165850-z1aubr0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230807165850-z1aubr0",
+				"updated": "20230807170749"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "skeletonAnimation.AnimationState.Event += (t, e) =\u003e\n{\n    print(skeletonAnimation.AnimationName + \"自定义事件\");\n};\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230807163254-zeu2p3v",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230807163254-zeu2p3v",
+				"updated": "20230807163303"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "便携特性"
+				}
+			]
+		},
+		{
+			"ID": "20230807172134-bmckwse",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230807172134-bmckwse",
+				"name": "[SpineAnimation]",
+				"updated": "20230807172333"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "动画特性"
+				}
+			]
+		},
+		{
+			"ID": "20230807172334-rq312gz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807172334-rq312gz",
+				"updated": "20230807173555"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "用来申明成员变量，使用该特性的成员变量，在inspector窗口上可以直接选择"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "动画"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，得到该"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "动画"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的名字，而无需再手动写字符串"
+				}
+			]
+		},
+		{
+			"ID": "20230807172551-ke410dh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807172551-ke410dh",
+				"updated": "20230807173550"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这样，在使用一些需要传入 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "动画"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的名字字符串 作为参数的方法里，可以直接使用这个成员变量，而不用再写字符串"
+				}
+			]
+		},
+		{
+			"ID": "20230807172052-ltl7dcm",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230807172052-ltl7dcm",
+				"updated": "20230807172829"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[SpineAnimation]\npublic string jumpName;\n\nvoid Start()\n{\n    skeletonAnimation.AnimationState.SetAnimation(0, jumpName, false);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230807172152-87yj3tx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230807172152-87yj3tx",
+				"name": "[SpineBone]",
+				"updated": "20230807172154"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "骨骼特性"
+				}
+			]
+		},
+		{
+			"ID": "20230807173053-jxxmcfy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807173053-jxxmcfy",
+				"updated": "20230807173529"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "用来申明成员变量，使用该特性的成员变量，在inspector窗口上可以直接选择"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "骨骼或者IK点"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，得到该"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "骨骼或者IK点"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的名字，而无需再手动写字符串"
+				}
+			]
+		},
+		{
+			"ID": "20230807173053-klx2nk0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807173053-klx2nk0",
+				"updated": "20230807173543"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这样，在使用一些需要传入 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "骨骼或者IK点的"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "名字字符串 作为参数的方法里，可以直接使用这个成员变量，而不用再写字符串"
+				}
+			]
+		},
+		{
+			"ID": "20230807172209-1df1a3s",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230807172209-1df1a3s",
+				"updated": "20230807173143"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[SpineBone]\npublic string BoneName;\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230807172156-1u8d5sx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230807172156-1u8d5sx",
+				"name": "[SpineSlot]",
+				"updated": "20230807172204"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "插槽特性"
+				}
+			]
+		},
+		{
+			"ID": "20230807173259-iukazom",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807173259-iukazom",
+				"updated": "20230807173401"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "用来申明成员变量，使用该特性的成员变量，在inspector窗口上可以直接选择"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "插槽"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，得到该"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "插槽"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的名字，而无需再手动写字符串"
+				}
+			]
+		},
+		{
+			"ID": "20230807173259-xm1lb86",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807173259-xm1lb86",
+				"updated": "20230807173544"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这样，在使用一些需要传入 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "插槽的"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "名字字符串 作为参数的方法里，可以直接使用这个成员变量，而不用再写字符串"
+				}
+			]
+		},
+		{
+			"ID": "20230807172211-27oil27",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230807172211-27oil27",
+				"updated": "20230807173251"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[SpineSlot]\npublic string slotName;\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230807172158-mre7kfw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230807172158-mre7kfw",
+				"name": "[SpineAttachment]",
+				"updated": "20230807172208"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "附件特性"
+				}
+			]
+		},
+		{
+			"ID": "20230807173305-n4qcwvs",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807173305-n4qcwvs",
+				"updated": "20230807173327"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "用来申明成员变量，使用该特性的成员变量，在inspector窗口上可以直接选择"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "附件"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，得到该"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "附件"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的名字，而无需再手动写字符串"
+				}
+			]
+		},
+		{
+			"ID": "20230807173305-ymnimll",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807173305-ymnimll",
+				"updated": "20230807173546"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这样，在使用一些需要传入 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "附件的"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "名字字符串 作为参数的方法里，可以直接使用这个成员变量，而不用再写字符串"
+				}
+			]
+		},
+		{
+			"ID": "20230807172213-mmjzz7z",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230807172213-mmjzz7z",
+				"updated": "20230807173241"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[SpineAttachment]\npublic string attachmentName;\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230807163303-i0b951r",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230807163303-i0b951r",
+				"updated": "20230807173429"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "获取骨骼、设置插槽附件"
+				}
+			]
+		},
+		{
+			"ID": "20230807173429-a4lelco",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230807173429-a4lelco",
+				"name": "skeletonAnimation.skeleton.FindBone()",
+				"updated": "20230807173807"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "获取骨骼"
+				}
+			]
+		},
+		{
+			"ID": "20230807173943-s07u3lm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807173943-s07u3lm",
+				"updated": "20230807173954"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以用这个调整骨骼的各种信息"
+				}
+			]
+		},
+		{
+			"ID": "20230807173817-vhi6ov3",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230807173817-vhi6ov3",
+				"updated": "20230807173823"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Bone bone = skeletonAnimation.skeleton.FindBone(boneName);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230807173807-gweqach",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230807173807-gweqach",
+				"name": "skeletonAnimation.skeleton.SetAttachment()",
+				"updated": "20230807173815"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "设置插槽附件"
+				}
+			]
+		},
+		{
+			"ID": "20230807173847-29h40ci",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807173847-29h40ci",
+				"updated": "20230807173937"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "第一个参数是 要设置附件的插槽，第二个参数是 要设置的附件，用这个可以实现换装"
+				}
+			]
+		},
+		{
+			"ID": "20230807173815-h1xl8m0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230807173815-h1xl8m0",
+				"updated": "20230807173838"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "skeletonAnimation.skeleton.SetAttachment(slotName, attachmentName);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230807163316-xum840r",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230807163316-xum840r",
+				"updated": "20230807163323"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在UI中使用"
+				}
+			]
+		},
+		{
+			"ID": "20230807173958-viizmsn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807173958-viizmsn",
+				"updated": "20230807174209"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "涉及一部分UGUI的内容"
+				}
+			]
+		},
+		{
+			"ID": "20230807174209-aj8c67d",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230807174209-aj8c67d",
+				"updated": "20230807180030"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "拖入Spine骨骼动画时选择UI，然后拖到Canvas对象下，即可显示出来，并可以使用Rect Transform"
+				}
+			]
+		}
+	]
+}

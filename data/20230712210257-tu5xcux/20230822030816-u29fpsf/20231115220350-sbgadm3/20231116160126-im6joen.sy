@@ -1,0 +1,325 @@
+{
+	"ID": "20231116160126-im6joen",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20231116160126-im6joen",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20231116160126-im6joen\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20231116160828-cywzx3v\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20231116160741-ibiw9zv\u0026quot;,\u0026quot;scrollTop\u0026quot;:410,\u0026quot;focusId\u0026quot;:\u0026quot;20231116160307-4097aik\u0026quot;,\u0026quot;focusStart\u0026quot;:0,\u0026quot;focusEnd\u0026quot;:0\u0026#125;",
+		"title": "U4S2L3——ScriptableObject 非持久数据",
+		"type": "doc",
+		"updated": "20231116161321"
+	},
+	"Children": [
+		{
+			"ID": "20231116160828-cywzx3v",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231116160828-cywzx3v",
+				"updated": "20231116160832"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20231116160832-byxooq6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231116160832-byxooq6",
+				"style": "line-height: 22px;",
+				"updated": "20231116161236"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "ScriptableObject.CreateInstance\u003c\u003e()    //在运行时创建出指定继承ScriptableObject的对象，该对象只存在于内存当中，可以被GC\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231116160126-ihw1eof",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20231116160126-ihw1eof",
+				"updated": "20231116160237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ScriptableObject的非持久化数据"
+				}
+			]
+		},
+		{
+			"ID": "20231116160238-e5dr6j8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116160238-e5dr6j8",
+				"updated": "20231116160305"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ScriptableObject的非持久化数据指的是，不管在编辑器模式还是在发布后都不会持久化的数据\n我们可以根据自己的需求随时创建对应数据对象进行使用，就好像直接new一个数据结构类对象"
+				}
+			]
+		},
+		{
+			"ID": "20231116160307-4097aik",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231116160307-4097aik",
+				"name": "ScriptableObject.CreateInstance\u0026lt;\u0026gt;()",
+				"updated": "20231116161207"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "利用ScriptableObject生成非持久化的数据"
+				}
+			]
+		},
+		{
+			"ID": "20231116160325-w5cw0ts",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116160325-w5cw0ts",
+				"updated": "20231116160339"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "利用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ScriptableObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​中的静态方法"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "CreateInstance\u0026lt;\u0026gt;()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n该方法可以在运行时创建出指定继承"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ScriptableObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的对象\n该对象只存在于内存当中，可以被GC\n调用一次就创建一次"
+				}
+			]
+		},
+		{
+			"ID": "20231116161133-skqck8b",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231116161133-skqck8b",
+				"style": "line-height: 22px;",
+				"updated": "20231116161258"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class Lesson3 : MonoBehaviour\n{\n    public MyData data;\n\n    void Start()\n    {\n        //通过类名来获取\n        //data = ScriptableObject.CreateInstance(\"MyData\") as MyData;\n        //通过泛型来获取\n        data = ScriptableObject.CreateInstance\u003cMyData\u003e();\n        data.PrintInfo();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231116161324-izws2q7",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20231116161324-izws2q7",
+				"updated": "20231116161321"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20231116160325-7i3p71i",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20231116160325-7i3p71i",
+						"updated": "20231116161543"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "通过这种方式创建出来的数据对象，\n"
+						},
+						{
+							"Type": "NodeTextMark",
+							"Properties": {
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+							},
+							"TextMarkType": "strong text",
+							"TextMarkTextContent": "它里面的默认值，将不会受到脚本中设置的影响"
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+						},
+						{
+							"Type": "NodeText"
+						},
+						{
+							"Type": "NodeTextMark",
+							"Properties": {
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+							},
+							"TextMarkType": "text",
+							"TextMarkTextContent": "这意味着你在Inspector窗口为脚本变量拖曳关联的对象在这里都是空"
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "\n（右图的值都是不是脚本设置的默认值）"
+						}
+					]
+				},
+				{
+					"ID": "20231116161321-nazbaf1",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20231116161321-nazbaf1",
+						"updated": "20231116161321"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Properties": {
+								"parent-style": "width: 154px;",
+								"style": "width: 144px;"
+							},
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20231116161321-x28thlh.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"width: 144px;\" parent-style=\"width: 154px;\"}"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20231116160738-77k414v",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231116160738-77k414v",
+				"updated": "20231116160740"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ScriptableObject的非持久化数据存在的意义"
+				}
+			]
+		},
+		{
+			"ID": "20231116160741-ibiw9zv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231116160741-ibiw9zv",
+				"updated": "20231116160805"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "当你只是希望在运行时能有一组唯一的数据可以使用，但是这个数据又不太希望保存为数据资源文件浪费硬盘空间\n那么ScriptableObject的非持久化数据就有了存在的意义\n它的特点是："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "只在运行时使用，在编辑器模式下也不会保存在本地"
+				}
+			]
+		}
+	]
+}

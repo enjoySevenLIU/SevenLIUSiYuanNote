@@ -1,0 +1,475 @@
+{
+	"ID": "20240201215534-ei4i3q5",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240201215534-ei4i3q5",
+		"title": "UH2S2L3——Lua文件加载重定向",
+		"updated": "20240302170527"
+	},
+	"Children": [
+		{
+			"ID": "20240201220040-f79yliw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201220040-f79yliw",
+				"updated": "20240201220045"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240201220046-iu95dj7",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201220046-iu95dj7",
+				"style": "line-height: 22px;",
+				"updated": "20240201224103"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "luaEnv.AddLoader()\t\t//添加加载Lua文件函数的方法，要求函数参数接收传入到require语句的字符串，返回脚本文件的byte数组\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201215743-5qgftse",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201215743-5qgftse",
+				"name": "luaEnv.AddLoader()",
+				"updated": "20240201215823"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "文件加载重定向"
+				}
+			]
+		},
+		{
+			"ID": "20240201215542-6qgn17x",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201215542-6qgn17x",
+				"updated": "20240201222548"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "xlua提供了一个路径重定向的方法"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "luaEnv.AddLoader()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，允许我们"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "自定义加载Lua文件的规则"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n当我们执行Lua语言"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "require"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​时，相当于执行一个lua脚本，它就会自动执行我们自定义传入的这个函数"
+				}
+			]
+		},
+		{
+			"ID": "20240201220448-xjbe1n9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201220448-xjbe1n9",
+				"updated": "20240201222552"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先需要观察该方法的实现"
+				}
+			]
+		},
+		{
+			"ID": "20240201220548-jjfqlwk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201220548-jjfqlwk",
+				"updated": "20240201220607"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "LuaEnv.cs"
+				}
+			]
+		},
+		{
+			"ID": "20240201215534-rsmwfzz",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201215534-rsmwfzz",
+				"style": "line-height: 22px;",
+				"updated": "20240201220621"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//...\npublic delegate byte[] CustomLoader(ref string filepath);\n\ninternal List\u003cCustomLoader\u003e customLoaders = new List\u003cCustomLoader\u003e();\n\n//loader : CustomLoader， filepath参数：（ref类型）输入是require的参数，如果需要支持调试，需要输出真实路径。\n//                        返回值：如果返回null，代表加载该源下无合适的文件，否则返回UTF8编码的byte[]\npublic void AddLoader(CustomLoader loader)\n{\n    customLoaders.Add(loader);\n}\n//...\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201220638-zt5kqe7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201220638-zt5kqe7",
+				"updated": "20240201221805"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "LuaEnv.cs"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "声明了委托"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "CustomLoader"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，要求"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "函数的参数列表为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code strong",
+					"TextMarkTextContent": "ref string filepath"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "，返回值为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code strong",
+					"TextMarkTextContent": "byte[]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n而我们添加的自定义加载Lua文件的方法，会加入到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "CustomLoader"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的列表内，\n因此我们的方法需要按照委托"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "CustomLoader"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​要求的那样声明，再执行"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AddLoader()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​并传入方法"
+				}
+			]
+		},
+		{
+			"ID": "20240201221050-oy3ndi5",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201221050-oy3ndi5",
+				"style": "line-height: 22px;",
+				"updated": "20240201222651"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Start()\n{\n    LuaEnv env = new LuaEnv();\n    env.AddLoader(MyCustomLoader);\n    env.DoString(\"require('Main')\");\n}\n\nprivate byte[] MyCustomLoader(ref string filePath)\n{\n\t//TODO...\n\tDebug.Log(\"Main\");\n    return null;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201222601-y0tfibb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201222601-y0tfibb",
+				"updated": "20240201223141"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "如果自定义加载函数返回了"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code strong",
+					"TextMarkTextContent": "null"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "，就会执行下一个自定义加载函数，如果都没有找到，就会使用默认路径查找"
+				}
+			]
+		},
+		{
+			"ID": "20240201221247-tlijehm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201221247-tlijehm",
+				"updated": "20240201223135"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "之后我们再执行"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "env.DoString(\u0026quot;require('Lua脚本名')\u0026quot;)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，就会自动执行这里的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "MyCustomLoader()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n通过函数中的逻辑，去加载Lua文件，传入的参数是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "require"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​执行的lua脚本文件名，通过它即可拼接一个Lua文件所在路径"
+				}
+			]
+		},
+		{
+			"ID": "20240201223039-oxbdgu1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201223039-oxbdgu1",
+				"updated": "20240201223358"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "接下来实现加载方法，首先需要将传入的脚本名拼接为文件路径，再通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref code",
+					"TextMarkBlockRefID": "20231107204133-mhsozjt",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "File"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20231107204133-mhsozjt",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "提供的方法"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "去加载文本文件，读取其内容"
+				}
+			]
+		},
+		{
+			"ID": "20240201222820-ukngsw1",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201222820-ukngsw1",
+				"style": "line-height: 22px;",
+				"updated": "20240201223753"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private byte[] MyCustomLoader(ref string filePath)\n{\n    string path = Application.dataPath + \"/Lua/\" + filePath + \".lua\";\n    if (File.Exists(path))\n    {\n        return File.ReadAllBytes(path);\n    }\n    else\n    {\n        Debug.LogError(\"重定向失败，文件名为: \" + filePath);\n    }\n    return null;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201223830-rh9qzjs",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201223830-rh9qzjs",
+				"updated": "20240201223830"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240201223830-x4pbtcx.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240201220321-c3n1ork",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201220321-c3n1ork",
+				"updated": "20240201220332"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "为了实现热更新，最终我们会去AB包中加载lua文件"
+				}
+			]
+		}
+	]
+}

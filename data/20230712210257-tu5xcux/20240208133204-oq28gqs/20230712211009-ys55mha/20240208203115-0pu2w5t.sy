@@ -1,0 +1,206 @@
+{
+	"ID": "20240208203115-0pu2w5t",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240208203115-0pu2w5t",
+		"title": "UG1L6——工具栏和选择网格",
+		"updated": "20240208205537"
+	},
+	"Children": [
+		{
+			"ID": "20240208203811-ueb86xf",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240208203811-ueb86xf",
+				"updated": "20240208203826"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240208203815-f06tsxc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240208203815-f06tsxc",
+				"style": "line-height: 22px;",
+				"updated": "20240208205537"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "GUI.Toolbar()\t\t\t//绘制一组工具栏\nGUI.SelectionGrid()\t\t//绘制选择网格，相比工具栏可以限制单行显示数量，达到上限就换行\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240208203817-9n8nys3",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240208203817-9n8nys3",
+				"name": "GUI.Toolbar()",
+				"updated": "20240208203824"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "工具栏"
+				}
+			]
+		},
+		{
+			"ID": "20240208203836-dxru28l",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240208203836-dxru28l",
+				"updated": "20240208205046"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUI.Toolbar"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​会绘制一系列按钮作为工具栏，工具栏可以帮助我们根据不同的返回索引，来处理不同的逻辑\n第二个参数传入当前索引值，第三个参数传入每个选项的名字，返回这一帧工具栏选择的选项，\n因此和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUI.Toggle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​一样，必须要在外面声明一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "int"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​变量，用来存储当前工具栏选择了什么选项的索引"
+				}
+			]
+		},
+		{
+			"ID": "20240208203832-ukoapji",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240208203832-ukoapji",
+				"style": "line-height: 22px;",
+				"updated": "20240208204548"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private int toolbarIndex = 0;\nprivate string[] toolbarInfos = new string[] { \"选项一\", \"选项二\", \"选项三\" };\n\nprivate void OnGUI()\n{\n    toolbarIndex = GUI.Toolbar(new Rect(0, 0, 200, 30), toolbarIndex, toolbarInfos);\n    switch (toolbarIndex)\n    {\n        case 0:\n            break;\n        case 1:\n            break;\n        case 2:\n            break;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240208203821-kph5j20",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240208203821-kph5j20",
+				"updated": "20240208203831"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "选择网格"
+				}
+			]
+		},
+		{
+			"ID": "20240208203838-ocdr3lz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240208203838-ocdr3lz",
+				"updated": "20240208205418"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "选择网格的作用与工具栏几乎一致，唯一的区别是多了一个参数"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "xCount"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，即水平方向最多显示多少个选项\n用它可以实现多行选项的显示"
+				}
+			]
+		},
+		{
+			"ID": "20240208203115-4elww3m",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240208203115-4elww3m",
+				"style": "line-height: 22px;",
+				"updated": "20240208205133"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private string[] toolbarInfos = new string[] { \"选项一\", \"选项二\", \"选项三\" };\nprivate int selGridIndex = 0;\n\nprivate void OnGUI()\n{\n    selGridIndex = GUI.SelectionGrid(new Rect(0, 50, 200, 60), selGridIndex, toolbarInfos, 1);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

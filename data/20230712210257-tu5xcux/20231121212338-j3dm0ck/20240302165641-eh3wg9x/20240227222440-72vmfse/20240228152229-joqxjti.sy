@@ -1,0 +1,627 @@
+{
+	"ID": "20240228152229-joqxjti",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240228152229-joqxjti",
+		"title": "UH2S3L4——toLua解析器管理器",
+		"updated": "20240302170710"
+	},
+	"Children": [
+		{
+			"ID": "20240228154541-d4j3hn0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240228154541-d4j3hn0",
+				"updated": "20240228154541"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Lua解析器管理器要做的工作"
+				}
+			]
+		},
+		{
+			"ID": "20240228154541-o39cdui",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228154541-o39cdui",
+				"updated": "20240228154607"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "封装管理唯一的toLua解析器，对外开放调用Lua解析器接口，在打包后可调用自定义解析规则，实现直接执行lua脚本的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240228154541-5a9jyuo",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240228154541-5a9jyuo",
+				"updated": "20240228154541"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "继承单例模式基类"
+				}
+			]
+		},
+		{
+			"ID": "20240228154541-rp5mxuh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228154541-rp5mxuh",
+				"updated": "20240228154541"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这里让"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ABManager"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​继承了"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20231223162523-vxvufy3",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "单例模式基类"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BaseManager\u0026lt;T\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，作为单例模式管理器使用"
+				}
+			]
+		},
+		{
+			"ID": "20240228154541-m6etuf5",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240228154541-m6etuf5",
+				"updated": "20240302162538"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "基础成员与属性、初始化方法"
+				}
+			]
+		},
+		{
+			"ID": "20240228154541-toovj1b",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240228154541-toovj1b",
+				"updated": "20240302162538"
+			},
+			"Children": [
+				{
+					"ID": "20240228154541-jka8m5l",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240228154541-jka8m5l",
+						"updated": "20240228154541"
+					},
+					"Children": [
+						{
+							"ID": "20240228154541-56zpjvc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228154541-56zpjvc",
+								"updated": "20240228154626"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "由于toLua解析器一般是唯一的，因此使用一个私有成员变量"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "luaState"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​​来管理这个唯一的toLua解析器"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240228154541-eqzze0p",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240228154541-eqzze0p",
+						"updated": "20240228160735"
+					},
+					"Children": [
+						{
+							"ID": "20240228154541-bavonkk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228154541-bavonkk",
+								"updated": "20240228160735"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "因为以后外部会经常调用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "luaState"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​​（主要是调用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "_G"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​​表内内容），因此开放只读属性"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LuaState"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​​使外部可以方便的调用"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240228154541-5gyzazk",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240228154541-5gyzazk",
+						"updated": "20240228154957"
+					},
+					"Children": [
+						{
+							"ID": "20240228154541-p68o0mh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228154541-p68o0mh",
+								"updated": "20240228154957"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "初始化方法会在解析器为空时实例化解析器，在打包后可调用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240228131233-wqqtiqf",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "自定义解析规则"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240228154734-pkiq47c",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240228154734-pkiq47c",
+						"updated": "20240302162114"
+					},
+					"Children": [
+						{
+							"ID": "20240228154734-wyt1y58",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228154734-wyt1y58",
+								"updated": "20240302162114"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "初始化方法中需要初始化"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DelegateFactory"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，执行"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DelegateFactory.Init()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，以便于正常使用委托"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240229182206-d62brk4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240229182206-d62brk4",
+						"updated": "20240229182356"
+					},
+					"Children": [
+						{
+							"ID": "20240229182206-0qx03jz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229182206-0qx03jz",
+								"updated": "20240229182356"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "初始化方法中需要让"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LuaLooper"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​挂载到自己的游戏对象上，并将管理的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LuaState"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​关联到其"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "luaState"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​​属性上，以便于正常使用Lua协程"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240302162021-lol1mh7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240302162021-lol1mh7",
+						"updated": "20240302162527"
+					},
+					"Children": [
+						{
+							"ID": "20240302162021-dh4y7c7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240302162021-dh4y7c7",
+								"updated": "20240302162527"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "初始化方法中需要注册Lua协程，执行"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LuaCoroutine.Register()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，传入当前Lua解析器，以及依附于GameObject上的脚本"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240229182257-yj0c8ju",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240229182257-yj0c8ju",
+						"updated": "20240302162045"
+					},
+					"Children": [
+						{
+							"ID": "20240229182257-z8ei5z1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240229182257-z8ei5z1",
+								"updated": "20240302162045"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "初始化方法中需要执行"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LuaBinder.Bind()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，传入当前的Lua解析器，才能让Lua执行Unity类相关代码"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240228154721-vp1qs1e",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240228154721-vp1qs1e",
+				"style": "line-height: 22px;",
+				"updated": "20240302162538"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private LuaState luaState;\n\npublic void Init()\n{\n    if (luaState != null)\n        return;\n#if !UNITY_EDITOR\n    //打包后再使用自定义解析方法\n    new LuaCustomLoader();\n#endif\n    luaState = new LuaState();\n    luaState.Start();\n\n    DelegateFactory.Init();             //委托初始化相关\n    //协程相关\n    LuaLooper looper = this.gameObject.AddComponent\u003cLuaLooper\u003e();\n    //将我们自己申明的解析器和lualooper绑定起来，这样就可以让协程跑起来了\n    looper.luaState = luaState;\n\tLuaCoroutine.Register(luaState, this);  //lua协程注册，这样我们才能在Lua中使用tolua提供的协程函数\n    //Lua使用Unity中的类相关\n\tLuaBinder.Bind(luaState);\n}\n/// \u003csummary\u003e\n/// 调用解析器接口\n/// \u003c/summary\u003e\npublic LuaState LuaState\n{\n    get =\u003e luaState;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240228155024-161ecd6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240228155024-161ecd6",
+				"updated": "20240228155024"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "封装Lua解析器方法"
+				}
+			]
+		},
+		{
+			"ID": "20240228155024-g5tb6wj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228155024-g5tb6wj",
+				"updated": "20240228155028"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "封装并对外开放一系列调用唯一toLua解析器的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240228155024-worywhs",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240228155024-worywhs",
+				"updated": "20240228155024"
+			},
+			"Children": [
+				{
+					"ID": "20240228155024-9i83u8a",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240228155024-9i83u8a",
+						"updated": "20240228155024"
+					},
+					"Children": [
+						{
+							"ID": "20240228155024-fwvck8u",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228155024-fwvck8u",
+								"updated": "20240228155054"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "执行lua语句，销毁解析器方法都封装了，并添加了判空逻辑"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240228155024-xj54hxy",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240228155024-xj54hxy",
+						"updated": "20240228155024"
+					},
+					"Children": [
+						{
+							"ID": "20240228155024-0563i3p",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228155024-0563i3p",
+								"updated": "20240228155110"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "添加"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Require"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法，传入脚本名可直接执行lua脚本"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240228155111-pnz6110",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240228155111-pnz6110",
+				"style": "line-height: 22px;",
+				"updated": "20240228155235"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "/// \u003csummary\u003e\n/// 执行字符串形式的Lua语句\n/// \u003c/summary\u003e\n/// \u003cparam name=\"str\"\u003e要执行的Lua语句\u003c/param\u003e\n/// \u003cparam name=\"chunkName\"\u003e执行出处\u003c/param\u003e\npublic void DoString(string str, string chunkName = \"LuaManager.cs\")\n{\n    luaState.DoString(str, chunkName);\n}\n/// \u003csummary\u003e\n/// 执行指定名字的lua脚本\n/// \u003c/summary\u003e\n/// \u003cparam name=\"fileName\"\u003e要执行的lua脚本名\u003c/param\u003e\npublic void Require(string fileName)\n{\n    luaState.Require(fileName);\n}\n/// \u003csummary\u003e\n/// 销毁当前使用的lua解析器\n/// \u003c/summary\u003e\npublic void Dispose()\n{\n    if (luaState == null)\n        return;\n    luaState.CheckTop();\n    luaState.Dispose();\n    luaState = null;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240228155256-bgzg0ba",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240228155256-bgzg0ba",
+				"updated": "20240228155257"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "管理器代码"
+				}
+			]
+		},
+		{
+			"ID": "20240228155314-yzzk9mn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240228155314-yzzk9mn",
+				"style": "line-height: 22px;",
+				"updated": "20240302162559"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using LuaInterface;\n\n/// \u003csummary\u003e\n/// 管理唯一的一个toLua解析器的管理器\n/// \u003c/summary\u003e\npublic class LuaManager : SingletonAutoMonoBehaviour\u003cLuaManager\u003e\n{\n    private LuaState luaState;\n\n    public void Init()\n    {\n        if (luaState != null)\n            return;\n#if !UNITY_EDITOR\n        new LuaCustomLoader();                  //打包后再使用自定义解析方法\n#endif\n        luaState = new LuaState();\n        luaState.Start();\n\n        DelegateFactory.Init();                 //委托初始化相关\n        //协程相关\n        LuaLooper looper = this.gameObject.AddComponent\u003cLuaLooper\u003e();   \n        looper.luaState = luaState;             //将我们自己申明的解析器和lualooper绑定起来，这样就可以让协程跑起来了\n        LuaCoroutine.Register(luaState, this);  //lua协程注册，这样我们才能在Lua中使用tolua提供的协程函数\n\n        LuaBinder.Bind(luaState);               //Lua使用Unity中的类相关\n    }\n\n    /// \u003csummary\u003e\n    /// 调用解析器接口\n    /// \u003c/summary\u003e\n    public LuaState LuaState\n    {\n        get =\u003e luaState;\n    }\n\n    /// \u003csummary\u003e\n    /// 执行字符串形式的Lua语句\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"str\"\u003e要执行的Lua语句\u003c/param\u003e\n    /// \u003cparam name=\"chunkName\"\u003e执行出处\u003c/param\u003e\n    public void DoString(string str, string chunkName = \"LuaManager.cs\")\n    {\n        luaState.DoString(str, chunkName);\n    }\n\n    /// \u003csummary\u003e\n    /// 执行指定名字的lua脚本\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"fileName\"\u003e要执行的lua脚本名\u003c/param\u003e\n    public void Require(string fileName)\n    {\n        luaState.Require(fileName);\n    }\n\n    /// \u003csummary\u003e\n    /// 销毁当前使用的lua解析器\n    /// \u003c/summary\u003e\n    public void Dispose()\n    {\n        if (luaState == null)\n            return;\n        luaState.CheckTop();\n        luaState.Dispose();\n        luaState = null;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

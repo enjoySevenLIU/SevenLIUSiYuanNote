@@ -1,0 +1,607 @@
+{
+	"ID": "20240201224137-bors5nz",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240201224137-bors5nz",
+		"title": "UH2S2L4——Lua解析器管理器",
+		"updated": "20240302170533"
+	},
+	"Children": [
+		{
+			"ID": "20240201233915-wm92nxm",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201233915-wm92nxm",
+				"updated": "20240201233924"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Lua解析器管理器要做的工作"
+				}
+			]
+		},
+		{
+			"ID": "20240201233924-6x7e631",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201233924-6x7e631",
+				"updated": "20240201234405"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "封装管理唯一的Lua解析器，对外开放调用Lua解析器接口，实现自定义加载脚本规则，实现直接执行lua脚本的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240201232145-0n3upiw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201232145-0n3upiw",
+				"updated": "20240201232145"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "继承单例模式基类"
+				}
+			]
+		},
+		{
+			"ID": "20240201232145-tajz507",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201232145-tajz507",
+				"updated": "20240201232237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这里让"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ABManager"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​继承了"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20231223162523-vxvufy3",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "单例模式基类"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "BaseManager\u0026lt;T\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，作为单例模式管理器使用"
+				}
+			]
+		},
+		{
+			"ID": "20240201232243-x575njq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201232243-x575njq",
+				"updated": "20240201232424"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "基础成员与属性、初始化方法"
+				}
+			]
+		},
+		{
+			"ID": "20240201232318-bggbpzm",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240201232318-bggbpzm",
+				"updated": "20240201232755"
+			},
+			"Children": [
+				{
+					"ID": "20240201232629-h3k6f8a",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240201232629-h3k6f8a",
+						"updated": "20240201232629"
+					},
+					"Children": [
+						{
+							"ID": "20240201232629-0qyxfan",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240201232629-0qyxfan",
+								"updated": "20240201232645"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "由于Lua解析器一般是唯一的，因此使用一个私有成员变量"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "luaEnv"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​来管理这个唯一的Lua解析器\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240201232630-p792taw",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240201232630-p792taw"
+					},
+					"Children": [
+						{
+							"ID": "20240201232630-51jrtc6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240201232630-51jrtc6",
+								"updated": "20240201232638"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "因为以后外部会经常调用Lua解析器的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "_G"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​表，因此使用开放只读属性"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Global"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​使外部可以方便的调用"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240201232657-7xk6i23",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240201232657-7xk6i23",
+						"updated": "20240201232755"
+					},
+					"Children": [
+						{
+							"ID": "20240201232657-ujb7kv6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240201232657-ujb7kv6",
+								"updated": "20240201232755"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "初始化方法会在解析器为空时实例化解析器，并将自定义加载脚本的方法添加到解析器里"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240201232247-0j6vta3",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201232247-0j6vta3",
+				"style": "line-height: 22px;",
+				"updated": "20240201232507"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private LuaEnv luaEnv;\n\npublic LuaTable Global\n{\n    get\n    {\n        if (luaEnv == null)\n        {\n            Debug.LogError(\"Lua解析器未初始化！\");\n            return null;\n        }\n        return luaEnv.Global;\n    }\n}\n\npublic void Init()\n{\n    if (luaEnv != null)\n        return;\n    //初始化\n    luaEnv = new LuaEnv();\n    luaEnv.AddLoader(CustomDebugLoader);\n    luaEnv.AddLoader(CustomABLoader);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201232758-ur7oidf",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201232758-ur7oidf",
+				"updated": "20240201232817"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义加载脚本方法"
+				}
+			]
+		},
+		{
+			"ID": "20240201232833-hsmn2m4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201232833-hsmn2m4",
+				"updated": "20240201233244"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "声明了两个自定义加载脚本方法，一个用于开放调试时读取，另一个用于打包后读取"
+				}
+			]
+		},
+		{
+			"ID": "20240201232947-449ycon",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240201232947-449ycon",
+				"updated": "20240201233218"
+			},
+			"Children": [
+				{
+					"ID": "20240201232948-68hy5ys",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240201232948-68hy5ys",
+						"updated": "20240201233218"
+					},
+					"Children": [
+						{
+							"ID": "20240201232948-58i750b",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240201232948-58i750b",
+								"updated": "20240201233218"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CustomDebugLoader"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​用于开发中读取，可以直接读取工程下的Lua文件夹下的脚本，且不需要加.txt后缀名，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "打包后不可用！"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240201233054-l5s4kzo",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240201233054-l5s4kzo",
+						"updated": "20240201233151"
+					},
+					"Children": [
+						{
+							"ID": "20240201233054-7x3nxgk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240201233054-7x3nxgk",
+								"updated": "20240201233151"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CustomABLoader"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​用于打包后读取，调用了之前实现的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240128185344-0bn5jbo",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "AB包管理器"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "，读取luaAB包的脚本，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "需要加.txt后缀名"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240201232817-1d2lpvg",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201232817-1d2lpvg",
+				"style": "line-height: 22px;",
+				"updated": "20240201232817"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private byte[] CustomDebugLoader(ref string filePath)\n{\n    string path = Application.dataPath + \"/Lua/\" + filePath + \".lua\";\n    if (File.Exists(path))\n    {\n        return File.ReadAllBytes(path);\n    }\n    else\n    {\n        Debug.Log(\"CustomDebugLoader重定向失败，文件名为: \" + filePath);\n    }\n    return null;\n}\n\nprivate byte[] CustomABLoader(ref string filePath)\n{\n    TextAsset luaScript = ABManager.Instance.LoadRes\u003cTextAsset\u003e(\"lua\", filePath + \".lua\");\n    if (luaScript != null)\n        return luaScript.bytes;\n    else\n        Debug.Log(\"CustomABLoader重定向失败，文件名: \" + filePath);\n    return null;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201233247-q8kosh8",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201233247-q8kosh8",
+				"updated": "20240201233307"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "封装Lua解析器方法"
+				}
+			]
+		},
+		{
+			"ID": "20240201233419-u24bg1g",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240201233419-u24bg1g",
+				"updated": "20240201233518"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "封装并对外开放一系列调用唯一Lua解析器的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240201233519-7jptrfq",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240201233519-7jptrfq",
+				"updated": "20240201233755"
+			},
+			"Children": [
+				{
+					"ID": "20240201233519-lou78wi",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240201233519-lou78wi",
+						"updated": "20240201233519"
+					},
+					"Children": [
+						{
+							"ID": "20240201233519-v7l1m66",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240201233519-v7l1m66",
+								"updated": "20240201233608"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "执行lua语句，释放垃圾，销毁解析器方法都封装了，并添加了判空逻辑"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240201233610-xe6kcxf",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240201233610-xe6kcxf",
+						"updated": "20240201233755"
+					},
+					"Children": [
+						{
+							"ID": "20240201233610-u3lj43i",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240201233610-u3lj43i",
+								"updated": "20240201233755"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "添加"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DoLuaFile"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法，传入脚本名可直接执行lua脚本，让外部不再需要执行"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "DoString(\u0026quot;require('脚本名')\u0026quot;)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240201233307-2p0hznl",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201233307-2p0hznl",
+				"style": "line-height: 22px;",
+				"updated": "20240201233307"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "/// \u003csummary\u003e\n/// 执行lua脚本\n/// \u003c/summary\u003e\n/// \u003cparam name=\"fileName\"\u003e要执行的脚本名\u003c/param\u003e\npublic void DoLuaFile(string fileName)\n{\n    string str = string.Format(\"require('{0}')\", fileName);\n    DoString(str);\n}\n\n/// \u003csummary\u003e\n/// 执行Lua语句\n/// \u003c/summary\u003e\n/// \u003cparam name=\"str\"\u003e要执行的Lua语句\u003c/param\u003e\npublic void DoString(string str)\n{\n    if (luaEnv == null)\n    {\n        Debug.LogError(\"Lua解析器未初始化！\");\n        return;\n    }\n    luaEnv.DoString(str);\n}\n\n/// \u003csummary\u003e\n/// 释放Lua垃圾\n/// \u003c/summary\u003e\npublic void Tick()\n{\n    if (luaEnv == null)\n    {\n        Debug.LogError(\"Lua解析器未初始化！\");\n        return;\n    }\n    luaEnv.Tick();\n}\n\n/// \u003csummary\u003e\n/// 销毁解析器\n/// \u003c/summary\u003e\npublic void Dispose()\n{\n    if (luaEnv == null)\n    {\n        Debug.LogError(\"Lua解析器未初始化！\");\n        return;\n    }\n    luaEnv.Dispose();\n    luaEnv = null;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240201233253-70y5f02",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240201233253-70y5f02",
+				"updated": "20240201233818"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "管理器代码"
+				}
+			]
+		},
+		{
+			"ID": "20240201233818-py692zz",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240201233818-py692zz",
+				"style": "line-height: 22px;",
+				"updated": "20240201233831"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.IO;\nusing UnityEngine;\nusing XLua;\n\n/// \u003csummary\u003e\n/// Lua管理器，提供Lua解析器\n/// \u003c/summary\u003e\npublic class LuaManager : ManagerBase\u003cLuaManager\u003e\n{\n    private LuaEnv luaEnv;\n\n    public LuaTable Global\n    {\n        get\n        {\n            if (luaEnv == null)\n            {\n                Debug.LogError(\"Lua解析器未初始化！\");\n                return null;\n            }\n            return luaEnv.Global;\n        }\n    }\n\n    public void Init()\n    {\n        if (luaEnv != null)\n            return;\n        //初始化\n        luaEnv = new LuaEnv();\n        luaEnv.AddLoader(CustomDebugLoader);\n        luaEnv.AddLoader(CustomABLoader);\n    }\n\n    /// \u003csummary\u003e\n    /// 执行lua脚本\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"fileName\"\u003e要执行的脚本名\u003c/param\u003e\n    public void DoLuaFile(string fileName)\n    {\n        string str = string.Format(\"require('{0}')\", fileName);\n        DoString(str);\n    }\n\n    /// \u003csummary\u003e\n    /// 执行Lua语句\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"str\"\u003e要执行的Lua语句\u003c/param\u003e\n    public void DoString(string str)\n    {\n        if (luaEnv == null)\n        {\n            Debug.LogError(\"Lua解析器未初始化！\");\n            return;\n        }\n        luaEnv.DoString(str);\n    }\n\n    /// \u003csummary\u003e\n    /// 释放Lua垃圾\n    /// \u003c/summary\u003e\n    public void Tick()\n    {\n        if (luaEnv == null)\n        {\n            Debug.LogError(\"Lua解析器未初始化！\");\n            return;\n        }\n        luaEnv.Tick();\n    }\n\n    /// \u003csummary\u003e\n    /// 销毁解析器\n    /// \u003c/summary\u003e\n    public void Dispose()\n    {\n        if (luaEnv == null)\n        {\n            Debug.LogError(\"Lua解析器未初始化！\");\n            return;\n        }\n        luaEnv.Dispose();\n        luaEnv = null;\n    }\n\n    private byte[] CustomDebugLoader(ref string filePath)\n    {\n        string path = Application.dataPath + \"/Lua/\" + filePath + \".lua\";\n        if (File.Exists(path))\n        {\n            return File.ReadAllBytes(path);\n        }\n        else\n        {\n            Debug.Log(\"CustomDebugLoader重定向失败，文件名为: \" + filePath);\n        }\n        return null;\n    }\n\n    private byte[] CustomABLoader(ref string filePath)\n    {\n        TextAsset luaScript = ABManager.Instance.LoadRes\u003cTextAsset\u003e(\"lua\", filePath + \".lua\");\n        if (luaScript != null)\n            return luaScript.bytes;\n        else\n            Debug.Log(\"CustomABLoader重定向失败，文件名: \" + filePath);\n        return null;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

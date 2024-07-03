@@ -1,0 +1,3844 @@
+{
+	"ID": "20240304162315-n0q7ehu",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240304162315-n0q7ehu",
+		"title": "UN2L1——Socket的重要API",
+		"updated": "20240311215831"
+	},
+	"Children": [
+		{
+			"ID": "20240304170023-to7x0kb",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240304170023-to7x0kb",
+				"updated": "20240304170029"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240304170029-h3u36v0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240304170029-h3u36v0",
+				"style": "line-height: 22px;",
+				"updated": "20240307113941"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "System.Net.Sockets\t\t\t\t//Socket所在命名空间\nSocket\t\t\t\t\t\t\t//套接字类，用于网络通信\nAddressFamily\t\t\t\t\t//网络寻址枚举类型，决定寻址方案\nAddressFamily.InterNetwork\t\t//IPv4寻址\nAddressFamily.InterNetwork6\t\t//IPv6寻址\nSocketType\t\t\t\t\t\t//套接字枚举类型，决定使用的套接字类型\nSocketType.Dgram\t\t\t\t//支持数据报，最大长度固定的无连接、不可靠的消息(主要用于UDP通信)\nSocketType.Stream\t\t\t\t//支持可靠、双向、基于连接的字节流（主要用于TCP通信）\nProtocolType\t\t\t\t\t//协议类型枚举类型，决定套接字使用的通信协议\nProtocolType.Udp\t\t\t\t//TCP传输控制协议\nProtocolType.Tcp\t\t\t\t//UDP用户数据报协议\n//常用属性\nsocket.Connected\t\t\t\t//套接字的连接状态\nsocket.SocketType\t\t\t\t//获取套接字的类型\nsocket.ProtocolType\t\t\t\t//获取套接字的协议类型\nsocket.AddressFamily\t\t\t//获取套接字的寻址方案\nsocket.Available\t\t\t\t//获取从网络中获取准备读取的数据数据量\nsocket.LocalEndPoint\t\t\t//获取本机EndPoint对象\nsocket.RemoteEndPoint\t\t\t//获取远程EndPoint对象\n//服务端常用方法\nsocket.Bind()\t\t\t\t\t//绑定IP和端口，服务端socket设置\nsocket.Listen()\t\t\t\t\t//设置客户端连接的最大数量\nsocket.Accept()\t\t\t\t\t//等待客户端连入，会阻塞线程\n//客户端常用方法\nsocket.Connect()\t\t\t\t//连接远程服务端\n//同步收发消息相关\nsocket.Send()\t\t\t\t\t//同步发送消息，会阻塞线程\nsocket.Receive()\t\t\t\t//同步接收消息，会阻塞线程\n//关闭Socket相关\nsockets.Shutdown()\t\t\t\t//停用socket连接，在Close前需要调用，需要传入SocketShutdown枚举\nSocketShutdown.Send\t\t\t\t//停用socket的发送\nSocketShutdown.Receive\t\t\t//停用socket的接收\nSocketShutdown.Both\t\t\t\t//停用socket的发送和接收\nsocket.Close()\t\t\t\t\t//关闭并释放socket\n\n//TCP流套接字的声明\nnew Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)\n//UDP数据报套接字的声明\nnew Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240304162328-rpt8ca9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240304162328-rpt8ca9",
+				"name": "Socket",
+				"updated": "20240304162328"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Socket套接字"
+				}
+			]
+		},
+		{
+			"ID": "20240304162328-h0ak5rb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240304162328-h0ak5rb",
+				"updated": "20240304162328"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "它是C#提供给我们用于网络通信的一个类（在其它语言当中也有对应的Socket类）\n类名："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Socket"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n命名空间："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "System.Net.Sockets"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240304171029-gfwe894",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240304171029-gfwe894",
+				"updated": "20240304171045"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "TCP和UDP两种长连接通信方案都是基于Socket套接字的\n我们之后只需要使用其中的各种方法，就可以进行网络连接和网络通信了\n这里必须掌握的内容就是如何声明TCP和UDP的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Socket"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​套接字"
+				}
+			]
+		},
+		{
+			"ID": "20240304162328-5hejw60",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240304162328-5hejw60",
+				"updated": "20240304163400"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Socket套接字是支持TCP/IP网络通信的基本操作单位，一个套接字对象包含以下关键信息："
+				}
+			]
+		},
+		{
+			"ID": "20240304162328-ccdycda",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240304162328-ccdycda",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240304162328"
+			},
+			"Children": [
+				{
+					"ID": "20240304162328-4hn56j0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240304162328-4hn56j0",
+						"updated": "20240304162328"
+					},
+					"Children": [
+						{
+							"ID": "20240304162328-ym88pfj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304162328-ym88pfj",
+								"updated": "20240304162328"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "本机的IP地址和端口"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304162328-u3uo2ty",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240304162328-u3uo2ty",
+						"updated": "20240304162328"
+					},
+					"Children": [
+						{
+							"ID": "20240304162328-tshbthy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304162328-tshbthy",
+								"updated": "20240304162328"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对方主机的IP地址和端口"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304162328-ojg3evd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240304162328-ojg3evd",
+						"updated": "20240304162328"
+					},
+					"Children": [
+						{
+							"ID": "20240304162328-z6gp9aa",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304162328-z6gp9aa",
+								"updated": "20240304162328"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "双方通信的协议信息"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240304162328-ychwzt7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240304162328-ychwzt7",
+				"updated": "20240304162616"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Socket"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​对象表示一个本地或者远程套接字信息，它可以被视为一个数据通道\n这个通道连接与客户端和服务端之间，数据的发送和接受均通过这个通道进行"
+				}
+			]
+		},
+		{
+			"ID": "20240304162328-4ik9v7a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240304162328-4ik9v7a",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240304162328"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "一般在制作长连接游戏时，我们会使用Socket套接字作为我们的通信方案，我们通过它连接客户端和服务端，通过它来收发消息\n你可以把它抽象的想象成一根管子，插在客户端和服务端应用程序上，通过这个管子来传递交换信息"
+				}
+			]
+		},
+		{
+			"ID": "20240304162328-07dvrzp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240304162328-07dvrzp",
+				"name": "new Socket()",
+				"updated": "20240304162329"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Socket的类型"
+				}
+			]
+		},
+		{
+			"ID": "20240304162338-d97io5i",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240304162338-d97io5i",
+				"updated": "20240304162622"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Socket"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​套接字有3种不同的类型"
+				}
+			]
+		},
+		{
+			"ID": "20240304162341-hsf52bn",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240304162341-hsf52bn",
+				"updated": "20240304162341"
+			},
+			"Children": [
+				{
+					"ID": "20240304162341-3f5iikh",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240304162341-3f5iikh",
+						"updated": "20240304162341"
+					},
+					"Children": [
+						{
+							"ID": "20240304162341-3hao6j3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304162341-3hao6j3",
+								"updated": "20240304162341"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "流套接字\n"
+								}
+							]
+						},
+						{
+							"ID": "20240304162343-pg87jg1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304162343-pg87jg1"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "主要用于实现TCP通信，提供了面向连接、可靠的、有序的、数据无差错且无重复的数据传输服务"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304162341-u0dhtta",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"fold": "0",
+						"id": "20240304162341-u0dhtta",
+						"updated": "20240304162341"
+					},
+					"Children": [
+						{
+							"ID": "20240304162341-pre1zrv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304162341-pre1zrv",
+								"updated": "20240304162341"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "数据报套接字\n"
+								}
+							]
+						},
+						{
+							"ID": "20240304162344-ev0k20q",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304162344-ev0k20q"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "主要用于实现UDP通信，提供了无连接的通信服务，数据包的长度不能大于32KB，不提供正确性检查，不保证顺序，可能出现重发、丢失等情况"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304162341-ws9apsm",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240304162341-ws9apsm",
+						"updated": "20240304162341"
+					},
+					"Children": [
+						{
+							"ID": "20240304162341-23x09nv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304162341-23x09nv",
+								"updated": "20240304162341"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "原始套接字（不常用，不深入讲解）\n"
+								}
+							]
+						},
+						{
+							"ID": "20240304162345-qnzo29m",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304162345-qnzo29m"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "主要用于实现IP数据包通信，用于直接访问协议的较低层，常用于侦听和分析数据包"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240304162603-r862el2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240304162603-r862el2",
+				"updated": "20240304163714"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Socket"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的构造函数，我们可以申明不同类型的套接字，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Socket"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的构造函数有三种，我们主要使用第三种重载"
+				}
+			]
+		},
+		{
+			"ID": "20240304162627-mzneowa",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240304162627-mzneowa",
+				"style": "line-height: 22px;",
+				"updated": "20240304163659"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public Socket(SocketInformation socketInformation);\npublic Socket(SocketType socketType, ProtocolType protocolType);\npublic Socket(AddressFamily addressFamily, SocketType socketType, ProtocolType protocolType);\t//主要使用该方法\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240304163702-h12se1q",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240304163702-h12se1q",
+				"updated": "20240304163903"
+			},
+			"Children": [
+				{
+					"ID": "20240304163802-g35f9hm",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240304163802-g35f9hm",
+						"name": "AddressFamily",
+						"updated": "20240304163814"
+					},
+					"Children": [
+						{
+							"ID": "20240304163802-73crzwf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304163802-73crzwf",
+								"updated": "20240304164309"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数一："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "AddressFamily"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：网络寻址 枚举类型，决定寻址方案"
+								}
+							]
+						},
+						{
+							"ID": "20240304163814-yzn5emc",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240304163814-yzn5emc",
+								"updated": "20240304163814"
+							},
+							"Children": [
+								{
+									"ID": "20240304163814-k3auyd6",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240304163814-k3auyd6",
+										"style": "background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);",
+										"updated": "20240304163814"
+									},
+									"Children": [
+										{
+											"ID": "20240304163814-vrzn0uk",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240304163814-vrzn0uk",
+												"updated": "20240304163820"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "常用："
+												}
+											]
+										},
+										{
+											"ID": "20240304163820-ltdd6d8",
+											"Type": "NodeList",
+											"ListData": {
+												"Typ": 1
+											},
+											"Properties": {
+												"id": "20240304163820-ltdd6d8",
+												"updated": "20240304163820"
+											},
+											"Children": [
+												{
+													"ID": "20240304163820-1c2yix0",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MS4=",
+														"Num": 1
+													},
+													"Properties": {
+														"id": "20240304163820-1c2yix0",
+														"updated": "20240304163820"
+													},
+													"Children": [
+														{
+															"ID": "20240304163820-glpxst2",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163820-glpxst2",
+																"updated": "20240304164332"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "InterNetwork"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— IPv4寻址"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163820-xf5nekn",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Mi4=",
+														"Num": 2
+													},
+													"Properties": {
+														"id": "20240304163820-xf5nekn",
+														"updated": "20240304163820"
+													},
+													"Children": [
+														{
+															"ID": "20240304163820-vgtwp2a",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163820-vgtwp2a",
+																"updated": "20240304164334"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "InterNetwork6"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— IPv6寻址"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240304163815-w2p9u9k",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240304163815-w2p9u9k",
+										"updated": "20240304164216"
+									},
+									"Children": [
+										{
+											"ID": "20240304163815-wck5chx",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240304163815-wck5chx",
+												"updated": "20240304163841"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "做了解："
+												}
+											]
+										},
+										{
+											"ID": "20240304163841-0y9vzel",
+											"Type": "NodeList",
+											"ListData": {
+												"Typ": 1
+											},
+											"Properties": {
+												"id": "20240304163841-0y9vzel",
+												"updated": "20240304164216"
+											},
+											"Children": [
+												{
+													"ID": "20240304163841-5da4gwj",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MS4=",
+														"Num": 1
+													},
+													"Properties": {
+														"id": "20240304163841-5da4gwj",
+														"updated": "20240304164154"
+													},
+													"Children": [
+														{
+															"ID": "20240304163841-doragh7",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163841-doragh7",
+																"updated": "20240304164154"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "UNIX"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— UNIX本地到主机地址"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163841-mxwdxu2",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Mi4=",
+														"Num": 2
+													},
+													"Properties": {
+														"id": "20240304163841-mxwdxu2",
+														"updated": "20240304164157"
+													},
+													"Children": [
+														{
+															"ID": "20240304163841-f1lldp0",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163841-f1lldp0",
+																"updated": "20240304164157"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "ImpLink"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— ARPANETIMP地址"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163841-opubtg3",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "My4=",
+														"Num": 3
+													},
+													"Properties": {
+														"id": "20240304163841-opubtg3",
+														"updated": "20240304164201"
+													},
+													"Children": [
+														{
+															"ID": "20240304163841-49pityk",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163841-49pityk",
+																"updated": "20240304164201"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Ipx"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— IPX或SPX地址"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163841-w7xf7uw",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "NC4=",
+														"Num": 4
+													},
+													"Properties": {
+														"id": "20240304163841-w7xf7uw",
+														"updated": "20240304164204"
+													},
+													"Children": [
+														{
+															"ID": "20240304163841-arvhw6v",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163841-arvhw6v",
+																"updated": "20240304164204"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Iso"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— ISO协议的地址"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163841-unnm6dz",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "NS4=",
+														"Num": 5
+													},
+													"Properties": {
+														"id": "20240304163841-unnm6dz",
+														"updated": "20240304164207"
+													},
+													"Children": [
+														{
+															"ID": "20240304163841-ew5o4k7",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163841-ew5o4k7",
+																"updated": "20240304164207"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Osi"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— OSI协议的地址"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163841-z2ffgmt",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Ni4=",
+														"Num": 6
+													},
+													"Properties": {
+														"id": "20240304163841-z2ffgmt",
+														"updated": "20240304164211"
+													},
+													"Children": [
+														{
+															"ID": "20240304163841-l5i3bpe",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163841-l5i3bpe",
+																"updated": "20240304164211"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "NetBios"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— NetBios地址"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163841-929kx6r",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Ny4=",
+														"Num": 7
+													},
+													"Properties": {
+														"id": "20240304163841-929kx6r",
+														"updated": "20240304164216"
+													},
+													"Children": [
+														{
+															"ID": "20240304163841-c9uzh9d",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163841-c9uzh9d",
+																"updated": "20240304164216"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Atm"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— 本机ATM服务地址"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304163804-y9kbi9n",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240304163804-y9kbi9n",
+						"name": "SocketType",
+						"updated": "20240304163900"
+					},
+					"Children": [
+						{
+							"ID": "20240304163804-e0dwuki",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304163804-e0dwuki",
+								"updated": "20240304164312"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数二："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SocketType"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：套接字枚举类型，决定使用的套接字类型"
+								}
+							]
+						},
+						{
+							"ID": "20240304163855-vtbp0uk",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240304163855-vtbp0uk",
+								"updated": "20240304163900"
+							},
+							"Children": [
+								{
+									"ID": "20240304163847-zjx5ram",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240304163847-zjx5ram",
+										"style": "background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);"
+									},
+									"Children": [
+										{
+											"ID": "20240304163847-3d3pekc",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240304163847-3d3pekc",
+												"updated": "20240304163858"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "常用："
+												}
+											]
+										},
+										{
+											"ID": "20240304163858-twtl9yw",
+											"Type": "NodeList",
+											"ListData": {
+												"Typ": 1
+											},
+											"Properties": {
+												"id": "20240304163858-twtl9yw",
+												"updated": "20240304163858"
+											},
+											"Children": [
+												{
+													"ID": "20240304163858-1cqzzc0",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MS4=",
+														"Num": 1
+													},
+													"Properties": {
+														"id": "20240304163858-1cqzzc0",
+														"updated": "20240304163858"
+													},
+													"Children": [
+														{
+															"ID": "20240304163858-nv9t5ob",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163858-nv9t5ob",
+																"updated": "20240304164226"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Dgram"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— 支持数据报，最大长度固定的无连接、不可靠的消息(主要用于UDP通信)"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163858-sqsi5vc",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Mi4=",
+														"Num": 2
+													},
+													"Properties": {
+														"id": "20240304163858-sqsi5vc",
+														"updated": "20240304163858"
+													},
+													"Children": [
+														{
+															"ID": "20240304163858-rx8l829",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163858-rx8l829",
+																"updated": "20240304164235"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Stream"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— 支持可靠、双向、基于连接的字节流（主要用于TCP通信）"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240304163857-4wlyrug",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240304163857-4wlyrug",
+										"updated": "20240304163900"
+									},
+									"Children": [
+										{
+											"ID": "20240304163857-98kkqgv",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240304163857-98kkqgv",
+												"updated": "20240304163900"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "做了解："
+												}
+											]
+										},
+										{
+											"ID": "20240304163900-2j51ffz",
+											"Type": "NodeList",
+											"ListData": {
+												"Typ": 1
+											},
+											"Properties": {
+												"id": "20240304163900-2j51ffz",
+												"updated": "20240304163900"
+											},
+											"Children": [
+												{
+													"ID": "20240304163900-nekgbrj",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MS4=",
+														"Num": 1
+													},
+													"Properties": {
+														"id": "20240304163900-nekgbrj",
+														"updated": "20240304163900"
+													},
+													"Children": [
+														{
+															"ID": "20240304163900-3lzyr8j",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163900-3lzyr8j",
+																"updated": "20240304164302"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Raw"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— 支持对基础传输协议的访问"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163900-myfskwy",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Mi4=",
+														"Num": 2
+													},
+													"Properties": {
+														"id": "20240304163900-myfskwy",
+														"updated": "20240304163900"
+													},
+													"Children": [
+														{
+															"ID": "20240304163900-va4uejd",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163900-va4uejd",
+																"updated": "20240304164255"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Rdm"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— 支持无连接、面向消息、以可靠方式发送的消息"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163900-91u1kme",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "My4=",
+														"Num": 3
+													},
+													"Properties": {
+														"id": "20240304163900-91u1kme",
+														"updated": "20240304163900"
+													},
+													"Children": [
+														{
+															"ID": "20240304163900-uhfs53k",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163900-uhfs53k",
+																"updated": "20240304164249"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Seqpacket"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— 提供排序字节流的面向连接且可靠的双向传输"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304163811-lfscw9l",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240304163811-lfscw9l",
+						"name": "ProtocolType",
+						"updated": "20240304163903"
+					},
+					"Children": [
+						{
+							"ID": "20240304163811-1cdfjj3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304163811-1cdfjj3",
+								"updated": "20240304164315"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数三："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ProtocolType"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：协议类型枚举类型，决定套接字使用的通信协议"
+								}
+							]
+						},
+						{
+							"ID": "20240304163904-xjnm762",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240304163904-xjnm762",
+								"updated": "20240304163903"
+							},
+							"Children": [
+								{
+									"ID": "20240304163903-c11x1qe",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240304163903-c11x1qe",
+										"style": "background-color: var(--b3-card-success-background); color: var(--b3-card-success-color);"
+									},
+									"Children": [
+										{
+											"ID": "20240304163903-vi0w3mu",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240304163903-vi0w3mu",
+												"updated": "20240304163919"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "常用："
+												}
+											]
+										},
+										{
+											"ID": "20240304163919-i0btegz",
+											"Type": "NodeList",
+											"ListData": {
+												"Typ": 1
+											},
+											"Properties": {
+												"id": "20240304163919-i0btegz",
+												"updated": "20240304163919"
+											},
+											"Children": [
+												{
+													"ID": "20240304163919-uybe86x",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MS4=",
+														"Num": 1
+													},
+													"Properties": {
+														"id": "20240304163919-uybe86x",
+														"updated": "20240304163919"
+													},
+													"Children": [
+														{
+															"ID": "20240304163919-8e4qvhq",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163919-8e4qvhq",
+																"updated": "20240304164347"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "TCP"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— TCP传输控制协议"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163919-doi1zw1",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Mi4=",
+														"Num": 2
+													},
+													"Properties": {
+														"id": "20240304163919-doi1zw1",
+														"updated": "20240304163919"
+													},
+													"Children": [
+														{
+															"ID": "20240304163919-rt1ybto",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163919-rt1ybto",
+																"updated": "20240304164352"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "UDP"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— UDP用户数据报协议"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240304163905-c3e3z36",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240304163905-c3e3z36",
+										"updated": "20240304164517"
+									},
+									"Children": [
+										{
+											"ID": "20240304163905-umw01a7",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240304163905-umw01a7",
+												"updated": "20240304163916"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "做了解："
+												}
+											]
+										},
+										{
+											"ID": "20240304163916-ffwjrc9",
+											"Type": "NodeList",
+											"ListData": {
+												"Typ": 1
+											},
+											"Properties": {
+												"id": "20240304163916-ffwjrc9",
+												"updated": "20240304164517"
+											},
+											"Children": [
+												{
+													"ID": "20240304163916-c72vfui",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MS4=",
+														"Num": 1
+													},
+													"Properties": {
+														"id": "20240304163916-c72vfui",
+														"updated": "20240304164444"
+													},
+													"Children": [
+														{
+															"ID": "20240304163916-4i0a3yq",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163916-4i0a3yq",
+																"updated": "20240304164444"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "IP"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— IP网际协议"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163916-74m74n0",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Mi4=",
+														"Num": 2
+													},
+													"Properties": {
+														"id": "20240304163916-74m74n0",
+														"updated": "20240304164449"
+													},
+													"Children": [
+														{
+															"ID": "20240304163916-m0w4hup",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163916-m0w4hup",
+																"updated": "20240304164449"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Icmp"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— Icmp网际消息控制协议"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163916-vsv8va2",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "My4=",
+														"Num": 3
+													},
+													"Properties": {
+														"id": "20240304163916-vsv8va2",
+														"updated": "20240304164451"
+													},
+													"Children": [
+														{
+															"ID": "20240304163916-7vhyobl",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163916-7vhyobl",
+																"updated": "20240304164451"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Igmp"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— Igmp网际组管理协议"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163916-e1bpz6u",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "NC4=",
+														"Num": 4
+													},
+													"Properties": {
+														"id": "20240304163916-e1bpz6u",
+														"updated": "20240304164453"
+													},
+													"Children": [
+														{
+															"ID": "20240304163916-bjahwom",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163916-bjahwom",
+																"updated": "20240304164453"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Ggp"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— 网关到网关协议"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163916-gkslgph",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "NS4=",
+														"Num": 5
+													},
+													"Properties": {
+														"id": "20240304163916-gkslgph",
+														"updated": "20240304164456"
+													},
+													"Children": [
+														{
+															"ID": "20240304163916-9bekoa5",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163916-9bekoa5",
+																"updated": "20240304164456"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "IPv4"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— Internet协议版本4"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163916-61qjxgz",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Ni4=",
+														"Num": 6
+													},
+													"Properties": {
+														"id": "20240304163916-61qjxgz",
+														"updated": "20240304164502"
+													},
+													"Children": [
+														{
+															"ID": "20240304163916-mfpt0g9",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163916-mfpt0g9",
+																"updated": "20240304164502"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Pup"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— PARC通用数据包协议"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163916-gfpxrl7",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Ny4=",
+														"Num": 7
+													},
+													"Properties": {
+														"id": "20240304163916-gfpxrl7",
+														"updated": "20240304164504"
+													},
+													"Children": [
+														{
+															"ID": "20240304163916-ngppfu5",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163916-ngppfu5",
+																"updated": "20240304164504"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Idp"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— Internet数据报协议"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163916-13wjr7d",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "OC4=",
+														"Num": 8
+													},
+													"Properties": {
+														"id": "20240304163916-13wjr7d",
+														"updated": "20240304164507"
+													},
+													"Children": [
+														{
+															"ID": "20240304163916-ea4lmzb",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163916-ea4lmzb",
+																"updated": "20240304164507"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Raw"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— 原始IP数据包协议"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163916-aq0ki21",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "OS4=",
+														"Num": 9
+													},
+													"Properties": {
+														"id": "20240304163916-aq0ki21",
+														"updated": "20240304164509"
+													},
+													"Children": [
+														{
+															"ID": "20240304163916-1escrvz",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163916-1escrvz",
+																"updated": "20240304164509"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Ipx"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— Internet数据包交换协议"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163916-nh8hhgx",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MTAu",
+														"Num": 10
+													},
+													"Properties": {
+														"id": "20240304163916-nh8hhgx",
+														"updated": "20240304164513"
+													},
+													"Children": [
+														{
+															"ID": "20240304163916-muaamua",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163916-muaamua",
+																"updated": "20240304164513"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "Spx"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— 顺序包交换协议"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240304163916-6uy5pny",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MTEu",
+														"Num": 11
+													},
+													"Properties": {
+														"id": "20240304163916-6uy5pny",
+														"updated": "20240304164517"
+													},
+													"Children": [
+														{
+															"ID": "20240304163916-fit65xg",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240304163916-fit65xg",
+																"updated": "20240304164517"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "IcmpV6"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ —— 用于IPv6的Internet控制消息协议"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240304163742-9hn0l41",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240304163742-9hn0l41",
+				"updated": "20240304164806"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "2、3参数的常用搭配："
+				}
+			]
+		},
+		{
+			"ID": "20240304164651-806ofm5",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240304164651-806ofm5",
+				"updated": "20240304164754"
+			},
+			"Children": [
+				{
+					"ID": "20240304164700-1rkfbx0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240304164700-1rkfbx0",
+						"updated": "20240304164719"
+					},
+					"Children": [
+						{
+							"ID": "20240304164700-bfw3l2s",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304164700-bfw3l2s",
+								"updated": "20240304164719"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SocketType.Dgram"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​  +  "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ProtocolType.Udp"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​  = UDP协议通信（常用，主要学习）\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304164701-kp0rrgc",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240304164701-kp0rrgc",
+						"updated": "20240304164754"
+					},
+					"Children": [
+						{
+							"ID": "20240304164701-d29l6km",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304164701-d29l6km",
+								"updated": "20240304164754"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SocketType.Stream"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​  +  "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ProtocolType.Tcp"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ = TCP协议通信（常用，主要学习）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304164701-1rste58",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240304164701-1rste58",
+						"updated": "20240304164751"
+					},
+					"Children": [
+						{
+							"ID": "20240304164701-owxd92k",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304164701-owxd92k",
+								"updated": "20240304164751"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SocketType.Raw"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​  +  "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ProtocolType.Icmp"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​  = Internet控制报文协议（了解）\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304164702-uxaorbi",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240304164702-uxaorbi",
+						"updated": "20240304164739"
+					},
+					"Children": [
+						{
+							"ID": "20240304164702-zzzk5pq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304164702-zzzk5pq",
+								"updated": "20240304164739"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SocketType.Raw"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​  +  "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ProtocolType.Raw"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​  = 简单的IP包通信（了解）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240304164757-gr56ha0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240304164757-gr56ha0",
+				"updated": "20240304164811"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们必须要掌握："
+				}
+			]
+		},
+		{
+			"ID": "20240304164916-wcmvxwp",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240304164916-wcmvxwp",
+				"updated": "20240304164951"
+			},
+			"Children": [
+				{
+					"ID": "20240304164921-cwrzz8p",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240304164921-cwrzz8p",
+						"updated": "20240304164951"
+					},
+					"Children": [
+						{
+							"ID": "20240304164921-tqftpow",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304164921-tqftpow",
+								"updated": "20240304164931"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "TCP流套接字"
+								}
+							]
+						},
+						{
+							"ID": "20240304164931-c37v4zg",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240304164931-c37v4zg",
+								"style": "line-height: 22px;",
+								"updated": "20240304164951"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Socket socketTcp = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304164936-yynn5zh",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240304164936-yynn5zh",
+						"updated": "20240304164950"
+					},
+					"Children": [
+						{
+							"ID": "20240304164936-tfgoiex",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304164936-tfgoiex",
+								"updated": "20240304164946"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "UDP数据报套接字"
+								}
+							]
+						},
+						{
+							"ID": "20240304164946-9frryxs",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240304164946-9frryxs",
+								"style": "line-height: 22px;",
+								"updated": "20240304164950"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Socket socketUdp = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240304165159-pog7xtv",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240304165159-pog7xtv",
+				"updated": "20240304165211"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Socket的常用属性"
+				}
+			]
+		},
+		{
+			"ID": "20240304165211-xc1scq9",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240304165211-xc1scq9",
+				"updated": "20240307111217"
+			},
+			"Children": [
+				{
+					"ID": "20240304165250-wbyetbh",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240304165250-wbyetbh",
+						"name": "socketTcp.Connected",
+						"updated": "20240304165250"
+					},
+					"Children": [
+						{
+							"ID": "20240304165250-9eqe3ci",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304165250-9eqe3ci",
+								"updated": "20240304165250"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "套接字的连接状态"
+								}
+							]
+						},
+						{
+							"ID": "20240304165303-n3y2mbm",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240304165303-n3y2mbm",
+								"style": "line-height: 22px;",
+								"updated": "20240304165320"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "if(socketTcp.Connected) { }\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304165250-k5848o3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240304165250-k5848o3",
+						"name": "socket.SocketType",
+						"updated": "20240304165501"
+					},
+					"Children": [
+						{
+							"ID": "20240304165250-45mkbna",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304165250-45mkbna",
+								"updated": "20240304165250"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取套接字的类型"
+								}
+							]
+						},
+						{
+							"ID": "20240304165321-0iut1df",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240304165321-0iut1df",
+								"style": "line-height: 22px;",
+								"updated": "20240304165501"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "print(socket.SocketType);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304165250-tk0tcr4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240304165250-tk0tcr4",
+						"name": "socket.ProtocolType",
+						"updated": "20240304165500"
+					},
+					"Children": [
+						{
+							"ID": "20240304165250-cnpo5uc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304165250-cnpo5uc",
+								"updated": "20240304165250"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取套接字的协议类型"
+								}
+							]
+						},
+						{
+							"ID": "20240304165325-p0a6y74",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240304165325-p0a6y74",
+								"style": "line-height: 22px;",
+								"updated": "20240304165500"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "print(socket.ProtocolType);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304165250-x19nla0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240304165250-x19nla0",
+						"name": "socket.AddressFamily",
+						"updated": "20240304165459"
+					},
+					"Children": [
+						{
+							"ID": "20240304165250-dg6rk1n",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304165250-dg6rk1n",
+								"updated": "20240304165250"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取套接字的寻址方案"
+								}
+							]
+						},
+						{
+							"ID": "20240304165326-jnridfj",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240304165326-jnridfj",
+								"style": "line-height: 22px;",
+								"updated": "20240304165459"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "print(socket.AddressFamily);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304165250-dpzn5ke",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20240304165250-dpzn5ke",
+						"name": "socket.Available",
+						"updated": "20240307111217"
+					},
+					"Children": [
+						{
+							"ID": "20240304165250-qfhkgbh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304165250-qfhkgbh",
+								"updated": "20240304165250"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "从网络中获取准备读取的数据数据量"
+								}
+							]
+						},
+						{
+							"ID": "20240307111135-5gucmbr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240307111135-5gucmbr",
+								"updated": "20240307111217"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "返回的是当前有"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "多少字节"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "准备读取"
+								}
+							]
+						},
+						{
+							"ID": "20240304165330-2mzhllp",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240304165330-2mzhllp",
+								"style": "line-height: 22px;",
+								"updated": "20240304165521"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "print(socket.Available);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304165250-hyfhtq6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ni4=",
+						"Num": 6
+					},
+					"Properties": {
+						"id": "20240304165250-hyfhtq6",
+						"name": "socket.LocalEndPoint",
+						"updated": "20240307111202"
+					},
+					"Children": [
+						{
+							"ID": "20240304165250-kg6lnr5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304165250-kg6lnr5",
+								"updated": "20240307111202"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取本机"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "EndPoint"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象（注意 ："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "IPEndPoint"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​继承"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "EndPoint"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​）"
+								}
+							]
+						},
+						{
+							"ID": "20240304165332-b37kd84",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240304165332-b37kd84",
+								"style": "line-height: 22px;",
+								"updated": "20240304165600"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "IPEndPoint endPoint = socket.LocalEndPoint as IPEndPoint;\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304165250-8ne43ff",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ny4=",
+						"Num": 7
+					},
+					"Properties": {
+						"id": "20240304165250-8ne43ff",
+						"name": "socket.RemoteEndPoint",
+						"updated": "20240304170609"
+					},
+					"Children": [
+						{
+							"ID": "20240304165250-x9j4sfx",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304165250-x9j4sfx",
+								"updated": "20240304165255"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取远程"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "EndPoint"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象"
+								}
+							]
+						},
+						{
+							"ID": "20240304165334-cctohpg",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240304165334-cctohpg",
+								"style": "line-height: 22px;",
+								"updated": "20240304170609"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "IPEndPoint RemoteEndPoint = socket.RemoteEndPoint as IPEndPoint;\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240304165650-xt2u0lk",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240304165650-xt2u0lk",
+				"updated": "20240304165715"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Socket的常用方法"
+				}
+			]
+		},
+		{
+			"ID": "20240304165715-du9xfgb",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240304165715-du9xfgb",
+				"updated": "20240311215831"
+			},
+			"Children": [
+				{
+					"ID": "20240304165737-5mgkyno",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240304165737-5mgkyno",
+						"updated": "20240307113437"
+					},
+					"Children": [
+						{
+							"ID": "20240304165737-hrrislg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304165737-hrrislg",
+								"updated": "20240304165747"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "主要用于服务端"
+								}
+							]
+						},
+						{
+							"ID": "20240304165747-zi18nlv",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240304165747-zi18nlv",
+								"updated": "20240307113437"
+							},
+							"Children": [
+								{
+									"ID": "20240304165747-th68m4k",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240304165747-th68m4k",
+										"name": "socket.Bind()",
+										"updated": "20240304170012"
+									},
+									"Children": [
+										{
+											"ID": "20240304165747-e3lc3mq",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240304165747-e3lc3mq",
+												"updated": "20240304165747"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "绑定IP和端口"
+												}
+											]
+										},
+										{
+											"ID": "20240304165809-zhcraxg",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240304165809-zhcraxg",
+												"style": "line-height: 22px;",
+												"updated": "20240304170012"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "socket.Bind(ipPoint);\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240304165747-8c7574a",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240304165747-8c7574a",
+										"name": "socket.Listen()",
+										"updated": "20240304170011"
+									},
+									"Children": [
+										{
+											"ID": "20240304165747-g8w16ci",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240304165747-g8w16ci",
+												"updated": "20240304165747"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "设置客户端连接的最大数量"
+												}
+											]
+										},
+										{
+											"ID": "20240304165811-ibqr9ib",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240304165811-ibqr9ib",
+												"style": "line-height: 22px;",
+												"updated": "20240304170011"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "socket.Listen(10);\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240304165747-azphub4",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20240304165747-azphub4",
+										"name": "socket.Accept()",
+										"updated": "20240307113437"
+									},
+									"Children": [
+										{
+											"ID": "20240304165747-kffq4n9",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240304165747-kffq4n9",
+												"updated": "20240304165747"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "等待客户端连入"
+												}
+											]
+										},
+										{
+											"ID": "20240307111423-og7t032",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240307111423-og7t032",
+												"updated": "20240307113437"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "执行该方法会阻塞线程，直到有客户端连入\n客户端连入后会返回与该客户端连接的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "socket"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​对象，通过该对象来收发该客户端数据"
+												}
+											]
+										},
+										{
+											"ID": "20240304165812-xeabr73",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240304165812-xeabr73",
+												"style": "line-height: 22px;",
+												"updated": "20240304170010"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "socket.Accept();\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304165737-7leuxn9",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240304165737-7leuxn9",
+						"updated": "20240307112258"
+					},
+					"Children": [
+						{
+							"ID": "20240304165737-az8m3xa",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304165737-az8m3xa",
+								"updated": "20240304165753"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "主要用于客户端"
+								}
+							]
+						},
+						{
+							"ID": "20240304165753-ym0z26f",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240304165753-ym0z26f",
+								"updated": "20240307112258"
+							},
+							"Children": [
+								{
+									"ID": "20240304165753-w7ox5la",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240304165753-w7ox5la",
+										"name": "socket.Connect()",
+										"updated": "20240307112258"
+									},
+									"Children": [
+										{
+											"ID": "20240304165753-kczql0d",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240304165753-kczql0d",
+												"updated": "20240304165753"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "连接远程服务端"
+												}
+											]
+										},
+										{
+											"ID": "20240307112231-v1g4beg",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240307112231-v1g4beg",
+												"updated": "20240307112258"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "执行该方法会阻塞线程，直到连接超时或失败"
+												}
+											]
+										},
+										{
+											"ID": "20240304165815-w23za4h",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240304165815-w23za4h",
+												"style": "line-height: 22px;",
+												"updated": "20240304170755"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "socket.Connect(IPAddress.Parse(\"118.12.123.11\"), 8080);\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240304165737-9qe560b",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240304165737-9qe560b",
+						"updated": "20240311215831"
+					},
+					"Children": [
+						{
+							"ID": "20240304165737-fdsqiqt",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240304165737-fdsqiqt",
+								"updated": "20240310143227"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "客户端服务端都会用的"
+								}
+							]
+						},
+						{
+							"ID": "20240304165806-xux5v29",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240304165806-xux5v29",
+								"updated": "20240311215831"
+							},
+							"Children": [
+								{
+									"ID": "20240304165806-hxlvy9g",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240304165806-hxlvy9g",
+										"updated": "20240311215820"
+									},
+									"Children": [
+										{
+											"ID": "20240304165806-11p0jg5",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240304165806-11p0jg5",
+												"updated": "20240304170954"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "同步发送和接收数据"
+												}
+											]
+										},
+										{
+											"ID": "20240307112433-opvaiim",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240307112433-opvaiim",
+												"updated": "20240311215820"
+											},
+											"Children": [
+												{
+													"ID": "20240307112434-8yj6ss9",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240307112434-8yj6ss9",
+														"name": "socket.Send()",
+														"updated": "20240307112434"
+													},
+													"Children": [
+														{
+															"ID": "20240307112434-bbqufvt",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240307112434-bbqufvt",
+																"updated": "20240311215740"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "TCP同步发送数据"
+																}
+															]
+														},
+														{
+															"ID": "20240307112449-kyeeqho",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240307112449-kyeeqho",
+																"updated": "20240307112531"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "传入字节数组"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "byte[]"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​​​形式的数据，该方法会阻塞线程"
+																}
+															]
+														},
+														{
+															"ID": "20240307112439-7rv3cc8",
+															"Type": "NodeCodeBlock",
+															"IsFencedCodeBlock": true,
+															"Properties": {
+																"id": "20240307112439-7rv3cc8",
+																"style": "line-height: 22px;",
+																"updated": "20240307112443"
+															},
+															"Children": [
+																{
+																	"Type": "NodeCodeBlockFenceOpenMarker",
+																	"Data": "```"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceInfoMarker",
+																	"CodeBlockInfo": "YyM="
+																},
+																{
+																	"Type": "NodeCodeBlockCode",
+																	"Data": "socket.Send()\n"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceCloseMarker",
+																	"Data": "```"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240307112507-yvkmg3k",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240307112507-yvkmg3k",
+														"name": "socket.Receive()",
+														"updated": "20240307112556"
+													},
+													"Children": [
+														{
+															"ID": "20240307112507-1bkzsgv",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240307112507-1bkzsgv",
+																"updated": "20240311215743"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "TCP同步接收数据"
+																}
+															]
+														},
+														{
+															"ID": "20240307112546-c4ya2a6",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240307112546-c4ya2a6",
+																"updated": "20240307112550"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "返回字节数组"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "byte[]"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​​​形式的数据，该方法会阻塞线程"
+																}
+															]
+														},
+														{
+															"ID": "20240307112536-ex4koif",
+															"Type": "NodeCodeBlock",
+															"IsFencedCodeBlock": true,
+															"Properties": {
+																"id": "20240307112536-ex4koif",
+																"style": "line-height: 22px;",
+																"updated": "20240307112540"
+															},
+															"Children": [
+																{
+																	"Type": "NodeCodeBlockFenceOpenMarker",
+																	"Data": "```"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceInfoMarker",
+																	"CodeBlockInfo": "YyM="
+																},
+																{
+																	"Type": "NodeCodeBlockCode",
+																	"Data": "socket.Receive()\n"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceCloseMarker",
+																	"Data": "```"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240311215745-ymlwelq",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240311215745-ymlwelq",
+														"updated": "20240311215820"
+													},
+													"Children": [
+														{
+															"ID": "20240311215745-vtb8bd5",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240311215745-vtb8bd5",
+																"updated": "20240311215752"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "UDP同步接受发送数据"
+																}
+															]
+														},
+														{
+															"ID": "20240311215753-ya0xz0j",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240311215753-ya0xz0j",
+																"updated": "20240311215820"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "详细请见："
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "block-ref",
+																	"TextMarkBlockRefID": "20240311215657-y0lgwxo",
+																	"TextMarkBlockRefSubtype": "s",
+																	"TextMarkTextContent": "UDP同步收发消息API"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240304165806-c2wzt4p",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240304165806-c2wzt4p",
+										"updated": "20240311215831"
+									},
+									"Children": [
+										{
+											"ID": "20240304165806-c2n3flu",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240304165806-c2n3flu",
+												"updated": "20240304170953"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "异步发送和接收数据"
+												}
+											]
+										},
+										{
+											"ID": "20240310143220-83epwbh",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240310143220-83epwbh",
+												"updated": "20240311215831"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "详细请见："
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref",
+													"TextMarkBlockRefID": "20240310143616-wkwqcpa",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "TCP异步通信常用方法"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240311215732-o5mgyzi",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240311215732-o5mgyzi",
+								"updated": "20240311215732"
+							},
+							"Children": [
+								{
+									"ID": "20240304165806-4jycmm7",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240304165806-4jycmm7",
+										"name": "sockets.Shutdown()",
+										"updated": "20240307113020"
+									},
+									"Children": [
+										{
+											"ID": "20240304165806-36k7irk",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240304165806-36k7irk",
+												"updated": "20240307112847"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "释放连接并关闭Socket，先于"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Close"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​​​调用"
+												}
+											]
+										},
+										{
+											"ID": "20240307112848-4mzfz5c",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240307112848-4mzfz5c",
+												"updated": "20240307113010"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "该方法不可逆转，一旦关闭就不能重新开启，传入"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "SocketShutdown"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​​​枚举，枚举各个类型含义如下："
+												}
+											]
+										},
+										{
+											"ID": "20240307112954-48cjgjl",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240307112954-48cjgjl",
+												"name": "SocketShutdown",
+												"updated": "20240307113020"
+											},
+											"Children": [
+												{
+													"ID": "20240307112954-5g1fp3i",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240307112954-5g1fp3i",
+														"updated": "20240307113014"
+													},
+													"Children": [
+														{
+															"ID": "20240307112954-8mse2my",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240307112954-8mse2my",
+																"updated": "20240307113014"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "SocketShutdown.Send"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​​​：停用在此 socket 上发送数据。"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240307112954-v23kqry",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240307112954-v23kqry",
+														"updated": "20240307113017"
+													},
+													"Children": [
+														{
+															"ID": "20240307112954-o27grl6",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240307112954-o27grl6",
+																"updated": "20240307113017"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "SocketShutdown.Receive"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​​​：停用在此 socket 上接收数据。"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240307112954-kwf4pz7",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240307112954-kwf4pz7",
+														"updated": "20240307113020"
+													},
+													"Children": [
+														{
+															"ID": "20240307112954-zqp8rei",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240307112954-zqp8rei",
+																"updated": "20240307113020"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "SocketShutdown.Both"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​​​：停用在此 socket 上发送和接收数据。"
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20240307111305-6hg3lqb",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240307111305-6hg3lqb",
+												"style": "line-height: 22px;",
+												"updated": "20240307111338"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "sockets.Shutdown(SocketShutdown.Both)\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240304165806-yh7fnro",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240304165806-yh7fnro",
+										"updated": "20240307111354"
+									},
+									"Children": [
+										{
+											"ID": "20240304165806-f2bxhm8",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240304165806-f2bxhm8",
+												"updated": "20240304165806"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "关闭连接，释放所有Socket关联资源"
+												}
+											]
+										},
+										{
+											"ID": "20240307111307-ddnv9da",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240307111307-ddnv9da",
+												"style": "line-height: 22px;",
+												"updated": "20240307111354"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "socket.Close()\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

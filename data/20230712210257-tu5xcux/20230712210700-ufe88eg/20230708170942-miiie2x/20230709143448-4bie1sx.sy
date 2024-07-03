@@ -1,0 +1,975 @@
+{
+	"ID": "20230709143448-4bie1sx",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230709143448-4bie1sx",
+		"name": "Transform的父子关系",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230709143448-4bie1sx\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230709144031-5q6kdfb\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230709151335-ekj6826\u0026quot;,\u0026quot;scrollTop\u0026quot;:200\u0026#125;",
+		"title": "U1L7-5——父子关系",
+		"type": "doc",
+		"updated": "20240321163903"
+	},
+	"Children": [
+		{
+			"ID": "20230709144031-5q6kdfb",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230709144031-5q6kdfb",
+				"updated": "20230709144100"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Transform中的父子关系相关"
+				}
+			]
+		},
+		{
+			"ID": "20230709143946-15tb3sq",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20230709143946-15tb3sq",
+				"updated": "20240321163815"
+			},
+			"Children": [
+				{
+					"ID": "20230709143820-bpyx2ik",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20230709143820-bpyx2ik",
+						"updated": "20240321163815"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "父子化是使用 Unity 时需要理解的最重要概念之一。\n当一个游戏对象是另一个游戏对象的__父__项时，__子__游戏对象完全跟随其父项移动、旋转和缩放。\n可将父子化看作是手臂与身体之间的关系；每当身体移动时，手臂也随之移动。\n子对象也可以有自己的子项，以此类推。所以，手可以视为手臂的“子项”，然后每只手都有几根手指，等等。\n任何一个对象都可以有多个子项，但只有一个父项。这些多级父子关系形成了变换组件的_层级视图"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "em",
+							"TextMarkTextContent": "。\n层级视图最顶层的对象（即层级视图中唯一没有父项的对象）称为__根"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "_。"
+						}
+					]
+				},
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				}
+			]
+		},
+		{
+			"ID": "20230709144106-suvbiqb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709144106-suvbiqb",
+				"updated": "20230709144145"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在脚本中，我们可以用Transform类中的属性和方法来操作父子关系"
+				}
+			]
+		},
+		{
+			"ID": "20230709143448-x20lvln",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709143448-x20lvln",
+				"updated": "20230709143813"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20230709143813-o1qevz6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709143813-o1qevz6",
+				"updated": "20230709145045"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "this.transform.parent.name\t    //通过transform获取父对象的的名字\nthis.transform.parent\t\t    //父对象的Transform对象的属性，可以通过这个获取、设置、脱离父对象\nthis.transform.SetParent()\t    //设置或者脱离父对象\nthis.transform.SetParent(, )\t//设置或者脱离父对象，第二个参数填true或者false来决定是否保留世界坐标的位置、角度、缩放\nthis.transform.DetachChildren()\t//抛弃自己的所有子对象（对子对象的子对象不起作用）\nthis.transform.Find()\t\t    //按照名字寻找子对象，可以找到失活的对象，不能直接找到子对象的子对象\nthis.transform.childCount\t    //获取自身所有子对象的数量，包括失活的子对象，但不包括子对象的子对象\nthis.transform.GetChild()\t    //通过索引号，返回自己对应的子对象的Transform对象\nson.IsChildOf()\t\t\t        //判断自己是不是另一个对象的子对象的方法\nson.GetSiblingIndex()\t\t    //得到自己作为子对象的编号\nson.SetAsFirstSibling();\t    //把自己设置为第一个子对象\nson.SetAsLastSibling()\t\t    //把自己设置为最后一个子对象\nson.SetSiblingIndex(10);\t    //把自己设置为指定第几个子对象\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709145103-id4qc0j",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709145103-id4qc0j",
+				"name": "transform.parent",
+				"updated": "20230709150036"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "获取和设置父对象"
+				}
+			]
+		},
+		{
+			"ID": "20230709150007-dk1rdv3",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709150007-dk1rdv3",
+				"updated": "20230709150019"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//获取父对象\nprint(this.transform.parent.name);\n//设置父对象 脱离父对象\nthis.transform.parent = null;\n//设置父对象 依附新的父对象 (不需要自行预先执行脱离原父对象的逻辑)\nthis.transform.parent = GameObject.Find(\"Lesson9\").transform;\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709150050-wwdogdk",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709150050-wwdogdk",
+				"name": "transform.SetParent()",
+				"updated": "20230709150129"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "设置父对象的方法"
+				}
+			]
+		},
+		{
+			"ID": "20230709150148-e5n2vwm",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20230709150148-e5n2vwm",
+				"updated": "20240321163832"
+			},
+			"Children": [
+				{
+					"ID": "20240321163821-n11pg7n",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321163821-n11pg7n",
+						"updated": "20240321163821"
+					},
+					"Children": [
+						{
+							"ID": "20240321163821-8izsnzl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321163821-8izsnzl",
+								"updated": "20240321163821"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数一：选择依附的新父对象\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321163822-mxa1ore",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321163822-mxa1ore",
+						"updated": "20240321163832"
+					},
+					"Children": [
+						{
+							"ID": "20240321163822-2t8yz9x",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321163822-2t8yz9x",
+								"updated": "20240321163824"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数二：是否保留世界坐标的位置 角度 缩放"
+								}
+							]
+						},
+						{
+							"ID": "20240321163824-8bhofp7",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240321163824-8bhofp7",
+								"updated": "20240321163832"
+							},
+							"Children": [
+								{
+									"ID": "20240321163824-99bg3hx",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240321163824-99bg3hx",
+										"updated": "20240321163832"
+									},
+									"Children": [
+										{
+											"ID": "20240321163824-0qp1pr5",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240321163824-0qp1pr5",
+												"updated": "20240321163832"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "true"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​    会保留 世界坐标下的状态 和 父对象 进行计算 得到本地坐标系的信息\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240321163825-ag1impz",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240321163825-ag1impz",
+										"updated": "20240321163828"
+									},
+									"Children": [
+										{
+											"ID": "20240321163825-ees44k1",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240321163825-ees44k1",
+												"updated": "20240321163828"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "false"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​   不会保留世界坐标系下的各种信息 会直接赋值到本地坐标系下"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230709150059-5wbobze",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709150059-5wbobze",
+				"updated": "20230709150108"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": " //通过API来进行父子关系的设置\n this.transform.SetParent(null); //脱离父对象\n this.transform.SetParent(GameObject.Find(\"Father\").transform);  //依附新父对象\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709150131-ptqyahq",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709150131-ptqyahq",
+				"updated": "20230709150213"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "this.transform.SetParent(GameObject.Find(\"Lesson9Father\").transform, true);\t//不会保留世界坐标系下的各种信息 会直接赋值到本地坐标系下\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709150216-vybe0m6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709150216-vybe0m6",
+				"name": "transform.DetachChildren()",
+				"updated": "20230709150306"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "放弃所有子对象"
+				}
+			]
+		},
+		{
+			"ID": "20230709150240-zulkwfs",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709150240-zulkwfs",
+				"updated": "20230709150246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "抛弃自己的所有子对象（对子对象的子对象不起作用）"
+				}
+			]
+		},
+		{
+			"ID": "20230709150248-obg9d13",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709150248-obg9d13",
+				"updated": "20230709150257"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "this.transform.DetachChildren();\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709150309-kwoi8yk",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709150309-kwoi8yk",
+				"updated": "20230709150317"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "获取子对象"
+				}
+			]
+		},
+		{
+			"ID": "20230709150317-du3aedn",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709150317-du3aedn",
+				"name": "transform.Find()",
+				"updated": "20230709150950"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按照名字寻找子对象"
+				}
+			]
+		},
+		{
+			"ID": "20230709150336-cnesn8x",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709150336-cnesn8x",
+				"updated": "20240321163840"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "transform.Find"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "是可以找到失活的对象的"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "！但"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230708203314-nywc3mr",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "GameObject相关方法"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "不能找到"
+				}
+			]
+		},
+		{
+			"ID": "20230709150457-x3xjzqk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709150457-x3xjzqk",
+				"updated": "20230709150533"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "this.transform.Find(\"Cube\");    //只能找到子对象，不能直接找到子对象的子对象\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709150534-il89lp3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709150534-il89lp3",
+				"updated": "20240321163846"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "虽然该方法效率，比"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230708203314-nywc3mr",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "GameObject.Find()相关方法"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "更高一些 但是该方法必须要知道父对象是谁才能找到"
+				}
+			]
+		},
+		{
+			"ID": "20230709150619-kt9s5u9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709150619-kt9s5u9",
+				"name": "transform.childCount",
+				"updated": "20230709150728"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "遍历父对象的所有子对象（不包括子对象的子对象）"
+				}
+			]
+		},
+		{
+			"ID": "20230709150652-j6nxoot",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709150652-j6nxoot",
+				"updated": "20230709150653"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "包括失活的子对象，但不包括子对象的子对象"
+				}
+			]
+		},
+		{
+			"ID": "20230709150635-vvvd0a9",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709150635-vvvd0a9",
+				"updated": "20230709150913"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(this.transform.childCount);   //包括失活的子对象，但不包括子对象的子对象\nfor (int i = 0; i \u003c this.transform.childCount; i++)\n{\n    print(\"子对象的名字：\" + this.transform.GetChild(i).name);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709150655-mo3fbxp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230709150655-mo3fbxp",
+				"name": "transform.GetChild()",
+				"updated": "20230709150859"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过索引号 去得到自己对应的子对象"
+				}
+			]
+		},
+		{
+			"ID": "20230709150755-mnbf9nt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709150755-mnbf9nt",
+				"updated": "20240321163851"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过索引号 去得到自己对应的子对象，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "如果编号溢出，会直接报错！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n返回值 是 transform ，可以得到对应子对象的Transform实例化对象"
+				}
+			]
+		},
+		{
+			"ID": "20230709150742-udz86s3",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709150742-udz86s3",
+				"updated": "20230709150749"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "this.transform.GetChild(0);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709150918-u0cln92",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709150918-u0cln92",
+				"updated": "20230709151004"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "子对象的操作"
+				}
+			]
+		},
+		{
+			"ID": "20230709151004-rxy6znt",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709151004-rxy6znt",
+				"name": "Transform.IsChildOf()",
+				"updated": "20230709151059"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "判断自己的父对象是什么"
+				}
+			]
+		},
+		{
+			"ID": "20230709151014-fojf9f4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709151014-fojf9f4",
+				"updated": "20240321163903"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "要做判断的子对象"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": ".IsChildOf"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​(被用于判断是否为父对象的对象)，一个对象 判断自己是不是另一个对象的子对象"
+				}
+			]
+		},
+		{
+			"ID": "20230709151030-zw7nmdw",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709151030-zw7nmdw",
+				"updated": "20230709151038"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "if (son.IsChildOf(this.transform)) //返回bool\n{\n    print(\"是我的子对象\");\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709151101-xxv5no7",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709151101-xxv5no7",
+				"name": "Transform.GetSiblingIndex()",
+				"updated": "20230709151134"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "得到自己作为子对象的编号"
+				}
+			]
+		},
+		{
+			"ID": "20230709151112-n9nfnei",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709151112-n9nfnei",
+				"updated": "20230709151122"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(son.GetSiblingIndex());\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709151135-3pzt1mf",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709151135-3pzt1mf",
+				"name": "Transform.SetAsFirstSibling()",
+				"updated": "20230709151255"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "把自己设置为第一个子对象"
+				}
+			]
+		},
+		{
+			"ID": "20230709151205-96daq9j",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709151205-96daq9j",
+				"updated": "20230709151223"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "son.SetAsFirstSibling();\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709151146-hlia5iq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709151146-hlia5iq",
+				"name": "Transform.SetAsLastSibling()",
+				"updated": "20230709151316"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "把自己设置为最后一个子对象"
+				}
+			]
+		},
+		{
+			"ID": "20230709151207-80ndesd",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709151207-80ndesd",
+				"updated": "20230709151228"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "son.SetAsLastSibling();\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709151158-3c7t9xy",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709151158-3c7t9xy",
+				"name": "Transform.SetSiblingIndex()",
+				"updated": "20230709151333"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "把自己设置为指定个儿子"
+				}
+			]
+		},
+		{
+			"ID": "20230709151216-r2h4het",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709151216-r2h4het",
+				"updated": "20230709151216"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果填的数值超出范围（无论是过大还是过小）都不会报错 会直接放在最后一个位置"
+				}
+			]
+		},
+		{
+			"ID": "20230709151210-zjgd7bp",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709151210-zjgd7bp",
+				"updated": "20230709151235"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "son.SetSiblingIndex(10);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709151335-ekj6826",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709151335-ekj6826"
+			}
+		}
+	]
+}

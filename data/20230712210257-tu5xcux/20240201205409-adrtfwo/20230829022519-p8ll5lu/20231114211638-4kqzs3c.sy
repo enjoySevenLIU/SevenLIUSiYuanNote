@@ -1,0 +1,915 @@
+{
+	"ID": "20231114211638-4kqzs3c",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20231114211638-4kqzs3c",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20231114211638-4kqzs3c\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20231115210901-zpad01p\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20231114220021-zudy170\u0026quot;,\u0026quot;scrollTop\u0026quot;:0,\u0026quot;focusId\u0026quot;:\u0026quot;20231115210908-o5iaxaj\u0026quot;,\u0026quot;focusStart\u0026quot;:602,\u0026quot;focusEnd\u0026quot;:602\u0026#125;",
+		"title": "UMVCSL4——主面板View和Mediator",
+		"type": "doc",
+		"updated": "20240322114158"
+	},
+	"Children": [
+		{
+			"ID": "20231115210901-zpad01p",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231115210901-zpad01p",
+				"updated": "20231115210907"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20231115210908-o5iaxaj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231115210908-o5iaxaj",
+				"style": "line-height: 22px;",
+				"updated": "20231115213554"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Mediator                      //Mediator基类，任何在PureMVC内作为Mediator中介的类都应该继承该类，可以实现对其关联ViewUI界面的操作\nmediator.Name                 //字符串常量，其派生类里可以覆盖该Name，使用自己的字符串作为名字\nmediator.ViewComponent        //该Mediator派生类对象关联的View类对象\nMediator()                    //Mediator的构造函数，继承该类必须要声明构造函数调用该构造函数，用于初始化名字和关联的对象\n\nstring[] ListNotificationInterests() { }            //Mediator要监听哪些通知的方法，返回要监听的通知字符串数组\nHandleNotification(INotification notification) { }  //监听到ListNotificationInterests()返回的通知会执行的方法\nOnRegister()                                        //注册时执行的方法\n\nINotification                 //监听到通知后传入的参数，其中包含重要属性\nnotification.Name             //监听到的通知名\nnotification.Body             //通知者上传的内容\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231114211638-2b45q5e",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231114211638-2b45q5e",
+				"updated": "20231114214423"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "View"
+				}
+			]
+		},
+		{
+			"ID": "20231114214423-7coffud",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231114214423-7coffud",
+				"updated": "20231114214621"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "即界面类，就是管理各个UI控件的类"
+				}
+			]
+		},
+		{
+			"ID": "20231114214453-whrll06",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231114214453-whrll06",
+				"style": "line-height: 22px;",
+				"updated": "20231114214500"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\nusing UnityEngine.UI;\n\npublic class NewMainView : MonoBehaviour\n{\n    //找控件\n    public Text txtName;\n    public Text txtLev;\n    public Text txtMoney;\n    public Text txtGem;\n    public Text txtPower;\n\n    public Button btnRole;\n\n    //可以选择是否向外部提供数据更新方法\n    //按照MVC的思想，可以直接在这里提供 更新的方法\n    //如果按照MVP的思想，该方法就没必要写\n    public void UpdateInfo(PlayerDataObject data)\n    {\n        txtName.text = data.playerName;\n        txtLev.text = \"LV.\" + data.lev.ToString();\n        txtMoney.text = data.money.ToString();\n        txtGem.text = data.gem.ToString();\n        txtPower.text = data.power.ToString();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231114214502-ioueyas",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231114214502-ioueyas",
+				"updated": "20231114214528"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Mediator"
+				}
+			]
+		},
+		{
+			"ID": "20231114214547-1sjojy2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231114214547-1sjojy2",
+				"updated": "20231115123020"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "界面中介类，类似于Model和Proxy之间的关系，Mediator负责处理界面逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20231114215000-jwhe1sw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231114215000-jwhe1sw",
+				"updated": "20231114215010"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "界面中介类有套路的写法"
+				}
+			]
+		},
+		{
+			"ID": "20231114215010-4i8bzey",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20231114215010-4i8bzey",
+				"updated": "20231114215255"
+			},
+			"Children": [
+				{
+					"ID": "20231114215020-2t7ktgs",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20231114215020-2t7ktgs",
+						"updated": "20231114215255"
+					},
+					"Children": [
+						{
+							"ID": "20231114215020-h9y1oyb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231114215020-h9y1oyb",
+								"updated": "20231114215255"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "继承PureMVC中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Mediator"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​脚本"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231114215020-kkhck1p",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20231114215020-kkhck1p",
+						"updated": "20231114215020"
+					},
+					"Children": [
+						{
+							"ID": "20231114215020-y0vv1vd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231114215020-y0vv1vd",
+								"updated": "20231114215020"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "写构造函数"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231114215020-w5iq6kw",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20231114215020-w5iq6kw",
+						"updated": "20231114215020"
+					},
+					"Children": [
+						{
+							"ID": "20231114215020-d5zoq8j",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231114215020-d5zoq8j",
+								"updated": "20231114215020"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重写要监听哪些通知的方法（重要）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231114215020-rx0cgc0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20231114215020-rx0cgc0",
+						"updated": "20231114215020"
+					},
+					"Children": [
+						{
+							"ID": "20231114215020-xhisrbz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231114215020-xhisrbz",
+								"updated": "20231114215020"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重写监听到处理通知的方法（重要）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231114215020-binnchm",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20231114215020-binnchm",
+						"updated": "20231114215020"
+					},
+					"Children": [
+						{
+							"ID": "20231114215020-zg4wu0f",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231114215020-zg4wu0f",
+								"updated": "20231114215020"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可选：重写注册时的方法"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20231114215020-bld3oae",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231114215020-bld3oae",
+				"updated": "20231114215131"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "其中3，4步非常重要，前者决定要监听哪些通知名，后者决定监听到前者指定的通知后要做什么"
+				}
+			]
+		},
+		{
+			"ID": "20231114215138-0zuya70",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20231114215138-0zuya70",
+				"updated": "20240322114158"
+			},
+			"Children": [
+				{
+					"ID": "20231114215141-izpor58",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20231114215141-izpor58",
+						"updated": "20231114215141"
+					},
+					"Children": [
+						{
+							"ID": "20231114215141-4u7xfc9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231114215141-4u7xfc9",
+								"updated": "20231114215251"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "继承PureMVC中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Mediator"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​脚本"
+								}
+							]
+						},
+						{
+							"ID": "20231114215145-kke8iha",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231114215145-kke8iha",
+								"style": "line-height: 22px;",
+								"updated": "20231114215155"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class NewMainViewMediator : Mediator { }\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231114215200-d7l0o9k",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20231114215200-d7l0o9k",
+						"updated": "20240322114158"
+					},
+					"Children": [
+						{
+							"ID": "20231114215200-ut2geqq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231114215200-ut2geqq",
+								"updated": "20231114215203"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "写构造函数"
+								}
+							]
+						},
+						{
+							"ID": "20231114215203-gvf0din",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231114215203-gvf0din",
+								"updated": "20240322114158"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "和"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref code",
+									"TextMarkBlockRefID": "20231114204742-xqys4sa",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "Proxy"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​一样，继承了"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Mediator"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的派生类需要声明构造函数并调用构造函数传入"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "mediatorName"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20231114215416-3gwclum",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231114215416-3gwclum",
+								"style": "line-height: 22px;",
+								"updated": "20231114215536"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//Mediator的构造函数在形式与作用上都与Proxy基类相似，这里不再多余阐述其用法\npublic Mediator(string mediatorName, object viewComponent = null)\n{\n    MediatorName = mediatorName ?? NAME;\n    ViewComponent = viewComponent;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20231114215546-2b2t7ws",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231114215546-2b2t7ws",
+								"updated": "20231114215738"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "因此，这里我们采用和"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20231114204742-xqys4sa",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "Proxy构造函数"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "差不多的写法"
+								}
+							]
+						},
+						{
+							"ID": "20231114215730-jnkvrx1",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231114215730-jnkvrx1",
+								"style": "line-height: 22px;",
+								"updated": "20231114215753"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//这里显式的将父类的NAME隐藏了，因此再调用NewMainViewMediator.NAME得到的将是这里的名字\npublic static new string NAME = \"NewMainViewMediator\";\n\n// 2.写构造函数\npublic NewMainViewMediator() : base(NAME)\n{\n    //这里面是可以去创建界面预设体等逻辑\n    //但是界面显示应该是被触发控制的\n    //而且创建界面的代码重复性比较高\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231114215755-p7w0yol",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20231114215755-p7w0yol",
+						"updated": "20231114222257"
+					},
+					"Children": [
+						{
+							"ID": "20231114215755-szfmh63",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231114215755-szfmh63",
+								"updated": "20231114215759"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重写要监听哪些通知的方法（重要）"
+								}
+							]
+						},
+						{
+							"ID": "20231114215800-uc044h0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231114215800-uc044h0",
+								"updated": "20231114215827"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "这是一个PureMVC的规则，就是你需要监听哪些通知，那就在这里把通知们通过字符串数组的形式返回出去\nPureMVC就会帮助我们监听这些通知，类似于 通过事件名 注册事件监听"
+								}
+							]
+						},
+						{
+							"ID": "20231114215819-aq8pyr2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231114215819-aq8pyr2",
+								"updated": "20231114215937"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "简单来说，就是要监听哪些通知，该方法就返回哪些通知名"
+								}
+							]
+						},
+						{
+							"ID": "20231114220023-wthug5r",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231114220023-wthug5r",
+								"updated": "20231114220211"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "这里就会体现"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20231114193427-y0q4gzo",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "通知类"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "的用处，要使用哪些通知就在通知类里声明一个字符串常量"
+								}
+							]
+						},
+						{
+							"ID": "20231114215927-06bnlcf",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231114215927-06bnlcf",
+								"style": "line-height: 22px;",
+								"updated": "20231114222257"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public override string[] ListNotificationInterests()\n{\n    //这是一个PureMVC的规则\n    //就是你需要监听哪些通知，那就在这里吧通知们通过字符串数组的形式返回出去\n    //PureMVC就会帮助我们监听这些通知\n    //类似于 通过事件名 注册事件监听\n    return new string[] { PureNotification.UPDATE_PLAYER_INFO };\n    //如果要监听别的通知，就在字符串数组后面在添加通知名即可\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231114220218-442omj8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20231114220218-442omj8",
+						"updated": "20231115182032"
+					},
+					"Children": [
+						{
+							"ID": "20231114220218-q2zfv84",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231114220218-q2zfv84",
+								"updated": "20231114220240"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重写处理通知的方法"
+								}
+							]
+						},
+						{
+							"ID": "20231114220241-mu3kzln",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231114220241-mu3kzln",
+								"updated": "20231115182032"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "你在"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ListNotificationInterests()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​返回了哪些通知名，这里就可以执行监听到通知后执行的逻辑\n该方法的参数是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "INotification"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，该接口内有两个重要信息"
+								}
+							]
+						},
+						{
+							"ID": "20231114220412-zc5lird",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20231114220412-zc5lird",
+								"updated": "20231114220415"
+							},
+							"Children": [
+								{
+									"ID": "20231114220415-dd8p9w5",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20231114220415-dd8p9w5",
+										"updated": "20231114220415"
+									},
+									"Children": [
+										{
+											"ID": "20231114220415-pcqqh3s",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20231114220415-pcqqh3s",
+												"updated": "20231114220419"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "通知名 我们根据这个名字 来做对应的处理"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20231114220420-d5qtnnf",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20231114220420-d5qtnnf"
+									},
+									"Children": [
+										{
+											"ID": "20231114220420-icetivo",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20231114220420-icetivo",
+												"updated": "20231114220714"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "通知包含的信息（类似于事件中心触发者发送给监听者的对象）"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20231114220334-v7m48x0",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231114220334-v7m48x0",
+								"style": "line-height: 22px;",
+								"updated": "20231114220343"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "// 4.重写处理通知的方法\npublic override void HandleNotification(INotification notification)\n{\n    //INotification 对象 里面包含两个对我们来说 重要的参数\n    //1. 通知名 我们根据这个名字 来做对应的处理\n    //2. 通知包含的信息\n    switch (notification.Name)\n    {\n        //和上面的ListNotificationInterests返回的字符串对应，这里就是如果监听到对应字符串处理相应的逻辑\n        case PureNotification.UPDATE_PLAYER_INFO:\n            (ViewComponent as NewMainView).UpdateInfo(notification.Body as PlayerDataObject);\n            break;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231114220730-vtref68",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20231114220730-vtref68",
+						"updated": "20231114220753"
+					},
+					"Children": [
+						{
+							"ID": "20231114220730-g3q3h1q",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231114220730-g3q3h1q",
+								"updated": "20231114220739"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可选：重写注册时的方法"
+								}
+							]
+						},
+						{
+							"ID": "20231114220739-xvo1s8b",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20231114220739-xvo1s8b",
+								"style": "line-height: 22px;",
+								"updated": "20231114220753"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public override void OnRegister()\n{\n    base.OnRegister();\n    //注册时初始化一些内容\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20231114220021-zudy170",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231114220021-zudy170"
+			}
+		}
+	]
+}

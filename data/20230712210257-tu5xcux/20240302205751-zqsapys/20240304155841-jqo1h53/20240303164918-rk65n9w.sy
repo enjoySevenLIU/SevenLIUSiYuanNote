@@ -1,0 +1,796 @@
+{
+	"ID": "20240303164918-rk65n9w",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240303164918-rk65n9w",
+		"title": "UN1L8——域名解析",
+		"updated": "20240304161815"
+	},
+	"Children": [
+		{
+			"ID": "20240303171354-w65grv2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240303171354-w65grv2",
+				"updated": "20240303171400"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240303171400-12j32o4",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240303171400-12j32o4",
+				"style": "line-height: 22px;",
+				"updated": "20240303173601"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "IPHostEntry\t\t\t\t\t\t//域名解析后的返回值，可以通过该对象获取IP地址、主机名等等信息，我们不会去自行new它\nipHostEntry.AddressList\t\t\t//获取关联IP\nipHostEntry.Aliases\t\t\t\t//获取主机别名列表\nipHostEntry.HostName\t\t\t//获取DNS名称\nDns\t\t\t\t\t\t\t\t//Dns相关静态类，可以使用它来根据域名获取IP地址\nDns.GetHostName()\t\t\t\t//获取本地系统的主机名\nDns.GetHostEntry()\t\t\t\t//同步获取指定域名的IP信息\nDns.GetHostEntryAsync()\t\t\t//异步获取指定域名的IP信息，返回一个Task协程类，await返回的task即可异步获取\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240303164918-ncg4bhw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240303164918-ncg4bhw",
+				"updated": "20240303170947"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "域名解析"
+				}
+			]
+		},
+		{
+			"ID": "20240303173407-gny3x0g",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240303173407-gny3x0g",
+				"updated": "20240303173423"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果你不知道对方的IP地址，想通过域名和对方进行通信，我们可以通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Dns"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类通过域名得到IP地址后再和对方建立连接并通信"
+				}
+			]
+		},
+		{
+			"ID": "20240303170959-t7thg0a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240303170959-t7thg0a",
+				"updated": "20240303170947"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "域名解析也叫域名指向、服务器设置、域名配置以及反向IP登记等等，说得简单点就是将好记的域名解析成IP\nIP地址是网络上标识站点的数字地址，但是IP地址相对来说记忆困难，所以为了方便记忆，采用域名来代替IP地址标识站点地址。\n比如，我们要登录一个网页："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "www.baidu.com"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，这个就是域名，\n我们可以通过记忆域名来记忆一个远端服务器的地址，而不是记录一个复杂的IP地址"
+				}
+			]
+		},
+		{
+			"ID": "20240303170959-p99afgx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240303170959-p99afgx",
+				"updated": "20240303170947"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "域名解析就是域名到IP地址的转换过程。域名的解析工作由DNS服务器完成，我们在进行通信时有时会有需求通过域名获取IP\n所以这节课我们就来学习C#提供的域名解析相关的类"
+				}
+			]
+		},
+		{
+			"ID": "20240303170959-z8njq4u",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240303170959-z8njq4u",
+				"updated": "20240303170947"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "域名系统（英文：Domain Name System，缩写：DNS）是互联网的一项服务\n它作为将域名和IP地址相互映射的一个分布式数据库，能够使人更方便地访问互联网\n是因特网上解决网上机器命名的一种系统，因为IP地址记忆不方便，就采用了域名系统来管理名字和IP的对应关系"
+				}
+			]
+		},
+		{
+			"ID": "20240303171047-de8ou78",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240303171047-de8ou78",
+				"updated": "20240303171055"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "IPHostEntry"
+				}
+			]
+		},
+		{
+			"ID": "20240303171102-030d0dj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240303171102-030d0dj",
+				"updated": "20240303171133"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "命名空间："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "System.Net"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n类名："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IPHostEntry"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n主要作用：域名解析后的返回值，可以通过该对象获取IP地址、主机名等等信息\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "该类不会自己声明，都是作为某些方法的返回值返回信息，我们主要通过该类对象获取返回的信息"
+				}
+			]
+		},
+		{
+			"ID": "20240303171102-arcf8ty",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240303171102-arcf8ty",
+				"updated": "20240303171226"
+			},
+			"Children": [
+				{
+					"ID": "20240303171226-a6387n0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240303171226-a6387n0",
+						"name": "ipHostEntry.AddressList",
+						"updated": "20240303171226"
+					},
+					"Children": [
+						{
+							"ID": "20240303171226-kxw9at9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240303171226-kxw9at9",
+								"updated": "20240303171226"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取关联IP成员变量："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ipHostEntry.AddressList"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240303171226-hg4znpp",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240303171226-hg4znpp",
+						"name": "ipHostEntry.Aliases"
+					},
+					"Children": [
+						{
+							"ID": "20240303171226-epvdnbl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240303171226-epvdnbl"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取主机别名列表成员变量："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ipHostEntry.Aliases"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240303171227-v3azkgc",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240303171227-v3azkgc",
+						"name": "ipHostEntry.HostName"
+					},
+					"Children": [
+						{
+							"ID": "20240303171227-poa0rst",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240303171227-poa0rst"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取DNS名称成员变量："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ipHostEntry.HostName"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240303171133-hoxkknk",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240303171133-hoxkknk",
+				"updated": "20240303171322"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Dns"
+				}
+			]
+		},
+		{
+			"ID": "20240303171330-baascnz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240303171330-baascnz",
+				"updated": "20240303171344"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "命名空间："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "System.Net"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n类名："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Dns"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n主要作用："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Dns"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​是一个静态类，提供了很多静态方法，可以使用它来根据域名获取IP地址"
+				}
+			]
+		},
+		{
+			"ID": "20240303171330-ipfjz2c",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240303171330-ipfjz2c",
+				"updated": "20240303171350"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "常用方法"
+				}
+			]
+		},
+		{
+			"ID": "20240303171350-3konund",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240303171350-3konund",
+				"updated": "20240303173101"
+			},
+			"Children": [
+				{
+					"ID": "20240303171350-rgtes17",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240303171350-rgtes17",
+						"updated": "20240303171350"
+					},
+					"Children": [
+						{
+							"ID": "20240303171350-q99xif2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240303171350-q99xif2",
+								"updated": "20240303171350"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取本地系统的主机名"
+								}
+							]
+						},
+						{
+							"ID": "20240303171612-t4ib1qb",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240303171612-t4ib1qb",
+								"style": "line-height: 22px;",
+								"updated": "20240303171728"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "print(Dns.GetHostName());\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240303171816-15okokg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240303171816-15okokg",
+								"updated": "20240303171816"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240303171816-bqqop4b.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240303171350-lmkpln4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240303171350-lmkpln4",
+						"updated": "20240303173101"
+					},
+					"Children": [
+						{
+							"ID": "20240303171350-emdj77u",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240303171350-emdj77u",
+								"updated": "20240303171831"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取指定域名的IP信息\n"
+								}
+							]
+						},
+						{
+							"ID": "20240303171850-jc6apeu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240303171850-jc6apeu"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "根据域名获取"
+								}
+							]
+						},
+						{
+							"ID": "20240303171831-l9u8yta",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240303171831-l9u8yta",
+								"updated": "20240303173101"
+							},
+							"Children": [
+								{
+									"ID": "20240303171831-0iep038",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240303171831-0iep038",
+										"name": "Dns.GetHostEntry()",
+										"updated": "20240303173059"
+									},
+									"Children": [
+										{
+											"ID": "20240303171831-qa6msgc",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240303171831-qa6msgc",
+												"updated": "20240303173059"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "同步获取指定域名的IP信息"
+												}
+											]
+										},
+										{
+											"ID": "20240303171847-pybeupq",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240303171847-pybeupq"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "注意：由于获取远程主机信息是需要进行网络通信，所以可能会阻塞主线程"
+												}
+											]
+										},
+										{
+											"ID": "20240303171853-zdmw6hk",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240303171853-zdmw6hk",
+												"style": "line-height: 22px;",
+												"updated": "20240303172356"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "IPHostEntry entry = Dns.GetHostEntry(\"www.baidu.com\");\nfor (int i = 0; i \u003c entry.AddressList.Length; i++)\n{\n    print(\"IP地址：\" + entry.AddressList[i]);\n}\nfor (int i = 0; i \u003c entry.Aliases.Length; i++)\n{\n    print(\"主机别名：\" + entry.Aliases[i]);\n}\nprint(\"DNS服务器名称：\" + entry.HostName);\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20240303172347-gp1z685",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240303172347-gp1z685",
+												"updated": "20240303172347"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Properties": {
+														"parent-style": "width: 363px;",
+														"style": "width: 353px;"
+													},
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20240303172347-jo89b1x.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeKramdownSpanIAL",
+													"Data": "{: style=\"width: 353px;\" parent-style=\"width: 363px;\"}"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240303171833-hjimaq2",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240303171833-hjimaq2",
+										"name": "Dns.GetHostEntryAsync()",
+										"updated": "20240303173101"
+									},
+									"Children": [
+										{
+											"ID": "20240303171833-ta3p5ou",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240303171833-ta3p5ou",
+												"updated": "20240303173101"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "异步获取指定域名的IP信息"
+												}
+											]
+										},
+										{
+											"ID": "20240303171855-ss4vczg",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240303171855-ss4vczg",
+												"style": "line-height: 22px;",
+												"updated": "20240303172959"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "void Start()\n{\n\tGetHostEntry();\n}\n\nprivate async void GetHostEntry()\n{\n    Task\u003cIPHostEntry\u003e task = Dns.GetHostEntryAsync(\"www.baidu.com\");\n    await task;\t\t\t\t//等待域名解析完成\n    for (int i = 0; i \u003c task.Result.AddressList.Length; i++)\n    {\n        print(\"IP地址：\" + task.Result.AddressList[i]);\n    }\n    for (int i = 0; i \u003c task.Result.Aliases.Length; i++)\n    {\n        print(\"主机别名：\" + task.Result.Aliases[i]);\n    }\n    print(\"DNS服务器名称：\" + task.Result.HostName);\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20240303173012-dvbsa38",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240303173012-dvbsa38",
+												"updated": "20240303173012"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20240303173012-3l1044k.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240303171315-qrza044",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240303171315-qrza044",
+				"updated": "20240303171322"
+			}
+		}
+	]
+}

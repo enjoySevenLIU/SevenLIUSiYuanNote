@@ -1,0 +1,1133 @@
+{
+	"ID": "20240422182411-iglltg4",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240422182411-iglltg4",
+		"title": "UFL9-1——输入控制模块的具体实现",
+		"type": "doc",
+		"updated": "20240422182430"
+	},
+	"Children": [
+		{
+			"ID": "20240422182430-p65n9s1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240422182430-p65n9s1",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输入控制模块的基本原理（以键盘为例）"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-t418p00",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240422182430-t418p00",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"ID": "20240422182430-6a6hum3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240422182430-6a6hum3",
+						"updated": "20240422182430"
+					},
+					"Children": [
+						{
+							"ID": "20240422182430-haw0tqb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-haw0tqb",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "制作 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "InputManager"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 单例模式管理器"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-4odynmm",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422182430-4odynmm",
+								"style": "line-height: 22px;",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class InputManager : BaseManager\u003cInputManager\u003e\n{\n    private InputManager() { }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240422182430-t69ve1g",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240422182430-t69ve1g",
+						"updated": "20240422182430"
+					},
+					"Children": [
+						{
+							"ID": "20240422182430-iiax5uc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-iiax5uc",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在输入管理器中进行按键检测"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-hzyfl52",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-hzyfl52",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "要检测哪个按键，就在帧更新方法内监听对应的方法，帧更新方法需要在添加到公共Mono模块的帧更新内"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-sux6i39",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422182430-sux6i39",
+								"style": "line-height: 22px;",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private InputManager()\n{\n    MonoManager.Instance.AddUpdateListener(InputUpdate);\n}\n\n// 开启或者关闭输入模块管理的检测\npublic void StartOrCloseInputManager(bool isCheckInput)\n{\n    this.isCheckInput = isCheckInput;\n}\n\nprivate void InputUpdate()\n{\n\tif (Input.GetKeyDown(KeyCode.W))\n\t{\n\t\tDebug.Log(\"按下W键\")\n\t}\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240422182430-ruc0m4w",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240422182430-ruc0m4w",
+						"updated": "20240422182430"
+					},
+					"Children": [
+						{
+							"ID": "20240422182430-fqrtm6w",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-fqrtm6w",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "利用事件中心分发事件"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-2dkipg6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-2dkipg6",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "先到事件中心声明对应的事件名"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-m8t7ij0",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422182430-m8t7ij0",
+								"style": "line-height: 22px;",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "/// \u003csummary\u003e\n/// 事件类型枚举\n/// \u003c/summary\u003e\npublic enum E_EventType\n{\n    /// \u003csummary\u003e\n    /// 键盘按下某一个键按下的事件\n    /// \u003c/summary\u003e\n    E_Keyboard_Up,\n    /// \u003csummary\u003e\n    /// 键盘某一个键抬起的事件\n    /// \u003c/summary\u003e\n    E_Keyboard_Down,\n    /// \u003csummary\u003e\n    /// 键盘某一个键长按的事件\n    /// \u003c/summary\u003e\n    E_Keyboard,\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-vfp66oe",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-vfp66oe",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "要监听键盘的哪个键输入，就在帧更新方法内调用检测键盘按键输入时传入这个按键的枚举值\n检测到输入时，需要将监听到的按键枚举值通过事件中心传递出去，让外部识别"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-lak89c5",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422182430-lak89c5",
+								"style": "line-height: 22px;",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using UnityEngine;\n\npublic class InputManager : BaseManager\u003cInputManager\u003e\n{\n    private InputManager()\n    {\n        MonoManager.Instance.AddUpdateListener(InputUpdate);\n    }\n\n    private void InputUpdate()\n    {\n        CheckKeyCode(KeyCode.W);\n        CheckKeyCode(KeyCode.A);\n        CheckKeyCode(KeyCode.S);\n        CheckKeyCode(KeyCode.D);\n\n        CheckKeyCode(KeyCode.H);\n        CheckKeyCode(KeyCode.J);\n        CheckKeyCode(KeyCode.K);\n        CheckKeyCode(KeyCode.L);\n    }\n\n    private void CheckKeyCode(KeyCode key)\n    {\n        if (Input.GetKeyDown(key))\n            EventCenter.Instance.EventTrigger(E_EventType.E_Keyboard_Down, key);\n        if (Input.GetKey(key))\n            EventCenter.Instance.EventTrigger(E_EventType.E_Keyboard, key);\n        if (Input.GetKeyUp(key))\n            EventCenter.Instance.EventTrigger(E_EventType.E_Keyboard_Up, key);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240422182430-6g019vg",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240422182430-6g019vg",
+						"updated": "20240422182430"
+					},
+					"Children": [
+						{
+							"ID": "20240422182430-6rwomfy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-6rwomfy",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在希望处理输入逻辑的位置监听事件"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-zjn5t72",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-zjn5t72",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "例如要监听W键按下的事件，就需要监听事件中心上的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "E_EventType.E_Keyboard_Down"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​事件，根据传入的枚举值来判断是否是W键按下"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-5ovwqft",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-5ovwqft",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注：为了便于移除监听方法，请不要使用匿名函数来监听事件中心的事件！"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-8rmxb70",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422182430-8rmxb70",
+								"style": "line-height: 22px;",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class Main : MonoBehaviour\n{\n    void Start()\n    {\n\t\tEventCenter.Instance.AddEventListener\u003cKeyCode\u003e(E_EventType.E_Keyboard_Down, CheckKeyCode);\n\t}\n\n    private void CheckKeyCode(KeyCode key)\n    {\n        switch (key)\n        {\n            case KeyCode.W:\n                print(\"W键按下\");\n                break;\n            default:\n                break;\n        }\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-5fb2gy8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-5fb2gy8",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "但是要注意，由于输入管理器继承的单例基类是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240415150008-2ba7e98",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "懒汉模式"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "的，此时还没有调用过输入模块，因此，这时输入检测是不会生效的"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240422182430-4w394cy",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20240422182430-4w394cy",
+						"updated": "20240422182430"
+					},
+					"Children": [
+						{
+							"ID": "20240422182430-6d4e2zz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-6d4e2zz",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "提供输入系统检测开关"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-he97f4y",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-he97f4y",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "声明一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "bool"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​变量表示是否开启输入检测，默认是关闭的，声明一个方法来为外部提供开启或关闭输入检测的功能"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-hr1b8pz",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422182430-hr1b8pz",
+								"style": "line-height: 22px;",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private bool isCheckInput;\n\nprivate InputManager()\n{\n    MonoManager.Instance.AddUpdateListener(InputUpdate);\n}\n\n// 开启或者关闭输入模块管理的检测\npublic void StartOrCloseInputManager(bool isCheckInput)\n{\n    this.isCheckInput = isCheckInput;\n}\n\nprivate void InputUpdate()\n{\n    //如果外部未开启检测功能，就不检测输入\n    if (!isCheckInput)\n        return;\n\n    CheckKeyCode(KeyCode.W);\n    CheckKeyCode(KeyCode.A);\n    CheckKeyCode(KeyCode.S);\n    CheckKeyCode(KeyCode.D);\n\n    CheckKeyCode(KeyCode.H);\n    CheckKeyCode(KeyCode.J);\n    CheckKeyCode(KeyCode.K);\n    CheckKeyCode(KeyCode.L);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-qubkr4q",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-qubkr4q",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "然后，在外部开启这个输入检测，之后输入检测就会生效"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-p96hcdd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-p96hcdd",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注：为了便于移除监听方法，请不要使用匿名函数来监听事件中心的事件！"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-4emu9uo",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240422182430-4emu9uo",
+								"style": "line-height: 22px;",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class Main : MonoBehaviour\n{\n    void Start()\n    {\n\t\tInputManager.Instance.StartOrCloseInputManager(true);\n\t\tEventCenter.Instance.AddEventListener\u003cKeyCode\u003e(E_EventType.E_Keyboard_Down, CheckKeyCode);\n\t}\n\n    private void CheckKeyCode(KeyCode key)\n    {\n        switch (key)\n        {\n            case KeyCode.W:\n                print(\"W键按下\");\n                break;\n            default:\n                break;\n        }\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240422182430-f38b030",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-f38b030",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "此时按下W键就会输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 444px;",
+										"style": "width: 434px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240422173550-1v6xiq9.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 434px;\" parent-style=\"width: 444px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-65d1yzc",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240422182430-65d1yzc",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "鼠标按键的监听"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-0boom0v",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422182430-0boom0v",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "先到事件中心声明对应的事件名"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-50uq7zk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240422182430-50uq7zk",
+				"style": "line-height: 22px;",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "/// \u003csummary\u003e\n/// 事件类型枚举\n/// \u003c/summary\u003e\npublic enum E_EventType\n{\n    /// \u003csummary\u003e\n    /// 鼠标按下\n    /// \u003c/summary\u003e\n    E_Mouse_Down,\n    /// \u003csummary\u003e\n    /// 鼠标抬起\n    /// \u003c/summary\u003e\n    E_Mouse_Up,\n    /// \u003csummary\u003e\n    /// 鼠标长按\n    /// \u003c/summary\u003e\n    E_Mouse,\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-b68h0c4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422182430-b68h0c4",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "仿照键盘输入的监听，声明对应的监听鼠标按键输入的方法，\n监听到鼠标输入时需要触发事件中心对应的事件，并将监听到的按键通过事件中心传递出去，方便外部识别\n要监听鼠标的哪个键的输入，就在帧更新方法内调用检测鼠标按键输入时传入这个按键的ID"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-xep0vgb",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240422182430-xep0vgb",
+				"style": "line-height: 22px;",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private bool isCheckInput;\n\nprivate InputManager()\n{\n    MonoManager.Instance.AddUpdateListener(InputUpdate);\n}\n\n// 开启或者关闭输入模块管理的检测\npublic void StartOrCloseInputManager(bool isCheckInput)\n{\n    this.isCheckInput = isCheckInput;\n}\n\nprivate void InputUpdate()\n{\n    //如果外部未开启检测功能，就不检测输入\n    if (!isCheckInput)\n        return;\n\n    //监听鼠标的左键和右键\n    CheckMouse(0);\n    CheckMouse(1);\n}\n\nprivate void CheckMouse(int mouseID)\n{\n    if (Input.GetMouseButtonDown(mouseID))\n        EventCenter.Instance.EventTrigger(E_EventType.E_Mouse_Down, mouseID);\n    if (Input.GetMouseButton(mouseID))\n        EventCenter.Instance.EventTrigger(E_EventType.E_Mouse, mouseID);\n    if (Input.GetMouseButtonUp(mouseID))\n        EventCenter.Instance.EventTrigger(E_EventType.E_Mouse_Up, mouseID);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-zsf2s6y",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422182430-zsf2s6y",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设要监听鼠标按键按下的事件，就需要监听事件中心上的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "E_EventType.E_Mouse_Down"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​事件，根据传入的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "mouseID"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​来识别是哪个按键的输入"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-1zi87u2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422182430-1zi87u2",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注：为了便于移除监听方法，请不要使用匿名函数来监听事件中心的事件！"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-yj05yqv",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240422182430-yj05yqv",
+				"style": "line-height: 22px;",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Main : MonoBehaviour\n{\n    void Start()\n    {\n        InputManager.Instance.StartOrCloseInputManager(true);\n\t\tEventCenter.Instance.AddEventListener\u003cint\u003e(E_EventType.E_Mouse_Down, CheckMouse);\n\t}\n\n    private void CheckMouse(int mouseID)\n    {\n        switch (mouseID)\n        {\n            case 0:\n                print(\"鼠标左键按下\");\n                break;\n            case 1:\n                print(\"鼠标右键按下\");\n                break;\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-o7w7q69",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422182430-o7w7q69",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "鼠标左右键分别按下时，输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 371px;",
+						"style": "width: 361px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240422175555-nn7p1gi.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 361px;\" parent-style=\"width: 371px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-uvdtv2w",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240422182430-uvdtv2w",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "轴的监听"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-cbneesv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422182430-cbneesv",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "直接在帧更新方法内不停的触发事件并传递某个轴的值即可，需要传递哪个轴的值就在帧更新方法内触发事件并传递出去"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-4g9djcm",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240422182430-4g9djcm",
+				"style": "line-height: 22px;",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private InputManager()\n{\n    MonoManager.Instance.AddUpdateListener(InputUpdate);\n}\n\nprivate void InputUpdate()\n{\n    //如果外部未开启检测功能，就不检测输入\n    if (!isCheckInput)\n        return;\n\n    EventCenter.Instance.EventTrigger(E_EventType.E_Input_Horizontal, Input.GetAxis(\"Horizontal\"));\n    EventCenter.Instance.EventTrigger(E_EventType.E_Input_Vertical, Input.GetAxis(\"Vertical\"));\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-o60tv1v",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422182430-o60tv1v",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "然后在外部监听对应的事件即可获取值"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-4j8ds2j",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422182430-4j8ds2j",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注：为了便于移除监听方法，请不要使用匿名函数来监听事件中心的事件！"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-cur4e8w",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240422182430-cur4e8w",
+				"style": "line-height: 22px;",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Main : MonoBehaviour\n{\n    void Start()\n    {\n        InputManager.Instance.StartOrCloseInputManager(true);\n        EventCenter.Instance.AddEventListener\u003cfloat\u003e(E_EventType.E_Input_Horizontal, CheckHorizontalAxis);\n    }\n\n    private void CheckHorizontalAxis(float v)\n    {\n        print(v);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-uwu5h68",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422182430-uwu5h68",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按下AD键输出内容："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 225px;",
+						"style": "width: 215px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240422181830-f64twrc.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 215px;\" parent-style=\"width: 225px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-1olveoc",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240422182430-1olveoc",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "抛出问题"
+				}
+			]
+		},
+		{
+			"ID": "20240422182430-6qxz6ph",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240422182430-6qxz6ph",
+				"updated": "20240422182430"
+			},
+			"Children": [
+				{
+					"ID": "20240422182430-eh4bg61",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240422182430-eh4bg61",
+						"updated": "20240422182430"
+					},
+					"Children": [
+						{
+							"ID": "20240422182430-ozoloro",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-ozoloro",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "多开关，分别控制键盘、鼠标、热键检测的开关 —— 思路：加 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "bool"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 变量"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240422182430-9391ug2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240422182430-9391ug2",
+						"updated": "20240422182430"
+					},
+					"Children": [
+						{
+							"ID": "20240422182430-61zum9n",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-61zum9n",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "按下、抬起、长按3种类型的事件合3为1 —— 思路：通过参数传递当前事件类型"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240422182430-67vvjcv",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240422182430-67vvjcv",
+						"updated": "20240422182430"
+					},
+					"Children": [
+						{
+							"ID": "20240422182430-xzhdzfi",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240422182430-xzhdzfi",
+								"updated": "20240422182430"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如何制作改键功能"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

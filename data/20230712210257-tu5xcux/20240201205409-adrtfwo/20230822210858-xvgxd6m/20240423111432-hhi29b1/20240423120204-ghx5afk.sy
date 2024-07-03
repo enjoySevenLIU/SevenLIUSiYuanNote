@@ -1,0 +1,1027 @@
+{
+	"ID": "20240423120204-ghx5afk",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240423120204-ghx5afk",
+		"title": "UFL10-2——TimeManager 具体实现",
+		"type": "doc",
+		"updated": "20240423144301"
+	},
+	"Children": [
+		{
+			"ID": "20240423120628-cxqewen",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240423120628-cxqewen",
+				"updated": "20240423120651"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "TimeManager 具体实现"
+				}
+			]
+		},
+		{
+			"ID": "20240423120728-sui4t7l",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240423120728-sui4t7l",
+				"style": "line-height: 22px;",
+				"updated": "20240423120744"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class TimerManager : BaseManager\u003cTimerManager\u003e\n{\n    private TimerManager() { }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240423120623-dvomjw3",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240423120623-dvomjw3",
+				"updated": "20240423144301"
+			},
+			"Children": [
+				{
+					"ID": "20240423120623-ypty8yp",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240423120623-ypty8yp",
+						"updated": "20240423120623"
+					},
+					"Children": [
+						{
+							"ID": "20240423120623-0pdy1nd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423120623-0pdy1nd",
+								"updated": "20240423120623"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "需要声明的关键成员"
+								}
+							]
+						},
+						{
+							"ID": "20240423120623-u9vg2bq",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240423120623-u9vg2bq",
+								"updated": "20240423120623"
+							},
+							"Children": [
+								{
+									"ID": "20240423120623-lxio7or",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240423120623-lxio7or",
+										"updated": "20240423120623"
+									},
+									"Children": [
+										{
+											"ID": "20240423120623-t4k1k44",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240423120623-t4k1k44",
+												"updated": "20240423120623"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "计时器字典容器"
+												}
+											]
+										},
+										{
+											"ID": "20240423120715-vpnoel0",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240423120715-vpnoel0",
+												"style": "line-height: 22px;",
+												"updated": "20240423120727"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "/// \u003csummary\u003e\n/// 用于管理所有计时器的字典容器\n/// \u003c/summary\u003e\nprivate Dictionary\u003cint, TimerItem\u003e timerDic = new Dictionary\u003cint, TimerItem\u003e();\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240423120623-04n1y3y",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240423120623-04n1y3y",
+										"updated": "20240423120623"
+									},
+									"Children": [
+										{
+											"ID": "20240423120623-g93lz5q",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240423120623-g93lz5q",
+												"updated": "20240423120623"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "待移除计时器列表容器"
+												}
+											]
+										},
+										{
+											"ID": "20240423122302-wmejsua",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240423122302-wmejsua",
+												"style": "line-height: 22px;",
+												"updated": "20240423122305"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "/// \u003csummary\u003e\n/// 待移除的列表\n/// \u003c/summary\u003e\nprivate List\u003cTimerItem\u003e delList = new List\u003cTimerItem\u003e();\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240423120623-yazieko",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423120623-yazieko",
+								"updated": "20240423120623"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "等等"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423120623-bmmapos",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240423120623-bmmapos",
+						"updated": "20240423144301"
+					},
+					"Children": [
+						{
+							"ID": "20240423120623-rga5kdq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423120623-rga5kdq",
+								"updated": "20240423120623"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "需要实现的关键方法"
+								}
+							]
+						},
+						{
+							"ID": "20240423120858-g9vqnzq",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240423120858-g9vqnzq",
+								"updated": "20240423144301"
+							},
+							"Children": [
+								{
+									"ID": "20240423120623-gwt9q0x",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240423120623-gwt9q0x",
+										"updated": "20240423144301"
+									},
+									"Children": [
+										{
+											"ID": "20240423120623-u9xsgcp",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240423120623-u9xsgcp",
+												"updated": "20240423125750"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "开启计时器管理器（实例化时就执行）"
+												}
+											]
+										},
+										{
+											"ID": "20240423120901-liku9uy",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240423120901-liku9uy",
+												"updated": "20240423121237"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "这里的计时逻辑由协程执行，因此需要声明一个协程变量，来管理开启时返的协程，便于关闭计时"
+												}
+											]
+										},
+										{
+											"ID": "20240423120835-yuzhkjq",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240423120835-yuzhkjq",
+												"style": "line-height: 22px;",
+												"updated": "20240423144301"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "private Coroutine timer;\n\nprivate TimerManager() \n{\n    Start();\n}\n\n//开启计时器管理器的方法\npublic void Start()\n{\n    timer = MonoManager.Instance.StartCoroutine(StartTiming());\n}\n\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240423120623-y6z639l",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240423120623-y6z639l",
+										"updated": "20240423120623"
+									},
+									"Children": [
+										{
+											"ID": "20240423120623-u27hqdt",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240423120623-u27hqdt",
+												"updated": "20240423120623"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "关闭计时器管理器"
+												}
+											]
+										},
+										{
+											"ID": "20240423121141-pbu42qd",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240423121141-pbu42qd",
+												"style": "line-height: 22px;",
+												"updated": "20240423121157"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "private Coroutine timer;\n\n//关闭计时器管理器的方法\npublic void Stop()\n{\n    MonoManager.Instance.StopCoroutine(timer);\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240423121436-8iabemd",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20240423121436-8iabemd"
+									},
+									"Children": [
+										{
+											"ID": "20240423121436-8abqot0",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240423121436-8abqot0",
+												"updated": "20240423121436"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "计时协程"
+												}
+											]
+										},
+										{
+											"ID": "20240423121436-qavymsx",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240423121436-qavymsx",
+												"updated": "20240423123831"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "可以通过修改 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "intervalTime"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 来修改每隔多少时间记一次时，间隔越短精确度越高，但性能也越差\n每记一次时间以后，就可以遍历 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "timerDic"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 内的计时器对象，"
+												}
+											]
+										},
+										{
+											"ID": "20240423123834-5cg9epg",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240423123834-5cg9epg",
+												"updated": "20240423123838"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果该对象有间隔时间要执行的委托，先对间隔时间减去经过的时间，再检测间隔时间是否归0，\n如果归0，就执行需要间隔执行的委托，并重置间隔时间"
+												}
+											]
+										},
+										{
+											"ID": "20240423123832-w89gpjf",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240423123832-w89gpjf",
+												"updated": "20240423123832"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "然后对总时间减去经过的时间，再检测总时间是否归0，\n如果归0，执行最终要执行的委托，然后将该计时器对象移入到待移除列表"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "delList"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​内"
+												}
+											]
+										},
+										{
+											"ID": "20240423123709-9bpl0vv",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240423123709-9bpl0vv",
+												"updated": "20240423123906"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "然后将待移除列表内的计时器对象从 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "timerDic"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 内，并压入缓存池，最后清空待移除列表"
+												}
+											]
+										},
+										{
+											"ID": "20240423121436-rcj2yme",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240423121436-rcj2yme",
+												"style": "line-height: 22px;",
+												"updated": "20240423123123"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "/// \u003csummary\u003e\n/// 用于管理所有计时器的字典容器\n/// \u003c/summary\u003e\nprivate Dictionary\u003cint, TimerItem\u003e timerDic = new Dictionary\u003cint, TimerItem\u003e();\n\n/// \u003csummary\u003e\n/// 待移除的列表\n/// \u003c/summary\u003e\nprivate List\u003cTimerItem\u003e delList = new List\u003cTimerItem\u003e();\n\nprivate Coroutine timer;\n\n/// \u003csummary\u003e\n/// 计时器管理器中唯一计时用的协程的间隔时间\n/// \u003c/summary\u003e\nprivate const float intervalTimeSec = 0.1f;\n\n//计时用的协程\nprivate IEnumerator StartTiming()\n{\n    while (true)\n    {\n        //每隔一段时间进行一次计时\n        yield return new WaitForSeconds(intervalTimeSec);\n        foreach (TimerItem item in timerDic.Values)\n        {\n            if (!item.isRunning)\n                continue;\n            //判断计时对象是否有间隔时间执行的需求\n            if (item.callBack != null)\n            {\n                //减去经过的间隔时间\n                item.intervalTimeMiniSec -= (int)(intervalTimeSec * 1000);\n                if (item.intervalTimeMiniSec \u003c= 0)\n                {\n                    item.callBack.Invoke();\n                    item.intervalTimeMiniSec = item.maxIntervalTimeMiniSec;\n                }\n            }\n            //总的时间更新\n            item.allTimeMiniSec -= (int)(intervalTimeSec * 1000);\n            //计时时间到，需要执行完成回调函数\n            if (item.allTimeMiniSec \u003c= 0)\n            {\n                item.overCallBack.Invoke();\n                delList.Add(item);\n            }\n        }\n        //移除待移除列表中的数据\n        for (int i = 0; i \u003c delList.Count; i++)\n        {\n            //从字典中移除\n            timerDic.Remove(delList[i].keyID);\n            //放入到缓存池中\n            PoolManager.Instance.PushObj(delList[i]);\n        }\n        //移除结束后清空列表\n        delList.Clear();\n    }\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240423120623-vzckflz",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NC4=",
+										"Num": 4
+									},
+									"Properties": {
+										"id": "20240423120623-vzckflz",
+										"updated": "20240423120623"
+									},
+									"Children": [
+										{
+											"ID": "20240423120623-3k7yren",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240423120623-3k7yren",
+												"updated": "20240423120623"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "创建单个计时器"
+												}
+											]
+										},
+										{
+											"ID": "20240423123910-zouw55w",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240423123910-zouw55w",
+												"style": "line-height: 22px;",
+												"updated": "20240423125126"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "/// \u003csummary\u003e\n/// 用于记录当前将要创建的计时器对象唯一ID\n/// \u003c/summary\u003e\nprivate int TIMER_KEY = 0;\n\n/// \u003csummary\u003e\n/// 创建单个计时器\n/// \u003c/summary\u003e\n/// \u003cparam name=\"allTimeMiniSec\"\u003e总延迟时间（单位：毫秒）\u003c/param\u003e\n/// \u003cparam name=\"overCallBack\"\u003e总时间结束回调\u003c/param\u003e\n/// \u003cparam name=\"intervalTimeMiniSec\"\u003e间隔计时时间（单位：毫秒）\u003c/param\u003e\n/// \u003cparam name=\"callBack\"\u003e间隔计时时间结束回调\u003c/param\u003e\n/// \u003creturns\u003e创建出来的计时器ID，用于外部控制对应计时器\u003c/returns\u003e\npublic int CreateTimer(int allTimeMiniSec, UnityAction overCallBack, int intervalTimeMiniSec = 0, UnityAction callBack = null)\n{\n    int keyID = ++TIMER_KEY;\n    //从缓存池取出对应的计时器，并初始化数据，然后记录到字典内\n    TimerItem timerItem = PoolManager.Instance.GetObj\u003cTimerItem\u003e();\n    timerItem.InitInfo(keyID, allTimeMiniSec, overCallBack, intervalTimeMiniSec, callBack);\n    timerDic.Add(keyID, timerItem);\n    return keyID;\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240423120623-3s5of3k",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NS4=",
+										"Num": 5
+									},
+									"Properties": {
+										"id": "20240423120623-3s5of3k",
+										"updated": "20240423120623"
+									},
+									"Children": [
+										{
+											"ID": "20240423120623-cmd3kmh",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240423120623-cmd3kmh",
+												"updated": "20240423120623"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "移除单个计时器"
+												}
+											]
+										},
+										{
+											"ID": "20240423125136-8h5cb0c",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240423125136-8h5cb0c",
+												"style": "line-height: 22px;",
+												"updated": "20240423125145"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "/// \u003csummary\u003e\n/// 移除单个计时器\n/// \u003c/summary\u003e\n/// \u003cparam name=\"keyID\"\u003e要移除的计时器对象ID\u003c/param\u003e\npublic void RemoveTimer(int keyID)\n{\n    if (timerDic.ContainsKey(keyID))\n    {\n        PoolManager.Instance.PushObj(timerDic[keyID]);\n        timerDic.Remove(keyID);\n    }\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240423120623-huiyj44",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Ni4=",
+										"Num": 6
+									},
+									"Properties": {
+										"id": "20240423120623-huiyj44",
+										"updated": "20240423120623"
+									},
+									"Children": [
+										{
+											"ID": "20240423120623-8k56fzl",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240423120623-8k56fzl",
+												"updated": "20240423120623"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "重置单个计时器"
+												}
+											]
+										},
+										{
+											"ID": "20240423125147-nt5iyih",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240423125147-nt5iyih",
+												"style": "line-height: 22px;",
+												"updated": "20240423125153"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "/// \u003csummary\u003e\n/// 重置单个计时器\n/// \u003c/summary\u003e\n/// \u003cparam name=\"keyID\"\u003e要重置计时的计时器对象ID\u003c/param\u003e\npublic void ResetTimer(int keyID)\n{\n    if (timerDic.ContainsKey(keyID))\n    {\n        timerDic[keyID].ResetTimer();\n    }\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240423120623-s4w2yxi",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Ny4=",
+										"Num": 7
+									},
+									"Properties": {
+										"id": "20240423120623-s4w2yxi",
+										"updated": "20240423120623"
+									},
+									"Children": [
+										{
+											"ID": "20240423120623-6snf5t8",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240423120623-6snf5t8",
+												"updated": "20240423120623"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "开启单个计时器"
+												}
+											]
+										},
+										{
+											"ID": "20240423125156-h6cj2rt",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240423125156-h6cj2rt",
+												"style": "line-height: 22px;",
+												"updated": "20240423125203"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "/// \u003csummary\u003e\n/// 开启单个计时器\n/// \u003c/summary\u003e\n/// \u003cparam name=\"keyID\"\u003e要开始计时的计时器对象ID\u003c/param\u003e\npublic void StartTimer(int keyID)\n{\n    if (timerDic.ContainsKey(keyID))\n    {\n        timerDic[keyID].isRunning = true;\n    }\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240423120623-6w817s2",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "OC4=",
+										"Num": 8
+									},
+									"Properties": {
+										"id": "20240423120623-6w817s2",
+										"updated": "20240423120623"
+									},
+									"Children": [
+										{
+											"ID": "20240423120623-bu2ruc3",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240423120623-bu2ruc3",
+												"updated": "20240423120623"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "停止单个计时器"
+												}
+											]
+										},
+										{
+											"ID": "20240423125204-zcu7hl0",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240423125204-zcu7hl0",
+												"style": "line-height: 22px;",
+												"updated": "20240423125213"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "/// \u003csummary\u003e\n/// 停止单个计时器的计时\n/// \u003c/summary\u003e\n/// \u003cparam name=\"keyID\"\u003e要停止计时的计时器对象ID\u003c/param\u003e\npublic void StopTimer(int keyID)\n{\n    if (timerDic.ContainsKey(keyID))\n    {\n        timerDic[keyID].isRunning = false;\n    }\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240423125242-wrag1yy",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240423125242-wrag1yy",
+				"updated": "20240423125248"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20240423130213-blrvac9",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240423130213-blrvac9",
+				"style": "line-height: 22px;",
+				"updated": "20240423130254"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private int timerID;\n\nvoid Update()\n{\n    if (Input.GetKeyDown(KeyCode.T))\n    {\n        timerID = TimerManager.Instance.CreateTimer(5000, () =\u003e\n        {\n            print(\"5s计时结束\");\n        }, 1000, () =\u003e\n        {\n            print(\"间隔1秒\");\n        });\n    }\n\n    if (Input.GetKeyDown(KeyCode.Y))\n    {\n        TimerManager.Instance.RemoveTimer(timerID);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240423125249-f8ry32w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423125249-f8ry32w",
+				"updated": "20240423130315"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按下T后输出，中途如果按下Y就会停止输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 386px;",
+						"style": "width: 376px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240423130212-pnvi0lg.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 376px;\" parent-style=\"width: 386px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240423130548-qjx0cj8",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240423130548-qjx0cj8",
+				"updated": "20240423130555"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "抛出问题"
+				}
+			]
+		},
+		{
+			"ID": "20240423130555-tzybdru",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423130555-tzybdru",
+				"updated": "20240423130657"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "目前的计时器管理器会受到 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Time.timeScale"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的影响，我们应该如何让计时器管理器可以自己决定是否受到它的影响呢?"
+				}
+			]
+		},
+		{
+			"ID": "20240423125223-o8q1jic",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240423125223-o8q1jic",
+				"updated": "20240423125227"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体代码"
+				}
+			]
+		},
+		{
+			"ID": "20240423125227-mq52iqu",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240423125227-mq52iqu",
+				"style": "line-height: 22px;",
+				"updated": "20240423144250"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\n\n/// \u003csummary\u003e\n/// 计时器管理器，主要用于开启，停止，重置等等操作管理计时器\n/// \u003c/summary\u003e\npublic class TimerManager : BaseManager\u003cTimerManager\u003e\n{\n    /// \u003csummary\u003e\n    /// 用于记录当前将要创建的计时器对象唯一ID\n    /// \u003c/summary\u003e\n    private int TIMER_KEY = 0;\n    /// \u003csummary\u003e\n    /// 用于管理所有计时器的字典容器\n    /// \u003c/summary\u003e\n    private Dictionary\u003cint, TimerItem\u003e timerDic = new Dictionary\u003cint, TimerItem\u003e();\n    /// \u003csummary\u003e\n    /// 待移除的列表\n    /// \u003c/summary\u003e\n    private List\u003cTimerItem\u003e delList = new List\u003cTimerItem\u003e();\n\n    private Coroutine timer;\n\n    /// \u003csummary\u003e\n    /// 计时器管理器中唯一计时用的协程的间隔时间\n    /// \u003c/summary\u003e\n    private const float intervalTimeSec = 0.1f;\n\n    private TimerManager() \n    {\n        Start();\n    }\n\n    //开启计时器管理器的方法\n    public void Start()\n    {\n        timer = MonoManager.Instance.StartCoroutine(StartTiming());\n    }\n\n    //关闭计时器管理器的方法\n    public void Stop()\n    {\n        MonoManager.Instance.StopCoroutine(timer);\n    }\n\n    //计时用的协程\n    private IEnumerator StartTiming()\n    {\n        while (true)\n        {\n            //每隔一段时间进行一次计时\n            yield return new WaitForSeconds(intervalTimeSec);\n            foreach (TimerItem item in timerDic.Values)\n            {\n                //如果计时器需要计时，才执行后边的逻辑\n                if (!item.isRunning)\n                    continue;\n                //判断计时对象是否有间隔时间执行的需求\n                if (item.callBack != null)\n                {\n                    //减去经过的间隔时间\n                    item.intervalTimeMiniSec -= (int)(intervalTimeSec * 1000);\n                    if (item.intervalTimeMiniSec \u003c= 0)\n                    {\n                        item.callBack.Invoke();\n                        item.intervalTimeMiniSec = item.maxIntervalTimeMiniSec;\n                    }\n                }\n                //总的时间更新\n                item.allTimeMiniSec -= (int)(intervalTimeSec * 1000);\n                //计时时间到，需要执行完成回调函数\n                if (item.allTimeMiniSec \u003c= 0)\n                {\n                    item.overCallBack.Invoke();\n                    delList.Add(item);\n                }\n            }\n            //移除待移除列表中的数据\n            for (int i = 0; i \u003c delList.Count; i++)\n            {\n                //从字典中移除\n                timerDic.Remove(delList[i].keyID);\n                //放入到缓存池中\n                PoolManager.Instance.PushObj(delList[i]);\n            }\n            //移除结束后清空列表\n            delList.Clear();\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 创建单个计时器\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"allTimeMiniSec\"\u003e总延迟时间（单位：毫秒）\u003c/param\u003e\n    /// \u003cparam name=\"overCallBack\"\u003e总时间结束回调\u003c/param\u003e\n    /// \u003cparam name=\"intervalTimeMiniSec\"\u003e间隔计时时间（单位：毫秒）\u003c/param\u003e\n    /// \u003cparam name=\"callBack\"\u003e间隔计时时间结束回调\u003c/param\u003e\n    /// \u003creturns\u003e创建出来的计时器ID，用于外部控制对应计时器\u003c/returns\u003e\n    public int CreateTimer(int allTimeMiniSec, UnityAction overCallBack, int intervalTimeMiniSec = 0, UnityAction callBack = null)\n    {\n        int keyID = ++TIMER_KEY;\n        //从缓存池取出对应的计时器，并初始化数据，然后记录到字典内\n        TimerItem timerItem = PoolManager.Instance.GetObj\u003cTimerItem\u003e();\n        timerItem.InitInfo(keyID, allTimeMiniSec, overCallBack, intervalTimeMiniSec, callBack);\n        timerDic.Add(keyID, timerItem);\n        return keyID;\n    }\n\n    /// \u003csummary\u003e\n    /// 移除单个计时器\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"keyID\"\u003e要移除的计时器对象ID\u003c/param\u003e\n    public void RemoveTimer(int keyID)\n    {\n        if (timerDic.ContainsKey(keyID))\n        {\n            PoolManager.Instance.PushObj(timerDic[keyID]);\n            timerDic.Remove(keyID);\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 重置单个计时器\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"keyID\"\u003e要重置计时的计时器对象ID\u003c/param\u003e\n    public void ResetTimer(int keyID)\n    {\n        if (timerDic.ContainsKey(keyID))\n        {\n            timerDic[keyID].ResetTimer();\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 开启单个计时器\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"keyID\"\u003e要开始计时的计时器对象ID\u003c/param\u003e\n    public void StartTimer(int keyID)\n    {\n        if (timerDic.ContainsKey(keyID))\n        {\n            timerDic[keyID].isRunning = true;\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 停止单个计时器的计时\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"keyID\"\u003e要停止计时的计时器对象ID\u003c/param\u003e\n    public void StopTimer(int keyID)\n    {\n        if (timerDic.ContainsKey(keyID))\n        {\n            timerDic[keyID].isRunning = false;\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

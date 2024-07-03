@@ -1,0 +1,573 @@
+{
+	"ID": "20240418225620-x2al5zs",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240418225620-x2al5zs",
+		"title": "UFL5-7——AB包资源管理器的同步加载修改",
+		"type": "doc",
+		"updated": "20240418233110"
+	},
+	"Children": [
+		{
+			"ID": "20240418225620-sbv2xmm",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240418225620-sbv2xmm",
+				"updated": "20240418225705"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "修改同步加载主要面对的问题"
+				}
+			]
+		},
+		{
+			"ID": "20240418225710-8cyl9yd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418225710-8cyl9yd",
+				"updated": "20240418225710"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在进行同步加载时如果遇到有AB包正在被异步加载应该如何解决？"
+				}
+			]
+		},
+		{
+			"ID": "20240418225710-k1kmlhq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418225710-k1kmlhq",
+				"updated": "20240418225724"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过我们之前学习的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240418210422-bfey4lt",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "潜在问题考虑"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 得知，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "在进行异步加载时再重复加载相同AB包是会报错的"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n即使是同步加载，我们也必须等待异步加载结束，再进行下一步"
+				}
+			]
+		},
+		{
+			"ID": "20240418225724-rh5tpxv",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240418225724-rh5tpxv",
+				"updated": "20240418225733"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "修改ABMgr中的同步加载相关逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240418225737-l7fubi2",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240418225737-l7fubi2",
+				"updated": "20240418233055"
+			},
+			"Children": [
+				{
+					"ID": "20240418225740-yqtct21",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240418225740-yqtct21",
+						"updated": "20240418225740"
+					},
+					"Children": [
+						{
+							"ID": "20240418225740-3spidne",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240418225740-3spidne",
+								"updated": "20240418225740"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注释之前的同步加载代码"
+								}
+							]
+						},
+						{
+							"ID": "20240418225901-nowynjt",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240418225901-nowynjt",
+								"style": "line-height: 22px;",
+								"updated": "20240418230201"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//同步加载，不指定类型\n//public Object LoadRes(string abName, string resName);\n\n//同步加载，使用type指定类型\n//public Object LoadRes(string abName, string resName, System.Type type);\n\n//同步加载，使用泛型指定类型\n//public T LoadRes\u003cT\u003e(string abName, string resName) where T : Object;\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240418225740-193bgs6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240418225740-193bgs6",
+						"updated": "20240418233055"
+					},
+					"Children": [
+						{
+							"ID": "20240418225740-et0rzcy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240418225740-et0rzcy",
+								"updated": "20240418225740"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在异步加载的基础上进行修改"
+								}
+							]
+						},
+						{
+							"ID": "20240418232407-p79azhs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240418232407-p79azhs",
+								"updated": "20240418232844"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "添加一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "isSync"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​参数，该参数为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "true"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​时，当遇到未加载的AB包或者资源，会全部所有同步API加载，\n但如果发现如果存在AB包正在异步加载，则还是和异步方法那样等待加载完毕"
+								}
+							]
+						},
+						{
+							"ID": "20240418225904-cr6uobq",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240418225904-cr6uobq",
+								"style": "line-height: 22px;",
+								"updated": "20240418232910"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//根据泛型异步加载\npublic void LoadResAsync\u003cT\u003e(string abName, string resName, UnityAction\u003cT\u003e callBack, bool isSync = false) where T : Object\n{\n    StartCoroutine(LoadResCoroutine(abName, resName, callBack));\n}\n\nprivate IEnumerator LoadResCoroutine\u003cT\u003e(string abName, string resName, UnityAction\u003cT\u003e callBack, bool isSync = false) where T : Object\n{\n    //加载AB包\n    LoadMainAB();\n    //加载主包中的关键配置文件 获取依赖包\n    string[] strs = manifest.GetAllDependencies(abName);\n    //加载依赖包\n    for (int i = 0; i \u003c strs.Length; i++)\n    {\n        //判断包是否加载过\n        if (!abDic.ContainsKey(strs[i]))\n        {\n            //调用同步加载AB包的方法\n            if (isSync)\n            {\n                AssetBundle ab = AssetBundle.LoadFromFile(PathUrl + strs[i]);\n                abDic.Add(strs[i], ab);\n            }\n            //异步加载AB包\n            else\n            {\n                //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n                abDic.Add(strs[i], null);\n                AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + strs[i]);\n                yield return req;\n                //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n                abDic[strs[i]] = req.assetBundle;\n            }\n        }\n        //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n        else\n        {\n            //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n            while (abDic[strs[i]] == null)\n            {\n                //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                yield return 0;\n            }\n        }\n    }\n    //加载目标包\n    if (!abDic.ContainsKey(abName))\n    {\n        if (isSync)\n        {\n            AssetBundle ab = AssetBundle.LoadFromFile(PathUrl + abName);\n            abDic.Add(abName, ab);\n        }\n        else\n        {\n            //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n            abDic.Add(abName, null);\n            AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + abName);\n            yield return req;\n            //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n            abDic[abName] = req.assetBundle;\n        }\n    }\n    //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n    else\n    {\n        //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n        while (abDic[abName] == null)\n        {\n            //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n            yield return 0;\n        }\n    }\n    if (isSync)\n    {\n        callBack(abDic[abName].LoadAsset\u003cT\u003e(resName));\n    }\n    else\n    {\n        AssetBundleRequest abr = abDic[abName].LoadAssetAsync\u003cT\u003e(resName);\n        yield return abr;\n        //异步加载结束后，通过委托，传递给外部，来使用\n        callBack(abr.asset as T);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240418232916-lmh5jvw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240418232916-lmh5jvw",
+								"updated": "20240418233017"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "其他的异步加载重载方法，同样添加该参数，加载AB包的逻辑是一致的，加载资源不同的重载调用对应的API"
+								}
+							]
+						},
+						{
+							"ID": "20240418233017-460wc96",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240418233017-460wc96",
+								"style": "line-height: 22px;",
+								"updated": "20240418233055"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//通过名字异步加载资源\npublic void LoadResAsync(string abName, string resName, UnityAction\u003cObject\u003e callBack, bool isSync = false)\n{\n    StartCoroutine(LoadResCoroutine(abName, resName, callBack, isSync));\n}\n\nprivate IEnumerator LoadResCoroutine(string abName, string resName, UnityAction\u003cObject\u003e callBack, bool isSync = false)\n{\n    //加载AB包\n    LoadMainAB();\n    //加载主包中的关键配置文件 获取依赖包\n    string[] strs = manifest.GetAllDependencies(abName);\n    //加载依赖包\n    for (int i = 0; i \u003c strs.Length; i++)\n        {\n            //判断包是否加载过\n            if (!abDic.ContainsKey(strs[i]))\n            {\n                //调用同步加载AB包的方法\n                if (isSync)\n                {\n                    AssetBundle ab = AssetBundle.LoadFromFile(PathUrl + strs[i]);\n                    abDic.Add(strs[i], ab);\n                }\n                //异步加载AB包\n                else\n                {\n                    //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n                    abDic.Add(strs[i], null);\n                    AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + strs[i]);\n                    yield return req;\n                    //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n                    abDic[strs[i]] = req.assetBundle;\n                }\n            }\n            //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n            else\n            {\n                //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n                while (abDic[strs[i]] == null)\n                {\n                    //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                    yield return 0;\n                }\n            }\n        }\n    //加载目标包\n    if (!abDic.ContainsKey(abName))\n    {\n        if (isSync)\n        {\n            AssetBundle ab = AssetBundle.LoadFromFile(PathUrl + abName);\n            abDic.Add(abName, ab);\n        }\n        else\n        {\n            //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n            abDic.Add(abName, null);\n            AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + abName);\n            yield return req;\n            //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n            abDic[abName] = req.assetBundle;\n        }\n    }\n    //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n    else\n        {\n            //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n            while (abDic[abName] == null)\n            {\n                //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                yield return 0;\n            }\n        }\n    //同步加载包中资源\n    if (isSync)\n    {\n        //即使是同步加载，也需要使用回调函数传给外部进行使用\n        callBack(abDic[abName].LoadAsset(resName));\n    }\n    //异步加载包中资源\n    else\n        {\n            AssetBundleRequest abr = abDic[abName].LoadAssetAsync(resName);\n            yield return abr;\n            //异步加载结束后，通过委托，传递给外部，来使用\n            callBack(abr.asset);\n        }\n}\n\n//根据Type异步加载资源\npublic void LoadResAsync(string abName, string resName, System.Type type, UnityAction\u003cObject\u003e callBack, bool isSync = false)\n{\n    StartCoroutine(LoadResCoroutine(abName, resName, type, callBack, isSync));\n}\n\nprivate IEnumerator LoadResCoroutine(string abName, string resName, System.Type type, UnityAction\u003cObject\u003e callBack, bool isSync = false)\n{\n    //加载AB包\n    LoadMainAB();\n    //加载主包中的关键配置文件 获取依赖包\n    string[] strs = manifest.GetAllDependencies(abName);\n    //加载依赖包\n    for (int i = 0; i \u003c strs.Length; i++)\n    {\n        //判断包是否加载过\n        if (!abDic.ContainsKey(strs[i]))\n        {\n            //调用同步加载AB包的方法\n            if (isSync)\n            {\n                AssetBundle ab = AssetBundle.LoadFromFile(PathUrl + strs[i]);\n                abDic.Add(strs[i], ab);\n            }\n            //异步加载AB包\n            else\n            {\n                //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n                abDic.Add(strs[i], null);\n                AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + strs[i]);\n                yield return req;\n                //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n                abDic[strs[i]] = req.assetBundle;\n            }\n        }\n        //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n        else\n        {\n            //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n            while (abDic[strs[i]] == null)\n            {\n                //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                yield return 0;\n            }\n        }\n    }\n    //加载目标包\n    if (!abDic.ContainsKey(abName))\n    {\n        if (isSync)\n        {\n            AssetBundle ab = AssetBundle.LoadFromFile(PathUrl + abName);\n            abDic.Add(abName, ab);\n        }\n        else\n        {\n            //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n            abDic.Add(abName, null);\n            AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + abName);\n            yield return req;\n            //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n            abDic[abName] = req.assetBundle;\n        }\n    }\n    //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n    else\n    {\n        //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n        while (abDic[abName] == null)\n        {\n            //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n            yield return 0;\n        }\n    }\n    if (isSync)\n    {\n        callBack(abDic[abName].LoadAsset(resName, type));\n    }\n    else\n    {\n        AssetBundleRequest abr = abDic[abName].LoadAssetAsync(resName, type);\n        yield return abr;\n        //异步加载结束后，通过委托，传递给外部，来使用\n        callBack(abr.asset);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240418232002-3e8bc9d",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240418232002-3e8bc9d",
+				"updated": "20240418232005"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20240418232127-fayayws",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418232127-fayayws",
+				"updated": "20240418232358"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "先同步加载，再两次异步加载，再同步加载同一包下的同一资源"
+				}
+			]
+		},
+		{
+			"ID": "20240418232127-qfydzn4",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240418232127-qfydzn4",
+				"style": "line-height: 22px;",
+				"updated": "20240418232327"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Main : MonoBehaviour\n{\n    void Start()\n    {\n\t\tABManager.Instance.LoadResAsync\u003cGameObject\u003e(\"test\", \"Cube\", (obj) =\u003e\n\t\t{\n\t\t    GameObject gameObj = Instantiate(obj);\n\t\t    gameObj.name = \"ABMgrCreateObj\";\n\t\t}, true);\n        ABManager.Instance.LoadResAsync\u003cGameObject\u003e(\"test\", \"Cube\", (obj) =\u003e\n        {\n            GameObject gameObj = Instantiate(obj);\n            gameObj.name = \"ABMgrCreateObj\";\n        });\n        ABManager.Instance.LoadResAsync\u003cGameObject\u003e(\"test\", \"Cube\", (obj) =\u003e\n        {\n            GameObject gameObj = Instantiate(obj);\n            gameObj.name = \"ABMgrCreateObj\";\n        });\n\t\tABManager.Instance.LoadResAsync\u003cGameObject\u003e(\"test\", \"Cube\", (obj) =\u003e\n\t\t{\n\t\t    GameObject gameObj = Instantiate(obj);\n \t\t   \tgameObj.name = \"ABMgrCreateObj\";\n\t\t}, true);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240418232006-cbxf9o6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418232006-cbxf9o6",
+				"updated": "20240418232242"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240418232242-pl3u01m.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240418225750-5mr89u0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240418225750-5mr89u0",
+				"updated": "20240418225835"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "抛出改进方向"
+				}
+			]
+		},
+		{
+			"ID": "20240418225748-l9frm6g",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240418225748-l9frm6g",
+				"updated": "20240418225841"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们已经完成了对ABMgr的修改，主要实现的就是彻底的异步化，对于大家来说还有可以修改的内容，比如："
+				}
+			]
+		},
+		{
+			"ID": "20240418225841-8kdd867",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240418225841-8kdd867",
+				"updated": "20240418225841"
+			},
+			"Children": [
+				{
+					"ID": "20240418225841-7yusr0s",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240418225841-7yusr0s",
+						"updated": "20240418225841"
+					},
+					"Children": [
+						{
+							"ID": "20240418225841-msy6rax",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240418225841-msy6rax",
+								"updated": "20240418225841"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "完善卸载资源逻辑"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240418225841-4l8vtxq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240418225841-4l8vtxq",
+						"updated": "20240418225841"
+					},
+					"Children": [
+						{
+							"ID": "20240418225841-653bz8h",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240418225841-653bz8h",
+								"updated": "20240418225841"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "添加AB包或资源预加载功能"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240418225841-4zbhbvv",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240418225841-4zbhbvv",
+						"updated": "20240418225841"
+					},
+					"Children": [
+						{
+							"ID": "20240418225841-nzk9f29",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240418225841-nzk9f29",
+								"updated": "20240418225841"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "考虑AB包加载失败的情况"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240418225812-omg3ss1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240418225812-omg3ss1",
+				"updated": "20240418233102"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体代码"
+				}
+			]
+		},
+		{
+			"ID": "20240418233102-o5k2pdl",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240418233102-o5k2pdl",
+				"style": "line-height: 22px;",
+				"updated": "20240418233110"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\n\n/// \u003csummary\u003e\n/// 通过AB包进行资源加载的管理器\n/// \u003c/summary\u003e\npublic class ABManager : SingletonAutoMono\u003cABManager\u003e\n{\n    //主包\n    private AssetBundle mainAB = null;\n    //依赖包获取用的配置文件\n    private AssetBundleManifest manifest = null;\n\n    private Dictionary\u003cstring, AssetBundle\u003e abDic = new Dictionary\u003cstring, AssetBundle\u003e();\n\n    /// \u003csummary\u003e\n    /// AB包存放路径，随项目修改\n    /// \u003c/summary\u003e\n    private string PathUrl\n    {\n        get\n        {\n            return Application.streamingAssetsPath + \"/\";\n        }\n    }\n\n    private string MainABName\n    {\n        get\n        {\n#if UNITY_IOS\n            return \"IOS\";\n#elif UNITY_ANDROID\n            return \"Android\";\n#else\n            return \"PC\";\n#endif\n        }\n    }\n\n    #region 同步加载\n    private void LoadMainAB()\n    {\n        //加载主包\n        if (mainAB == null)\n        {\n            mainAB = AssetBundle.LoadFromFile(PathUrl + MainABName);\n            manifest = mainAB.LoadAsset\u003cAssetBundleManifest\u003e(\"AssetBundleManifest\");\n        }\n    }\n\n    public void LoadAB(string abName)\n    {\n        LoadMainAB();\n        //获取依赖包相关信息\n        AssetBundle ab;\n        //加载主包中的关键配置文件 获取依赖包\n        string[] strs = manifest.GetAllDependencies(abName);\n        //加载依赖包\n        for (int i = 0; i \u003c strs.Length; i++)\n        {\n            //判断包是否加载过\n            if (!abDic.ContainsKey(strs[i]))\n            {\n                ab = AssetBundle.LoadFromFile(PathUrl + strs[i]);\n                abDic.Add(strs[i], ab);\n            }\n        }\n        //加载目标包\n        if (!abDic.ContainsKey(abName))\n        {\n            ab = AssetBundle.LoadFromFile(PathUrl + abName);\n            abDic.Add(abName, ab);\n        }\n    }\n\n    #endregion\n\n\n    #region 废弃的同步加载方法\n    //同步加载，不指定类型\n    //public Object LoadRes(string abName, string resName)\n    //{\n    //    //加载AB包\n    //    LoadAB(abName);\n    //    Object obj = abDic[abName].LoadAsset(resName);\n    //    //为了外部使用方便，在加载资源时，先判断是否为Object，如果是直接实例化返回出去\n    //    if (obj is GameObject)\n    //        return Instantiate(obj);\n    //    else\n    //        return obj;\n    //}\n\n    //同步加载，使用type指定类型\n    //public Object LoadRes(string abName, string resName, System.Type type)\n    //{\n    //    //加载AB包\n    //    LoadAB(abName);\n    //    Object obj = abDic[abName].LoadAsset(resName, type);\n    //    //为了外部使用方便，在加载资源时，先判断是否为Object，如果是直接实例化返回出去\n    //    if (obj is GameObject)\n    //        return Instantiate(obj);\n    //    else\n    //        return obj;\n    //}\n\n    //同步加载，使用泛型指定类型\n    //public T LoadRes\u003cT\u003e(string abName, string resName) where T : Object\n    //{\n    //    //加载AB包\n    //    LoadAB(abName);\n    //    T obj = abDic[abName].LoadAsset\u003cT\u003e(resName);\n    //    //为了外部使用方便，在加载资源时，先判断是否为Object，如果是直接实例化返回出去\n    //    if (obj is GameObject)\n    //        return Instantiate(obj);\n    //    else\n    //        return obj;\n    //}\n\n    #endregion\n\n    #region 异步加载\n    //这里的异步加载 AB包并没有使用异步加载，只是从AB包中加载资源时异步加载\n\n    //通过名字异步加载资源\n    public void LoadResAsync(string abName, string resName, UnityAction\u003cObject\u003e callBack, bool isSync = false)\n    {\n        StartCoroutine(LoadResCoroutine(abName, resName, callBack, isSync));\n    }\n\n    private IEnumerator LoadResCoroutine(string abName, string resName, UnityAction\u003cObject\u003e callBack, bool isSync = false)\n    {\n        //加载AB包\n        LoadMainAB();\n        //加载主包中的关键配置文件 获取依赖包\n        string[] strs = manifest.GetAllDependencies(abName);\n        //加载依赖包\n        for (int i = 0; i \u003c strs.Length; i++)\n        {\n            //判断包是否加载过\n            if (!abDic.ContainsKey(strs[i]))\n            {\n                //调用同步加载AB包的方法\n                if (isSync)\n                {\n                    AssetBundle ab = AssetBundle.LoadFromFile(PathUrl + strs[i]);\n                    abDic.Add(strs[i], ab);\n                }\n                //异步加载AB包\n                else\n                {\n                    //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n                    abDic.Add(strs[i], null);\n                    AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + strs[i]);\n                    yield return req;\n                    //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n                    abDic[strs[i]] = req.assetBundle;\n                }\n            }\n            //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n            else\n            {\n                //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n                while (abDic[strs[i]] == null)\n                {\n                    //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                    yield return 0;\n                }\n            }\n        }\n        //加载目标包\n        if (!abDic.ContainsKey(abName))\n        {\n            if (isSync)\n            {\n                AssetBundle ab = AssetBundle.LoadFromFile(PathUrl + abName);\n                abDic.Add(abName, ab);\n            }\n            else\n            {\n                //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n                abDic.Add(abName, null);\n                AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + abName);\n                yield return req;\n                //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n                abDic[abName] = req.assetBundle;\n            }\n        }\n        //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n        else\n        {\n            //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n            while (abDic[abName] == null)\n            {\n                //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                yield return 0;\n            }\n        }\n        //同步加载包中资源\n        if (isSync)\n        {\n            //即使是同步加载，也需要使用回调函数传给外部进行使用\n            callBack(abDic[abName].LoadAsset(resName));\n        }\n        //异步加载包中资源\n        else\n        {\n            AssetBundleRequest abr = abDic[abName].LoadAssetAsync(resName);\n            yield return abr;\n            //异步加载结束后，通过委托，传递给外部，来使用\n            callBack(abr.asset);\n        }\n    }\n\n    //根据Type异步加载资源\n    public void LoadResAsync(string abName, string resName, System.Type type, UnityAction\u003cObject\u003e callBack, bool isSync = false)\n    {\n        StartCoroutine(LoadResCoroutine(abName, resName, type, callBack, isSync));\n    }\n\n    private IEnumerator LoadResCoroutine(string abName, string resName, System.Type type, UnityAction\u003cObject\u003e callBack, bool isSync = false)\n    {\n        //加载AB包\n        LoadMainAB();\n        //加载主包中的关键配置文件 获取依赖包\n        string[] strs = manifest.GetAllDependencies(abName);\n        //加载依赖包\n        for (int i = 0; i \u003c strs.Length; i++)\n        {\n            //判断包是否加载过\n            if (!abDic.ContainsKey(strs[i]))\n            {\n                //调用同步加载AB包的方法\n                if (isSync)\n                {\n                    AssetBundle ab = AssetBundle.LoadFromFile(PathUrl + strs[i]);\n                    abDic.Add(strs[i], ab);\n                }\n                //异步加载AB包\n                else\n                {\n                    //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n                    abDic.Add(strs[i], null);\n                    AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + strs[i]);\n                    yield return req;\n                    //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n                    abDic[strs[i]] = req.assetBundle;\n                }\n            }\n            //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n            else\n            {\n                //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n                while (abDic[strs[i]] == null)\n                {\n                    //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                    yield return 0;\n                }\n            }\n        }\n        //加载目标包\n        if (!abDic.ContainsKey(abName))\n        {\n            if (isSync)\n            {\n                AssetBundle ab = AssetBundle.LoadFromFile(PathUrl + abName);\n                abDic.Add(abName, ab);\n            }\n            else\n            {\n                //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n                abDic.Add(abName, null);\n                AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + abName);\n                yield return req;\n                //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n                abDic[abName] = req.assetBundle;\n            }\n        }\n        //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n        else\n        {\n            //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n            while (abDic[abName] == null)\n            {\n                //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                yield return 0;\n            }\n        }\n        if (isSync)\n        {\n            callBack(abDic[abName].LoadAsset(resName, type));\n        }\n        else\n        {\n            AssetBundleRequest abr = abDic[abName].LoadAssetAsync(resName, type);\n            yield return abr;\n            //异步加载结束后，通过委托，传递给外部，来使用\n            callBack(abr.asset);\n        }\n    }\n\n    //根据泛型异步加载\n    public void LoadResAsync\u003cT\u003e(string abName, string resName, UnityAction\u003cT\u003e callBack, bool isSync = false) where T : Object\n    {\n        StartCoroutine(LoadResCoroutine(abName, resName, callBack));\n    }\n\n    private IEnumerator LoadResCoroutine\u003cT\u003e(string abName, string resName, UnityAction\u003cT\u003e callBack, bool isSync = false) where T : Object\n    {\n        //加载AB包\n        LoadMainAB();\n        //加载主包中的关键配置文件 获取依赖包\n        string[] strs = manifest.GetAllDependencies(abName);\n        //加载依赖包\n        for (int i = 0; i \u003c strs.Length; i++)\n        {\n            //判断包是否加载过\n            if (!abDic.ContainsKey(strs[i]))\n            {\n                //调用同步加载AB包的方法\n                if (isSync)\n                {\n                    AssetBundle ab = AssetBundle.LoadFromFile(PathUrl + strs[i]);\n                    abDic.Add(strs[i], ab);\n                }\n                //异步加载AB包\n                else\n                {\n                    //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n                    abDic.Add(strs[i], null);\n                    AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + strs[i]);\n                    yield return req;\n                    //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n                    abDic[strs[i]] = req.assetBundle;\n                }\n            }\n            //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n            else\n            {\n                //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n                while (abDic[strs[i]] == null)\n                {\n                    //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                    yield return 0;\n                }\n            }\n        }\n        //加载目标包\n        if (!abDic.ContainsKey(abName))\n        {\n            if (isSync)\n            {\n                AssetBundle ab = AssetBundle.LoadFromFile(PathUrl + abName);\n                abDic.Add(abName, ab);\n            }\n            else\n            {\n                //一开始异步加载就记录，如果此时的记录的AB包为空，说明该AB包正在异步加载\n                abDic.Add(abName, null);\n                AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(PathUrl + abName);\n                yield return req;\n                //异步加载结束后再替换以前的null，此时记录的AB包不为null，证明加载结束了\n                abDic[abName] = req.assetBundle;\n            }\n        }\n        //字典存在记录，说明AB包正在异步加载或者加载已经结束了\n        else\n        {\n            //如果字典中记录的消息是null，则证明正在加载中，这时就需要等待加载结束\n            while (abDic[abName] == null)\n            {\n                //只要发现正在加载中，就不停的等待一帧，下一帧再进行判断\n                yield return 0;\n            }\n        }\n        if (isSync)\n        {\n            callBack(abDic[abName].LoadAsset\u003cT\u003e(resName));\n        }\n        else\n        {\n            AssetBundleRequest abr = abDic[abName].LoadAssetAsync\u003cT\u003e(resName);\n            yield return abr;\n            //异步加载结束后，通过委托，传递给外部，来使用\n            callBack(abr.asset as T);\n        }\n    }\n    #endregion\n\n    //单个包卸载\n    public void UnLoad(string abName, UnityAction\u003cbool\u003e callBackResult)\n    {\n        if (abDic.ContainsKey(abName))\n        {\n            if (abDic[abName] == null)\n            {\n                //如果发现正在异步加载，则不允许卸载，向回调函数传入false\n                callBackResult?.Invoke(false);\n                return;\n            }\n            abDic[abName].Unload(false);\n            abDic.Remove(abName);\n            //卸载成功，向回调函数传入true\n            callBackResult?.Invoke(true);\n        }\n    }\n\n    //所有包的卸载\n    public void ClearAB()\n    {\n        //由于AB包都是异步加载，同时停止所有的异步加载协程\n        StopAllCoroutines();\n        AssetBundle.UnloadAllAssetBundles(false);\n        abDic.Clear();\n        //卸载主包，卸载依赖文件\n        mainAB = null;\n        manifest = null;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

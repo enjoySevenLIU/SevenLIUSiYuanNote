@@ -1,0 +1,151 @@
+{
+	"ID": "20230824003203-lmh7jko",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230824003203-lmh7jko",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230824003203-lmh7jko\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230824011259-9eje95p\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230824011207-r0a8e2c\u0026quot;,\u0026quot;scrollTop\u0026quot;:0,\u0026quot;focusId\u0026quot;:\u0026quot;20230824011259-9eje95p\u0026quot;,\u0026quot;focusStart\u0026quot;:0,\u0026quot;focusEnd\u0026quot;:0\u0026#125;",
+		"title": "UF_OLDL6——资源加载模块",
+		"updated": "20231223160943"
+	},
+	"Children": [
+		{
+			"ID": "20230824011259-9eje95p",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230824011259-9eje95p",
+				"updated": "20230824011304"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "资源加载模块"
+				}
+			]
+		},
+		{
+			"ID": "20230824003203-xx96otc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230824003203-xx96otc",
+				"updated": "20230824003345"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意！该资源加载模块不包含AB包相关内容\n"
+				}
+			]
+		},
+		{
+			"ID": "20230824003851-mqv1bt8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230824003851-mqv1bt8",
+				"updated": "20230824004030"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在之前的学习里我们已经大量的使用了"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230713031957-op5yt5y",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "Resource"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "公共类动态读取资源\n将其封装出一个资源加载模块可以更好的使用它"
+				}
+			]
+		},
+		{
+			"ID": "20230824003750-snb0sjw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230824003750-snb0sjw",
+				"updated": "20230824004117"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "知识点："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230713170940-saon1ju",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "异步加载"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，委托和lambda表达式，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230712214614-4ja3qtk",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "协同程序"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，泛型"
+				}
+			]
+		},
+		{
+			"ID": "20230824011107-33cy5g1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230824011107-33cy5g1",
+				"updated": "20230824011237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用方法：\n资源同步加载，如果加载的是游戏对象就直接实例化并返回该游戏对象\n资源异步加载，如果加载的是游戏对象就直接实例化并返回该游戏对象，需要传入有参数的回调函数，加载完毕后执行，参数为读取到的资源"
+				}
+			]
+		},
+		{
+			"ID": "20230824011050-dx0kepx",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230824011050-dx0kepx",
+				"updated": "20230824011251"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\nusing UnityEngine;\nusing UnityEngine.Events;\n\npublic class ResourcesManager : BaseManager\u003cResourcesManager\u003e\n{\n    /// \u003csummary\u003e\n    /// 同步加载资源，如果是游戏对象就直接实例化，并返回游戏对象\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e资源路径\u003c/param\u003e\n    /// \u003ctypeparam name=\"T\"\u003e资源类型\u003c/typeparam\u003e\n    /// 这里的约束是Object(不是object万物之父)，Resources读取返回的一定属于这种类型\n    public T Load\u003cT\u003e(string name) where T : Object\n    {\n        T res = Resources.Load\u003cT\u003e(name);\n        if (res is GameObject)\n            return GameObject.Instantiate(res);\n        else\n            return res;\n    }\n\n    /// \u003csummary\u003e\n    /// 异步加载资源，如果是游戏对象就直接实例化，并返回游戏对象，需要传入有参数的回调函数，参数为读取到的资源\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e资源类型\u003c/typeparam\u003e\n    /// \u003cparam name=\"name\"\u003e资源路径\u003c/param\u003e\n    /// \u003cparam name=\"callback\"\u003e当资源异步加载完成后获取资源并处理的回调函数\u003c/param\u003e\n    public void LoadAsync\u003cT\u003e(string name, UnityAction\u003cT\u003e callback) where T : Object\n    {\n        MonoManager.Instance().StartCoroutine(ReallyLoadAsyne\u003cT\u003e(name, callback));\n    }\n\n    /// \u003csummary\u003e\n    /// 异步加载资源的协程使用的迭代器函数\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e资源类型\u003c/typeparam\u003e\n    /// \u003cparam name=\"name\"\u003e资源路径\u003c/param\u003e\n    /// \u003cparam name=\"func\"\u003e当资源异步加载完成后获取资源并处理的回调函数\u003c/param\u003e\n    /// \u003creturns\u003e协程执行暂停后等待多久再执行\u003c/returns\u003e\n    private IEnumerator ReallyLoadAsyne\u003cT\u003e(string name, UnityAction\u003cT\u003e callback) where T : Object\n    {\n        ResourceRequest rr = Resources.LoadAsync\u003cT\u003e(name);\n        yield return rr;\n        if (rr.asset is GameObject)\n            callback(GameObject.Instantiate(rr.asset) as T);\n        else\n            callback(rr.asset as T);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230824011207-r0a8e2c",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230824011207-r0a8e2c"
+			}
+		}
+	]
+}

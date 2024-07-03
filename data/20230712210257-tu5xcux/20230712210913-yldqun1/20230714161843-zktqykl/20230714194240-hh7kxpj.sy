@@ -1,0 +1,1916 @@
+{
+	"ID": "20230714194240-hh7kxpj",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230714194240-hh7kxpj",
+		"name": "射线检测",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230714194240-hh7kxpj\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230714195018-5z5w0xa\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230714212233-2psm1uq\u0026quot;,\u0026quot;scrollTop\u0026quot;:0,\u0026quot;focusId\u0026quot;:\u0026quot;20230714195018-5z5w0xa\u0026quot;,\u0026quot;focusStart\u0026quot;:0,\u0026quot;focusEnd\u0026quot;:0\u0026#125;",
+		"title": "U2L13-2——物理系统之射线检测",
+		"type": "doc",
+		"updated": "20240425201138"
+	},
+	"Children": [
+		{
+			"ID": "20240425200724-xq9k98j",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240425200724-xq9k98j",
+				"updated": "20240425200724"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240425200724-temlq2j",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240425200724-temlq2j",
+				"style": "line-height: 22px;",
+				"updated": "20240425200725"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Ray\t\t\t\t            //射线类，根据起点和方向确定射线，用于接下来的检测函数\nray.origin\t\t\t        //射线的起点\nray.direction\t\t\t    //射线的方向\ncamera.ScreenPointToRay()\t//相机的屏幕位置转射线，从屏幕的某个点射出射线\nPhysics.Raycast()\t\t    //射线检测函数，通过传入的射线（或者给定起点和方向）检测特定层级上是否有对象相交，用out关键字传入RaycastHit，会为该变量赋予物体信息\nRaycastHit\t\t\t        //射线检测被击中对象的信息结构体，里面有各种信息\nraycastHit.collider\t\t    //射线检测被击中对象的碰撞器，可以通过这个进一步获取信息\nraycastHit.point\t\t    //射线击中的点\nraycastHit.normal\t\t    //射线击中的面的向量\nraycastHit.transform\t\t//射线检测被击中对象的transform信息，可以得到诸如位置等信息\nraycastHit.distance\t\t    //起点到射线击中的点的距离\nPhysics.RaycastAll()\t\t//射线检测函数，检测所有击中的对象，返回一个RaycastHit数组\nPhysics.RaycastNonAlloc()\t//射线检测函数，检测击中的对象的数量\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714195018-5z5w0xa",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230714195018-5z5w0xa",
+				"updated": "20231007220722"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "射线检测"
+				}
+			]
+		},
+		{
+			"ID": "20230714194259-ld396go",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714194259-ld396go",
+				"updated": "20240318174223"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "物理系统中，目前我们学习的物体相交判断有："
+				}
+			]
+		},
+		{
+			"ID": "20240318174214-kwbylqc",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240318174214-kwbylqc",
+				"updated": "20240318174221"
+			},
+			"Children": [
+				{
+					"ID": "20240318174214-acs37bb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240318174214-acs37bb",
+						"updated": "20240318174221"
+					},
+					"Children": [
+						{
+							"ID": "20240318174214-tzxz67n",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240318174214-tzxz67n",
+								"updated": "20240318174221"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20230709221108-3pj56u1",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "碰撞检测函数"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " —— 必备条件：1、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20230709205048-chuwbrp",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "刚体"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "，2、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20230709205818-i2aszmc",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "碰撞器"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240318174214-8kfea2q",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240318174214-8kfea2q",
+						"updated": "20240318174219"
+					},
+					"Children": [
+						{
+							"ID": "20240318174214-3voe7jm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240318174214-3voe7jm",
+								"updated": "20240318174219"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20230714163636-dgtedgi",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "范围检测"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " —— 必备条件："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20230709205818-i2aszmc",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "碰撞器"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230714194240-4g08wx9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714194240-4g08wx9",
+				"updated": "20240318174209"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果想要做这样的碰撞检测"
+				}
+			]
+		},
+		{
+			"ID": "20240318174209-ljqhoqs",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240318174209-ljqhoqs",
+				"updated": "20240318174209"
+			},
+			"Children": [
+				{
+					"ID": "20240318174209-ihph8vd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240318174209-ihph8vd",
+						"updated": "20240318174209"
+					},
+					"Children": [
+						{
+							"ID": "20240318174209-v0kceb9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240318174209-v0kceb9",
+								"updated": "20240318174209"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "鼠标选择场景上一物体"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240318174209-28brfoy",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240318174209-28brfoy",
+						"updated": "20240318174209"
+					},
+					"Children": [
+						{
+							"ID": "20240318174209-vk0odwx",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240318174209-vk0odwx",
+								"updated": "20240318174209"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "FPS射击游戏（无弹道 - 不产生实际的子弹对象进行移动）\n等等 需要判断一条线和物体的碰撞情况"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230714195147-exharo0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714195147-exharo0",
+				"updated": "20240318174227"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "射线检测 就是来解决这些问题的，它可以在指定点发射一个指定方向的射线\n判断该射线与哪些碰撞器相交，得到对应对象"
+				}
+			]
+		},
+		{
+			"ID": "20230714195307-61q5l7n",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230714195307-61q5l7n",
+				"name": "Ray",
+				"updated": "20230714200555"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "射线对象"
+				}
+			]
+		},
+		{
+			"ID": "20230714200619-xym67h9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714200619-xym67h9",
+				"updated": "20230714200619"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "3D世界中的射线"
+				}
+			]
+		},
+		{
+			"ID": "20230714200537-fdlf827",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714200537-fdlf827",
+				"updated": "20230714200710"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "注意：单独的射线对于我们来说，没有任何实际的意义，我们需要用它来结合物理系统进行射线判断"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230714195321-h0feudp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714195321-h0feudp",
+				"updated": "20240321173215"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设有一条 起点为坐标(1, 0, 0) 方向为世界坐标Z轴正方向的射线\n注意：理解参数含义"
+				}
+			]
+		},
+		{
+			"ID": "20240321173215-isvgkqn",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240321173215-isvgkqn",
+				"updated": "20240425200916"
+			},
+			"Children": [
+				{
+					"ID": "20240321173215-ql8go29",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173215-ql8go29",
+						"updated": "20240321173215"
+					},
+					"Children": [
+						{
+							"ID": "20240321173215-jx4lvsq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173215-jx4lvsq",
+								"updated": "20240321173215"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数一：起点\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173216-5h0i0e3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173216-5h0i0e3",
+						"updated": "20240425200916"
+					},
+					"Children": [
+						{
+							"ID": "20240321173216-5x9tzuo",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173216-5x9tzuo",
+								"updated": "20240425200916"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数二：方向 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "text",
+									"TextMarkTextContent": "（一定记住 不是两点决定射线方向，第二个参数直接就代表 "
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "text strong",
+									"TextMarkTextContent": "方向向量"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "text",
+									"TextMarkTextContent": "）"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230714195924-h2g0kxj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714195924-h2g0kxj",
+				"updated": "20230714195931"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Ray r = new Ray(Vector3.right, Vector3.forward);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714195558-q7sd7fy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714195558-q7sd7fy",
+				"updated": "20230714195953"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "目前只是申明了一个射线对象，对于我们来说，没有任何用处"
+				}
+			]
+		},
+		{
+			"ID": "20230714200009-vthqnyj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"alias": "ray.direction",
+				"id": "20230714200009-vthqnyj",
+				"name": "ray.origin",
+				"updated": "20230714200611"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Ray中的参数"
+				}
+			]
+		},
+		{
+			"ID": "20230714200035-qzj53om",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714200035-qzj53om",
+				"updated": "20230714200117"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(r.origin);\t//起点\nprint(r.direction);\t//方向\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714200235-96z4ute",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230714200235-96z4ute",
+				"name": "camera.ScreenPointToRay()",
+				"updated": "20230714200517"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "摄像机发射出的射线"
+				}
+			]
+		},
+		{
+			"ID": "20230714200247-xce0lbm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714200247-xce0lbm",
+				"updated": "20230714200446"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "得到一条从屏幕位置作为起点，以摄像机视口方向为方向的射线"
+				}
+			]
+		},
+		{
+			"ID": "20230714200425-y43hhl6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714200425-y43hhl6",
+				"updated": "20230714200427"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Ray r2 = Camera.main.ScreenPointToRay(Input.mousePosition);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714200451-jkbbi9l",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230714200451-jkbbi9l",
+				"updated": "20230714200721"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "射线的碰撞检测函数"
+				}
+			]
+		},
+		{
+			"ID": "20230714200721-boiel9o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714200721-boiel9o",
+				"updated": "20230714200855"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Physics类中提供了很多进行射线检测的静态函数\n他们有很多种重载类型我们只需要掌握核心的几个函数其它函数自然就明白什么意思了\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "注意：射线检测也是瞬时的，执行代码时进行一次射线检测"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230714212257-qp2rata",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714212257-qp2rata",
+				"updated": "20230714212552"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "注意！距离、层级两个参数，如果都是int类型，可能会出现混淆问题"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "所以当我们传入参数时，一定要明确传入的参数代表的是距离还是层级！！！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "参数里，距离在前，层级在后！"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n例如：下面的内容就是错误的"
+				}
+			]
+		},
+		{
+			"ID": "20230714212524-8l1sn6y",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714212524-8l1sn6y",
+				"updated": "20230714212635"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "if (Physics.Raycast(r3, 1 \u003c\u003c LayerMask.NameToLayer(\"Monster\"))\t//这个参数是错误的！！！\n    print(\"碰撞到了对象\");\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714200857-bnf9jh8",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230714200857-bnf9jh8",
+				"name": "Physics.Raycast()",
+				"updated": "20230714201727"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "最原始的射线检测"
+				}
+			]
+		},
+		{
+			"ID": "20230714200911-1zz6wb2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714200911-1zz6wb2",
+				"updated": "20230714200916"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "准备一条射线"
+				}
+			]
+		},
+		{
+			"ID": "20230714200917-wbeva9e",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714200917-wbeva9e",
+				"updated": "20230714201010"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Ray r3 = new Ray(Vector3.zero, Vector3.forward);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714201318-faoefq4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714201318-faoefq4",
+				"updated": "20240321173220"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "进行射线检测，如果碰撞到对象 返回Ture"
+				}
+			]
+		},
+		{
+			"ID": "20240321173220-bynmup0",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240321173220-bynmup0",
+				"updated": "20240321173244"
+			},
+			"Children": [
+				{
+					"ID": "20240321173220-l7gh6on",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173220-l7gh6on",
+						"updated": "20240321173220"
+					},
+					"Children": [
+						{
+							"ID": "20240321173220-zxfk20h",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173220-zxfk20h",
+								"updated": "20240321173220"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数一：射线对象\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173221-2xk8duv",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173221-2xk8duv"
+					},
+					"Children": [
+						{
+							"ID": "20240321173221-1b4cd3m",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173221-1b4cd3m"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数二：检测的最大距离，超过这个距离不检测\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173221-we6pl21",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173221-we6pl21"
+					},
+					"Children": [
+						{
+							"ID": "20240321173221-psjy4og",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173221-psjy4og"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数三：检测指定层级（不填检测所有层）（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+									},
+									"TextMarkType": "text",
+									"TextMarkTextContent": "注意！有"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-font-background1);"
+									},
+									"TextMarkType": "block-ref text",
+									"TextMarkBlockRefID": "20230714174437-u1eloa2",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "特殊的填入规则！"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-font-background1);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "）\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173221-dq8gjtu",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173221-dq8gjtu",
+						"updated": "20240321173235"
+					},
+					"Children": [
+						{
+							"ID": "20240321173221-k81dcla",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173221-k81dcla",
+								"updated": "20240321173235"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数四：是否忽略触发器 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UseGlobal"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​-使用全局设置 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Collide"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​-检测触发器 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Ignore"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​-忽略触发器 不填使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UseGlobal"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173221-kjp5j40",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173221-kjp5j40",
+						"updated": "20240321173244"
+					},
+					"Children": [
+						{
+							"ID": "20240321173221-vi4mdy5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173221-vi4mdy5",
+								"updated": "20240321173244"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "返回值："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "bool"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，当碰撞到对象时，返回"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "true"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，否则，返回"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "false"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230714201039-zdhv8w1",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714201039-zdhv8w1",
+				"updated": "20230714201458"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "if (Physics.Raycast(r3, 1000, 1 \u003c\u003c LayerMask.NameToLayer(\"Monster\"), QueryTriggerInteraction.UseGlobal))\n{\n    print(\"碰撞到了对象\");\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714201113-jipjtoh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714201113-jipjtoh",
+				"updated": "20230714201908"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "还有一种重载，不用射线，直接传入起点和方向 也可以用于判断\n就是把 第一个参数射线 变成了 射线的两个参数：起点和方向"
+				}
+			]
+		},
+		{
+			"ID": "20230714201914-9w47qe0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714201914-9w47qe0",
+				"updated": "20230714202059"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "if (Physics.Raycast(Vector3.zero, Vector3.forward, 1000, 1 \u003c\u003c LayerMask.NameToLayer(\"Monster\"), QueryTriggerInteraction.UseGlobal))\n{\n    print(\"碰撞到了对象2\");\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714211012-0mth4p2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714211012-0mth4p2",
+				"updated": "20230714211128"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但是只有射线检测是不能直接得到被击中的对象的信息的，我们还需要"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230714201958-r0jd3im",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "RaycastHit"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "类来装载物体信息"
+				}
+			]
+		},
+		{
+			"ID": "20230714201958-r0jd3im",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230714201958-r0jd3im",
+				"name": "RaycastHit",
+				"updated": "20230714211111"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "获取相交的单个物体信息"
+				}
+			]
+		},
+		{
+			"ID": "20230714203143-7oafg3i",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714203143-7oafg3i",
+				"updated": "20240321173317"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "物体信息类 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "RaycastHit"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20230714210140-rpn072v",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714210140-rpn072v",
+				"updated": "20240321173319"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "RaycastHit"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 该类 对于我们的意义\n它不仅可以得到我们碰撞到的对象信息\n还可以得到一些 碰撞的点 距离 法线 等等的信息\n使用这些信息可以用来创建诸如弹痕之类的东西"
+				}
+			]
+		},
+		{
+			"ID": "20230714203546-hp25qjq",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714203546-hp25qjq",
+				"updated": "20230714212756"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "RaycastHit hitInfo;\nprint(hitInfo.collider.gameObject.name);\n//碰撞到的点，可以用于创建诸如弹痕，飙血等特效\nprint(hitInfo.point);\n//法线信息，可以用于确定诸如弹痕，飙血的特效方向\nprint(hitInfo.normal);\n//得到碰撞到对象的位置信息（依附于对象的transform）\nprint(hitInfo.transform.position);\n//可以得到碰撞到对象 离起点的距离，可以用于计算诸如伤害衰减，子弹抛物线等\nprint(hitInfo.distance);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714203552-0ifs5mv",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20230714203552-0ifs5mv",
+				"updated": "20240425200936"
+			},
+			"Children": [
+				{
+					"ID": "20240321173322-9lnecx3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173322-9lnecx3",
+						"updated": "20240321173322"
+					},
+					"Children": [
+						{
+							"ID": "20240321173322-4ubfyjy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173322-4ubfyjy",
+								"updated": "20240321173322"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数一：射线对象\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173323-o8x2jyo",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173323-o8x2jyo",
+						"updated": "20240425200936"
+					},
+					"Children": [
+						{
+							"ID": "20240321173323-t5ukbdj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173323-t5ukbdj",
+								"updated": "20240425200936"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "参数二："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong code",
+									"TextMarkTextContent": "RaycastHit"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "结构体 是值类型 Unity会通过"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong code",
+									"TextMarkTextContent": "out"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "关键字 在函数内部处理后 得到碰撞数据返回到该参数中"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173323-yjohwnm",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173323-yjohwnm"
+					},
+					"Children": [
+						{
+							"ID": "20240321173323-z073ou3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173323-z073ou3"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数三：检测的最大距离，超过这个距离不检测\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173323-2y0mmfs",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173323-2y0mmfs"
+					},
+					"Children": [
+						{
+							"ID": "20240321173323-shb44in",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173323-shb44in"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数四：检测指定层级（不填检测所有层）（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+									},
+									"TextMarkType": "text",
+									"TextMarkTextContent": "注意！有"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-font-background1);"
+									},
+									"TextMarkType": "block-ref text",
+									"TextMarkBlockRefID": "20230714174437-u1eloa2",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "特殊的填入规则！"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-font-background1);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "）\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173324-v70zs95",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173324-v70zs95",
+						"updated": "20240321173326"
+					},
+					"Children": [
+						{
+							"ID": "20240321173324-alt4s4j",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173324-alt4s4j",
+								"updated": "20240321173326"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数五：是否忽略触发器 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UseGlobal"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​-使用全局设置 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Collide"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​-检测触发器 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Ignore"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​-忽略触发器 不填使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UseGlobal"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230714203709-nt83egl",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714203709-nt83egl",
+				"updated": "20230714210956"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "if (Physics.Raycast(r3, out hitInfo, 1000, 1 \u003c\u003c LayerMask.NameToLayer(\"Monster\"), QueryTriggerInteraction.UseGlobal))\n{\n    print(\"碰撞到了对象，得到了信息\");\n    //碰撞器信息，可以获取到该对象的一切信息\n    print(hitInfo.collider.gameObject.name);\n    //碰撞到的点，可以用于创建诸如弹痕，飙血等特效\n    print(hitInfo.point);\n    //法线信息，可以用于确定诸如弹痕，飙血的特效方向\n    print(hitInfo.normal);\n    //得到碰撞到对象的位置信息（依附于对象的transform）\n    print(hitInfo.transform.position);\n    //可以得到碰撞到对象 离起点的距离，可以用于计算诸如伤害衰减，子弹抛物线等\n    print(hitInfo.distance);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714210652-re2upfd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714210652-re2upfd",
+				"updated": "20230714210815"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "同样的，还有一种重载，不用射线，直接传入起点和方向 也可以用于判断\n就是把 第一个参数射线 变成了 射线的两个参数：起点和方向"
+				}
+			]
+		},
+		{
+			"ID": "20230714210652-4206fw5",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714210652-4206fw5",
+				"style": "line-height: 22px;",
+				"updated": "20240425201124"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "if (Physics.Raycast(Vector3.zero, \n                    Vector3.forward,\n                    out hitInfo,\n                    1000, \n                    1 \u003c\u003c LayerMask.NameToLayer(\"Monster\"), QueryTriggerInteraction.UseGlobal))\n{\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714211249-50q9jzl",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230714211249-50q9jzl",
+				"name": "Physics.RaycastAll()",
+				"updated": "20230714211759"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "获取相交的多个物体信息"
+				}
+			]
+		},
+		{
+			"ID": "20230714211326-umd2lbw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714211326-umd2lbw",
+				"updated": "20230714211455"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以得到碰撞到的多个对象\n如果没有就是容量为0的数组\n"
+				}
+			]
+		},
+		{
+			"ID": "20230714211455-2q3rb6s",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20230714211455-2q3rb6s",
+				"updated": "20240321173450"
+			},
+			"Children": [
+				{
+					"ID": "20240321173331-2fvcayi",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173331-2fvcayi",
+						"updated": "20240321173331"
+					},
+					"Children": [
+						{
+							"ID": "20240321173331-y2nr8jg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173331-y2nr8jg",
+								"updated": "20240321173331"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数一：射线对象\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173332-j7um844",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173332-j7um844"
+					},
+					"Children": [
+						{
+							"ID": "20240321173332-btejsx1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173332-btejsx1"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数二：检测的最大距离，超过这个距离不检测\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173332-vxo4ahf",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173332-vxo4ahf"
+					},
+					"Children": [
+						{
+							"ID": "20240321173332-ftf3wzn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173332-ftf3wzn"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数三：检测指定层级（不填检测所有层）（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+									},
+									"TextMarkType": "text",
+									"TextMarkTextContent": "注意！有"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-font-background1);"
+									},
+									"TextMarkType": "block-ref text",
+									"TextMarkBlockRefID": "20230714174437-u1eloa2",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "特殊的填入规则！"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-font-background1);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "）\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173333-pa7i2nx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173333-pa7i2nx",
+						"updated": "20240321173450"
+					},
+					"Children": [
+						{
+							"ID": "20240321173333-nuhrffi",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173333-nuhrffi",
+								"updated": "20240321173450"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数四：是否忽略触发器 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UseGlobal"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​-使用全局设置 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Collide"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​-检测触发器 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Ignore"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​-忽略触发器 不填使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UseGlobal"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230714211712-2xi31xk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714211712-2xi31xk",
+				"updated": "20230714211743"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "注意，数组的顺序是，先进来的在开头，后面的在结尾"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230714211458-zg8rxua",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714211458-zg8rxua",
+				"updated": "20230714211711"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "RaycastHit[] hits = Physics.RaycastAll(r3, 1000, 1 \u003c\u003c LayerMask.NameToLayer(\"Monster\"), QueryTriggerInteraction.UseGlobal);\nfor (int i = 0; i \u003c hits.Length; i++)\n{\n    print(hits[i].collider.gameObject.name);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714211448-029sqw2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714211448-029sqw2",
+				"updated": "20230714211810"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "同样的，还有一种重载，不用射线，直接传入起点和方向 也可以用于判断\n就是把 第一个参数射线 变成了 射线的两个参数：起点和方向"
+				}
+			]
+		},
+		{
+			"ID": "20230714211811-6vwf9cz",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714211811-6vwf9cz",
+				"style": "line-height: 22px;",
+				"updated": "20240425201055"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "hits = Physics.RaycastAll(Vector3.zero,\n                          Vector3.forward,\n                          1000,\n                          1 \u003c\u003c LayerMask.NameToLayer(\"Monster\"),\n                          QueryTriggerInteraction.UseGlobal);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714211930-qxgcoa4",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230714211930-qxgcoa4",
+				"name": "Physics.RaycastNonAlloc()",
+				"updated": "20230714212718"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "返回碰撞的数量"
+				}
+			]
+		},
+		{
+			"ID": "20230714211957-e9i8h97",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714211957-e9i8h97",
+				"updated": "20240321173454"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "返回碰撞的数量，通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "out"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​得到数据"
+				}
+			]
+		},
+		{
+			"ID": "20230714212014-ubzfihx",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714212014-ubzfihx",
+				"style": "line-height: 22px;",
+				"updated": "20240425201138"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "if (Physics.RaycastNonAlloc(r3,\n                            hits,\n                            1000,\n                            1 \u003c\u003c LayerMask.NameToLayer(\"Monster\"),\n                            QueryTriggerInteraction.UseGlobal) \u003e 0)\n{\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714212233-2psm1uq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714212233-2psm1uq"
+			}
+		}
+	]
+}

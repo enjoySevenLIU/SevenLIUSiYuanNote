@@ -1,0 +1,454 @@
+{
+	"ID": "20240428220512-ct825b2",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240428220512-ct825b2",
+		"title": "UH4L20——解释器",
+		"type": "doc",
+		"updated": "20240501160218"
+	},
+	"Children": [
+		{
+			"ID": "20240428220512-1clwhde",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240428220512-1clwhde",
+				"updated": "20240428220605"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime中的解释器"
+				}
+			]
+		},
+		{
+			"ID": "20240428220611-p80ado0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428220611-p80ado0",
+				"updated": "20240501150513"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "当ILRuntime通过 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Mono.Cecil"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 库将DLL文件中的 IL 中间语言读取出来后，\n会利用已经写好的相关代码，将IL代码解释翻译，之后用于执行\n它主要做了（"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ILIntepreter"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​脚本）："
+				}
+			]
+		},
+		{
+			"ID": "20240428220614-j7f22ug",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240428220614-j7f22ug",
+				"updated": "20240501150522"
+			},
+			"Children": [
+				{
+					"ID": "20240428220614-5wg32qn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240428220614-5wg32qn",
+						"updated": "20240428220614"
+					},
+					"Children": [
+						{
+							"ID": "20240428220614-m8m4o6b",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428220614-m8m4o6b",
+								"updated": "20240428220614"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "遍历方法体中的每一条指令"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240428220614-un76q31",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240428220614-un76q31",
+						"updated": "20240501150522"
+					},
+					"Children": [
+						{
+							"ID": "20240428220614-s594t5a",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428220614-s594t5a",
+								"updated": "20240501150522"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用内部巨大的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "switch case"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 用于处理 IL 中的每一条指令（判断不同的指令类型来处理对应逻辑）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240428220611-n9u09c4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428220611-n9u09c4",
+				"updated": "20240428220703"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在执行代码时，使用ILRuntime内部自己实现的运行栈来管理内存，ILRuntime中使用非托管内存，内存不会被GC管理，\n而是ILRuntime内部自己管理，通过指针直接对内存进行操作（脚本"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "RuntimeStack"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​），其中使用自定义类 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "StackObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 来表达基础类型值"
+				}
+			]
+		},
+		{
+			"ID": "20240428221138-gumxm94",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240428221138-gumxm94",
+				"updated": "20240428221138"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime中的内存布局"
+				}
+			]
+		},
+		{
+			"ID": "20240428221149-gd3tilv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428221149-gd3tilv",
+				"updated": "20240501153515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在ILRuntime实现的非托管 运行栈 中存储的对象主要就是 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "StackObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 对象\n在该运行栈中，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "StackObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 对象是依次排列的，我们只需要移动当前的栈指针（加一或者减一）就可以获取到栈中存储的各数据"
+				}
+			]
+		},
+		{
+			"ID": "20240428221201-ly91sb9",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240428221201-ly91sb9",
+				"style": "line-height: 22px;",
+				"updated": "20240501153440"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "                      **StackObject** (栈指针 - 1)\n                         ObjectType\n                           Value\n                          ValueLow\n  栈指针   ————\u003e       **StackObject** (栈指针)\n                         ObjectType\n                           Value\n                          ValueLow\n                      **StackObject** (栈指针 + 1)\n                         ObjectType\n                           Value\n                          ValueLow\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240428221215-pkierde",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240428221215-pkierde",
+				"updated": "20240428221230"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime中方法指令的调用"
+				}
+			]
+		},
+		{
+			"ID": "20240428221245-lg3tttk",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240428221245-lg3tttk",
+				"updated": "20240428222411"
+			},
+			"Children": [
+				{
+					"ID": "20240428221251-y6ey06a",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240428221251-y6ey06a",
+						"updated": "20240428221251"
+					},
+					"Children": [
+						{
+							"ID": "20240428221251-tm1sixa",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428221251-tm1sixa",
+								"updated": "20240428221251"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "按顺序将参数依次压栈"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240428221251-r29rzpw",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240428221251-r29rzpw",
+						"updated": "20240428221251"
+					},
+					"Children": [
+						{
+							"ID": "20240428221251-mmohn62",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428221251-mmohn62",
+								"updated": "20240428221251"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "利用栈指针的移动获取到各参数进行处理"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240428221251-h8xa1m5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240428221251-h8xa1m5",
+						"updated": "20240428222411"
+					},
+					"Children": [
+						{
+							"ID": "20240428221251-zq5reug",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240428221251-zq5reug",
+								"updated": "20240428222411"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "清理栈（将栈指针移动到顶部，下方内容就认为会被释放了）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240428221401-54u11t4",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240428221401-54u11t4",
+				"style": "line-height: 22px;",
+				"updated": "20240428221404"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "  参数1                  返回值\n  参数2                  栈指针\n  局部变量1    ——————\u003e\n  局部变量2\n  栈指针\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240428221439-qdhtqxu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240428221439-qdhtqxu",
+				"updated": "20240428221448"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关于CLR重定向"
+				}
+			]
+		},
+		{
+			"ID": "20240428221455-224sc1x",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428221455-224sc1x",
+				"updated": "20240501160218"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ILIntepreter"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​脚本中搜索"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "callvirt"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​指令（对对象调用后期绑定方法，并且将返回值推送到计算堆栈上）\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "该指令处理中，如果发现是CLR重定向，会调用对应绑定的委托函数，这为我们自己书写重定向打下基础"
+				}
+			]
+		},
+		{
+			"ID": "20240428221505-x4d73zz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240428221505-x4d73zz"
+			}
+		}
+	]
+}

@@ -1,0 +1,965 @@
+{
+	"ID": "20240203232125-qffa1bw",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240203232125-qffa1bw",
+		"title": "UH2S2L15——Lua调用带out和ref的函数",
+		"updated": "20240302170608"
+	},
+	"Children": [
+		{
+			"ID": "20240203232238-3kzoyzo",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240203232238-3kzoyzo",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用带out和ref的函数"
+				}
+			]
+		},
+		{
+			"ID": "20240204142258-10ncq0d",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240204142258-10ncq0d",
+				"updated": "20240204142309"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "多个out，ref参数用多返回值接收"
+				}
+			]
+		},
+		{
+			"ID": "20240204142258-rhnhjyj",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240204142258-rhnhjyj",
+				"updated": "20240204142340"
+			},
+			"Children": [
+				{
+					"ID": "20240204142311-66d676y",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240204142311-66d676y",
+						"updated": "20240204142311"
+					},
+					"Children": [
+						{
+							"ID": "20240204142311-syrf0rs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240204142311-syrf0rs",
+								"updated": "20240204142317"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "out参数"
+								}
+							]
+						},
+						{
+							"ID": "20240204142313-co62d9i",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240204142313-co62d9i"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "注意：out在Lua中不算参数如果有返回值 第一个返回值就是返回值 之后依次返回out"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240204142321-6pxlbg3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240204142321-6pxlbg3",
+						"updated": "20240204142340"
+					},
+					"Children": [
+						{
+							"ID": "20240204142321-8jw7ab3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240204142321-8jw7ab3",
+								"updated": "20240204142328"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "ref参数"
+								}
+							]
+						},
+						{
+							"ID": "20240204142332-ywhol6k",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240204142332-ywhol6k",
+								"updated": "20240204142340"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "注意：ref和out不同，在Lua中算参数，我们必须传入一个值"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240203232236-m2j7d3a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203232236-m2j7d3a",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "先在C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "脚本内声明如下内容"
+				}
+			]
+		},
+		{
+			"ID": "20240203232236-4acd978",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240203232236-4acd978",
+				"style": "line-height: 22px;",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Lesson5\n{\n    public int RefFun(int a, ref int b, ref int c, int d)\n    {\n        b = a + d;\n        c = a - d;\n        return 100;\n    }\n\n    public int OutFun(int a, out int b, out int c, int d)\n    {\n        b = a;\n        c = d;\n        return 200;\n    }\n\n    public int RefOutFun(int a, out int b, ref int c)\n    {\n        b = a * 10;\n        c = a * 20;\n        return 300;\n    }\n}"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240203232313-sdmeu6q",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240203232313-sdmeu6q",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用带ref参数的函数"
+				}
+			]
+		},
+		{
+			"ID": "20240203232427-h9zqzaj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203232427-h9zqzaj",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ref"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数，会以多返回值的形式返回给lua，如果函数存在返回值，那么第一个值就是该返回值，之后的返回值，就是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ref"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的结果，从左到右一一对应\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ref"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数，需要传入一个默认值，占位置，即该参数不可以略过或者忽略，必须传入一个值占位"
+				}
+			]
+		},
+		{
+			"ID": "20240203234752-qu6x0i2",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240203234752-qu6x0i2",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"ID": "20240203234753-pxq01ke",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240203234753-pxq01ke",
+						"updated": "20240203235113"
+					},
+					"Children": [
+						{
+							"ID": "20240203234753-2062qpa",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240203234753-2062qpa",
+								"updated": "20240203235113"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设参数为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "(int a, ref int b, ref int c, int d)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "strong text",
+									"TextMarkTextContent": "则中间两个值必须传入值占位，哪怕值不会起作用，否则第四个参数无法传入"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240203232718-5ejpqxo",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240203232718-5ejpqxo",
+				"style": "line-height: 22px;",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Lesson5 = CS.Lesson5\nlocal obj = Lesson5()\n\nlocal a, b, c = obj:RefFun(1, 0, 0, 1)  --如果C#函数存在返回值，则Lua脚本的函数里第一个返回值就算这个返回值，之后和ref参数一一对应\nprint(a)                                --函数返回值\nprint(b)                                --第一个 ref\nprint(c)                                --第二个 ref\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240203233247-1klxchg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203233247-1klxchg",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240203233247-kbw3133.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240203233332-2927ung",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203233332-2927ung",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果少传入参数，或者忽略"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ref"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数的传入，则剩余的参数默认会传入0补位，即使"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ref"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​相关参数没有作用，\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "因此我们必须要用值在对应的"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "code strong text",
+					"TextMarkTextContent": "ref"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "参数位置占位"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20240203233512-zk9jh4p",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240203233512-zk9jh4p",
+				"style": "line-height: 22px;",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local a, b, c = obj:RefFun(1, 1)\t\t--等同于obj:RefFun(1, 1, 0, 0)\nprint(a)                    \nprint(b)                    \nprint(c)\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240203233544-1ogzrkc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203233544-1ogzrkc",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 368px;",
+						"style": "width: 358px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240203233544-4lxs7lm.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 358px;\" parent-style=\"width: 368px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240203232532-x1n7wet",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240203232532-x1n7wet",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用带out参数的函数"
+				}
+			]
+		},
+		{
+			"ID": "20240203232532-mjx9oq3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203232532-mjx9oq3",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "out"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数，会以多返回值的形式返回给lua，如果函数存在返回值，那么第一个值就是该返回值，之后的返回值，就是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "out"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的结果，从左到右一一对应\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "out"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数，不需要传占位置的值，需要跳过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "out"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数，如果传入参数数量多于非"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "out"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数数量，则只取前面的参数，后面的参数忽略"
+				}
+			]
+		},
+		{
+			"ID": "20240203234900-gzsis2k",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240203234900-gzsis2k",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"ID": "20240203234900-l7e4e1m",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240203234900-l7e4e1m",
+						"updated": "20240203235108"
+					},
+					"Children": [
+						{
+							"ID": "20240203234900-495ylr4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240203234900-495ylr4",
+								"updated": "20240203235108"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设参数为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "(int a, out int b, out int c, int d)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "strong text",
+									"TextMarkTextContent": "则中间两个参数不需要传入，如果传入，只会取传入的前面的值，可能造成传入错位！"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240203233908-chmqtc2",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240203233908-chmqtc2",
+				"style": "line-height: 22px;",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local a, b, c = obj:OutFun(20, 30)\t\t--需要跳过了out参数的传入！否则可能传入参数出现问题\nprint(a)                                --函数返回值\nprint(b)                                --第一个 out\nprint(c)                                --第二个 out\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240203234033-jnx1u2m",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203234033-jnx1u2m",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240203234033-lfew6ye.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240203235003-439rk3m",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240203235003-439rk3m",
+				"style": "line-height: 22px;",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "--C#: public int OutFun(int a, out int b, out int c, int d)\nlocal a, b, c = obj:OutFun(20, 100, 200, 30)\t--如果你不跳过out参数传入，则30无法准确的传入到d中！多出的参数会被忽略！\nprint(a)                      \nprint(b)                      \nprint(c)\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240203235046-8veyg5z",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203235046-8veyg5z",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240203235046-ysc16ul.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240203232533-wcrvu16",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240203232533-wcrvu16",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调用混合out和ref参数的函数"
+				}
+			]
+		},
+		{
+			"ID": "20240203232533-vvoa7nb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203232533-vvoa7nb",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "混合使用时，综合上面的规则，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ref"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​需占位，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "out"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​不用传\n第一个是函数的返回值，之后，从左到右依次对应"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ref"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​或者"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "out"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240203235156-15y7hln",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240203235156-15y7hln",
+				"style": "line-height: 22px;",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "local a, b, c = obj:RefOutFun(20, 1)\nprint(a)                            \t--返回值\nprint(b)                            \t--out\nprint(c)                            \t--ref\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240203235619-071v97j",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240203235619-071v97j",
+				"updated": "20240203232246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240203235619-kh9mply.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		}
+	]
+}

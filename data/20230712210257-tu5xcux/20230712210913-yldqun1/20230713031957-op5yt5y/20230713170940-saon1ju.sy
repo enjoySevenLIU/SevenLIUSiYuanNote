@@ -1,0 +1,852 @@
+{
+	"ID": "20230713170940-saon1ju",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230713170940-saon1ju",
+		"name": "Resources资源异步加载",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230713170940-saon1ju\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230713170940-ygng3kr\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230713191554-a3pab8k\u0026quot;,\u0026quot;scrollTop\u0026quot;:1493.3333740234375,\u0026quot;focusId\u0026quot;:\u0026quot;20230713190859-kcqefry\u0026quot;,\u0026quot;focusStart\u0026quot;:57,\u0026quot;focusEnd\u0026quot;:57\u0026#125;",
+		"title": "U2L10-2——Resources资源异步加载",
+		"type": "doc",
+		"updated": "20230713184339"
+	},
+	"Children": [
+		{
+			"ID": "20240321172619-pkbzazo",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240321172619-pkbzazo",
+				"updated": "20240321172622"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20230713181953-ohp1avt",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230713181953-ohp1avt",
+				"style": "line-height: 22px;",
+				"updated": "20230713184339"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Resources.LoadAsync\u003c\u003e()\t\t\t\t//Resources资源异步加载的方法，返回一个ResourceRequest类型的变量作为资源请求对其进行监听，获取等操作\nAsyncOperation\t\t\t\t\t\t//异步操作类，继承了协程中断指令类，因此协程调度器可以识别它，等到它对应的异步操作完成再执行继续协程\nAsyncOperation.completed\t\t\t//异步操作完成后就会执行的事件，外部需要向该事件添加监听函数，才能异步完成后通过监听函数获取加载的资源\nAsyncOperation.isDone\t\t\t\t//返回异步操作是否完成的属性\nAsyncOperation.progress\t\t\t\t//返回异步操作的进度的属性\nAsyncOperation.priority\t\t\t\t//返回异步操作的优先级的属性\nAsyncOperation.allowSceneActivation\t//返回异步操作是否允许在当前场景激活的属性\nResourceRequest\t\t\t\t\t\t//资源请求类，继承了异步操作类，因此可以用异步操作的成员也能在协程里返回它，异步加载完成后要从该类获取资源\nresourceRequest.asset\t\t\t\t//异步操作完成后，资源通过该属性去获取\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230713170940-ygng3kr",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230713170940-ygng3kr",
+				"updated": "20230713171433"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "何为Resources资源异步加载"
+				}
+			]
+		},
+		{
+			"ID": "20230713171434-cg3jw3o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713171434-cg3jw3o",
+				"updated": "20230713171621"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230713151506-ifut9vm",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "上节课"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "学习的同步加载中\n如果加载过大的资源可能会造成程序卡顿\n卡顿的原因就是 从硬盘上把数据读取到内存中 是需要进行计算的\n越大的资源耗时越长，就会造成掉帧卡顿"
+				}
+			]
+		},
+		{
+			"ID": "20230713171621-7aeb4qb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713171621-7aeb4qb",
+				"updated": "20230713171950"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Resources资源异步加载 就是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "内部新开一个线程进行资源加载 不会造成主线程卡顿"
+				}
+			]
+		},
+		{
+			"ID": "20230713172046-29tk5b6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713172046-29tk5b6",
+				"updated": "20230713172203"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "缺点是这样的加载不能使主线程立刻得到数据，需要等待异步加载完毕后才能从公共内存中读取数据"
+				}
+			]
+		},
+		{
+			"ID": "20230713181859-fkrfsf5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713181859-fkrfsf5",
+				"updated": "20230713181938"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章涉及协程的知识——\u003e"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230712214614-4ja3qtk",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "协同程序"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230712231445-ihyij81",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "协同程序原理"
+				}
+			]
+		},
+		{
+			"ID": "20230713171654-k414768",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230713171654-k414768",
+				"name": "Resource.LoadAsync\u0026lt;\u0026gt;()",
+				"updated": "20230713175040"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Resources资源异步加载方法"
+				}
+			]
+		},
+		{
+			"ID": "20230713174209-dszchdt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713174209-dszchdt",
+				"updated": "20230713191711"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "异步加载也有和同步加载一样的普通加载方法和泛型加载方法，区别类似于"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230713151506-ifut9vm",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "Resources资源同步加载"
+				},
+				{
+					"Type": "NodeText"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "一般建议直接使用泛型方法，下面也只介绍泛型方法"
+				}
+			]
+		},
+		{
+			"ID": "20230713191632-8mwj2ff",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713191632-8mwj2ff",
+				"updated": "20230713191652"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "有两种方法：\n"
+				}
+			]
+		},
+		{
+			"ID": "20240321172514-ysansse",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240321172514-ysansse"
+			},
+			"Children": [
+				{
+					"ID": "20240321172514-audw41y",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321172514-audw41y"
+					},
+					"Children": [
+						{
+							"ID": "20230713191656-pldp1zm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230713191656-pldp1zm"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-theme-background); font-family: var(--b3-font-family); color: var(--b3-theme-on-background);"
+									},
+									"TextMarkType": "text",
+									"TextMarkTextContent": "第一种方法：完成事件监听异步加载"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-theme-background); font-family: var(--b3-font-family); color: var(--b3-theme-on-background);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n好处：写法简单\n坏处：只能在资源加载结束后继续处理\n“线性处理”"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321172514-5jgpjyz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321172514-5jgpjyz"
+					},
+					"Children": [
+						{
+							"ID": "20230713191648-h4esw04",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230713191648-h4esw04",
+								"updated": "20230713191648"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "第二种方法：协程异步加载\n好处：可以在协程中处理复杂逻辑，比如同时加载多个资源，比如进度条更新\n坏处：写法较麻烦\n“并行加载”"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230713191648-f3klkms",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713191648-f3klkms",
+				"updated": "20230713191648"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：\n理解为什么异步加载不能马上加载结束，为什么至少要等一帧\n理解协程异步加载的原理"
+				}
+			]
+		},
+		{
+			"ID": "20230713171627-22l9fb8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713171627-22l9fb8",
+				"updated": "20230713172437"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "注意！异步加载不能马上得到加载的资源 至少要等一帧"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230713172426-34da2hk",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230713172426-34da2hk",
+				"updated": "20230713174002"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过异步加载中的完成事件监听，使用加载的资源"
+				}
+			]
+		},
+		{
+			"ID": "20230713174004-65nqtc2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713174004-65nqtc2",
+				"updated": "20240321172538"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "大致步骤为：\n执行"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Resource.LoadAsync\u0026lt;获取类型\u0026gt;(\u0026quot;文件名\u0026quot;)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​并用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ResourceRequest"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​(资源请求)类变量装载其返回值\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ResourceRequest"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类里有 当完成资源加载时就执行的事件，因此向事件添加参数为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AsyncOperation"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（异步操作）类型的监听函数\n在监听函数内执行获取资源的操作，最后再使用资源"
+				}
+			]
+		},
+		{
+			"ID": "20230713174111-lvwma8g",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713174111-lvwma8g",
+				"updated": "20230713175014"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体的代码运行如下："
+				}
+			]
+		},
+		{
+			"ID": "20230713175014-hps4y92",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230713175014-hps4y92",
+				"updated": "20230820004111"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private Texture tex;\n\n//定义监听函数，当异步完成时就会调用该函数，通过该函数获取资源\nprivate void LoadOver(AsyncOperation rq)\n{\n    print(\"加载结束\");\n    tex = (rq as ResourceRequest).asset as Texture;\t//通过这个属性获取资源\n    print(Time.frameCount);\t//输出异步加载完成后是第几帧，通过这个可以确认异步获取资源至少需要等一帧\n}\n\n//代码从这里开始\nvoid Start()\n{\n    //这句代码 可以理解为 Unity在内部会开一个线程去进行资源下载\n    ResourceRequest rq = Resources.LoadAsync\u003cTexture\u003e(\"Tex/test\");\n    //添加一个 资源下载结束的 一个事件函数监听\n    rq.completed += LoadOver;\n    print(Time.frameCount);\t//输出异步开始执行时是第几帧，通过这个可以确认异步获取资源至少需要等一帧\n    //如果这时进行rq.asset获取资源是不对的，因为此时资源是没有加载完毕的，使用异步加载一定是至少等到下一帧或者更久才有资源\n    //一定要等到加载结束后 才能获取资源\n}\n\n//使用获取的资源的函数\nprivate void OnGUI()\n{\n    if (tex != null) \t\t//一定要确认获取到资源了才开始渲染GUI\n        GUI.DrawTexture(new Rect(0, 0, 100, 100), tex);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230713184418-ijpvras",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713184418-ijpvras",
+				"updated": "20230713185932"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "代码里涉及到的关键字有："
+				}
+			]
+		},
+		{
+			"ID": "20230713190142-12k7tfu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"alias": "ResourceRequest.completed",
+				"id": "20230713190142-12k7tfu",
+				"name": "AsyncOperation.completed",
+				"updated": "20230713190342"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如何监听异步加载完成"
+				}
+			]
+		},
+		{
+			"ID": "20230713190403-hnlzvo9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713190403-hnlzvo9",
+				"updated": "20240321172548"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "completed"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AsyncOperation"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​异步操作完成后就会执行的事件，外部需要向该事件添加监听函数，才能异步完成后通过监听函数获取加载的资源\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ResourceRequest"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​继承了"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AsyncOperation"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，因此可以使用它"
+				}
+			]
+		},
+		{
+			"ID": "20230713190159-sqhway0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230713190159-sqhway0",
+				"updated": "20230713190708"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "ResourceRequest rq = Resources.LoadAsync\u003cTexture\u003e(\"Tex/test\");\nrq.completed += LoadOver;\t//这是AsyncOperation的事件，ResourceRequest继承了它所以可以用，该事件在异步完成执行\n//该事件只能添加参数为AsyncOperation类的函数\n\nprivate void LoadOver(AsyncOperation rq)\t//当异步完成后被调用执行\n{\n    print(\"加载结束\");\n    tex = (rq as ResourceRequest).asset as Texture;\t//通过这个属性获取资源，因为这是派生类的方法所以需要转化\n    print(Time.frameCount);\t//输出异步加载完成后是第几帧，通过这个可以确认异步获取资源至少需要等一帧\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230713185935-uljcc1w",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230713185935-uljcc1w",
+				"name": "ResourceRequest.asset",
+				"updated": "20230713190047"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "异步加载后怎么获取资源"
+				}
+			]
+		},
+		{
+			"ID": "20230713190713-7kuwvrt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713190713-7kuwvrt",
+				"updated": "20240321172554"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AsyncOperation"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​没有这个方法，而继承它的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ResourceRequest"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​有这个方法，所以可能需要转换一次才能使用"
+				}
+			]
+		},
+		{
+			"ID": "20230713190027-2cnnnly",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230713190027-2cnnnly",
+				"updated": "20230713190038"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "tex = (rq as ResourceRequest).asset as Texture;\t//通过这个属性获取资源\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230713190339-949f5s6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230713190339-949f5s6",
+				"updated": "20230713190911"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过协程，使用加载的资源"
+				}
+			]
+		},
+		{
+			"ID": "20230713190859-kcqefry",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230713190859-kcqefry",
+				"updated": "20230713190947"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Start()\n{\n    //通过协程 使用加载的资源\n    StartCoroutine(Load());  \n}\n\nIEnumerator Load()\n{\n    ResourceRequest rq = Resources.LoadAsync\u003cTexture\u003e(\"Tex/test\");\n    print(Time.frameCount);\n    yield return rq;    //向Unity协程调度器返回这种类型的变量，Unity就会识别出当前正在执行异步下载资源操作\n    //Unity会自行判断该资源是否加载完毕了 加载完毕后才会继续执行后面的代码\n    tex = rq.asset as Texture;\n    print(\"加载结束\");\n    print(Time.frameCount);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230713190952-vephndz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713190952-vephndz",
+				"updated": "20240321172601"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "向Unity协程调度器返回一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ResourceRequest"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类（或者说"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AsyncOperation"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类），\nUnity协程调度器会识别到这是一个异步操作，这样就会中断协程，直到异步操作完成后再继续执行协程"
+				}
+			]
+		},
+		{
+			"ID": "20230713191305-1852jge",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230713191305-1852jge",
+				"updated": "20230713191424"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ResourceRequest类（AsyncOperation类）的属性"
+				}
+			]
+		},
+		{
+			"ID": "20230713191331-29nmi1g",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230713191331-29nmi1g",
+				"updated": "20240321172608"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在这里也可以使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ResourceRequest"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类（或者说"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AsyncOperation"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类）的属性，例如"
+				}
+			]
+		},
+		{
+			"ID": "20230713191202-t4i60tn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230713191202-t4i60tn",
+				"updated": "20230713191534"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Start()\n{\n    //通过协程 使用加载的资源\n    StartCoroutine(Load2());  \n}\n\nIEnumerator Load2()\n{\n    ResourceRequest rq = Resources.LoadAsync\u003cTexture\u003e(\"Tex/test\");\n    //判断资源是否加载结束\n    while (!rq.isDone)\n    {\n        //打印当前的加载进度\n        //但是 这个进度 不会特别准确 过渡也不是特别明显\n        print(rq.progress);\n        yield return null;\n    }\n    tex = rq.asset as Texture;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230713191405-6gau0kr",
+			"Type": "NodeHeading",
+			"HeadingLevel": 5,
+			"Properties": {
+				"id": "20230713191405-6gau0kr",
+				"name": "AsyncOperation.isDone",
+				"updated": "20230713191542"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "异步操作是否完成"
+				}
+			]
+		},
+		{
+			"ID": "20230713191436-8ripidz",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230713191436-8ripidz",
+				"updated": "20230713191505"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "ResourceRequest rq = Resources.LoadAsync\u003cTexture\u003e(\"Tex/test\");\n//判断资源是否加载结束\nwhile (!rq.isDone)\n{\n    //打印当前的加载进度\n    //但是 这个进度 不会特别准确 过渡也不是特别明显\n    print(rq.progress);\n    yield return null;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230713191258-dys7g1x",
+			"Type": "NodeHeading",
+			"HeadingLevel": 5,
+			"Properties": {
+				"id": "20230713191258-dys7g1x",
+				"name": "AsyncOperation.progress",
+				"updated": "20230713191618"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "异步操作进度查询"
+				}
+			]
+		},
+		{
+			"ID": "20230713191554-a3pab8k",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230713191554-a3pab8k",
+				"updated": "20230713191559"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(rq.progress);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

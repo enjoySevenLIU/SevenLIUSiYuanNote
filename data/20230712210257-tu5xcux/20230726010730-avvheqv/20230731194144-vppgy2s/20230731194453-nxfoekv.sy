@@ -1,0 +1,1283 @@
+{
+	"ID": "20230731194453-nxfoekv",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230731194453-nxfoekv",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230731194453-nxfoekv\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230731194453-4clgaj0\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230731204550-7qo88rk\u0026quot;,\u0026quot;scrollTop\u0026quot;:200,\u0026quot;focusId\u0026quot;:\u0026quot;20230731204529-pj2lwk7\u0026quot;,\u0026quot;focusStart\u0026quot;:10,\u0026quot;focusEnd\u0026quot;:10\u0026#125;",
+		"title": "U3L9-2——2D物理系统之碰撞器",
+		"updated": "20230731214027"
+	},
+	"Children": [
+		{
+			"ID": "20230731194453-4clgaj0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230731194453-4clgaj0",
+				"updated": "20230731204353"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "碰撞器（2D）"
+				}
+			]
+		},
+		{
+			"ID": "20230731204415-wg66qsd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230731204415-wg66qsd",
+				"updated": "20230731204416"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "碰撞器是用于在物理系统中 表示物体体积的的（形状或范围）\n刚体通过得到碰撞器的范围信息进行计算\n判断两个物体的范围是否接触\n如果接触 刚体就会模拟力的效果产生速度和旋转"
+				}
+			]
+		},
+		{
+			"ID": "20230731213943-wkoowxx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230731213943-wkoowxx",
+				"updated": "20230731213952"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20230731213949-lo4vfx7",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230731213949-lo4vfx7",
+				"updated": "20230731214027"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void OnCollisionEnter2D(Collision2D collision) { }\t//碰撞触发接触时会自动执行这个函数（函数名，函数参数的类型不可以改动）\ncollision2D.collider\t\t\t\t        //碰撞到的对象碰撞器的信息\ncollision2D.gameObject\t\t\t\t        //碰撞对象的依附对象（GameObject）\ncollision2D.transform\t\t\t\t        //碰撞对象的依附对象的位置信息\ncollision2D.contactCount\t\t\t\t//触碰点数相关\nContactPoint[] pos = collision2D.contacts\t\t//接触点 具体的坐标\t\nvoid OnCollisionStay2D(Collision2D collision) { }\t//碰撞结束分离时会自动执行这个函数（函数名，函数参数的类型不可以改动）\nvoid OnCollisionExit2D(Collision2D collision) { }\t//两个物体相互接触摩擦时 会不停调用该函数\nvoid OnTriggerEnter2D(Collider2D other) { }\t\t//触发开始的函数 当第一次接触时 会自动调用\nvoid OnTriggerExit2D(Collider2D other) { }\t\t//触发结束的函数 当接触的状态结束时 会调用一次\nvoid OnTriggerStay2D(Collider2D other) { }\t\t//持续触发的函数 当两个对象持续触发（结合）时 会一直调用\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230731204417-boho1u3",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230731204417-boho1u3",
+				"updated": "20230731204429"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "2D碰撞器"
+				}
+			]
+		},
+		{
+			"ID": "20230731204500-gs17272",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230731204500-gs17272",
+				"updated": "20230731204500"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "圆形碰撞器"
+				}
+			]
+		},
+		{
+			"ID": "20230731205227-xiagom9",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20230731205227-xiagom9",
+				"updated": "20230731205225"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20230731205225-7nhzh39",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20230731205225-7nhzh39",
+						"updated": "20230731205225"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Properties": {
+								"parent-style": "max-width: 558px;",
+								"style": "width: 548px;"
+							},
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20230731205225-6sh1t4o.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"width: 548px;\" parent-style=\"max-width: 558px;\"}"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20230731204737-1hvgj3i",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20230731204737-1hvgj3i",
+						"updated": "20230731205228"
+					},
+					"Children": [
+						{
+							"ID": "20230731204737-d3z9oif",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230731204737-d3z9oif",
+								"updated": "20230731204737"
+							},
+							"Children": [
+								{
+									"ID": "20230731204737-gwiduwk",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230731204737-gwiduwk",
+										"updated": "20230731204747"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Material：一种物理材质，用于确定碰撞的属性，控制摩擦和弹性"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20230731204748-h6xq3r3",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230731204748-h6xq3r3"
+							},
+							"Children": [
+								{
+									"ID": "20230731204748-nsbc6ik",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230731204748-nsbc6ik",
+										"updated": "20230731204749"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Is Trigger：是否是触发器"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20230731204750-xv6pubu",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230731204750-xv6pubu"
+							},
+							"Children": [
+								{
+									"ID": "20230731204750-rksltjj",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230731204750-rksltjj",
+										"updated": "20230731204754"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Used By Effector：是否被附加的2D效应器使用"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20230731204755-uhsr86i",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230731204755-uhsr86i"
+							},
+							"Children": [
+								{
+									"ID": "20230731204755-ejkm3fl",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230731204755-ejkm3fl",
+										"updated": "20230731204757"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Offset：圆心偏移位置"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20230731204758-kn424z2",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230731204758-kn424z2"
+							},
+							"Children": [
+								{
+									"ID": "20230731204758-ls1gbdm",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230731204758-ls1gbdm"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Radius：圆形的半径"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20230731204500-ookizlj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230731204500-ookizlj",
+				"updated": "20230731204500"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "盒状碰撞器"
+				}
+			]
+		},
+		{
+			"ID": "20230731210109-a46ttgj",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20230731210109-a46ttgj",
+				"updated": "20230731205249"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20230731205249-29taauq",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20230731205249-29taauq",
+						"updated": "20230731205249"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Properties": {
+								"parent-style": "max-width: 572px;",
+								"style": "width: 562px;"
+							},
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20230731205249-plmvguy.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"width: 562px;\" parent-style=\"max-width: 572px;\"}"
+						}
+					]
+				},
+				{
+					"ID": "20230731205956-ab20ku4",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20230731205956-ab20ku4",
+						"updated": "20230731210109"
+					},
+					"Children": [
+						{
+							"ID": "20230731205957-t0c8mp6",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230731205957-t0c8mp6",
+								"updated": "20230731205957"
+							},
+							"Children": [
+								{
+									"ID": "20230731205957-llgc6tp",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230731205957-llgc6tp",
+										"updated": "20230731210030"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Used by Composite：如果勾选，则该碰撞器将附加到2D复合碰撞器中使用\n勾选后，将消失一些属性，这些属性将在复合碰撞器中配置"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20230731210002-h728ejv",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230731210002-h728ejv"
+							},
+							"Children": [
+								{
+									"ID": "20230731210002-tqb47y8",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230731210002-tqb47y8",
+										"updated": "20230731210042"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Auto Tiling：如果精灵渲染器组件的Draw Mode设置为Tiled平铺模式，勾选该选项后，当改变精灵大小时将自动更新碰撞器的尺寸"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20230731210049-zikm3vw",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230731210049-zikm3vw",
+								"updated": "20230731210104"
+							},
+							"Children": [
+								{
+									"ID": "20230731210049-0dp2pm8",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230731210049-0dp2pm8",
+										"updated": "20230731210104"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Size：矩形的宽高"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20230731210053-higtffi",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230731210053-higtffi",
+								"updated": "20230731210102"
+							},
+							"Children": [
+								{
+									"ID": "20230731210053-262cfw6",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230731210053-262cfw6",
+										"updated": "20230731210102"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Edge Radius：使四个顶点为圆角"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20230731204500-2asnrye",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230731204500-2asnrye",
+				"updated": "20230731204500"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "多边形碰撞器"
+				}
+			]
+		},
+		{
+			"ID": "20230731210643-70l6u7e",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20230731210643-70l6u7e",
+				"updated": "20230731210644"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20230731210545-r44p0a2",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20230731210545-r44p0a2",
+						"updated": "20230731210644"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20230731210545-c4psyt8.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20230731204839-pxivafz",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20230731204839-pxivafz",
+						"updated": "20230731210644"
+					},
+					"Children": [
+						{
+							"ID": "20230731204839-hcnkqvv",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230731204839-hcnkqvv",
+								"updated": "20230731204904"
+							},
+							"Children": [
+								{
+									"ID": "20230731204839-b0ew37c",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230731204839-b0ew37c",
+										"updated": "20230731204904"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Points：多边形顶点，虽然可以手动修改，\n但是一般情况下，我们通过数值编辑太复杂了\n因此都通过Edit Collider编辑，或者让Unity自动识别创建"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20230731204500-95h7kyp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230731204500-95h7kyp",
+				"updated": "20230731204500"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "边界碰撞器"
+				}
+			]
+		},
+		{
+			"ID": "20230731210647-61l4m9l",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20230731210647-61l4m9l",
+				"updated": "20230731210648"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20230731210641-ngjwy4p",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20230731210641-ngjwy4p",
+						"updated": "20230731210648"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20230731210641-wg7ymxj.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20230731204919-hk38lyj",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20230731204919-hk38lyj",
+						"updated": "20230731210648"
+					},
+					"Children": [
+						{
+							"ID": "20230731204919-uji3s7f",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230731204919-uji3s7f",
+								"updated": "20230731204923"
+							},
+							"Children": [
+								{
+									"ID": "20230731204919-6khuw3q",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230731204919-6khuw3q",
+										"updated": "20230731204923"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "边界碰撞器的编辑主要还是通过Edit Collider\n一般不会手动去通过数值加点"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20230731204500-j9c9n80",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230731204500-j9c9n80",
+				"updated": "20230731204500"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "胶囊碰撞器"
+				}
+			]
+		},
+		{
+			"ID": "20230731210826-s5qwcjh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230731210826-s5qwcjh",
+				"updated": "20230731210826"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20230731210826-ltrhx9x.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20230731204929-9d01yu6",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20230731204929-9d01yu6",
+				"updated": "20230731204929"
+			},
+			"Children": [
+				{
+					"ID": "20230731204929-0zn9g3m",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20230731204929-0zn9g3m",
+						"updated": "20230731204929"
+					},
+					"Children": [
+						{
+							"ID": "20230731204929-m1e59cc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230731204929-m1e59cc",
+								"updated": "20230731204931"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Size：胶囊的宽高\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20230731210801-6w1l5nq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20230731210801-6w1l5nq"
+					},
+					"Children": [
+						{
+							"ID": "20230731210801-sj1ios5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20230731210801-sj1ios5"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Direction：是竖直胶囊还是水平胶囊"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230731204500-cxvnop1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230731204500-cxvnop1",
+				"updated": "20230731204500"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "复合碰撞器"
+				}
+			]
+		},
+		{
+			"ID": "20230731213157-pqbzzsh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230731213157-pqbzzsh",
+				"updated": "20230731213313"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "父对象挂载复合碰撞器可以组合多个子对象碰撞器，使用时必须要加上刚体"
+				}
+			]
+		},
+		{
+			"ID": "20230731211030-7t6hnrb",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20230731211030-7t6hnrb",
+				"updated": "20230731211031"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20230731211027-49r6k7m",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20230731211027-49r6k7m",
+						"updated": "20230731211031"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20230731211026-mpbedhi.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20230731204943-9p1ttqd",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20230731204943-9p1ttqd",
+						"updated": "20230731211031"
+					},
+					"Children": [
+						{
+							"ID": "20230731204943-rjxl94i",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230731204943-rjxl94i",
+								"updated": "20230731204943"
+							},
+							"Children": [
+								{
+									"ID": "20230731204943-o2toxd8",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230731204943-o2toxd8",
+										"updated": "20230731204958"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Geometry Type：几何学类型，\n合并碰撞体时，碰撞体顶点将组合为两种不同的几何体类型"
+										}
+									]
+								},
+								{
+									"ID": "20230731204959-1xbt4gt",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20230731204959-1xbt4gt"
+									},
+									"Children": [
+										{
+											"ID": "20230731204959-lj9mb8b",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20230731204959-lj9mb8b"
+											},
+											"Children": [
+												{
+													"ID": "20230731204959-t7c045y",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20230731204959-t7c045y",
+														"updated": "20230731205001"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Outlines：空心轮廓，类似边界碰撞器"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20230731205002-mvtbjel",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20230731205002-mvtbjel"
+											},
+											"Children": [
+												{
+													"ID": "20230731205002-7j9zbsr",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20230731205002-7j9zbsr"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Polygons：实心多边形，类似多边形碰撞器"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20230731204943-1gcy255",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230731204943-1gcy255",
+								"updated": "20230731205009"
+							},
+							"Children": [
+								{
+									"ID": "20230731204943-5e2ffwn",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230731204943-5e2ffwn",
+										"updated": "20230731205008"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Generation Type：生成类型，复合碰撞器在何时生成新几何体"
+										}
+									]
+								},
+								{
+									"ID": "20230731205009-31jkah0",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20230731205009-31jkah0"
+									},
+									"Children": [
+										{
+											"ID": "20230731205008-jh5yln1",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20230731205008-jh5yln1"
+											},
+											"Children": [
+												{
+													"ID": "20230731205008-8qcbeu5",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20230731205008-8qcbeu5",
+														"updated": "20230731205011"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Synchronous：对2D复合碰撞器或使用的其它碰撞器修改时，Unity立即生成新几何体"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20230731205011-6aydf9a",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20230731205011-6aydf9a"
+											},
+											"Children": [
+												{
+													"ID": "20230731205011-ioqilvd",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20230731205011-ioqilvd"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Manual：手动生成新几何体，通过代码生成或者点击下发的Regenerate Geometry生成按钮"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20230731204943-dcxdx7m",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230731204943-dcxdx7m",
+								"updated": "20230731204943"
+							},
+							"Children": [
+								{
+									"ID": "20230731204943-np3ulkj",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230731204943-np3ulkj",
+										"updated": "20230731204943"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Vertex Distance：从复合碰撞器收集顶点时允许的最小间距值"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20230731204513-ntu8242",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230731204513-ntu8242",
+				"updated": "20230731204526"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "碰撞检测函数 "
+				}
+			]
+		},
+		{
+			"ID": "20230731204529-pj2lwk7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230731204529-pj2lwk7",
+				"updated": "20230731204545"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "碰撞检测函数和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230709221108-3pj56u1",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "3D碰撞检测函数"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "除了名字不同外其他基本一致\n在这里只简单讲解不赘述\n它是非常重要的知识点"
+				}
+			]
+		},
+		{
+			"ID": "20230731213416-nl73ds0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230731213416-nl73ds0"
+			}
+		},
+		{
+			"ID": "20230731204550-7qo88rk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230731204550-7qo88rk"
+			}
+		}
+	]
+}

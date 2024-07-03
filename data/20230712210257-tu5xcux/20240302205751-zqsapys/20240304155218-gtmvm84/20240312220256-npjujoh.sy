@@ -1,0 +1,1424 @@
+{
+	"ID": "20240312220256-npjujoh",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240312220256-npjujoh",
+		"title": "UN2L12——UDP异步通信常用方法",
+		"updated": "20240313162739"
+	},
+	"Children": [
+		{
+			"ID": "20240312225753-d1zf4iu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240312225753-d1zf4iu",
+				"updated": "20240312225759"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240312225800-do3aec9",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240312225800-do3aec9",
+				"style": "line-height: 22px;",
+				"updated": "20240312230344"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "socket.BeginSendTo()\t\t\t\t\t//异步发送消息，传入字节数组，偏移量，最大发送字节数，标识，目标IP与端口，回调函数和回调函数的参数\nsocket.EndSendTo()\t\t\t\t\t\t//结束异步发送消息，传入回调函数的参数，返回发送了多少字节\nsocket.BeginReceiveFrom()\t\t\t\t//异步接收消息，传入字节数组，偏移量，最大接收字节数，标识，记录发送者IP与端口的对象，回调函数和回调函数的参数\nsocket.EndReceiveFrom()\t\t\t\t\t//结束异步接收消息方法，传入回调函数的参数，返回接收了多少字节\nsocketAsyncEventArgs.RemoteEndPoint\t\t//设置发送到哪个IP地址和端口号或者记录发送者IP地址和端口号的属性\nsocket.SendToAsync()\t\t\t\t\t//异步发送消息\nsocket.ReceiveFromAsync()\t\t\t\t//异步接收消息\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240312220256-4e9bjsw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240312220256-4e9bjsw",
+				"updated": "20240312220518"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Socket的UDP通信中的异步方法"
+				}
+			]
+		},
+		{
+			"ID": "20240312220523-z5k87px",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240312220523-z5k87px",
+				"updated": "20240312220559"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过之前的学习，UDP用到的通信相关方法主要就是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "SendTo"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ReceiveFrom"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n所以在讲解UDP异步通信时，也主要是围绕着收发消息相关方法来讲解"
+				}
+			]
+		},
+		{
+			"ID": "20240312225728-q8kmnny",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240312225728-q8kmnny",
+				"updated": "20240312225742"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "由于学习了"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240310143616-wkwqcpa",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "TCP相关的知识点"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，所以UDP的相关内容的学习就变得简单了\n他们异步通信的唯一的区别就是API不同，使用规则都是一致的"
+				}
+			]
+		},
+		{
+			"ID": "20240312220531-uiqqtie",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240312220531-uiqqtie",
+				"updated": "20240313162739"
+			},
+			"Children": [
+				{
+					"ID": "20240312221048-jz3io81",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240312221048-jz3io81",
+						"updated": "20240312222528"
+					},
+					"Children": [
+						{
+							"ID": "20240312221048-2lyaezq",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240312221048-2lyaezq",
+								"updated": "20240312221116"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Begin"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​开头的API"
+								}
+							]
+						},
+						{
+							"ID": "20240312221811-m74c6z5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240312221811-m74c6z5",
+								"updated": "20240312225322"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "UDP通信的异步方法使用方式上和TCP通信异步方法大同小异，可参考："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240310145251-rre4seo",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "TCP_Begin开头的API"
+								}
+							]
+						},
+						{
+							"ID": "20240312221110-abr3z31",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240312221110-abr3z31",
+								"updated": "20240312222528"
+							},
+							"Children": [
+								{
+									"ID": "20240312221138-ed4nhjt",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"alias": "socket.EndSendTo()",
+										"id": "20240312221138-ed4nhjt",
+										"name": "socket.BeginSendTo()"
+									},
+									"Children": [
+										{
+											"ID": "20240312221138-xnk8gv5",
+											"Type": "NodeHeading",
+											"HeadingLevel": 4,
+											"Properties": {
+												"id": "20240312221138-xnk8gv5",
+												"updated": "20240312221222"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "UDP发送消息"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Begin"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​开头异步方法"
+												}
+											]
+										},
+										{
+											"ID": "20240312222336-2ypjaq8",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240312222336-2ypjaq8",
+												"updated": "20240312222351"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "UDP开始异步发送消息使用"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "socket.BeginSendTo()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20240312222336-kwina3o",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240312222336-kwina3o",
+												"updated": "20240312222336"
+											},
+											"Children": [
+												{
+													"ID": "20240312222336-8r14nmb",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240312222336-8r14nmb",
+														"updated": "20240312222336"
+													},
+													"Children": [
+														{
+															"ID": "20240312222336-tzffy2l",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240312222336-tzffy2l",
+																"updated": "20240312222336"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数一：要发送的字节数组"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240312222336-bpn5x8x",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240312222336-bpn5x8x",
+														"updated": "20240312222336"
+													},
+													"Children": [
+														{
+															"ID": "20240312222336-ose5q66",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240312222336-ose5q66",
+																"updated": "20240312222336"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数二：偏移量，从字节数组的第几位开始发送，将一个消息分开发送时可以使用"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240312222336-j4exfa6",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240312222336-j4exfa6",
+														"updated": "20240312222336"
+													},
+													"Children": [
+														{
+															"ID": "20240312222336-j1iau48",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240312222336-j1iau48",
+																"updated": "20240312222336"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数三：发送消息字节数组最多发送出去多少字节，将一个消息分开发送时可以使用"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240312222336-kscxmqr",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240312222336-kscxmqr",
+														"updated": "20240312222336"
+													},
+													"Children": [
+														{
+															"ID": "20240312222336-df5n9wf",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240312222336-df5n9wf",
+																"updated": "20240312222336"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数四："
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "SocketFlag"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​枚举，也就是标识，一般传入空标识"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "SocketFlag.None"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​即可"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240312223358-ecm8i0b",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240312223358-ecm8i0b"
+													},
+													"Children": [
+														{
+															"ID": "20240312223358-g808cpo",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240312223358-g808cpo",
+																"updated": "20240312223513"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数五：要发送消息到哪个IP地址和端口号"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240312222336-eie7v02",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240312222336-eie7v02",
+														"updated": "20240312222336"
+													},
+													"Children": [
+														{
+															"ID": "20240312222336-p8e1hq4",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240312222336-p8e1hq4",
+																"updated": "20240312223408"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数六：回调函数，参数为"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "IAsyncResult"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240312222336-epcxias",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240312222336-epcxias",
+														"updated": "20240312222336"
+													},
+													"Children": [
+														{
+															"ID": "20240312222336-sdbqbxu",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240312222336-sdbqbxu",
+																"updated": "20240312223411"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数七：传入到回调函数内的参数，一般传入"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "socket"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​自己，在回调函数内通过"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "iAsyncResult.AsyncState"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​获取"
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20240312222403-3k8v363",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240312222403-3k8v363",
+												"updated": "20240312222510"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "在发送了消息后，会执行参数五的回调函数，并将参数六传入进去，可通过"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "iAsyncResult.AsyncState"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​获取\n通过"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "socket.EndSendTo()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​可以获取发送出去了多少字节，需要传入回调函数的参数\n一般不需要获取发送出去了多少字节，除非要将一个消息分批发送"
+												}
+											]
+										},
+										{
+											"ID": "20240312221228-6umghr0",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240312221228-6umghr0",
+												"style": "line-height: 22px;",
+												"updated": "20240312222317"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "void Start()\n{\n    Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);\n    byte[] bytes = Encoding.UTF8.GetBytes(\"123123123123123\");\n    EndPoint ipPoint = new IPEndPoint(IPAddress.Parse(\"127.0.0.1\"), 8080);\n    socket.BeginSendTo(bytes, 0, bytes.Length, SocketFlags.None, ipPoint, SendToOver, socket);\n}\n\nprivate void SendToOver(IAsyncResult result)\n{\n    try\n    {\n        Socket s = result.AsyncState as Socket;\n        s.EndSendTo(result);\n        print(\"发送成功\");\n    }\n    catch (SocketException e)\n    {\n        print(\"发送失败：\" + e.SocketErrorCode + e.Message);\n    }\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240312221123-z5cn60m",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"alias": "socket.EndReceiveFrom()",
+										"id": "20240312221123-z5cn60m",
+										"name": "socket.BeginReceiveFrom()",
+										"updated": "20240312222528"
+									},
+									"Children": [
+										{
+											"ID": "20240312222528-3wd3c6o",
+											"Type": "NodeHeading",
+											"HeadingLevel": 4,
+											"Properties": {
+												"id": "20240312222528-3wd3c6o",
+												"updated": "20240312222528"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "UDP接收消息"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Begin"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​开头异步方法"
+												}
+											]
+										},
+										{
+											"ID": "20240312223313-scj7nqf",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240312223313-scj7nqf",
+												"updated": "20240312222528"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "开始异步接收消息使用"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "socket.BeginReceiveFrom()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20240312223313-m22pdd6",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240312223313-m22pdd6",
+												"updated": "20240312222528"
+											},
+											"Children": [
+												{
+													"ID": "20240312223313-rlfpg0j",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240312223313-rlfpg0j",
+														"updated": "20240312223313"
+													},
+													"Children": [
+														{
+															"ID": "20240312223313-26hbt5m",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240312223313-26hbt5m",
+																"updated": "20240312223313"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数一：用于接收消息的字节数组"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240312223313-yr5wxh9",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240312223313-yr5wxh9",
+														"updated": "20240312223313"
+													},
+													"Children": [
+														{
+															"ID": "20240312223313-b4d613n",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240312223313-b4d613n",
+																"updated": "20240312223313"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数二：偏移量，相当于从接收消息字节数组的第几位开始接收，处理分包、黏包可以就利用该参数"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240312223313-6fqtu48",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240312223313-6fqtu48",
+														"updated": "20240312223313"
+													},
+													"Children": [
+														{
+															"ID": "20240312223313-xz3iiqe",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240312223313-xz3iiqe",
+																"updated": "20240312223313"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数三：接收消息字节数组还能接收多少字节"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240312223313-h8movdb",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240312223313-h8movdb",
+														"updated": "20240312223313"
+													},
+													"Children": [
+														{
+															"ID": "20240312223313-4lqz2wa",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240312223313-4lqz2wa",
+																"updated": "20240312223313"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数四："
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "SocketFlag"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​枚举，也就是标识，一般传入空标识"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "SocketFlag.None"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​即可"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240312223521-6dl74n1",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240312223521-6dl74n1"
+													},
+													"Children": [
+														{
+															"ID": "20240312223521-9eptpdw",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240312223521-9eptpdw",
+																"updated": "20240312223635"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数五：用来记录发送者IP地址和端口号的"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "EndPoint"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240312223313-bp1htj7",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240312223313-bp1htj7",
+														"updated": "20240312223313"
+													},
+													"Children": [
+														{
+															"ID": "20240312223313-aholg3p",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240312223313-aholg3p",
+																"updated": "20240312223519"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数六：回调函数，参数为"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "IAsyncResult"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240312223313-y8smcqq",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240312223313-y8smcqq",
+														"updated": "20240312223748"
+													},
+													"Children": [
+														{
+															"ID": "20240312223313-95f789r",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240312223313-95f789r",
+																"updated": "20240312223748"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数七：传入到回调函数内的参数，一般传入记录发送者的"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "EndPoint"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​和"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "socket"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​自己，在回调函数内通过"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "iAsyncResult.AsyncState"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​获取"
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20240312223656-j7bh9si",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240312223656-j7bh9si",
+												"updated": "20240312222528"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "在接收到消息后，会执行参数五的回调函数，并将参数六传入进去，可通过"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "iAsyncResult.AsyncState"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​获取\n需要通过"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "socket.EndReceiveFrom()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​获取接收到了多少字节，需要传入回调函数的参数，\n在回调函数内就可以处理消息，执行"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "socket.BeginReceiveFrom()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​开始下一次消息监听"
+												}
+											]
+										},
+										{
+											"ID": "20240312223656-e16y30n",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240312223656-e16y30n",
+												"updated": "20240312222528"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "同样的，因为"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "socket.BeginReceiveFrom()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​是异步方法，回调方法会继续执行，所以不构成递归，不需要担心爆栈（前提是正常运行）"
+												}
+											]
+										},
+										{
+											"ID": "20240312222528-cnjwk0e",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240312222528-cnjwk0e",
+												"style": "line-height: 22px;",
+												"updated": "20240312222528"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "private byte[] cacheBytes = new byte[512];\n\nvoid Start()\n{\n    Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);\n    EndPoint ipPoint = new IPEndPoint(IPAddress.Any, 0);\n    socket.BeginReceiveFrom(cacheBytes, 0, cacheBytes.Length, SocketFlags.None, ref ipPoint, ReceiveToOver, (socket, ipPoint));\n}\n\nprivate void ReceiveToOver(IAsyncResult result)\n{\n    try\n    {\n        (Socket s, EndPoint ipPoint) info = ((Socket, EndPoint))result.AsyncState;\n        //返回值 就是接收了多少个字节数\n        int num = info.s.EndReceiveFrom(result, ref info.ipPoint);\n        //处理消息\n        print(Encoding.UTF8.GetString(cacheBytes, 0, num));\n        //处理完消息，又继续接收消息\n        info.s.BeginReceiveFrom(cacheBytes, 0, cacheBytes.Length, SocketFlags.None, ref info.ipPoint, ReceiveToOver, info);\n    }\n    catch (SocketException e)\n    {\n        print(\"接收消息失败：\" + e.SocketErrorCode + e.Message);\n    }\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240312221057-snnnad7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240312221057-snnnad7",
+						"updated": "20240313162739"
+					},
+					"Children": [
+						{
+							"ID": "20240312221057-7camx2x",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240312221057-7camx2x",
+								"updated": "20240312221118"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Async"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​结尾的API"
+								}
+							]
+						},
+						{
+							"ID": "20240312225600-u59b0il",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240312225600-u59b0il",
+								"updated": "20240312225601"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "UDP通信的异步方法使用方式上和TCP通信异步方法大同小异，可参考："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240310145251-z460vpb",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "TCP_Async结尾的API"
+								}
+							]
+						},
+						{
+							"ID": "20240312221237-v67ic73",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240312221237-v67ic73",
+								"updated": "20240313162739"
+							},
+							"Children": [
+								{
+									"ID": "20240312221237-dm1zzys",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240312221237-dm1zzys",
+										"name": "socket.SendToAsync()",
+										"updated": "20240312221237"
+									},
+									"Children": [
+										{
+											"ID": "20240312221237-qvb826x",
+											"Type": "NodeHeading",
+											"HeadingLevel": 4,
+											"Properties": {
+												"id": "20240312221237-qvb826x",
+												"updated": "20240312221253"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "UDP发送消息"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Async"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​结尾异步方法"
+												}
+											]
+										},
+										{
+											"ID": "20240312225431-yrj3vvy",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240312225431-yrj3vvy",
+												"updated": "20240312225526"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "首先实例化一个"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "SocketAsyncEventArgs"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，然后设置完成异步方法后执行的回调函数\n回调函数有两个参数，一个是执行异步方法的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Socket"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​（"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "object"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​类型），一个是传入到异步方法的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "SocketAsyncEventArgs"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​\n然后，需要通过"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "socketAsyncEventArgs.SetBuffer()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​来设置要发送出去的字节数组\n通过"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "socketAsyncEventArgs.RemoteEndPoint"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​来设置要发送到哪个IP地址和端口号"
+												}
+											]
+										},
+										{
+											"ID": "20240312225431-jfa231e",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240312225431-jfa231e",
+												"updated": "20240312225431"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "在回调函数中，需要通过"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "socketAsyncEventArgs.SocketError"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​来判断消息发送是否成功"
+												}
+											]
+										},
+										{
+											"ID": "20240312221237-5acvq8n",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240312221237-5acvq8n",
+												"style": "line-height: 22px;",
+												"updated": "20240312224554"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "void Start()\n{\n    Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);\n    byte[] bytes = Encoding.UTF8.GetBytes(\"123123123123123\");\n    EndPoint ipPoint = new IPEndPoint(IPAddress.Parse(\"127.0.0.1\"), 8080);\n\n    SocketAsyncEventArgs SendToArgs = new SocketAsyncEventArgs();\n    SendToArgs.SetBuffer(bytes, 0, bytes.Length);                     //设置要发送的数据\n    SendToArgs.RemoteEndPoint = ipPoint;                              //设置要发送的IP地址\n    SendToArgs.Completed += SendToAsyncCallBack;                      //设置完成事件\n    socket.SendToAsync(SendToArgs);\n}\n\nprivate void SendToAsyncCallBack(object s, SocketAsyncEventArgs args)\n{\n    if (args.SocketError == SocketError.Success)\n    {\n        print(\"发送成功\");\n    }\n    else\n    {\n        print(\"发送失败\");\n    }\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240312221237-ojujn0u",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240312221237-ojujn0u",
+										"name": "socket.ReceiveFromAsync()",
+										"updated": "20240313162739"
+									},
+									"Children": [
+										{
+											"ID": "20240312221237-8mh1noz",
+											"Type": "NodeHeading",
+											"HeadingLevel": 4,
+											"Properties": {
+												"id": "20240312221237-8mh1noz",
+												"updated": "20240312225428"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "UDP接收消息"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Async"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​结尾异步方法"
+												}
+											]
+										},
+										{
+											"ID": "20240312225618-efv8d87",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240312225618-efv8d87",
+												"updated": "20240312225701"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "首先实例化一个"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "SocketAsyncEventArgs"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，然后设置完成异步方法后执行的回调函数\n回调函数有两个参数，一个是执行异步方法的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Socket"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​（"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "object"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​类型），一个是传入到异步方法的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "SocketAsyncEventArgs"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​\n然后，需要通过"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "socketAsyncEventArgs.SetBuffer()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​来设置要接收消息的字节数组\n通过"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "socketAsyncEventArgs.RemoteEndPoint"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​来设置记录发送者的IP地址和端口号的"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "EndPoint"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20240312225618-vr6yzu9",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240312225618-vr6yzu9",
+												"updated": "20240312225618"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "在回调函数中，需要通过"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "socketAsyncEventArgs.SocketError"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​来判消息接收是否成功\n通过"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "socketAsyncEventArgs.Buffer"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​来获取接收到消息的字节数组\n通过"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "socketAsyncEventArgs.BytesTransferred"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​来获取接收到了多少字节数据"
+												}
+											]
+										},
+										{
+											"ID": "20240312221237-rp8wepd",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240312221237-rp8wepd",
+												"style": "line-height: 22px;",
+												"updated": "20240313162739"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "private byte[] cacheBytes = new byte[512];\n\nvoid Start()\n{\n    Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);\n\n    SocketAsyncEventArgs receiveFromArgs = new SocketAsyncEventArgs();\n    receiveFromArgs.SetBuffer(cacheBytes, 0, cacheBytes.Length);        //设置要接收数据的数组\n    receiveFromArgs.RemoteEndPoint = new IPEndPoint(IPAddress.Any, 0);  //设置用于记录发送者IP和端口号的EndPoint\n    receiveFromArgs.Completed += ReceiveFromAsyncCallBack;              //设置完成事件\n    socket.ReceiveFromAsync(receiveFromArgs);\n}\n\nprivate void ReceiveFromAsyncCallBack(object s, SocketAsyncEventArgs args)\n{\n    if (args.SocketError == SocketError.Success)\n    {\n        print(\"接收成功\");\n        //处理消息\n        print(Encoding.UTF8.GetString(args.Buffer, 0, args.BytesTransferred));\n        Socket socket = s as Socket;\n        //设置从第几位开始接，最多接多少字节\n        args.SetBuffer(0, cacheBytes.Length);\n        socket.ReceiveFromAsync(args);\n    }\n    else\n    {\n        print(\"接收失败\");\n    }\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240312220601-9kmkmju",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240312220601-9kmkmju",
+				"updated": "20240312221048"
+			}
+		}
+	]
+}

@@ -1,0 +1,2299 @@
+{
+	"ID": "20240316225300-vqrldav",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240316225300-vqrldav",
+		"title": "UN5L3——协议（消息）生成",
+		"type": "doc",
+		"updated": "20240321145308"
+	},
+	"Children": [
+		{
+			"ID": "20240316225300-z96xklb",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240316225300-z96xklb",
+				"updated": "20240318222802"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "协议(消息)生成主要做什么"
+				}
+			]
+		},
+		{
+			"ID": "20240318222728-tluvb4z",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240318222728-tluvb4z",
+				"updated": "20240318222734"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "协议生成 主要是使用配置文件中读取出来的信息，动态的生成对应语言的代码文件\n每次添加消息或者数据结构类时，我们不需要再手写代码了\n我们不仅可以生成C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "脚本文件，还可以根据需求生成别的语言的文件"
+				}
+			]
+		},
+		{
+			"ID": "20240318222854-jwuahnd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240318222854-jwuahnd",
+				"updated": "20240318222857"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "根据配置生成脚本的文件的主要思路就是，按规则拼接字符串\n只要有数据和规则，我们就可以动态的创建脚本文件"
+				}
+			]
+		},
+		{
+			"ID": "20240318222735-on4tsml",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240318222735-on4tsml",
+				"updated": "20240318222812"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "制作功能前的准备工作"
+				}
+			]
+		},
+		{
+			"ID": "20240318222819-0vf0qj6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240318222819-0vf0qj6",
+				"updated": "20240318222827"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "协议生成是不会在发布后使用的功能，主要是在开发时使用，所以我们在Unity当中可以把它作为一个编辑器功能来做\n因此我们可以专门新建一个Editor文件夹（专门放编辑器相关内容，不会发布），在其中放置配置文件、自动生成相关脚本文件"
+				}
+			]
+		},
+		{
+			"ID": "20240318223944-2bi4s1c",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240318223944-2bi4s1c",
+				"updated": "20240318224329"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "创建一个生成协议（消息）脚本的工具类，并利用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code block-ref",
+					"TextMarkBlockRefID": "20240317224643-rwv86f4",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "[MenuItem()]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​​创建选项"
+				}
+			]
+		},
+		{
+			"ID": "20240318223935-vl8daqw",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240318223935-vl8daqw",
+				"style": "line-height: 22px;",
+				"updated": "20240318223941"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEditor;\nusing UnityEngine;\n\npublic class ProtocolTool\n{\n    [MenuItem(\"ProtocolTool/生成C#脚本\")]\n    private static void GenerateCSharp()\n    {\n        Debug.Log(\"生成C#代码\");\n    }\n\n    [MenuItem(\"ProtocolTool/生成C++脚本\")]\n    private static void GenerateCPP()\n    {\n        Debug.Log(\"生成C++代码\");\n    }\n\n    [MenuItem(\"ProtocolTool/生成Java脚本\")]\n    private static void GenerateJava()\n    {\n        Debug.Log(\"生成Java代码\");\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240319135511-a09n5q0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240319135511-a09n5q0",
+				"updated": "20240319135958"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "由于创建脚本代码逻辑较多，因此新声明一个类"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GenerateCSharp"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​用来实现脚本代码生成，由"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ProtocolTool"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类调用\n在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GenerateCSharp"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​实现三个方法分别用来生成枚举脚本，数据类脚本，消息类脚本，这些方法需要传入对应的XML节点"
+				}
+			]
+		},
+		{
+			"ID": "20240319135700-xb1f4yt",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240319135700-xb1f4yt",
+				"style": "line-height: 22px;",
+				"updated": "20240319135756"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.IO;\nusing System.Xml;\nusing UnityEngine;\n\npublic class GenerateCSharp\n{\n    //协议保存路径\n    private string SAVE_PATH = Application.dataPath + \"/Scripts/Protocol/\";\n\n    public void GenerateEnum(XmlNodeList nodes)\n    {\n\t\t//TODO.. 生成枚举脚本\n    }\n\n\t//TODO.. 生成数据类消息类脚本\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240319140000-0e6ry1i",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240319140000-0e6ry1i",
+				"updated": "20240319140240"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此，在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ProtocolTool"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​中实现读取指定名字子节点List的方法，再传入到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GenerateCSharp"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的方法内"
+				}
+			]
+		},
+		{
+			"ID": "20240319135511-gy7o1ga",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240319135511-gy7o1ga",
+				"style": "line-height: 22px;",
+				"updated": "20240319140054"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Xml;\nusing UnityEditor;\nusing UnityEngine;\n\npublic class ProtocolTool\n{\n    //配置文件所在路径\n    private static string PROTO_INFO_PATH = Application.dataPath + \"/Editor/ProtocolTool/ProtocolInfo.xml\";\n    private static GenerateCSharp generateCSharp = new GenerateCSharp();\n\n    [MenuItem(\"ProtocolTool/生成C#脚本\")]\n    private static void GenerateCSharp()\n    {\n        generateCSharp.GenerateEnum(GetNodes(\"enum\"));\n\t\t//TODO.. 生成数据类消息类脚本\n        AssetDatabase.Refresh();\n    }\n\n    [MenuItem(\"ProtocolTool/生成C++脚本\")]\n    private static void GenerateCPP()\n    {\n        Debug.Log(\"生成C++代码\");\n    }\n\n    [MenuItem(\"ProtocolTool/生成Java脚本\")]\n    private static void GenerateJava()\n    {\n        Debug.Log(\"生成Java代码\");\n    }\n\n    // 获取指定名字的所有子节点的List\n    private static XmlNodeList GetNodes(string nodeName)\n    {\n        XmlDocument xml = new XmlDocument();\n        xml.Load(PROTO_INFO_PATH);\n        XmlNode root = xml.SelectSingleNode(\"messages\");\n        return root.SelectNodes(nodeName);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240318222829-6cinc4l",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240318222829-6cinc4l",
+				"updated": "20240318222837"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "制作生成枚举功能"
+				}
+			]
+		},
+		{
+			"ID": "20240318222842-xe7qyll",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240318222842-xe7qyll",
+				"updated": "20240321141547"
+			},
+			"Children": [
+				{
+					"ID": "20240318222845-3s6wlrh",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240318222845-3s6wlrh",
+						"updated": "20240321141542"
+					},
+					"Children": [
+						{
+							"ID": "20240318222845-rkrjgme",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240318222845-rkrjgme",
+								"updated": "20240321141542"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "读取xml枚举相关信息"
+								}
+							]
+						},
+						{
+							"ID": "20240319140354-gklayv8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240319140354-gklayv8",
+								"updated": "20240321141542"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "遍历传入的枚举节点，读取其名字与命名空间名，再遍历枚举节点下的每个字段节点，读取其字段名与默认值\n其中，字段的字符串可以提前拼接好，添加合适缩进和换行（使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "\\r\\n"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​）"
+								}
+							]
+						},
+						{
+							"ID": "20240319135233-dca7ifm",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240319135233-dca7ifm",
+								"style": "line-height: 22px;",
+								"updated": "20240321141542"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public void GenerateEnum(XmlNodeList nodes)\n{\n    //生成枚举脚本的逻辑\n    string namespaceStr = \"\";\n    string enumNameStr = \"\";\n    string fieldStr = \"\";\n    //遍历所有的枚举节点\n    foreach (XmlNode enumNode in nodes)\n    {\n        namespaceStr = enumNode.Attributes[\"namespace\"].Value;          //获取命名空间\n        enumNameStr = enumNode.Attributes[\"name\"].Value;                //获取枚举名\n        //遍历枚举下的所有字段消息\n        XmlNodeList enumFields = enumNode.SelectNodes(\"field\");\n        fieldStr = \"\";                                                  //新枚举需要清空上一次拼接的字段字符串\n        foreach (XmlNode fieldNode in enumFields)\n        {\n            fieldStr += \"\\t\\t\" + fieldNode.Attributes[\"name\"].Value;    //添加字段名\n            if (fieldNode.InnerText != \"\")\n                fieldStr += \" = \" + fieldNode.InnerText;                //如果有值添加值\n            fieldStr += \",\\r\\n\";                                        //换行\n        }\n\t}\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240318222845-9kvw13n",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240318222845-9kvw13n",
+						"updated": "20240321141544"
+					},
+					"Children": [
+						{
+							"ID": "20240318222845-5x8ipo3",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240318222845-5x8ipo3",
+								"updated": "20240321141544"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "根据枚举相关信息 拼接字符串"
+								}
+							]
+						},
+						{
+							"ID": "20240319140641-yrtx0k2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240319140641-yrtx0k2",
+								"updated": "20240321141544"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "得到所有可变消息后，按照C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "的代码格式，添加合适的关键词，缩进，换行，将所有可变内容拼接起来得到完整的代码字符串"
+								}
+							]
+						},
+						{
+							"ID": "20240319135235-hnuz372",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240319135235-hnuz372",
+								"style": "line-height: 22px;",
+								"updated": "20240321141544"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public void GenerateEnum(XmlNodeList nodes)\n{\n    //生成枚举脚本的逻辑\n    string namespaceStr = \"\";\n    string enumNameStr = \"\";\n    string fieldStr = \"\";\n    //遍历所有的枚举节点\n    foreach (XmlNode enumNode in nodes)\n    {\n        namespaceStr = enumNode.Attributes[\"namespace\"].Value;          //获取命名空间\n        enumNameStr = enumNode.Attributes[\"name\"].Value;                //获取枚举名\n        //遍历枚举下的所有字段消息\n        XmlNodeList enumFields = enumNode.SelectNodes(\"field\");\n        fieldStr = \"\";                                                  //新枚举需要清空上一次拼接的字段字符串\n        foreach (XmlNode fieldNode in enumFields)\n        {\n            fieldStr += \"\\t\\t\" + fieldNode.Attributes[\"name\"].Value;    //添加字段名\n            if (fieldNode.InnerText != \"\")\n                fieldStr += \" = \" + fieldNode.InnerText;                //如果有值添加值\n            fieldStr += \",\\r\\n\";                                        //换行\n        }\n        //对所有的可变的内容进行拼接\n        string enumStr = $\"namespace {namespaceStr}\\r\\n\" +              //命名空间\n                          \"{\\r\\n\" +\n                         $\"\\tpublic enum {enumNameStr}\\r\\n\" +           //枚举声明\n                          \"\\t{\\r\\n\" +\n                         $\"{fieldStr}\" +                                //添加字段字符串\n                          \"\\t}\\r\\n\" +\n                          \"}\";\n\t}\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240318222845-kxk5n4a",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240318222845-kxk5n4a",
+						"updated": "20240321141547"
+					},
+					"Children": [
+						{
+							"ID": "20240318222845-tsthbma",
+							"Type": "NodeHeading",
+							"HeadingLevel": 3,
+							"Properties": {
+								"id": "20240318222845-tsthbma",
+								"updated": "20240321141547"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "生成枚举脚本文件"
+								}
+							]
+						},
+						{
+							"ID": "20240319140754-lnrns59",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240319140754-lnrns59",
+								"updated": "20240321141547"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将拼接得到的代码字符串保存到指定路径下，每个命名空间一个文件夹，所有同一命名空间下的枚举脚本放一个文件夹"
+								}
+							]
+						},
+						{
+							"ID": "20240319135239-6dk79iy",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240319135239-6dk79iy",
+								"style": "line-height: 22px;",
+								"updated": "20240321141547"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//协议保存路径\nprivate string SAVE_PATH = Application.dataPath + \"/Scripts/Protocol/\";\n\npublic void GenerateEnum(XmlNodeList nodes)\n{\n    //生成枚举脚本的逻辑\n    string namespaceStr = \"\";\n    string enumNameStr = \"\";\n    string fieldStr = \"\";\n    //遍历所有的枚举节点\n    foreach (XmlNode enumNode in nodes)\n    {\n        namespaceStr = enumNode.Attributes[\"namespace\"].Value;          //获取命名空间\n        enumNameStr = enumNode.Attributes[\"name\"].Value;                //获取枚举名\n        //遍历枚举下的所有字段消息\n        XmlNodeList enumFields = enumNode.SelectNodes(\"field\");\n        fieldStr = \"\";                                                  //新枚举需要清空上一次拼接的字段字符串\n        foreach (XmlNode fieldNode in enumFields)\n        {\n            fieldStr += \"\\t\\t\" + fieldNode.Attributes[\"name\"].Value;    //添加字段名\n            if (fieldNode.InnerText != \"\")\n                fieldStr += \" = \" + fieldNode.InnerText;                //如果有值添加值\n            fieldStr += \",\\r\\n\";                                        //换行\n        }\n        //对所有的可变的内容进行拼接\n        string enumStr = $\"namespace {namespaceStr}\\r\\n\" +              //命名空间\n                          \"{\\r\\n\" +\n                         $\"\\tpublic enum {enumNameStr}\\r\\n\" +           //枚举声明\n                          \"\\t{\\r\\n\" +\n                         $\"{fieldStr}\" +                                //添加字段字符串\n                          \"\\t}\\r\\n\" +\n                          \"}\";\n        //保存文件的路径\n        string path = SAVE_PATH + namespaceStr + \"/Enum/\";\n        //若不存在就创建\n        if (!Directory.Exists(path))\n            Directory.CreateDirectory(path);\n        //字符串保存 存储为枚举脚本文件\n        File.WriteAllText(path + enumNameStr + \".cs\", enumStr);\n    }\n\n    Debug.Log(\"枚举生成结束\");\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240319151951-b5wypio",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240319151951-b5wypio",
+				"updated": "20240319151959"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "制作生成数据类功能"
+				}
+			]
+		},
+		{
+			"ID": "20240319151257-ykf0rv7",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240319151257-ykf0rv7",
+				"updated": "20240319152026"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "分析制作数据结构类的构成"
+				}
+			]
+		},
+		{
+			"ID": "20240319151614-sznvlgf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240319151614-sznvlgf",
+				"updated": "20240319152026"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "数据结构的类的全部内容如下"
+				}
+			]
+		},
+		{
+			"ID": "20240319151310-7hclzc8",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240319151310-7hclzc8",
+				"style": "line-height: 22px;",
+				"updated": "20240321133750"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Text;\n\n//玩家数据类\npublic class PlayerData : BaseData\n{\n    public string name;\n    public int atk;\n    public int lev;\n\n    public override int GetBytesNum()\n    {\n        return 4 + 4 + 4 + Encoding.UTF8.GetBytes(name).Length;\n    }\n\n    public override int Reading(byte[] bytes, int beginIndex = 0)\n    {\n        int index = beginIndex;\n        name = ReadString(bytes, ref index);\n        atk = ReadInt(bytes, ref index);\n        lev = ReadInt(bytes, ref index);\n        return index - beginIndex;\n    }\n\n    public override byte[] Writeing()\n    {\n        int index = 0;\n        byte[] bytes = new byte[GetBytesNum()];\n        WriteString(bytes, name, ref index);\n        WriteInt(bytes, atk, ref index);\n        WriteInt(bytes, lev, ref index);\n        return bytes;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240321133750-0f5xu4l",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321133750-0f5xu4l",
+				"updated": "20240321134546"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过分析可知，我们需要根据字段生成成员变量声明，\n再根据各个成员变量的长度生成"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GetBytesNum()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，根据各个成员变量的类型生成"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Reading()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Writeing()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240319152033-wq020qo",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240319152033-wq020qo",
+				"updated": "20240319152039"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "制作生成数据结构类步骤"
+				}
+			]
+		},
+		{
+			"ID": "20240321134237-sw2imyd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321134237-sw2imyd",
+				"updated": "20240321134711"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "声明一个导入所有"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "\u0026lt;data\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​节点生成数据结构类的方法，在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ProtocolTool"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​中调用"
+				}
+			]
+		},
+		{
+			"ID": "20240321134723-ehlpr6j",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240321134723-ehlpr6j",
+				"style": "line-height: 22px;",
+				"updated": "20240321134803"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[MenuItem(\"ProtocolTool/生成C#脚本\")]\nprivate static void GenerateCSharp()\n{\n    generateCSharp.GenerateEnum(GetNodes(\"enum\"));\n    generateCSharp.GenerateData(GetNodes(\"data\"));\n\t// TODO.. 生成消息类\n\tAssetDatabase.Refresh();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240319151941-4ycjxju",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240319151941-4ycjxju",
+				"updated": "20240321144025"
+			},
+			"Children": [
+				{
+					"ID": "20240319152042-vqs2wff",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240319152042-vqs2wff",
+						"updated": "20240319152042"
+					},
+					"Children": [
+						{
+							"ID": "20240319152042-y0sl49z",
+							"Type": "NodeHeading",
+							"HeadingLevel": 4,
+							"Properties": {
+								"id": "20240319152042-y0sl49z",
+								"updated": "20240321141607"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "生成成员变量声明"
+								}
+							]
+						},
+						{
+							"ID": "20240321142908-b0zkj39",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321142908-b0zkj39",
+								"updated": "20240321142929"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设我们要生成这样的类声明和成员变量声明"
+								}
+							]
+						},
+						{
+							"ID": "20240321142929-kbkslyu",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240321142929-kbkslyu",
+								"style": "line-height: 22px;",
+								"updated": "20240321143014"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "namespace GamePlayer\n{\n\tpublic class PlayerData : BaseData\n\t{\n\t\tpublic int id;\n\t\tpublic float atk;\n\t\tpublic bool sex;\n\t\tpublic long lev;\n\t\tpublic int[] arrays;\n\t\tpublic List\u003cint\u003e list;\n\t\tpublic Dictionary\u003cint, string\u003e dic;\n\t\tpublic E_HERO_TYPE heroType;\n\t}\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240321135229-qztrgc7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321135229-qztrgc7",
+								"updated": "20240321135914"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "遍历传入的所有"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "\u0026lt;data\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​节点，读取命名及所在命名空间，完成类的声明，然后在类的声明中先声明各个变量\n数据类变量的声明是可变的，因此使用一个单独的字符串变量装载，该字符串变量包括所有的变量声明语句"
+								}
+							]
+						},
+						{
+							"ID": "20240321133938-ajrncsq",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240321133938-ajrncsq",
+								"style": "line-height: 22px;",
+								"updated": "20240321140006"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public void GenerateData(XmlNodeList nodes)\n{\n    string namespaceStr = \"\";\n    string classNameStr = \"\";\n    string fieldStr = \"\";\n\n    foreach (XmlNode dataNode in nodes)\n    {\n        namespaceStr = dataNode.Attributes[\"namespace\"].Value;\n        classNameStr = dataNode.Attributes[\"name\"].Value;\n        XmlNodeList fields = dataNode.SelectNodes(\"field\");\t//获取所有的字段消息\n        fieldStr = GetFieldStr(fields);\t\t\t\t\t\t//根据字段获取变量声明相关字符串\n        string dataStr = $\"using System;\\r\\n\" +\n                         $\"using System.Collections.Generic;\\r\\n\" +\n                         $\"using System.Text;\\r\\n\" +\n                         $\"using UnityEngine;\\r\\n\\r\\n\" +\n                         //命名空间\n                         $\"namespace {namespaceStr}\\r\\n\" +\n                          \"{\\r\\n\" +\n                         //类声明\n                         $\"\\tpublic class {classNameStr} : BaseData\\r\\n\" +\n                          \"\\t{\\r\\n\" +\n                         //拼接各个变量声明的字符串\n                         $\"{fieldStr}\\r\\n\" +\n                         //TODO.. GetBytesNum声明\n                         //TODO.. Writing声明\n                         //TODO.. Reading声明\n                          \"\\t}\\r\\n\" +\n                          \"}\";\n        //保存为 脚本文件\n        //保存文件的路径\n        string path = SAVE_PATH + namespaceStr + \"/Data/\";\n        //若不存在就创建\n        if (!Directory.Exists(path))\n            Directory.CreateDirectory(path);\n        File.WriteAllText(path + classNameStr + \".cs\", dataStr);\n    }\n    Debug.Log(\"数据结构类生成结束\");\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240321135022-x74uk6o",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321135022-x74uk6o",
+								"updated": "20240321140646"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "生成声明各个变量的语句逻辑较为复杂，因此另外声明一个方法"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetFieldStr"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，\n该方法需要导入"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "\u0026lt;data\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​节点下的所有的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "\u0026lt;field\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​节点，遍历解析，生成所有数据类变量的声明\n其中"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "list"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "array"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "dic"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "enum"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​类型，它们需要另外识别类型，因此需要读取特定的属性"
+								}
+							]
+						},
+						{
+							"ID": "20240321135127-73zzt2f",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240321135127-73zzt2f",
+								"style": "line-height: 22px;",
+								"updated": "20240321140142"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//拼接各个成员变量的方法\nprivate string GetFieldStr(XmlNodeList fields)\n{\n    string fieldStr = \"\";\n\t//遍历所有的字段节点，生成对应的遍历声明语句\n    foreach (XmlNode field in fields)\n    {\n        string type = field.Attributes[\"type\"].Value;           //变量类型\n        string fieldName = field.Attributes[\"name\"].Value;      //变量名\n\t\t//列表声明语句\n        if (type == \"list\")\n        {\n            string T = field.Attributes[\"T\"].Value;\n            fieldStr += $\"\\t\\tpublic List\u003c{T}\u003e \";\n        }\n\t\t//数组声明语句\n        else if (type == \"array\")\n        {\n            string data = field.Attributes[\"data\"].Value;\n            fieldStr += $\"\\t\\tpublic {data}[] \";\n        }\n\t\t//字典声明语句\n        else if (type == \"dic\")\n        {\n            string TKey = field.Attributes[\"TKey\"].Value;\n            string TValue = field.Attributes[\"TValue\"].Value;\n            fieldStr += $\"\\t\\tpublic Dictionary\u003c{TKey}, {TValue}\u003e \";\n        }\n\t\t//枚举声明语句\n        else if (type == \"enum\")\n        {\n            string data = field.Attributes[\"data\"].Value;\n            fieldStr += $\"\\t\\tpublic {data} \";\n        }\n\t\t//变量声明语句\n        else\n        {\n            fieldStr += $\"\\t\\tpublic {type} \";\n        }\n        fieldStr += fieldName + \";\\r\\n\";\n    }\n    return fieldStr;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240319152042-7twsgmg",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240319152042-7twsgmg",
+						"updated": "20240321142819"
+					},
+					"Children": [
+						{
+							"ID": "20240319152042-ya7tqdi",
+							"Type": "NodeHeading",
+							"HeadingLevel": 4,
+							"Properties": {
+								"id": "20240319152042-ya7tqdi",
+								"updated": "20240321141605"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "生成"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetBytesNum"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​获取字节数函数"
+								}
+							]
+						},
+						{
+							"ID": "20240321143020-c61ybfh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321143020-c61ybfh",
+								"updated": "20240321143028"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设我们要生成这样的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetBytesNum"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法"
+								}
+							]
+						},
+						{
+							"ID": "20240321143029-k6vngd0",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240321143029-k6vngd0",
+								"style": "line-height: 22px;",
+								"updated": "20240321143043"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "namespace GamePlayer\n{\n\tpublic class PlayerData : BaseData\n\t{\n\t\tpublic int id;\n\t\tpublic float atk;\n\t\tpublic bool sex;\n\t\tpublic long lev;\n\t\tpublic int[] arrays;\n\t\tpublic List\u003cint\u003e list;\n\t\tpublic Dictionary\u003cint, string\u003e dic;\n\t\tpublic E_HERO_TYPE heroType;\n\n\t\tpublic override int GetBytesNum()\n\t\t{\n\t\t\tint num = 0;\n\t\t\tnum += 4;\t\t// id : sizeof(int)\n\t\t\tnum += 4;\t\t// atk : sizeof(float)\n\t\t\tnum += 1;\t\t// sex : sizeof(bool)\n\t\t\tnum += 8;\t\t// lev : sizeof(long)\n\t\t\tnum += 2;\t\t// arrays.Length : sizeof(short)\n\t\t\tfor (int i = 0; i \u003c arrays.Length; ++i)\n\t\t\t\tnum += 4;\t// arrays : sizeof(int)\n\t\t\tnum += 2;\t\t// list.Count : sizeof(short)\n\t\t\tfor (int i = 0; i \u003c list.Count; ++i)\n\t\t\t\tnum += 4;\t// list : sizeof(int)\n\t\t\tnum += 2;\t\t// dic.Count : sizeof(short)\n\t\t\tforeach (int key in dic.Keys)\n\t\t\t{\n\t\t\t\tnum += 4;\t// dic : sizeof(int, string)\n\t\t\t\tnum += 4 + Encoding.UTF8.GetByteCount(dic[key]);\n\t\t\t}\n\t\t\tnum += 4;\t\t// heroType : sizeof(enum)\n\t\t\treturn num;\n\t\t}\n\t}\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240321133940-fkuz60n",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321133940-fkuz60n",
+								"updated": "20240321143451"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetBytesNum"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的声明语句是可变的，因此将其可变部分使用一个单独的字符串变量装载，该字符串变量包括所有可变的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetBytesNum"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法声明语句"
+								}
+							]
+						},
+						{
+							"ID": "20240321140317-comohjq",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240321140317-comohjq",
+								"style": "line-height: 22px;",
+								"updated": "20240321140627"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public void GenerateData(XmlNodeList nodes)\n{\n    string namespaceStr = \"\";\n    string classNameStr = \"\";\n    string fieldStr = \"\";\n\tstring getBytesNumStr = \"\";\n\n    foreach (XmlNode dataNode in nodes)\n    {\n        namespaceStr = dataNode.Attributes[\"namespace\"].Value;\n        classNameStr = dataNode.Attributes[\"name\"].Value;\n        XmlNodeList fields = dataNode.SelectNodes(\"field\");\t//获取所有的字段消息\n        fieldStr = GetFieldStr(fields);\t\t\t\t\t\t//根据字段获取变量声明相关字符串\n\t\t//根据所有字段，对GetBytesNum函数中的字符串内容进行拼接 返回结果\n\t\tgetBytesNumStr = GetGetBytesNumStr(fields);\n        string dataStr = $\"using System;\\r\\n\" +\n                         $\"using System.Collections.Generic;\\r\\n\" +\n                         $\"using System.Text;\\r\\n\" +\n                         $\"using UnityEngine;\\r\\n\\r\\n\" +\n                         //命名空间\n                         $\"namespace {namespaceStr}\\r\\n\" +\n                          \"{\\r\\n\" +\n                         //类声明\n                         $\"\\tpublic class {classNameStr} : BaseData\\r\\n\" +\n                          \"\\t{\\r\\n\" +\n                         //拼接各个变量声明的字符串\n                         $\"{fieldStr}\\r\\n\" +\n                         //GetBytesNum声明\n                         $\"\\t\\tpublic override int GetBytesNum()\\r\\n\" +\n                          \"\\t\\t{\\r\\n\" +\n                          \"\\t\\t\\tint num = 0;\\r\\n\" +\n                         $\"{getBytesNumStr}\" +\n                          \"\\t\\t\\treturn num;\\r\\n\" +\n                          \"\\t\\t}\\r\\n\\r\\n\" +\n                         //TODO.. Writing声明\n                         //TODO.. Reading声明\n                          \"\\t}\\r\\n\" +\n                          \"}\";\n        //保存为 脚本文件\n        //保存文件的路径\n        string path = SAVE_PATH + namespaceStr + \"/Data/\";\n        //若不存在就创建\n        if (!Directory.Exists(path))\n            Directory.CreateDirectory(path);\n        File.WriteAllText(path + classNameStr + \".cs\", dataStr);\n    }\n    Debug.Log(\"数据结构类生成结束\");\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240321140635-gmxbqp0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321140635-gmxbqp0",
+								"updated": "20240321141059"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "生成"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetBytesNum"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的语句逻辑较为复杂，因此另外声明一个方法"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetGetBytesNumStr"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n该方法需要"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "遍历所有的字段，识别类型，根据字段的类型获取对应的字节数，再将生成字节数累加语句，"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n最终使得生成的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetBytesNum"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法可以获取消息类所有成员变量的总长度"
+								}
+							]
+						},
+						{
+							"ID": "20240321141010-y65h9g0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321141010-y65h9g0",
+								"updated": "20240321142312"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "其中，基础类型包括枚举的变量的字节数是固定的，因此可以直接再另外声明"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetValueBytesNum"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​用于获取各种基本类型的字节数"
+								}
+							]
+						},
+						{
+							"ID": "20240321141150-m5iy170",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321141150-m5iy170",
+								"updated": "20240321142819"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "而"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "list"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "array"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "dic"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的字节数是可变的，我们需要像字符串那样，\n先"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "+2"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​用来存储它们元素的数量，在根据"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "list"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "array"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "dic"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的类型来循环累加字节数\n这样反序列化可以前通过前两个字节来确认元素数量，再根据数量循环反序列化各个元素"
+								}
+							]
+						},
+						{
+							"ID": "20240321140927-064u0pf",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240321140927-064u0pf",
+								"style": "line-height: 22px;",
+								"updated": "20240321141147"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//拼接GetBytesNum函数的方法\nprivate string GetGetBytesNumStr(XmlNodeList fields)\n{\n    string bytesNumStr = \"\";\n    string type = \"\";\n    string name = \"\";\n    foreach (XmlNode field in fields)\n    {\n        type = field.Attributes[\"type\"].Value;\n        name = field.Attributes[\"name\"].Value;\n        if (type == \"list\")\n        {\n            string T = field.Attributes[\"T\"].Value;\n            //+2 是为了节约字节数，用一个short去存储消息\n            bytesNumStr += $\"\\t\\t\\tnum += 2;\\t\\t// {name}.Count : sizeof(short)\\r\\n\";  \n            bytesNumStr += $\"\\t\\t\\tfor (int i = 0; i \u003c {name}.Count; ++i)\\r\\n\";\n            //这里使用的是 name + [i] 目的是获取list当中的元素传入进行使用\n            bytesNumStr += $\"\\t\\t\\t\\tnum += {GetValueBytesNum(T, $\"{name}[i]\")};\\t// {name} : sizeof({T})\\r\\n\";\n        }\n        else if (type == \"array\")\n        {\n            string data = field.Attributes[\"data\"].Value;\n            //+2 是为了节约字节数，用一个short去存储消息\n            bytesNumStr += $\"\\t\\t\\tnum += 2;\\t\\t// {name}.Length : sizeof(short)\\r\\n\";\n            bytesNumStr += $\"\\t\\t\\tfor (int i = 0; i \u003c {name}.Length; ++i)\\r\\n\";\n            //这里使用的是 name + [i] 目的是获取list当中的元素传入进行使用\n            bytesNumStr += $\"\\t\\t\\t\\tnum += {GetValueBytesNum(data, $\"{name}[i]\")};\\t// {name} : sizeof({data})\\r\\n\";\n        }\n        else if (type == \"dic\")\n        {\n            string TKey = field.Attributes[\"TKey\"].Value;\n            string TValue = field.Attributes[\"TValue\"].Value;\n            //+2 是为了节约字节数，用一个short去存储消息\n            bytesNumStr += $\"\\t\\t\\tnum += 2;\\t\\t// {name}.Count : sizeof(short)\\r\\n\";\n            bytesNumStr += $\"\\t\\t\\tforeach ({TKey} key in {name}.Keys)\\r\\n\";\n            bytesNumStr += \"\\t\\t\\t{\\r\\n\";\n            bytesNumStr += $\"\\t\\t\\t\\tnum += {GetValueBytesNum(TKey, $\"key\")};\\t// {name} : sizeof({TKey}, {TValue})\\r\\n\";\n            bytesNumStr += $\"\\t\\t\\t\\tnum += {GetValueBytesNum(TValue, $\"{name}[key]\")};\\r\\n\";\n            bytesNumStr += \"\\t\\t\\t}\\r\\n\";\n        }\n        else\n            bytesNumStr += $\"\\t\\t\\tnum += {GetValueBytesNum(type, name)};\\t\\t// {name} : sizeof({type})\\r\\n\";\n    }\n    return bytesNumStr;\n}\n\nprivate string GetValueBytesNum(string type, string name)\n{\n    switch (type)\n    {\n        case \"int\":\n        case \"float\":\n        case \"enum\":\n            return \"4\";\n        case \"byte\":\n        case \"bool\":\n            return \"1\";\n        case \"short\":\n            return \"2\";\n        case \"long\":\n        case \"double\":\n            return \"8\";\n        case \"string\":\n            return $\"4 + Encoding.UTF8.GetByteCount({name})\";\n        default:\n            return $\"{name}.GetBytesNum()\";\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240319152042-dv5an20",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240319152042-dv5an20",
+						"updated": "20240321143855"
+					},
+					"Children": [
+						{
+							"ID": "20240319152042-yjm7rkk",
+							"Type": "NodeHeading",
+							"HeadingLevel": 4,
+							"Properties": {
+								"id": "20240319152042-yjm7rkk",
+								"updated": "20240321141616"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "生成"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Writing"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​序列化函数"
+								}
+							]
+						},
+						{
+							"ID": "20240321143056-a1zn4f6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321143056-a1zn4f6",
+								"updated": "20240321143104"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设我们要生成这样的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Writing"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​序列化函数"
+								}
+							]
+						},
+						{
+							"ID": "20240321143104-10r3rxw",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240321143104-10r3rxw",
+								"style": "line-height: 22px;",
+								"updated": "20240321143124"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "namespace GamePlayer\n{\n\tpublic class PlayerData : BaseData\n\t{\n\t\tpublic int id;\n\t\tpublic float atk;\n\t\tpublic bool sex;\n\t\tpublic long lev;\n\t\tpublic int[] arrays;\n\t\tpublic List\u003cint\u003e list;\n\t\tpublic Dictionary\u003cint, string\u003e dic;\n\t\tpublic E_HERO_TYPE heroType;\n\n\t\tpublic override int GetBytesNum()\n\t\t{\n\t\t\tint num = 0;\n\t\t\tnum += 4;\t\t// id : sizeof(int)\n\t\t\tnum += 4;\t\t// atk : sizeof(float)\n\t\t\tnum += 1;\t\t// sex : sizeof(bool)\n\t\t\tnum += 8;\t\t// lev : sizeof(long)\n\t\t\tnum += 2;\t\t// arrays.Length : sizeof(short)\n\t\t\tfor (int i = 0; i \u003c arrays.Length; ++i)\n\t\t\t\tnum += 4;\t// arrays : sizeof(int)\n\t\t\tnum += 2;\t\t// list.Count : sizeof(short)\n\t\t\tfor (int i = 0; i \u003c list.Count; ++i)\n\t\t\t\tnum += 4;\t// list : sizeof(int)\n\t\t\tnum += 2;\t\t// dic.Count : sizeof(short)\n\t\t\tforeach (int key in dic.Keys)\n\t\t\t{\n\t\t\t\tnum += 4;\t// dic : sizeof(int, string)\n\t\t\t\tnum += 4 + Encoding.UTF8.GetByteCount(dic[key]);\n\t\t\t}\n\t\t\tnum += 4;\t\t// heroType : sizeof(enum)\n\t\t\treturn num;\n\t\t}\n\n\t\tpublic override byte[] Writing()\n\t\t{\n\t\t\tint index = 0;\n\t\t\tbyte[] bytes = new byte[GetBytesNum()];\n\t\t\tWriteInt(bytes, id, ref index);\n\t\t\tWriteFloat(bytes, atk, ref index);\n\t\t\tWriteBool(bytes, sex, ref index);\n\t\t\tWriteLong(bytes, lev, ref index);\n\t\t\tWriteShort(bytes, (short)arrays.Length, ref index);\n\t\t\tfor (int i = 0; i \u003c arrays.Length; ++i)\n\t\t\t\tWriteInt(bytes, arrays[i], ref index);\n\t\t\tWriteShort(bytes, (short)list.Count, ref index);\n\t\t\tfor (int i = 0; i \u003c list.Count; ++i)\n\t\t\t\tWriteInt(bytes, list[i], ref index);\n\t\t\tWriteShort(bytes, (short)dic.Count, ref index);\n\t\t\tforeach (int key in dic.Keys)\n\t\t\t{\n\t\t\t\tWriteInt(bytes, key, ref index);\n\t\t\t\tWriteString(bytes, dic[key], ref index);\n\t\t\t}\n\t\t\tWriteInt(bytes, Convert.ToInt32(heroType), ref index);\n\t\t\treturn bytes;\n\t\t}\n\t}\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240321141641-z4ckcyk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321141641-z4ckcyk",
+								"updated": "20240321143441"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Writing"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的声明语句也是可变的，因此将其可变部分使用一个单独的字符串变量装载，该字符串变量包括所有可变的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Writing"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法声明语句"
+								}
+							]
+						},
+						{
+							"ID": "20240321141641-nzpxb9u",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240321141641-nzpxb9u",
+								"style": "line-height: 22px;",
+								"updated": "20240321143400"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public void GenerateData(XmlNodeList nodes)\n{\n    string namespaceStr = \"\";\n    string classNameStr = \"\";\n    string fieldStr = \"\";\n\tstring getBytesNumStr = \"\";\n\tstring writingStr = \"\";\n\n    foreach (XmlNode dataNode in nodes)\n    {\n        namespaceStr = dataNode.Attributes[\"namespace\"].Value;\n        classNameStr = dataNode.Attributes[\"name\"].Value;\n        XmlNodeList fields = dataNode.SelectNodes(\"field\");\t//获取所有的字段消息\n        fieldStr = GetFieldStr(fields);\t\t\t\t\t\t//根据字段获取变量声明相关字符串\n\t\t//根据所有字段，对GetBytesNum函数中的字符串内容进行拼接 返回结果\n\t\tgetBytesNumStr = GetGetBytesNumStr(fields);\n\t\t//通过所有字段，对Writing函数中的字符串内容进行拼接 返回结果\n\t\twritingStr = GetWritingStr(fields);\n        string dataStr = $\"using System;\\r\\n\" +\n                         $\"using System.Collections.Generic;\\r\\n\" +\n                         $\"using System.Text;\\r\\n\" +\n                         $\"using UnityEngine;\\r\\n\\r\\n\" +\n                         //命名空间\n                         $\"namespace {namespaceStr}\\r\\n\" +\n                          \"{\\r\\n\" +\n                         //类声明\n                         $\"\\tpublic class {classNameStr} : BaseData\\r\\n\" +\n                          \"\\t{\\r\\n\" +\n                         //拼接各个变量声明的字符串\n                         $\"{fieldStr}\\r\\n\" +\n                         //GetBytesNum声明\n                         $\"\\t\\tpublic override int GetBytesNum()\\r\\n\" +\n                          \"\\t\\t{\\r\\n\" +\n                          \"\\t\\t\\tint num = 0;\\r\\n\" +\n                         $\"{getBytesNumStr}\" +\n                          \"\\t\\t\\treturn num;\\r\\n\" +\n                          \"\\t\\t}\\r\\n\\r\\n\" +\n                         //Writing声明\n                         $\"\\t\\tpublic override byte[] Writing()\\r\\n\" +\n                          \"\\t\\t{\\r\\n\" +\n                          \"\\t\\t\\tint index = 0;\\r\\n\" +\n                         $\"\\t\\t\\tbyte[] bytes = new byte[GetBytesNum()];\\r\\n\" +\n                         $\"{writingStr}\" +\n                          \"\\t\\t\\treturn bytes;\\r\\n\" +\n                          \"\\t\\t}\\r\\n\\r\\n\" +\n                         //TODO.. Reading声明\n                          \"\\t}\\r\\n\" +\n                          \"}\";\n        //保存为 脚本文件\n        //保存文件的路径\n        string path = SAVE_PATH + namespaceStr + \"/Data/\";\n        //若不存在就创建\n        if (!Directory.Exists(path))\n            Directory.CreateDirectory(path);\n        File.WriteAllText(path + classNameStr + \".cs\", dataStr);\n    }\n    Debug.Log(\"数据结构类生成结束\");\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240321141641-57jy4nl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321141641-57jy4nl",
+								"updated": "20240321143400"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "生成"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Writing"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的语句逻辑较为复杂，因此另外声明一个方法"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetWritingStr"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n该方法需要"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "遍历所有的字段，识别类型，根据字段的类型，生成对应的序列化语句"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n最终使得生成的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Writing"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法可以将消息类对象自己进行序列化"
+								}
+							]
+						},
+						{
+							"ID": "20240321141641-xd63gdz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321141641-xd63gdz",
+								"updated": "20240321143400"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "由于已经封装了基础类型变量的序列化方法，可以直接调用，因此再声明"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetFieldWritingStr"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​来生成调用序列化基础类型变量方法的字符串"
+								}
+							]
+						},
+						{
+							"ID": "20240321141641-xneyu6t",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321141641-xneyu6t",
+								"updated": "20240321143855"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "list"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "array"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "dic"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的序列化语句是可变的，我们需要像字符串那样，\n先生成序列化它们的元素的数量"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Short"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的语句，再生成循环序列化其元素的语句，\n这样反序列化就会先得到数量，在根据数量反序列化多少个元素"
+								}
+							]
+						},
+						{
+							"ID": "20240321141641-p1uixd9",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240321141641-p1uixd9",
+								"style": "line-height: 22px;",
+								"updated": "20240321143400"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//拼接Writing函数的方法\nprivate string GetWritingStr(XmlNodeList fields)\n{\n    string writingStr = \"\";\n    string type = \"\";\n    string name = \"\";\n    foreach (XmlNode field in fields)\n    {\n        type = field.Attributes[\"type\"].Value;\n        name = field.Attributes[\"name\"].Value;\n        if (type == \"list\")\n        {\n            string T = field.Attributes[\"T\"].Value;\n            writingStr += $\"\\t\\t\\tWriteShort(bytes, (short){name}.Count, ref index);\\r\\n\";\n            writingStr += $\"\\t\\t\\tfor (int i = 0; i \u003c {name}.Count; ++i)\\r\\n\";\n            writingStr += $\"\\t\\t\\t\\t{GetFieldWritingStr(T, $\"{name}[i]\")}\\r\\n\";\n        }\n        else if (type == \"array\")\n        {\n            string data = field.Attributes[\"data\"].Value;\n            writingStr += $\"\\t\\t\\tWriteShort(bytes, (short){name}.Length, ref index);\\r\\n\";\n            writingStr += $\"\\t\\t\\tfor (int i = 0; i \u003c {name}.Length; ++i)\\r\\n\";\n            writingStr += $\"\\t\\t\\t\\t{GetFieldWritingStr(data, $\"{name}[i]\")}\\r\\n\";\n        }\n        else if (type == \"dic\")\n        {\n            string TKey = field.Attributes[\"TKey\"].Value;\n            string TValue = field.Attributes[\"TValue\"].Value;\n            writingStr += $\"\\t\\t\\tWriteShort(bytes, (short){name}.Count, ref index);\\r\\n\";\n            writingStr += $\"\\t\\t\\tforeach ({TKey} key in {name}.Keys)\\r\\n\";\n            writingStr += \"\\t\\t\\t{\\r\\n\";\n            writingStr += $\"\\t\\t\\t\\t{GetFieldWritingStr(TKey, \"key\")}\\r\\n\";\n            writingStr += $\"\\t\\t\\t\\t{GetFieldWritingStr(TValue, $\"{name}[key]\")}\\r\\n\";\n            writingStr += \"\\t\\t\\t}\\r\\n\";\n        }\n        else\n        {\n            writingStr += $\"\\t\\t\\t{GetFieldWritingStr(type, name)}\\r\\n\";\n        }\n    }\n    return writingStr;\n}\n\n//获取各种基本类型的序列化语句字符串\nprivate string GetFieldWritingStr(string type, string name)\n{\n    switch (type)\n    {\n        case \"byte\":\n            return $\"WriteByte(bytes, {name}, ref index);\";\n        case \"int\":\n            return $\"WriteInt(bytes, {name}, ref index);\";\n        case \"enum\":\n            return $\"WriteInt(bytes, Convert.ToInt32({name}), ref index);\";\n        case \"short\":\n            return $\"WriteShort(bytes, {name}, ref index);\";\n        case \"long\":\n            return $\"WriteLong(bytes, {name}, ref index);\";\n        case \"float\":\n            return $\"WriteFloat(bytes, {name}, ref index);\";\n        case \"double\":\n            return $\"WriteDouble(bytes, {name}, ref index);\";\n        case \"bool\":\n            return $\"WriteBool(bytes, {name}, ref index);\";\n        case \"string\":\n            return $\"WriteString(bytes, {name}, ref index);\";\n        default:\n            return $\"WriteData(bytes, {name}, ref index);\";\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240319152042-jucl7du",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240319152042-jucl7du",
+						"updated": "20240321144025"
+					},
+					"Children": [
+						{
+							"ID": "20240319152042-8cuojh1",
+							"Type": "NodeHeading",
+							"HeadingLevel": 4,
+							"Properties": {
+								"id": "20240319152042-8cuojh1",
+								"updated": "20240321141619"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "生成"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Reading"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​反序列化函数"
+								}
+							]
+						},
+						{
+							"ID": "20240321143152-smuky9n",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321143152-smuky9n",
+								"updated": "20240321143203"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设我们要生成这样的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Reading"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​反序列化函数"
+								}
+							]
+						},
+						{
+							"ID": "20240321143201-271ky5k",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240321143201-271ky5k",
+								"style": "line-height: 22px;",
+								"updated": "20240321143233"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "namespace GamePlayer\n{\n\tpublic class PlayerData : BaseData\n\t{\n\t\tpublic int id;\n\t\tpublic float atk;\n\t\tpublic bool sex;\n\t\tpublic long lev;\n\t\tpublic int[] arrays;\n\t\tpublic List\u003cint\u003e list;\n\t\tpublic Dictionary\u003cint, string\u003e dic;\n\t\tpublic E_HERO_TYPE heroType;\n\n\t\tpublic override int GetBytesNum()\n\t\t{\n\t\t\tint num = 0;\n\t\t\tnum += 4;\t\t// id : sizeof(int)\n\t\t\tnum += 4;\t\t// atk : sizeof(float)\n\t\t\tnum += 1;\t\t// sex : sizeof(bool)\n\t\t\tnum += 8;\t\t// lev : sizeof(long)\n\t\t\tnum += 2;\t\t// arrays.Length : sizeof(short)\n\t\t\tfor (int i = 0; i \u003c arrays.Length; ++i)\n\t\t\t\tnum += 4;\t// arrays : sizeof(int)\n\t\t\tnum += 2;\t\t// list.Count : sizeof(short)\n\t\t\tfor (int i = 0; i \u003c list.Count; ++i)\n\t\t\t\tnum += 4;\t// list : sizeof(int)\n\t\t\tnum += 2;\t\t// dic.Count : sizeof(short)\n\t\t\tforeach (int key in dic.Keys)\n\t\t\t{\n\t\t\t\tnum += 4;\t// dic : sizeof(int, string)\n\t\t\t\tnum += 4 + Encoding.UTF8.GetByteCount(dic[key]);\n\t\t\t}\n\t\t\tnum += 4;\t\t// heroType : sizeof(enum)\n\t\t\treturn num;\n\t\t}\n\n\t\t//省略Writing\n\n\t\tpublic override int Reading(byte[] bytes, int beginIndex = 0)\n\t\t{\n\t\t\tint index = beginIndex;\n\t\t\tid = ReadInt(bytes, ref index);\n\t\t\tatk = ReadFloat(bytes, ref index);\n\t\t\tsex = ReadBool(bytes, ref index);\n\t\t\tlev = ReadLong(bytes, ref index);\n\t\t\tshort arraysLength = ReadShort(bytes, ref index);\n\t\t\tarrays = new int[arraysLength];\n\t\t\tfor (int i = 0; i \u003c arraysLength; ++i)\n\t\t\t\tarrays[i] = ReadInt(bytes, ref index);\n\t\t\tlist = new List\u003cint\u003e();\n\t\t\tshort listCount = ReadShort(bytes, ref index);\n\t\t\tfor (int i = 0; i \u003c listCount; ++i)\n\t\t\t\tlist.Add(ReadInt(bytes, ref index));\n\t\t\tdic = new Dictionary\u003cint, string\u003e();\n\t\t\tshort dicCount = ReadShort(bytes, ref index);\n\t\t\tfor (int i = 0; i \u003c dicCount; ++i)\n\t\t\t\tdic.Add(ReadInt(bytes, ref index), ReadString(bytes, ref index));\n\t\t\theroType = (E_HERO_TYPE)ReadInt(bytes, ref index);\n\t\t\treturn index - beginIndex;\n\t\t}\n\t}\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240321143417-gud3rn1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321143417-gud3rn1",
+								"updated": "20240321143433"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Reading"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的声明语句也是可变的，因此将其可变部分使用一个单独的字符串变量装载，该字符串变量包括所有可变的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Reading"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法声明语句"
+								}
+							]
+						},
+						{
+							"ID": "20240321143417-vcsezk3",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240321143417-vcsezk3",
+								"style": "line-height: 22px;",
+								"updated": "20240321143627"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public void GenerateData(XmlNodeList nodes)\n{\n    string namespaceStr = \"\";\n    string classNameStr = \"\";\n    string fieldStr = \"\";\n\tstring getBytesNumStr = \"\";\n\tstring writingStr = \"\";\n\tstring readingStr = \"\";\n\n    foreach (XmlNode dataNode in nodes)\n    {\n        namespaceStr = dataNode.Attributes[\"namespace\"].Value;\n        classNameStr = dataNode.Attributes[\"name\"].Value;\n        XmlNodeList fields = dataNode.SelectNodes(\"field\");\t//获取所有的字段消息\n        fieldStr = GetFieldStr(fields);\t\t\t\t\t\t//根据字段获取变量声明相关字符串\n\t\t//根据所有字段，对GetBytesNum函数中的字符串内容进行拼接 返回结果\n\t\tgetBytesNumStr = GetGetBytesNumStr(fields);\n\t\t//根据所有字段，对Writing函数中的字符串内容进行拼接 返回结果\n\t\twritingStr = GetWritingStr(fields);\n\t\t//根据所有字段，对Reading函数中的字符串内容进行拼接 返回结果\n\t\treadingStr = GetReadingStr(fields);\n        string dataStr = $\"using System;\\r\\n\" +\n                         $\"using System.Collections.Generic;\\r\\n\" +\n                         $\"using System.Text;\\r\\n\" +\n                         $\"using UnityEngine;\\r\\n\\r\\n\" +\n                         //命名空间\n                         $\"namespace {namespaceStr}\\r\\n\" +\n                          \"{\\r\\n\" +\n                         //类声明\n                         $\"\\tpublic class {classNameStr} : BaseData\\r\\n\" +\n                          \"\\t{\\r\\n\" +\n                         //拼接各个变量声明的字符串\n                         $\"{fieldStr}\\r\\n\" +\n                         //GetBytesNum声明\n                         $\"\\t\\tpublic override int GetBytesNum()\\r\\n\" +\n                          \"\\t\\t{\\r\\n\" +\n                          \"\\t\\t\\tint num = 0;\\r\\n\" +\n                         $\"{getBytesNumStr}\" +\n                          \"\\t\\t\\treturn num;\\r\\n\" +\n                          \"\\t\\t}\\r\\n\\r\\n\" +\n                         //Writing声明\n                         $\"\\t\\tpublic override byte[] Writing()\\r\\n\" +\n                          \"\\t\\t{\\r\\n\" +\n                          \"\\t\\t\\tint index = 0;\\r\\n\" +\n                         $\"\\t\\t\\tbyte[] bytes = new byte[GetBytesNum()];\\r\\n\" +\n                         $\"{writingStr}\" +\n                          \"\\t\\t\\treturn bytes;\\r\\n\" +\n                          \"\\t\\t}\\r\\n\\r\\n\" +\n                         //Reading声明\n                         $\"\\t\\tpublic override int Reading(byte[] bytes, int beginIndex = 0)\\r\\n\" +\n                          \"\\t\\t{\\r\\n\" +\n                          \"\\t\\t\\tint index = beginIndex;\\r\\n\" +\n                         $\"{readingStr}\" +\n                          \"\\t\\t\\treturn index - beginIndex;\\r\\n\" +\n                          \"\\t\\t}\\r\\n\" +\n                          \"\\t}\\r\\n\" +\n                          \"}\";\n        //保存为 脚本文件\n        //保存文件的路径\n        string path = SAVE_PATH + namespaceStr + \"/Data/\";\n        //若不存在就创建\n        if (!Directory.Exists(path))\n            Directory.CreateDirectory(path);\n        File.WriteAllText(path + classNameStr + \".cs\", dataStr);\n    }\n    Debug.Log(\"数据结构类生成结束\");\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240321143417-ufd2w79",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321143417-ufd2w79",
+								"updated": "20240321143709"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "生成"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Reading"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的语句逻辑较为复杂，因此另外声明一个方法"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetReadingStr"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n该方法需要"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "遍历所有的字段，识别类型，根据字段的类型，生成对应的反序列化语句"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n最终使得生成的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Reading"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法可以从字节数组中反序列化对象"
+								}
+							]
+						},
+						{
+							"ID": "20240321143417-gwgrzjs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321143417-gwgrzjs",
+								"updated": "20240321143950"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "由于已经封装了基础类型变量的反序列化方法，可以直接调用，因此再声明"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetFieldReadingStr"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​来生成调用反序列化基础类型变量方法的字符串"
+								}
+							]
+						},
+						{
+							"ID": "20240321143953-4l5p9oh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321143953-4l5p9oh",
+								"updated": "20240321144025"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "其中"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "enum"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的反序列化实际上是反序列化一个"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "int"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​值，再强转为对应枚举"
+								}
+							]
+						},
+						{
+							"ID": "20240321143417-0catcre",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321143417-0catcre",
+								"updated": "20240321143955"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "list"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "array"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "dic"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的反序列化语句是可变的，我们需要像字符串那样，\n先生成反序列化它们的元素的数量"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Short"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的语句，再生成循环反序列化元素的语句，\n这样反序列化就会先得到数量，在根据数量反序列化多少个元素"
+								}
+							]
+						},
+						{
+							"ID": "20240321143417-m98gg8b",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240321143417-m98gg8b",
+								"style": "line-height: 22px;",
+								"updated": "20240321143803"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//拼接Reading函数的方法\nprivate string GetReadingStr(XmlNodeList fields)\n{\n    string readingStr = \"\";\n    string type = \"\";\n    string name = \"\";\n    foreach (XmlNode field in fields)\n    {\n        type = field.Attributes[\"type\"].Value;\n        name = field.Attributes[\"name\"].Value;\n        if (type == \"list\")\n        {\n            string T = field.Attributes[\"T\"].Value;\n            readingStr += $\"\\t\\t\\t{name} = new List\u003c{T}\u003e();\\r\\n\";\n            readingStr += $\"\\t\\t\\tshort {name}Count = ReadShort(bytes, ref index);\\r\\n\";\n            readingStr += $\"\\t\\t\\tfor (int i = 0; i \u003c {name}Count; ++i)\\r\\n\";\n            readingStr += $\"\\t\\t\\t\\t{name}.Add({GetFieldReadingStr(T)});\\r\\n\";\n\n        }\n        else if (type == \"array\")\n        {\n            string data = field.Attributes[\"data\"].Value;\n            readingStr += $\"\\t\\t\\tshort {name}Length = ReadShort(bytes, ref index);\\r\\n\";\n            readingStr += $\"\\t\\t\\t{name} = new {data}[{name}Length];\\r\\n\";\n            readingStr += $\"\\t\\t\\tfor (int i = 0; i \u003c {name}Length; ++i)\\r\\n\";\n            readingStr += $\"\\t\\t\\t\\t{name}[i] = {GetFieldReadingStr(data)};\\r\\n\";\n        }\n        else if (type == \"dic\")\n        {\n            string TKey = field.Attributes[\"TKey\"].Value;\n            string TValue = field.Attributes[\"TValue\"].Value;\n            readingStr += $\"\\t\\t\\t{name} = new Dictionary\u003c{TKey}, {TValue}\u003e();\\r\\n\";\n            readingStr += $\"\\t\\t\\tshort {name}Count = ReadShort(bytes, ref index);\\r\\n\";\n            readingStr += $\"\\t\\t\\tfor (int i = 0; i \u003c {name}Count; ++i)\\r\\n\";\n            readingStr += $\"\\t\\t\\t\\t{name}.Add({GetFieldReadingStr(TKey)}, {GetFieldReadingStr(TValue)});\\r\\n\";\n        }\n        else if (type == \"enum\")\n        {\n            string data = field.Attributes[\"data\"].Value;\n            readingStr += $\"\\t\\t\\t{name} = ({data})ReadInt(bytes, ref index);\\r\\n\";\n        }\n        else\n        {\n            readingStr += $\"\\t\\t\\t{name} = {GetFieldReadingStr(type)};\\r\\n\";\n        }\n    }\n    return readingStr;\n}\n\n//获取各种基本类型的反序列化语句字符串\nprivate string GetFieldReadingStr(string type)\n{\n    switch (type)\n    {\n        case \"byte\":\n            return $\"ReadByte(bytes, ref index)\";\n        case \"int\":\n            return $\"ReadInt(bytes, ref index)\";\n        case \"short\":\n            return $\"ReadShort(bytes, ref index)\";\n        case \"long\":\n            return $\"ReadLong(bytes, ref index)\";\n        case \"float\":\n            return $\"ReadFloat(bytes, ref index)\";\n        case \"double\":\n            return $\"ReadDouble(bytes, ref index)\";\n        case \"bool\":\n            return $\"ReadBool(bytes, ref index)\";\n        case \"string\":\n            return $\"ReadString(bytes, ref index)\";\n        default:\n            return $\"ReadData\u003c{type}\u003e(bytes, ref index)\";\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240319152003-a2fmlw6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240319152003-a2fmlw6",
+				"updated": "20240321144104"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "制作生成消息类功能"
+				}
+			]
+		},
+		{
+			"ID": "20240321144104-z634blc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321144104-z634blc",
+				"updated": "20240321144250"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "消息类本身与数据类十分类似，只是多了一个包含消息ID和消息体长度的头数据\n因此我们可以方便的复用之前在制作数据类功能时声明的方法，只是在生成语句方面需要添加一些特有的内容"
+				}
+			]
+		},
+		{
+			"ID": "20240321144251-jxg4hlz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321144251-jxg4hlz",
+				"updated": "20240321144259"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设要生成下面的消息类"
+				}
+			]
+		},
+		{
+			"ID": "20240321144259-py1lbhp",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240321144259-py1lbhp",
+				"style": "line-height: 22px;",
+				"updated": "20240321144312"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "namespace GamePlayer\n{\n\tpublic class PlayerMsg : BaseMessage\n\t{\n\t\tpublic int playerID;\n\t\tpublic PlayerData data;\n\n\t\tpublic override int GetID()\n\t\t{\n\t\t\treturn 1001;\n\t\t}\n\n\t\tpublic override int GetBytesNum()\n\t\t{\n\t\t\tint num = 0;\n\t\t\tnum += 4;\t\t// ID : size(int)\n\t\t\tnum += 4;\t\t// messageBodyLength : size(int)\n\t\t\tnum += 4;\t\t// playerID : sizeof(int)\n\t\t\tnum += data.GetBytesNum();\t\t// data : sizeof(PlayerData)\n\t\t\treturn num;\n\t\t}\n\n\t\tpublic override byte[] Writing()\n\t\t{\n\t\t\tint index = 0;\n\t\t\tint bytesNum = GetBytesNum();\n\t\t\tbyte[] bytes = new byte[bytesNum];\n\t\t\tWriteInt(bytes, GetID(), ref index);\n\t\t\tWriteInt(bytes, bytesNum - 8, ref index);\n\t\t\tWriteInt(bytes, playerID, ref index);\n\t\t\tWriteData(bytes, data, ref index);\n\t\t\treturn bytes;\n\t\t}\n\n\t\tpublic override int Reading(byte[] bytes, int beginIndex = 0)\n\t\t{\n\t\t\tint index = beginIndex;\n\t\t\tplayerID = ReadInt(bytes, ref index);\n\t\t\tdata = ReadData\u003cPlayerData\u003e(bytes, ref index);\n\t\t\treturn index - beginIndex;\n\t\t}\n\t}\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240321144318-0oqisxe",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321144318-0oqisxe",
+				"updated": "20240321144753"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "分析可以发现，相对于数据类，\n消息类的获取字节长度上多了获取消息ID和消息体的字节长度，序列化方法上多了序列化ID和消息体长度的逻辑，多了一个可以获取消息ID的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240321144643-oa3vyvh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321144643-oa3vyvh",
+				"updated": "20240321144802"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此可以复制之前生成数据类的语句，在此基础上稍作修改即可完成生成消息类的逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240321144835-i2xjppj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240321144835-i2xjppj",
+				"style": "line-height: 22px;",
+				"updated": "20240321144852"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[MenuItem(\"ProtocolTool/生成C#脚本\")]\nprivate static void GenerateCSharp()\n{\n    generateCSharp.GenerateEnum(GetNodes(\"enum\"));\n    generateCSharp.GenerateData(GetNodes(\"data\"));\n    generateCSharp.GenerateMessage(GetNodes(\"message\"));\n    AssetDatabase.Refresh();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240321144855-cvzp228",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321144855-cvzp228",
+				"updated": "20240321144908"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "相对于数据类作修改的地方："
+				}
+			]
+		},
+		{
+			"ID": "20240321144908-i1iyzbc",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240321144908-i1iyzbc",
+				"updated": "20240321145308"
+			},
+			"Children": [
+				{
+					"ID": "20240321144909-69kimql",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321144909-69kimql",
+						"updated": "20240321144909"
+					},
+					"Children": [
+						{
+							"ID": "20240321144909-7iy3j6v",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321144909-7iy3j6v",
+								"updated": "20240321144946"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "需要额外从"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "\u0026lt;message\u0026gt;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​节点的属性内获取消息ID"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321144950-yeimeq8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321144950-yeimeq8"
+					},
+					"Children": [
+						{
+							"ID": "20240321144950-e56od5c",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321144950-e56od5c",
+								"updated": "20240321145029"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "添加额外的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetID"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法，该方法唯一可变的地方是之前获取的消息ID"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321145029-2csiw32",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321145029-2csiw32"
+					},
+					"Children": [
+						{
+							"ID": "20240321145029-hfveeya",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321145029-hfveeya",
+								"updated": "20240321145112"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetBytesNum"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中，添加固定的累加消息头字节长度的语句"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321145112-es5v45v",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321145112-es5v45v"
+					},
+					"Children": [
+						{
+							"ID": "20240321145112-s6zzmzd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321145112-s6zzmzd",
+								"updated": "20240321145235"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Writing"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中，添加固定的序列化消息ID和消息体长度的语句"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321145304-d2w3hi3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321145304-d2w3hi3",
+						"updated": "20240321145308"
+					},
+					"Children": [
+						{
+							"ID": "20240321145304-lkjxv6r",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321145304-lkjxv6r",
+								"updated": "20240321145308"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "修改存储路径"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240321144724-v6ogfp4",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240321144724-v6ogfp4",
+				"style": "line-height: 22px;",
+				"updated": "20240321144829"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public void GenerateMessage(XmlNodeList nodes)\n{\n    string namespaceStr = \"\";\n    string classNameStr = \"\";\n    string idStr = \"\";\n    string fieldStr = \"\";\n    string getBytesNumStr = \"\";\n    string writingStr = \"\";\n    string readingStr = \"\";\n\n    foreach (XmlNode dataNode in nodes)\n    {\n        namespaceStr = dataNode.Attributes[\"namespace\"].Value;\n        classNameStr = dataNode.Attributes[\"name\"].Value;\n        idStr = dataNode.Attributes[\"id\"].Value;\n        XmlNodeList fields = dataNode.SelectNodes(\"field\");\n        fieldStr = GetFieldStr(fields);\n        //通过某个方法，对GetBytesNum函数中的字符串内容进行拼接 返回结果\n        getBytesNumStr = GetGetBytesNumStr(fields);\n        //通过某个方法，对Writing函数中的字符串内容进行拼接 返回结果\n        writingStr = GetWritingStr(fields);\n        readingStr = GetReadingStr(fields);\n        string messageStr = $\"using System;\\r\\n\" +\n                            $\"using System.Collections.Generic;\\r\\n\" +\n                            $\"using System.Text;\\r\\n\" +\n                            $\"using UnityEngine;\\r\\n\\r\\n\" +\n                            //命名空间\n                            $\"namespace {namespaceStr}\\r\\n\" +\n                             \"{\\r\\n\" +\n                            //类声明\n                            $\"\\tpublic class {classNameStr} : BaseMessage\\r\\n\" +\n                             \"\\t{\\r\\n\" +\n                            //各个变量声明\n                            $\"{fieldStr}\\r\\n\" +\n                            //GetID声明\n                             \"\\t\\tpublic override int GetID()\\r\\n\" +\n                             \"\\t\\t{\\r\\n\" +\n                            $\"\\t\\t\\treturn {idStr};\\r\\n\" +\n                             \"\\t\\t}\\r\\n\\r\\n\" +\n                            //GetBytesNum声明\n                            $\"\\t\\tpublic override int GetBytesNum()\\r\\n\" +\n                             \"\\t\\t{\\r\\n\" +\n                             \"\\t\\t\\tint num = 0;\\r\\n\" +\n                             //添加固定的消息头长度\n                             \"\\t\\t\\tnum += 4;\\t\\t// ID : size(int)\\r\\n\" +\n                             \"\\t\\t\\tnum += 4;\\t\\t// messageBodyLength : size(int)\\r\\n\" +\n                            $\"{getBytesNumStr}\" +\n                             \"\\t\\t\\treturn num;\\r\\n\" +\n                             \"\\t\\t}\\r\\n\\r\\n\" +\n                            //Writing声明\n                            $\"\\t\\tpublic override byte[] Writing()\\r\\n\" +\n                             \"\\t\\t{\\r\\n\" +\n                             \"\\t\\t\\tint index = 0;\\r\\n\" +\n                             \"\\t\\t\\tint bytesNum = GetBytesNum();\\r\\n\" +\n                            $\"\\t\\t\\tbyte[] bytes = new byte[bytesNum];\\r\\n\" +\n                            //反序列化固定的消息头\n                            $\"\\t\\t\\tWriteInt(bytes, GetID(), ref index);\\r\\n\" +\n                            $\"\\t\\t\\tWriteInt(bytes, bytesNum - 8, ref index);\\r\\n\" +\n                            $\"{writingStr}\" +\n                             \"\\t\\t\\treturn bytes;\\r\\n\" +\n                             \"\\t\\t}\\r\\n\\r\\n\" +\n                            //Reading声明\n                            $\"\\t\\tpublic override int Reading(byte[] bytes, int beginIndex = 0)\\r\\n\" +\n                             \"\\t\\t{\\r\\n\" +\n                             \"\\t\\t\\tint index = beginIndex;\\r\\n\" +\n                            $\"{readingStr}\" +\n                             \"\\t\\t\\treturn index - beginIndex;\\r\\n\" +\n                             \"\\t\\t}\\r\\n\" +\n                             \"\\t}\\r\\n\" +\n                             \"}\";\n        //保存为 脚本文件\n        //保存文件的路径\n        string path = SAVE_PATH + namespaceStr + \"/Message/\";\n        //若不存在就创建\n        if (!Directory.Exists(path))\n            Directory.CreateDirectory(path);\n        File.WriteAllText(path + classNameStr + \".cs\", messageStr);\n    }\n    Debug.Log(\"消息类生成结束\");\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

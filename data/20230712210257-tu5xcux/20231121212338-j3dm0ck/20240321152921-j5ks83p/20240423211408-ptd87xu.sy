@@ -1,0 +1,1731 @@
+{
+	"ID": "20240423211408-ptd87xu",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240423211408-ptd87xu",
+		"title": "UH4L1——环境搭建和开发方式",
+		"type": "doc",
+		"updated": "20240501223906"
+	},
+	"Children": [
+		{
+			"ID": "20240423211408-qokht8f",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240423211408-qokht8f",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime环境搭建"
+				}
+			]
+		},
+		{
+			"ID": "20240423214845-mn2fzwt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423214845-mn2fzwt",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "想要正常使用ILRuntime的注意事项："
+				}
+			]
+		},
+		{
+			"ID": "20240423214847-uop0sql",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240423214847-uop0sql",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"ID": "20240423214847-0j66m0w",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240423214847-0j66m0w",
+						"updated": "20240423214847"
+					},
+					"Children": [
+						{
+							"ID": "20240423214847-xssdaxz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423214847-xssdaxz",
+								"updated": "20240423214847"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "修改manifest.json文件中的配置"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423214847-80lphju",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240423214847-80lphju",
+						"updated": "20240423214847"
+					},
+					"Children": [
+						{
+							"ID": "20240423214847-j0of61e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423214847-j0of61e",
+								"updated": "20240423214847"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Allow 'unsafe' Code 选项"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423214847-rzcbpfd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240423214847-rzcbpfd",
+						"updated": "20240423214847"
+					},
+					"Children": [
+						{
+							"ID": "20240423214847-nhmz8qp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423214847-nhmz8qp",
+								"updated": "20240423214847"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过HotFix_Project工程生成用于热更的dll和pdb文件"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240423214845-b36uebc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423214845-b36uebc",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime的基本原理就是利用Mono.Cecil库，去解释执行热更工程中DLL中的代码"
+				}
+			]
+		},
+		{
+			"ID": "20240423214854-bbqvyc7",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240423214854-bbqvyc7",
+				"updated": "20240423214906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "环境搭建具体步骤"
+				}
+			]
+		},
+		{
+			"ID": "20240423211708-igtmcp7",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240423211708-igtmcp7",
+				"updated": "20240501222721"
+			},
+			"Children": [
+				{
+					"ID": "20240423211901-f27hl10",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240423211901-f27hl10",
+						"updated": "20240423211901"
+					},
+					"Children": [
+						{
+							"ID": "20240423211901-btr1iqe",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423211901-btr1iqe",
+								"updated": "20240423211901"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "修改工程文件夹下Packages文件夹中的manifest.json文件，在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "dependencies"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 字段前加上："
+								}
+							]
+						},
+						{
+							"ID": "20240423211850-o7sq3ne",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423211850-o7sq3ne",
+								"updated": "20240423211850"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 435px;",
+										"style": "width: 425px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240423211850-1umjve6.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 425px;\" parent-style=\"width: 435px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240423211734-mc6lyiu",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240423211734-mc6lyiu",
+								"style": "line-height: 22px;",
+								"updated": "20240423211909"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "anNvbg=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "\"scopedRegistries\": [\n  {\n    \"name\": \"ILRuntime\",\n    \"url\": \"https://registry.npmjs.org\",\n    \"scopes\": [\n          \"com.ourpalm\"\n    ]\n  }\n],\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240423212113-o251nz5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423212113-o251nz5",
+								"updated": "20240423212124"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "保存后就会弹出该窗口"
+								}
+							]
+						},
+						{
+							"ID": "20240423212125-0c0motr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423212125-0c0motr",
+								"updated": "20240423212125"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 614px;",
+										"style": "width: 604px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240423212125-dlh1x4q.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 604px;\" parent-style=\"width: 614px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240423211910-n3xlxxp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423211910-n3xlxxp",
+								"updated": "20240423211910"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "或者在 ProjectSetting 中的 Package Manager 添加对应信息"
+								}
+							]
+						},
+						{
+							"ID": "20240423212015-yymd5l9",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240423212015-yymd5l9",
+								"style": "line-height: 22px;",
+								"updated": "20240423212250"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker"
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Name: ILRuntime\nUrl: https://registry.npmjs.org\nScopes: com.ourpalm\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240423212319-mzk8cyi",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423212319-mzk8cyi",
+								"updated": "20240423212319"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 543px;",
+										"style": "width: 533px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240423212319-94g0287.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 533px;\" parent-style=\"width: 543px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423211920-fv1qbcq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240423211920-fv1qbcq",
+						"updated": "20240501222721"
+					},
+					"Children": [
+						{
+							"ID": "20240423211921-4p9rqxs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423211921-4p9rqxs",
+								"updated": "20240423212410"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在Unity工具栏中的 Window 中打开 Package Manager\n左上角的Packages选择My Registries选项，选择其中的ILRuntime并安装，安装完成后 再导入其示例工程"
+								}
+							]
+						},
+						{
+							"ID": "20240423212350-l5iyyfh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423212350-l5iyyfh",
+								"updated": "20240423212350"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 681px;",
+										"style": "width: 671px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240423212350-af1ec6u.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 671px;\" parent-style=\"width: 681px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240423212510-qklxkn1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423212510-qklxkn1",
+								"updated": "20240501222721"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "不要忘记导入这个示例"
+								}
+							]
+						},
+						{
+							"ID": "20240423212518-km0fgjv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423212518-km0fgjv",
+								"updated": "20240423212518"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 438px;",
+										"style": "width: 428px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240423212518-m6k5a4u.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 428px;\" parent-style=\"width: 438px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423211924-tnqwmkt",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240423211924-tnqwmkt"
+					},
+					"Children": [
+						{
+							"ID": "20240423211924-qbeu035",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423211924-qbeu035",
+								"updated": "20240423212443"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "这时会出现报错，因为ILRuntime中会用到C#中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240323201531-a2me1lh",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "unsafe"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​关键字，\n我们需要在工具栏的 Edit 中选择 Project Settings，在Other Setting 中 勾选 Allow 'unsafe' Code 的选项"
+								}
+							]
+						},
+						{
+							"ID": "20240423212614-e23f94s",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423212614-e23f94s",
+								"updated": "20240423212614"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 585px;",
+										"style": "width: 575px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240423212614-gd1ny3i.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 575px;\" parent-style=\"width: 585px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423211927-1bamzgb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240423211927-1bamzgb",
+						"updated": "20240423212636"
+					},
+					"Children": [
+						{
+							"ID": "20240423211928-3wi15c5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423211928-3wi15c5",
+								"updated": "20240423211933"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "执行完上述操作后，可以在工具栏看到ILRuntime的选项"
+								}
+							]
+						},
+						{
+							"ID": "20240423212636-37ss7gj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423212636-37ss7gj",
+								"updated": "20240423212636"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 780px;",
+										"style": "width: 770px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240423212636-mfo4ysw.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 770px;\" parent-style=\"width: 780px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240423212009-mb8uy1w",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240423212009-mb8uy1w",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime的开发方式"
+				}
+			]
+		},
+		{
+			"ID": "20240423212757-q8aubsj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423212757-q8aubsj",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过知识点一导入ILRuntime的工具后，我们可以在 工程目录下的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Samples\\ILRuntime\\2.1.0\\Demo"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 文件夹中\n看到一个HotFix"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "_"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "Project的文件夹，该文件夹在编辑器中无法看到，需要在文件浏览器中查看，该工程就是我们的热更工程"
+				}
+			]
+		},
+		{
+			"ID": "20240423213053-35uqrja",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423213053-35uqrja",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "处于Assets文件夹下的文件夹，如果文件夹名字的最后一个字符为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "~"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，则该文件夹不会在Project窗口内显示"
+				}
+			]
+		},
+		{
+			"ID": "20240423212945-t35q041",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423212945-t35q041",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 722px;",
+						"style": "width: 712px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240423212945-ea4qrch.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 712px;\" parent-style=\"width: 722px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240423212757-a50h7nw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423212757-a50h7nw",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime的开发方式分成了两个部分"
+				}
+			]
+		},
+		{
+			"ID": "20240423212806-8jluozv",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240423212806-8jluozv",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"ID": "20240423212806-rozvtj2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240423212806-rozvtj2",
+						"updated": "20240423212806"
+					},
+					"Children": [
+						{
+							"ID": "20240423212806-z9fdvgs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423212806-z9fdvgs",
+								"updated": "20240423212806"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "直接在Unity工程中进行非热更部分的开发（和以前写C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "一样）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423212806-t9dsmk4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240423212806-t9dsmk4",
+						"updated": "20240423212806"
+					},
+					"Children": [
+						{
+							"ID": "20240423212806-oovbya0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423212806-oovbya0",
+								"updated": "20240423212806"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在热更工程中开发需要热更新的部分（同样使用C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240423212805-ux24ot6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423212805-ux24ot6",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "导入ILRuntime过后我们需要在两个工程之间切换开发，两个工程之间可以相互访问调用，这就是在开发ILRuntime热更项目时的工作方式"
+				}
+			]
+		},
+		{
+			"ID": "20240423213051-yrqqrww",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240423213051-yrqqrww",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "什么是ILRuntime中的跨域访问"
+				}
+			]
+		},
+		{
+			"ID": "20240423213316-ltx07a5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423213316-ltx07a5",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime中的跨域访问就是指 在原始的Unity工程之间 和 热更工程 之间的相互访问调用"
+				}
+			]
+		},
+		{
+			"ID": "20240423213333-7q0nzij",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423213333-7q0nzij",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "比如："
+				}
+			]
+		},
+		{
+			"ID": "20240423213327-ba47q7x",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240423213327-ba47q7x",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"ID": "20240423213327-a3ql7op",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240423213327-a3ql7op",
+						"updated": "20240423213327"
+					},
+					"Children": [
+						{
+							"ID": "20240423213327-prxzw17",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423213327-prxzw17",
+								"updated": "20240423213327"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在Unity工程中使用热更工程中声明的内容（类、委托、函数等）\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423213329-5he7oo6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240423213329-5he7oo6"
+					},
+					"Children": [
+						{
+							"ID": "20240423213329-aj4c36g",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423213329-aj4c36g"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在热更工程中使用Unity工程中声明的内容（类、委托、函数等）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240423213517-6r6rkzq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240423213517-6r6rkzq",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "执行我们的第一个ILRuntime热更程序"
+				}
+			]
+		},
+		{
+			"ID": "20240423213517-gaqf8un",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240423213517-gaqf8un",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"ID": "20240423213517-4iayrxk",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240423213517-4iayrxk",
+						"updated": "20240423213517"
+					},
+					"Children": [
+						{
+							"ID": "20240423213517-u46qged",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423213517-u46qged",
+								"updated": "20240423213517"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过文件浏览器打开 HotFix_Project 工程（如果报错，请修改工程的目标框架）"
+								}
+							]
+						},
+						{
+							"ID": "20240423213809-hwg80tf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423213809-hwg80tf",
+								"updated": "20240423213809"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 734px;",
+										"style": "width: 724px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240423213809-7srzw3s.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 724px;\" parent-style=\"width: 734px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423213517-1bzdcxx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240423213517-1bzdcxx",
+						"updated": "20240423213517"
+					},
+					"Children": [
+						{
+							"ID": "20240423213517-5i7vzee",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423213517-5i7vzee",
+								"updated": "20240423213830"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "生成成功后，可以在Unity工程的 StreamingAssets 文件夹中看到 HotFix_Project 的两个文件，一个是dll文件、一个是pdb文件"
+								}
+							]
+						},
+						{
+							"ID": "20240423213928-s5ivjrp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423213928-s5ivjrp",
+								"updated": "20240423213928"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 653px;",
+										"style": "width: 643px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240423213928-ply0nml.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 643px;\" parent-style=\"width: 653px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240423213951-2hwtph2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423213951-2hwtph2",
+								"updated": "20240423214134"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "它的原理是设置了输出路径到本工程下的Assets文件夹下的StreamingAssets文件夹（在相对路径中 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "..\\"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 相对于上级目录）"
+								}
+							]
+						},
+						{
+							"ID": "20240423214157-krmk5wr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423214157-krmk5wr",
+								"updated": "20240423214157"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 592px;",
+										"style": "width: 582px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240423214157-q07rl2e.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 582px;\" parent-style=\"width: 592px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423213517-im6s5k1",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240423213517-im6s5k1",
+						"updated": "20240423214450"
+					},
+					"Children": [
+						{
+							"ID": "20240423213517-fk53ijd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423213517-fk53ijd",
+								"updated": "20240423213517"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "打开示例工程HelloWorld，运行。成功后可以在Console窗口看到打印信息"
+								}
+							]
+						},
+						{
+							"ID": "20240423214450-ubzovag",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423214450-ubzovag",
+								"updated": "20240423214450"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240423214450-hthzx5v.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240423213334-62hvety",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240423213334-62hvety",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime的基本原理"
+				}
+			]
+		},
+		{
+			"ID": "20240423213350-oasnqt4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423213350-oasnqt4",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关键点："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Mono.Cecil"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 库，它是一个专门用于读取C#编译的DLL的开源第三方库，通过它我们可以获取到"
+				}
+			]
+		},
+		{
+			"ID": "20240423213352-q78xc64",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240423213352-q78xc64",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"ID": "20240423213352-w5jtddy",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240423213352-w5jtddy",
+						"updated": "20240423213352"
+					},
+					"Children": [
+						{
+							"ID": "20240423213352-79mtpp7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423213352-79mtpp7",
+								"updated": "20240423213352"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "DLL中的类型和方法原信息"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423213352-2yowud0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240423213352-2yowud0",
+						"updated": "20240423214736"
+					},
+					"Children": [
+						{
+							"ID": "20240423213352-bje7zx6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423213352-bje7zx6",
+								"updated": "20240423214736"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "读取方法体的IL汇编指令（何为IL：C#编译出来的中间语言，详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20231028202105-150d6lr",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "CS5L1——.NET相关知识"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423213352-3dloavg",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240423213352-3dloavg",
+						"updated": "20240423214816"
+					},
+					"Children": [
+						{
+							"ID": "20240423213352-got38vl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423213352-got38vl",
+								"updated": "20240423214816"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可以读取PDB调试符号表文件，用于断点调试等等"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240423213352-22u7r9d",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240423213352-22u7r9d",
+						"updated": "20240423213352"
+					},
+					"Children": [
+						{
+							"ID": "20240423213352-8g468b8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240423213352-8g468b8",
+								"updated": "20240423213352"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可以修改DLL中的元信息和方法体内容并写回DLL"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240423213350-i4ihe74",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240423213350-i4ihe74",
+				"updated": "20240423214900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime通过该库，在运行时通过读取解释DLL文件中的内容来执行我们热更的代码"
+				}
+			]
+		},
+		{
+			"ID": "20240501223906-725w135",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240501223906-725w135"
+			}
+		}
+	]
+}

@@ -1,0 +1,657 @@
+{
+	"ID": "20240307201553-i9t1qba",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240307201553-i9t1qba",
+		"title": "UN2L4——区分消息类型",
+		"updated": "20240307211743"
+	},
+	"Children": [
+		{
+			"ID": "20240307201608-2486bao",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240307201608-2486bao",
+				"updated": "20240307202242"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "不同类型的消息辨识问题"
+				}
+			]
+		},
+		{
+			"ID": "20240307202134-dai783k",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240307202134-dai783k",
+				"updated": "20240307202242"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "当将序列化的2进制数据发送给对象时，对方如何区分？举例："
+				}
+			]
+		},
+		{
+			"ID": "20240307202207-4crp4l5",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240307202207-4crp4l5",
+				"updated": "20240307202427"
+			},
+			"Children": [
+				{
+					"ID": "20240307202207-mxg08nu",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240307202207-mxg08nu",
+						"updated": "20240307202424"
+					},
+					"Children": [
+						{
+							"ID": "20240307202207-pet3frz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240307202207-pet3frz",
+								"updated": "20240307202424"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "PlayerInfo"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：玩家信息"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240307202207-1j9wgip",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240307202207-1j9wgip",
+						"updated": "20240307202426"
+					},
+					"Children": [
+						{
+							"ID": "20240307202207-qtnz1xr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240307202207-qtnz1xr",
+								"updated": "20240307202426"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ChatInfo"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：聊天信息"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240307202208-a25agep",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240307202208-a25agep",
+						"updated": "20240307202427"
+					},
+					"Children": [
+						{
+							"ID": "20240307202208-guun1te",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240307202208-guun1te",
+								"updated": "20240307202427"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LoginInfo"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：登录信息"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240307202205-0panahx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240307202205-0panahx",
+				"updated": "20240307202242"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "等等"
+				}
+			]
+		},
+		{
+			"ID": "20240307202219-baoruoz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240307202219-baoruoz",
+				"updated": "20240307202242"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这些数据对象序列化后是长度不同的字节数组，将它们发送给对象后，对方如何区分出他们分别是什么消息\n如何选择对应的数据类反序列化它们？"
+				}
+			]
+		},
+		{
+			"ID": "20240307202224-oqnprpw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240307202224-oqnprpw",
+				"updated": "20240307202339"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "区分消息思路"
+				}
+			]
+		},
+		{
+			"ID": "20240307202256-vsg7l8g",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240307202256-vsg7l8g",
+				"updated": "20240307202407"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "解决方案：为发送的信息添加标识，比如添加消息ID\n在所有发送的消息的头部加上消息ID("
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "int"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "short"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "byte"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "long"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​都可以，根据实际情况选择)"
+				}
+			]
+		},
+		{
+			"ID": "20240307202256-dhsz97j",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240307202256-dhsz97j",
+				"updated": "20240307202414"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "举例说明：\n消息构成，如果选用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "int"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类型作为消息ID的类型，前4个字节为消息ID，而后面的字节为数据类的内容\n这样每次收到消息时，先把前4个字节取出来解析为消息ID，再根据ID进行消息反序列化即可"
+				}
+			]
+		},
+		{
+			"ID": "20240307211620-3mndmzz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240307211620-3mndmzz",
+				"updated": "20240307211627"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "区分消息的关键点，是在数据字节数组头部加上消息ID，只要前后端定义好统一的规则\n那么我们可以通过ID来决定如何反序列化消息，并且可以决定我们应该如何处理该消息"
+				}
+			]
+		},
+		{
+			"ID": "20240307202318-ma58ew6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240307202318-ma58ew6",
+				"updated": "20240307202330"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现"
+				}
+			]
+		},
+		{
+			"ID": "20240307202345-2pl9f6o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240307202345-2pl9f6o",
+				"updated": "20240307202347"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实践步骤"
+				}
+			]
+		},
+		{
+			"ID": "20240307202347-19zqy0x",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240307202347-19zqy0x",
+				"updated": "20240307202347"
+			},
+			"Children": [
+				{
+					"ID": "20240307202347-38nq566",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240307202347-38nq566",
+						"updated": "20240307202347"
+					},
+					"Children": [
+						{
+							"ID": "20240307202347-8myv2d6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240307202347-8myv2d6",
+								"updated": "20240307202436"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "创建消息基类，基类继承"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "BaseData"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，基类添加获取消息ID的方法或者属性"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240307202347-bhw26yc",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240307202347-bhw26yc",
+						"updated": "20240307202347"
+					},
+					"Children": [
+						{
+							"ID": "20240307202347-2m77lcf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240307202347-2m77lcf",
+								"updated": "20240307202347"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "让想要被发送的消息继承该类，实现序列化反序列化方法"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240307202347-iwhpx8w",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240307202347-iwhpx8w",
+						"updated": "20240307202347"
+					},
+					"Children": [
+						{
+							"ID": "20240307202347-2qumyjh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240307202347-2qumyjh",
+								"updated": "20240307202347"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "修改客户端和服务端收发消息的逻辑"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240307211805-juuwe1f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240307211805-juuwe1f",
+				"updated": "20240307211808"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "消息基类："
+				}
+			]
+		},
+		{
+			"ID": "20240307211747-gqp0dho",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240307211747-gqp0dho",
+				"style": "line-height: 22px;",
+				"updated": "20240307211802"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class BaseMessage : BaseData\n{\n    public override int GetBytesNum()\n    {\n        throw new System.NotImplementedException();\n    }\n\n    public override int Reading(byte[] bytes, int BeginIndex = 0)\n    {\n        throw new System.NotImplementedException();\n    }\n\n    public override byte[] Writeing()\n    {\n        throw new System.NotImplementedException();\n    }\n\n    public virtual int GetID()\n    {\n        return 0;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240307211810-seacexe",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240307211810-seacexe",
+				"updated": "20240307211816"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "继承消息基类的示例："
+				}
+			]
+		},
+		{
+			"ID": "20240307211816-9crhx1k",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240307211816-9crhx1k",
+				"style": "line-height: 22px;",
+				"updated": "20240307211845"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//玩家数据类\npublic class PlayerData : BaseData\n{\n    public string name;\n    public int atk;\n    public int lev;\n\n    public override int GetBytesNum()\n    {\n        return 4 + 4 + 4 + Encoding.UTF8.GetBytes(name).Length;\n    }\n\n    public override int Reading(byte[] bytes, int beginIndex = 0)\n    {\n        int index = beginIndex;\n        name = ReadString(bytes, ref index);\n        atk = ReadInt(bytes, ref index);\n        lev = ReadInt(bytes, ref index);\n        return index - beginIndex;\n    }\n\n    public override byte[] Writeing()\n    {\n        int index = 0;\n        byte[] bytes = new byte[GetBytesNum()];\n        WriteString(bytes, name, ref index);\n        WriteInt(bytes, atk, ref index);\n        WriteInt(bytes, lev, ref index);\n        return bytes;\n    }\n}\n\npublic class PlayerMessage : BaseMessage\n{\n    public int playerID;\n    public PlayerData playerData;\n\n    public override byte[] Writeing()\n    {\n        int index = 0;\n        byte[] bytes = new byte[GetBytesNum()];\n        WriteInt(bytes, GetID(), ref index);        //先写消息ID\n        WriteInt(bytes, playerID, ref index);       //再写消息的成员变量\n        WriteData(bytes, playerData, ref index);\n        return bytes;\n    }\n\n    public override int Reading(byte[] bytes, int beginIndex = 0)\n    {\n        //反序列化不需要去解析ID 因为在这一步之前 就应该把ID反序列化出来\n        //用来判断到底使用哪一个自定义类来反序化\n        int index = beginIndex;\n        playerID = ReadInt(bytes, ref index);\n        playerData = ReadData\u003cPlayerData\u003e(bytes, ref index);\n        return index - beginIndex;\n    }\n\n    public override int GetBytesNum()\n    {\n        return 4 +                          //消息ID的长度\n               4 +                          //playerID的字节数组长度\n               playerData.GetBytesNum();    //playerData\n    }\n\n    //自定义的消息ID 主要是用于区分是哪一个消息类\n    public override int GetID()\n    {\n        return 1001;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240307211713-0i524zg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240307211713-0i524zg",
+				"updated": "20240307211718"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "服务端部分代码："
+				}
+			]
+		},
+		{
+			"ID": "20240307211718-h0o6ptv",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240307211718-h0o6ptv",
+				"style": "line-height: 22px;",
+				"updated": "20240307211735"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "PlayerMessage msg = new PlayerMessage();\nmsg.playerID = 666;\nmsg.playerData = new PlayerData();\nmsg.playerData.name = \"我是唐老狮的服务端\";\nmsg.playerData.atk = 99;\nmsg.playerData.lev = 50;\nsocketClient.Send(msg.Writeing());\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240307202350-id3biun",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240307202350-id3biun",
+				"updated": "20240307211637"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "客户端部分代码："
+				}
+			]
+		},
+		{
+			"ID": "20240307211637-w8s8p3m",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240307211637-w8s8p3m",
+				"style": "line-height: 22px;",
+				"updated": "20240307211711"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//用Receive方法接收数据\nbyte[] receiveBytes = new byte[1024];\nint receiveNum = socket.Receive(receiveBytes);\n//首先解析消息的ID，使用字节数组中的前四个字节，得到ID\nint msgID = BitConverter.ToInt32(receiveBytes, 0);\nswitch (msgID)\n{\n    case 1001:\n        PlayerMessage msg = new PlayerMessage();\n        msg.Reading(receiveBytes, 4);\n        print(msg.playerID);\n        print(msg.playerData.name);\n        print(msg.playerData.atk);\n        print(msg.playerData.lev);\n        break;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240307211743-iuwxlnj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240307211743-iuwxlnj",
+				"updated": "20240307211743"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 380px;",
+						"style": "width: 370px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240307211743-z06d4xo.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 370px;\" parent-style=\"width: 380px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		}
+	]
+}

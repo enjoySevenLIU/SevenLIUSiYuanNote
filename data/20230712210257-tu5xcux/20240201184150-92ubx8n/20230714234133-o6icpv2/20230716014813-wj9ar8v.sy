@@ -1,0 +1,429 @@
+{
+	"ID": "20230716014813-wj9ar8v",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230716014813-wj9ar8v",
+		"name": "lXmlSerialzable接口",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230716014813-wj9ar8v\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230716014828-w8cazb8\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230716160514-ulx10aa\u0026quot;,\u0026quot;scrollTop\u0026quot;:600,\u0026quot;focusId\u0026quot;:\u0026quot;20230716014828-w8cazb8\u0026quot;,\u0026quot;focusStart\u0026quot;:0,\u0026quot;focusEnd\u0026quot;:0\u0026#125;",
+		"title": "UD2SL3——lXmlSerialzable接口",
+		"updated": "20240317172904"
+	},
+	"Children": [
+		{
+			"ID": "20240317172800-32bar67",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240317172800-32bar67",
+				"updated": "20240317172800"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240317172800-rf4r0g7",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240317172800-rf4r0g7",
+				"style": "line-height: 22px;",
+				"updated": "20240317172801"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "IXmlSerializable                    //若要使自定义类有自己的自定义序列化规则，则需要继承该接口，并实现该接口的方法\nGetSchema() { }                     //返回框架，一般返回null即可\nWriteXml(XmlWriter writer) { }      //对该类对象序列化时会自动调用的方法\nwriter.WriteAttributeString(,)      //写属性\nwriter.WriteElementString()         //写元素节点\nwriter.WriteStartElement()          //写头节点\nwriter.WriteEndElement()            //写尾节点\nReadXml(XmlReader reader) { }       //对该类反序列化时会自动调用的方法\nreader[]                            //读取当前节点属性\nreader.Read()                       //读取下一个节点\nreader.Value                        //读取当前节点的内容\nreader.ReadStartElement()           //读当前节点下的头节点\nreader.ReadEndElement()             //读当前节点的的尾节点\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230716014828-w8cazb8",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230716014828-w8cazb8",
+				"updated": "20230716014923"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "lXmlSerialzable接口"
+				}
+			]
+		},
+		{
+			"ID": "20230716014850-6tpbbr7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230716014850-6tpbbr7",
+				"updated": "20240317172751"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "XmlSerializer"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 提供了可拓展内容\n可以让一些不能被序列化和反序列化的特殊类能被处理\n让特殊类继承 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IXmlSerializable"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 接口 实现其中的方法即可"
+				}
+			]
+		},
+		{
+			"ID": "20230716014813-s8b6ngn",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230716014813-s8b6ngn",
+				"updated": "20230716015154"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义类实践"
+				}
+			]
+		},
+		{
+			"ID": "20230716160134-kgcq8so",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230716160134-kgcq8so",
+				"updated": "20230716160142"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "序列化回顾"
+				}
+			]
+		},
+		{
+			"ID": "20230716015156-umixr3f",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230716015156-umixr3f",
+				"updated": "20230716015838"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "TestLesson3 t = new TestLesson3();\nt.test2 = \"123\";\nusing (StreamWriter writer = new StreamWriter(Application.persistentDataPath + \"/TestLesson3.xml\"))\n{\n    XmlSerializer s = new XmlSerializer(typeof(TestLesson3));\n    s.Serialize(writer, t);\n}\n\nusing (StreamReader reader = new StreamReader(Application.persistentDataPath + \"/TestLesson3.xml\"))\n{\n    XmlSerializer s = new XmlSerializer(typeof(TestLesson3));\n    t = s.Deserialize(reader) as TestLesson3;\n}\n\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230716160129-oumx7sw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230716160129-oumx7sw",
+				"updated": "20230716160159"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义类的自定义序列化"
+				}
+			]
+		},
+		{
+			"ID": "20230716160206-60w7aiq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230716160206-60w7aiq",
+				"updated": "20240317172855"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "若要自定义自己的序列化规则，需要继承"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IXmlSerializable"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​接口\n这样XML序列化对象 在序列化 该类的对象 时 会调用该接口的方法"
+				}
+			]
+		},
+		{
+			"ID": "20230716160351-hycit2k",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230716160351-hycit2k",
+				"updated": "20230716160412"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class TestLesson3 : IXmlSerializable\n{\n    public int test1;\n    public string test2;\n    //返回结构\n    public XmlSchema GetSchema()\n    {\n        return null;    //一般用不到，直接返回空\n    }\n    //反序列化时 会自动调用的方法\n    public void ReadXml(XmlReader reader)\n    {\n        //在里面可以 自定义反序列化的规则\n    }\n    //序列化时 会自动调用的方法\n    public void WriteXml(XmlWriter writer)\n    {\n        //在里面可以 自定义序列化的规则\n        //如果要自定义 序列化的规则 一定会用到 XmlWriter中的一些方法 来进行序列化\n    }\n}\n\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230716160339-s8jm9mt",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230716160339-s8jm9mt",
+				"name": "WriteXml(XmlWriter writer)",
+				"updated": "20230716160606"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "序列化时会自动调用的方法"
+				}
+			]
+		},
+		{
+			"ID": "20230716160612-sica8gh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230716160612-sica8gh",
+				"updated": "20240317172900"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在该方法里一定会使用参数"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "writer"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的方法"
+				}
+			]
+		},
+		{
+			"ID": "20230716160200-5muh56z",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230716160200-5muh56z",
+				"updated": "20230716170942"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public void WriteXml(XmlWriter writer)\n{\n    //在里面可以 自定义序列化的规则\n    //如果要自定义 序列化的规则 一定会用到 XmlWriter中的一些方法 来进行序列化\n    //1.写属性\n    writer.WriteAttributeString(\"test1\", test1.ToString());\n    writer.WriteAttributeString(\"test2\", test2);\n\n    //2.写节点\n    writer.WriteElementString(\"test1\", test1.ToString());\n    writer.WriteElementString(\"test2\", test2);\n\n    //3.写包裹节点\n    XmlSerializer s = new XmlSerializer(typeof(int));       //实例化一个int类型的xml序列化对象\n    writer.WriteStartElement(\"test1\");                      //写头节点\n    s.Serialize(writer, test1);                             //写包裹节点\n    writer.WriteEndElement();                               //写尾节点，不需要写参数，自动根据上句写好的头节点补齐\n\n    XmlSerializer s2 = new XmlSerializer(typeof(string));   //实例化一个string类型的xml序列化对象\n    writer.WriteStartElement(\"test2\");                      //写头节点\n    s2.Serialize(writer, test2);                            //写包裹节点\n    writer.WriteEndElement();                               //写尾节点，不需要写参数，自动根据上句写好的头节点补齐  \n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230716160440-32yjqsm",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230716160440-32yjqsm",
+				"name": "ReadXml(XmlReader reader)",
+				"updated": "20230716160600"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "反序列化时会自动调用的方法"
+				}
+			]
+		},
+		{
+			"ID": "20230716160633-ez89l6w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230716160633-ez89l6w",
+				"updated": "20240317172904"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在该方法里一定会使用参数"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "reader"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的方法"
+				}
+			]
+		},
+		{
+			"ID": "20230716160455-s0ixar9",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230716160455-s0ixar9",
+				"updated": "20230716171534"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public void ReadXml(XmlReader reader)\n{\n    //在里面可以 自定义反序列化的规则\n    //1.读属性\n    test1 = int.Parse(reader[\"test1\"]);\n    test2 = reader[\"test2\"];\n\n    //2.读节点\n    //方式一：一个部分一个部分的读\n    reader.Read();  //这时读到的是test1节点\n    reader.Read();  //这时读到的是test1包裹的内容\n    test1 = int.Parse(reader.Value);    //得到当前内容的值\n    reader.Read();  //这时读到的是尾部包裹节点\n    reader.Read();  //这时读到的是test2节点\n    reader.Read();  //这时读到的是test2包裹的内容\n    test2 = reader.Value;\n    //方法二：\n    while (reader.Read())\n    {\n        if (reader.NodeType == XmlNodeType.Element) //在这里只要判断是元素开始节点就读取\n        {\n            switch (reader.Name)    //根据名字来读取内容\n            {\n                case \"test1\":\n                    reader.Read();\n                    test1 = int.Parse(reader.Value);\n                    break;\n                case \"test2\":\n                    reader.Read();\n                    test2 = reader.Value;\n                    break;\n            }\n        }\n    }\n  \n    //3.读包裹节点\n    XmlSerializer s = new XmlSerializer(typeof(int));       //实例化一个int类型的xml序列化对象\n    XmlSerializer s2 = new XmlSerializer(typeof(string));   //实例化一个string类型的xml序列化对象\n    reader.Read();                                          //跳过根节点\n    reader.ReadStartElement(\"test1\");                       //读头节点\n    test1 = (int)s.Deserialize(reader);                     //读包裹节点\n    reader.ReadEndElement();                                //读尾节点\n  \n    reader.ReadStartElement(\"test2\");                       //读头节点\n    test2 = s2.Deserialize(reader).ToString();              //读包裹节点\n    reader.ReadEndElement();                                //读尾节点\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230716160508-btr98aj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230716160508-btr98aj",
+				"name": "GetSchema()",
+				"updated": "20230716160553"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "返回框架"
+				}
+			]
+		},
+		{
+			"ID": "20230716171458-ddy44be",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230716171458-ddy44be",
+				"updated": "20230716171459"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "一般用不到，直接返回空\n"
+				}
+			]
+		},
+		{
+			"ID": "20230716160514-ulx10aa",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230716160514-ulx10aa",
+				"updated": "20230716160526"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public XmlSchema GetSchema()\n{\n    return null;    //一般用不到，直接返回空\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

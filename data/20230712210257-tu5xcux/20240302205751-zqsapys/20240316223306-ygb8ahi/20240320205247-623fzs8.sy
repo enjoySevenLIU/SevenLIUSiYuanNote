@@ -1,0 +1,1388 @@
+{
+	"ID": "20240320205247-623fzs8",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240320205247-623fzs8",
+		"title": "UN5L7——Protobuf协议使用",
+		"type": "doc",
+		"updated": "20240320222522"
+	},
+	"Children": [
+		{
+			"ID": "20240320214507-a8z0l77",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240320214507-a8z0l77",
+				"updated": "20240320214517"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240320214517-h0848xe",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240320214517-h0848xe",
+				"style": "line-height: 22px;",
+				"updated": "20240320222522"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Google.Protobuf\t\t\t\t\t//ProtoBuf相关命名空间，该命名空间内有为IMessage的WriteTo方法的拓展方法，使得流可以传入到方法内\niMessage.Writeto()\t\t\t\t//所有的ProtoBuf生成的消息类都继承自IMessage，因此可以调用该方法将自己序列化写入到流内\niMessage.ToByteArray()\t\t\t//在Google.Protobuf命名空间中为IMessage拓展的方法，该方法可以直接将类对象序列化为字节数组\nmessageParser\u003c\u003e.ParseFrom()\t\t//所有ProtoBuf消息类都有MessageParser\u003c\u003e静态变量，可通过Parse属性调用，它可以将流中的数据或者字节数组反序列化\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240320205713-npvdy4s",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240320205713-npvdy4s",
+				"updated": "20240320205719"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Protobuf协议使用"
+				}
+			]
+		},
+		{
+			"ID": "20240320205719-espf4fu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320205719-espf4fu",
+				"updated": "20240320205731"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Protobuf的序列化和反序列化都要通过流对象来进行处理"
+				}
+			]
+		},
+		{
+			"ID": "20240320205728-jjsfgm1",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240320205728-jjsfgm1",
+				"updated": "20240320205728"
+			},
+			"Children": [
+				{
+					"ID": "20240320205728-poquy7g",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240320205728-poquy7g",
+						"updated": "20240320205728"
+					},
+					"Children": [
+						{
+							"ID": "20240320205728-ydhg7qx",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240320205728-ydhg7qx",
+								"updated": "20240320205728"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果是进行本地存储 则可以使用文件流\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240320205728-uxznrre",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240320205728-uxznrre"
+					},
+					"Children": [
+						{
+							"ID": "20240320205728-j65v97e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240320205728-j65v97e"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果是进行网络传输 则可以使用内存流获取字节数组"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240320214911-lntznr1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320214911-lntznr1",
+				"updated": "20240320215155"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：Protobuf生成的消息类没有为我们自动实现生成消息ID和消息体长度的逻辑，\n这意味着区分消息逻辑和解决分包黏包问题需要我们自己来处理，例如添加消息ID和消息体长度都需要我们自己来做"
+				}
+			]
+		},
+		{
+			"ID": "20240320205247-slrnru1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240320205247-slrnru1",
+				"name": "IMessage.Writeto()",
+				"updated": "20240320213354"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "消息类序列化"
+				}
+			]
+		},
+		{
+			"ID": "20240320211936-nn4mhr0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320211936-nn4mhr0",
+				"updated": "20240320213422"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Writeto()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IMessage"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内声明的方法，所有的ProtoBuf生成的消息类都继承自它"
+				}
+			]
+		},
+		{
+			"ID": "20240320213355-vs2guq0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240320213355-vs2guq0",
+				"updated": "20240320213401"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "序列化到本地文件"
+				}
+			]
+		},
+		{
+			"ID": "20240320205538-8nixhz3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320205538-8nixhz3",
+				"updated": "20240320213401"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要使用"
+				}
+			]
+		},
+		{
+			"ID": "20240320205541-uj2z7fm",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240320205541-uj2z7fm",
+				"updated": "20240320213401"
+			},
+			"Children": [
+				{
+					"ID": "20240320205541-kwxybbd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240320205541-kwxybbd",
+						"updated": "20240320205541"
+					},
+					"Children": [
+						{
+							"ID": "20240320205541-sk9drjl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240320205541-sk9drjl",
+								"updated": "20240320205546"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "生成的类中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "WriteTo()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240320205541-0r9lyec",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240320205541-0r9lyec",
+						"updated": "20240320205541"
+					},
+					"Children": [
+						{
+							"ID": "20240320205541-8kd7snb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240320205541-8kd7snb",
+								"updated": "20240320205551"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "文件流"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "FileStream"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240320210502-k5ye03f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320210502-k5ye03f",
+				"updated": "20240320213401"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在初始化了ProtoBuf生成的消息类后，我们就可以对其序列化生成为本地文件存储\n我们需要使用一个文件流传入到其"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "WriteTo()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法内，但是要注意，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "WriteTo()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法不支持直接传入文件流\n想让"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "WriteTo()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​可以直接传入文件流，需要引入命名空间"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Google.Protobuf"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n因为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Google.Protobuf"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​命名空间中，有"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "WriteTo()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的拓展方法，它可以让我们直接传入文件流"
+				}
+			]
+		},
+		{
+			"ID": "20240320210410-6yyqncf",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240320210410-6yyqncf",
+				"style": "line-height: 22px;",
+				"updated": "20240320213401"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using GamePlayerTest;\nusing Google.Protobuf;\nusing System.IO;\nusing UnityEngine;\n\npublic class Lesson41 : MonoBehaviour\n{\n    void Start()\n    {\n        TestMsg msg = new TestMsg();\n\t\t//TestMsg初始化相关\n\t\tmsg.ListInt.Add(1);\n        msg.TestBool = false;\n        msg.TestD = 5.5;\n        msg.TestMap.Add(1, \"唐老狮\");\n        msg.TestMsg2 = new TestMsg2();\n        msg.TestMsg2.TestInt32 = 88;\n        msg.TestMsg3 = new TestMsg.Types.TestMsg3();\n        msg.TestMsg3.TestInt32 = 66;\n\n        print(Application.persistentDataPath);\n\t\t//序列化为本地文件\n        using (FileStream fs = File.Create(Application.persistentDataPath + \"/TestMsg.Tang\"))\n        {\n            msg.WriteTo(fs);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240320213417-xcjw85o",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240320213417-xcjw85o",
+				"updated": "20240320213417"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "序列化为字节数组"
+				}
+			]
+		},
+		{
+			"ID": "20240320213417-4c3dlac",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320213417-4c3dlac",
+				"updated": "20240320213418"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要使用"
+				}
+			]
+		},
+		{
+			"ID": "20240320213417-1t3vks9",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240320213417-1t3vks9",
+				"updated": "20240320213418"
+			},
+			"Children": [
+				{
+					"ID": "20240320213417-tlun2g5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240320213417-tlun2g5",
+						"updated": "20240320213417"
+					},
+					"Children": [
+						{
+							"ID": "20240320213417-372ta80",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240320213417-372ta80",
+								"updated": "20240320213417"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "生成的类中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "WriteTo"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240320213417-u68ddrb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240320213417-u68ddrb",
+						"updated": "20240320213417"
+					},
+					"Children": [
+						{
+							"ID": "20240320213417-mzuv9bg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240320213417-mzuv9bg",
+								"updated": "20240320213417"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "内存流"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "MemoryStream"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240320213417-n75a1e4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320213417-n75a1e4",
+				"updated": "20240320213445"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "获取序列化后的字节数组很简单，使用内存流传入到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "WriteTo()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法内即可，注意引入命名空间"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Google.Protobuf"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240320213417-u6unjlt",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240320213417-u6unjlt",
+				"style": "line-height: 22px;",
+				"updated": "20240320213418"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using GamePlayerTest;\nusing Google.Protobuf;\nusing System.IO;\nusing UnityEngine;\n\npublic class Lesson41 : MonoBehaviour\n{\n    // Start is called before the first frame update\n    void Start()\n    {\n        TestMsg msg = new TestMsg();\n        msg.ListInt.Add(1);\n        msg.TestBool = false;\n        msg.TestD = 5.5;\n        msg.TestMap.Add(1, \"唐老狮\");\n        msg.TestMsg2 = new TestMsg2();\n        msg.TestMsg2.TestInt32 = 88;\n        msg.TestMsg3 = new TestMsg.Types.TestMsg3();\n        msg.TestMsg3.TestInt32 = 66;\n\n        msg.TestHeart = new GameSystemTest.HeartMsg();\n        msg.TestHeart.Time = 7777;\n\t\t//序列化到内存流\n        using (MemoryStream memoryStream = new MemoryStream())\n        {\n            msg.WriteTo(memoryStream);\n\t\t\t//通过字节数组获取内存流内数据\n            byte[] bytes = memoryStream.ToArray();\n            print(\"字节数组长度：\" + bytes);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240320214222-3vmr9pj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320214222-3vmr9pj",
+				"updated": "20240320214222"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 381px;",
+						"style": "width: 371px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240320214222-iuw5sdy.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 371px;\" parent-style=\"width: 381px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240320221612-ptjmr52",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240320221612-ptjmr52",
+				"name": "iMessage.ToByteArray()",
+				"updated": "20240320221622"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "更方便的序列化为字节数组"
+				}
+			]
+		},
+		{
+			"ID": "20240320221627-8rjbc78",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320221627-8rjbc78",
+				"updated": "20240320221757"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Google.Protobuf"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​命名空间中，有一个为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IMessage"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​拓展的方法"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ToByteArray()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，该方法可以直接将类对象序列化为字节数组"
+				}
+			]
+		},
+		{
+			"ID": "20240320221623-73y0xd0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240320221623-73y0xd0",
+				"style": "line-height: 22px;",
+				"updated": "20240320221750"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "// 序列化Protobuf生成的对象\npublic static byte[] GetProtoBytes(IMessage msg)\n{\n    return msg.ToByteArray();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240320205558-gxo7wem",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240320205558-gxo7wem",
+				"name": "MessageParser\u0026lt;\u0026gt;.ParseFrom()",
+				"updated": "20240320214430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "消息类反序列化"
+				}
+			]
+		},
+		{
+			"ID": "20240320212447-p7rjip1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320212447-p7rjip1",
+				"updated": "20240320214735"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ParseFrom()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "MessageParser\u0026lt;\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内声明的方法，所有ProtoBuf消息类都有该类的静态变量（泛型参数为自己），可通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Parse"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​调用它"
+				}
+			]
+		},
+		{
+			"ID": "20240320214424-27hs0bj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240320214424-27hs0bj",
+				"updated": "20240320214438"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "从本地文件反序列化"
+				}
+			]
+		},
+		{
+			"ID": "20240320205603-ea7kcrb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320205603-ea7kcrb",
+				"updated": "20240320214438"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要使用"
+				}
+			]
+		},
+		{
+			"ID": "20240320205605-36168g7",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240320205605-36168g7",
+				"updated": "20240320214438"
+			},
+			"Children": [
+				{
+					"ID": "20240320205605-x8zq1rj",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240320205605-x8zq1rj",
+						"updated": "20240320205605"
+					},
+					"Children": [
+						{
+							"ID": "20240320205605-my33evm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240320205605-my33evm",
+								"updated": "20240320205609"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "生成的类中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Parser.ParseFrom"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240320205605-smmkr9z",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240320205605-smmkr9z",
+						"updated": "20240320205605"
+					},
+					"Children": [
+						{
+							"ID": "20240320205605-lxd9l97",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240320205605-lxd9l97",
+								"updated": "20240320205612"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "文件流"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "FileStream"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240320211758-gfd8m5e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320211758-gfd8m5e",
+				"updated": "20240320214438"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "将读取文件的文件流传入到要接收消息的数据类的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Parser.ParseFrom()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法内"
+				}
+			]
+		},
+		{
+			"ID": "20240320211042-uypscyl",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240320211042-uypscyl",
+				"style": "line-height: 22px;",
+				"updated": "20240320214438"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using GamePlayerTest;\nusing Google.Protobuf;\nusing System.IO;\nusing UnityEngine;\n\npublic class Lesson41 : MonoBehaviour\n{\n    void Start()\n    {\n        TestMsg msg = new TestMsg();\n        msg.ListInt.Add(1);\n        msg.TestBool = false;\n        msg.TestD = 5.5;\n        msg.TestMap.Add(1, \"唐老狮\");\n        msg.TestMsg2 = new TestMsg2();\n        msg.TestMsg2.TestInt32 = 88;\n        msg.TestMsg3 = new TestMsg.Types.TestMsg3();\n        msg.TestMsg3.TestInt32 = 66;\n\n        msg.TestHeart = new GameSystemTest.HeartMsg();\n        msg.TestHeart.Time = 7777;\n\t\t//序列化为本地文件\n        print(Application.persistentDataPath);\n        using (FileStream fs = File.Create(Application.persistentDataPath + \"/TestMsg.Tang\"))\n        {\n            msg.WriteTo(fs);\n        }\n        //从本地文件反序列化出来数据\n        using (FileStream fs = File.OpenRead(Application.persistentDataPath + \"/TestMsg.Tang\"))\n        {\n\t\t\tprint(\"文件流当中反序列化的内容\");\n            TestMsg msg2 = TestMsg.Parser.ParseFrom(fs);\n\t\t\t//输出反序列出来的数据\n            print(msg2.TestMap[1]);\n            print(msg2.ListInt[0]);\n            print(msg2.TestD);\n            print(msg2.TestMsg2.TestInt32);\n            print(msg2.TestMsg3.TestInt32);\n            print(msg2.TestHeart.Time);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240320211746-c78vuly",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320211746-c78vuly",
+				"updated": "20240320214438"
+			},
+			"Children": [
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 291px;",
+						"style": "width: 281px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240320214055-1y7twq7.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 281px;\" parent-style=\"width: 291px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240320205637-z5x0npp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240320205637-z5x0npp",
+				"updated": "20240320214444"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "从字节数组反序列化"
+				}
+			]
+		},
+		{
+			"ID": "20240320205647-lurgcyp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320205647-lurgcyp",
+				"updated": "20240320214444"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要使用"
+				}
+			]
+		},
+		{
+			"ID": "20240320205648-1ajtm4v",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240320205648-1ajtm4v",
+				"updated": "20240320214444"
+			},
+			"Children": [
+				{
+					"ID": "20240320205648-ex9a0cc",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240320205648-ex9a0cc",
+						"updated": "20240320205648"
+					},
+					"Children": [
+						{
+							"ID": "20240320205648-0lj6ers",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240320205648-0lj6ers",
+								"updated": "20240320205655"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "生成的类中的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Parser.ParseFrom"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​方法"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240320205648-ogsb386",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240320205648-ogsb386",
+						"updated": "20240320205648"
+					},
+					"Children": [
+						{
+							"ID": "20240320205648-n1smk14",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240320205648-n1smk14",
+								"updated": "20240320205653"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "内存流"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "MemoryStream"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​对象"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240320214315-tvris71",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320214315-tvris71",
+				"updated": "20240320214444"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "从字节数组反序列化很简单，将要反序列化的字节数组传入到内存流的构造方法内，再将内存流传入到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Parser.ParseFrom()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法内即可"
+				}
+			]
+		},
+		{
+			"ID": "20240320213301-oc0ddaf",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240320213301-oc0ddaf",
+				"style": "line-height: 22px;",
+				"updated": "20240320214444"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using GamePlayerTest;\nusing Google.Protobuf;\nusing System.IO;\nusing UnityEngine;\n\npublic class Lesson41 : MonoBehaviour\n{\n    void Start()\n    {\n        TestMsg msg = new TestMsg();\n        msg.ListInt.Add(1);\n        msg.TestBool = false;\n        msg.TestD = 5.5;\n        msg.TestMap.Add(1, \"唐老狮\");\n        msg.TestMsg2 = new TestMsg2();\n        msg.TestMsg2.TestInt32 = 88;\n        msg.TestMsg3 = new TestMsg.Types.TestMsg3();\n        msg.TestMsg3.TestInt32 = 66;\n\n        msg.TestHeart = new GameSystemTest.HeartMsg();\n        msg.TestHeart.Time = 7777;\n\n        byte[] bytes = null;\n        using (MemoryStream memoryStream = new MemoryStream())\n        {\n            msg.WriteTo(memoryStream);\n            bytes = memoryStream.ToArray();\n            print(\"字节数组长度：\" + bytes.Length);\n        }\n\n        using (MemoryStream memoryStream = new MemoryStream(bytes))\n        {\n            print(\"内存流当中反序列化的内容\");\n            TestMsg msg2 = TestMsg.Parser.ParseFrom(memoryStream);\n            print(msg2.TestMap[1]);\n            print(msg2.ListInt[0]);\n            print(msg2.TestD);\n            print(msg2.TestMsg2.TestInt32);\n            print(msg2.TestMsg3.TestInt32);\n            print(msg2.TestHeart.Time);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240320214109-a4417js",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320214109-a4417js",
+				"updated": "20240320214109"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 271px;",
+						"style": "width: 261px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240320214109-iacarou.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 261px;\" parent-style=\"width: 271px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240320222025-au82uln",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240320222025-au82uln",
+				"updated": "20240320222039"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "更方便的从字节数组反序列化"
+				}
+			]
+		},
+		{
+			"ID": "20240320222313-kglui5b",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320222313-kglui5b",
+				"updated": "20240320222348"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "MessageParser\u0026lt;\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内同样有更方便的从字节数组中直接反序列化的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240320222236-wq2g2lv",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240320222236-wq2g2lv",
+				"style": "line-height: 22px;",
+				"updated": "20240320222440"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "TestMsg msg = new TestMsg();\nbyte[] bytes = msg.ToByteArray();\nTestMsg msg2 = TestMsg.Parser.ParseFrom(bytes);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240320222040-ukw8mto",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240320222040-ukw8mto",
+				"updated": "20240320222039"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "由于声明"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ParseFrom()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "MessageParser\u0026lt;\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​在Protobuf生成的消息类里是静态属性，\n因此我们可以通过反射方便的获取该静态属性，进而通过该静态属性反射出"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ParseFrom"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法，在通过反射出的消息调用执行该方法"
+				}
+			]
+		},
+		{
+			"ID": "20240320222044-869gytc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240320222044-869gytc",
+				"style": "line-height: 22px;",
+				"updated": "20240320222039"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "// 反序列化字节数组为Protobuf相关的对象\npublic static T GetProtoMsg\u003cT\u003e(byte[] bytes) where T : class, IMessage\n{\n    Type type = typeof(T);\n    //通过反射得到对应的静态成员属性对象\n    PropertyInfo pInfo = type.GetProperty(\"Parser\");\n    object parserObj = pInfo.GetValue(null, null);\n    //得到了MeseageParser对象，那么可以得到该对象中的对应方法\n    Type parserType = parserObj.GetType();\n    //这是通过类型，指定得到某一个重载函数\n    MethodInfo mInfo = parserType.GetMethod(\"ParseFrom\", new Type[] { typeof(byte[]) });\n    //调用反射得到的方法，反序列化为指定的对象\n    object msg = mInfo.Invoke(parserObj, new object[] { bytes });\n    return msg as T;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

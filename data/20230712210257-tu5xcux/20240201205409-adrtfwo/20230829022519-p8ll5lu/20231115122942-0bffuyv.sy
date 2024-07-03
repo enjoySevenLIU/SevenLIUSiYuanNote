@@ -1,0 +1,1315 @@
+{
+	"ID": "20231115122942-0bffuyv",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20231115122942-0bffuyv",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20231115122942-0bffuyv\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20231115212254-6snnhcs\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20231115182140-0z8uluo\u0026quot;,\u0026quot;scrollTop\u0026quot;:0,\u0026quot;focusId\u0026quot;:\u0026quot;20231115212259-g5z8pir\u0026quot;,\u0026quot;focusStart\u0026quot;:2,\u0026quot;focusEnd\u0026quot;:2\u0026#125;",
+		"title": "UMVCSL6——Facade和Command",
+		"updated": "20231115213149"
+	},
+	"Children": [
+		{
+			"ID": "20231115212254-6snnhcs",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231115212254-6snnhcs",
+				"updated": "20231115212259"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20231115212259-g5z8pir",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231115212259-g5z8pir",
+				"style": "line-height: 22px;",
+				"updated": "20231115213149"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Facade                        //Facade基类，任何在PureMVC内作为Facade的类都应该继承该类，可以实现对PureMVC内框架下所有对象的管理\nfacade.RegisterCommand()      //注册命令，将通知和命令绑定在一起\nfacade.SendNotification()     //发送通知，触发监听该通知的命令和Mediator\nInitializeController() { }    //初始化控制层内容，这里应当为所有的Command命令进行注册\nSimpleCommand                 //即单个命令类，所有只负责一个业务且作为Command的类，应当继承该类，他必须要在Facade里注册并于通知绑定\nExecute() { }                 //当接收到绑定的通知后要执行的方法\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231115122942-7xvdbjy",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231115122942-7xvdbjy",
+				"updated": "20231115123458"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Facade"
+				}
+			]
+		},
+		{
+			"ID": "20231115123458-qwj5lil",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115123458-qwj5lil",
+				"updated": "20231115124010"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Facade是PureMVC非常重要的内容，它管理了PureMVC框架下的Model，View，Controller对象\n而在Model，View，Controller对象之下，就是各个Proxy，Mediator，Command的，因此可以说Facade是PureMVC的总管理者"
+				}
+			]
+		},
+		{
+			"ID": "20231115124024-w73h2mb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115124024-w73h2mb",
+				"updated": "20231115124335"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Facade也有套路写法"
+				}
+			]
+		},
+		{
+			"ID": "20231115124347-86wn5uc",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20231115124347-86wn5uc",
+				"updated": "20231115133112"
+			},
+			"Children": [
+				{
+					"ID": "20231115124357-2hphegx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20231115124357-2hphegx",
+						"updated": "20231115124357"
+					},
+					"Children": [
+						{
+							"ID": "20231115124357-cjlscr0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231115124357-cjlscr0",
+								"updated": "20231115124357"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "继承PureMVC中的Facade脚本"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231115124357-ih3po8j",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20231115124357-ih3po8j",
+						"updated": "20231115124357"
+					},
+					"Children": [
+						{
+							"ID": "20231115124357-gvwsstv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231115124357-gvwsstv",
+								"updated": "20231115124357"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "为了方便使用Facade 我们需要自己写一个单例模式的属性"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231115124357-nv0wwyg",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20231115124357-nv0wwyg",
+						"updated": "20231115124357"
+					},
+					"Children": [
+						{
+							"ID": "20231115124357-5to7t38",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231115124357-5to7t38",
+								"updated": "20231115124357"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "初始化 控制层相关的内容"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231115125230-n5c4h9i",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20231115125230-n5c4h9i",
+						"updated": "20231115133112"
+					},
+					"Children": [
+						{
+							"ID": "20231115125230-ewafcmc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231115125230-ewafcmc",
+								"updated": "20231115133112"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "必须定义一个启动函数"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20231115124357-o0dbt16",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115124357-o0dbt16",
+				"updated": "20231115132512"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "第一步：项目里作为架构内Facade的类需要继承"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Facade"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​基类"
+				}
+			]
+		},
+		{
+			"ID": "20231115124520-y2xzb1e",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231115124520-y2xzb1e",
+				"style": "line-height: 22px;",
+				"updated": "20231115124530"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class GameFacade : Facade { }\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231115124515-dhbdt14",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115124515-dhbdt14",
+				"updated": "20231115132519"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "第二步：其次，我们需要自己写一个单例模式的属性，\n在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Facade"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​基类的定义里，已经声明了一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "instance"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​对象，\n但由于基类内的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GetInstance"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法需要传入"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Func\u0026lt;IFacade\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数（用于初始化对象），且返回的是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IFacade"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n因此实现自己的调用单例的属性更好"
+				}
+			]
+		},
+		{
+			"ID": "20231115124834-79b7dba",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115124834-79b7dba",
+				"updated": "20231115124851"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Facade"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​基类内的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GetInstance"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "instance"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​对象："
+				}
+			]
+		},
+		{
+			"ID": "20231115124830-1qliea1",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231115124830-1qliea1",
+				"style": "line-height: 22px;",
+				"updated": "20231115125021"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Facade : IFacade\n{\n    public static IFacade GetInstance(Func\u003cIFacade\u003e facadeFunc)\n    {\n        if (instance == null)\n        {\n            instance = facadeFunc();\n        }\n        return instance;\n    }\n\n    protected static IFacade instance;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231115124928-nuvxvjd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115124928-nuvxvjd",
+				"updated": "20231115125101"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自己实现的调用单例的属性："
+				}
+			]
+		},
+		{
+			"ID": "20231115125033-t0e51af",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231115125033-t0e51af",
+				"style": "line-height: 22px;",
+				"updated": "20231115125058"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "sing PureMVC.Patterns.Facade;\n\npublic class GameFacade : Facade\n{\n    //2.为了方便使用Facade 我们需要自己写一个单例模式的属性 ??= 是空赋值运算符，当instance为null时，执行运算符后面的表达式\n    public static GameFacade Instance =\u003e (instance ??= new GameFacade()) as GameFacade;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231115125100-rv6qz5k",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115125100-rv6qz5k",
+				"updated": "20231115125252"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在Facade内，有这三个成员变量"
+				}
+			]
+		},
+		{
+			"ID": "20231115125252-1alrc5h",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231115125252-1alrc5h",
+				"style": "line-height: 22px;",
+				"updated": "20231115125358"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Facade : IFacade\n{\n    protected IController controller;\n    protected IModel model;\n    protected IView view;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231115125540-siyth5w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115125540-siyth5w",
+				"updated": "20231115125540"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "而PureMVC的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Model"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "View"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Controller"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​都继承了各自的接口，Facade就通过这三个接口成员变量管理Model，View，Controller对象"
+				}
+			]
+		},
+		{
+			"ID": "20231115125401-tm3ymiz",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231115125401-tm3ymiz",
+				"style": "line-height: 22px;",
+				"updated": "20231115125618"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Controller: IController { }\npublic class Model: IModel { }\npublic class View: IView { }\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231115125625-mipbvvf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115125625-mipbvvf",
+				"updated": "20231115125906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Facade"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​基类内，有很多方法，其中有的方法我们必须要用\n例如第三步的重写"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "InitializeController()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​初始化控制层方法，其实也有"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "InitializeModel()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "InitializeView()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的方法"
+				}
+			]
+		},
+		{
+			"ID": "20231115125915-iy8mgff",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115125915-iy8mgff",
+				"updated": "20231115130039"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "而游戏启动，初始化控制层内容是必不可少的，所以我们必须要重写"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "InitializeController()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20231115125954-hd5z460",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231115125954-hd5z460",
+				"style": "line-height: 22px;",
+				"updated": "20231115130406"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//3.初始化 控制层相关的内容\nprotected override void InitializeController()\n{\n    //在基类里该方法调用并初始化了Control单例，因此必须保留\n    base.InitializeController();\n    //这里面要写一些 关于 命令（即command）和通知 绑定的逻辑\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231115130149-q0zso8y",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115130149-q0zso8y",
+				"updated": "20231115131651"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通知我们已经知道就是字符串，通过字符串来让Mediator来监听并触发执行方法\n但是命令（即command）我们这里还不知道，我们需要先需要"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20231115130244-9o3bqfb",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "先写一个命令（command）"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n同时，我们需要在写一个与该命令对应的通知名"
+				}
+			]
+		},
+		{
+			"ID": "20231115131651-vafwpi2",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231115131651-vafwpi2",
+				"style": "line-height: 22px;",
+				"updated": "20231115131704"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class PureNotification\n{\n    public const string START_UP = \"startUp\";\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231115131712-5xtem5k",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115131712-5xtem5k",
+				"updated": "20231115131942"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "现在有了命令与通知，就需要进行注册绑定了\n使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "RegisterCommand()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法，传入通知字符串和一个返回"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Icommand"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​对象的方法（也就是返回要执行的命令类对象）"
+				}
+			]
+		},
+		{
+			"ID": "20231115131733-let3asb",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231115131733-let3asb",
+				"style": "line-height: 22px;",
+				"updated": "20231115131952"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "protected override void InitializeController()\n{\n    base.InitializeController();\n    //这里面要写一些 关于 命令和通知 绑定的逻辑\n    RegisterCommand(PureNotification.START_UP, () =\u003e { return new StartUpCommand(); });\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231115131953-q78q3dj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115131953-q78q3dj",
+				"updated": "20231115132119"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "完成这次绑定后，只要以后发送了注册时传入的通知，就会执行与之绑定的命名类的执行函数"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Execute()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20231115132130-xdd9g69",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115132130-xdd9g69",
+				"updated": "20231115132810"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "第四步：我们必须在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Facade"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类里自己定义一个启动函数\n我们需要调用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "SendNotification()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​来发送通知，发送在第三步的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "RegisterCommand()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​里绑定命令的通知，就会执行其绑定的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Command"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Execute()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20231115132556-3xqaxqd",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231115132556-3xqaxqd",
+				"style": "line-height: 22px;",
+				"updated": "20231115132909"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//4.必须定义一个启动函数\npublic void StartUp()\n{\n    //发送通知，发送通知时可以传入object参数，供监听者调用这个object，就像事件中心那样\n    SendNotification(PureNotification.START_UP);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231115133136-9h0s2fy",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20231115133136-9h0s2fy",
+				"updated": "20231115133147"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20231115132911-3t3xr1a",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20231115132911-3t3xr1a",
+						"updated": "20231115133147"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "之后，在其他类执行"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "GameFacade.Instance.StartUp();"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​\n即可发现其执行了"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "StartUpCommand"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​的"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "Execute()"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​方法"
+						}
+					]
+				},
+				{
+					"ID": "20231115133134-lsmqcua",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20231115133134-lsmqcua",
+						"updated": "20231115133134"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20231115133134-6pdux20.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20231115133143-wdpvsh0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115133143-wdpvsh0",
+				"updated": "20231115133300"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以上即Facade和Command的简单使用方法，这是非常重要的知识，我们通过这些知识将PureMVC内的一切串联起来"
+				}
+			]
+		},
+		{
+			"ID": "20231115133301-y2nismk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231115133301-y2nismk",
+				"style": "line-height: 22px;",
+				"updated": "20231115133309"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using PureMVC.Patterns.Facade;\n\npublic class GameFacade : Facade\n{\n    //套路写法\n    //1.继承PureMVC中的Facade脚本\n    //2.为了方便使用Facade 我们需要自己写一个单例模式的属性\n    //3.初始化 控制层相关的内容\n    //4.必须定义一个启动函数\n\n    //2.为了方便使用Facade 我们需要自己写一个单例模式的属性 ??= 是空赋值运算符，当instance为null时，执行运算符后面的表达式\n    public static GameFacade Instance =\u003e (instance ??= new GameFacade()) as GameFacade;\n\n    //3.初始化 控制层相关的内容\n    protected override void InitializeController()\n    {\n        base.InitializeController();\n        //这里面要写一些 关于 命令和通知 绑定的逻辑\n        RegisterCommand(PureNotification.START_UP, () =\u003e { return new StartUpCommand(); });\n    }\n\n    //4.必须定义一个启动函数\n    public void StartUp()\n    {\n        //发送通知，发送通知时可以传入object参数，供监听者调用这个object，就像事件中心那样\n        SendNotification(PureNotification.START_UP);\n    }\n}\n\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231115130244-9o3bqfb",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20231115130244-9o3bqfb",
+				"updated": "20231115131042"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Command"
+				}
+			]
+		},
+		{
+			"ID": "20231115131128-11amths",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115131128-11amths",
+				"updated": "20231115131601"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Command即命令类，被执行时，就会执行其内部的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Execute"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法"
+				}
+			]
+		},
+		{
+			"ID": "20231115131523-ei5de6p",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115131523-ei5de6p"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Command类的套路写法很简单"
+				}
+			]
+		},
+		{
+			"ID": "20231115131300-7p04guv",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20231115131300-7p04guv",
+				"updated": "20231115131446"
+			},
+			"Children": [
+				{
+					"ID": "20231115131301-vtstztv",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20231115131301-vtstztv",
+						"updated": "20231115131301"
+					},
+					"Children": [
+						{
+							"ID": "20231115131301-29meued",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231115131301-29meued",
+								"updated": "20231115131428"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "继承Command相关的基类，这里就一个命令，因此继承"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SimpleCommand"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​基类"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231115131428-3frbc9e",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20231115131428-3frbc9e",
+						"updated": "20231115131446"
+					},
+					"Children": [
+						{
+							"ID": "20231115131428-w6zud4c",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231115131428-w6zud4c",
+								"updated": "20231115131446"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重写里面的执行函数"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20231115130432-53sthue",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20231115130432-53sthue",
+				"style": "line-height: 22px;",
+				"updated": "20231115131533"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using PureMVC.Interfaces;\nusing PureMVC.Patterns.Command;\nusing UnityEngine;\n\npublic class StartUpCommand : SimpleCommand\n{\n    //1.继承Command相关的基类\n    //2.重写里面的执行函数\n\n    //2.重写里面的执行函数\n    public override void Execute(INotification notification)\n    {\n        base.Execute(notification);\n        //当命令被执行时，就会调用该方法\n        Debug.Log(\"StartUp!\");\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20231115181010-aykn7iz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20231115181010-aykn7iz",
+				"updated": "20231115182132"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Execute()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法的参数，很明显是和在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Mediator"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code block-ref",
+					"TextMarkBlockRefID": "20231114220241-mu3kzln",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "ListNotificationInterests()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的参数是一样的类型，而该参数类型包含两个重要信息"
+				}
+			]
+		},
+		{
+			"ID": "20231115182140-0z8uluo",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20231115182140-0z8uluo",
+				"updated": "20231115182140"
+			},
+			"Children": [
+				{
+					"ID": "20231115182140-ze4eyqu",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20231115182140-ze4eyqu",
+						"updated": "20231115182140"
+					},
+					"Children": [
+						{
+							"ID": "20231115182140-ey7sy9e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231115182140-ey7sy9e",
+								"updated": "20231115182140"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通知名 我们根据这个名字 来做对应的处理"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20231115182140-zstwm33",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20231115182140-zstwm33",
+						"updated": "20231115182140"
+					},
+					"Children": [
+						{
+							"ID": "20231115182140-96hg3w5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20231115182140-96hg3w5",
+								"updated": "20231115182140"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通知包含的信息（类似于事件中心触发者发送给监听者的对象）"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

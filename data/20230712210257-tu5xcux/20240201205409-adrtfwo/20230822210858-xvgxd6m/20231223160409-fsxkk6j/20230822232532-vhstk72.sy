@@ -1,0 +1,793 @@
+{
+	"ID": "20230822232532-vhstk72",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230822232532-vhstk72",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230822232532-vhstk72\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230822232532-9lhb5wa\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230824013321-ipwqyyr\u0026quot;,\u0026quot;scrollTop\u0026quot;:6154,\u0026quot;focusId\u0026quot;:\u0026quot;20230824013200-cm2bstv\u0026quot;,\u0026quot;focusStart\u0026quot;:7,\u0026quot;focusEnd\u0026quot;:7\u0026#125;",
+		"title": "UF_OLDL2——缓存池模块",
+		"type": "doc",
+		"updated": "20231223160923"
+	},
+	"Children": [
+		{
+			"ID": "20230822232532-9lhb5wa",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230822232532-9lhb5wa",
+				"updated": "20230823151132"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "缓存池"
+				}
+			]
+		},
+		{
+			"ID": "20230823151605-sqtu731",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230823151605-sqtu731",
+				"updated": "20230823151719"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "为何要用缓存池"
+				}
+			]
+		},
+		{
+			"ID": "20230823151436-ki43v0y",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20230823151436-ki43v0y",
+				"updated": "20230823152701"
+			},
+			"Children": [
+				{
+					"ID": "20230823151456-i88w3gu",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20230823151456-i88w3gu",
+						"updated": "20230823152138"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "节选自："
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "a",
+							"TextMarkAHref": "https://zhuanlan.zhihu.com/p/406418909",
+							"TextMarkTextContent": "Unity —— 缓存池简单理解 - 知乎 (zhihu.com)"
+						}
+					]
+				},
+				{
+					"ID": "20230823151255-c0mgq4v",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20230823151255-c0mgq4v",
+						"updated": "20230823151436"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "来理解缓存池之前，我们先了解一下"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "strong",
+							"TextMarkTextContent": "C#的内存回收机制"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "：\n"
+						}
+					]
+				},
+				{
+					"ID": "20230823151310-myf50nl",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20230823151310-myf50nl",
+						"updated": "20230823152114"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "每次实例化一个对象（在场景上创建一个对象），都会分配一个内存空间；\n"
+						},
+						{
+							"Type": "NodeTextMark",
+							"Properties": {
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+							},
+							"TextMarkType": "text",
+							"TextMarkTextContent": "当这个对象被删除时，仅仅时断开了对这片空间的引用，"
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+						},
+						{
+							"Type": "NodeTextMark",
+							"Properties": {
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+							},
+							"TextMarkType": "strong text",
+							"TextMarkTextContent": "此内存空间并没有被释放掉"
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+						},
+						{
+							"Type": "NodeTextMark",
+							"Properties": {
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+							},
+							"TextMarkType": "text",
+							"TextMarkTextContent": "。"
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+						},
+						{
+							"Type": "NodeText"
+						},
+						{
+							"Type": "NodeTextMark",
+							"Properties": {
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+							},
+							"TextMarkType": "text",
+							"TextMarkTextContent": "再次创建对象时，会继续分配其他的内存空间，"
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+						},
+						{
+							"Type": "NodeTextMark",
+							"Properties": {
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+							},
+							"TextMarkType": "strong text",
+							"TextMarkTextContent": "直到内存被全部被分配满"
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+						},
+						{
+							"Type": "NodeTextMark",
+							"Properties": {
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+							},
+							"TextMarkType": "text",
+							"TextMarkTextContent": "。"
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "\n当内存满了再回过头看有哪些是不用的\"垃圾\"，再回收释放。\n"
+						}
+					]
+				},
+				{
+					"ID": "20230823151308-lmam3py",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20230823151308-lmam3py",
+						"updated": "20230823151436"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "这样的一次释放，叫做 \""
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "strong",
+							"TextMarkTextContent": "一次GC"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "\"。\n所谓垃圾，"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "strong",
+							"TextMarkTextContent": "就是没有被任何变量、对象引用的内容"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "。\n通过是否被引用来确定哪些对象是\"垃圾\"。"
+						}
+					]
+				},
+				{
+					"ID": "20230823151325-qddtrjp",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20230823151325-qddtrjp",
+						"updated": "20230823151325"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20230823151325-cymyyqe.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20230823151522-uffn3jt",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20230823151522-uffn3jt",
+						"updated": "20230823152127"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "正是因为每次GC需要经过大量的计算来判断是否需要回收，对CPU的消耗较大，\n"
+						},
+						{
+							"Type": "NodeTextMark",
+							"Properties": {
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+							},
+							"TextMarkType": "text",
+							"TextMarkTextContent": "所以每次GC都可能会造成卡顿，GC次数一旦多了会严重影响玩家的使用体验，由此出现了"
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+						},
+						{
+							"Type": "NodeTextMark",
+							"Properties": {
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+							},
+							"TextMarkType": "strong text",
+							"TextMarkTextContent": "缓存池"
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+						},
+						{
+							"Type": "NodeTextMark",
+							"Properties": {
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+							},
+							"TextMarkType": "text",
+							"TextMarkTextContent": "。"
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+						}
+					]
+				},
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				}
+			]
+		},
+		{
+			"ID": "20230823151651-10tcbp6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823151651-10tcbp6",
+				"updated": "20230823152909"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在以前我们不使用缓存池时，例如子弹，我们一旦发射出去，打中什么了之后，就不再使用它，就会将其直接"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230708205424-jq0z48e",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "销毁"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n然而实际上，这些子弹对象仍然占用着内存空间，只是没有被引用\n而这种对象的多次创建，内存空间被占满，这些没有被引用的对象内存空间将会触发GC而被回收释放，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "但是GC本身可能会造成卡顿！"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n随着游戏进行，如果不做应对，GC将会被频繁触发，进而引发卡顿，影响玩家体验"
+				}
+			]
+		},
+		{
+			"ID": "20230823151655-a1onaxa",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823151655-a1onaxa",
+				"updated": "20230823152558"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "为了应对这种情况，我们就需要使用缓存池让类似于子弹这种一次性触发的对象可以在内存里被回收利用，减少GC"
+				}
+			]
+		},
+		{
+			"ID": "20230823151706-ug5vwoq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230823151706-ug5vwoq",
+				"updated": "20230823151714"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "何为缓存池"
+				}
+			]
+		},
+		{
+			"ID": "20230823151722-ttnyx07",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823151722-ttnyx07",
+				"updated": "20230823200430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "打个比方，缓存池就像一个衣柜，把对象比作衣服，制作衣服比作实例化对象，销毁当作扔进垃圾桶，触发GC当作垃圾桶满了清理垃圾桶"
+				}
+			]
+		},
+		{
+			"ID": "20230823153001-0doonqc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823153001-0doonqc",
+				"updated": "20230823200206"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "刚开始时，这个衣柜没有任何衣服，\n这时我们仍然需要制作衣服来获取需要的衣服，"
+				}
+			]
+		},
+		{
+			"ID": "20230823154020-vzwsxbh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823154020-vzwsxbh",
+				"updated": "20230823200210"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "是当这个衣服用完后，我们不再将其直接扔进垃圾桶，而是将其放入衣柜\n当我们再需要这个衣服时，我们会先在衣柜里寻找有没有这个衣服\n发现有，我们就直接穿衣柜里的衣服，而不是制作它"
+				}
+			]
+		},
+		{
+			"ID": "20230823153723-9ozc0lt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823153723-9ozc0lt",
+				"updated": "20230823200214"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这样，我们解决了重复穿某件衣服时，需要重新制作衣服\n以及垃圾桶被扔满了后要去清理垃圾的问题"
+				}
+			]
+		},
+		{
+			"ID": "20230823153953-v45q242",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823153953-v45q242",
+				"updated": "20230823154920"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "当然，我们的衣服不可能只有一种类型（就像发射出去的子弹对象会有发射特效，子弹本体，击中特效）\n所以，我们的衣柜需要一个个的抽屉，分门别类的放不同的衣服（对象按照不同的类，分门别类的集中缓存他们）"
+				}
+			]
+		},
+		{
+			"ID": "20230823154909-i09mxe1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823154909-i09mxe1",
+				"updated": "20230823154955"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以上即缓存池的理论原理，接下来是代码实现"
+				}
+			]
+		},
+		{
+			"ID": "20230823154958-5nx7un4",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230823154958-5nx7un4",
+				"updated": "20230823163555"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "缓存池模块基础"
+				}
+			]
+		},
+		{
+			"ID": "20230823155115-aefd73h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823155115-aefd73h",
+				"updated": "20230823155811"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "知识点：字典，列表，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230708170126-zpj96z3",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "和"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230713031957-yxo68d9",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "Resources"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的API"
+				}
+			]
+		},
+		{
+			"ID": "20230823155650-na4wpvv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823155650-na4wpvv",
+				"updated": "20230823162956"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "作用：当对象不需要时，直接传入缓存池，需要时在取出使用即可"
+				}
+			]
+		},
+		{
+			"ID": "20230823162959-xlvlo1l",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823162959-xlvlo1l",
+				"updated": "20230823173501"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用方法：\n当用完某对象时，使用PushObj()将其存储到缓存池并失活它，\n而当需要使用某对象时，使用GetObj()方法获取并激活它"
+				}
+			]
+		},
+		{
+			"ID": "20230823163308-zd4tves",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823163308-zd4tves",
+				"updated": "20230823163704"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "注意：传入的名字需要为该对象在Resource路径下的名字，才能保证实例化它"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，如果想要对象在被取出时做什么，请在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230708150548-io2tonz",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "OnEnable()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "内写逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20230823163206-4jj6o8p",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230823163206-4jj6o8p",
+				"updated": "20230823163237"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections.Generic;\nusing UnityEngine;\n\n/// \u003csummary\u003e\n/// 缓存池模块\n/// \u003c/summary\u003e\npublic class PoolManager : BaseManager\u003cPoolManager\u003e\n{\n    /// \u003csummary\u003e\n    /// 缓存池容器，键为对象的类名，值为对应的游戏对象\n    /// \u003c/summary\u003e\n    public Dictionary\u003cstring, List\u003cGameObject\u003e\u003e poolDic = new Dictionary\u003cstring, List\u003cGameObject\u003e\u003e();\n\n    /// \u003csummary\u003e\n    /// 通过Resource资源路径，向缓存池取东西\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003eResources资源路径（对象名）\u003c/param\u003e\n    /// \u003creturns\u003e取出的类对象\u003c/returns\u003e\n    public GameObject GetObj(string name)\n    {\n        GameObject obj = null;\n        //缓存池有该对象类型的存储列表，且存储空间内有闲置的该类对象\n        if (poolDic.ContainsKey(name) \u0026\u0026 poolDic[name].Count \u003e 0)\n        {\n            obj = poolDic[name][0];\n            poolDic[name].RemoveAt(0);      //将对象从缓存池取出\n        }\n        //没有就从Resource文件夹里实例化一个\n        else\n        {\n            obj = GameObject.Instantiate(Resources.Load\u003cGameObject\u003e(name));\n            obj.name = name;                //把对象名改为和存储池的名字（键名或者说存储路径）一样，便于动态的存储自己\n        }\n        obj.SetActive(true);                //将缓存时失活的对象重新激活\n        return obj;\n    }\n\n    /// \u003csummary\u003e\n    /// 向缓存池存入暂时不用的东西，通过Resources资源路径来存储\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003eResources资源路径（对象名）\u003c/param\u003e\n    /// \u003cparam name=\"obj\"\u003e要缓存的对象\u003c/param\u003e\n    public void PushObj(string name, GameObject obj)\n    {\n        obj.SetActive(false);               //缓存该对象之前，先失活这个对象\n        //当缓存池有该对象类型的存储列表时\n        if (poolDic.ContainsKey(name))\n        {\n            poolDic[name].Add(obj);\n        }\n        //没有就创建一个这种类型的存储列表\n        else\n        {\n            poolDic.Add(name, new List\u003cGameObject\u003e() { obj });\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230823163508-vbk5ywl",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230823163508-vbk5ywl",
+				"updated": "20230823163559"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "缓存池模块优化"
+				}
+			]
+		},
+		{
+			"ID": "20230823163716-2bx7krs",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823163716-2bx7krs",
+				"updated": "20230823165019"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "上一个缓存池存在对象全部暴露在层级最外层的问题，这样会影响我们的Hierarchy窗口的观看，而且也不容易知道哪些对象是缓存池内的对象\n以及，当切换场景时，场景上的对象都会被删除，这时缓存池存储对象就没有意义且会出错，应当清除存储池的所有对象"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230823163858-ulsmtn7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823163858-ulsmtn7",
+				"updated": "20230823173140"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "接下来的优化，会使我们的缓存池下使用若干个存储容器，分别存储不同类型的对象，\n且在Hierarchy窗口下可以看到不同类型的对象依附在相应名字的空对象下\n并且提供清空缓存池的方法"
+				}
+			]
+		},
+		{
+			"ID": "20230823173157-w15jvda",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230823173157-w15jvda",
+				"updated": "20230823173526"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用方法：\n取出对象，传入该对象的Resources资源路径，即可获取到名字为传入的路径的对象\n存入对象，填入该对象和对象的名字（直接填自己的名字即可），即可存储该对象\n清空缓存池，直接Clear()即可，用于切换场景用"
+				}
+			]
+		},
+		{
+			"ID": "20230823173142-q8e36or",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230823173142-q8e36or",
+				"updated": "20230823173152"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections.Generic;\nusing UnityEngine;\n\n/// \u003csummary\u003e\n/// 缓存池模块，一个缓存池模块下有若干个存储容器，分别存储不同类型的对象，按照对象名（Resources资源路径）划分类型\n/// \u003c/summary\u003e\npublic class PoolManager : BaseManager\u003cPoolManager\u003e\n{\n    /// \u003csummary\u003e\n    /// 缓存池容器，键为对象名（Resources资源路径），值为对应的存储容器\n    /// \u003c/summary\u003e\n    public Dictionary\u003cstring, PoolData\u003e poolDic = new Dictionary\u003cstring, PoolData\u003e();\n  \n    /// \u003csummary\u003e\n    /// 缓存池下的所有存储容器都作为该对象的子物体\n    /// \u003c/summary\u003e\n    private GameObject poolObj;\n\n    /// \u003csummary\u003e\n    /// 通过Resource资源路径，向缓存池取出东西\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003eResources资源路径（对象名）\u003c/param\u003e\n    /// \u003creturns\u003e取出的类对象\u003c/returns\u003e\n    public GameObject GetObj(string name)\n    {\n        GameObject obj = null;\n        //缓存池有该对象类型的存储容器，且存储容器内有闲置的对象\n        if (poolDic.ContainsKey(name) \u0026\u0026 poolDic[name].poolList.Count \u003e 0)\n        {\n            obj = poolDic[name].GetObj();\n        }\n        //不满足条件就根据传入Resource资源路径实例化一个这个对象\n        else\n        {\n            obj = GameObject.Instantiate(Resources.Load\u003cGameObject\u003e(name));\n            obj.name = name;                //把对象名改为和存储池的名字（键名或者说存储路径）一样，便于动态的存储自己\n        }\n        return obj;\n    }\n\n    /// \u003csummary\u003e\n    /// 向缓存池存入暂时不用的东西，通过Resources资源路径来存储\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003eResources资源路径（对象名）\u003c/param\u003e\n    /// \u003cparam name=\"obj\"\u003e要缓存的对象\u003c/param\u003e\n    public void PushObj(string name, GameObject obj)\n    {\n        //如果不存在缓存池空物体对象，就先创建它，之后所有的存储容器都作为它的子对象\n        if (poolObj == null)\n            poolObj = new GameObject(\"Pool\");\n\n        //当缓存池有该对象类型的存储容器时\n        if (poolDic.ContainsKey(name))\n        {\n            poolDic[name].PushObj(obj);\n        }\n        //没有就创建一个这种类型的存储列表\n        else\n        {\n            poolDic.Add(name, new PoolData(obj, poolObj));\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 清除缓存池的所有对象，以便于切换场景后对象池可以正常使用\n    /// \u003c/summary\u003e\n    public void Clear()\n    {\n        poolDic.Clear();\n        poolObj = null;\n    }\n}\n\n/// \u003csummary\u003e\n/// 缓存池下的某一种对象的存储容器，每一种类型（对象名）的对象都有一个自己的存储容器\n/// \u003c/summary\u003e\npublic class PoolData\n{\n    /// \u003csummary\u003e\n    /// 缓存池内，相同类型（对象名）的对象所依附的父对象\n    /// \u003c/summary\u003e\n    public GameObject fatherObj;\n  \n    /// \u003csummary\u003e\n    /// 相同类型（对象名）的对象的存储列表\n    /// \u003c/summary\u003e\n    public List\u003cGameObject\u003e poolList;\n  \n    /// \u003csummary\u003e\n    /// 存储容器的构造函数，当不存在某种类型的存储容器时就使用它初始化，需要传入要存储的对象和需要依附的存储池对象\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"obj\"\u003e要存储的对象\u003c/param\u003e\n    /// \u003cparam name=\"poolObj\"\u003e所依附的缓存池对象\u003c/param\u003e\n    public PoolData(GameObject obj, GameObject poolObj)\n    {\n        fatherObj = new GameObject(obj.name);           //为该存储容器创建一个空对象，以后该存储容器内的对象都会依附于该父对象下面\n        fatherObj.transform.parent = poolObj.transform; //将空对象依附于缓存池对象\n        poolList = new List\u003cGameObject\u003e();              //初始化存储列表\n        PushObj(obj);                                   //把要存储的对象存进去\n    }\n\n    /// \u003csummary\u003e\n    /// 向存储容器存储对象，并将其作为该存储容器的对象下的子对象\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"obj\"\u003e\u003c/param\u003e\n    public void PushObj(GameObject obj)\n    {\n        obj.SetActive(false);                           //将存入缓存池的对象失活\n        poolList.Add(obj);                              //将对象存入存储列表内\n        obj.transform.parent = fatherObj.transform;     //将对象设置为该存储列表的子对象\n    }\n  \n    /// \u003csummary\u003e\n    /// 从存储容器取出对象\n    /// \u003c/summary\u003e\n    /// \u003creturns\u003e要取出的对象\u003c/returns\u003e\n    public GameObject GetObj()\n    {\n        GameObject obj = null;\n        obj = poolList[0];                        \n        poolList.RemoveAt(0);                           //将对象从存储列表内取出\n        obj.transform.parent = null;                    //将取出的对象切断其与缓存池空对象的父子关系\n        obj.SetActive(true);                            //将缓存时失活的对象重新激活\n        return obj;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230824011410-2vbmy7u",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230824011410-2vbmy7u",
+				"updated": "20230824011541"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "运用资源异步加载的缓存池模块优化"
+				}
+			]
+		},
+		{
+			"ID": "20230824013200-cm2bstv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230824013200-cm2bstv",
+				"updated": "20230824013828"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230824003203-lmh7jko",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "资源加载模块异步加载"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的方法，我们可以优化在缓存池不存在某资源时实例化资源，通过异步加载来提升性能"
+				}
+			]
+		},
+		{
+			"ID": "20230824013332-0bmgkov",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230824013332-0bmgkov",
+				"updated": "20230824013757"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用方法：\n相比上面的缓存池模块，这次的优化重载了一个获取资源的方法，它使用加载资源模块异步加载资源\n传入的参数变为：传入该对象的Resources资源路径，有参数的回调函数，\n回调函数在加载完成后执行，执行时参数为读取到的游戏对象"
+				}
+			]
+		},
+		{
+			"ID": "20230824013757-6nrn6cf",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230824013757-6nrn6cf",
+				"updated": "20230824013814"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\n\n/// \u003csummary\u003e\n/// 缓存池模块，一个缓存池模块下有若干个存储容器，分别存储不同类型的对象，按照对象名（Resources资源路径）划分类型\n/// \u003c/summary\u003e\npublic class PoolManager : BaseManager\u003cPoolManager\u003e\n{\n    /// \u003csummary\u003e\n    /// 缓存池容器，键为对象名（Resources资源路径），值为对应的存储容器\n    /// \u003c/summary\u003e\n    public Dictionary\u003cstring, PoolData\u003e poolDic = new Dictionary\u003cstring, PoolData\u003e();\n  \n    /// \u003csummary\u003e\n    /// 缓存池下的所有存储容器都作为该对象的子物体\n    /// \u003c/summary\u003e\n    private GameObject poolObj;\n\n    /// \u003csummary\u003e\n    /// 通过Resource资源路径，向缓存池取出东西，不存在就直接使用Resources同步加载实例化它\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003eResources资源路径（对象名）\u003c/param\u003e\n    /// \u003creturns\u003e取出的类对象\u003c/returns\u003e\n    public GameObject GetObj(string name)\n    {\n        GameObject obj = null;\n        //缓存池有该对象类型的存储容器，且存储容器内有闲置的对象\n        if (poolDic.ContainsKey(name) \u0026\u0026 poolDic[name].poolList.Count \u003e 0)\n        {\n            obj = poolDic[name].GetObj();\n        }\n        //不满足条件就根据传入Resource资源路径实例化一个这个对象\n        else\n        {\n            obj = GameObject.Instantiate(Resources.Load\u003cGameObject\u003e(name));\n            obj.name = name;                //把对象名改为和存储池的名字（键名或者说存储路径）一样，便于动态的存储自己\n        }\n        return obj;\n    }\n\n    /// \u003csummary\u003e\n    /// 通过Resource资源路径，向缓存池取出东西，通过传入的回调函数参数获取资源，不存在就异步加载它\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003eResources资源路径（对象名）\u003c/param\u003e\n    /// \u003cparam name=\"callback\"\u003e资源获取完成后执行的，通过参数获取资源的回调函数\u003c/param\u003e\n    public void GetObj(string name, UnityAction\u003cGameObject\u003e callback)\n    {\n        //缓存池有该对象类型的存储容器，且存储容器内有闲置的对象\n        if (poolDic.ContainsKey(name) \u0026\u0026 poolDic[name].poolList.Count \u003e 0)\n        {\n            callback(poolDic[name].GetObj());\n        }\n        //不满足条件就根据传入Resource资源路径实例化一个这个对象\n        else\n        {\n            ResourcesManager.Instance().LoadAsync\u003cGameObject\u003e(name, (o) =\u003e\n            {\n                o.name = name;\n                callback(o);\n            });\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 向缓存池存入暂时不用的东西，通过Resources资源路径来存储\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003eResources资源路径（对象名）\u003c/param\u003e\n    /// \u003cparam name=\"obj\"\u003e要缓存的对象\u003c/param\u003e\n    public void PushObj(string name, GameObject obj)\n    {\n        //如果不存在缓存池空物体对象，就先创建它，之后所有的存储容器都作为它的子对象\n        if (poolObj == null)\n            poolObj = new GameObject(\"Pool\");\n\n        //当缓存池有该对象类型的存储容器时\n        if (poolDic.ContainsKey(name))\n        {\n            poolDic[name].PushObj(obj);\n        }\n        //没有就创建一个这种类型的存储列表\n        else\n        {\n            poolDic.Add(name, new PoolData(obj, poolObj));\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 清除缓存池的所有对象，以便于切换场景后对象池可以正常使用\n    /// \u003c/summary\u003e\n    public void Clear()\n    {\n        poolDic.Clear();\n        poolObj = null;\n    }\n}\n\n/// \u003csummary\u003e\n/// 缓存池下的某一种对象的存储容器，每一种类型（对象名）的对象都有一个自己的存储容器\n/// \u003c/summary\u003e\npublic class PoolData\n{\n    /// \u003csummary\u003e\n    /// 缓存池内，相同类型（对象名）的对象所依附的父对象\n    /// \u003c/summary\u003e\n    public GameObject fatherObj;\n  \n    /// \u003csummary\u003e\n    /// 相同类型（对象名）的对象的存储列表\n    /// \u003c/summary\u003e\n    public List\u003cGameObject\u003e poolList;\n  \n    /// \u003csummary\u003e\n    /// 存储容器的构造函数，当不存在某种类型的存储容器时就使用它初始化，需要传入要存储的对象和需要依附的存储池对象\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"obj\"\u003e要存储的对象\u003c/param\u003e\n    /// \u003cparam name=\"poolObj\"\u003e所依附的缓存池对象\u003c/param\u003e\n    public PoolData(GameObject obj, GameObject poolObj)\n    {\n        fatherObj = new GameObject(obj.name);           //为该存储容器创建一个空对象，以后该存储容器内的对象都会依附于该父对象下面\n        fatherObj.transform.parent = poolObj.transform; //将空对象依附于缓存池对象\n        poolList = new List\u003cGameObject\u003e();              //初始化存储列表\n        PushObj(obj);                                   //把要存储的对象存进去\n    }\n\n    /// \u003csummary\u003e\n    /// 向存储容器存储对象，并将其作为该存储容器的对象下的子对象\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"obj\"\u003e\u003c/param\u003e\n    public void PushObj(GameObject obj)\n    {\n        obj.SetActive(false);                           //将存入缓存池的对象失活\n        poolList.Add(obj);                              //将对象存入存储列表内\n        obj.transform.parent = fatherObj.transform;     //将对象设置为该存储列表的子对象\n    }\n  \n    /// \u003csummary\u003e\n    /// 从存储容器取出对象\n    /// \u003c/summary\u003e\n    /// \u003creturns\u003e要取出的对象\u003c/returns\u003e\n    public GameObject GetObj()\n    {\n        GameObject obj = null;\n        obj = poolList[0];                        \n        poolList.RemoveAt(0);                           //将对象从存储列表内取出\n        obj.transform.parent = null;                    //将取出的对象切断其与缓存池空对象的父子关系\n        obj.SetActive(true);                            //将缓存时失活的对象重新激活\n        return obj;\n    }\n}\n\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230824013321-ipwqyyr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230824013321-ipwqyyr"
+			}
+		}
+	]
+}

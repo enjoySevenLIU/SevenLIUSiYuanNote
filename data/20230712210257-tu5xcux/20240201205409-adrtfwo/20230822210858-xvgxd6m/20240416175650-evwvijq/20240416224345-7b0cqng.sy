@@ -1,0 +1,299 @@
+{
+	"ID": "20240416224345-7b0cqng",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240416224345-7b0cqng",
+		"title": "UFL4-4——事件中心的事件名优化",
+		"type": "doc",
+		"updated": "20240417171420"
+	},
+	"Children": [
+		{
+			"ID": "20240416224345-7dsc2t3",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240416224345-7dsc2t3",
+				"updated": "20240416224410"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "事件中心中 事件名优化 指的是什么"
+				}
+			]
+		},
+		{
+			"ID": "20240416224435-vx1swpl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416224435-vx1swpl",
+				"updated": "20240416224446"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "目前我们通过 字符串 作为事件名来区分各事件\n明显的缺点："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "若触发或监听时，事件名 字符串 拼写错误会导致无法正确监听或触发事件"
+				}
+			]
+		},
+		{
+			"ID": "20240416224446-3cn0gtq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240416224446-3cn0gtq",
+				"updated": "20240416224620"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "制作思路和具体实现"
+				}
+			]
+		},
+		{
+			"ID": "20240416224624-fq7lpv1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416224624-fq7lpv1",
+				"updated": "20240416225029"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "将事件名使用枚举进行统一管理，例如："
+				}
+			]
+		},
+		{
+			"ID": "20240416225030-qvt6xdc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416225030-qvt6xdc",
+				"style": "line-height: 22px;",
+				"updated": "20240416225033"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "/// \u003csummary\u003e\n/// 事件类型枚举\n/// \u003c/summary\u003e\npublic enum E_EventType\n{\n    /// \u003csummary\u003e\n    /// 怪物死亡事件 —— 参数：Monster\n    /// \u003c/summary\u003e\n    E_Monster_Dead,\n    /// \u003csummary\u003e\n    /// 玩家获取奖励 —— 参数：int\n    /// \u003c/summary\u003e\n    E_Player_GetReward,\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240416225034-t7xj41z",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416225034-t7xj41z",
+				"updated": "20240416225257"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "然后，将"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "EventCenter"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内所有使用到字符串事件名都改为使用枚举"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "E_EventType"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的"
+				}
+			]
+		},
+		{
+			"ID": "20240416225147-yuu701r",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416225147-yuu701r",
+				"style": "line-height: 22px;",
+				"updated": "20240416225247"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\n\n/// \u003csummary\u003e\n/// 事件中心模块\n/// \u003c/summary\u003e\npublic class EventCenter : BaseManager\u003cEventCenter\u003e\n{\n    private Dictionary\u003cE_EventType, EventInfoBase\u003e eventDic = new Dictionary\u003cE_EventType, EventInfoBase\u003e();\n\n    private EventCenter() { }\n\n    /// \u003csummary\u003e\n    /// 触发事件，同时传递一个参数\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e要传递的参数的类型\u003c/typeparam\u003e\n    /// \u003cparam name=\"eventName\"\u003e要触发的事件名字\u003c/param\u003e\n    /// \u003cparam name=\"info\"\u003e要传递的参数\u003c/param\u003e\n    public void EventTrigger\u003cT\u003e(E_EventType eventName, T info)\n    {\n        //如果没有对象监听这个事件，则直接返回\n        if (!eventDic.ContainsKey(eventName))\n            return;\n        (eventDic[eventName] as EventInfo\u003cT\u003e).actions?.Invoke(info);\n    }\n\n    /// \u003csummary\u003e\n    /// 触发事件，不传递参数\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventName\"\u003e要触发的事件名字\u003c/param\u003e\n    public void EventTrigger(E_EventType eventName)\n    {\n        //如果没有对象监听这个事件，则直接返回\n        if (!eventDic.ContainsKey(eventName))\n            return;\n        (eventDic[eventName] as EventInfo).actions?.Invoke();\n    }\n\n    /// \u003csummary\u003e\n    /// 添加事件监听者，监听方法需要参数\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e监听方法的参数类型\u003c/typeparam\u003e\n    /// \u003cparam name=\"eventName\"\u003e要监听的事件\u003c/param\u003e\n    /// \u003cparam name=\"action\"\u003e监听到事件后要执行的方法\u003c/param\u003e\n    public void AddEventListener\u003cT\u003e(E_EventType eventName, UnityAction\u003cT\u003e action)\n    {\n        if (eventDic.ContainsKey(eventName))\n            (eventDic[eventName] as EventInfo\u003cT\u003e).actions += action;\n        else\n        {\n            //eventDic.Add(eventName, new UnityAction(action));     //不要这样写，会无法移除传入的方法\n            eventDic.Add(eventName, new EventInfo\u003cT\u003e(action));\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 添加事件监听者，该监听方法不需要参数\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventName\"\u003e要监听的事件\u003c/param\u003e\n    /// \u003cparam name=\"action\"\u003e监听到事件后要执行的方法\u003c/param\u003e\n    public void AddEventListener(E_EventType eventName, UnityAction action)\n    {\n        if (eventDic.ContainsKey(eventName))\n            (eventDic[eventName] as EventInfo).actions += action;\n        else\n        {\n            //eventDic.Add(eventName, new UnityAction(action));     //不要这样写，会无法移除传入的方法\n            eventDic.Add(eventName, new EventInfo(action));\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 移除带参数的事件监听\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e监听方法的参数类型\u003c/typeparam\u003e\n    /// \u003cparam name=\"eventName\"\u003e要移除监听的事件\u003c/param\u003e\n    /// \u003cparam name=\"action\"\u003e要移除监听的方法\u003c/param\u003e\n    public void RemoveEventListener\u003cT\u003e(E_EventType eventName, UnityAction\u003cT\u003e action)\n    {\n        if (eventDic.ContainsKey(eventName))\n            (eventDic[eventName] as EventInfo\u003cT\u003e).actions -= action;\n    }\n\n    /// \u003csummary\u003e\n    /// 移除无参事件监听\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventName\"\u003e要移除监听的事件\u003c/param\u003e\n    /// \u003cparam name=\"action\"\u003e要移除监听的方法\u003c/param\u003e\n    public void RemoveEventListener(E_EventType eventName, UnityAction action)\n    {\n        if (eventDic.ContainsKey(eventName))\n            (eventDic[eventName] as EventInfo).actions -= action;\n    }\n\n    /// \u003csummary\u003e\n    /// 清除所有事件的监听\n    /// \u003c/summary\u003e\n    public void Clear()\n    {\n        eventDic.Clear();\n    }\n\n    /// \u003csummary\u003e\n    /// 清除某一个事件的监听\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventName\"\u003e\u003c/param\u003e\n    public void Clear(E_EventType eventName)\n    {\n        if (eventDic.ContainsKey(eventName))\n            eventDic.Remove(eventName);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240416225259-m88dlb6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240416225259-m88dlb6",
+				"updated": "20240416225539"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20240416225549-55t6ltj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416225549-55t6ltj",
+				"updated": "20240416225603"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们有下面的这些事件枚举"
+				}
+			]
+		},
+		{
+			"ID": "20240416225539-p4xq69z",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416225539-p4xq69z",
+				"style": "line-height: 22px;",
+				"updated": "20240416225539"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "/// \u003csummary\u003e\n/// 事件类型枚举\n/// \u003c/summary\u003e\npublic enum E_EventType\n{\n    /// \u003csummary\u003e\n    /// 怪物死亡事件 —— 参数：Monster\n    /// \u003c/summary\u003e\n    E_Monster_Dead,\n    /// \u003csummary\u003e\n    /// 玩家获取奖励 —— 参数：int\n    /// \u003c/summary\u003e\n    E_Player_GetReward,\n    /// \u003csummary\u003e\n    /// 测试用事件 —— 参数：无\n    /// \u003c/summary\u003e\n    E_Test,\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240416225620-omgikft",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240416225620-omgikft",
+				"updated": "20240416225758"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "然后，我们即可使用枚举作为事件名，这样，我们就不再需要担心拼错事件名，而且事件名也更易于管理了"
+				}
+			]
+		},
+		{
+			"ID": "20240416225604-ewj1w7v",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416225604-ewj1w7v",
+				"style": "line-height: 22px;",
+				"updated": "20240416225615"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class Player : MonoBehaviour\n{\n    private void Awake()\n    {\n        EventCenter.Instance.AddEventListener\u003cMonster\u003e(E_EventType.E_Monster_Dead, PlayerWaitMonsterDeadDo);\n        EventCenter.Instance.AddEventListener(E_EventType.E_Test, Test);\n    }\n\n    public void Test()\n    {\n        print(\"无参事件监听者\");\n    }\n\n    public void PlayerWaitMonsterDeadDo(Monster info)\n    {\n        Debug.Log(\"怪物名为：\" + info.monsterName + \"，怪物ID\" + info.monsterID);\n        Debug.Log(\"玩家得到奖励\");\n    }\n\n    public void OnDestroy()\n    {\n        EventCenter.Instance.RemoveEventListener\u003cMonster\u003e(E_EventType.E_Monster_Dead, PlayerWaitMonsterDeadDo);\n        EventCenter.Instance.RemoveEventListener(E_EventType.E_Test, Test);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240416225643-j1ew8hy",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240416225643-j1ew8hy",
+				"style": "line-height: 22px;",
+				"updated": "20240416225701"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System;\nusing UnityEngine;\n\npublic class Main : MonoBehaviour\n{\n    void Update()\n    {\n        if (Input.GetKeyDown(KeyCode.X))\n        {\n            GameObject.Find(\"Monster\").GetComponent\u003cMonster\u003e().Dead();\n            EventCenter.Instance.EventTrigger(E_EventType.E_Test);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240417171419-19d40yc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240417171419-19d40yc",
+				"updated": "20240417171420"
+			}
+		}
+	]
+}

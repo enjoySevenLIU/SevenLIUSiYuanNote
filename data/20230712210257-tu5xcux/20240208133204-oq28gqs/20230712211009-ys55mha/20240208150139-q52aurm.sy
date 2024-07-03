@@ -1,0 +1,388 @@
+{
+	"ID": "20240208150139-q52aurm",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240208150139-q52aurm",
+		"title": "UG1L3——多选框和单选框",
+		"updated": "20240208160026"
+	},
+	"Children": [
+		{
+			"ID": "20240208150500-at082oi",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240208150500-at082oi",
+				"updated": "20240208150506"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240208150506-lmo6w1l",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240208150506-lmo6w1l",
+				"style": "line-height: 22px;",
+				"updated": "20240208154441"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "GUI.Toggle()\t\t//绘制多选框，第二个参数需要传入当前是否选中的值，返回这一帧是否被选中的值\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240208150139-ulejp7h",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240208150139-ulejp7h",
+				"name": "GUI.Toggle()",
+				"updated": "20240208150459"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "多选框"
+				}
+			]
+		},
+		{
+			"ID": "20240208150830-ufiotco",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240208150830-ufiotco",
+				"updated": "20240208160026"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUI.Toggle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​会绘制一个多选框，第二个参数需要传入当前是否选中的值，返回这一帧是否被选中的值，其余参数和其他控件差不多\n因此，使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUI.Toggle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​绘制的多选框，必须要在外面声明一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "bool"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​变量，用来存储多选框是否被选中的值\n该变量需要传入到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUI.Toggle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​内，再返回给该变量，这样才能实现多选框选中的效果"
+				}
+			]
+		},
+		{
+			"ID": "20240208150921-bylpces",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240208150921-bylpces",
+				"style": "line-height: 22px;",
+				"updated": "20240208150959"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private bool isSel;\n\nprivate void OnGUI()\n{\n    //第二个参数应该用变量，而不是固定的常量\n    isSel = GUI.Toggle(new Rect(0, 0, 100, 30), isSel, \"效果开关\");\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240208151532-ew6wdmt",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240208151532-ew6wdmt",
+				"updated": "20240208152143"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义样式的显示问题"
+				}
+			]
+		},
+		{
+			"ID": "20240208152143-qt4xv5l",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240208152143-qt4xv5l",
+				"updated": "20240208152400"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUI.Toggle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code block-ref",
+					"TextMarkBlockRefID": "20230822150550-toyc7gg",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "GUIStyle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​时，我们可以通过设置背景图来自定义是否选中的图标，Normal是未选中时图标，OnNormal是选中时图标\n但是直接设置会有显示问题，需要设置如下内容："
+				}
+			]
+		},
+		{
+			"ID": "20240208152400-7wd8vv9",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240208152400-7wd8vv9",
+				"updated": "20240208152605"
+			},
+			"Children": [
+				{
+					"ID": "20240208152401-7xdlmum",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240208152401-7xdlmum",
+						"updated": "20240208152401"
+					},
+					"Children": [
+						{
+							"ID": "20240208152401-q74dglq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240208152401-q74dglq",
+								"updated": "20240208152450"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "背景图拉伸，铺满文字：设置Fixed Width和Fixed Height，以设置背景图的宽高"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240208152451-vf3mbnl",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240208152451-vf3mbnl",
+						"updated": "20240208152605"
+					},
+					"Children": [
+						{
+							"ID": "20240208152451-7d0icbi",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240208152451-7d0icbi",
+								"updated": "20240208152605"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "文字与背景图重叠：设置Padding，可偏移文本到UI控件的边缘的量，可用于设置文本位置"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240208151546-y71u1qn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240208151546-y71u1qn",
+				"style": "line-height: 22px;",
+				"updated": "20240208152143"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private bool isSel;\nprivate bool isSel2;\n\npublic GUIStyle style;\n\nprivate int nowSelIndex = 1;\n\nprivate void OnGUI()\n{\n    //第二个参数应该用变量，而不是固定的常量\n    isSel = GUI.Toggle(new Rect(0, 0, 100, 30), isSel, \"效果开关\");\n    //修改固定宽高 fixedWidth 和 fixedHeight\n    //修改从GUIStyle边缘到内容起始处的空间 padding\n    isSel2 = GUI.Toggle(new Rect(0, 40, 100, 30), isSel2, \"音效开关\", style);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240208152626-k20emyc",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240208152626-k20emyc",
+				"updated": "20240208152636"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "单选框"
+				}
+			]
+		},
+		{
+			"ID": "20240208152639-cfch1m9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240208152639-cfch1m9",
+				"updated": "20240208153118"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "单选框是基于多选框实现的，通过一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "int"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​来标识哪个选项被选中了，\n通过比较标识值与选项对应的值来决定哪个单选框显示被选中，\n当单选框被选中时，就修改标识的值，从而实现单选框的效果"
+				}
+			]
+		},
+		{
+			"ID": "20240208153248-x7a2jwj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240208153248-x7a2jwj",
+				"updated": "20240208153340"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "注意，下面的代码是，那个选项被选中，那个if语句块就会每帧都执行一次，而不是修改选项时才会执行一次！"
+				}
+			]
+		},
+		{
+			"ID": "20240208153118-nqcpyaf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240208153118-nqcpyaf",
+				"updated": "20240208153220"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：下面的代码中当Toggle被选中，对应的那个if代码块就会每帧都执行一次，"
+				}
+			]
+		},
+		{
+			"ID": "20240208152712-8fc2p48",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240208152712-8fc2p48",
+				"style": "line-height: 22px;",
+				"updated": "20240208152721"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private int nowSelIndex = 1;\n\nprivate void OnGUI()\n{\n    //单选框是基于多选框的实现\n    //关键：通过一个int标识来决定是否选择\n    if (GUI.Toggle(new Rect(0, 100, 100, 30), nowSelIndex == 1, \"选项一\"))\n    {\n        nowSelIndex = 1;\n    }\n    if (GUI.Toggle(new Rect(0, 140, 100, 30), nowSelIndex == 2, \"选项一\"))\n    {\n        nowSelIndex = 2;\n    }\n    if (GUI.Toggle(new Rect(0, 180, 100, 30), nowSelIndex == 3, \"选项一\"))\n    {\n        nowSelIndex = 3;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

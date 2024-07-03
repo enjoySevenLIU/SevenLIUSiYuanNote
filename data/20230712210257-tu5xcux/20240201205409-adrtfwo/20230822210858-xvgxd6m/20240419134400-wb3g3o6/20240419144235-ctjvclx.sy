@@ -1,0 +1,812 @@
+{
+	"ID": "20240419144235-ctjvclx",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240419144235-ctjvclx",
+		"title": "UFL6-2——音效管理模块音效部分实现",
+		"type": "doc",
+		"updated": "20240419161211"
+	},
+	"Children": [
+		{
+			"ID": "20240419144236-vte521e",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240419144236-vte521e",
+				"updated": "20240419144327"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现音效管理模块 音效 相关内容"
+				}
+			]
+		},
+		{
+			"ID": "20240419144334-u95a0it",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419144334-u95a0it",
+				"updated": "20240419144409"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要实现内容"
+				}
+			]
+		},
+		{
+			"ID": "20240419144334-viwt9kn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419144334-viwt9kn",
+				"updated": "20240419153801"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意："
+				}
+			]
+		},
+		{
+			"ID": "20240419144338-lq3l6bh",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240419144338-lq3l6bh",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240419153758"
+			},
+			"Children": [
+				{
+					"ID": "20240419144338-2xv65sw",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240419144338-2xv65sw",
+						"updated": "20240419144338"
+					},
+					"Children": [
+						{
+							"ID": "20240419144338-zi5n2js",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419144338-zi5n2js",
+								"updated": "20240419144338"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "音效和背景音乐不同\n"
+								}
+							]
+						},
+						{
+							"ID": "20240419144401-pwd4ves",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419144401-pwd4ves",
+								"updated": "20240419144406"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "音效存在多个，并且音效需要管理是否结束，因此需要用容器记录音效组件"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240419144338-8bc5lb3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240419144338-8bc5lb3",
+						"updated": "20240419144338"
+					},
+					"Children": [
+						{
+							"ID": "20240419144338-d7rza3j",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419144338-d7rza3j",
+								"updated": "20240419144355"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "音效分为循环和非循环\n"
+								}
+							]
+						},
+						{
+							"ID": "20240419144358-pyymj96",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419144358-pyymj96"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "非循环的需要我们检测它播放结束，循环的需要让外部进行管理"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240419144409-fub8h93",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240419144409-fub8h93",
+				"updated": "20240419161211"
+			},
+			"Children": [
+				{
+					"ID": "20240419144409-yygvyv9",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240419144409-yygvyv9",
+						"updated": "20240419161211"
+					},
+					"Children": [
+						{
+							"ID": "20240419144409-cv50jis",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419144409-cv50jis",
+								"updated": "20240419144409"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "播放音效"
+								}
+							]
+						},
+						{
+							"ID": "20240419154234-xdwhf91",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419154234-xdwhf91",
+								"updated": "20240419161211"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果不考虑3D音效的话，可以将所有的音效源组件添加到一个单独的对象上，方便管理\n每次播放音效时，都需要将播放音效的音效源组件添加到列表内，方便管理，同时还需要一个回调函数参数，将音效源组件传递出去"
+								}
+							]
+						},
+						{
+							"ID": "20240419153804-eao374k",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240419153804-eao374k",
+								"style": "line-height: 22px;",
+								"updated": "20240419155302"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//用于音效组件依附的对象\nprivate GameObject soundObj = null;\n//管理正在播放的音效\nprivate List\u003cAudioSource\u003e soundList = new List\u003cAudioSource\u003e();\n//音效音量大小\nprivate float soundVolume = 0.1f;\n\n// 播放音效\npublic void PlaySound(string name, bool isLoop = false, bool isSync = false, UnityAction\u003cAudioSource\u003e callBack = null)\n{\n    if (soundObj == null)\n    {\n        //音效依附的对象，一般过场景音效都需要停止，所以我们可以不处理，它过场景不移除\n        soundObj = new GameObject(\"soundObj\");\n    }\n    //加载音效资源，进行播放\n    ABResManager.Instance.LoadResAsync\u003cAudioClip\u003e(\"sound\", name, (clip) =\u003e\n    {\n        AudioSource source = soundObj.AddComponent\u003cAudioSource\u003e();\n        source.clip = clip;\n        source.loop = isLoop;\n        source.volume = soundVolume;\n        source.Play();\n        //存储容器，用于记录，方便之后判断是否停止\n        soundList.Add(source);\n        callBack?.Invoke(source);\n    }, isSync);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240419144409-bj8ey5h",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240419144409-bj8ey5h",
+						"updated": "20240419144409"
+					},
+					"Children": [
+						{
+							"ID": "20240419144409-ufdu26h",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419144409-ufdu26h",
+								"updated": "20240419144409"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "自动移除播放完成的音效"
+								}
+							]
+						},
+						{
+							"ID": "20240419154057-q3hlbme",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419154057-q3hlbme",
+								"updated": "20240419154551"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "由于音效源没有播放完毕就执行的回调委托，我们必须每帧或者每隔一小段时间遍历检测音效是否播放完毕，将播放完毕的音效销毁并移除出列表\n这里就会使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240415162818-ogrh42a",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "公共Mono模块"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "的添加帧更新方法"
+								}
+							]
+						},
+						{
+							"ID": "20240419154152-ou2b07w",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240419154152-ou2b07w",
+								"style": "line-height: 22px;",
+								"updated": "20240419154210"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//管理正在播放的音效\nprivate List\u003cAudioSource\u003e soundList = new List\u003cAudioSource\u003e();\n\nprivate MusicManager() \n{\n    //固定每一小段时间检测是否有音效播放完毕\n    MonoManager.Instance.AddFixedUpdateListener(Update);\n}\n\nprivate void Update()\n{\n    //逆向遍历容器，检测是否有音效播放完毕了，如果播放完毕就销毁该组件并移除\n    for (int i = soundList.Count - 1; i \u003e= 0; i--)\n    {\n        if (!soundList[i].isPlaying)\n        {\n            GameObject.Destroy(soundList[i]);\n            soundList.RemoveAt(i);\n        }\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240419144409-vmidqaa",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240419144409-vmidqaa",
+						"updated": "20240419160606"
+					},
+					"Children": [
+						{
+							"ID": "20240419144409-hh98jwo",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419144409-hh98jwo",
+								"updated": "20240419144409"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "停止播放指定音效"
+								}
+							]
+						},
+						{
+							"ID": "20240419154426-k4hmi39",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419154426-k4hmi39",
+								"updated": "20240419154500"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "能够停止的音效必须是存在于列表内的"
+								}
+							]
+						},
+						{
+							"ID": "20240419154321-2n36emn",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240419154321-2n36emn",
+								"style": "line-height: 22px;",
+								"updated": "20240419160606"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//管理正在播放的音效\nprivate List\u003cAudioSource\u003e soundList = new List\u003cAudioSource\u003e();\n\n// 停止播放音效\npublic void StopSound(AudioSource source)\n{\n    if (soundList.Contains(source))\n    {\n        source.Stop();\n        soundList.Remove(source);\n        GameObject.Destroy(source);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240419144409-57m8l09",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240419144409-57m8l09",
+						"updated": "20240419144409"
+					},
+					"Children": [
+						{
+							"ID": "20240419144409-hpq0qi4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419144409-hpq0qi4",
+								"updated": "20240419144409"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "设置音效声音大小"
+								}
+							]
+						},
+						{
+							"ID": "20240419155306-5u9eelj",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240419155306-5u9eelj",
+								"style": "line-height: 22px;",
+								"updated": "20240419155337"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//管理正在播放的音效\nprivate List\u003cAudioSource\u003e soundList = new List\u003cAudioSource\u003e();\n//音效音量大小\nprivate float soundVolume = 0.1f;\n\npublic void ChangeSoundValue(float value)\n{\n    soundVolume = value;\n    for (int i = 0; i \u003c soundList.Count; i++)\n    {\n        soundList[i].volume = soundVolume;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240419144409-ggd4fuk",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20240419144409-ggd4fuk",
+						"updated": "20240419160238"
+					},
+					"Children": [
+						{
+							"ID": "20240419144409-cmozu4v",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419144409-cmozu4v",
+								"updated": "20240419144409"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "暂停或继续播放所有音效"
+								}
+							]
+						},
+						{
+							"ID": "20240419155938-utimf63",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419155938-utimf63",
+								"updated": "20240419160224"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注意，为我们在帧更新方法里使用音效源的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "isPlaying"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​属性来判断是否需要销毁音效源，而暂停也会让"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "isPlaying == false"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n因此，我们需要额外声明一个变量"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "soundIsPlay"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，用于控制帧更新销毁音效源的逻辑是否执行"
+								}
+							]
+						},
+						{
+							"ID": "20240419155522-7w74fnv",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240419155522-7w74fnv",
+								"style": "line-height: 22px;",
+								"updated": "20240419160238"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//管理正在播放的音效\nprivate List\u003cAudioSource\u003e soundList = new List\u003cAudioSource\u003e();\n//音效是否在播放，如果false说明在暂停\nprivate bool soundIsPlay = true;\n\n// 继续播放或者暂停所有音效\npublic void PlayOrPauseSound(bool isPlay)\n{\n    soundIsPlay = isPlay;\n    if (isPlay)\n    {\n        for (int i = 0; i \u003c soundList.Count; i++)\n        {\n            soundList[i].Play();\n        }\n    }\n    else\n    {\n        for (int i = 0; i \u003c soundList.Count; i++)\n        {\n            soundList[i].Pause();\n        }\n    }\n}\n\nprivate MusicManager() \n{\n    //固定每一小段时间检测是否有音效播放完毕\n    MonoManager.Instance.AddFixedUpdateListener(Update);\n}\n\nprivate void Update()\n{\n    if (!soundIsPlay)\n        return;\n    //逆向遍历容器，检测是否有音效播放完毕了，如果播放完毕就销毁该组件并移除\n    for (int i = soundList.Count - 1; i \u003e= 0; i--)\n    {\n        if (!soundList[i].isPlaying)\n        {\n            GameObject.Destroy(soundList[i]);\n            soundList.RemoveAt(i);\n        }\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240419144434-wvyrf2u",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240419144434-wvyrf2u",
+				"updated": "20240419144437"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20240419144438-wte35s1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419144438-wte35s1",
+				"updated": "20240419144553"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "准备几个音效文件，放到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Assets/Editor/sound"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​文件夹下，以便于读取和打包"
+				}
+			]
+		},
+		{
+			"ID": "20240419160738-fhf5wgx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419160738-fhf5wgx",
+				"updated": "20240419160738"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240419160738-1v0vhbp.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240419160739-75ql8t8",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240419160739-75ql8t8",
+				"style": "line-height: 22px;",
+				"updated": "20240419160759"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private float v = 0.1f;\nprivate float oldV = 0.1f;\nprivate AudioSource source;\n\nprivate void OnGUI()\n{\n    v = GUILayout.HorizontalSlider(v, 0, 1);\n    //当值改变时，才执行改变音量方法\n    if (oldV != v)\n    {\n        MusicManager.Instance.ChangeBGMVolume(v);\n        MusicManager.Instance.ChangeSoundValue(v);\n        oldV = v;\n    }\n\n    if (GUILayout.Button(\"播放音效\"))\n    {\n        MusicManager.Instance.PlaySound(\"sound_1\");\n    }\n\n    //需要停止的音效往往是循环音效\n    if (GUILayout.Button(\"播放循环音效\"))\n    {\n        if (this.source == null)\n        {\n            MusicManager.Instance.PlaySound(\"sound_2\", true, false, (source) =\u003e\n            {\n                this.source = source;\n            });\n        }\n    }\n\n    if (GUILayout.Button(\"停止循环音效\"))\n    {\n        MusicManager.Instance.StopSound(this.source);\n        this.source = null;\n    }\n\n    if (GUILayout.Button(\"暂停音效播放\"))\n    {\n        MusicManager.Instance.PlayOrPauseSound(false);\n    }\n\n    if (GUILayout.Button(\"恢复音效播放\"))\n    {\n        MusicManager.Instance.PlayOrPauseSound(true);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240419160802-okamwtd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419160802-okamwtd",
+				"updated": "20240419160848"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过点击屏幕上的绘制的按钮和滑动条，观察音效源控件的变化，监听音效变化"
+				}
+			]
+		},
+		{
+			"ID": "20240419144416-161iwxt",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240419144416-161iwxt",
+				"updated": "20240419144419"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "抛出问题"
+				}
+			]
+		},
+		{
+			"ID": "20240419144426-plcvxxd",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240419144426-plcvxxd",
+				"updated": "20240419144428"
+			},
+			"Children": [
+				{
+					"ID": "20240419144428-46b9gzd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240419144428-46b9gzd",
+						"updated": "20240419144428"
+					},
+					"Children": [
+						{
+							"ID": "20240419144428-itjsoz3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419144428-itjsoz3",
+								"updated": "20240419144428"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "频繁的删除创建音效组件，比较浪费性能，应该如何优化？"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240419144428-osnf5ck",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240419144428-osnf5ck",
+						"updated": "20240419144428"
+					},
+					"Children": [
+						{
+							"ID": "20240419144428-p560oyh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419144428-p560oyh",
+								"updated": "20240419144428"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "3D音效需要让音效对象位置产生变化，我们应该如何修改？"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240419160912-u04ad3b",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240419160912-u04ad3b",
+				"updated": "20240419160915"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体代码"
+				}
+			]
+		},
+		{
+			"ID": "20240419160916-wstvacs",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240419160916-wstvacs",
+				"style": "line-height: 22px;",
+				"updated": "20240419160929"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\n\n/// \u003csummary\u003e\n/// 音乐音效管理器\n/// \u003c/summary\u003e\npublic class MusicManager : BaseManager\u003cMusicManager\u003e\n{\n    //背景音乐播放组件\n    private AudioSource bgmSource = null;\n    //背景音乐大小\n    private float bgmVolume = 0.1f;\n    //用于音效组件依附的对象\n    private GameObject soundObj = null;\n    //管理正在播放的音效\n    private List\u003cAudioSource\u003e soundList = new List\u003cAudioSource\u003e();\n    //音效音量大小\n    private float soundVolume = 0.1f;\n    //音效是否在播放，如果false说明在暂停\n    private bool soundIsPlay = true;\n\n    private MusicManager() \n    {\n        //固定每一小段时间检测是否有音效播放完毕\n        MonoManager.Instance.AddFixedUpdateListener(Update);\n    }\n\n    private void Update()\n    {\n        if (!soundIsPlay)\n            return;\n        //逆向遍历容器，检测是否有音效播放完毕了，如果播放完毕就销毁该组件并移除\n        for (int i = soundList.Count - 1; i \u003e= 0; i--)\n        {\n            if (!soundList[i].isPlaying)\n            {\n                GameObject.Destroy(soundList[i]);\n                soundList.RemoveAt(i);\n            }\n        }\n    }\n\n    public void PlayBGM(string name)\n    {\n        //动态创建播放背景音乐的组件，并且不会因为过场景而移除\n        //保证背景音乐在过场景时也能播放\n        if (bgmSource == null)\n        {\n            GameObject obj = new GameObject(\"BGM\");\n            GameObject.DontDestroyOnLoad(obj);\n            bgmSource = obj.AddComponent\u003cAudioSource\u003e();\n        }\n        //根据传入的背景音乐名字，来播放背景音乐\n        ABResManager.Instance.LoadResAsync\u003cAudioClip\u003e(\"music\", name, (clip) =\u003e\n        {\n            bgmSource.clip = clip;\n            bgmSource.loop = true;\n            bgmSource.volume = bgmVolume;\n            bgmSource.Play();\n        });\n    }\n\n    public void StopBGM()\n    {\n        if (bgmSource == null)\n            return;\n        bgmSource.Stop();\n    }\n\n    public void PauseBGM()\n    {\n        if (bgmSource == null)\n            return;\n        bgmSource.Pause();\n    }\n\n    public void ChangeBGMVolume(float value)\n    {\n        bgmVolume = value;\n        if (bgmSource == null)\n            return;\n        bgmSource.volume = bgmVolume;\n    }\n\n    /// \u003csummary\u003e\n    /// 播放音效\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"name\"\u003e音效名字\u003c/param\u003e\n    /// \u003cparam name=\"isLoop\"\u003e是否循环\u003c/param\u003e\n    /// \u003cparam name=\"isSync\"\u003e是否同步加载\u003c/param\u003e\n    /// \u003cparam name=\"callBack\"\u003e音效加载结束后的回调\u003c/param\u003e\n    public void PlaySound(string name, bool isLoop = false, bool isSync = false, UnityAction\u003cAudioSource\u003e callBack = null)\n    {\n        if (soundObj == null)\n        {\n            //音效依附的对象，一般过场景音效都需要停止，所以我们可以不处理，它过场景不移除\n            soundObj = new GameObject(\"soundObj\");\n        }\n        //加载音效资源，进行播放\n        ABResManager.Instance.LoadResAsync\u003cAudioClip\u003e(\"sound\", name, (clip) =\u003e\n        {\n            AudioSource source = soundObj.AddComponent\u003cAudioSource\u003e();\n            source.clip = clip;\n            source.loop = isLoop;\n            source.volume = soundVolume;\n            source.Play();\n            //存储容器，用于记录，方便之后判断是否停止\n            soundList.Add(source);\n            callBack?.Invoke(source);\n        }, isSync);\n    }\n\n    /// \u003csummary\u003e\n    /// 停止播放音效\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"source\"\u003e要停止播放音效的组件对象\u003c/param\u003e\n    public void StopSound(AudioSource source)\n    {\n        if (soundList.Contains(source))\n        {\n            source.Stop();\n            soundList.Remove(source);\n            GameObject.Destroy(source);\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 改变音效大小\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"value\"\u003e\u003c/param\u003e\n    public void ChangeSoundValue(float value)\n    {\n        soundVolume = value;\n        for (int i = 0; i \u003c soundList.Count; i++)\n        {\n            soundList[i].volume = soundVolume;\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 继续播放或者暂停所有音效\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"isPlay\"\u003e是否继续播放，true为播放，false为暂停\u003c/param\u003e\n    public void PlayOrPauseSound(bool isPlay)\n    {\n        soundIsPlay = isPlay;\n        if (isPlay)\n        {\n            for (int i = 0; i \u003c soundList.Count; i++)\n            {\n                soundList[i].Play();\n            }\n        }\n        else\n        {\n            for (int i = 0; i \u003c soundList.Count; i++)\n            {\n                soundList[i].Pause();\n            }\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

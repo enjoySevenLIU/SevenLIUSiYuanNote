@@ -1,0 +1,2521 @@
+{
+	"ID": "20240410171656-2lx1s0v",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240410171656-2lx1s0v",
+		"title": "UG4L13——输入处理",
+		"type": "doc",
+		"updated": "20240410222055"
+	},
+	"Children": [
+		{
+			"ID": "20240410172448-4vdstw7",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240410172448-4vdstw7",
+				"updated": "20240410172457"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240410172457-x0efzlp",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240410172457-x0efzlp",
+				"style": "line-height: 22px;",
+				"updated": "20240410224407"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Stage.isTouchOnUI\t\t\t\t\t//判断是否点在了UI上\nGRoot.inst.touchTarget\t\t\t\t//获取指向的UI对象\ngObject.onTouchBegin.Add()\t\t\t//添加鼠标(左中右键)/手指按下的监听事件\neventContext.inputEvent.button\t\t//获取按下的是哪个键\ngObject.onTouchMove.Add()\t\t\t//添加按下后移动的监听事件\neventContext.inputEvent.x\t\t\t//获取移动的坐标x轴，是物理屏幕坐标，如果想使用UI坐标需要使用GRoot.inst.GlobalToLocal()转换\neventContext.inputEvent.y\t\t\t//获取移动的坐标y轴，是物理屏幕坐标，如果想使用UI坐标需要使用GRoot.inst.GlobalToLocal()转换\ngObject.onTouchEnd.Add()\t\t\t//添加按下后抬起的监听事件\neventContext.CaptureTouch()\t\t\t//按下后移动到对象外部抬起依然可以触发抬起\ngObject.onClick.Add()\t\t\t\t//添加点击的监听事件\ngObject.onRightClick.Add()\t\t\t//添加鼠标右键点击的监听事件\ngObject.onRollOver.Add()\t\t\t//添加鼠标或手指进入元件的监听事件\ngObject.onRollOut.Add()\t\t\t\t//添加鼠标或手指离开元件的监听事件\neventContext.sender\t\t\t\t\t//获取监听事件的触发者（元件）\nStage.inst.touchPosition\t\t\t//鼠标位置或者最后一个手指的位置\nStage.inst.GetTouchPosition()\t\t//获取指定手指位置，参数是手指ID，从0开始，按照按下去的顺序分配手指ID\nStage.inst.touchCount\t\t\t\t//当前按下手指数量\nStage.inst.GetAllTouch()\t\t\t//获得当前所有按下的手指id\nLongPressGesture\t\t\t\t\t//长按手势类\nlongPressGesture.onAction.Add()\t\t//添加长按手势的监听事件\nSwipeGesture\t\t\t\t\t\t//手指滑动手势类\nPinchGesture\t\t\t\t\t\t//两指缩放手势类\nRotationGesture\t\t\t\t\t\t//两指旋转手势类\nStage.inst.onKeyDown.Add()\t\t\t//添加的监听事件\neventContext.inputEvent.keyCode\t\t//获取键盘输入的是哪个键\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240410171656-obvk6fs",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240410171656-obvk6fs",
+				"name": "Stage.isTouchOnUI",
+				"updated": "20240410171712"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "判断是否点在了UI上"
+				}
+			]
+		},
+		{
+			"ID": "20240410171817-tt6h551",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240410171817-tt6h551",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240410172048"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：全屏界面，没有设置穿透时，空白区域也是接受输入的，只要是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ture"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，那就一定是有UI遮挡"
+				}
+			]
+		},
+		{
+			"ID": "20240410172403-wpkx907",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240410172403-wpkx907",
+				"style": "line-height: 22px;",
+				"updated": "20240410172441"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Start()\n{\n\t//显示面板的方法\n    UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\n}\n\nvoid Update()\n{\n\n    if (Stage.isTouchOnUI)\n    {\n        print(\"鼠标或者手指在UI上\");\n    }\n    else\n    {\n        print(\"鼠标或者手指不在UI上\");\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240410172050-io0xt4f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240410172050-io0xt4f",
+				"updated": "20240410172419"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 919px;",
+						"style": "width: 909px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240410172419-66hmfpj.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 909px;\" parent-style=\"width: 919px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240410172523-4mc72dq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240410172523-4mc72dq",
+				"name": "GRoot.inst.touchTarget.name",
+				"updated": "20240410172536"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "获取指向的UI对象"
+				}
+			]
+		},
+		{
+			"ID": "20240410172537-wt0y3ky",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240410172537-wt0y3ky",
+				"style": "line-height: 22px;",
+				"updated": "20240410172651"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Start()\n{\n\t//显示面板的方法\n    UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\n}\n\nvoid Update()\n{\n\n    if (Stage.isTouchOnUI)\n    {\n        //可以通过这种方式，得到鼠标或者手指指向的UI对象\n        print(GRoot.inst.touchTarget.name);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240410172712-x1ma5dc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240410172712-x1ma5dc",
+				"updated": "20240410195449"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 291px;",
+						"style": "width: 281px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240410172712-1o30rgl.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 281px;\" parent-style=\"width: 291px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240410171734-lvb9b79",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240410171734-lvb9b79",
+				"updated": "20240410195449"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "鼠标/触摸相关事件"
+				}
+			]
+		},
+		{
+			"ID": "20240410171818-iww2cmu",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240410171818-iww2cmu",
+				"updated": "20240410222055"
+			},
+			"Children": [
+				{
+					"ID": "20240410195518-kcdf2e6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"alias": "eventContext.inputEvent.button",
+						"id": "20240410195518-kcdf2e6",
+						"name": "gObject.onTouchBegin.Add()",
+						"updated": "20240410204659"
+					},
+					"Children": [
+						{
+							"ID": "20240410195518-460q72z",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410195518-460q72z",
+								"updated": "20240410195518"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "鼠标(左中右键)/手指 按下"
+								}
+							]
+						},
+						{
+							"ID": "20240410201732-m7ouuys",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410201732-m7ouuys",
+								"updated": "20240410204659"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果想要获取是哪个键按下了，需要使用有参方法作为委托，通过传入的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "EventContext"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​参数使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "inputEvent.button"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​获取按下的哪个键"
+								}
+							]
+						},
+						{
+							"ID": "20240410195907-h79e9ib",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410195907-h79e9ib",
+								"style": "line-height: 22px;",
+								"updated": "20240410195910"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\npanel.m_btnTest.onTouchBegin.Add((data) =\u003e\n{\n    print(\"按下\");\n    //如果想要获取鼠标哪个键按下：0左键 1右键 2中键\n    print(data.inputEvent.button);\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410195911-jkl5wk2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410195911-jkl5wk2",
+								"updated": "20240410200327"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "按下按钮时（没有抬起时）就会输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 293px;",
+										"style": "width: 283px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410200000-pepl4vm.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 283px;\" parent-style=\"width: 293px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240410195518-i5xjxtv",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"alias": "eventContext.inputEvent.x,eventContext.inputEvent.y",
+						"id": "20240410195518-i5xjxtv",
+						"name": "gObject.onTouchMove.Add()",
+						"updated": "20240410204759"
+					},
+					"Children": [
+						{
+							"ID": "20240410195518-51z316l",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410195518-51z316l",
+								"updated": "20240410200337"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "鼠标/手指 移动"
+								}
+							]
+						},
+						{
+							"ID": "20240410200339-b05gmrl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410200339-b05gmrl",
+								"updated": "20240410204510"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "移动 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "一定是先按下过后 才会响应的，可用于制作拖曳的逻辑"
+								}
+							]
+						},
+						{
+							"ID": "20240410204511-fevgty5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410204511-fevgty5",
+								"updated": "20240410204759"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果要得到鼠标移动的坐标，需要使用带"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "EventContext"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​参数的委托，对传入的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "EventContext"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​参数通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "inputEvent.x/y"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​得到移动位置\n"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "text",
+									"TextMarkTextContent": "注意！得到是物理屏幕坐标，如果想要使用UI坐标需要使用"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref code",
+									"TextMarkBlockRefID": "20240409224121-kmdwk3g",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "GRoot.inst.GlobalToLocal()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "text",
+									"TextMarkTextContent": "进行一次转换"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								}
+							]
+						},
+						{
+							"ID": "20240410200340-gisak1g",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410200340-gisak1g",
+								"style": "line-height: 22px;",
+								"updated": "20240410204500"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\npanel.m_btnTest.onTouchBegin.Add((data) =\u003e\n{\n    print(\"按下\");\n    //如果想要获取鼠标哪个键按下：0左键 1右键 2中键\n    print(data.inputEvent.button);\n});\npanel.m_btnTest.onTouchMove.Add((data) =\u003e\n{\n    print(\"移动\");\n\tprint(new Vector2(data.inputEvent.x, data.inputEvent.y));\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410200303-i9ksebn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410200303-i9ksebn",
+								"updated": "20240410204643"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在按下按钮时移动输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 310px;",
+										"style": "width: 300px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410204643-5s2wwqg.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 300px;\" parent-style=\"width: 310px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240410195518-8g2hudw",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240410195518-8g2hudw",
+						"name": "gObject.onTouchEnd.Add()",
+						"updated": "20240410204503"
+					},
+					"Children": [
+						{
+							"ID": "20240410195518-cyx85sf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410195518-cyx85sf",
+								"updated": "20240410195518"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "鼠标/手指 抬起"
+								}
+							]
+						},
+						{
+							"ID": "20240410200458-y8rq206",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410200458-y8rq206",
+								"style": "line-height: 22px;",
+								"updated": "20240410204503"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\npanel.m_btnTest.onTouchEnd.Add((data) =\u003e\n{\n    print(\"抬起\");\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410200545-4ybiz2q",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410200545-4ybiz2q",
+								"updated": "20240410200615"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在按下按钮并抬起后输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410200615-gcs06eh.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240410195518-tx6c46s",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240410195518-tx6c46s",
+						"name": "gObject.onClick.Add()",
+						"updated": "20240410195518"
+					},
+					"Children": [
+						{
+							"ID": "20240410195518-oc6uepg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410195518-oc6uepg",
+								"updated": "20240410195518"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "点击"
+								}
+							]
+						},
+						{
+							"ID": "20240410200826-4xuicht",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410200826-4xuicht",
+								"updated": "20240410200854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "点击是按下并直接抬起后才算点击，如果按下后移动则即使抬起也不算点击"
+								}
+							]
+						},
+						{
+							"ID": "20240410200900-4mgqxax",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410200900-4mgqxax",
+								"updated": "20240410201003"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "关于按钮的点击的之前的描述可见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref code",
+									"TextMarkBlockRefID": "20240226213242-4q8qedv",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "gButton.onClick.Add()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240410200617-rqbx34h",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410200617-rqbx34h",
+								"style": "line-height: 22px;",
+								"updated": "20240410200729"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\npanel.m_btnTest.onClick.Add(() =\u003e\n{\n    print(\"点击\");\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410200709-okhxwmf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410200709-okhxwmf",
+								"updated": "20240410200824"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "按下按钮并直接抬起（不能移动）后输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 416px;",
+										"style": "width: 406px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410200756-1e0jfal.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 406px;\" parent-style=\"width: 416px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240410195518-ntzup23",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20240410195518-ntzup23",
+						"name": "gObject.onRightClick.Add()",
+						"updated": "20240410195518"
+					},
+					"Children": [
+						{
+							"ID": "20240410195518-oumygxy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410195518-oumygxy",
+								"updated": "20240410195518"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "鼠标右键点击"
+								}
+							]
+						},
+						{
+							"ID": "20240410201408-khe5a5o",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410201408-khe5a5o",
+								"updated": "20240410201449"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "FGUI提供了一个直接监听鼠标右键是否点击的方法，同样，如果按下后移动则即使抬起也不算点击"
+								}
+							]
+						},
+						{
+							"ID": "20240410201352-sz5yo89",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410201352-sz5yo89",
+								"style": "line-height: 22px;",
+								"updated": "20240410201406"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\npanel.m_btnTest.onRightClick.Add(() =\u003e\n{\n    print(\"右键点击\");\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410201331-k1m2ipd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410201331-k1m2ipd",
+								"updated": "20240410201351"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对按钮右键点击后（不能移动）输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 385px;",
+										"style": "width: 375px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410201349-m56qq3v.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 375px;\" parent-style=\"width: 385px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240410195518-ejpdixp",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ni4=",
+						"Num": 6
+					},
+					"Properties": {
+						"alias": "eventContext.sender",
+						"id": "20240410195518-ejpdixp",
+						"name": "gObject.onRollOver.Add()",
+						"updated": "20240410195518"
+					},
+					"Children": [
+						{
+							"ID": "20240410195518-tjv42yk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410195518-tjv42yk",
+								"updated": "20240410195518"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "鼠标或手指进入元件"
+								}
+							]
+						},
+						{
+							"ID": "20240410202313-62102ny",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410202313-62102ny",
+								"updated": "20240410202606"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果想要获取进入了哪个元件，需要使用带"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "EventContext"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​参数的委托，\n通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "sender"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​属性去获取发生事件的元件，再转为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GObject"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​去获取名字"
+								}
+							]
+						},
+						{
+							"ID": "20240410202250-ajpqx0g",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410202250-ajpqx0g",
+								"style": "line-height: 22px;",
+								"updated": "20240410202304"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\n    panel.m_btnTest.onRollOver.Add(InObject);\n}\n\nprivate void InObject(EventContext eventData)\n{\n    print(\"进入了某个对象\" + (eventData.sender as GObject).name);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410202609-vkzcmlg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410202609-vkzcmlg",
+								"updated": "20240410202636"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "鼠标进入元件后输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 368px;",
+										"style": "width: 358px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410202636-qy2scq2.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 358px;\" parent-style=\"width: 368px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240410195518-fbgmj48",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ny4=",
+						"Num": 7
+					},
+					"Properties": {
+						"id": "20240410195518-fbgmj48",
+						"name": "gObject.onRollOut.Add()",
+						"updated": "20240410202925"
+					},
+					"Children": [
+						{
+							"ID": "20240410195518-d8fnpib",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410195518-d8fnpib",
+								"updated": "20240410202920"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "鼠标或手指离开元件"
+								}
+							]
+						},
+						{
+							"ID": "20240410202920-p9yhy6n",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410202920-p9yhy6n",
+								"updated": "20240410202925"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果想要获取离开了哪个元件，需要使用带"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "EventContext"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​参数的委托，\n通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "sender"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​属性去获取发生事件的元件，再转为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GObject"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​去获取名字"
+								}
+							]
+						},
+						{
+							"ID": "20240410202640-suual82",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410202640-suual82",
+								"style": "line-height: 22px;",
+								"updated": "20240410202829"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\n    panel.m_btnTest.onRollOut.Add((eventData) =\u003e\n    {\n        print(\"离开了某个对象\" + (eventData.sender as GObject).name);\n    });\n}\n\nprivate void InObject(EventContext eventData)\n{\n    print(\"进入了某个对象\" + (eventData.sender as GObject).name);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410202830-trrpvyy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410202830-trrpvyy",
+								"updated": "20240410202905"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "鼠标离开元件后输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 377px;",
+										"style": "width: 367px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410202905-33a4aob.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 367px;\" parent-style=\"width: 377px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240410171736-scvldms",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240410171736-scvldms",
+				"updated": "20240410171749"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "获取当前鼠标或者手指的位置"
+				}
+			]
+		},
+		{
+			"ID": "20240410203313-w5i1gm2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240410203313-w5i1gm2",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240410203543"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意！得到的都是物理屏幕坐标，如果想要使用UI坐标需要使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+						"style": "background-color: var(--b3-font-background6);"
+					},
+					"TextMarkType": "block-ref code text",
+					"TextMarkBlockRefID": "20240409224121-kmdwk3g",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "GRoot.inst.GlobalToLocal()"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-font-background6);\" parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "进行一次转换"
+				}
+			]
+		},
+		{
+			"ID": "20240410203304-m1mx50m",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240410203304-m1mx50m",
+				"updated": "20240410204128"
+			},
+			"Children": [
+				{
+					"ID": "20240410203548-i8ja0t8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240410203548-i8ja0t8",
+						"name": "Stage.inst.touchPosition",
+						"updated": "20240410204123"
+					},
+					"Children": [
+						{
+							"ID": "20240410203548-ke80ljr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410203548-ke80ljr",
+								"updated": "20240410203600"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Stage.inst.touchPosition"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 鼠标位置或者最后一个手指的位置"
+								}
+							]
+						},
+						{
+							"ID": "20240410203756-3zunvgn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410203756-3zunvgn",
+								"updated": "20240410204123"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "返回FairyGUI坐标系的坐标，得到是物理屏幕坐标，如果想要使用UI坐标需要使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref code",
+									"TextMarkBlockRefID": "20240409224121-kmdwk3g",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "GRoot.inst.GlobalToLocal()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​进行一次转换"
+								}
+							]
+						},
+						{
+							"ID": "20240410203621-egbw1zt",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410203621-egbw1zt",
+								"style": "line-height: 22px;",
+								"updated": "20240410203715"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Update()\n{\n    print(Stage.inst.touchPosition);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410203718-2clo0iv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410203718-2clo0iv",
+								"updated": "20240410203749"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 262px;",
+										"style": "width: 252px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410203749-y5s0srp.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 252px;\" parent-style=\"width: 262px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240410203550-uif5rsb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240410203550-uif5rsb",
+						"name": "Stage.inst.GetTouchPosition()",
+						"updated": "20240410204128"
+					},
+					"Children": [
+						{
+							"ID": "20240410203550-zyioug4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410203550-zyioug4",
+								"updated": "20240410203846"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Stage.inst.GetTouchPosition()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 获取指定手指位置，参数是手指ID，从0开始，按照按下去的顺序分配手指ID"
+								}
+							]
+						},
+						{
+							"ID": "20240410203615-iivm1l2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410203615-iivm1l2",
+								"updated": "20240410204128"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "返回FairyGUI坐标系的坐标，得到是物理屏幕坐标，如果想要使用UI坐标需要使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref code",
+									"TextMarkBlockRefID": "20240409224121-kmdwk3g",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "GRoot.inst.GlobalToLocal()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​进行一次转换"
+								}
+							]
+						},
+						{
+							"ID": "20240410203816-b67mpk6",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410203816-b67mpk6",
+								"style": "line-height: 22px;",
+								"updated": "20240410203934"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Update()\n{\n    print(Stage.inst.GetTouchPosition(0));\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410203935-yi7k1iq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410203935-yi7k1iq",
+								"updated": "20240410204016"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 252px;",
+										"style": "width: 242px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410204016-x61eucj.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 242px;\" parent-style=\"width: 252px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240410171758-d1feh9p",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240410171758-d1feh9p",
+				"updated": "20240410204847"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "多点触摸"
+				}
+			]
+		},
+		{
+			"ID": "20240410171821-blqfjwa",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240410171821-blqfjwa",
+				"updated": "20240410205616"
+			},
+			"Children": [
+				{
+					"ID": "20240410204851-xbievpa",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240410204851-xbievpa",
+						"name": "Stage.inst.touchCount",
+						"updated": "20240410205616"
+					},
+					"Children": [
+						{
+							"ID": "20240410204851-5zfgi15",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410204851-5zfgi15",
+								"updated": "20240410204906"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Stage.inst.touchCount"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 当前按下手指数量"
+								}
+							]
+						},
+						{
+							"ID": "20240410204933-6xgakcw",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410204933-6xgakcw",
+								"style": "line-height: 22px;",
+								"updated": "20240410205616"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "int num = Stage.inst.touchCount;\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240410204852-oe4ruzd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240410204852-oe4ruzd",
+						"name": "Stage.inst.GetAllTouch()",
+						"updated": "20240410205216"
+					},
+					"Children": [
+						{
+							"ID": "20240410204852-9wggcv5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410204852-9wggcv5",
+								"updated": "20240410204920"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Stage.inst.GetAllTouch(null)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 获得当前所有按下的手指id"
+								}
+							]
+						},
+						{
+							"ID": "20240410205208-6dz30ic",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410205208-6dz30ic",
+								"style": "line-height: 22px;",
+								"updated": "20240410205216"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "int[] touchIDs = Stage.inst.GetAllTouch(null);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240410204853-vk8894a",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240410204853-vk8894a",
+						"updated": "20240410205307"
+					},
+					"Children": [
+						{
+							"ID": "20240410204853-77t0isj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410204853-77t0isj",
+								"updated": "20240410205307"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20230709190056-zmyd1jx",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "Input.multiTouchEnabled"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 关闭多点触控"
+								}
+							]
+						},
+						{
+							"ID": "20240410205159-lh72e73",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410205159-lh72e73",
+								"style": "line-height: 22px;",
+								"updated": "20240410205205"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Input.multiTouchEnabled = false;\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240410171803-vmktwuv",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240410171803-vmktwuv",
+				"updated": "20240410171804"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "手势"
+				}
+			]
+		},
+		{
+			"ID": "20240410171822-mh5597a",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240410171822-mh5597a",
+				"updated": "20240410210511"
+			},
+			"Children": [
+				{
+					"ID": "20240410205335-3efgri4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"alias": "longPressGesture.onAction.Add()",
+						"id": "20240410205335-3efgri4",
+						"name": "LongPressGesture",
+						"updated": "20240410210012"
+					},
+					"Children": [
+						{
+							"ID": "20240410205335-y9heiip",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410205335-y9heiip",
+								"updated": "20240410205338"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "长按"
+								}
+							]
+						},
+						{
+							"ID": "20240410205846-phli5is",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410205846-phli5is",
+								"updated": "20240410210012"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果要对某个控件监听长按手势，实例化"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LongPressGesture"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​类然后对构造函数传入控件\n最后通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "onAction.Add()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​添加监听方法即可"
+								}
+							]
+						},
+						{
+							"ID": "20240410205743-kflxs4h",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410205743-kflxs4h",
+								"style": "line-height: 22px;",
+								"updated": "20240410205806"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "TeachPanel panel = UIManager.Instance.ShowPanel\u003cTeachPanel\u003e(\"teach\");\nLongPressGesture gesture = new LongPressGesture(panel.m_btnTest);\ngesture.onAction.Add(() =\u003e\n{\n    print(\"长按\");\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240410205828-nhbgikk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410205828-nhbgikk",
+								"updated": "20240410205841"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "当长按按钮时输出："
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240410205837-s439t0f.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240410205338-5jingf4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240410205338-5jingf4",
+						"name": "SwipeGesture",
+						"updated": "20240410210435"
+					},
+					"Children": [
+						{
+							"ID": "20240410205338-s8f44rk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410205338-s8f44rk",
+								"updated": "20240410205342"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "手指滑动"
+								}
+							]
+						},
+						{
+							"ID": "20240410210409-jivppur",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410210409-jivppur",
+								"updated": "20240410210435"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果要对某个控件监听手指滑动手势，实例化"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SwipeGesture"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​类然后对构造函数传入控件\n最后通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "onAction.Add()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​添加监听方法即可"
+								}
+							]
+						},
+						{
+							"ID": "20240410210112-cmgmp2t",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410210112-cmgmp2t",
+								"style": "line-height: 22px;",
+								"updated": "20240410210356"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "SwipeGesture gesture1 = new SwipeGesture(panel.m_btnTest);\ngesture1.onAction.Add(() =\u003e\n{\n    print(\"手指滑动\");\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240410205342-d9dm4yx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240410205342-d9dm4yx",
+						"name": "PinchGesture",
+						"updated": "20240410210450"
+					},
+					"Children": [
+						{
+							"ID": "20240410205342-n7ak8su",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410205342-n7ak8su",
+								"updated": "20240410205359"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "两指缩放"
+								}
+							]
+						},
+						{
+							"ID": "20240410210412-zdt77kr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410210412-zdt77kr",
+								"updated": "20240410210450"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果要对某个控件监听两指缩放手势，实例化"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "PinchGesture"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​类然后对构造函数传入控件\n最后通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "onAction.Add()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​添加监听方法即可"
+								}
+							]
+						},
+						{
+							"ID": "20240410210327-4fk6dq7",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410210327-4fk6dq7",
+								"style": "line-height: 22px;",
+								"updated": "20240410210343"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "PinchGesture gesture2 = new PinchGesture(panel.m_btnTest);\ngesture2.onAction.Add(() =\u003e\n{\n    print(\"两指缩放\");\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240410205359-0kb3hnb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240410205359-0kb3hnb",
+						"name": "RotationGesture",
+						"updated": "20240410210511"
+					},
+					"Children": [
+						{
+							"ID": "20240410205359-nbmq7ju",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410205359-nbmq7ju",
+								"updated": "20240410205405"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "两指旋转"
+								}
+							]
+						},
+						{
+							"ID": "20240410210414-isdg0d5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240410210414-isdg0d5",
+								"updated": "20240410210511"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果要对某个控件监听两指旋转手势，实例化"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "RotationGesture"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​类然后对构造函数传入控件\n最后通过"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "onAction.Add()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​添加监听方法即可"
+								}
+							]
+						},
+						{
+							"ID": "20240410210334-l4corqy",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240410210334-l4corqy",
+								"style": "line-height: 22px;",
+								"updated": "20240410210340"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "RotationGesture gesture3 = new RotationGesture(panel.m_btnTest);\ngesture3.onAction.Add(() =\u003e\n{\n    print(\"两指旋转\");\n});\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240410171812-6x9hgol",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "eventContext.inputEvent.keyCode",
+				"id": "20240410171812-6x9hgol",
+				"name": "Stage.inst.onKeyDown.Add()",
+				"updated": "20240410171814"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "键盘输入"
+				}
+			]
+		},
+		{
+			"ID": "20240410210537-cawvnoy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240410210537-cawvnoy",
+				"updated": "20240410210630"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "该功能主要提供没有监听键盘输入的引擎使用的，在Unity中我们可以不用在意该方法"
+				}
+			]
+		},
+		{
+			"ID": "20240410210739-2d948jm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240410210739-2d948jm",
+				"updated": "20240410210837"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "获取键盘输入的是哪个键，需要使用带"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "EventContext"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​参数的方法，通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "inputEvent.keyCode"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​来获取"
+				}
+			]
+		},
+		{
+			"ID": "20240410210631-ili945r",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240410210631-ili945r",
+				"style": "line-height: 22px;",
+				"updated": "20240410210726"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Stage.inst.onKeyDown.Add((data) =\u003e\n{\n    print(data.inputEvent.keyCode);\n});\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240410224751-jqwmvea",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240410224751-jqwmvea",
+				"updated": "20240410224822"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按下按键时输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 320px;",
+						"style": "width: 310px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240410224822-12sq9by.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 310px;\" parent-style=\"width: 320px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		}
+	]
+}

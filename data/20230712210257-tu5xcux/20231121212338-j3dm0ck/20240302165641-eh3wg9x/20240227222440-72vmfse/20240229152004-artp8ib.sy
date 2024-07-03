@@ -1,0 +1,308 @@
+{
+	"ID": "20240229152004-artp8ib",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240229152004-artp8ib",
+		"title": "UH2S3L9——使用toLua提供的协程",
+		"updated": "20240302170730"
+	},
+	"Children": [
+		{
+			"ID": "20240229175648-071ypx5",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240229175648-071ypx5",
+				"updated": "20240229175700"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240229181756-aknm4ky",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229181756-aknm4ky",
+				"style": "line-height: 22px;",
+				"updated": "20240229182022"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "LuaLooper\t\t\t\t//toLua在使用协程前，必须要在场景上的某个游戏对象上挂载该脚本，并关联当前正在运行的解析器\nluaLooper.luaState\t\t//如果要让lua解析器的可以执行协程，就必须要先将解析器与关联到luaLooper.luaState上\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229175700-wlxdakw",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229175700-wlxdakw",
+				"style": "line-height: 22px;",
+				"updated": "20240229175700"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "-- 以下是toLua为我们提供的协程方法，原本的Lua里不存在这些方法\ncoroutine.start()\t\t--将某个函数作为协程开启，返回协程变量\ncoroutine.wait()\t\t--挂起协程，输入秒数可以将协程挂起指定的一段时间\ncoroutine.stop()\t\t--传入协程，停止某个协程\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229152004-101mmny",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240229152004-101mmny",
+				"updated": "20240229175404"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "toLua提供的协程"
+				}
+			]
+		},
+		{
+			"ID": "20240229175405-xdzsdmw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229175405-xdzsdmw",
+				"updated": "20240229175628"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "toLua为Lua的协程添加了"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "start"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "wait"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "stop"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​函数，使得协程的开启、挂起、停止更加方便了"
+				}
+			]
+		},
+		{
+			"ID": "20240229175628-yluhwuz",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229175628-yluhwuz",
+				"style": "line-height: 22px;",
+				"updated": "20240229175645"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "bHVh"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "-- tolua协程相关的代码\nlocal coDelay = nil\n\n-- 协程 相关的lua逻辑 这些内容都是toLua帮助我们实现的\nStartDelay = function()\n    coDelay = coroutine.start(Delay)\nend\n\nDelay = function()\n    local c = 1\n    while true do\n        --等待1s 执行一次逻辑（toLua提供方法）\n        coroutine.wait(1)\n        print(\"Count: \" .. c)\n        c = c + 1\n        if c \u003e= 5 then\n            StopDelay()\n            break\n        end\n    end\nend\n\nStopDelay = function()\n    coroutine.stop(coDelay)\nend\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229175532-d3yod3i",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229175532-d3yod3i",
+				"updated": "20240229182100"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在Lua中声明完毕后，就可以在C#中调用函数开启协程，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "前提是完成了"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text block-ref",
+					"TextMarkBlockRefID": "20240229180144-voz01nl",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "toLua"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-font-background2);"
+					},
+					"TextMarkType": "strong block-ref text",
+					"TextMarkBlockRefID": "20240229180144-voz01nl",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "协程相关的初始化"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-font-background2);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20240229180113-yx2hbae",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229180113-yx2hbae",
+				"style": "line-height: 22px;",
+				"updated": "20240229180140"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "LuaFunction luaFunction = LuaManager.Instance.LuaState.GetFunction(\"StartDelay\")\nluaFunction.Call();\nluaFunction.Dispose();\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240229180144-voz01nl",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240229180144-voz01nl",
+				"name": "LuaLooper",
+				"updated": "20240229181510"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ToLua使用协程初始化"
+				}
+			]
+		},
+		{
+			"ID": "20240229181511-be1bse8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240229181511-be1bse8",
+				"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);",
+				"updated": "20240229181630"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意！toLua在使用协程前，必须要在场景上的某个GameObject上加上LuaLooper脚本，并且将目前正在运行的Lua解析器关联起来！"
+				}
+			]
+		},
+		{
+			"ID": "20240229181601-p9b2yf7",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240229181601-p9b2yf7",
+				"style": "line-height: 22px;",
+				"updated": "20240229181729"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "luaState = new LuaState();\nluaState.Start();\nDelegateFactory.Init();             //委托初始化相关\n//协程相关\nLuaLooper looper = this.gameObject.AddComponent\u003cLuaLooper\u003e();\n//将我们自己申明的解析器和lualooper绑定起来，这样就可以让协程跑起来了\nlooper.luaState = luaState;\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

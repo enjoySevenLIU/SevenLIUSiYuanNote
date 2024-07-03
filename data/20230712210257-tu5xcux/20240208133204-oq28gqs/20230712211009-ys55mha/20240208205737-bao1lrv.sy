@@ -1,0 +1,332 @@
+{
+	"ID": "20240208205737-bao1lrv",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240208205737-bao1lrv",
+		"title": "UG1L7——滚动视图和分组",
+		"updated": "20240208212656"
+	},
+	"Children": [
+		{
+			"ID": "20240208205737-megf13d",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240208205737-megf13d",
+				"updated": "20240208205813"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240208205811-yjgajlu",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240208205811-yjgajlu",
+				"style": "line-height: 22px;",
+				"updated": "20240208211926"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "GUI.BeginGroup()\t\t//开始分组，传入位置，它将决定接下来的UI控件绘制是在相对于哪个位置绘制，以及UI控件的显示的范围\nGUI.EndGroup()\t\t\t//结束分组\nGUI.BeginScrollView()\t//开始绘制滚动列表\nGUI.EndScrollView()\t\t//结束绘制滚动列表\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240208205814-meucmcn",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "GUI.EndGroup()",
+				"id": "20240208205814-meucmcn",
+				"name": "GUI.BeginGroup()",
+				"updated": "20240208205819"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "分组"
+				}
+			]
+		},
+		{
+			"ID": "20240208210836-zxnsuxt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240208210836-zxnsuxt",
+				"updated": "20240208210846"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "用于批量控制控件的位置，可以理解为包裹着的控件加了一个父对象\n可以通过控制分组来批量控制被包裹控件的位置"
+				}
+			]
+		},
+		{
+			"ID": "20240208210848-z2zxku5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240208210848-z2zxku5",
+				"updated": "20240208211022"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "根据分组传入的位置和尺寸，决定了接下来的UI控件绘制是在相对于哪个位置绘制，以及UI控件的显示的范围"
+				}
+			]
+		},
+		{
+			"ID": "20240208210555-dob0x9i",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240208210555-dob0x9i",
+				"style": "line-height: 22px;",
+				"updated": "20240208205819"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public Rect groupPos;\n\nprivate void OnGUI()\n{\n    #region 分组\n    /* 用于批量控制控件的位置\n     * 可以理解为 包裹着的控件加了一个父对象\n     * 可以通过控制分组来批量控制被包裹控件的位置\n     */\n    GUI.BeginGroup(groupPos);\n\n    GUI.Button(new Rect(0, 0, 100, 50), \"测试按钮\");\n    GUI.Label(new Rect(0, 60, 100, 20), \"Label信息\");\n\n    GUI.EndGroup(); //与GUI.BeginGroup()成对出现！！！\n    #endregion\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240208205819-43utbz0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "GUI.EndScrollView()",
+				"id": "20240208205819-43utbz0",
+				"name": "GUI.BeginScrollView()",
+				"updated": "20240208211713"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "滚动列表"
+				}
+			]
+		},
+		{
+			"ID": "20240208211713-to6gmk4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240208211713-to6gmk4",
+				"updated": "20240208212241"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "类似于分组，也可以用于批量控制控件的位置和显示尺寸，\n但是当所有内容的尺寸大于可见内容的尺寸时，滚动列表可以水平或者垂直滚动显示，以改变可见内容\n效果类似于其他GUI系统的滚动列表"
+				}
+			]
+		},
+		{
+			"ID": "20240208212245-x8i7ubp",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240208212245-x8i7ubp",
+				"updated": "20240208212656"
+			},
+			"Children": [
+				{
+					"ID": "20240208212256-7sm51ag",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240208212256-7sm51ag",
+						"updated": "20240208212656"
+					},
+					"Children": [
+						{
+							"ID": "20240208212256-iuk18jh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240208212256-iuk18jh",
+								"updated": "20240208212656"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "第一个参数，可见部分的尺寸"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240208212257-u2x3596",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240208212257-u2x3596"
+					},
+					"Children": [
+						{
+							"ID": "20240208212257-p7o0n6u",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240208212257-p7o0n6u"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "第二个参数，当前滚动条所在的坐标\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240208212258-jma5qv8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240208212258-jma5qv8",
+						"updated": "20240208212613"
+					},
+					"Children": [
+						{
+							"ID": "20240208212258-ogovs5p",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240208212258-ogovs5p",
+								"updated": "20240208212613"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "第三个参数，所有内容的尺寸（决定可滚动的范围）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240208212258-fb9wjq2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240208212258-fb9wjq2"
+					},
+					"Children": [
+						{
+							"ID": "20240208212258-3ttwvyj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240208212258-3ttwvyj"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "第四个参数，是否总是显示横向滚动条（尽管可见内容大于所有内容）\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240208212258-ygti697",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240208212258-ygti697"
+					},
+					"Children": [
+						{
+							"ID": "20240208212258-phmz8w9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240208212258-phmz8w9"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "第五个参数，是否总是显示纵向滚动条（尽管可见内容大于所有内容）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240208210647-zbih3gn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240208210647-zbih3gn",
+				"style": "line-height: 22px;",
+				"updated": "20240208212525"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public Rect scPos;\nprivate Vector2 nowPos;\npublic Rect showPos;\n\nprivate string[] strs = new string[] { \"123\", \"234\", \"222\", \"111\" };\n\nprivate void OnGUI()\n{\n    #region 滚动列表\n    //第一个参数，可见部分的尺寸\n    //第二个参数，当前滚动条所在的坐标\n    //第三个参数，所有内容的尺寸\n    //第四个参数，是否总是显示横向滚动条（尽管可见内容大于所有内容）\n    //第五个参数，是否总是显示纵向滚动条（尽管可见内容大于所有内容）\n    nowPos = GUI.BeginScrollView(scPos, nowPos, showPos, false, false);\n\n    GUI.Toolbar(new Rect(0, 0, 300, 50), 0, strs);\n    GUI.Toolbar(new Rect(0, 60, 300, 50), 0, strs);\n    GUI.Toolbar(new Rect(0, 120, 300, 50), 0, strs);\n    GUI.Toolbar(new Rect(0, 180, 300, 50), 0, strs);\n\n    GUI.EndScrollView();    //与 GUI.BeginScrollView()成对出现！！！\n    #endregion\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

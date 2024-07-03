@@ -1,0 +1,355 @@
+{
+	"ID": "20240422182526-vgszg30",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240422182526-vgszg30",
+		"title": "UFL9-3——输入控制模块的获取输入消息",
+		"type": "doc",
+		"updated": "20240422221734"
+	},
+	"Children": [
+		{
+			"ID": "20240422214505-79248lo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422214505-79248lo",
+				"updated": "20240422214510"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "遗留问题："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "在真正制作改键功能时，我们应该如何获取到任意键盘或任意鼠标输入来记录对应的输入信息"
+				}
+			]
+		},
+		{
+			"ID": "20240422182616-8p3ys3r",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240422182616-8p3ys3r",
+				"updated": "20240422214403"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现获取输入信息逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20240422214409-xoh28sc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422214409-xoh28sc",
+				"updated": "20240422214436"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "InputManager"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​的更新函数中，获取当前输入内容，用委托返回给外部"
+				}
+			]
+		},
+		{
+			"ID": "20240422214409-5ev35jk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422214409-5ev35jk",
+				"updated": "20240422220110"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要思路：\n当存在某个键按下输入时，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "遍历监听"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code strong",
+					"TextMarkTextContent": "KeyCode"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "枚举中所有键位"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，检测是哪个键位输入了\n当没有监听到时，监听鼠标左中右键键位，检测是哪个键位输入了"
+				}
+			]
+		},
+		{
+			"ID": "20240422214624-i0ja1c6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240422214624-i0ja1c6",
+				"style": "line-height: 22px;",
+				"updated": "20240422220115"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//是否开启了输入检测\nprivate bool isCheckInput;\n//用于在改键时获取输入信息的委托，只有当Update内获取到信息的时候 再通过委托传递出去\nprivate UnityAction\u003cInputInfo\u003e getInputInfoCallBack;\n\nprivate InputManager()\n{\n    MonoManager.Instance.AddUpdateListener(InputUpdate);\n}\n\npublic void GetInputInfo(UnityAction\u003cInputInfo\u003e callBack)\n{\n    getInputInfoCallBack = callBack;\n}\n\nprivate void InputUpdate()\n{\n    //如果外部未开启检测功能，就不检测输入\n    if (!isCheckInput)\n        return;\n\n    //当委托不为空时，证明想要获取到输入的消息传递给外部\n    if (getInputInfoCallBack != null)\n    {\n        if (Input.anyKeyDown)\n        {\n            InputInfo inputInfo = null;\n            Array keyCodes = Enum.GetValues(typeof(KeyCode));\n            foreach (KeyCode inputKey in keyCodes)\n            {\n                //判断到底是谁被按下了，通过这个的带对应的输入的键盘信息\n                if (Input.GetKeyDown(inputKey))\n                {\n                    inputInfo = new InputInfo(InputInfo.E_InputType.Down, inputKey);\n                    break;\n                }\n            }\n            for (int i = 0; i \u003c 3; i++)\n            {\n                if (Input.GetMouseButtonDown(i))\n                {\n                    inputInfo = new InputInfo(InputInfo.E_InputType.Down, i);\n                    break;\n                }\n            }\n            //把获取到的消息传递到外部，并清空委托\n            getInputInfoCallBack.Invoke(inputInfo);\n            getInputInfoCallBack = null;\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240422214513-0vo68eg",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240422214513-0vo68eg",
+				"updated": "20240422214546"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "延迟一帧获取"
+				}
+			]
+		},
+		{
+			"ID": "20240422214547-gzh0ev5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422214547-gzh0ev5",
+				"updated": "20240422220211"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "由于"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "开启检测输入时很可能伴随着键盘或者鼠标输入"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，因此我们利用协同程序延迟一帧再进行检测"
+				}
+			]
+		},
+		{
+			"ID": "20240422220212-00gwhv6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240422220212-00gwhv6",
+				"style": "line-height: 22px;",
+				"updated": "20240422220904"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//是否开启了输入检测\nprivate bool isCheckInput;\n//用于在改键时获取输入信息的委托，只有当Update内获取到信息的时候 再通过委托传递出去\nprivate UnityAction\u003cInputInfo\u003e getInputInfoCallBack;\n//是否开始检测输入\nprivate bool isBeginCheckInput = false;\n\nprivate InputManager()\n{\n    MonoManager.Instance.AddUpdateListener(InputUpdate);\n}\n\npublic void GetInputInfo(UnityAction\u003cInputInfo\u003e callBack)\n{\n    getInputInfoCallBack = callBack;\n    MonoManager.Instance.StartCoroutine(BeginCheckInput());\n}\n\npublic IEnumerator BeginCheckInput()\n{\n    //延迟一帧再设置为true\n    yield return 0;\n    isBeginCheckInput = true;\n}\n\nprivate void InputUpdate()\n{\n    //如果外部未开启检测功能，就不检测输入\n    if (!isCheckInput)\n        return;\n\n    //当委托不为空时，证明想要获取到输入的消息传递给外部\n    if (isBeginCheckInput)\n    {\n        if (Input.anyKeyDown)\n        {\n            InputInfo inputInfo = null;\n            Array keyCodes = Enum.GetValues(typeof(KeyCode));\n            foreach (KeyCode inputKey in keyCodes)\n            {\n                //判断到底是谁被按下了，通过这个的带对应的输入的键盘信息\n                if (Input.GetKeyDown(inputKey))\n                {\n                    inputInfo = new InputInfo(InputInfo.E_InputType.Down, inputKey);\n                    break;\n                }\n            }\n            for (int i = 0; i \u003c 3; i++)\n            {\n                if (Input.GetMouseButtonDown(i))\n                {\n                    inputInfo = new InputInfo(InputInfo.E_InputType.Down, i);\n                    break;\n                }\n            }\n            //把获取到的消息传递到外部，并清空委托\n            getInputInfoCallBack.Invoke(inputInfo);\n            getInputInfoCallBack = null;\n            //检测一次后就停止检测\n            isBeginCheckInput = false;\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240422214847-qt3y2ez",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240422214847-qt3y2ez",
+				"updated": "20240422220206"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20240422221557-t54kke2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422221557-t54kke2",
+				"updated": "20240422221610"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设要修改技能一事件的输入监听键位"
+				}
+			]
+		},
+		{
+			"ID": "20240422221200-h95ytth",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240422221200-h95ytth",
+				"style": "line-height: 22px;",
+				"updated": "20240422220206"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Update()\n{\n    if (Input.GetKeyDown(KeyCode.C))\n    {\n        print(\"开始检测输入\");\n        InputManager.Instance.GetInputInfo((inputInfo) =\u003e\n        {\n            if (inputInfo.keyOrMouse == InputInfo.E_KeyOrMouse.Key)\n            {\n                print(\"键盘输入：\" + inputInfo.key);\n\t\t\t\tInputManager.Instance.ChangeKeyboardInfo(E_EventType.E_Input_Skill1, inputInfo.key, InputInfo.E_InputType.Down);\n            }\n            else\n            {\n                print(\"鼠标输入：\" + inputInfo.mouseID);\n\t\t\t\tInputManager.Instance.ChangeMouseInfo(E_EventType.E_Input_Skill1, inputInfo.mouseID, InputInfo.E_InputType.Down);\n            }\n        });\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240422221304-xpinws7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422221304-xpinws7",
+				"updated": "20240422221734"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按下C后按下某一个键的输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240422221726-3ugg9ej.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240422221352-q1bpye2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240422221352-q1bpye2",
+				"updated": "20240422221404"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体代码"
+				}
+			]
+		},
+		{
+			"ID": "20240422221404-oaa3smn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240422221404-oaa3smn",
+				"style": "line-height: 22px;",
+				"updated": "20240422221416"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System;\nusing System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\n\npublic class InputManager : BaseManager\u003cInputManager\u003e\n{\n    private Dictionary\u003cE_EventType, InputInfo\u003e inputDic = new Dictionary\u003cE_EventType, InputInfo\u003e();\n    //当前遍历取出的遍历消息\n    private InputInfo nowInputInfo;\n    //是否开启了输入检测\n    private bool isCheckInput;\n    //用于在改键时获取输入信息的委托，只有当Update内获取到信息的时候 再通过委托传递出去\n    private UnityAction\u003cInputInfo\u003e getInputInfoCallBack;\n    //是否开始检测输入\n    private bool isBeginCheckInput = false;\n\n    private InputManager()\n    {\n        MonoManager.Instance.AddUpdateListener(InputUpdate);\n    }\n\n    public void GetInputInfo(UnityAction\u003cInputInfo\u003e callBack)\n    {\n        getInputInfoCallBack = callBack;\n        MonoManager.Instance.StartCoroutine(BeginCheckInput());\n    }\n\n    public IEnumerator BeginCheckInput()\n    {\n        //延迟一帧再设置为true\n        yield return 0;\n        isBeginCheckInput = true;\n    }\n\n    private void InputUpdate()\n    {\n        //如果外部未开启检测功能，就不检测输入\n        if (!isCheckInput)\n            return;\n\n        //当委托不为空时，证明想要获取到输入的消息传递给外部\n        if (isBeginCheckInput)\n        {\n            if (Input.anyKeyDown)\n            {\n                InputInfo inputInfo = null;\n                Array keyCodes = Enum.GetValues(typeof(KeyCode));\n                foreach (KeyCode inputKey in keyCodes)\n                {\n                    //判断到底是谁被按下了，通过这个的带对应的输入的键盘信息\n                    if (Input.GetKeyDown(inputKey))\n                    {\n                        inputInfo = new InputInfo(InputInfo.E_InputType.Down, inputKey);\n                        break;\n                    }\n                }\n                for (int i = 0; i \u003c 3; i++)\n                {\n                    if (Input.GetMouseButtonDown(i))\n                    {\n                        inputInfo = new InputInfo(InputInfo.E_InputType.Down, i);\n                        break;\n                    }\n                }\n                //把获取到的消息传递到外部，并清空委托\n                getInputInfoCallBack.Invoke(inputInfo);\n                getInputInfoCallBack = null;\n                //检测一次后就停止检测\n                isBeginCheckInput = false;\n            }\n        }\n\n        foreach (E_EventType eventType in inputDic.Keys)\n        {\n            nowInputInfo = inputDic[eventType];\n            //如果是键盘输入\n            if (nowInputInfo.keyOrMouse == InputInfo.E_KeyOrMouse.Key)\n            {\n                //根据输入类型检测对应的输入，传入输入消息设置的键位\n                switch (nowInputInfo.inputType)\n                {\n                    case InputInfo.E_InputType.Down:\n                        if (Input.GetKeyDown(nowInputInfo.key))\n                            EventCenter.Instance.EventTrigger(eventType);\n                        break;\n                    case InputInfo.E_InputType.Up:\n                        if (Input.GetKeyUp(nowInputInfo.key))\n                            EventCenter.Instance.EventTrigger(eventType);\n                        break;\n                    case InputInfo.E_InputType.Always:\n                        if (Input.GetKey(nowInputInfo.key))\n                            EventCenter.Instance.EventTrigger(eventType);\n                        break;\n                }\n            }\n            //如果是鼠标输入\n            else if (nowInputInfo.keyOrMouse == InputInfo.E_KeyOrMouse.Mouse)\n            {\n                //根据输入类型检测对应的输入，传入输入消息设置的键位\n                switch (nowInputInfo.inputType)\n                {\n                    case InputInfo.E_InputType.Down:\n                        if (Input.GetMouseButtonDown(nowInputInfo.mouseID))\n                            EventCenter.Instance.EventTrigger(eventType);\n                        break;\n                    case InputInfo.E_InputType.Up:\n                        if (Input.GetMouseButtonUp(nowInputInfo.mouseID))\n                            EventCenter.Instance.EventTrigger(eventType);\n                        break;\n                    case InputInfo.E_InputType.Always:\n                        if (Input.GetMouseButton(nowInputInfo.mouseID))\n                            EventCenter.Instance.EventTrigger(eventType);\n                        break;\n                }\n            }\n        }\n\n        EventCenter.Instance.EventTrigger(E_EventType.E_Input_Horizontal, Input.GetAxis(\"Horizontal\"));\n        EventCenter.Instance.EventTrigger(E_EventType.E_Input_Vertical, Input.GetAxis(\"Vertical\"));\n    }\n\n    /// \u003csummary\u003e\n    /// 开启或者关闭输入模块管理的检测\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"isCheckInput\"\u003e检测输入\u003c/param\u003e\n    public void StartOrCloseInputManager(bool isCheckInput)\n    {\n        this.isCheckInput = isCheckInput;\n    }\n\n    /// \u003csummary\u003e\n    /// 提供给外部改键或初始化的方法（改为键盘事件）\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventType\"\u003e行为事件类型\u003c/param\u003e\n    /// \u003cparam name=\"key\"\u003e要监听哪个键\u003c/param\u003e\n    /// \u003cparam name=\"inputType\"\u003e输入类型\u003c/param\u003e\n    public void ChangeKeyboardInfo(E_EventType eventType, KeyCode key, InputInfo.E_InputType inputType)\n    {\n        //初始化\n        if (!inputDic.ContainsKey(eventType))\n        {\n            inputDic.Add(eventType, new InputInfo(inputType, key));\n        }\n        //改键\n        else\n        {\n            //如果之前是鼠标，我们必须要修改它的按键类型\n            inputDic[eventType].keyOrMouse = InputInfo.E_KeyOrMouse.Key;\n            inputDic[eventType].key = key;\n            inputDic[eventType].inputType = inputType;\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 提供给外部改键或初始化的方法（改为鼠标事件）\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventType\"\u003e行为事件类型\u003c/param\u003e\n    /// \u003cparam name=\"mouseID\"\u003e要监听鼠标按键的ID\u003c/param\u003e\n    /// \u003cparam name=\"inputType\"\u003e输入类型\u003c/param\u003e\n    public void ChangeMouseInfo(E_EventType eventType, int mouseID, InputInfo.E_InputType inputType)\n    {\n        //初始化\n        if (!inputDic.ContainsKey(eventType))\n        {\n            inputDic.Add(eventType, new InputInfo(inputType, mouseID));\n        }\n        //改键\n        else\n        {\n            //如果之前是键盘，我们必须要修改它的按键类型\n            inputDic[eventType].keyOrMouse = InputInfo.E_KeyOrMouse.Mouse;\n            inputDic[eventType].mouseID = mouseID;\n            inputDic[eventType].inputType = inputType;\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 移除某个事件的输入监听\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventType\"\u003e要移除输入监听的事件\u003c/param\u003e\n    public void RemoveInputInfo(E_EventType eventType)\n    {\n        if (inputDic.ContainsKey(eventType))\n            inputDic.Remove(eventType);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240422221412-av5z1er",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240422221412-av5z1er"
+			}
+		}
+	]
+}

@@ -1,0 +1,570 @@
+{
+	"ID": "20240419135329-8lxnlkv",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240419135329-8lxnlkv",
+		"title": "UFL6-1——音效管理模块音乐部分实现",
+		"type": "doc",
+		"updated": "20240419161027"
+	},
+	"Children": [
+		{
+			"ID": "20240419135329-jhf5hq3",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240419135329-jhf5hq3",
+				"updated": "20240419140325"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现音效管理模块 音乐 相关内容"
+				}
+			]
+		},
+		{
+			"ID": "20240419140326-aixraxa",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240419140326-aixraxa",
+				"updated": "20240419144000"
+			},
+			"Children": [
+				{
+					"ID": "20240419140341-n8y2zbe",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240419140341-n8y2zbe",
+						"updated": "20240419140341"
+					},
+					"Children": [
+						{
+							"ID": "20240419140341-mj745i0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419140341-mj745i0",
+								"updated": "20240419141038"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "声明"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "MusicManager"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，继承 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240104151530-3axozd7",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "不继承MonoBehaviour的单例模式基类"
+								}
+							]
+						},
+						{
+							"ID": "20240419140958-k3r4six",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240419140958-k3r4six",
+								"style": "line-height: 22px;",
+								"updated": "20240419141003"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "/// \u003csummary\u003e\n/// 音乐音效管理器\n/// \u003c/summary\u003e\npublic class MusicManager : BaseManager\u003cMusicManager\u003e\n{\n    private MusicManager() { }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240419140341-cp7qvot",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240419140341-cp7qvot",
+						"updated": "20240419140341"
+					},
+					"Children": [
+						{
+							"ID": "20240419140341-bxuqxsc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419140341-bxuqxsc",
+								"updated": "20240419140341"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "播放背景音乐"
+								}
+							]
+						},
+						{
+							"ID": "20240419142857-ugr51hq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419142857-ugr51hq",
+								"updated": "20240419143120"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在场景上添加一个唯一的不可销毁的对象，该对象挂载一个播放背景音乐的音效源，\n音效管理模块需要关联这个音效源，通过这个音效源来控制背景音乐的播放"
+								}
+							]
+						},
+						{
+							"ID": "20240419141043-x61be3m",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240419141043-x61be3m",
+								"style": "line-height: 22px;",
+								"updated": "20240419143335"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//背景音乐播放组件\nprivate AudioSource bgmSource = null;\n\npublic void PlayBGM(string name)\n{\n    //动态创建播放背景音乐的组件，并且不会因为过场景而移除\n    //保证背景音乐在过场景时也能播放\n    if (bgmSource == null)\n    {\n        GameObject obj = new GameObject(\"BGM\");\n        GameObject.DontDestroyOnLoad(obj);\n        bgmSource = obj.AddComponent\u003cAudioSource\u003e();\n    }\n    //根据传入的背景音乐名字，来播放背景音乐\n    ABResManager.Instance.LoadResAsync\u003cAudioClip\u003e(\"music\", name, (clip) =\u003e\n    {\n        bgmSource.clip = clip;\n        bgmSource.loop = true;\n        bgmSource.volume = 0.1f;\t//TODO.. 临时设置\n        bgmSource.Play();\n    });\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240419140341-294k9fz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240419140341-294k9fz",
+						"updated": "20240419140341"
+					},
+					"Children": [
+						{
+							"ID": "20240419140341-hf3l61a",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419140341-hf3l61a",
+								"updated": "20240419140341"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "停止背景音乐"
+								}
+							]
+						},
+						{
+							"ID": "20240419141045-ty4i3kl",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240419141045-ty4i3kl",
+								"style": "line-height: 22px;",
+								"updated": "20240419143132"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public void StopBGM()\n{\n    if (bgmSource == null)\n        return;\n    bgmSource.Stop();\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240419140341-w4hyhng",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240419140341-w4hyhng",
+						"updated": "20240419140341"
+					},
+					"Children": [
+						{
+							"ID": "20240419140341-ao9xf1c",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419140341-ao9xf1c",
+								"updated": "20240419140341"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "暂停背景音乐"
+								}
+							]
+						},
+						{
+							"ID": "20240419141047-u2nwhy3",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240419141047-u2nwhy3",
+								"style": "line-height: 22px;",
+								"updated": "20240419143139"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public void PauseBGM()\n{\n    if (bgmSource == null)\n        return;\n    bgmSource.Pause();\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240419140341-fwhfkes",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20240419140341-fwhfkes",
+						"updated": "20240419144000"
+					},
+					"Children": [
+						{
+							"ID": "20240419140341-l3z79fj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419140341-l3z79fj",
+								"updated": "20240419140341"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "设置背景音乐大小"
+								}
+							]
+						},
+						{
+							"ID": "20240419143406-ph5zd5m",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240419143406-ph5zd5m",
+								"updated": "20240419144000"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "不论背景音乐音效源是否存在，都记录这个设置的值到"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "bgmVolume"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，当背景音乐正在播放，或者背景音乐开始播放，就使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "bgmVolume"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​调整音量"
+								}
+							]
+						},
+						{
+							"ID": "20240419143347-f20g74o",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240419143347-f20g74o",
+								"style": "line-height: 22px;",
+								"updated": "20240419143402"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//背景音乐播放组件\nprivate AudioSource bgmSource = null;\n//背景音乐大小\nprivate float bgmVolume = 0.1f;\n\nprivate MusicManager() { }\n\npublic void PlayBGM(string name)\n{\n    //动态创建播放背景音乐的组件，并且不会因为过场景而移除\n    //保证背景音乐在过场景时也能播放\n    if (bgmSource == null)\n    {\n        GameObject obj = new GameObject(\"BGM\");\n        GameObject.DontDestroyOnLoad(obj);\n        bgmSource = obj.AddComponent\u003cAudioSource\u003e();\n    }\n    //根据传入的背景音乐名字，来播放背景音乐\n    ABResManager.Instance.LoadResAsync\u003cAudioClip\u003e(\"music\", name, (clip) =\u003e\n    {\n        bgmSource.clip = clip;\n        bgmSource.loop = true;\n        bgmSource.volume = bgmVolume;\n        bgmSource.Play();\n    });\n}\n\npublic void ChangeBGMVolume(float value)\n{\n    bgmVolume = value;\n    if (bgmSource == null)\n        return;\n    bgmSource.volume = bgmVolume;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240419143518-upjrhcf",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240419143518-upjrhcf",
+				"updated": "20240419144017"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20240419144032-696r0na",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419144032-696r0na",
+				"updated": "20240419144558"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "准备两个音乐，放到"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Assets/Editor/music"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​文件夹下，以便于读取和打包"
+				}
+			]
+		},
+		{
+			"ID": "20240419144031-2p3lfek",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419144031-2p3lfek",
+				"updated": "20240419144017"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240419144031-l8djlfq.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240419144042-as0tthd",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240419144042-as0tthd",
+				"style": "line-height: 22px;",
+				"updated": "20240419144050"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private float v = 0.1f;\nprivate float oldV = 0.1f;\n\nprivate void OnGUI()\n{\n    if (GUILayout.Button(\"播放背景音乐\"))\n    {\n        MusicManager.Instance.PlayBGM(\"Begin\");\n    }\n    if (GUILayout.Button(\"播放背景音乐2\"))\n    {\n        MusicManager.Instance.PlayBGM(\"Fight\");\n    }\n    if (GUILayout.Button(\"停止背景音乐\"))\n    {\n        MusicManager.Instance.StopBGM();\n    }\n    if (GUILayout.Button(\"暂停背景音乐\"))\n    {\n        MusicManager.Instance.PauseBGM();\n    }\n\n    v = GUILayout.HorizontalSlider(v, 0, 1);\n    //当值改变时，才执行改变音量方法\n    if (oldV != v)\n    {\n        MusicManager.Instance.ChangeBGMVolume(v);\n        oldV = v;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240419144050-l2c8afz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419144050-l2c8afz",
+				"updated": "20240419144142"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过点击屏幕上的绘制的按钮和滑动条，监听音乐变化"
+				}
+			]
+		},
+		{
+			"ID": "20240419144148-sekrknz",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240419144148-sekrknz",
+				"updated": "20240419160937"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体代码"
+				}
+			]
+		},
+		{
+			"ID": "20240419160937-9wz75rd",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240419160937-9wz75rd",
+				"style": "line-height: 22px;",
+				"updated": "20240419161027"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\n\n/// \u003csummary\u003e\n/// 音乐音效管理器\n/// \u003c/summary\u003e\npublic class MusicManager : BaseManager\u003cMusicManager\u003e\n{\n    //背景音乐播放组件\n    private AudioSource bgmSource = null;\n    //背景音乐大小\n    private float bgmVolume = 0.1f;\n\n    private MusicManager() { }\n\n    public void PlayBGM(string name)\n    {\n        //动态创建播放背景音乐的组件，并且不会因为过场景而移除\n        //保证背景音乐在过场景时也能播放\n        if (bgmSource == null)\n        {\n            GameObject obj = new GameObject(\"BGM\");\n            GameObject.DontDestroyOnLoad(obj);\n            bgmSource = obj.AddComponent\u003cAudioSource\u003e();\n        }\n        //根据传入的背景音乐名字，来播放背景音乐\n        ABResManager.Instance.LoadResAsync\u003cAudioClip\u003e(\"music\", name, (clip) =\u003e\n        {\n            bgmSource.clip = clip;\n            bgmSource.loop = true;\n            bgmSource.volume = bgmVolume;\n            bgmSource.Play();\n        });\n    }\n\n    public void StopBGM()\n    {\n        if (bgmSource == null)\n            return;\n        bgmSource.Stop();\n    }\n\n    public void PauseBGM()\n    {\n        if (bgmSource == null)\n            return;\n        bgmSource.Pause();\n    }\n\n    public void ChangeBGMVolume(float value)\n    {\n        bgmVolume = value;\n        if (bgmSource == null)\n            return;\n        bgmSource.volume = bgmVolume;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240419160952-pobw0ty",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240419160952-pobw0ty"
+			}
+		}
+	]
+}

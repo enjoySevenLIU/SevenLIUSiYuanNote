@@ -1,0 +1,1432 @@
+{
+	"ID": "20230709225046-6z9caz8",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230709225046-6z9caz8",
+		"name": "刚体加力",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230709225046-6z9caz8\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230709225146-48xjpna\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230710004917-0fe94p6\u0026quot;,\u0026quot;scrollTop\u0026quot;:2772,\u0026quot;focusId\u0026quot;:\u0026quot;20230709225146-48xjpna\u0026quot;,\u0026quot;focusStart\u0026quot;:0,\u0026quot;focusEnd\u0026quot;:0\u0026#125;",
+		"title": "U1L13-5——物理系统之刚体加力",
+		"type": "doc",
+		"updated": "20240321165955"
+	},
+	"Children": [
+		{
+			"ID": "20230709225146-48xjpna",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709225146-48xjpna",
+				"updated": "20230709225152"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "刚体加力"
+				}
+			]
+		},
+		{
+			"ID": "20230709225137-egj6dxf",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20230709225137-egj6dxf",
+				"updated": "20230709225138"
+			},
+			"Children": [
+				{
+					"ID": "20230709225046-6crkuau",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20230709225046-6crkuau",
+						"updated": "20230709225138"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "由于刚体组件会接管附加到的游戏对象的运动，因此不应试图借助脚本通过更改"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "a",
+							"TextMarkAHref": "https://docs.unity.cn/cn/2021.1/Manual/class-Transform.html",
+							"TextMarkTextContent": "变换"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "属性（如位置和旋转）来移动游戏对象。相反，应该施加__力__来推动游戏对象并让物理引擎计算结果"
+						}
+					]
+				},
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				}
+			]
+		},
+		{
+			"ID": "20230709225153-fjanw1x",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709225153-fjanw1x",
+				"updated": "20240321165940"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "给刚体加力的目标就是：让其有一个速度 使其朝向某一个方向移动"
+				}
+			]
+		},
+		{
+			"ID": "20230709225320-19rwx4i",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709225320-19rwx4i",
+				"updated": "20230709225334"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20230709225334-8q5xq4j",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709225334-8q5xq4j",
+				"updated": "20230710003542"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "this.GetComponent\u003cRigidbody\u003e()\t//获取刚体组件\nrigidBody.AddForce()\t\t//相对世界坐标 添加力\nrigidBody.AddRelativeForce()\t//相对本地坐标 添加力\nrigidBody.AddTorque()\t\t//相对世界坐标 添加扭矩力让其旋转\nrigidBody.AddRelativeTorque()\t//相对本地坐标 添加扭矩力让其旋转\nrigidBody.velocity\t\t//直接改变速度 速度方向是相对于世界坐标系\nrigidBody.AddExplosionForce()\t//模拟爆炸效果 只对挂载的脚本有这句语句的对象才有用\nrigidBody.AddForceAtPosition()\t//对物体特定的点施加力\nForceMode.Acceleration\t\t//给物体添加一个持续的加速度，忽略质量 默认为1\nForceMode.Force\t\t\t//给物体添加一个持续的力，与物体的质量有关\nForceMode.Impulse\t\t//给物体添加一个瞬间的力，与物体的质量有关 忽略时间 默认为1\nForceMode.VelocityCharge\t//给物体添加一个瞬时速度，忽略质量和时间都默认为1\nrigidBody.IsSleeping()\t\t//判断刚体是否在休眠的方法\nrigidBody.WakeUp()\t\t//唤醒刚体的方法\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709225756-k6o7l23",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709225756-k6o7l23",
+				"updated": "20230709234205"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "添加力"
+				}
+			]
+		},
+		{
+			"ID": "20230709234205-tiwi3v1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709234205-tiwi3v1",
+				"updated": "20240321165935"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先，添加力之前一定要获取刚体组件"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref code",
+					"TextMarkBlockRefID": "20230708174717-pcvfwf6",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": ".GetComponent\u0026lt;\u0026gt;()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20230709234235-m5qf8fx",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709234235-m5qf8fx",
+				"updated": "20230709234243"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "rigidBody = this.GetComponent\u003cRigidbody\u003e();\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709234445-787v4k2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709234445-787v4k2",
+				"updated": "20230710003453"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "注意！加力过后 对象是否停止移动 是由阻力决定的"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，如果阻力为0 那给了一个力之后 对象始终不会停止运动"
+				}
+			]
+		},
+		{
+			"ID": "20230710003454-gyg8ra1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710003454-gyg8ra1",
+				"updated": "20230710003454"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果希望即使有阻力 对象也能一直动，那就一直给“推”它（加力）就行了"
+				}
+			]
+		},
+		{
+			"ID": "20230710003433-57qt0bl",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230710003433-57qt0bl",
+				"updated": "20230710003448"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Update()\n{\n    //如果希望即使有阻力 对象也能一直动，那就一直给“推”它（加力）就行了\n    rigidBody.AddForce(Vector3.forward * 10);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709234312-bkf88b7",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709234312-bkf88b7",
+				"name": "rigidBody.AddForce()",
+				"updated": "20230709234359"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "相对世界坐标加力"
+				}
+			]
+		},
+		{
+			"ID": "20230709234400-s9hvtcf",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709234400-s9hvtcf",
+				"updated": "20230709234439"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//加力过后 对象是否停止移动 是由阻力决定的\n//如果阻力为0 那给了一个力之后 始终 不会停止运动\nrigidBody.AddForce(Vector3.forward * 10);   //这是相对于世界坐标系坐标轴的移动！\n//如果想要在 世界坐标系方法中 让对象 相对于自己的面朝向动\nrigidBody.AddForce(this.transform.forward * 10);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709234440-qhlqz2a",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709234440-qhlqz2a",
+				"name": "rigidBody.AddRelativeForce()",
+				"updated": "20230709234550"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "相对于本地坐标加力"
+				}
+			]
+		},
+		{
+			"ID": "20230709234530-4rop0d0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709234530-4rop0d0",
+				"updated": "20230709234539"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "rigidBody.AddRelativeForce(Vector3.forward * 10);   //至少相对于自己的坐标系的移动！\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709234557-od03pwr",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709234557-od03pwr",
+				"updated": "20230709234611"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "添加扭矩力"
+				}
+			]
+		},
+		{
+			"ID": "20230709234611-ercp97l",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709234611-ercp97l",
+				"updated": "20230709234644"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "添加扭矩力 让其旋转，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "加力过后 对象是否停止移动 是由扭矩阻力决定的"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230709234619-y30q92k",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709234619-y30q92k",
+				"name": "rigidBody.AddTorque()",
+				"updated": "20230709234831"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "相对世界坐标"
+				}
+			]
+		},
+		{
+			"ID": "20230709234707-mwjzg08",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709234707-mwjzg08",
+				"updated": "20230709234850"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//相对世界坐标\n//加力过后 对象是否停止移动 是由扭矩阻力决定的\nrigidBody.AddTorque(Vector3.up * 10);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709234630-cpsky6g",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709234630-cpsky6g",
+				"name": "rigidBody.AddRelativeTorque()",
+				"updated": "20230709234836"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "相对本地坐标"
+				}
+			]
+		},
+		{
+			"ID": "20230709234710-5gthdbe",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709234710-5gthdbe",
+				"updated": "20230709234901"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//相对本地坐标\nrigidBody.AddRelativeTorque(Vector3.up * 10);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709234904-skjej3n",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709234904-skjej3n",
+				"name": "rigidBody.velocity",
+				"updated": "20230709234950"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "直接改变速度"
+				}
+			]
+		},
+		{
+			"ID": "20230709234921-c3wti6m",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709234921-c3wti6m",
+				"updated": "20230709234933"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "注意！如果要直接通过改变速度，这个速度方向 是相对于 世界坐标系的！！！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230709234937-axjpsq5",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709234937-axjpsq5",
+				"updated": "20230709234942"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "rigidBody.velocity = Vector3.forward * 5;   //这个速度相对于世界坐标系！！！\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709234959-1vae33j",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709234959-1vae33j",
+				"name": "rigidBody.AddExplosionForce()",
+				"updated": "20230709235203"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "模拟爆炸效果"
+				}
+			]
+		},
+		{
+			"ID": "20230709235011-jkvff63",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709235011-jkvff63",
+				"updated": "20230709235059"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "模拟爆炸的里 一定是 所有希望受到爆炸效果影响的对象 都需要得到它们的刚体 来执行这个方法才能都有效果\n也就是说每个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "希望受到爆炸影响的刚体都需要执行该方法才能看到爆炸效果"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "！！！"
+				}
+			]
+		},
+		{
+			"ID": "20230709235034-dckjah2",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709235034-dckjah2",
+				"updated": "20230709235041"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "rigidBody.AddExplosionForce(10, Vector3.zero, 10);  //第一个参数 爆炸的力，第二个参数 爆炸中心坐标，第三个 爆炸半径\n//注意！！！这一句只对挂载的脚本有这句语句的对象才有用！！！没有这句语句的刚体不受影响\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709235104-w7vkujd",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709235104-w7vkujd",
+				"updated": "20230709235135"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对物体特定的点施加力"
+				}
+			]
+		},
+		{
+			"ID": "20230709235136-750gl1b",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709235136-750gl1b",
+				"updated": "20230709235151"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "一般对物体施加力都是对中心点加力，但是以下语句可以对物体特定的点位置施加力"
+				}
+			]
+		},
+		{
+			"ID": "20230709235152-5m96b6f",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709235152-5m96b6f",
+				"updated": "20230709235240"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "rigidBody.AddForceAtPosition(Vector3.forward * 10, new Vector3(0, 0, 0));\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709235242-2mr5y3r",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230709235242-2mr5y3r",
+				"name": "ForceMode",
+				"updated": "20230710002449"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "力的几种模式"
+				}
+			]
+		},
+		{
+			"ID": "20230709235339-yj6h1yy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709235339-yj6h1yy",
+				"updated": "20230709235502"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "大部分加力的参数还重载了一个力的模式\n主要的作用 就是 计算方式不同而已\n由于4中计算方式的不同 最终的移动速度就会不同"
+				}
+			]
+		},
+		{
+			"ID": "20230709235503-guxajvc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230709235503-guxajvc",
+				"updated": "20230709235528"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "rigidBody.AddForce(Vector3.forward * 10, ForceMode.Acceleration); //加速度模式\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230709235529-60ycpsj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230709235529-60ycpsj",
+				"updated": "20230709235545"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "动量定理"
+				}
+			]
+		},
+		{
+			"ID": "20230709235738-vcml8dp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230709235738-vcml8dp",
+				"updated": "20230710001413"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "Ft=mv"
+				},
+				{
+					"Type": "NodeText"
+				}
+			]
+		},
+		{
+			"ID": "20230710001857-tz8yny6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710001857-tz8yny6",
+				"updated": "20230710001939"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "v=\\frac{Ft}{m}"
+				}
+			]
+		},
+		{
+			"ID": "20230710000216-glxdesj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710000216-glxdesj",
+				"updated": "20230710000414"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "F"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "：力、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "t"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "：时间、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "m"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "：质量、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "v"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "：速度"
+				}
+			]
+		},
+		{
+			"ID": "20230710000337-sh5go78",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230710000337-sh5go78",
+				"name": "ForceMode.Acceleration",
+				"updated": "20230710002437"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "加速度（Acceleration）"
+				}
+			]
+		},
+		{
+			"ID": "20230710000430-cp7mw0z",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710000430-cp7mw0z",
+				"updated": "20230710001853"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "给物体添加一个持续的加速度，而"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "忽略其质量"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230710001840-xvt2qz9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710001840-xvt2qz9",
+				"updated": "20230710003209"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "v=Ft"
+				}
+			]
+		},
+		{
+			"ID": "20230710001849-puhm7ux",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710001849-puhm7ux",
+				"updated": "20230710003214"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "t：0.02s(取决于物理帧更新时间)\nF：(0,0,10)\nm：被忽略，默认为1\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "v = 10*0.02 = 0.2m/s"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n每物理帧移动0.2m/s*0.02 = 0.004m"
+				}
+			]
+		},
+		{
+			"ID": "20230710001127-4lowvkn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230710001127-4lowvkn",
+				"updated": "20230710001133"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "rigidBody.AddForce(Vector3.forward * 10, ForceMode.Acceleration); //加速度模式\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230710000653-614fsbj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230710000653-614fsbj",
+				"name": "ForceMode.Force",
+				"updated": "20230710002429"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "持续的力（Force）"
+				}
+			]
+		},
+		{
+			"ID": "20230710001218-txmpjxd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710001218-txmpjxd",
+				"updated": "20230710001955"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "给物体添加一个瞬间的力，与物体的质量有关"
+				}
+			]
+		},
+		{
+			"ID": "20230710001912-up8h746",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710001912-up8h746",
+				"updated": "20230710002515"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "v=\\frac{Ft}{m}"
+				}
+			]
+		},
+		{
+			"ID": "20230710001922-4srsblm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710001922-4srsblm",
+				"updated": "20230710002143"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "F：(0,0,10)\nt：0.02s\nm：2kg\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "v = 10 * \\frac{0.02}{2} = 0.1m/s"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n每物理帧移动0.1m/s*0.02 = 0.002m"
+				}
+			]
+		},
+		{
+			"ID": "20230710002146-or0ytku",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230710002146-or0ytku",
+				"updated": "20230710002831"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "rigidBody.AddForce(Vector3.forward * 10, ForceMode.Force);\t//持续力模式\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230710002018-qe1bit1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230710002018-qe1bit1",
+				"name": "ForceMode.Impulse",
+				"updated": "20230710003405"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "瞬间的力（Impulse）"
+				}
+			]
+		},
+		{
+			"ID": "20230710002453-5f27kbn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710002453-5f27kbn",
+				"updated": "20230710002708"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "给物体添加一个瞬间的力，与物体的质量有关 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "color: var(--b3-font-color1);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "忽略时间 默认为1"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"color: var(--b3-font-color1);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230710002713-1duqqn2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710002713-1duqqn2",
+				"updated": "20230710003049"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "v=\\frac{F}{m}"
+				}
+			]
+		},
+		{
+			"ID": "20230710002718-79mhfwk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710002718-79mhfwk",
+				"updated": "20230710003241"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "F：(0,0,10)\nt：被忽略，默认为1\nm：2kg\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "v = 10*\\frac{1}{2} = 5m/s"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n每物理帧移动5m/s*0.02 = 0.1m"
+				}
+			]
+		},
+		{
+			"ID": "20230710002724-4v0kws0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230710002724-4v0kws0",
+				"updated": "20230710002850"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "rigidBody.AddForce(Vector3.forward * 10, ForceMode.Impulse);\t//瞬间力模式\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230710002628-ejs39dq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230710002628-ejs39dq",
+				"name": "ForceMode.VelocityChange",
+				"updated": "20230710003358"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "瞬时速度（VelocityChange）"
+				}
+			]
+		},
+		{
+			"ID": "20230710002918-vd6ddq3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710002918-vd6ddq3",
+				"updated": "20230710002945"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "给物体添加一个瞬时速度，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "忽略质量与时间，全部默认为1"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				}
+			]
+		},
+		{
+			"ID": "20230710002959-eevwlv2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710002959-eevwlv2",
+				"updated": "20230710003148"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "v=F"
+				}
+			]
+		},
+		{
+			"ID": "20230710003018-a701u6b",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710003018-a701u6b",
+				"updated": "20230710003306"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "F：(0,0,10)\nt：被忽略，默认为1\nm：被忽略，默认为1\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "v = 10"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n每物理帧移动10m/s*0.02 = 0.2m"
+				}
+			]
+		},
+		{
+			"ID": "20230710003308-jbuz9ky",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230710003308-jbuz9ky",
+				"updated": "20230710003343"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "rigidBody.AddForce(Vector3.forward * 10, ForceMode.VelocityChange);\t//瞬时速度模式\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230710003219-zx5vl0v",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230710003219-zx5vl0v",
+				"name": "Constant Force",
+				"updated": "20230710004159"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "力场脚本（Constant Force）"
+				}
+			]
+		},
+		{
+			"ID": "20230710004018-poly9sq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710004018-poly9sq",
+				"updated": "20230710004132"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以直接在该组件内给予该对象一个持续的力，而无需写代码，填写方法参考"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230709225756-k6o7l23",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "添加力"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的写法即可"
+				}
+			]
+		},
+		{
+			"ID": "20230710004008-yq1stal",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710004008-yq1stal",
+				"updated": "20230710004008"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "max-width: 400px;",
+						"style": "width: 390px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20230710004008-letakvo.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 390px;\" parent-style=\"max-width: 400px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20230710004134-blh1c2d",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710004134-blh1c2d",
+				"updated": "20230710004150"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意！添加该脚本时，若没有rigidbody组件会自动添加rigidbody脚本"
+				}
+			]
+		},
+		{
+			"ID": "20230710004233-33p3fee",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230710004233-33p3fee",
+				"name": "rigidBody.WakeUp()",
+				"updated": "20230710004454"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "刚体的唤醒"
+				}
+			]
+		},
+		{
+			"ID": "20230710004243-4kbnwfp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710004243-4kbnwfp",
+				"updated": "20240321165955"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity为了节约性能，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "有时会让刚体在一定情况下休眠，这可能会导致一些错误的现象（例如旋转一个方块刚体的所在的地面，但方块卡在原地）"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n详细原因参考"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230709221430-3o23p4i",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "刚体睡眠"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，可以通过脚本让刚体不会处于休眠状态"
+				}
+			]
+		},
+		{
+			"ID": "20230710004310-xsbfqzy",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230710004310-xsbfqzy",
+				"updated": "20230710004412"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//判断刚体是否在休眠的方法\nif (rigidBody.IsSleeping())\n{\n    //唤醒刚体的方法\n    rigidBody.WakeUp();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230710004917-0fe94p6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230710004917-0fe94p6"
+			}
+		}
+	]
+}

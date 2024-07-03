@@ -1,0 +1,868 @@
+{
+	"ID": "20240322122255-m1hnv8d",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240322122255-m1hnv8d",
+		"title": "UH3L2——获取AB包文件的MD5码",
+		"type": "doc",
+		"updated": "20240324132947"
+	},
+	"Children": [
+		{
+			"ID": "20240322123655-988yyti",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240322123655-988yyti",
+				"updated": "20240322123659"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240322123659-yd73v6w",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240322123659-yd73v6w",
+				"style": "line-height: 22px;",
+				"updated": "20240322125949"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "System.Security.Cryptography\t\t//安全和加密相关命名空间\nMD5\t\t\t\t\t\t\t\t\t//MD5码类\nMD5CryptoServiceProvider\t\t\t//MD5加密服务提供商类\nnew MD5CryptoServiceProvider()\t\t//通过MD5加密服务提供商类的构造函数实例化一个继承MD5类对象的构造方法\nmd5.ComputeHash()\t\t\t\t\t//通过文件流获取md5码，返回16个字节的字节数组\nbyte.ToString(\"x2\")\t\t\t\t\t//将字节数组转为小写16进制的字符\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240322122255-qi4o61j",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"alias": "MD5CryptoServiceProvider",
+				"id": "20240322122255-qi4o61j",
+				"name": "MD5",
+				"updated": "20240322122433"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "MD5码"
+				}
+			]
+		},
+		{
+			"ID": "20240322122438-9oluavi",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322122438-9oluavi",
+				"updated": "20240322122445"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "MD5（Message-Digest Algorithm）是MD5信息摘要算法的简称，它是一种广泛使用的密码散列函数\n可以生成出一个128位（16个字节）的散列值，用于确保信息的完整一致性"
+				}
+			]
+		},
+		{
+			"ID": "20240322122438-7wc2b5a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322122438-7wc2b5a",
+				"updated": "20240322122956"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "当我们将数据经过MD5算法计算过后，不管我们传入的数据有多大，都会生成一个固定长度（128位共16个字节）的信息摘要值"
+				}
+			]
+		},
+		{
+			"ID": "20240322122438-ywm58v2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322122438-ywm58v2",
+				"updated": "20240322123356"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong u",
+					"TextMarkTextContent": "相同的数据，每次经过MD5算法计算后的结果都会是一样的，如果数据变化，MD5码将会发生变化"
+				}
+			]
+		},
+		{
+			"ID": "20240322122438-x0pqrbi",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322122438-x0pqrbi",
+				"updated": "20240322122452"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此，我们可以利用MD5码作为文件的唯一标识，通过它来判断文件内容是否变化"
+				}
+			]
+		},
+		{
+			"ID": "20240322122454-xn2ugzx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240322122454-xn2ugzx",
+				"updated": "20240322122502"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "MD5码在热更新资源对比文件中的作用"
+				}
+			]
+		},
+		{
+			"ID": "20240322122506-aom619c",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322122506-aom619c",
+				"updated": "20240322123406"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过资源名或者资源大小我们无法判断资源是否更新，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "所以我们需要"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong u",
+					"TextMarkTextContent": "利用MD5的唯一性，来判断资源的更新"
+				}
+			]
+		},
+		{
+			"ID": "20240322122519-v8x9trh",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240322122519-v8x9trh",
+				"updated": "20240322122525"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "C#中获取文件的MD5码"
+				}
+			]
+		},
+		{
+			"ID": "20240322122533-9mooas5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322122533-9mooas5",
+				"updated": "20240322122600"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关键类："
+				}
+			]
+		},
+		{
+			"ID": "20240322122600-1ncmmx5",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240322122600-1ncmmx5",
+				"updated": "20240324132938"
+			},
+			"Children": [
+				{
+					"ID": "20240322122600-u367hnn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240322122600-u367hnn",
+						"updated": "20240322122629"
+					},
+					"Children": [
+						{
+							"ID": "20240322122600-gzo6egm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240322122600-gzo6egm",
+								"updated": "20240322122604"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "新知识"
+								}
+							]
+						},
+						{
+							"ID": "20240322122604-v0v8hwr",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240322122604-v0v8hwr",
+								"updated": "20240322122629"
+							},
+							"Children": [
+								{
+									"ID": "20240322122604-0fym5xt",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240322122604-0fym5xt",
+										"updated": "20240322122629"
+									},
+									"Children": [
+										{
+											"ID": "20240322122604-5avacp6",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240322122604-5avacp6",
+												"updated": "20240322122629"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "MD5"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ —— MD5类\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240322122605-y9thhvs",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240322122605-y9thhvs",
+										"updated": "20240322122627"
+									},
+									"Children": [
+										{
+											"ID": "20240322122605-lcvfbjl",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240322122605-lcvfbjl",
+												"updated": "20240322122627"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "MD5CryptoServiceProvider"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ —— MD5加密服务提供商类"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240322122601-6govcry",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240322122601-6govcry",
+						"updated": "20240322123849"
+					},
+					"Children": [
+						{
+							"ID": "20240322122601-aw7rmw3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240322122601-aw7rmw3",
+								"updated": "20240322122608"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "老知识"
+								}
+							]
+						},
+						{
+							"ID": "20240322122608-7ck977e",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20240322122608-7ck977e",
+								"updated": "20240322123849"
+							},
+							"Children": [
+								{
+									"ID": "20240322122608-nwonnds",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240322122608-nwonnds",
+										"updated": "20240322122621"
+									},
+									"Children": [
+										{
+											"ID": "20240322122608-pczctdc",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240322122608-pczctdc",
+												"updated": "20240322122621"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code block-ref",
+													"TextMarkBlockRefID": "20231107214338-m5env4j",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "FileStream"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ —— 文件流类 数据持久化四部曲 2进制中讲解过\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240322122609-dude0up",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20240322122609-dude0up",
+										"updated": "20240322123849"
+									},
+									"Children": [
+										{
+											"ID": "20240322122609-m963e9c",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240322122609-m963e9c",
+												"updated": "20240322123849"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code block-ref",
+													"TextMarkBlockRefID": "20240322122838-nr8hxth",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "StringBuilder"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ —— 字符串拼接类 C"
+												},
+												{
+													"Type": "NodeBackslash",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "#"
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": "四部曲C"
+												},
+												{
+													"Type": "NodeBackslash",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "#"
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": "核心中讲过"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240322122533-6mm3anc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322122533-6mm3anc",
+				"updated": "20240324132947"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "获取MD5码流程："
+				}
+			]
+		},
+		{
+			"ID": "20240322122550-42yrhto",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240322122550-42yrhto",
+				"updated": "20240324132938"
+			},
+			"Children": [
+				{
+					"ID": "20240322122550-lzhvx3o",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240322122550-lzhvx3o",
+						"updated": "20240322122550"
+					},
+					"Children": [
+						{
+							"ID": "20240322122550-z8l86bi",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240322122550-z8l86bi",
+								"updated": "20240322122550"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "根据文件路径，获取文件的流信息"
+								}
+							]
+						},
+						{
+							"ID": "20240322125800-kaltl3j",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240322125800-kaltl3j",
+								"style": "line-height: 22px;",
+								"updated": "20240322125805"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using (FileStream file = new FileStream(filePath, FileMode.Open))\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240322122550-31j6jyl",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240322122550-31j6jyl",
+						"name": "md5.ComputeHash()",
+						"updated": "20240322122550"
+					},
+					"Children": [
+						{
+							"ID": "20240322122550-dpuvurj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240322122550-dpuvurj",
+								"updated": "20240322123856"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "利用md5对象根据流信息，计算出MD5码（字节数组形式）"
+								}
+							]
+						},
+						{
+							"ID": "20240322125739-wxywis0",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240322125739-wxywis0",
+								"style": "line-height: 22px;",
+								"updated": "20240322125757"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "MD5 md5 = new MD5CryptoServiceProvider();\nbyte[] md5Info = md5.ComputeHash(file);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240322122550-bplqehq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240322122550-bplqehq",
+						"updated": "20240322122550"
+					},
+					"Children": [
+						{
+							"ID": "20240322122550-7qzgxm1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240322122550-7qzgxm1",
+								"updated": "20240322125844"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将字节数组形式的MD5码转为16进制字符串（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "byte"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ToString()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​内传入"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "\u0026quot;x2\u0026quot;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，会转为小写16进制）"
+								}
+							]
+						},
+						{
+							"ID": "20240322125807-z6lu867",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240322125807-z6lu867",
+								"style": "line-height: 22px;",
+								"updated": "20240322125821"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "for (int i = 0; i \u003c md5Info.Length; i++)\n\t//关于md5Info[i].ToString()内的参数，如果传入X2就是大写的16进制，x2就是小写的\n    sb.Append(md5Info[i].ToString(\"x2\"));\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240322130020-f9gf24h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322130020-f9gf24h",
+				"updated": "20240324132938"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "读取指定路径下的luaAB包，输出它的MD5码"
+				}
+			]
+		},
+		{
+			"ID": "20240322125055-atjhkdv",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240322125055-atjhkdv",
+				"style": "line-height: 22px;",
+				"updated": "20240324132938"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.IO;\nusing System.Security.Cryptography;\nusing System.Text;\nusing UnityEngine;\n\npublic class Lesson_MD5 : MonoBehaviour\n{\n    void Start()\n    {\n        print(GetMD5(Application.dataPath + \"/ArtRes/AB/PC/lua\"));\n    }\n\n    private string GetMD5(string filePath)\n    {\n        using (FileStream file = new FileStream(filePath, FileMode.Open))\n        {\n            //声明一个MD5对象，用于生成MD5码\n            MD5 md5 = new MD5CryptoServiceProvider();\n            //利用API得到数据的MD5码 16个字节的数组\n            byte[] md5Info = md5.ComputeHash(file);\n            //把16个字节转换为16进制 拼接成字符串，为了减小md5码的长度\n            StringBuilder sb = new StringBuilder();\n            file.Close();\n            for (int i = 0; i \u003c md5Info.Length; i++)\n                //关于md5Info[i].ToString()内的参数，如果传入X2就是大写的16进制，x2就是小写的\n                sb.Append(md5Info[i].ToString(\"x2\"));\n            return sb.ToString();\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240322125153-ograyyu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322125153-ograyyu",
+				"updated": "20240324132938"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出如下："
+				}
+			]
+		},
+		{
+			"ID": "20240322124947-dxzdqtw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322124947-dxzdqtw",
+				"updated": "20240324132938"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240322124947-gtvtwgl.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240322125158-ev07a2f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322125158-ev07a2f",
+				"updated": "20240324132938"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "向luaAB包添加了一个文件的输出如下："
+				}
+			]
+		},
+		{
+			"ID": "20240322125052-uyjr75d",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240322125052-uyjr75d",
+				"updated": "20240324132938"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 497px;",
+						"style": "width: 487px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240322125052-8rwqw5q.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 487px;\" parent-style=\"width: 497px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		}
+	]
+}

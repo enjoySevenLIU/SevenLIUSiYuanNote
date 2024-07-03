@@ -1,0 +1,232 @@
+{
+	"ID": "20230716172436-58qomub",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230716172436-58qomub",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230716172436-58qomub\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230716172436-iz1393q\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230716175849-olx0qx7\u0026quot;,\u0026quot;scrollTop\u0026quot;:0,\u0026quot;focusId\u0026quot;:\u0026quot;20230716172436-iz1393q\u0026quot;,\u0026quot;focusStart\u0026quot;:0,\u0026quot;focusEnd\u0026quot;:0\u0026#125;",
+		"title": "UD2SL4——让Dictionary支持序列化和反序列化",
+		"updated": "20240317172940"
+	},
+	"Children": [
+		{
+			"ID": "20230716172436-iz1393q",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20230716172436-iz1393q",
+				"updated": "20240317172940"
+			},
+			"Children": [
+				{
+					"ID": "20240311221519-az51y93",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240311221519-az51y93",
+						"updated": "20240311221519"
+					},
+					"Children": [
+						{
+							"ID": "20240311221519-mv78tlb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240311221519-mv78tlb",
+								"updated": "20240311221519"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "我们没办法修改C#自带的类"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240311221519-xdp5fbr",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240311221519-xdp5fbr",
+						"updated": "20240317172940"
+					},
+					"Children": [
+						{
+							"ID": "20240311221519-00gixqx",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240311221519-00gixqx",
+								"updated": "20240317172940"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "我们可以重写一个类，继承"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Dictionary"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​然后让这个类继承序列化拓展接口"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref code",
+									"TextMarkBlockRefID": "20230716014813-wj9ar8v",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "lXmlSerialzable"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240311221519-jzsbxme",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240311221519-jzsbxme",
+						"updated": "20240311221519"
+					},
+					"Children": [
+						{
+							"ID": "20240311221519-zl2zshp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240311221519-zl2zshp",
+								"updated": "20240311221519"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "实现里面的序列化和反序列化规则即可"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230716172953-gi0vevu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230716172953-gi0vevu",
+				"updated": "20230716175826"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现过程"
+				}
+			]
+		},
+		{
+			"ID": "20230716175827-yb044ol",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230716175827-yb044ol",
+				"updated": "20230716175832"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class SerizlizerDictionary\u003cTkey, TValue\u003e : Dictionary\u003cTkey, TValue\u003e, IXmlSerializable\n{\n    public XmlSchema GetSchema()\n    {\n        return null;\n    }\n    //自定义 字典的 反序列化规则\n    public void ReadXml(XmlReader reader)\n    {\n        XmlSerializer keySer = new XmlSerializer(typeof(Tkey));\n        XmlSerializer valueSer = new XmlSerializer(typeof(TValue));\n        reader.Read();                                              //要跳过根节点的头节点\n        //循环遍历所有节点\n        while (reader.NodeType != XmlNodeType.EndElement)           //判断当前不是元素节点尾节点 进行反序列化\n        {\n            Tkey key = (Tkey)keySer.Deserialize(reader);            //反序列化键\n            TValue value = (TValue)valueSer.Deserialize(reader);    //反序列化值\n            this.Add(key, value);                                   //向自己存储这对键值对\n        }\n        reader.Read();                                              //跳过（字典的）根节点的尾节点，避免影响之后数据的读取！\n    }\n    //自定义 字典的 序列化规则\n    public void WriteXml(XmlWriter writer)\n    {\n        XmlSerializer keySer = new XmlSerializer(typeof(Tkey));\n        XmlSerializer valueSer = new XmlSerializer(typeof(TValue));\n\n        foreach(KeyValuePair\u003cTkey, TValue\u003e kv in this)\n        {\n            keySer.Serialize(writer, kv.Key);\n            valueSer.Serialize(writer, kv.Value);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230716172934-l523nuw",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230716172934-l523nuw",
+				"updated": "20230716180013"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class TestLesson4\n{\n    public int Test1;\n    public SerizlizerDictionary\u003cint, string\u003e dic;\n}\n\npublic class Lesson4 : MonoBehaviour\n{\n    TestLesson4 tl4;\n    void Start()\n    {\n        tl4 = new TestLesson4\n        {\n            dic = new SerizlizerDictionary\u003cint, string\u003e()\n        };\n        tl4.dic.Add(1, \"123\");\n        tl4.dic.Add(2, \"234\");\n        tl4.dic.Add(3, \"345\");\n\n        string path = Application.persistentDataPath + \"/TestLesson4.xml\";\n\n        using (StreamWriter writer = new StreamWriter(path))\n        {\n            XmlSerializer s = new XmlSerializer(typeof(TestLesson4));\n            s.Serialize(writer, tl4);\n        }\n\n        using (StreamReader reader = new StreamReader(path))\n        {\n            XmlSerializer s = new XmlSerializer(typeof(TestLesson4));\n            tl4 = (TestLesson4)s.Deserialize(reader);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230716175849-olx0qx7",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230716175849-olx0qx7",
+				"updated": "20230716175859"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "eG1s"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "\u003c?xml version=\"1.0\" encoding=\"utf-8\"?\u003e\n\u003cTestLesson4 xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\n  \u003cTest1\u003e0\u003c/Test1\u003e\n  \u003cdic\u003e\n    \u003cint\u003e1\u003c/int\u003e\n    \u003cstring\u003e123\u003c/string\u003e\n    \u003cint\u003e2\u003c/int\u003e\n    \u003cstring\u003e234\u003c/string\u003e\n    \u003cint\u003e3\u003c/int\u003e\n    \u003cstring\u003e345\u003c/string\u003e\n  \u003c/dic\u003e\n\u003c/TestLesson4\u003e\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

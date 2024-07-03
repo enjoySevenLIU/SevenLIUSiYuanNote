@@ -1,0 +1,721 @@
+{
+	"ID": "20240427145950-dogc2by",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240427145950-dogc2by",
+		"title": "UH4L10——值类型绑定",
+		"type": "doc",
+		"updated": "20240501222832"
+	},
+	"Children": [
+		{
+			"ID": "20240427155104-rxpmysh",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240427155104-rxpmysh",
+				"updated": "20240427155109"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240427155110-09u0dzf",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240427155110-09u0dzf",
+				"style": "line-height: 22px;",
+				"updated": "20240427155311"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "appDomain.RegisterValueTypeBinder()\t\t//注册值类型与值类型绑定类的绑定，可以提高值类型计算效率\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240427145950-ob2honr",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240427145950-ob2honr",
+				"name": "appDomain.RegisterValueTypeBinder()",
+				"updated": "20240427150051"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "值类型绑定"
+				}
+			]
+		},
+		{
+			"ID": "20240427150047-r1ehevo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427150047-r1ehevo",
+				"updated": "20240427150129"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240426161157-1ia3bss",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "上节课"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "我们知道，CLR绑定其实就是把ILRuntime中用到的Unity相关方法\n进行CLR重定向，让本来要使用反射去执行的一些逻辑变成直接执行，这样可以大大提升我们的性能\n那么值类型绑定，其实就是把Unity当中的一些常用值类型方法进行CLR绑定，比如"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Vector2"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Vector3"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Quaternion"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​等\n值类型绑定后，性能将得到大幅提升"
+				}
+			]
+		},
+		{
+			"ID": "20240427150242-ebj53hr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427150242-ebj53hr",
+				"updated": "20240427150247"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "值类型绑定，就是把Unity当中的一些常用值类型方法进行CLR绑定，它可以大幅提高在热更新工程中使用Unity中值类型对象的效率"
+				}
+			]
+		},
+		{
+			"ID": "20240427150120-9hl7mty",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240427150120-9hl7mty",
+				"updated": "20240427150139"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如何进行值类型绑定"
+				}
+			]
+		},
+		{
+			"ID": "20240427150148-fq2oxuu",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240427150148-fq2oxuu",
+				"updated": "20240501222832"
+			},
+			"Children": [
+				{
+					"ID": "20240427150150-xhb6epj",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240427150150-xhb6epj",
+						"updated": "20240501222832"
+					},
+					"Children": [
+						{
+							"ID": "20240427150150-i1vdxqq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240427150150-i1vdxqq",
+								"updated": "20240427150203"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "手写值类型绑定类（示例工程中提供了"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Vector2"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Vector3"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Quaternion"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​的，可以直接使用）"
+								}
+							]
+						},
+						{
+							"ID": "20240427150148-iq8ib94",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240427150148-iq8ib94",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+								"updated": "20240501222832"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注意：手写值类型绑定类必须了解ILRuntime原理，详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240428211727-5kbqc59",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "UH4L18——基本原理"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"parent-style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240501160226-q1xf6zn",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "UH4L21——重定向的书写规则"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: parent-style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								}
+							]
+						},
+						{
+							"ID": "20240427150529-cu296b0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240427150529-cu296b0",
+								"updated": "20240427150529"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"parent-style": "width: 284px;",
+										"style": "width: 274px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240427150529-lq8urqt.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 274px;\" parent-style=\"width: 284px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240427150150-op1eq9k",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240427150150-op1eq9k",
+						"name": "appDomain.RegisterValueTypeBinder()",
+						"updated": "20240427151521"
+					},
+					"Children": [
+						{
+							"ID": "20240427150150-w9zkz7y",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240427150150-w9zkz7y",
+								"updated": "20240427150207"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注册值类型绑定"
+								}
+							]
+						},
+						{
+							"ID": "20240427151155-9n9iqwj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240427151155-9n9iqwj",
+								"updated": "20240427151513"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "appDomain.RegisterValueTypeBinder(typeof(值类型), new 绑定类());"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，在CLR绑定脚本的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "InitILRuntime"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​中注册，\n"
+								}
+							]
+						},
+						{
+							"ID": "20240427151205-kj9uokq",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240427151205-kj9uokq",
+								"style": "line-height: 22px;",
+								"updated": "20240427151245"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class ILRuntimeCLRBinding\n{\n    static void InitILRuntime(ILRuntime.Runtime.Enviorment.AppDomain domain)\n    {\n        //这里需要注册所有热更DLL中用到的跨域继承Adapter，否则无法正确抓取引用\n        domain.RegisterCrossBindingAdaptor(new MonoBehaviourAdapter());\n        domain.RegisterCrossBindingAdaptor(new CoroutineAdapter());\n        domain.RegisterCrossBindingAdaptor(new TestClassBaseAdapter());\n        //需要在这里注册我们自定义的一些需要跨域继承的类\n        domain.RegisterCrossBindingAdaptor(new ILRuntimeAdapter.Lesson11_TestAdapter());\n\n        domain.RegisterValueTypeBinder(typeof(Vector3), new Vector3Binder());\n        domain.RegisterValueTypeBinder(typeof(Vector2), new Vector2Binder());\n        domain.RegisterValueTypeBinder(typeof(Quaternion), new QuaternionBinder());\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240427151510-5alvlch",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240427151510-5alvlch",
+								"updated": "20240427151521"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在运行时，在"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "appDomain"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​加载完热更新dll和pdb后也需要注册"
+								}
+							]
+						},
+						{
+							"ID": "20240427151501-bsis5ki",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240427151501-bsis5ki",
+								"style": "line-height: 22px;",
+								"updated": "20240427151507"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//初始化ILRuntime相关的方法\nprivate unsafe void InitILRuntime()\n{\n    //注册委托和委托转换器\n    appDomain.DelegateManager.RegisterDelegateConvertor\u003cMyUnityDel1\u003e((action) =\u003e\n    {\n        return new MyUnityDel1(() =\u003e\n        {\n            ((System.Action)action)();\n        });\n    });\n    appDomain.DelegateManager.RegisterMethodDelegate\u003cint\u003e();\n    appDomain.DelegateManager.RegisterFunctionDelegate\u003cint, int, int\u003e();\n    appDomain.DelegateManager.RegisterDelegateConvertor\u003cMyUnityDel2\u003e((func) =\u003e\n    {\n        return new MyUnityDel2((i, j) =\u003e\n        {\n            return ((System.Func\u003cint, int, int\u003e)func)(i, j);\n        });\n    });\n    //注册跨域继承类\n    appDomain.RegisterCrossBindingAdaptor(new ILRuntimeAdapter.Lesson11_TestAdapter());\n    //注册值类型\n    appDomain.RegisterValueTypeBinder(typeof(Vector3), new Vector3Binder());\n    appDomain.RegisterValueTypeBinder(typeof(Vector2), new Vector2Binder());\n    appDomain.RegisterValueTypeBinder(typeof(Quaternion), new QuaternionBinder());\n\n    //CLR重定向内容，必须要写到CLR绑定之前！！！\n    System.Type debugType = typeof(Debug);\n    MethodInfo methodInfo = debugType.GetMethod(\"Log\", new System.Type[] { typeof(object) });\n    appDomain.RegisterCLRMethodRedirection(methodInfo, MyLog);\n\n    //注册 CLR绑定相关信息\n    ILRuntime.Runtime.Generated.CLRBindings.Initialize(appDomain);\n    //初始化ILRuntime相关信息（目前只需要告诉ILRuntime主线程的线程ID，主要目的是能够在Unity的Profiler剖析器窗口中分析问题）\n    appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240427150218-8whbmga",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240427150218-8whbmga",
+				"updated": "20240427150225"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "性能优化体现"
+				}
+			]
+		},
+		{
+			"ID": "20240427150226-tugw1bc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427150226-tugw1bc",
+				"updated": "20240427151535"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在ILRuntime热更工程中使用Unity中值类型进行计算，不进行值类型绑定的效率较低，进行值类型绑定后性能将大幅提升"
+				}
+			]
+		},
+		{
+			"ID": "20240427151608-st71unb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427151608-st71unb",
+				"updated": "20240427152037"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "热更新测试值类型计算测试代码："
+				}
+			]
+		},
+		{
+			"ID": "20240427152008-rae771f",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240427152008-rae771f",
+				"style": "line-height: 22px;",
+				"updated": "20240427153229"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class ILRuntimeMain\n{\n    public static void Main()\n    {\n        System.DateTime currentTime = System.DateTime.Now;\n        Vector3 v1 = new Vector3(123, 54, 567);\n        Vector3 v2 = new Vector3(342, 678, 123);\n        float dot = 0;\n        for (int i = 0; i \u003c 1000000; i++)\n        {\n            dot += Vector3.Dot(v1, v2);\n        }\n        Vector2 v3 = new Vector2(12, 56);\n        Vector2 v4 = new Vector2(123123, 45345);\n        for (int i = 0; i \u003c 1000000; i++)\n        {\n            dot += Vector2.Dot(v3, v4);\n        }\n        Debug.Log(\"值类型计算花费的时间：\" + (System.DateTime.Now - currentTime).Milliseconds + \"ms\");\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240427152051-xs1zyhj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427152051-xs1zyhj",
+				"updated": "20240427155159"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设不进行值类型绑定的注册（"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-memo",
+					"TextMarkInlineMemoContent": "实际上如果删除值类型相关绑定内容，相比值类型计算消耗的时间，加载dll文件时速度会大幅度拖慢，值类型计算量越大，加载时间越长，原因不明",
+					"TextMarkTextContent": "可以删掉所有值类型CLR绑定相关内容再测试"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "），直接计算，耗时如下："
+				}
+			]
+		},
+		{
+			"ID": "20240427154423-1tgxnsd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427154423-1tgxnsd",
+				"updated": "20240427154423"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 611px;",
+						"style": "width: 601px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240427154423-row5sts.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 601px;\" parent-style=\"width: 611px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240427152229-ao0sw50",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427152229-ao0sw50",
+				"updated": "20240427152244"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "然后进行值类型绑定的注册，直接计算，耗时如下："
+				}
+			]
+		},
+		{
+			"ID": "20240427152241-2quxn3t",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240427152241-2quxn3t",
+				"style": "line-height: 22px;",
+				"updated": "20240427152331"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private unsafe void InitILRuntime()\n{\n    //注册跨域继承类\n    appDomain.RegisterCrossBindingAdaptor(new ILRuntimeAdapter.Lesson11_TestAdapter());\n    //注册值类型\n    appDomain.RegisterValueTypeBinder(typeof(Vector3), new Vector3Binder());\n    appDomain.RegisterValueTypeBinder(typeof(Vector2), new Vector2Binder());\n    appDomain.RegisterValueTypeBinder(typeof(Quaternion), new QuaternionBinder());\n\n    //CLR重定向内容，必须要写到CLR绑定之前！！！\n    System.Type debugType = typeof(Debug);\n    MethodInfo methodInfo = debugType.GetMethod(\"Log\", new System.Type[] { typeof(object) });\n    appDomain.RegisterCLRMethodRedirection(methodInfo, MyLog);\n\n    //注册 CLR绑定相关信息\n    ILRuntime.Runtime.Generated.CLRBindings.Initialize(appDomain);\n    //初始化ILRuntime相关信息（目前只需要告诉ILRuntime主线程的线程ID，主要目的是能够在Unity的Profiler剖析器窗口中分析问题）\n    appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240427154519-7uk0qim",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427154519-7uk0qim",
+				"updated": "20240427154519"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 610px;",
+						"style": "width: 600px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240427154519-xpqan44.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 600px;\" parent-style=\"width: 610px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240427154521-t593478",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240427154521-t593478"
+			}
+		}
+	]
+}

@@ -1,0 +1,573 @@
+{
+	"ID": "20240228124821-xpxrxzz",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240228124821-xpxrxzz",
+		"title": "UH2S3L2——toLua解析器",
+		"updated": "20240302170704"
+	},
+	"Children": [
+		{
+			"ID": "20240228132531-5xohje9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240228132531-5xohje9",
+				"updated": "20240228132540"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240228132540-x1n9h7i",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240228132540-x1n9h7i",
+				"style": "line-height: 22px;",
+				"updated": "20240228132849"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "LuaState\t\t\t\t//Lua解析器类，初始化lua解析器只需要new它\nluaState.Start()\t\t//启动lua解析器\nluaState.DoString()\t\t//执行一个字符串形式的Lua语句\nluaState.DoFile()\t\t//执行指定路径下的lua脚本（可加可不加.lua后缀）\nluaState.Require()\t\t//执行指定路径下的lua脚本（不可加.lua后缀）\nluaState.CheckTop()\t\t//检查lua解析器栈顶是否为空，销毁lua解析器前必须要执行该方法\nluaState.Dispose()\t\t//销毁lua解析器\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240228124907-g2qf2gf",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240228124907-g2qf2gf",
+				"name": "LuaState",
+				"updated": "20240228124911"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "toLua解析器"
+				}
+			]
+		},
+		{
+			"ID": "20240228124821-4bvj1ii",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228124821-4bvj1ii",
+				"updated": "20240228131013"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "toLua同样提供了一个Lua解析器（虚拟机）对象用来执行lua代码和脚本"
+				}
+			]
+		},
+		{
+			"ID": "20240228124913-hys91n8",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240228124913-hys91n8",
+				"name": "luaState.Start()",
+				"updated": "20240228125255"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "初始化并启动一个Lua解析器"
+				}
+			]
+		},
+		{
+			"ID": "20240228125231-870rxcm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228125231-870rxcm",
+				"updated": "20240228125255"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "toLua的解析器只需要new出来然后执行"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "start()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法即可"
+				}
+			]
+		},
+		{
+			"ID": "20240228124941-z78oibt",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240228124941-z78oibt",
+				"style": "line-height: 22px;",
+				"updated": "20240228125255"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "LuaState luaState = new LuaState();\nluaState.Start();\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240228125302-i725bww",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240228125302-i725bww",
+				"updated": "20240228125324"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "执行一句Lua语句"
+				}
+			]
+		},
+		{
+			"ID": "20240228125325-ihu7lqh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228125325-ihu7lqh",
+				"updated": "20240228125324"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "执行字符串形式的lua代码，第二个参数可以指明出处，方便调试时查看问题"
+				}
+			]
+		},
+		{
+			"ID": "20240228125413-t3cc6jh",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240228125413-t3cc6jh",
+				"style": "line-height: 22px;",
+				"updated": "20240228125324"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "luaState.DoString(\"print('你好世界')\");\nluaState.DoString(\"print('你好世界')\", \"L1_LuaState.cs\");\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240228125421-14b0gdb",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "luaState.Require()",
+				"id": "20240228125421-14b0gdb",
+				"name": "luaState.DoFile()",
+				"updated": "20240228130341"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "执行Lua脚本"
+				}
+			]
+		},
+		{
+			"ID": "20240228130341-c6a81vt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228130341-c6a81vt",
+				"updated": "20240228130544"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ToLua在不设置的情况下，默认可以执行Assets/Lua文件夹下的Lua脚本，执行脚本有两种方法"
+				}
+			]
+		},
+		{
+			"ID": "20240228130519-gcusaz0",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240228130519-gcusaz0",
+				"updated": "20240228130520"
+			},
+			"Children": [
+				{
+					"ID": "20240228130520-576qfk8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240228130520-576qfk8",
+						"updated": "20240228130520"
+					},
+					"Children": [
+						{
+							"ID": "20240228130520-b1mg3bd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228130520-b1mg3bd",
+								"updated": "20240228130701"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "DoFile()"
+								}
+							]
+						},
+						{
+							"ID": "20240228130545-zvft0y6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228130545-zvft0y6",
+								"updated": "20240228130613"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "传入脚本文件名，.lua后缀可加可不加"
+								}
+							]
+						},
+						{
+							"ID": "20240228130615-ttvnehg",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240228130615-ttvnehg",
+								"style": "line-height: 22px;",
+								"updated": "20240228130649"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "luaState.DoFile(\"Main.lua\");\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240228130525-bf5es84",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240228130525-bf5es84"
+					},
+					"Children": [
+						{
+							"ID": "20240228130525-eakbtsc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228130525-eakbtsc",
+								"updated": "20240228130659"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Require()"
+								}
+							]
+						},
+						{
+							"ID": "20240228130619-ke8j2yo",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228130619-ke8j2yo",
+								"updated": "20240228130637"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "传入脚本文件名，不要加.lua后缀"
+								}
+							]
+						},
+						{
+							"ID": "20240228130639-63dyrlm",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240228130639-63dyrlm",
+								"style": "line-height: 22px;",
+								"updated": "20240228130657"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "luaState.Require(\"Main\");\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240228131418-dou47zk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228131418-dou47zk",
+				"updated": "20240228131442"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于如何执行其他路径下的Lua脚本，请看："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240228131233-wqqtiqf",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "UH2S3L3——toLua解析器自定义解析方式"
+				}
+			]
+		},
+		{
+			"ID": "20240228130617-d8ikq5v",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240228130617-d8ikq5v",
+				"name": "luaState.Dispose()",
+				"updated": "20240228130745"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "销毁Lua解析器"
+				}
+			]
+		},
+		{
+			"ID": "20240228130803-cuys73w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228130803-cuys73w",
+				"updated": "20240228130834"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "销毁Lua解析器之前需要先检查解析器栈顶是否为空，然后才能销毁"
+				}
+			]
+		},
+		{
+			"ID": "20240228130746-a10b54g",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240228130746-a10b54g",
+				"updated": "20240228130920"
+			},
+			"Children": [
+				{
+					"ID": "20240228130847-r38t36h",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240228130847-r38t36h",
+						"name": "luaState.CheckTop()",
+						"updated": "20240228130920"
+					},
+					"Children": [
+						{
+							"ID": "20240228130847-y1emrhc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228130847-y1emrhc",
+								"updated": "20240228130847"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "检查Lua解析器栈顶是否为空"
+								}
+							]
+						},
+						{
+							"ID": "20240228130835-1lmg197",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240228130835-1lmg197",
+								"style": "line-height: 22px;",
+								"updated": "20240228130920"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "luaState.CheckTop();\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240228130852-3blhv26",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240228130852-3blhv26",
+						"updated": "20240228130918"
+					},
+					"Children": [
+						{
+							"ID": "20240228130852-96xlu13",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240228130852-96xlu13",
+								"updated": "20240228130904"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "销毁Lua解析器"
+								}
+							]
+						},
+						{
+							"ID": "20240228130904-wieklil",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240228130904-wieklil",
+								"style": "line-height: 22px;",
+								"updated": "20240228130918"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "luaState.Dispose();\nluaState = null;\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240228130801-ovpg5x2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240228130801-ovpg5x2",
+				"updated": "20240228130847"
+			}
+		}
+	]
+}

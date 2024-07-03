@@ -1,0 +1,576 @@
+{
+	"ID": "20230828202200-77x0f2v",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230828202200-77x0f2v",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230828202200-77x0f2v\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230828204245-e9t4sgw\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230829021205-elz7qli\u0026quot;,\u0026quot;scrollTop\u0026quot;:118,\u0026quot;focusId\u0026quot;:\u0026quot;20230828204234-eq4175z\u0026quot;,\u0026quot;focusStart\u0026quot;:0,\u0026quot;focusEnd\u0026quot;:0\u0026#125;",
+		"title": "UF_OLDL9——UI管理模块",
+		"updated": "20231223160957"
+	},
+	"Children": [
+		{
+			"ID": "20230828204245-e9t4sgw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230828204245-e9t4sgw",
+				"updated": "20230829022814"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "注意！该UI模块是基于"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-font-background2);"
+					},
+					"TextMarkType": "block-ref strong text",
+					"TextMarkBlockRefID": "20230810030123-uiohjpe",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "UGUI"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-font-background2);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "的！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "请先学习"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "UGUI"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "再学习"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "这里"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的内容"
+				}
+			]
+		},
+		{
+			"ID": "20230828204641-cozh281",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230828204641-cozh281",
+				"updated": "20230828205353"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在游戏中，各种游戏对象可能会打开或者隐藏各种UI面板\n如果让它们直接相互关联，那这些对象和面板的联系会变成错综复杂难以管理，也就是说程序的耦合性变高了\n制作UI模块的目的，就是为了降低这种耦合性"
+				}
+			]
+		},
+		{
+			"ID": "20230828205202-mhzh3pa",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230828205202-mhzh3pa",
+				"updated": "20230828205536"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先，对于 游戏对象（也有可能是一个面板） 显示隐藏一个UI面板的需求\n我们可以构建一个UI管理器，通过调用UI管理器来控制各个UI面板的显示隐藏"
+				}
+			]
+		},
+		{
+			"ID": "20230828204553-ldfyo2d",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230828204553-ldfyo2d",
+				"updated": "20230828210014"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于各个UI面板（Panel），\n它们的共同点在于：它们需要管理控制自己面板内的各个控件，需要显示隐藏等\n这时我们就可以抽象出这些共同行为，将其写入一个UI基类，让面板对象继承这个UI基类"
+				}
+			]
+		},
+		{
+			"ID": "20230828204234-eq4175z",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230828204234-eq4175z",
+				"updated": "20230828204242"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "UI基类"
+				}
+			]
+		},
+		{
+			"ID": "20230828204115-rmbwcko",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230828204115-rmbwcko",
+				"updated": "20230828214651"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先可以利用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230708175455-zm29l8o",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": ".GetComponentsInChildren\u0026lt;\u0026gt;()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "获取所有的组件（它们都有一个父类UIBehaviour），再用字典存储\n我们可以通过输入控件对象名和控件类型来获取某个控件\n其次，每个UI都有隐藏显示的方法，所以我们需要首先在基类声明显示和隐藏的方法，到之后具体到某个子类在重写"
+				}
+			]
+		},
+		{
+			"ID": "20230828214651-kjkoyjy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230828214651-kjkoyjy",
+				"updated": "20230828214712"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用方法：\n让UI面板类继承它\n"
+				}
+			]
+		},
+		{
+			"ID": "20230828214714-3gh3y6m",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230828214714-3gh3y6m",
+				"updated": "20230828214814"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.EventSystems;\nusing UnityEngine.UI;\n\n/// \u003csummary\u003e\n/// 面板基类，可以找到所有自己面板下的控件对象，以及显示隐藏的方法\n/// \u003c/summary\u003e\npublic abstract class BasePanel : MonoBehaviour\n{\n    private Dictionary\u003cstring, List\u003cUIBehaviour\u003e\u003e controlDic = new Dictionary\u003cstring, List\u003cUIBehaviour\u003e\u003e();\n\n    protected virtual void Awake()\n    {\n        FindChildrenControl\u003cButton\u003e();\n        FindChildrenControl\u003cToggle\u003e();\n        FindChildrenControl\u003cInputField\u003e();\n        FindChildrenControl\u003cSlider\u003e();\n        FindChildrenControl\u003cScrollRect\u003e();\n        FindChildrenControl\u003cDropdown\u003e();\n        FindChildrenControl\u003cImage\u003e();\n        FindChildrenControl\u003cText\u003e();\n    }\n\n    /// \u003csummary\u003e\n    /// 得到对应控件名字的控件脚本\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e控件类型\u003c/typeparam\u003e\n    /// \u003cparam name=\"controlName\"\u003e控件名\u003c/param\u003e\n    /// \u003creturns\u003e控件脚本或者null\u003c/returns\u003e\n    protected T GetControl\u003cT\u003e(string controlName) where T : UIBehaviour\n    {\n        if (controlDic.ContainsKey(controlName))\n        {\n            for (int i = 0; i \u003c controlDic[controlName].Count; i++)\n            {\n                if (controlDic[controlName][i] is T)\n                    return controlDic[controlName][i] as T;\n            }\n        }\n        return null;\n    }\n\n    /// \u003csummary\u003e\n    /// 找到子对象的对应控件\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003eUI控件类型\u003c/typeparam\u003e\n    private void FindChildrenControl\u003cT\u003e() where T : UIBehaviour\n    {\n        T[] controls = this.GetComponentsInChildren\u003cT\u003e();\n        for (int i = 0; i \u003c controls.Length; i++)\n        {\n            if (controlDic.ContainsKey(controls[i].gameObject.name))\n                controlDic[controls[i].gameObject.name].Add(controls[i]);\n            controlDic.Add(controls[i].gameObject.name, new List\u003cUIBehaviour\u003e() { controls[i] });\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 显示面板\n    /// \u003c/summary\u003e\n    public abstract void ShowMe();\n\n    /// \u003csummary\u003e\n    /// 隐藏面板\n    /// \u003c/summary\u003e\n    public abstract void HideMe();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230828214607-n1cbqdk",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230828214607-n1cbqdk",
+				"updated": "20230828214824"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "UI管理器"
+				}
+			]
+		},
+		{
+			"ID": "20230829003231-zqca184",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230829003231-zqca184",
+				"updated": "20230829003236"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "最基础的UI管理器"
+				}
+			]
+		},
+		{
+			"ID": "20230828214825-o76l4jq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230828214825-o76l4jq",
+				"updated": "20230829000908"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用方法：\n显示面板\n隐藏面板"
+				}
+			]
+		},
+		{
+			"ID": "20230828214915-il6qf4z",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230828214915-il6qf4z",
+				"updated": "20230829003244"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\n\npublic enum E_UILayer\n{\n    Bottom,\n    Middle,\n    Top,\n    System,\n}\n\npublic class UIManager : BaseManager\u003cUIManager\u003e\n{\n    //当前正在显示的面板\n    private Dictionary\u003cstring, BasePanel\u003e panelDic = new Dictionary\u003cstring, BasePanel\u003e();\n    //Canvas的各个层级\n    private Transform top;\n    private Transform middle;\n    private Transform bottom;\n    private Transform system;\n\n    public UIManager()\n    {\n        //创建Canvas 让其过场景的时候 不被移除\n        GameObject canvasObj = ResourcesManager.Instance().Load\u003cGameObject\u003e(\"UI/Canvas\");\n        GameObject.DontDestroyOnLoad(canvasObj);\n        Transform canvas = canvasObj.transform;\n        GameObject.DontDestroyOnLoad(ResourcesManager.Instance().Load\u003cGameObject\u003e(\"UI/EventSystem\"));\n        //找到各层级\n        top = canvas.Find(\"Top\");\n        middle = canvas.Find(\"Middle\");\n        bottom = canvas.Find(\"Bottom\");\n        system = canvas.Find(\"System\");\n    }\n\n    /// \u003csummary\u003e\n    /// 显示面板\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e面板脚本类型\u003c/typeparam\u003e\n    /// \u003cparam name=\"panelName\"\u003e面板名\u003c/param\u003e\n    /// \u003cparam name=\"layer\"\u003e显示在哪一层\u003c/param\u003e\n    /// \u003cparam name=\"callback\"\u003e当面板预设体创建成功后要执行的方法\u003c/param\u003e\n    public void ShowPanel\u003cT\u003e(string panelName, E_UILayer layer = E_UILayer.Middle, UnityAction\u003cT\u003e callback = null) where T : BasePanel\n    {\n        if (panelDic.ContainsKey(panelName))\n        {\n            if (callback != null)\n            {\n                panelDic[panelName].ShowMe();\n                callback(panelDic[panelName] as T);\n            }\n\n        }\n        else\n        {\n            ResourcesManager.Instance().LoadAsync\u003cGameObject\u003e(\"UI/\" + panelName, (panelObj) =\u003e\n            {\n                //设置层级，并设置父对象，并设置大小\n                Transform father = bottom;\n                switch (layer)\n                {\n                    case E_UILayer.Bottom:\n                        father = bottom;\n                        break;\n                    case E_UILayer.Middle:\n                        father = middle;\n                        break;\n                    case E_UILayer.Top:\n                        father = top;\n                        break;\n                    case E_UILayer.System:\n                        father = system;\n                        break;\n                }\n                panelObj.transform.SetParent(father, false);\n                panelObj.transform.localPosition = Vector3.zero;\n                panelObj.transform.localScale = Vector3.one;\n                (panelObj.transform as RectTransform).offsetMax = Vector2.zero;\n                (panelObj.transform as RectTransform).offsetMin = Vector2.zero;\n                //获取面板上的面板脚本，如果面板脚本存在，执行传入的回调函数，并将面板加入到字典内管理\n                T panel = panelObj.GetComponent\u003cT\u003e();\n                if (panel != null)\n                    callback(panel);\n                panel.ShowMe();\n                panelDic.Add(panelName, panel);\n            });\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 隐藏面板\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"panelName\"\u003e面板名\u003c/param\u003e\n    public void HidePanel(string panelName)\n    {\n        if (panelDic.ContainsKey(panelName))\n        {\n            panelDic[panelName].HideMe();\n            GameObject.Destroy(panelDic[panelName].gameObject);\n            panelDic.Remove(panelName);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230829003306-tqtb372",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230829003306-tqtb372",
+				"updated": "20230829003501"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "优化面板基类事件监听的UI模块"
+				}
+			]
+		},
+		{
+			"ID": "20230829004501-u9enmmo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230829004501-u9enmmo",
+				"updated": "20230829013016"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先修正了UI管理器在显示过某个面板后再执行显示面板方法仍然会加载该面板的bug\n其次是增加的获取面板和获取层级对象的方法"
+				}
+			]
+		},
+		{
+			"ID": "20230829010426-4roop1t",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230829010426-4roop1t",
+				"updated": "20230829010925"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "然后是优化面板控件添加事件监听的方法，\n原来的实现虽然优化了拖曳控件这一步，但仍然要通过控件名一个一个添加方法\n这次优化，向控件添加方法的一部分实现，直接合并到UI基类的FindChildrenControl\u003cT\u003e()的方法里\n即某一种控件都添加一个空的有参的虚方法，虚方法参数为控件名字（用于区分不同的控件）\n之后为某一种控件添加方法，只需要重写那个虚方法即可，使用switch通过控件名字参数来执行不同逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20230829012425-otyifkx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230829012425-otyifkx",
+				"updated": "20230829012438"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "UI管理器（修正后的）"
+				}
+			]
+		},
+		{
+			"ID": "20230829005912-ld6yqez",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230829005912-ld6yqez",
+				"updated": "20230829012959"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\n\npublic enum E_UILayer\n{\n    Bottom,\n    Middle,\n    Top,\n    System,\n}\n\npublic class UIManager : BaseManager\u003cUIManager\u003e\n{\n    //当前正在显示的面板\n    private Dictionary\u003cstring, BasePanel\u003e panelDic = new Dictionary\u003cstring, BasePanel\u003e();\n    //Canvas以及它的各个层级\n    public RectTransform canvas;\n    private Transform top;\n    private Transform middle;\n    private Transform bottom;\n    private Transform system;\n\n    public UIManager()\n    {\n        //创建Canvas 让其过场景的时候 不被移除\n        GameObject canvasObj = ResourcesManager.Instance().Load\u003cGameObject\u003e(\"UI/Canvas\");\n        GameObject.DontDestroyOnLoad(canvasObj);\n        canvas = canvasObj.transform as RectTransform;\n        GameObject.DontDestroyOnLoad(ResourcesManager.Instance().Load\u003cGameObject\u003e(\"UI/EventSystem\"));\n        //找到各层级\n        top = canvas.Find(\"Top\");\n        middle = canvas.Find(\"Middle\");\n        bottom = canvas.Find(\"Bottom\");\n        system = canvas.Find(\"System\");\n    }\n\n    /// \u003csummary\u003e\n    /// 显示面板\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e面板脚本类型\u003c/typeparam\u003e\n    /// \u003cparam name=\"panelName\"\u003e面板名\u003c/param\u003e\n    /// \u003cparam name=\"layer\"\u003e显示在哪一层\u003c/param\u003e\n    /// \u003cparam name=\"callback\"\u003e当面板预设体创建成功后要执行的方法\u003c/param\u003e\n    public void ShowPanel\u003cT\u003e(string panelName, E_UILayer layer = E_UILayer.Middle, UnityAction\u003cT\u003e callback = null) where T : BasePanel\n    {\n        if (panelDic.ContainsKey(panelName))\n        {\n            if (callback != null)\n            {\n                panelDic[panelName].ShowMe();\n                callback(panelDic[panelName] as T);\n            }\n\n        }\n        else\n        {\n            ResourcesManager.Instance().LoadAsync\u003cGameObject\u003e(\"UI/\" + panelName, (panelObj) =\u003e\n            {\n                //设置层级，并设置父对象，并设置大小\n                Transform father = bottom;\n                switch (layer)\n                {\n                    case E_UILayer.Bottom:\n                        father = bottom;\n                        break;\n                    case E_UILayer.Middle:\n                        father = middle;\n                        break;\n                    case E_UILayer.Top:\n                        father = top;\n                        break;\n                    case E_UILayer.System:\n                        father = system;\n                        break;\n                }\n                panelObj.transform.SetParent(father, false);\n                panelObj.transform.localPosition = Vector3.zero;\n                panelObj.transform.localScale = Vector3.one;\n                (panelObj.transform as RectTransform).offsetMax = Vector2.zero;\n                (panelObj.transform as RectTransform).offsetMin = Vector2.zero;\n                //获取面板上的面板脚本，如果面板脚本存在，执行传入的回调函数，并将面板加入到字典内管理\n                T panel = panelObj.GetComponent\u003cT\u003e();\n                if (callback != null)\n                    callback(panel);\n                panel.ShowMe();\n                panelDic.Add(panelName, panel);\n            });\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 隐藏面板\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"panelName\"\u003e面板名\u003c/param\u003e\n    public void HidePanel(string panelName)\n    {\n        if (panelDic.ContainsKey(panelName))\n        {\n            panelDic[panelName].HideMe();\n            GameObject.Destroy(panelDic[panelName].gameObject);\n            panelDic.Remove(panelName);\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 获取面板\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"panelName\"\u003e面板名\u003c/param\u003e\n    public T GetPanel\u003cT\u003e(string panelName) where T : BasePanel\n    {\n        if (panelDic.ContainsKey(panelName))\n            return panelDic[panelName] as T;\n        return null;\n    }\n\n    /// \u003csummary\u003e\n    /// 获取对应层级的父对象\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"layer\"\u003e层级枚举\u003c/param\u003e\n    /// \u003creturns\u003e层级对应的父对象\u003c/returns\u003e\n    public Transform GetLayer(E_UILayer layer)\n    {\n        switch (layer)\n        {\n            case E_UILayer.Bottom:\n                return this.bottom;\n            case E_UILayer.Middle:\n                return this.middle;\n            case E_UILayer.Top:\n                return this.top;\n            case E_UILayer.System:\n                return this.system;\n        }\n        return null;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230829012447-1dg4nxi",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230829012447-1dg4nxi",
+				"updated": "20230829012507"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "UI基类（优化了事件监听方法）"
+				}
+			]
+		},
+		{
+			"ID": "20230829012508-r2l7uti",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230829012508-r2l7uti",
+				"updated": "20230829012736"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.EventSystems;\nusing UnityEngine.UI;\n\n/// \u003csummary\u003e\n/// 面板基类，可以找到所有自己面板下的控件对象，以及显示隐藏的方法\n/// \u003c/summary\u003e\npublic abstract class BasePanel : MonoBehaviour\n{\n    private Dictionary\u003cstring, List\u003cUIBehaviour\u003e\u003e controlDic = new Dictionary\u003cstring, List\u003cUIBehaviour\u003e\u003e();\n\n    protected virtual void Awake()\n    {\n        FindChildrenControl\u003cButton\u003e();\n        FindChildrenControl\u003cToggle\u003e();\n        FindChildrenControl\u003cInputField\u003e();\n        FindChildrenControl\u003cSlider\u003e();\n        FindChildrenControl\u003cScrollRect\u003e();\n        FindChildrenControl\u003cDropdown\u003e();\n        FindChildrenControl\u003cImage\u003e();\n        FindChildrenControl\u003cText\u003e();\n    }\n\n    /// \u003csummary\u003e\n    /// 得到对应控件名字的控件脚本\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e控件类型\u003c/typeparam\u003e\n    /// \u003cparam name=\"controlName\"\u003e控件名\u003c/param\u003e\n    /// \u003creturns\u003e控件脚本或者null\u003c/returns\u003e\n    protected T GetControl\u003cT\u003e(string controlName) where T : UIBehaviour\n    {\n        if (controlDic.ContainsKey(controlName))\n        {\n            for (int i = 0; i \u003c controlDic[controlName].Count; i++)\n            {\n                if (controlDic[controlName][i] is T)\n                    return controlDic[controlName][i] as T;\n            }\n        }\n        return null;\n    }\n\n    /// \u003csummary\u003e\n    /// 找到子对象的对应控件\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003eUI控件类型\u003c/typeparam\u003e\n    private void FindChildrenControl\u003cT\u003e() where T : UIBehaviour\n    {\n        T[] controls = this.GetComponentsInChildren\u003cT\u003e();\n        for (int i = 0; i \u003c controls.Length; i++)\n        {\n            string objName = controls[i].gameObject.name;\n            if (controlDic.ContainsKey(objName))\n                controlDic[objName].Add(controls[i]);\n            else\n                controlDic.Add(objName, new List\u003cUIBehaviour\u003e() { controls[i] });\n\n            if (controls[i] is Button)\n            {\n                (controls[i] as Button).onClick.AddListener(() =\u003e\n                {\n                    OnClick(objName);\n                });\n            }\n            else if (controls[i] is Toggle)\n            {\n                (controls[i] as Toggle).onValueChanged.AddListener((value) =\u003e\n                {\n                    OnValueChanged(objName, value);\n                });\n            }\n        }\n    }\n\n    protected abstract void OnClick(string btnName);\n\n    protected abstract void OnValueChanged(string toggleName, bool value);\n\n    /// \u003csummary\u003e\n    /// 显示面板\n    /// \u003c/summary\u003e\n    public virtual void ShowMe()\n    {\n\n    }\n\n    /// \u003csummary\u003e\n    /// 隐藏面板\n    /// \u003c/summary\u003e\n    public virtual void HideMe()\n    {\n\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230829012526-vxtce0h",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230829012526-vxtce0h",
+				"updated": "20230829012543"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "UI基类使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20230829012544-be5cvmv",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230829012544-be5cvmv",
+				"updated": "20230829012731"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine.UI;\n\npublic class LoginPanel : BasePanel\n{\n    public void InitInfo()\n    {\n        Debug.Log(\"初始化数据\");\n    }\n\n    protected override void OnClick(string btnName)\n    {\n        switch (btnName)\n        {\n            case \"btnStart\":\n                Debug.Log(\"btnStart被点击\");\n                break;\n            case \"btnQuit\":\n                Debug.Log(\"btnQuit被点击\");\n                break;\n        }\n    }\n\n    protected override void OnValueChanged(string toggleName, bool value)\n    {\n        switch (toggleName) { }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230829013128-fnkpyjg",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230829013128-fnkpyjg",
+				"updated": "20230829013156"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义事件监听的UI模块"
+				}
+			]
+		},
+		{
+			"ID": "20230829013159-x04uv7e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230829013159-x04uv7e",
+				"updated": "20230829020010"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关于自定义事件监听请看这里 ——\u003e "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230813021154-8xoimw2",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "EventTrigger"
+				}
+			]
+		},
+		{
+			"ID": "20230829020020-3okryj0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230829020020-3okryj0",
+				"updated": "20230829020340"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "每次为EventTrigger添加自定义事件，都会写一些重复的代码，例如：声明Entry，修改entryID，添加回调函数等"
+				}
+			]
+		},
+		{
+			"ID": "20230829020127-fs6nq5t",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230829020127-fs6nq5t",
+				"updated": "20230829021135"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以将这些重复的代码在UI管理器写成一个方法，为UI控件添加自定义事件监听"
+				}
+			]
+		},
+		{
+			"ID": "20230829021120-74chkg1",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230829021120-74chkg1",
+				"updated": "20230829021629"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\nusing UnityEngine.EventSystems;\n\npublic enum E_UILayer\n{\n    Bottom,\n    Middle,\n    Top,\n    System,\n}\n\npublic class UIManager : BaseManager\u003cUIManager\u003e\n{\n    //当前正在显示的面板\n    private Dictionary\u003cstring, BasePanel\u003e panelDic = new Dictionary\u003cstring, BasePanel\u003e();\n    //Canvas以及它的各个层级\n    public RectTransform canvas;\n    private Transform top;\n    private Transform middle;\n    private Transform bottom;\n    private Transform system;\n\n    public UIManager()\n    {\n        //创建Canvas 让其过场景的时候 不被移除\n        GameObject canvasObj = ResourcesManager.Instance().Load\u003cGameObject\u003e(\"UI/Canvas\");\n        GameObject.DontDestroyOnLoad(canvasObj);\n        canvas = canvasObj.transform as RectTransform;\n        GameObject.DontDestroyOnLoad(ResourcesManager.Instance().Load\u003cGameObject\u003e(\"UI/EventSystem\"));\n        //找到各层级\n        top = canvas.Find(\"Top\");\n        middle = canvas.Find(\"Middle\");\n        bottom = canvas.Find(\"Bottom\");\n        system = canvas.Find(\"System\");\n    }\n\n    /// \u003csummary\u003e\n    /// 显示面板\n    /// \u003c/summary\u003e\n    /// \u003ctypeparam name=\"T\"\u003e面板脚本类型\u003c/typeparam\u003e\n    /// \u003cparam name=\"panelName\"\u003e面板名\u003c/param\u003e\n    /// \u003cparam name=\"layer\"\u003e显示在哪一层\u003c/param\u003e\n    /// \u003cparam name=\"callback\"\u003e当面板预设体创建成功后要执行的方法\u003c/param\u003e\n    public void ShowPanel\u003cT\u003e(string panelName, E_UILayer layer = E_UILayer.Middle, UnityAction\u003cT\u003e callback = null) where T : BasePanel\n    {\n        if (panelDic.ContainsKey(panelName))\n        {\n            if (callback != null)\n            {\n                panelDic[panelName].ShowMe();\n                callback(panelDic[panelName] as T);\n            }\n\n        }\n        else\n        {\n            ResourcesManager.Instance().LoadAsync\u003cGameObject\u003e(\"UI/\" + panelName, (panelObj) =\u003e\n            {\n                //设置层级，并设置父对象，并设置大小\n                Transform father = bottom;\n                switch (layer)\n                {\n                    case E_UILayer.Bottom:\n                        father = bottom;\n                        break;\n                    case E_UILayer.Middle:\n                        father = middle;\n                        break;\n                    case E_UILayer.Top:\n                        father = top;\n                        break;\n                    case E_UILayer.System:\n                        father = system;\n                        break;\n                }\n                panelObj.transform.SetParent(father, false);\n                panelObj.transform.localPosition = Vector3.zero;\n                panelObj.transform.localScale = Vector3.one;\n                (panelObj.transform as RectTransform).offsetMax = Vector2.zero;\n                (panelObj.transform as RectTransform).offsetMin = Vector2.zero;\n                //获取面板上的面板脚本，如果面板脚本存在，执行传入的回调函数，并将面板加入到字典内管理\n                T panel = panelObj.GetComponent\u003cT\u003e();\n                if (callback != null)\n                    callback(panel);\n                panel.ShowMe();\n                panelDic.Add(panelName, panel);\n            });\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 隐藏面板\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"panelName\"\u003e面板名\u003c/param\u003e\n    public void HidePanel(string panelName)\n    {\n        if (panelDic.ContainsKey(panelName))\n        {\n            panelDic[panelName].HideMe();\n            GameObject.Destroy(panelDic[panelName].gameObject);\n            panelDic.Remove(panelName);\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 获取面板\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"panelName\"\u003e面板名\u003c/param\u003e\n    public T GetPanel\u003cT\u003e(string panelName) where T : BasePanel\n    {\n        if (panelDic.ContainsKey(panelName))\n            return panelDic[panelName] as T;\n        return null;\n    }\n\n    /// \u003csummary\u003e\n    /// 获取对应层级的父对象\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"layer\"\u003e层级枚举\u003c/param\u003e\n    /// \u003creturns\u003e层级对应的父对象\u003c/returns\u003e\n    public Transform GetLayer(E_UILayer layer)\n    {\n        switch (layer)\n        {\n            case E_UILayer.Bottom:\n                return this.bottom;\n            case E_UILayer.Middle:\n                return this.middle;\n            case E_UILayer.Top:\n                return this.top;\n            case E_UILayer.System:\n                return this.system;\n        }\n        return null;\n    }\n\n    /// \u003csummary\u003e\n    /// 向某个控件添加自定义监听事件\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"control\"\u003e要添加自定义监听事件控件的控件对象\u003c/param\u003e\n    /// \u003cparam name=\"type\"\u003e自定义监听事件类型\u003c/param\u003e\n    /// \u003cparam name=\"callback\"\u003e监听事件的相应函数\u003c/param\u003e\n    public static void AddCustomEventTrigger(UIBehaviour control, EventTriggerType type, UnityAction\u003cBaseEventData\u003e callback)\n    {\n        EventTrigger trigger = control.GetComponent\u003cEventTrigger\u003e();\n        if (trigger == null)\n            trigger = control.gameObject.AddComponent\u003cEventTrigger\u003e();\n\n        EventTrigger.Entry entry = new EventTrigger.Entry();\n        entry.eventID = type;\n        entry.callback.AddListener(callback);\n\n        trigger.triggers.Add(entry);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230829021150-tslucno",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230829021150-tslucno",
+				"updated": "20230829021205"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例"
+				}
+			]
+		},
+		{
+			"ID": "20230829021205-elz7qli",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230829021205-elz7qli",
+				"updated": "20230829021639"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.EventSystems;\nusing UnityEngine.UI;\n\npublic class LoginPanel : BasePanel\n{\n    private void Start()\n    {\n        UIManager.AddCustomEventTrigger(GetControl\u003cButton\u003e(\"btnStart\"), EventTriggerType.PointerEnter, (data) =\u003e\n        {\n            Debug.Log(\"进入\");\n        });\n        UIManager.AddCustomEventTrigger(GetControl\u003cButton\u003e(\"btnStart\"), EventTriggerType.PointerExit, (data) =\u003e\n        {\n            Debug.Log(\"离开\");\n        });\n    }\n\n\n    private void Drag(BaseEventData data)\n    {\n\n    }\n\n    public void InitInfo()\n    {\n        Debug.Log(\"初始化数据\");\n    }\n\n    protected override void OnClick(string btnName)\n    {\n        switch (btnName)\n        {\n            case \"btnStart\":\n                Debug.Log(\"btnStart被点击\");\n                break;\n            case \"btnQuit\":\n                Debug.Log(\"btnQuit被点击\");\n                break;\n        }\n    }\n\n    protected override void OnValueChanged(string toggleName, bool value)\n    {\n\n    }\n}\n\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

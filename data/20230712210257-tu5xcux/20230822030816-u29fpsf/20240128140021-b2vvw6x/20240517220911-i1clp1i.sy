@@ -1,0 +1,491 @@
+{
+	"ID": "20240517220911-i1clp1i",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240517220911-i1clp1i",
+		"title": "U4S4L15——异步加载的几种使用方式",
+		"type": "doc",
+		"updated": "20240517222821"
+	},
+	"Children": [
+		{
+			"ID": "20240517220911-ttmd7iw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240517220911-ttmd7iw",
+				"updated": "20240517222821"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "回顾目前动态异步加载的使用方式"
+				}
+			]
+		},
+		{
+			"ID": "20240517221107-fufqmet",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240517221107-fufqmet",
+				"style": "line-height: 22px;",
+				"updated": "20240517221119"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "var handle = Addressables.LoadAssetAsync\u003cGameObject\u003e(\"Cube\");\n//通过事件监听的方式 结束时使用资源\nhandle.Completed += (obj) =\u003e\n{\n    if (handle.Status == AsyncOperationStatus.Succeeded)\n    {\n        print(\"事件创建对象\");\n        Instantiate(obj.Result);\n    }\n};\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240517221111-u3knin9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240517221111-u3knin9",
+				"updated": "20240517222821"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "3种使用异步加载资源的方式"
+				}
+			]
+		},
+		{
+			"ID": "20240517221226-nsxcq8m",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240517221226-nsxcq8m",
+				"updated": "20240517221228"
+			},
+			"Children": [
+				{
+					"ID": "20240517221228-fdhdsyu",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240517221228-fdhdsyu",
+						"updated": "20240517221228"
+					},
+					"Children": [
+						{
+							"ID": "20240517221228-b2t26ju",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240517221228-b2t26ju",
+								"updated": "20240517221228"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "事件监听（目前学习过的）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240517221228-98mwh3j",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240517221228-98mwh3j",
+						"updated": "20240517221228"
+					},
+					"Children": [
+						{
+							"ID": "20240517221228-eybp5l4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240517221228-eybp5l4",
+								"updated": "20240517221311"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "协同程序（协程相关知识详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20230712214614-4ja3qtk",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "协同程序"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240517221228-mt72elo",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240517221228-mt72elo",
+						"updated": "20240517221228"
+					},
+					"Children": [
+						{
+							"ID": "20240517221228-b2jhsrr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240517221228-b2jhsrr",
+								"updated": "20240517221337"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "异步函数（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "async"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 和 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "await"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20231031101414-o6mwkon",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "异步方法"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240517221403-wfcb3q5",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240517221403-wfcb3q5",
+				"updated": "20240517222821"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过协程使用异步加载"
+				}
+			]
+		},
+		{
+			"ID": "20240517221923-vdumtuz",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240517221923-vdumtuz",
+				"style": "line-height: 22px;",
+				"updated": "20240517221936"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "AsyncOperationHandle\u003cGameObject\u003e handle;\n\nvoid Start()\n{\n    StartCoroutine(LoadAsset());\n}\n\nIEnumerator LoadAsset()\n{\n    handle = Addressables.LoadAssetAsync\u003cGameObject\u003e(\"Cube\");\n    //没有加载完时才需要去挂起协程等待加载\n    if (!handle.IsDone)\n        yield return handle;\n    //加载成功后即可使用\n    if (handle.Status == AsyncOperationStatus.Succeeded)\n    {\n        print(\"协同程序创建对象\");\n        Instantiate(handle.Result);\n    }\n    else\n        Addressables.Release(handle);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240517221917-a7ha5x7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240517221917-a7ha5x7",
+				"updated": "20240517221410"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240517221922-dw16jtg.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240517221347-zq0ke7y",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240517221347-zq0ke7y",
+				"updated": "20240517222821"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过异步函数async和await加载"
+				}
+			]
+		},
+		{
+			"ID": "20240517221953-wahyp9y",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240517221953-wahyp9y",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240517222003"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意：WebGL平台不支持异步函数语法！"
+				}
+			]
+		},
+		{
+			"ID": "20240517222240-rk5rdbq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240517222240-rk5rdbq",
+				"updated": "20240517222244"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "单任务加载："
+				}
+			]
+		},
+		{
+			"ID": "20240517221938-vr8r9zo",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240517221938-vr8r9zo",
+				"style": "line-height: 22px;",
+				"updated": "20240517222239"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "AsyncOperationHandle\u003cGameObject\u003e handle;\n\nvoid Start()\n{\n    //单任务加载\n    Load();\n}\n\nasync void Load()\n{\n    handle = Addressables.LoadAssetAsync\u003cGameObject\u003e(\"Cube\");\n    //没有加载完时才需要去挂起异步方法等待加载\n    if (!handle.IsDone)\n        await handle.Task;\n    //加载成功后即可使用\n    if (handle.Status == AsyncOperationStatus.Succeeded)\n    {\n        print(\"异步方法创建对象\");\n        Instantiate(handle.Result);\n    }\n    else\n        Addressables.Release(handle);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240517222246-hwf4p5c",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240517222246-hwf4p5c",
+				"updated": "20240517222821"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "多任务加载：多任务加载可以使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref code",
+					"TextMarkBlockRefID": "20231030223745-wk26o6m",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "Task.WhenAll()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240517222249-0ow4hi6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240517222249-0ow4hi6",
+				"style": "line-height: 22px;",
+				"updated": "20240517222718"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "AsyncOperationHandle\u003cGameObject\u003e handle;\n\nvoid Start()\n{\n    //StartCoroutine(LoadAsset());\n    //多任务加载\n    Load();\n}\n\nasync void Load()\n{\n    handle = Addressables.LoadAssetAsync\u003cGameObject\u003e(\"Cube\");\n    AsyncOperationHandle\u003cGameObject\u003e handle2 = Addressables.LoadAssetAsync\u003cGameObject\u003e(\"Sphere\");\n    await Task.WhenAll(handle.Task, handle2.Task);\n    //加载成功后即可使用\n    if (handle.Status == AsyncOperationStatus.Succeeded \u0026\u0026 handle2.Status == AsyncOperationStatus.Succeeded)\n    {\n        print(\"异步方法创建多个对象\");\n        Instantiate(handle.Result);\n        Instantiate(handle2.Result);\n    }\n    else\n        Addressables.Release(handle);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240517222719-p4nxme3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240517222719-p4nxme3",
+				"updated": "20240517222751"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 804px;",
+						"style": "width: 794px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240517222751-84xj1u8.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 794px;\" parent-style=\"width: 804px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240517222754-u1lxr5i",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240517222754-u1lxr5i"
+			}
+		}
+	]
+}

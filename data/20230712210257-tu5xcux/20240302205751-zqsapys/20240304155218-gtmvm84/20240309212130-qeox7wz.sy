@@ -1,0 +1,331 @@
+{
+	"ID": "20240309212130-qeox7wz",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240309212130-qeox7wz",
+		"title": "UN2L7——实现心跳消息",
+		"updated": "20240309223318"
+	},
+	"Children": [
+		{
+			"ID": "20240309212130-gmjael3",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240309212130-gmjael3",
+				"updated": "20240309212255"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "心跳消息"
+				}
+			]
+		},
+		{
+			"ID": "20240309212302-7fagj7k",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240309212302-7fagj7k",
+				"updated": "20240309212345"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "所谓心跳消息，就是在长连接中，客户端和服务端之间定期发送的一种特殊的数据包，用于通知对方自己还在线，以确保长连接的有效性\n由于其发送的时间间隔往往是固定的持续的，就像是心跳一样一直存在，所以我们称之为心跳消息"
+				}
+			]
+		},
+		{
+			"ID": "20240309212421-zfd6qxr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240309212421-zfd6qxr",
+				"updated": "20240309212424"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "心跳消息是长连接项目中必备的一套逻辑规则，通过它可以帮助我们在服务器端及时的释放掉失效的socket\n可以有效避免当客户端非正常关闭时，服务器端不能及时判断连接已断开"
+				}
+			]
+		},
+		{
+			"ID": "20240309212307-sesk69t",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240309212307-sesk69t",
+				"updated": "20240309212319"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "为什么需要心跳消息"
+				}
+			]
+		},
+		{
+			"ID": "20240309212325-0v5c7bz",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240309212325-0v5c7bz",
+				"updated": "20240309212335"
+			},
+			"Children": [
+				{
+					"ID": "20240309212332-m2n6j4x",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240309212332-m2n6j4x",
+						"updated": "20240309212335"
+					},
+					"Children": [
+						{
+							"ID": "20240309212332-zeyofos",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240309212332-zeyofos",
+								"updated": "20240309212335"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "避免非正常关闭客户端时，服务器无法正常收到关闭连接消息，通过心跳消息我们可以自定义超时判断，\n如果超时没有收到客户端消息，证明客户端已经断开连接"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240309212332-o79watb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240309212332-o79watb",
+						"updated": "20240309212332"
+					},
+					"Children": [
+						{
+							"ID": "20240309212332-f99nog9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240309212332-f99nog9",
+								"updated": "20240309212332"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "避免客户端长期不发送消息，防火墙或者路由器会断开连接，我们可以通过心跳消息一直保持活跃状态"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240309212347-wdk1nac",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240309212347-wdk1nac",
+				"updated": "20240309212356"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现心跳消息"
+				}
+			]
+		},
+		{
+			"ID": "20240309214728-7mqtcwe",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240309214728-7mqtcwe",
+				"updated": "20240309214741"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先声明一个不包括消息体的心跳消息"
+				}
+			]
+		},
+		{
+			"ID": "20240309214742-xxohf8h",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240309214742-xxohf8h",
+				"style": "line-height: 22px;",
+				"updated": "20240309214743"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class HeartMessage : BaseMessage\n{\n    public override int GetBytesNum()\n    {\n        return 8;\n    }\n\n    public override byte[] Writeing()\n    {\n        int index = 0;\n        byte[] bytes = new byte[GetBytesNum()];\n        WriteInt(bytes, GetID(), ref index);\n        WriteInt(bytes, 0, ref index);\n        return bytes;\n    }\n\n    public override int Reading(byte[] bytes, int BeginIndex = 0)\n    {\n        return 0;\n    }\n\n    public override int GetID()\n    {\n        return 999;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240309212402-rnawtc7",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240309212402-rnawtc7",
+				"updated": "20240309223318"
+			},
+			"Children": [
+				{
+					"ID": "20240309212407-zem51sn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240309212407-zem51sn",
+						"updated": "20240309215911"
+					},
+					"Children": [
+						{
+							"ID": "20240309212407-h98nwaj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240309212407-h98nwaj",
+								"updated": "20240309212409"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "客户端，主要功能：定时发送消息"
+								}
+							]
+						},
+						{
+							"ID": "20240309214304-ctyq5lq",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240309214304-ctyq5lq",
+								"style": "line-height: 22px;",
+								"updated": "20240309215911"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//客户端 NetManager类内部\nprivate HeartMessage heartMsg = new HeartMessage();\n\nprivate void Awake()\n{\n    instance = this;\n    DontDestroyOnLoad(gameObject);\n    InvokeRepeating(nameof(SendHeartMsg), 0, SEND_HEART_MSG_TIME);      //客户端循环定时给服务端发送心跳消息\n}\n\nprivate void SendHeartMsg()\n{\n    if (isConnented)\n        Send(heartMsg);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240309212408-lj27szz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240309212408-lj27szz",
+						"updated": "20240309223318"
+					},
+					"Children": [
+						{
+							"ID": "20240309212408-ieza12w",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240309212408-ieza12w",
+								"updated": "20240309212411"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "服务器，主要功能：不停检测上次收到某客户端消息的时间，如果超时则认为连接已经断开"
+								}
+							]
+						},
+						{
+							"ID": "20240309215417-7058563",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240309215417-7058563",
+								"style": "line-height: 22px;",
+								"updated": "20240309223318"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "//服务器端 ClientSocket类内部\n//超时时间\nprivate static int TIME_OUT_TIME = 10;\n\npublic void Receive()\n{\n    if (!Connented)\n    {\n        Program.socket.AddDelSocket(this);\n        return;\n    } \n    try\n    {\n        if (socket.Available \u003e 0)\n        {\n            byte[] result = new byte[1024 * 5];\n            int receiveNum = socket.Receive(result);\n            HandleReceiveMsg(result, receiveNum);\n        }\n\t\t//间隔一段时间，检测一次超时，如果超时，就主动断开该客户端的连接\n        CheckTimeOut();\n    }\n    catch (Exception e)\n    {\n        Console.WriteLine($\"从客户端{clientID}接收消息失败：{e.Message}\");\n        //如果解析错误，也认为要把这个socket断开\n        Program.socket.AddDelSocket(this);\n    }\n}\n\n//间隔一段时间，检测一次超时，如果超时，就主动断开该客户端的连接\nprivate void CheckTimeOut()\n{\n    //如果接收到心跳消息的时间超过了超时时间，就断开连接\n    if (frontTime != -1\n        \u0026\u0026 DateTime.Now.Ticks / TimeSpan.TicksPerSecond - frontTime \u003e= TIME_OUT_TIME)\n    {\n        Program.socket.AddDelSocket(this);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240309212700-7iokcu1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240309212700-7iokcu1",
+				"updated": "20240309212356"
+			}
+		}
+	]
+}

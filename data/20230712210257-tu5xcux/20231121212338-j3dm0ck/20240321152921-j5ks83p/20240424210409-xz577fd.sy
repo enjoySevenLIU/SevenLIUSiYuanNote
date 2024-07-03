@@ -1,0 +1,1263 @@
+{
+	"ID": "20240424210409-xz577fd",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240424210409-xz577fd",
+		"title": "UH4L6——ILRuntime调用Unity",
+		"type": "doc",
+		"updated": "20240424215330"
+	},
+	"Children": [
+		{
+			"ID": "20240424210605-41qkf7g",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240424210605-41qkf7g",
+				"updated": "20240424210609"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime调用Unity"
+				}
+			]
+		},
+		{
+			"ID": "20240424210618-54yd0md",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424210618-54yd0md",
+				"updated": "20240424210623"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime跨域调用Unity中相关内容，相对更简单，和Unity开发中一样使用即可"
+				}
+			]
+		},
+		{
+			"ID": "20240424210618-zf6sb6w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424210618-zf6sb6w",
+				"updated": "20240424210650"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "需要注意的是，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "使用中如果无法正常使用Unity相关组件，都是因为热更工程没有引用对应的Unity相关模块的DLL文件"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n我们只需要"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "找到对应DLL文件 复制到 热更工程中的UnityDlls文件夹中，并且在热更工程中引用 即可"
+				}
+			]
+		},
+		{
+			"ID": "20240424210409-0rjoz4v",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240424210409-0rjoz4v",
+				"updated": "20240424210609"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在ILRuntime工程中做一个主入口"
+				}
+			]
+		},
+		{
+			"ID": "20240424210432-oxth7t4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424210432-oxth7t4",
+				"updated": "20240424210609"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们在做有热更新功能的项目时，往往会有大量的逻辑是在热更工程中完成的\n所以我们会在热更工程中做一个主入口，相当于是把逻辑处理权交给热更工程的感觉"
+				}
+			]
+		},
+		{
+			"ID": "20240424210432-oc5vhyr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424210432-oc5vhyr",
+				"updated": "20240424210432"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "类似在Lua热更相关知识点中讲解的相关内容"
+				}
+			]
+		},
+		{
+			"ID": "20240424211304-rj3zh6z",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424211304-rj3zh6z",
+				"updated": "20240424211312"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime热更新工程内"
+				}
+			]
+		},
+		{
+			"ID": "20240424211321-uhzu5cg",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240424211321-uhzu5cg",
+				"style": "line-height: 22px;",
+				"updated": "20240424211424"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\nnamespace HotFix_Project\n{\n    internal class ILRuntimeMain\n    {\n        /// \u003csummary\u003e\n        /// 把逻辑处理权交给热更新工程，这是一个启动函数\n        /// \u003c/summary\u003e\n        public static void Main()\n        {\n            Debug.Log(\"Hello, world!\");\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240424211312-woztnz8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424211312-woztnz8",
+				"updated": "20240424211318"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity主工程内"
+				}
+			]
+		},
+		{
+			"ID": "20240424211301-vnsjx5n",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240424211301-vnsjx5n",
+				"style": "line-height: 22px;",
+				"updated": "20240424211303"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class Lesson9 : MonoBehaviour\n{\n    void Start()\n    {\n        ILRuntimeMgr.Instance.StartILRuntime(() =\u003e\n        {\n            ILRuntimeMgr.Instance.appDomain.Invoke(\"HotFix_Project.ILRuntimeMain\", \"Main\", null, null);\n        });\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240424210449-h63dnxx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240424210449-h63dnxx",
+				"updated": "20240424214654"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ILRuntime调用Unity相关"
+				}
+			]
+		},
+		{
+			"ID": "20240424210457-a22vr9o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424210457-a22vr9o",
+				"updated": "20240424214654"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "就像在Unity开发中使用一样，引用命名空间后，直接使用即可，之所以我们能够直接使用，是因为热更工程已经引用了Unity对应的dll文件"
+				}
+			]
+		},
+		{
+			"ID": "20240424211920-s90t6nz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424211920-s90t6nz",
+				"updated": "20240424214654"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 832px;",
+						"style": "width: 822px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240424211920-rvsuzb7.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 822px;\" parent-style=\"width: 832px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240424210543-lcnaokc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424210543-lcnaokc",
+				"updated": "20240424214654"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "例如想要在场景上创建空对象并设置位置，就如同Unity内那样编写逻辑即可"
+				}
+			]
+		},
+		{
+			"ID": "20240424211700-2q0kf1f",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240424211700-2q0kf1f",
+				"style": "line-height: 22px;",
+				"updated": "20240424214654"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\nnamespace HotFix_Project\n{\n    internal class ILRuntimeMain\n    {\n        /// \u003csummary\u003e\n        /// 把逻辑处理权交给热更新工程，这是一个启动函数\n        /// \u003c/summary\u003e\n        public static void Main()\n        {\n            GameObject obj = new GameObject(\"ILRuntime创建的空物体\");\n            obj.transform.position = new Vector3(10, 10, 10);\n            Debug.Log(obj.transform.position);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240424211748-5rjrb1j",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424211748-5rjrb1j",
+				"updated": "20240424214654"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240424211748-4acg9lw.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240424211750-7t8k0m1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424211750-7t8k0m1",
+				"updated": "20240424211814"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，空物体确实被创建了出来，并且被设置了位置"
+				}
+			]
+		},
+		{
+			"ID": "20240424214740-nmujf65",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424214740-nmujf65",
+				"updated": "20240424215219"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们自己创建的脚本在ILRuntime里也可以正常的使用，因为热更示例工程已经关联了Assembly-CSharp这个程序集"
+				}
+			]
+		},
+		{
+			"ID": "20240424215305-t2gazq4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424215305-t2gazq4",
+				"updated": "20240424215305"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 717px;",
+						"style": "width: 707px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240424215305-nysmhr1.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 707px;\" parent-style=\"width: 717px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240424215330-okqtrro",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424215330-okqtrro",
+				"updated": "20240424215330"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 299px;",
+						"style": "width: 289px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240424215330-e5sr9mk.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 289px;\" parent-style=\"width: 299px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240424214657-0bs8r3g",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240424214657-0bs8r3g",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "添加ILRuntime内可调用的内容"
+				}
+			]
+		},
+		{
+			"ID": "20240424210528-khd7ovn",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240424210528-khd7ovn",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240424210457-wq3xb8m",
+					"Type": "NodeHeading",
+					"HeadingLevel": 3,
+					"Properties": {
+						"id": "20240424210457-wq3xb8m",
+						"updated": "20240424210524"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "注意"
+						}
+					]
+				},
+				{
+					"ID": "20240424210522-3hlfn2n",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240424210522-3hlfn2n",
+						"updated": "20240424210537"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "测试热更工程中，只关联引用了部分Unity相关dll，\n如果想要使用更多，只需要把对应Unity的Dll文件拷贝到热更工程中的UnityDlls文件夹中即可\n再在热更工程中设置一下dll文件的引用"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240424212419-boie8gz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424212419-boie8gz",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们要调用Unity的物理系统相关的内容，我们需要物理系统相关的dll导入到UnityDlls文件夹中"
+				}
+			]
+		},
+		{
+			"ID": "20240424213028-ztbxvz1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424213028-ztbxvz1",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 351px;",
+						"style": "width: 341px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240424213028-nvek4nj.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 341px;\" parent-style=\"width: 351px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 273px;",
+						"style": "width: 263px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240424212639-ltdbr5m.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 263px;\" parent-style=\"width: 273px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240424213038-neso6vo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424213038-neso6vo",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在属性窗口内查看其路径（在VS的菜单栏：视图 —— 属性 打开此窗口）"
+				}
+			]
+		},
+		{
+			"ID": "20240424213252-icntiz8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424213252-icntiz8",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 507px;",
+						"style": "width: 497px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240424213252-kukotwm.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 497px;\" parent-style=\"width: 507px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240424213052-mb424pm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424213052-mb424pm",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "然后在资源管理器内找到该dll文件，复制它"
+				}
+			]
+		},
+		{
+			"ID": "20240424213417-oimvxqg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424213417-oimvxqg",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 717px;",
+						"style": "width: 707px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240424213417-niaqb3z.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 707px;\" parent-style=\"width: 717px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240424213420-nk29hl3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424213420-nk29hl3",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "然后粘贴到UnityDlls文件夹内"
+				}
+			]
+		},
+		{
+			"ID": "20240424213516-w36y4n2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424213516-w36y4n2",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 718px;",
+						"style": "width: 708px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240424213516-a04mq8f.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 708px;\" parent-style=\"width: 718px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240424213519-u314wbe",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424213519-u314wbe",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "然后，在工程的引用处右键选项添加引用"
+				}
+			]
+		},
+		{
+			"ID": "20240424213732-cku2q6j",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424213732-cku2q6j",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 427px;",
+						"style": "width: 417px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240424213732-0x6dh1e.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 417px;\" parent-style=\"width: 427px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240424213744-yz39zbx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424213744-yz39zbx",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "最后选择复制的dll即可"
+				}
+			]
+		},
+		{
+			"ID": "20240424214005-z3z6yji",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424214005-z3z6yji",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 607px;",
+						"style": "width: 597px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240424214005-sgb7ng3.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 597px;\" parent-style=\"width: 607px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240424213922-30sgs1k",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424213922-30sgs1k",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "至此，我们可以在项目里使用物理相关内容了，想要引用哪些Unity的内容，就导入哪个dll文件即可"
+				}
+			]
+		},
+		{
+			"ID": "20240424214105-9t14xde",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240424214105-9t14xde",
+				"style": "line-height: 22px;",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\nnamespace HotFix_Project\n{\n    internal class ILRuntimeMain\n    {\n        /// \u003csummary\u003e\n        /// 把逻辑处理权交给热更新工程，这是一个启动函数\n        /// \u003c/summary\u003e\n        public static void Main()\n        {\n            GameObject obj = new GameObject(\"ILRuntime创建的空物体\");\n            obj.transform.position = new Vector3(10, 10, 10);\n            Debug.Log(obj.transform.position);\n            obj.AddComponent\u003cRigidbody\u003e();\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240424214133-9icbq2k",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424214133-9icbq2k",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但值得一提的是，如果直接重新生成，导入的dll也会被打包出来"
+				}
+			]
+		},
+		{
+			"ID": "20240424214356-uueydwd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424214356-uueydwd",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 316px;",
+						"style": "width: 306px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240424214356-ii5u1he.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 306px;\" parent-style=\"width: 316px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240424214338-hd0ry2j",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424214338-hd0ry2j",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这时，我们需要在导入的dll文件的属性窗口处，将 复制本地 设置为 False"
+				}
+			]
+		},
+		{
+			"ID": "20240424214457-cchzt4c",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424214457-cchzt4c",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 304px;",
+						"style": "width: 294px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240424214457-3inmwdg.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 294px;\" parent-style=\"width: 304px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240424214613-5xlt8qi",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424214613-5xlt8qi",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这样，热更代码就可以正常的使用物理相关内容了"
+				}
+			]
+		},
+		{
+			"ID": "20240424214607-v5bdlz6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240424214607-v5bdlz6",
+				"updated": "20240424214720"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240424214607-4i9sdqd.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		}
+	]
+}

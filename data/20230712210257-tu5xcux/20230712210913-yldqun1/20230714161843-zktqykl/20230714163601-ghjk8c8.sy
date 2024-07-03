@@ -1,0 +1,1805 @@
+{
+	"ID": "20230714163601-ghjk8c8",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230714163601-ghjk8c8",
+		"name": "范围检测",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230714163601-ghjk8c8\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230714163636-dgtedgi\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230714182725-kbm8iyx\u0026quot;,\u0026quot;scrollTop\u0026quot;:1848\u0026#125;",
+		"title": "U2L13-1——物理系统之范围检测",
+		"type": "doc",
+		"updated": "20230714204239"
+	},
+	"Children": [
+		{
+			"ID": "20230714163636-dgtedgi",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230714163636-dgtedgi",
+				"updated": "20230714163647"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "范围检测"
+				}
+			]
+		},
+		{
+			"ID": "20230714174250-mzhki24",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714174250-mzhki24",
+				"updated": "20240321173158"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "范围检测主要是用于瞬时的碰撞范围检测，主要掌握："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Physics"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类的静态方法，球形 盒状 胶囊 三种API的使用即可"
+				}
+			]
+		},
+		{
+			"ID": "20230714163601-c627h0j",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714163601-c627h0j",
+				"updated": "20240318174241"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "游戏中瞬时攻击范围判断一般会使用范围检测举例："
+				}
+			]
+		},
+		{
+			"ID": "20240318174240-znvislj",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240318174240-znvislj",
+				"updated": "20240318174244"
+			},
+			"Children": [
+				{
+					"ID": "20240318174240-nok2150",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240318174240-nok2150",
+						"updated": "20240318174240"
+					},
+					"Children": [
+						{
+							"ID": "20240318174240-6ydfmhc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240318174240-6ydfmhc",
+								"updated": "20240318174240"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "玩家在前方5m处释放一个地刺魔法，在此处范围内的对象将受到地刺伤害"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240318174240-bdvhcce",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240318174240-bdvhcce",
+						"updated": "20240318174244"
+					},
+					"Children": [
+						{
+							"ID": "20240318174240-ff7vk08",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240318174240-ff7vk08",
+								"updated": "20240318174244"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "玩家攻击，在前方1米圆形范围内对象都受到伤害，等等\n类似这种并没有实体物体 只想要检测在指定某一范围是否让敌方受到伤害时 便可以使用范围判断\n简而言之，在指定位置进行范围判断我们可以得到处于指定范围内的对象，目的是对 对象进行处理，比如受伤 减血等"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230714182811-lcg7agq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230714182811-lcg7agq",
+				"updated": "20230714182818"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20230714182818-9t0w4m6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714182818-9t0w4m6",
+				"style": "line-height: 22px;",
+				"updated": "20230714204239"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "LayerMask.NameToLayer()\t\t\t\t//通过层级名字得到层级编号\nPhysics.OverlapBox()\t\t\t\t//盒状范围检测，瞬时根据参数描述的立方体范围内，检测指定层级上（可选）的对象，返回碰撞器数组\nPhysics.OverlapBoxNonAlloc()\t\t//盒状范围检测，比上个方法多了一个碰撞器数组的参数，返回检测到的碰撞器数组长度\nPhysics.OverlapSphere()\t\t\t\t//球形范围检测，瞬时根据参数描述的球形范围内，检测指定层级上（可选）的对象\nPhysics.OverlapSphereNonAlloc()\t\t//球形范围检测，比上个方法多了一个碰撞器数组的参数，返回检测到的碰撞器数组长度\nPhysics.OverlapCapsule()\t\t\t//胶囊范围检测，瞬时根据参数描述的胶囊范围内，检测指定层级上（可选）的对象\nPhysics.OverlapCapsuleNonAlloc()\t//胶囊范围检测，比上个方法多了一个碰撞器数组的参数，返回检测到的碰撞器数组长度\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714174437-u1eloa2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230714174437-u1eloa2",
+				"updated": "20230714174459"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "重要知识点——层级参数的填入"
+				}
+			]
+		},
+		{
+			"ID": "20230714174500-xqqbrw3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714174500-xqqbrw3",
+				"updated": "20230714175218"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "接下来的三个API都有层级的填入，但是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "层级参数的填入不是简单的填入数字编号那么简单！！！"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n该知识点"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "strong text",
+					"TextMarkTextContent": "涉及"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-font-background1);"
+					},
+					"TextMarkType": "block-ref strong text",
+					"TextMarkBlockRefID": "20230616144113-lxgzck7",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "CS1L13——位运算符"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-font-background1);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的各种知识点"
+				}
+			]
+		},
+		{
+			"ID": "20230714174845-2auz3d2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230714174845-2auz3d2",
+				"name": "LayerMask.NameToLayer()",
+				"updated": "20230714174911"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以通过名字得到层级编号"
+				}
+			]
+		},
+		{
+			"ID": "20230714174852-8vd7ae5",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714174852-8vd7ae5",
+				"updated": "20230714174901"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(LayerMask.NameToLayer(\"UI\"));     //将层级名字转为对应的层级编号\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714174753-c8zrfp4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714174753-c8zrfp4",
+				"updated": "20230714175200"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但是要注意，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"Properties": {
+						"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+					},
+					"TextMarkType": "text",
+					"TextMarkTextContent": "我们不能直接将编号作为参数填入"
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "我们需要通过编号左移构建二进制数"
+				}
+			]
+		},
+		{
+			"ID": "20230714175015-20igiqn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714175015-20igiqn",
+				"updated": "20230714175049"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "1 \u003c\u003c LayerMask.NameToLayer(\"UI\")\t//这样就代表选择了UI层\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714175011-gtshtqh",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230714175011-gtshtqh",
+				"updated": "20230714182220"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "每一个编号的层级 都是对应位的1的2进制数"
+				}
+			]
+		},
+		{
+			"ID": "20230714175125-7v0tcmd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714175125-7v0tcmd",
+				"updated": "20230714181432"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "层级编号是 0~31 刚好32位，每一个编号 代表的 都是int数的二进制的一位\n也就是说对于一个int数来说，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "哪个编号的层级要检测，这个int数的二进制数的哪一位就是1"
+				}
+			]
+		},
+		{
+			"ID": "20230714175636-i17eair",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714175636-i17eair",
+				"updated": "20230714200207"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "编号 - 左移编号 --------- 每一个层级对应的二进制数 --- 对应的int数\n0 —— 1 \u003c\u003c 0 —— 0000 0000 0000 0000 0000 0000 0000 0001 = 1\n1 —— 1 \u003c\u003c 1 —— 0000 0000 0000 0000 0000 0000 0000 0010 = 2\n2 —— 1 \u003c\u003c 2 —— 0000 0000 0000 0000 0000 0000 0000 0100 = 4\n3 —— 1 \u003c\u003c 3 —— 0000 0000 0000 0000 0000 0000 0000 1000 = 8\n4 —— 1 \u003c\u003c 4 —— 0000 0000 0000 0000 0000 0000 0001 0000 = 16\n......\n17 = 0000 0000 0000 0000 0000 0000 0001 0001\n这个int数的二进制数中，第1位和第5位为1，这说明第0层和第4层需要检测，哪一位为1，哪个层（位数减1）需要检测\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714175634-r8m5h1x",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714175634-r8m5h1x",
+				"updated": "20230714175702"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity之后会对每个层对应的二进制数进行"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230616144255-jmx6fje",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "位与 \u0026amp;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "计算（同1则1），如果某个层计算结果不为1，则相当于告诉Unity这个层需要检测"
+				}
+			]
+		},
+		{
+			"ID": "20230714175622-1rzpe29",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714175622-1rzpe29",
+				"updated": "20230714200221"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "填入的二进制数：\n  17 = 0000 0000 0000 0000 0000 0000 0001 0001\nUnity检测：\n  第0层检测\n  0000 0000 0000 0000 0000 0000 0001 0001\n\u0026 0000 0000 0000 0000 0000 0000 0000 0001\n= 0000 0000 0000 0000 0000 0000 0000 0001 != 0（告知Unity第0层需要检测）\n  ......\n  第4层检测\n  0000 0000 0000 0000 0000 0000 0001 0001\n\u0026 0000 0000 0000 0000 0000 0000 0001 0000\n= 0000 0000 0000 0000 0000 0000 0001 0000 != 0（告知Unity第4层需要检测）\n  ......\n最后确认第0层和第4层需要检测\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714180840-c8z0m2z",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714180840-c8z0m2z",
+				"updated": "20230714181517"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以看到一个int范围内的数就可以表示 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "所有想要的检测的层级信息的组合"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "（2的32次方，这也是层级最多只有32层的原因）"
+				}
+			]
+		},
+		{
+			"ID": "20230714182234-hpb0yz1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230714182234-hpb0yz1",
+				"updated": "20230714182234"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "我们通过 位运算 可以选择想要的检测层级"
+				}
+			]
+		},
+		{
+			"ID": "20230714175124-2nfldav",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714175124-2nfldav",
+				"updated": "20230714182234"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以通过"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230616144304-h2uystd",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "位或 |"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "（有1则1）来选取多个层级\n亦或是对0进行"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230616144325-1iai74s",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "位取反 ~"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "（所有位全部变为1）来全选层级\n然后用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230616144314-8j6n2cr",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "异或 ^"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "（相同为0，不同为1）来剔除某个层级"
+				}
+			]
+		},
+		{
+			"ID": "20230714181608-9z6659g",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714181608-9z6659g",
+				"updated": "20230714182139"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "1 \u003c\u003c LayerMask.NameToLayer(\"UI\") | 1 \u003c\u003c LayerMask.NameToLayer(\"Default\")  //通过位或（有1则1）连接，可以多选层级\n  0000 0000 0000 0000 0000 0000 0001 0000\n| 0000 0000 0000 0000 0000 0000 0000 0001\n= 0000 0000 0000 0000 0000 0000 0001 0001 = 17\n  第1位和第5位为1，这说明第0层和第4层需要检测\n\n(~0) ^ (1 \u003c\u003c LayerMask.NameToLayer(\"UI\"))    //通过位取反全选，通过异或（相同为0，不同为1）来剔除某个层级\n~ 0000 0000 0000 0000 0000 0000 0000 0000\n= 1111 1111 1111 1111 1111 1111 1111 1111\n^ 0000 0000 0000 0000 0000 0000 0001 0000\n= 1111 1111 1111 1111 1111 1111 1110 1111\n  第5位不为1，这说明第4层不需要检测\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714164426-dn5gxop",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230714164426-dn5gxop",
+				"updated": "20230714164437"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如何进行范围检测"
+				}
+			]
+		},
+		{
+			"ID": "20230714164438-0clscec",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230714164438-0clscec",
+				"updated": "20240321173120"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "必备条件：想要被范围检测到的对象 必须具备碰撞器"
+				}
+			]
+		},
+		{
+			"ID": "20240321173120-vej500q",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240321173120-vej500q",
+				"updated": "20240321173120"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意点："
+				}
+			]
+		},
+		{
+			"ID": "20240321173037-8ugdd71",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240321173037-8ugdd71",
+				"updated": "20240321173037"
+			},
+			"Children": [
+				{
+					"ID": "20240321173037-u8wz0lh",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240321173037-u8wz0lh",
+						"updated": "20240321173037"
+					},
+					"Children": [
+						{
+							"ID": "20240321173037-4kmq2gm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173037-4kmq2gm",
+								"updated": "20240321173037"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "范围检测相关API "
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);"
+									},
+									"TextMarkType": "text",
+									"TextMarkTextContent": "只有当执行该句代码时 进行一次范围检测 它是瞬时的"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);\"}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173037-rj9668s",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240321173037-rj9668s",
+						"updated": "20240321173037"
+					},
+					"Children": [
+						{
+							"ID": "20240321173037-3rk9ajn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173037-3rk9ajn",
+								"updated": "20240321173037"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "范围检测相关API并不会真正产生一个碰撞器 只是碰撞判断计算而已"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230714174515-zan6rf9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230714174515-zan6rf9",
+				"updated": "20230714174515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "范围检测API"
+				}
+			]
+		},
+		{
+			"ID": "20230714182310-ez8biqi",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230714182310-ez8biqi",
+				"name": "Physics.OverlapBox()",
+				"updated": "20230714182321"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "盒状范围检测"
+				}
+			]
+		},
+		{
+			"ID": "20230714164654-fxgakoq",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20230714164654-fxgakoq",
+				"updated": "20240321173051"
+			},
+			"Children": [
+				{
+					"ID": "20240321173051-rb0vifn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173051-rb0vifn",
+						"updated": "20240321173051"
+					},
+					"Children": [
+						{
+							"ID": "20240321173051-u1ckwxe",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173051-u1ckwxe",
+								"updated": "20240321173051"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数一：立方体中心点\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173051-sgsuy8i",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173051-sgsuy8i"
+					},
+					"Children": [
+						{
+							"ID": "20240321173051-jgjors2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173051-jgjors2"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数二：立方体三面距离中心点长度\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173052-u8kd2dq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173052-u8kd2dq"
+					},
+					"Children": [
+						{
+							"ID": "20240321173052-z1e2ran",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173052-z1e2ran"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数三：立方体角度\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173052-mj3n6p6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173052-mj3n6p6"
+					},
+					"Children": [
+						{
+							"ID": "20240321173052-vabqijh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173052-vabqijh",
+								"updated": "20240321173103"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数四：检测指定层级（不填检测所有层）"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+									},
+									"TextMarkType": "strong text",
+									"TextMarkTextContent": "(特殊的"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-font-background1);"
+									},
+									"TextMarkType": "strong block-ref text",
+									"TextMarkBlockRefID": "20230714174437-u1eloa2",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "填入规则"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-font-background1);\"}"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);"
+									},
+									"TextMarkType": "strong text",
+									"TextMarkTextContent": "！)"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);\"}"
+								},
+								{
+									"Type": "NodeText"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173104-ow1bj0e",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173104-ow1bj0e"
+					},
+					"Children": [
+						{
+							"ID": "20240321173104-ex0kg89",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173104-ex0kg89"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数五：是否忽略触发器 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UseGlobal"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​-使用全局设置 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Collide"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​-检测触发器 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Ignore"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​-忽略触发器 不填使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UseGlobal"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173052-8f48l3v",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173052-8f48l3v"
+					},
+					"Children": [
+						{
+							"ID": "20240321173052-3uq0ata",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173052-3uq0ata"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "返回值：在该范围内的触发器（得到了对象触发器就可以得到对象的所有信息）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230714172647-vde8400",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714172647-vde8400",
+				"updated": "20230714191520"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "print(LayerMask.NameToLayer(\"UI\"));     //将层级名字转为对应的层级编号\nCollider[] colliders = Physics.OverlapBox(Vector3.zero,\n                                          Vector3.one,\t//注意！这里的长宽高是距离中心点的长宽高而非立方体的长宽高，这就意味着这里创建了一个2，2，2的立方体\n                                          Quaternion.AngleAxis(45, Vector3.up),\n                                          1 \u003c\u003c LayerMask.NameToLayer(\"UI\") |     //重要知识点：这里的层级必须要这样填：对1左移检测的编号！\n                                          1 \u003c\u003c LayerMask.NameToLayer(\"Default\"), //通过位或（有1则1）连接，可以多选层级\n                                          QueryTriggerInteraction.UseGlobal);\n\nfor (int i = 0; i \u003c colliders.Length; i++)\n{\n    print(colliders[i].gameObject.name);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714182245-2gp1lpj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 5,
+			"Properties": {
+				"id": "20230714182245-2gp1lpj",
+				"name": "Physics.OverlapBoxNonAlloc()",
+				"updated": "20230714182536"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "盒状范围检测另一个API"
+				}
+			]
+		},
+		{
+			"ID": "20230714182402-itg9kus",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20230714182402-itg9kus",
+				"updated": "20240321173112"
+			},
+			"Children": [
+				{
+					"ID": "20240321173108-k7q6acl",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173108-k7q6acl",
+						"updated": "20240321173108"
+					},
+					"Children": [
+						{
+							"ID": "20240321173108-6uptao5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173108-6uptao5",
+								"updated": "20240321173108"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "返回值：碰撞到的碰撞器数量\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173108-3p8u9m5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173108-3p8u9m5",
+						"updated": "20240321173112"
+					},
+					"Children": [
+						{
+							"ID": "20240321173108-dakyp57",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173108-dakyp57",
+								"updated": "20240321173112"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数：多了一个传入一个数组进行存储的参数，其他参数和"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Physics.OverlapBox()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​比没有什么变化"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230714182411-3b1ar2n",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714182411-3b1ar2n",
+				"updated": "20230714182417"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "if (Physics.OverlapBoxNonAlloc(Vector3.zero, Vector3.one, colliders) != 0) { }\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714182443-t4akt0n",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230714182443-t4akt0n",
+				"name": "Physics.OverlapSphere()",
+				"updated": "20230714182452"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "球形范围检测"
+				}
+			]
+		},
+		{
+			"ID": "20230714182339-gzkqxtj",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20230714182339-gzkqxtj",
+				"updated": "20240321173134"
+			},
+			"Children": [
+				{
+					"ID": "20240321173125-t6ykbis",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173125-t6ykbis",
+						"updated": "20240321173125"
+					},
+					"Children": [
+						{
+							"ID": "20240321173125-335ujgn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173125-335ujgn",
+								"updated": "20240321173125"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数一：球中心点\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173126-o2fv0sw",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173126-o2fv0sw"
+					},
+					"Children": [
+						{
+							"ID": "20240321173126-r51skps",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173126-r51skps"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数二：球半径\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173126-thh7abi",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173126-thh7abi"
+					},
+					"Children": [
+						{
+							"ID": "20240321173126-v6btp0e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173126-v6btp0e"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数三：检测指定层级（不填检测所有层）\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173127-lywc5v4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173127-lywc5v4",
+						"updated": "20240321173134"
+					},
+					"Children": [
+						{
+							"ID": "20240321173127-ml3i9yu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173127-ml3i9yu",
+								"updated": "20240321173134"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数四：是否忽略触发器 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UseGlobal"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​-使用全局设置 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Collide"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​-检测触发器 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Ignore"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​-忽略触发器 不填使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UseGlobal"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173127-lam45n6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173127-lam45n6"
+					},
+					"Children": [
+						{
+							"ID": "20240321173127-aoxucpo",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173127-aoxucpo"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "返回值：在该范围内的触发器（得到了对象触发器就可以得到对象的所有信息）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230714182615-zrk0nxc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714182615-zrk0nxc",
+				"updated": "20230714182624"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "colliders = Physics.OverlapSphere(Vector3.zero, 5, 1 \u003c\u003c LayerMask.NameToLayer(\"Default\"), QueryTriggerInteraction.UseGlobal);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714182533-i4zxysy",
+			"Type": "NodeHeading",
+			"HeadingLevel": 5,
+			"Properties": {
+				"id": "20230714182533-i4zxysy",
+				"name": "Physics.OverlapSphereNonAlloc()",
+				"updated": "20230714182605"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "球形范围检测另一个API"
+				}
+			]
+		},
+		{
+			"ID": "20230714182459-y333dnp",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20230714182459-y333dnp",
+				"updated": "20240321173141"
+			},
+			"Children": [
+				{
+					"ID": "20240321173137-zm2ekjt",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173137-zm2ekjt",
+						"updated": "20240321173137"
+					},
+					"Children": [
+						{
+							"ID": "20240321173137-ucp813h",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173137-ucp813h",
+								"updated": "20240321173137"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "返回值：碰撞到的碰撞器数量\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173137-2svwhgn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173137-2svwhgn",
+						"updated": "20240321173141"
+					},
+					"Children": [
+						{
+							"ID": "20240321173137-fmybzf0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173137-fmybzf0",
+								"updated": "20240321173141"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数：多了一个传入一个数组进行存储的参数，其他参数和"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Physics.OverlapSphere()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​比没有什么变化"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230714182723-ntt0wnr",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714182723-ntt0wnr",
+				"updated": "20230714182732"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "if (Physics.OverlapSphereNonAlloc(Vector3.zero, 5, colliders) != 0) { }\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714182527-9rlyux9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230714182527-9rlyux9",
+				"name": "Physics.OverlapCapsule()",
+				"updated": "20230714182548"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "胶囊范围检测"
+				}
+			]
+		},
+		{
+			"ID": "20230714182507-8vhoau3",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20230714182507-8vhoau3",
+				"updated": "20240321173144"
+			},
+			"Children": [
+				{
+					"ID": "20240321173144-7fmfo6a",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173144-7fmfo6a",
+						"updated": "20240321173144"
+					},
+					"Children": [
+						{
+							"ID": "20240321173144-uvi65sc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173144-uvi65sc",
+								"updated": "20240321173144"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数一：半圆一中心点\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173145-kbb55yn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173145-kbb55yn"
+					},
+					"Children": [
+						{
+							"ID": "20240321173145-kfecso7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173145-kfecso7"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数二：半圆二中心点，注意！胶囊直接通过两个半圆中心点来确定它的角度\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173145-15yt9cp",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173145-15yt9cp"
+					},
+					"Children": [
+						{
+							"ID": "20240321173145-3fb7j6d",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173145-3fb7j6d"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数三：半圆半径\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173145-7betady",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173145-7betady"
+					},
+					"Children": [
+						{
+							"ID": "20240321173145-1ozqxgs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173145-1ozqxgs"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数四：检测指定层级（不填检测所有层）\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173146-l2queng",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173146-l2queng"
+					},
+					"Children": [
+						{
+							"ID": "20240321173146-vze1cal",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173146-vze1cal"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数五：是否忽略触发器 UseGlobal-使用全局设置 Collide-检测触发器 Ignore-忽略触发器 不填使用UseGlobal\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173146-3wcl0r5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173146-3wcl0r5"
+					},
+					"Children": [
+						{
+							"ID": "20240321173146-gmp061k",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173146-gmp061k"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "返回值：在该范围内的触发器（得到了对象触发器就可以得到对象的所有信息）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230714182648-rfst6nv",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714182648-rfst6nv",
+				"updated": "20230714182706"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "colliders = Physics.OverlapCapsule(Vector3.zero, Vector3.up, 5, \n                                   1 \u003c\u003c LayerMask.NameToLayer(\"Default\"), \n                                   QueryTriggerInteraction.UseGlobal);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230714182530-f51tq70",
+			"Type": "NodeHeading",
+			"HeadingLevel": 5,
+			"Properties": {
+				"id": "20230714182530-f51tq70",
+				"name": "Physics.OverlapCapsuleNonAlloc()",
+				"updated": "20230714182559"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "胶囊范围检测另一个API"
+				}
+			]
+		},
+		{
+			"ID": "20230714182520-0i74vo0",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20230714182520-0i74vo0",
+				"updated": "20240321173149"
+			},
+			"Children": [
+				{
+					"ID": "20240321173149-lske23l",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173149-lske23l",
+						"updated": "20240321173149"
+					},
+					"Children": [
+						{
+							"ID": "20240321173149-5v65e8y",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173149-5v65e8y",
+								"updated": "20240321173149"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "返回值：碰撞到的碰撞器数量\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240321173149-892slzb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240321173149-892slzb"
+					},
+					"Children": [
+						{
+							"ID": "20240321173149-af4icds",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240321173149-af4icds"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数：多了一个传入一个数组进行存储的参数，其他参数和Physics.OverlapCapsule()比没有什么变化"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20230714182725-kbm8iyx",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230714182725-kbm8iyx",
+				"updated": "20230714182738"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "if (Physics.OverlapCapsuleNonAlloc(Vector3.zero, Vector3.up, 5, colliders) != 0) { }\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

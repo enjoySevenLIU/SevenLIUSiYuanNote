@@ -1,0 +1,1448 @@
+{
+	"ID": "20230803230746-35nleba",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20230803230746-35nleba",
+		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20230803230746-35nleba\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20230803230746-fdkuml9\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20230804172457-bc9iwi9\u0026quot;,\u0026quot;scrollTop\u0026quot;:3265.60009765625\u0026#125;",
+		"title": "U3L13-1——代码控制动画（老动画系统）",
+		"updated": "20230804172457"
+	},
+	"Children": [
+		{
+			"ID": "20230803230746-fdkuml9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20230803230746-fdkuml9",
+				"updated": "20230804161651"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "老动画系统"
+				}
+			]
+		},
+		{
+			"ID": "20230804161701-r37jsjm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804161701-r37jsjm",
+				"updated": "20230804162120"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity中有两套动画系统\n新：Mecanim动画系统——主要用Animator组件控制动画\n老：Animation动画系统——主要用Animation组件控制动画"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "（Unity4之前的版本可能会用到）"
+				}
+			]
+		},
+		{
+			"ID": "20230804161701-nfs3m1z",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804161701-nfs3m1z",
+				"updated": "20230804161701"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "目前我们为对象在Animation窗口创建的动画都会被新动画系统支配\n有特殊需求或者针对一些简易动画，才会使用老动画系统"
+				}
+			]
+		},
+		{
+			"ID": "20230804172230-jeyz9ay",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804172230-jeyz9ay",
+				"updated": "20230804172230"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "老动画系统主要用于处理老版本项目和简单的一些自制动画\n新项目都不建议大家使用了"
+				}
+			]
+		},
+		{
+			"ID": "20230804172230-hv1vgc0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804172230-hv1vgc0",
+				"updated": "20230804172230"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关键组件：Animation"
+				}
+			]
+		},
+		{
+			"ID": "20230804164910-rrjgaqp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230804164910-rrjgaqp",
+				"updated": "20230804164922"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20230804164923-29dv6z6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230804164923-29dv6z6",
+				"updated": "20230804172444"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Animation                        //老动画系统类\nanimation.Play()                 //播放动画\nanimation.CrossFade()            //过渡播放动画\nanimation.PlayQueued()           //队列播放动画，如果前一个动画没有播放完先等前一个动画播放完再播放\nanimation.CrossFadeQueued()      //过渡队列播放动画，在队列播放动画的基础上过渡播放动画\nanimation.Stop()                 //停止所有当前在播的动画\nanimation.IsPlaying()            //检测某个动画是否在播放的方法\nanimation.wrapMode               //设置播放模式的属性\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230804161702-xafrfaw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230804161702-xafrfaw",
+				"updated": "20230804161714"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "老动画系统控制动画播放"
+				}
+			]
+		},
+		{
+			"ID": "20230804161728-fxpm2k2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804161728-fxpm2k2",
+				"updated": "20230804161731"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "注意：\n在创建动画之前为对象添加Animation组件之后再制作动画\n这时制作出的动画和之前的动画格式是有区别的"
+				}
+			]
+		},
+		{
+			"ID": "20230804161728-jolji64",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230804161728-jolji64",
+				"updated": "20230804161733"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Animation参数"
+				}
+			]
+		},
+		{
+			"ID": "20230804161851-7427puu",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20230804161851-7427puu",
+				"updated": "20230804162324"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20230804161848-7sh4tq9",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20230804161848-7sh4tq9",
+						"updated": "20230804161851"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20230804161848-oucfnwn.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20230804161754-yzpj1im",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20230804161754-yzpj1im",
+						"updated": "20230804162324"
+					},
+					"Children": [
+						{
+							"ID": "20230804161754-eqdk68f",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230804161754-eqdk68f",
+								"updated": "20230804161754"
+							},
+							"Children": [
+								{
+									"ID": "20230804161754-s3701tr",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230804161754-s3701tr",
+										"updated": "20230804161756"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Animation：默认播放的动画"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20230804161756-fh76fqq",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230804161756-fh76fqq"
+							},
+							"Children": [
+								{
+									"ID": "20230804161756-fjhb97v",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230804161756-fjhb97v",
+										"updated": "20230804161759"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Animations：该动画组件可以控制的所有动画"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20230804161759-3trnmsu",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230804161759-3trnmsu"
+							},
+							"Children": [
+								{
+									"ID": "20230804161759-pkorol0",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230804161759-pkorol0",
+										"updated": "20230804161801"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Play AutoMatically：是否一开始就自动播放默认动画"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20230804161802-am2okup",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230804161802-am2okup"
+							},
+							"Children": [
+								{
+									"ID": "20230804161802-gfls9xs",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230804161802-gfls9xs",
+										"updated": "20230804161805"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Animate Physics：动画是否与物理交互"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20230804161806-3hfrfjb",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230804161806-3hfrfjb",
+								"updated": "20230804162324"
+							},
+							"Children": [
+								{
+									"ID": "20230804161806-j0dj7dn",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230804161806-j0dj7dn",
+										"updated": "20230804161809"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Culling Type：决定什么时候不播放动画"
+										}
+									]
+								},
+								{
+									"ID": "20230804161810-8by6o8j",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20230804161810-8by6o8j",
+										"updated": "20230804162324"
+									},
+									"Children": [
+										{
+											"ID": "20230804161809-zro89hn",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20230804161809-zro89hn"
+											},
+											"Children": [
+												{
+													"ID": "20230804161809-aavjasy",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20230804161809-aavjasy",
+														"updated": "20230804161813"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Always Animate：始终播放"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20230804161812-2nobq1a",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20230804161812-2nobq1a",
+												"updated": "20230804162324"
+											},
+											"Children": [
+												{
+													"ID": "20230804161812-fwhwdgs",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20230804161812-fwhwdgs",
+														"updated": "20230804162324"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Based On Renderers：基于默认动画姿势剔除"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20230804162329-qh3t5v1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230804162329-qh3t5v1",
+				"updated": "20230804162402"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "老动画文件参数（与新系统有区别）"
+				}
+			]
+		},
+		{
+			"ID": "20230804162413-x448j8y",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20230804162413-x448j8y",
+				"updated": "20230804162414"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20230804162332-6g2qoaf",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20230804162332-6g2qoaf",
+						"updated": "20230804162414"
+					},
+					"Children": [
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20230804162329-isao41g.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20230804162410-iq50ixu",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20230804162410-iq50ixu",
+						"updated": "20230804162414"
+					},
+					"Children": [
+						{
+							"ID": "20230804162410-uwivvt4",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20230804162410-uwivvt4",
+								"updated": "20230804162410"
+							},
+							"Children": [
+								{
+									"ID": "20230804162410-2l1uvge",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20230804162410-2l1uvge",
+										"updated": "20230804162410"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Wrap Mode：播放模式"
+										}
+									]
+								},
+								{
+									"ID": "20230804162410-5k8pcb1",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20230804162410-5k8pcb1",
+										"updated": "20230804162410"
+									},
+									"Children": [
+										{
+											"ID": "20230804162410-u853rwc",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20230804162410-u853rwc",
+												"updated": "20230804162410"
+											},
+											"Children": [
+												{
+													"ID": "20230804162410-7cqcors",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20230804162410-7cqcors",
+														"updated": "20230804162410"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Default：默认"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20230804162410-6d2e2h1",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20230804162410-6d2e2h1",
+												"updated": "20230804162410"
+											},
+											"Children": [
+												{
+													"ID": "20230804162410-r99pjvb",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20230804162410-r99pjvb",
+														"updated": "20230804162410"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Once：只播放一次"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20230804162410-fk0qco7",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20230804162410-fk0qco7",
+												"updated": "20230804162410"
+											},
+											"Children": [
+												{
+													"ID": "20230804162410-gk7fpit",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20230804162410-gk7fpit",
+														"updated": "20230804162410"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Loop：循环播放"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20230804162410-pijgi0q",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20230804162410-pijgi0q",
+												"updated": "20230804162410"
+											},
+											"Children": [
+												{
+													"ID": "20230804162410-y0bjkno",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20230804162410-y0bjkno",
+														"updated": "20230804162410"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Ping Pong：从头到尾，从尾到头播放"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20230804162410-jyq99i9",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20230804162410-jyq99i9",
+												"updated": "20230804162410"
+											},
+											"Children": [
+												{
+													"ID": "20230804162410-i5h2r8a",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20230804162410-i5h2r8a",
+														"updated": "20230804162410"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Clamp Forever：播放结束会停在最后一帧，\n并且会一直播放最后一帧（相当于状态不停止）\n表现效果和Once一样，但是逻辑处理上不同"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20230804162405-361g1gx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804162405-361g1gx"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20230804161852-4m5otbz",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230804161852-4m5otbz",
+				"updated": "20230804161915"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "代码控制播放"
+				}
+			]
+		},
+		{
+			"ID": "20230804162111-03eypmz",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230804162111-03eypmz",
+				"name": "animation.Play()",
+				"updated": "20230804164625"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "播放动画"
+				}
+			]
+		},
+		{
+			"ID": "20230804164735-3kxbw43",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804164735-3kxbw43",
+				"updated": "20230804164745"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "参数填入要播放动画的名字"
+				}
+			]
+		},
+		{
+			"ID": "20230804164625-gjnj0y3",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230804164625-gjnj0y3",
+				"updated": "20230804164700"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Update()\n{\n    if (Input.GetKeyDown(KeyCode.Alpha1))\n        animation.Play(\"1\");\n    if (Input.GetKeyDown(KeyCode.Alpha2))\n        animation.Play(\"2\");\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230804164750-2ga3cf2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230804164750-2ga3cf2",
+				"name": "animation.CrossFade()",
+				"updated": "20230804164815"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "淡入播放，自动产生过渡效果"
+				}
+			]
+		},
+		{
+			"ID": "20230804170043-0111lwi",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804170043-0111lwi",
+				"updated": "20230804170049"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "当你要播放的动画的开始状态 和当前的状态 不一样时 就会产生过渡效果"
+				}
+			]
+		},
+		{
+			"ID": "20230804165305-r3rcj2s",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804165305-r3rcj2s",
+				"updated": "20230804165407"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意！不一定是完全过渡到该动画的初始形态，而是过渡到一个Unity认为合适的状态再开始播放"
+				}
+			]
+		},
+		{
+			"ID": "20230804164815-292bcq3",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230804164815-292bcq3",
+				"updated": "20230804165252"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "if (Input.GetKeyDown(KeyCode.Alpha3))\n    animation.CrossFade(\"3\");\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230804164816-8d7wu99",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230804164816-8d7wu99",
+				"name": "animation.PlayQueued()",
+				"updated": "20230804164833"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "前一个播放完再播放下一个"
+				}
+			]
+		},
+		{
+			"ID": "20230804165506-t78oc68",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804165506-t78oc68",
+				"updated": "20230804165529"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "即只有上一个动画完成播放后，才会播放该动画"
+				}
+			]
+		},
+		{
+			"ID": "20230804164834-68dt9sq",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230804164834-68dt9sq",
+				"updated": "20230804165504"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "if (Input.GetKeyDown(KeyCode.Alpha4))\n    animation.PlayQueued(\"2\");\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230804170317-p21r3kf",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20230804170317-p21r3kf",
+				"name": "animation.CrossFadeQueued()",
+				"updated": "20230804170412"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "有过渡效果的前一个播放完再播放下一个"
+				}
+			]
+		},
+		{
+			"ID": "20230804170339-2k7jwr7",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230804170339-2k7jwr7",
+				"updated": "20230804170424"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "if (Input.GetKeyDown(KeyCode.Alpha4))\n    animation.CrossFadeQueued(\"2\");\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230804164835-jgrh2bd",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230804164835-jgrh2bd",
+				"name": "animation.Stop()",
+				"updated": "20230804164842"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "停止播放所有动画"
+				}
+			]
+		},
+		{
+			"ID": "20230804164846-zvnyiwy",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230804164846-zvnyiwy",
+				"updated": "20230804170526"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "animation.Stop();\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230804164846-xb83kf3",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230804164846-xb83kf3",
+				"name": "animation.IsPlaying()",
+				"updated": "20230804164855"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "是否在播放某个动画"
+				}
+			]
+		},
+		{
+			"ID": "20230804170722-mapkyja",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804170722-mapkyja",
+				"updated": "20230804170755"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "注意，与isPlaying（是否在播放动画的属性）区别开来"
+				}
+			]
+		},
+		{
+			"ID": "20230804164857-rf9e3e8",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230804164857-rf9e3e8",
+				"updated": "20230804170710"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "if (animation.IsPlaying(\"1\"))\n    print(\"正在播放动画1\");\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230804164857-03ff3l2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230804164857-03ff3l2",
+				"name": "animation.wrapMode",
+				"updated": "20230804164905"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "播放模式设置"
+				}
+			]
+		},
+		{
+			"ID": "20230804170836-n9u4c9x",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804170836-n9u4c9x",
+				"updated": "20230804170904"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "能设置的模式直接参考WrapMode内的选项即可"
+				}
+			]
+		},
+		{
+			"ID": "20230804164759-6kzgeuv",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230804164759-6kzgeuv",
+				"updated": "20230804170835"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "animation.wrapMode = WrapMode.Loop\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230804170914-u0gynbx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230804170914-u0gynbx",
+				"updated": "20230804171109"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "其它"
+				}
+			]
+		},
+		{
+			"ID": "20230804171110-bfn1c0o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804171110-bfn1c0o",
+				"updated": "20230804171131"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "了解即可，之后的新动画系统会详细讲解"
+				}
+			]
+		},
+		{
+			"ID": "20230804170957-u1bwiwu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804170957-u1bwiwu",
+				"updated": "20230804170957"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "层级和权重以及混合（老动画系统需要通过代码来达到动画的遮罩、融合等效果）"
+				}
+			]
+		},
+		{
+			"ID": "20230804170957-cwztkfo",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230804170957-cwztkfo",
+				"updated": "20230804170957"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "设置层级"
+				}
+			]
+		},
+		{
+			"ID": "20230804171003-7nlo8sx",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230804171003-7nlo8sx",
+				"updated": "20230804171046"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "animation[\"1\"].layer = 1;\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230804171003-puiol9c",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230804171003-puiol9c",
+				"updated": "20230804171003"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "设置权重"
+				}
+			]
+		},
+		{
+			"ID": "20230804171005-of5uz7s",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230804171005-of5uz7s",
+				"updated": "20230804171035"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "animation[\"1\"].weight = 1;\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230804171005-7dla6pa",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230804171005-7dla6pa",
+				"updated": "20230804171009"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "混合模式"
+				}
+			]
+		},
+		{
+			"ID": "20230804171010-5bbafqj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804171010-5bbafqj"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "叠加还是混合"
+				}
+			]
+		},
+		{
+			"ID": "20230804171018-7aekl1v",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230804171018-7aekl1v",
+				"updated": "20230804171029"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "animation[\"1\"].blendMode = AnimationBlendMode.Additive;\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230804171013-0515sff",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20230804171013-0515sff",
+				"updated": "20230804171013"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "设置混组相关骨骼信息"
+				}
+			]
+		},
+		{
+			"ID": "20230804170918-laycvat",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230804170918-laycvat",
+				"updated": "20230804171055"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker"
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "animation[\"\"].AddMixingTransform();\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230804162054-3j4f7xo",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20230804162054-3j4f7xo",
+				"updated": "20230804162056"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "动画事件"
+				}
+			]
+		},
+		{
+			"ID": "20230804163153-x50woff",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804163153-x50woff",
+				"updated": "20230804171732"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "动画事件主要用于处理 当动画播放到某一时刻想要触发某些逻辑\n比如进行伤害检测、发射子弹、特效播放等等"
+				}
+			]
+		},
+		{
+			"ID": "20230804171734-5enwzhx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804171734-5enwzhx",
+				"updated": "20230804172034"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "先在动画中添加事件，再在Inspector面板上选择要执行的函数"
+				}
+			]
+		},
+		{
+			"ID": "20230804172014-83eng75",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804172014-83eng75",
+				"updated": "20230804172135"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这种参数可以设置参数，同样在Inspector面板输入参数，参数的类型可以用很多"
+				}
+			]
+		},
+		{
+			"ID": "20230804171827-stzemxm",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20230804171827-stzemxm",
+				"updated": "20230804172142"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public void AnimationEvent(int i)\n{\n    print(\"动画事件触发\");\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20230804172457-bc9iwi9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20230804172457-bc9iwi9"
+			}
+		}
+	]
+}
