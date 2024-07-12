@@ -1,0 +1,1249 @@
+{
+	"ID": "20240710211945-ki6ph40",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240710211945-ki6ph40",
+		"title": "US3S2L1——纹理颜色采样",
+		"type": "doc",
+		"updated": "20240710221810"
+	},
+	"Children": [
+		{
+			"ID": "20240710211945-aolboq1",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240710211945-aolboq1",
+				"updated": "20240710212523"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240710212316-63kdx85",
+					"Type": "NodeHeading",
+					"HeadingLevel": 2,
+					"Properties": {
+						"id": "20240710212316-63kdx85",
+						"updated": "20240710212523"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "知识回顾"
+						}
+					]
+				},
+				{
+					"ID": "20240710212320-lagu473",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240710212320-lagu473",
+						"updated": "20240710212408"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "内置函数 —— 二维纹理采样函数，详见："
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "block-ref",
+							"TextMarkBlockRefID": "20240616174041-82jjlbg",
+							"TextMarkBlockRefSubtype": "d",
+							"TextMarkTextContent": "US2S3L12——CG内置函数"
+						}
+					]
+				},
+				{
+					"ID": "20240710212332-cegnj5c",
+					"Type": "NodeCodeBlock",
+					"IsFencedCodeBlock": true,
+					"Properties": {
+						"id": "20240710212332-cegnj5c",
+						"style": "line-height: 22px;",
+						"updated": "20240710212356"
+					},
+					"Children": [
+						{
+							"Type": "NodeCodeBlockFenceOpenMarker",
+							"Data": "```"
+						},
+						{
+							"Type": "NodeCodeBlockFenceInfoMarker",
+							"CodeBlockInfo": "Yw=="
+						},
+						{
+							"Type": "NodeCodeBlockCode",
+							"Data": "fixed tex2D(sampler2D tex, float2 s)\n"
+						},
+						{
+							"Type": "NodeCodeBlockFenceCloseMarker",
+							"Data": "```"
+						}
+					]
+				},
+				{
+					"ID": "20240710212444-5g34ifq",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240710212444-5g34ifq",
+						"updated": "20240710212523"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "传入纹理图片和UV坐标，返回纹理图片中对应位置的颜色值"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240710212524-06ezced",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240710212524-06ezced",
+				"updated": "20240710221810"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "单张纹理颜色采样的Shader"
+				}
+			]
+		},
+		{
+			"ID": "20240710213036-85b3lac",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240710213036-85b3lac",
+				"updated": "20240710213045"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关键步骤："
+				}
+			]
+		},
+		{
+			"ID": "20240710213045-grbxwzg",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240710213045-grbxwzg",
+				"updated": "20240710220832"
+			},
+			"Children": [
+				{
+					"ID": "20240710213047-d20ggq3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240710213047-d20ggq3",
+						"updated": "20240710213047"
+					},
+					"Children": [
+						{
+							"ID": "20240710213047-7n6bw0u",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240710213047-7n6bw0u",
+								"updated": "20240710213056"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "纹理属性和CG成员变量声明"
+								}
+							]
+						},
+						{
+							"ID": "20240710213143-kmeaa7y",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240710213143-kmeaa7y",
+								"updated": "20240710213219"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "CG中映射ShaderLab中的纹理属性，需要有两个成员变量：\n"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "一个用于映射纹理颜色数据，一个用于映射纹理缩放平移数据"
+								}
+							]
+						},
+						{
+							"ID": "20240710213143-ncx0oax",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240710213143-ncx0oax",
+								"updated": "20240710213342"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "ShaderLab中的属性：图片属性（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240612180335-ykas7br",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "2D"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​），用于利用UV坐标提取这个图片中的颜色"
+								}
+							]
+						},
+						{
+							"ID": "20240710213407-ohvmawy",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240710213407-ohvmawy",
+								"style": "line-height: 22px;",
+								"updated": "20240710213414"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Properties\n{\n    _MainTex(\"MainTex\", 2D) = \"\"{}\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20240710213540-j8kwkil",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240710213540-j8kwkil",
+								"updated": "20240710213540"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20240710213540-0am4mwa.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20240710213541-dlrwacr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240710213541-dlrwacr",
+								"updated": "20240710213932"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在Inspector窗口上，可以看到ShaderLab的图片属性除了关联贴图，还可以修改贴图的缩放和偏移量，\n如果CG代码内需要获取贴图的缩放和偏移量这些数据，还需要额外的声明对应的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "float4"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 变量去获取这些值"
+								}
+							]
+						},
+						{
+							"ID": "20240710213143-d3tbu2y",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240710213143-d3tbu2y",
+								"updated": "20240710213940"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "因此，CG中用于映射属性的成员变量有："
+								}
+							]
+						},
+						{
+							"ID": "20240710213159-c1gs1x6",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240710213159-c1gs1x6",
+								"updated": "20240710213159"
+							},
+							"Children": [
+								{
+									"ID": "20240710213159-dl4hg0d",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240710213159-dl4hg0d",
+										"updated": "20240710213159"
+									},
+									"Children": [
+										{
+											"ID": "20240710213159-77pvm3c",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240710213159-77pvm3c",
+												"updated": "20240710214014"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "sampler2D 纹理属性名"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：用于映射纹理图片"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240710213159-e20h45b",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240710213159-e20h45b",
+										"updated": "20240710213159"
+									},
+									"Children": [
+										{
+											"ID": "20240710213159-rzhzfkj",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240710213159-rzhzfkj",
+												"updated": "20240710214022"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "float4 纹理属性名_ST"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​：   用于映射纹理图片的缩放和平移"
+												}
+											]
+										},
+										{
+											"ID": "20240710213201-2kvdkxl",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240710213201-2kvdkxl",
+												"updated": "20240710214048"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "固定命名方式为："
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "纹理名_ST"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​（S代表Scale缩放，T代表Translation平移）"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20240710214051-8u3w254",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240710214051-8u3w254",
+								"updated": "20240710214339"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设要获取 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "_MainTex"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 属性设置的纹理贴图以及缩放与偏移量，则在CG语句中声明如下变量："
+								}
+							]
+						},
+						{
+							"ID": "20240710214200-locs9zq",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240710214200-locs9zq",
+								"style": "line-height: 22px;",
+								"updated": "20240710214327"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "CGPROGRAM\n#pragma vertex vert\n#pragma fragment frag\n\n#include \"UnityCG.cginc\"\n\nsampler2D _MainTex;\nfloat4 _MainTex_ST;\n\nv2f_img vert (appdata_base v) { /*...*/ }\nfixed4 frag (v2f_img i) : SV_Target { /*...*/ }\nENDCG\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240710213056-uw5ltp1",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240710213056-uw5ltp1",
+						"name": "TRANSFORM_TEX()",
+						"updated": "20240710220451"
+					},
+					"Children": [
+						{
+							"ID": "20240710213056-hkrb8tp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240710213056-hkrb8tp",
+								"updated": "20240710215921"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在顶点着色器中用缩放平移参数参与UV值计算"
+								}
+							]
+						},
+						{
+							"ID": "20240710215925-fm8ec4b",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240710215925-fm8ec4b",
+								"updated": "20240710220146"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "这里使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UnityCG.cginc"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 提供的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240616182612-gxmjelq",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "v2f_img"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 作为顶点着色器返回值，\n其中就包括了表示纹理UV坐标的成员 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "uv"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，计算出来的uv坐标值需要赋值给该成员"
+								}
+							]
+						},
+						{
+							"ID": "20240710214356-k9mn9om",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20240710214356-k9mn9om",
+								"updated": "20240710220451"
+							},
+							"Children": [
+								{
+									"ID": "20240710214508-6jauyzi",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20240710214508-6jauyzi",
+										"updated": "20240710214508"
+									},
+									"Children": [
+										{
+											"ID": "20240710214508-tcjr1vv",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240710214508-tcjr1vv",
+												"updated": "20240710214515"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如何获取模型中携带的uv信息？\n"
+												}
+											]
+										},
+										{
+											"ID": "20240710214519-b92ajm1",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240710214519-b92ajm1",
+												"updated": "20240710214540"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "在顶点着色器中，我们可以利用 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code block-ref",
+													"TextMarkBlockRefID": "20240616155841-3gz71el",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "TEXCOORD"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 语义获取到模型中的纹理坐标信息，它是一个 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "float4"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 类型的，其中："
+												}
+											]
+										},
+										{
+											"ID": "20240710214530-fgbftro",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20240710214530-fgbftro",
+												"updated": "20240710214530"
+											},
+											"Children": [
+												{
+													"ID": "20240710214530-p5fcovw",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240710214530-p5fcovw",
+														"updated": "20240710214530"
+													},
+													"Children": [
+														{
+															"ID": "20240710214530-yx96wrg",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240710214530-yx96wrg",
+																"updated": "20240710214533"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "xy"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ 获取到的是纹理坐标的水平和垂直坐标"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20240710214531-0p6tw7m",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20240710214531-0p6tw7m"
+													},
+													"Children": [
+														{
+															"ID": "20240710214531-9zjhn5v",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20240710214531-9zjhn5v",
+																"updated": "20240710214814"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "zw"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ 获取到的是纹理携带的一些额外信息，例如深度值等，目前暂时不用。"
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20240710215103-n9cu8ip",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240710215103-n9cu8ip",
+												"updated": "20240710215309"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "例如："
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "UnityCG.cginc"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 提供的 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code block-ref",
+													"TextMarkBlockRefID": "20240616182612-6zz8ivk",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "appdata_base"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 就包含 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "TEXCOORD0"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 语义的成员 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "texcoord"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，它就用于获取模型的UV信息。"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20240710214508-3k8hoxt",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20240710214508-3k8hoxt",
+										"updated": "20240710220451"
+									},
+									"Children": [
+										{
+											"ID": "20240710214508-00rip27",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240710214508-00rip27",
+												"updated": "20240710214508"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如何计算\n"
+												}
+											]
+										},
+										{
+											"ID": "20240710214828-khpr9wl",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240710214828-khpr9wl",
+												"updated": "20240710215632"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "固定算法为：先缩放，后平(偏)移，缩放用乘法，平(偏)移用加法"
+												}
+											]
+										},
+										{
+											"ID": "20240710214920-ydjo59u",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240710214920-ydjo59u",
+												"updated": "20240710214926"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "语法类似于："
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "纹理坐标.xy * 纹理名_ST.xy + 纹理名_ST.zw"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20240710215346-j1j8nj3",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240710215346-j1j8nj3",
+												"style": "line-height: 22px;",
+												"updated": "20240710220437"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "Yw=="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "v2f_img vert (appdata_base v)\n{\n    v2f_img data;\n    data.pos = UnityObjectToClipPos(v.vertex);                  //将顶点转换到裁剪空间下\n\t//根据属性设置的缩放和偏移量，修正顶点UV坐标，确保缩放偏移后也能正确映射\n    data.uv = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;\n    return data;\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20240710214853-1wcq58h",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240710214853-1wcq58h",
+												"updated": "20240710214912"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "或者直接用内置宏："
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "TRANSFORM_TEX(纹理坐标变量, 纹理变量)"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，该宏在内部会进行相同的计算"
+												}
+											]
+										},
+										{
+											"ID": "20240710215358-20llkeu",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20240710215358-20llkeu",
+												"style": "line-height: 22px;",
+												"updated": "20240710220451"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "Yw=="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "v2f_img vert (appdata_base v)\n{\n    v2f_img data;\n    data.pos = UnityObjectToClipPos(v.vertex);          //将顶点转换到裁剪空间下\n    data.uv = TRANSFORM_TEX(v.texcoord.xy, _MainTex);   //根据属性设置的缩放和偏移量，修正顶点UV坐标，确保缩放偏移后也能正确映射\n    return data;\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20240710215641-fr0h5m7",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20240710215641-fr0h5m7",
+												"updated": "20240710215723"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如果没有进行缩放和平移，那么计算后，值是不会变化的，因为缩放默认值是1和1，平移默认值是0和0"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240710213114-pflasbo",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240710213114-pflasbo",
+						"updated": "20240710220832"
+					},
+					"Children": [
+						{
+							"ID": "20240710213114-dg01m9h",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240710213114-dg01m9h",
+								"updated": "20240710220501"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在片元着色器中进行纹理颜色采样"
+								}
+							]
+						},
+						{
+							"ID": "20240710220627-d3bpq9l",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240710220627-d3bpq9l",
+								"updated": "20240710220808"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "这里使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240616175909-rwnovje",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "tex2D()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ ，传入UV坐标和贴图，将纹理中对应的UV坐标的颜色映射到模型的某个片元"
+								}
+							]
+						},
+						{
+							"ID": "20240710220503-18wco2e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240710220503-18wco2e",
+								"updated": "20240710220619"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "要注意，这里传入的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "v2f_img"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "uv"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 是插值计算后的，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "每一个片元自己的UV坐标"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "，这样才可以精准的从贴图中取出颜色"
+								}
+							]
+						},
+						{
+							"ID": "20240710220158-rb9bj4w",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20240710220158-rb9bj4w",
+								"style": "line-height: 22px;",
+								"updated": "20240710220832"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "fixed4 frag (v2f_img i) : SV_Target\n{\n    fixed4 color = tex2D(_MainTex, i.uv);   //根据UV坐标，将纹理上颜色映射到模型上\n    return color;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240710220953-qkmijiq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240710220953-qkmijiq",
+				"updated": "20240710221000"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "完整Shader代码如下："
+				}
+			]
+		},
+		{
+			"ID": "20240710221000-y5yn8ix",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240710221000-y5yn8ix",
+				"style": "line-height: 22px;",
+				"updated": "20240710221006"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson48\"\n{\n    Properties\n    {\n        _MainTex(\"MainTex\", 2D) = \"\"{}\n    }\n    SubShader\n    {\n        Pass\n        {\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n\n            sampler2D _MainTex;\n            float4 _MainTex_ST;\n\n            v2f_img vert (appdata_base v)\n            {\n                v2f_img data;\n                data.pos = UnityObjectToClipPos(v.vertex);                  //将顶点转换到裁剪空间下\n                data.uv = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;  //根据属性设置的缩放和偏移量，修正顶点UV坐标，确保缩放偏移后也能正确映射\n                return data;\n            }\n\n            fixed4 frag (v2f_img i) : SV_Target\n            {\n                fixed4 color = tex2D(_MainTex, i.uv);   //根据UV坐标，将纹理上颜色映射到模型上\n                return color;\n            }\n            ENDCG\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240710221028-gc09zuh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240710221028-gc09zuh",
+				"updated": "20240710221707"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果（左图为不关联纹理的模型的显示效果（固定为白色），右图为关联的纹理的模型的显示效果）："
+				}
+			]
+		},
+		{
+			"ID": "20240710221702-da435kn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240710221702-da435kn",
+				"updated": "20240710221702"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 610px;",
+						"style": "width: 600px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240710221454-ytbalw4.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 600px;\" parent-style=\"width: 610px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240710221702-ddhxoh2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240710221702-ddhxoh2",
+				"updated": "20240710221842"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "修改纹理的缩放和偏移量，会影响到模型的显示效果（偏移量修改为0.5，0）："
+				}
+			]
+		},
+		{
+			"ID": "20240710221810-vag0tg3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240710221810-vag0tg3",
+				"updated": "20240710221810"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 503px;",
+						"style": "width: 493px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240710221810-om2isoz.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 493px;\" parent-style=\"width: 503px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		}
+	]
+}
