@@ -10,5 +10,7 @@
 
 思源笔记的首页：[siyuan首页](https://b3log.org/siyuan/)
 
-当然你也可以下载Release的打包好的siyuan文件，或者markdown文件压缩包，
-但是要注意，从siyuan转到markdown，将不可避免的丢失双链引用，超级块排版
+当然你也可以下载Release的打包好的siyuan文件，导入到思源笔记内直接使用
+如果不想使用思源笔记，也可以下载md文件压缩包，但是要注意，从siyuan转到markdown，将不可避免的丢失双链引用，超级块排版
+
+注意！仓库每次随博客更新而更新，Release为每月一次更新或者每次更新完一次大课程系列时更新
