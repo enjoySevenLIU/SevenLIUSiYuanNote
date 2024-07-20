@@ -1,0 +1,1446 @@
+{
+	"ID": "20240715103135-7bodhb9",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240715103135-7bodhb9",
+		"title": "CS5L13-1——筛选和排序",
+		"type": "doc",
+		"updated": "20240716121318"
+	},
+	"Children": [
+		{
+			"ID": "20240716110613-4157wry",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240716110613-4157wry",
+				"updated": "20240716121318"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240716110620-5xty5eg",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240716110620-5xty5eg",
+				"style": "line-height: 22px;",
+				"updated": "20240716113137"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//查询表达式\nfrom ... in ...\t\t\t\t//从某个集合内选出单个元素\nwhere\t\t\t\t\t\t//筛选，后跟和集合内单个元素相关的条件表达式\norderby\t\t\t\t\t\t//排序。后跟要排序的单个元素\nselect\t\t\t\t\t\t//将单个元素放入到新集合内\n//链式表达式\nIEnumerable\u003c\u003e\t\t\t\t//公开枚举数，该枚举数支持在指定类型的集合上进行简单迭代\nIEnumerable\u003c\u003e.Where()\t\t//筛选，需要传入条件表达式，可以使用lambda表达式\nIEnumerable\u003c\u003e.OrderBy()\t\t//排序\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-p1bevfn",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240715103157-p1bevfn",
+				"updated": "20240716121318"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "用LINQ来筛选和排序"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-bhss7de",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715103157-bhss7de",
+				"updated": "20240715103210"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设有一个列表，要筛选出里面的所有的偶数，且大于等于4的数据，再对挑选出来的数字进行排序，最后打印出来"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-tcncsps",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715103157-tcncsps",
+				"style": "line-height: 22px;",
+				"updated": "20240715103205"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//假设有一个列表\nList\u003cint\u003e list = new List\u003cint\u003e() { 1, 3, 5, 7, 9, 2, 4, 6, 8, 0 };\n//要筛选出里面的所有的偶数，且大于等于4的数据\n//再对挑选出来的数字进行排序，最后打印出来\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-0p0fkox",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715103157-0p0fkox",
+				"updated": "20240715103413"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果不用LINQ，我们需要使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "foreach"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 遍历条件判断，最后再排序"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-uijbfyy",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715103157-uijbfyy",
+				"style": "line-height: 22px;",
+				"updated": "20240715103205"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private static void Normal(List\u003cint\u003e list)\n{\n    //不使用LINQ的方法\n    List\u003cint\u003e resultList = new List\u003cint\u003e();\n    foreach (int i in list)\n    {\n        if (i % 2 == 0 \u0026\u0026 i \u003e= 4)\n            resultList.Add(i);\n    }\n    resultList.Sort();\n    foreach (int i in resultList)\n        Console.WriteLine(i);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-j5xpaht",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715103157-j5xpaht",
+				"updated": "20240715103205"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出结果："
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-g4hu9kh",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715103157-g4hu9kh",
+				"style": "line-height: 22px;",
+				"updated": "20240715103205"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "4\n6\n8\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-bszjz62",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715103157-bszjz62",
+				"updated": "20240715103251"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "接下来我们使用LINQ来替代 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "foreach"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 遍历和 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": ".Sort()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-z41x6oz",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"alias": "from,in",
+				"id": "20240715103157-z41x6oz",
+				"name": "select",
+				"updated": "20240716121318"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "从可遍历集合内取出元素、再将元素放入到新集合内"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-lyfkyw1",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240715103157-lyfkyw1",
+				"updated": "20240715103910"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240715103157-51j6pft",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240715103157-51j6pft",
+						"updated": "20240715103157"
+					},
+					"Children": [
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "a",
+							"TextMarkAHref": "https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/from-clause",
+							"TextMarkTextContent": "from 子句 - C# 参考 - C# | Microsoft Learn"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240715103432-mjoo98c",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715103432-mjoo98c",
+				"updated": "20240715103910"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可遍历集合指的是继承了 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerable\u0026lt;\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 或者 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerable"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 接口的数据集合，包括数组，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "List\u0026lt;\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Dictionary\u0026lt;\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 等都继承了这些接口"
+				}
+			]
+		},
+		{
+			"ID": "20240716114428-ci8idzt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240716114428-ci8idzt",
+				"updated": "20240716114509"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "继承了 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerable\u0026lt;\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的数据集合类，就可以使用LINQ去进行查询操作"
+				}
+			]
+		},
+		{
+			"ID": "20240715103810-eojvjdf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715103810-eojvjdf",
+				"updated": "20240716114426"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "当我们使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "for"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​、 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "foreach"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 或者 LINQ 对数据集合进行筛选，排序等操作时，都会将集合内的某个元素取出\n再操作完毕后，会将经过了这些操作的数据放到一个另一个数据集合内，因此，取出和放入的操作在LINQ内是必不可少的"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-nr5rupd",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240715103157-nr5rupd",
+				"updated": "20240716114526"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240715103806-wcnwpf7",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240715103806-wcnwpf7",
+						"updated": "20240715103806"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "注意，由于LINQ语句返回的数据类型不容易确定（往往返回的是 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "IEnumerable\u0026lt;\u0026gt;"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​），"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "strong",
+							"TextMarkTextContent": "因此，建议使用"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code strong",
+							"TextMarkTextContent": "var"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "strong",
+							"TextMarkTextContent": "，由IDE来判断类型"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240716114136-z8wobdm",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20240716114136-z8wobdm",
+				"updated": "20240716121318"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "查询表达式语法"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-rrbf65o",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715103157-rrbf65o",
+				"style": "line-height: 22px;",
+				"updated": "20240716120811"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//查询表达式语法\nvar result = from 单个元素名 in 需要获取数据的集合(列表,数组等)\n             //在这里对元素进行各种操作，\n             select 要放入的单个元素;\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-u360jm1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715103157-u360jm1",
+				"updated": "20240715103910"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "from...in..."
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 是从某个可遍历集合内（例如列表，数组等）取出元素，接下来我们才可以对取出的元素进行筛选，排序，等等操作\n最后使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "select"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 语句，将经过操作，符合条件的元素放入到 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "result"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 内，它们是LINQ查询表达式里几乎使用都会出现的语法"
+				}
+			]
+		},
+		{
+			"ID": "20240716114149-n02ib1f",
+			"Type": "NodeHeading",
+			"HeadingLevel": 4,
+			"Properties": {
+				"id": "20240716114149-n02ib1f",
+				"updated": "20240716121318"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "链式表达式语法"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-h1tnmwu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715103157-h1tnmwu",
+				"updated": "20240716114157"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "接下来是链式表达式方法，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "大部分链式表达式方法要求的参数都是"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code strong",
+					"TextMarkTextContent": "Func\u0026lt;\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "委托"
+				}
+			]
+		},
+		{
+			"ID": "20240716114041-j42fmti",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240716114041-j42fmti",
+				"updated": "20240716114938"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此这里我们可以传入 lambda 表达式，以简化代码量，而大多数链式方法需要作为参数传入的方法"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "只需要一个参数和一个语句"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n而"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "当 lambda 表达式仅有一个参数和一句语句"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "时，它可以"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "u",
+					"TextMarkTextContent": "缩写为类似于 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code u",
+					"TextMarkTextContent": "x =\u0026gt; test(x)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "u",
+					"TextMarkTextContent": " 这样的形式"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，其等价于 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "(x) =\u0026gt; { return test(x); }"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240716114102-3trxi6a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240716114102-3trxi6a",
+				"updated": "20240716114246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此，大多数链式表达式方法会写成如下方式："
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-inevf6p",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715103157-inevf6p",
+				"style": "line-height: 22px;",
+				"updated": "20240716114157"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//链式表达式语法\nlist.LINQ拓展方法(x =\u003e 表达式(x))\n//可以等效的视为查询表达式的：\n    //from x in list\n    //要执行的方法 x\n    //select x\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240716114249-vw14pql",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240716114249-vw14pql",
+				"updated": "20240716114317"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240716114317-2x26tqu",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240716114317-2x26tqu",
+						"updated": "20240716114317"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "注意，这里的 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "x =\u0026gt; 表达式(x)"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​ 本质上是 lambda 表达式，也就是匿名方法"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240715104200-4kmaga0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715104200-4kmaga0",
+				"updated": "20240716120520"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "链式表达式的LINQ扩展方法都会直接返回新的数据集合，因此不需要 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "select"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 这些关键字，\n其中，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "x"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 指代的是集合内的单个元素，表达式则根据不同方法的需要，填入不同类型的表达式。"
+				}
+			]
+		},
+		{
+			"ID": "20240716120748-17rgs9z",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240716120748-17rgs9z",
+				"updated": "20240716121318"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "指的一提的是，链式表达式也有 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": ".Select()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法\n但由于链式表达式的每一步都在返回新集合，因此大多数情况下我们不需要这个方法做结尾"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-dzlzign",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"alias": "IEnumerable\u0026lt;\u0026gt;.Where()",
+				"id": "20240715103157-dzlzign",
+				"name": "where",
+				"updated": "20240716115152"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "筛选"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-tu5itni",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240715103157-tu5itni",
+				"updated": "20240715103205"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240715103157-k7if657",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240715103157-k7if657",
+						"updated": "20240715103157"
+					},
+					"Children": [
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "a",
+							"TextMarkAHref": "https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/where-clause",
+							"TextMarkTextContent": "where 子句 - C# 参考 - C# | Microsoft Learn"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-tjx44ac",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715103157-tjx44ac",
+				"style": "line-height: 22px;",
+				"updated": "20240715105517"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//查询表达式语法\nvar result = from x in list       //从list挑选出每一个元素，每一个元素取名x\n             where 条件表达式(x)    //根据条件表达式是否为true，筛选符合条件的x\n             select x             //将挑选出的x全部放入到result内\n\n//链式表达式语法\n//其中，x是从list挑选出的单个元素，根据条件表达式是否为ture，筛选符合条件的x，返回装载满足条件的x的可迭代集合\nvar result = list.Where(x =\u003e 条件表达式(x))  \n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-205kagr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715103157-205kagr",
+				"updated": "20240715103312"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在查询表达式内在 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "where"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 关键字后面写与取出的元素相关的条件表达式，如果为 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "true"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，就将该元素筛选出来\n在链式表达式内参数为 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "x =\u0026gt; 条件表达式(x)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，返回满足条件的元素的集合"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-g8wxwpj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240715103157-g8wxwpj",
+				"name": "orderby",
+				"updated": "20240716115152"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "排序"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-8nm3k5w",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240715103157-8nm3k5w",
+				"updated": "20240715103205"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240715103157-iplig1n",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240715103157-iplig1n",
+						"updated": "20240715103157"
+					},
+					"Children": [
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "a",
+							"TextMarkAHref": "https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/orderby-clause",
+							"TextMarkTextContent": "orderby 子句 - C# 参考 - C# | Microsoft Learn"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-56u9u59",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715103157-56u9u59",
+				"style": "line-height: 22px;",
+				"updated": "20240715103205"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//查询表达式语法\nvar result = from x in list       //从list挑选出每一个元素，每一个元素取名x\n             orderby x            //对x进行排序\n             select x             //将挑选出的x全部放入到result内\n\n//链式表达式语法\n//其中，n是从list挑选出的单个元素，根据条件表达式是否为ture，筛选符合条件的x，返回装载满足条件的x的可迭代集合\nvar result = list.OrderBy(x =\u003e x);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-3kui7sj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715103157-3kui7sj",
+				"updated": "20240715105137"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在查询表达式内在 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "orderby"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 关键字要排序的元素，如果在元素后面添加 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "descending"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，形成"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "orderby x descending"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，就是降序排序\n在链式表达式内参数为 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "x =\u0026gt; 条件表达式(x)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，返回排序完毕的元素的集合，如果使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "OrderByDescending()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​方法，就是降序排序"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-cs275wq",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240715103157-cs275wq",
+				"updated": "20240716115152"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "LINQ实例：排序和筛选"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-ysz5t5j",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715103157-ysz5t5j",
+				"updated": "20240715105553"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "值得一提的是，这里不能用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "List\u0026lt;\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 类型的变量来承接这个结果，因此这里建议用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "var"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 关键字，因为返回的类型是不确定的"
+				}
+			]
+		},
+		{
+			"ID": "20240715105552-dze7bbe",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715105552-dze7bbe",
+				"updated": "20240715105552"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先，使用查询表达式来写"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-bejp4jp",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715103157-bejp4jp",
+				"style": "line-height: 22px;",
+				"updated": "20240715105458"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "List\u003cint\u003e list = new List\u003cint\u003e() { 1, 3, 5, 7, 9, 2, 4, 6, 8, 0 };\n//你要筛选出里面的所有的偶数，且大于等于4的数据\n//再对挑选出来的数字进行排序，最后打印出来\n//使用LINQ的方法(查询表达式形式)\nvar result = from x in list                    //从list挑选出每一个元素，每一个元素取名x\n             where x % 2 == 0 \u0026\u0026 x \u003e= 4        //挑选出偶数且大于4的数\n             orderby x                         //对所有的n进行排序\n             select x;                         //将挑选出的x全部放入到result内\n//输出结果\nforeach (var x in result)\n{\n    Console.WriteLine(x);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-24cqi62",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715103157-24cqi62",
+				"updated": "20240715105458"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出结果："
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-wqzxs37",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715103157-wqzxs37",
+				"style": "line-height: 22px;",
+				"updated": "20240715105458"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "4\n6\n8\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-zir0fc7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715103157-zir0fc7",
+				"updated": "20240715105458"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "LINQ可以用链式表达式来写，它的形式是让一个对象执行连续执行多个方法的形式"
+				}
+			]
+		},
+		{
+			"ID": "20240715103157-ox1av13",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715103157-ox1av13",
+				"style": "line-height: 22px;",
+				"updated": "20240716111217"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "List\u003cint\u003e list = new List\u003cint\u003e() { 1, 3, 5, 7, 9, 2, 4, 6, 8, 0 };\n//你要筛选出里面的所有的偶数，且大于等于4的数据\n//再对挑选出来的数字进行排序，最后打印出来\n//使用LINQ的方法(查询表达式形式)\nvar result = list\n    .Where(n =\u003e n % 2 == 0 \u0026\u0026 n \u003e= 4)\n    .OrderBy(n =\u003e n);\n\nforeach (var x in result)\n{\n    Console.WriteLine(x);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240716114343-ip2aj42",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240716114343-ip2aj42",
+				"updated": "20240716115152"
+			},
+			"Children": [
+				{
+					"ID": "20240716113749-e4car76",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240716113749-e4car76",
+						"updated": "20240716114343"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "注意！这里的 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "n =\u0026gt; n % 2 == 0 \u0026amp;\u0026amp; n \u0026gt;= 4"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​ 等价于："
+						}
+					]
+				},
+				{
+					"ID": "20240716113807-h97bbbv",
+					"Type": "NodeCodeBlock",
+					"IsFencedCodeBlock": true,
+					"Properties": {
+						"id": "20240716113807-h97bbbv",
+						"style": "line-height: 22px;",
+						"updated": "20240716115007"
+					},
+					"Children": [
+						{
+							"Type": "NodeCodeBlockFenceOpenMarker",
+							"Data": "```"
+						},
+						{
+							"Type": "NodeCodeBlockFenceInfoMarker",
+							"CodeBlockInfo": "YyM="
+						},
+						{
+							"Type": "NodeCodeBlockCode",
+							"Data": "bool TempFunc(int n)\n{\n    return n % 2 == 0 \u0026\u0026 n \u003e= 4;\n}\n"
+						},
+						{
+							"Type": "NodeCodeBlockFenceCloseMarker",
+							"Data": "```"
+						}
+					]
+				},
+				{
+					"ID": "20240716114347-0v57ixx",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240716114347-0v57ixx",
+						"updated": "20240716115101"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "IEnumerable\u0026lt;\u0026gt;.Where()"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​ 方法的参数为 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "Func\u0026lt;int, bool\u0026gt;"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​ ，\n也就是需要传入参数为 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "int"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​ 返回值为 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "bool"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​ 的方法，根据 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "bool"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​ 的结果确认元素是否通过筛选\n我们可以传入一个 Lambda 表达式避免额外声明一个 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "TempFunc"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​ 方法："
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "(n) =\u0026gt; { return n % 2 == 0 \u0026amp;\u0026amp; n \u0026gt;= 4; }"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​\n又因为，Lambda 表达式在只有一个参数和一个语句时可以直接缩写，因此最终可以简化为："
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "n =\u0026gt; n % 2 == 0 \u0026amp;\u0026amp; n \u0026gt;= 4"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20240716115107-2pnsips",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240716115107-2pnsips",
+						"updated": "20240716115152"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "同理，这里的 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "n =\u0026gt; n"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​ 也等价于："
+						}
+					]
+				},
+				{
+					"ID": "20240716115124-y5hqope",
+					"Type": "NodeCodeBlock",
+					"IsFencedCodeBlock": true,
+					"Properties": {
+						"id": "20240716115124-y5hqope",
+						"style": "line-height: 22px;",
+						"updated": "20240716115142"
+					},
+					"Children": [
+						{
+							"Type": "NodeCodeBlockFenceOpenMarker",
+							"Data": "```"
+						},
+						{
+							"Type": "NodeCodeBlockFenceInfoMarker",
+							"CodeBlockInfo": "YyM="
+						},
+						{
+							"Type": "NodeCodeBlockCode",
+							"Data": "int TempFunc(int n)\n{\n    return n;\n}\n"
+						},
+						{
+							"Type": "NodeCodeBlockFenceCloseMarker",
+							"Data": "```"
+						}
+					]
+				},
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				}
+			]
+		},
+		{
+			"ID": "20240715105220-czfbd3n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715105220-czfbd3n",
+				"updated": "20240715105458"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出结果："
+				}
+			]
+		},
+		{
+			"ID": "20240715105220-m63vmhj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715105220-m63vmhj",
+				"style": "line-height: 22px;",
+				"updated": "20240715105458"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "4\n6\n8\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

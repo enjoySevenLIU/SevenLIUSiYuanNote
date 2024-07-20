@@ -1,0 +1,232 @@
+{
+	"ID": "20240720214555-hp6p4lk",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240720214555-hp6p4lk",
+		"title": "CS2L9——函数重载",
+		"type": "doc",
+		"updated": "20240720215146"
+	},
+	"Children": [
+		{
+			"ID": "20240720214555-74d90ny",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240720214555-74d90ny",
+				"updated": "20240720215146"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "函数重载"
+				}
+			]
+		},
+		{
+			"ID": "20240720214625-8ljufaa",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720214625-8ljufaa",
+				"updated": "20240720214711"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在同一语句块（"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "class"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 或者 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "struct"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​）中\n拥有一组名字相同，但是参数的数量不同 或者 参数的数量相同但参数的类型或者顺序不同的函数（方法）"
+				}
+			]
+		},
+		{
+			"ID": "20240720214625-b9e8eg6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720214625-b9e8eg6",
+				"updated": "20240720214715"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "作用：命名一组功能相似的函数 减少函数名的变量 避免命名空间的污染，提升代码可读性"
+				}
+			]
+		},
+		{
+			"ID": "20240720214717-qa7l6uj",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240720214717-qa7l6uj",
+				"updated": "20240720214958"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240720214749-zlh6xhl",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240720214749-zlh6xhl",
+						"updated": "20240720214955"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "注意！重载"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "strong",
+							"TextMarkTextContent": "与返回值类型无关"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "，只和 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "strong",
+							"TextMarkTextContent": "参数类型 个数 顺序相关"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "\n调用时 程序会自己根据传入的参数类型判断使用哪一个重载"
+						}
+					]
+				},
+				{
+					"ID": "20240720214958-bfmrr22",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240720214958-bfmrr22",
+						"updated": "20240720214958"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "可选参数不能重载！！！"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240720215009-qvvy1ss",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720215009-qvvy1ss",
+				"updated": "20240720215021"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "同一个语句块中函数名相同，参数数量、类型、顺序不同的函数，我们就称为重载函数，注意！与返回值无关\n作用：一般用来处理不同参数的同一类型的逻辑处理"
+				}
+			]
+		},
+		{
+			"ID": "20240720215036-xh4eoqo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720215036-xh4eoqo",
+				"updated": "20240720215146"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "例如下面的相加计算重载函数："
+				}
+			]
+		},
+		{
+			"ID": "20240720214806-u2rv5r0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240720214806-u2rv5r0",
+				"style": "line-height: 22px;",
+				"updated": "20240720215105"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "static int CalcSum(int a, int b)\n{\n    return a + b;\n}\n//参数数量不同\nstatic int CalcSum(int a, int b, int c)\n{\n    return a + b + c;\n}\n//数量相同，返回值类型不同\nstatic float CalcSum(float a, float b)\n{\n    return a + b;\n}\n\n//数量相同，参数类型不同\nstatic float CalcSum(int a, float f)\n{\n    return a + f;\n}\n//数量不同，顺序不同\nstatic float CalcSum(float f, int a)\n{\n    return f + a;\n}\n//ref和out\n//ref和out可以理解成他们也是一种变量类型，所以可以用在重载中，但是ref和out不能同时修饰\nstatic float CalcSum(ref float f, int a)\n{\n    return f + a;\n}\n\nstatic void Main(string[] args)\n{\n    Console.WriteLine(CalcSum(1, 2));\n    Console.WriteLine(CalcSum(1, 2, 3));\n    Console.WriteLine(CalcSum(1.1f, 1.2f));\n    Console.WriteLine(CalcSum(1, 1.2f));\n    Console.WriteLine(CalcSum(1.2f, 1));\n    float a = 1.0f; \n    Console.WriteLine(CalcSum(ref a, 1));\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240720214832-5iqsnjv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720214832-5iqsnjv",
+				"updated": "20240720214833"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20240720214834-eunfz7d",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240720214834-eunfz7d",
+				"style": "line-height: 22px;",
+				"updated": "20240720214929"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "3\n6\n2.3000002\n2.2\n2.2\n2\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

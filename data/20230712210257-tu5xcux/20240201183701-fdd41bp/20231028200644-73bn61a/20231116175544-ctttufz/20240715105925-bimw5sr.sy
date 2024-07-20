@@ -1,0 +1,577 @@
+{
+	"ID": "20240715105925-bimw5sr",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240715105925-bimw5sr",
+		"title": "CS5L13-3——使用分组统计出现频率",
+		"type": "doc",
+		"updated": "20240716122547"
+	},
+	"Children": [
+		{
+			"ID": "20240716115345-hv7nnwl",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240716115345-hv7nnwl",
+				"updated": "20240716122547"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240716115349-h51y3pt",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240716115349-h51y3pt",
+				"style": "line-height: 22px;",
+				"updated": "20240716122547"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "group ... by ... into ...\t\t//第一个空传入集合中的单个元素，第二个空传入分组依据（表达式），第三空为分组得到某个组集合，后续可以使用\n\nIEnumerable\u003c\u003e.GroupBy()\t\t\t//传入分组方法，对集合进行分组，返回分组出来的集合\nIEnumerable\u003c\u003e.Select()\t\t\t//传入选择方法，返回一个新集合\nIEnumerable\u003c\u003e.ToDictionary()\t//传入两个方法，一个是获取键的方法，一个是获取值的方法，根据这两个方法将集合转换为字典\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-phfi8tl",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "group,by",
+				"id": "20240715110014-phfi8tl",
+				"name": "IEnumerable\u0026lt;\u0026gt;.GroupBy()",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "统计频率"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-xhdy4xa",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715110014-xhdy4xa",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设有一个长度为200的数组，其中值是随机的，范围在0到19之间"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-kcuufbe",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715110014-kcuufbe",
+				"style": "line-height: 22px;",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": " Random random = new Random(1334);       //使用种子使数组内部的值是唯一的\n var arr = new int[200];\n for (int i = 0; i \u003c arr.Length; i++)\n     arr[i] = random.Next(0, 20);        //该数组内的数据都是0~19\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-slfqemr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715110014-slfqemr",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "不使用LINQ"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-xhf11ck",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715110014-xhf11ck",
+				"style": "line-height: 22px;",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "static void Normal3(int[] arr)\n{\n    Console.WriteLine(\"不使用LINQ\");\n    Dictionary\u003cint, int\u003e dict = new();      //用来装载数组值与对应的频率，键为数组值，值为出现次数\n    foreach (int i in arr)\n    {\n        if (dict.ContainsKey(i))            //若存在，则+1\n            dict[i] += 1;\n        else\n            dict.Add(i, 1);                 //若不存在，则添加键值对\n    }\n    foreach (int i in dict.Keys)            //全部打印出来\n        Console.WriteLine(i + \" frequency is \" + dict[i]);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-vgu69c0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715110014-vgu69c0",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出结果:"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-2hkr8wb",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715110014-2hkr8wb",
+				"style": "line-height: 22px;",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "12 frequency is 11\n4 frequency is 17\n5 frequency is 8\n9 frequency is 15\n6 frequency is 8\n13 frequency is 7\n0 frequency is 9\n3 frequency is 10\n1 frequency is 8\n18 frequency is 7\n14 frequency is 10\n2 frequency is 8\n15 frequency is 14\n16 frequency is 10\n8 frequency is 12\n10 frequency is 11\n17 frequency is 5\n11 frequency is 11\n7 frequency is 8\n19 frequency is 11\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-s9kju0b",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240715110014-s9kju0b",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "分组"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-cn2gb9p",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240715110014-cn2gb9p",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240715110014-mt4u9zh",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240715110014-mt4u9zh",
+						"updated": "20240715110014"
+					},
+					"Children": [
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "a",
+							"TextMarkAHref": "https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/group-clause",
+							"TextMarkTextContent": "group 子句 - C# 参考 - C# | Microsoft Learn"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-cqsavgk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715110014-cqsavgk",
+				"style": "line-height: 22px;",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//查询表达式内\nvar result = from x in arr                     \n             group 要分组的元素 by 按照什么分组 into 分组得到的某个组的集合              \n             select new { num = 分组出来的元素.Key, count = 分组出来的元素.Count() };\n\n//连接表达式内\nvar result = arr\n    .GroupBy(要分组的元素 =\u003e 按照什么分组)\n    .Select(组集合 =\u003e new { num = 组集合.Key, count = 组集合.Count() });\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-iz3jti7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715110014-iz3jti7",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "由于通过 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "groupby"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 或者 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": ".GroupBy()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 分组出的数据类型是类似于字典内的键值对形式的分组"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IGrouping\u0026lt;\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类型，"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-4rjd5th",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715110014-4rjd5th",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "其中，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IGrouping\u0026lt;\u0026gt;.key"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 可以得到分组的键（具体内容取决于如何分组），"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IGrouping\u0026lt;\u0026gt;.Count()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 可以得到该组的元素数量"
+				}
+			]
+		},
+		{
+			"ID": "20240716121821-sp0ckg8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240716121821-sp0ckg8",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此建议使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Select()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 返回匿名类来装载，或者使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ToDictionary()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 直接转化为"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Dictionary\u0026lt;\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​类型（仅限链接表达式）"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-2pmkhy3",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240715110014-2pmkhy3",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "LINQ实例"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-0ixqxbv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715110014-0ixqxbv",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用LINQ（查询表达式）"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-krza1c1",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715110014-krza1c1",
+				"style": "line-height: 22px;",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "static void QueryExpressionLINQ3(int[] arr)\n{\n    Console.WriteLine(\"查询表达式LINQ\");\n    var result = from x in arr                                      //从arr内取出所有元素并取名x\n                 group x by x into g                                //为x的值为x进行分组，装载到g，此时g的类型是类似于键值对形式的\n                 select new { num = g.Key, count = g.Count() };     //使用匿名类来装载，num为键也就是数组的元素，count就是该组的值\n    foreach (var keyValuePair in result)                            //全部打印出来\n        Console.WriteLine(keyValuePair.num + \" frequency is \" + keyValuePair.count);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-d7xjk2b",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715110014-d7xjk2b",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出结果："
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-0s3hc68",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715110014-0s3hc68",
+				"style": "line-height: 22px;",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "12 frequency is 11\n4 frequency is 17\n5 frequency is 8\n9 frequency is 15\n6 frequency is 8\n13 frequency is 7\n0 frequency is 9\n3 frequency is 10\n1 frequency is 8\n18 frequency is 7\n14 frequency is 10\n2 frequency is 8\n15 frequency is 14\n16 frequency is 10\n8 frequency is 12\n10 frequency is 11\n17 frequency is 5\n11 frequency is 11\n7 frequency is 8\n19 frequency is 11\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-miumjgt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715110014-miumjgt",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用LINQ（链式表达式）"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-xviucoy",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715110014-xviucoy",
+				"style": "line-height: 22px;",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "static void ChainedExpressionLINQ3(int[] arr)\n{\n    Console.WriteLine(\"链式表达式LINQ\");\n    //对arr使用分组，分组形式为数组元素x通过数组元素x来分组，这时result为分组元素的可迭代集合，\n    //再挑选，将分组元素g使用匿名类来装载，num为分组名（数组元素），count为该组的值，这时result为匿名类的可迭代集合\n    var result = arr.GroupBy(x =\u003e x)\n                    .Select(g =\u003e new { num = g.Key, count = g.Count() });\n    //你也可以这样写，将分组元素直接转化为Dictionary\u003c\u003e类型\n    var res = arr.GroupBy(x =\u003e x)\n                 .ToDictionary(g =\u003e g.Key, g =\u003e g.Count());\n    foreach (var keyValuePair in result)\n        Console.WriteLine(keyValuePair.num + \" frequency is \" + keyValuePair.count);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715110338-wpoln9a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715110338-wpoln9a",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出结果："
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-0lv4not",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240715110014-0lv4not",
+				"style": "line-height: 22px;",
+				"updated": "20240716121929"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "12 frequency is 11\n4 frequency is 17\n5 frequency is 8\n9 frequency is 15\n6 frequency is 8\n13 frequency is 7\n0 frequency is 9\n3 frequency is 10\n1 frequency is 8\n18 frequency is 7\n14 frequency is 10\n2 frequency is 8\n15 frequency is 14\n16 frequency is 10\n8 frequency is 12\n10 frequency is 11\n17 frequency is 5\n11 frequency is 11\n7 frequency is 8\n19 frequency is 11\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240715110014-hut03xn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240715110014-hut03xn",
+				"updated": "20240716121929"
+			}
+		}
+	]
+}

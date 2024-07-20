@@ -1,0 +1,449 @@
+{
+	"ID": "20240720215339-jnkd7a7",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240720215339-jnkd7a7",
+		"title": "CS2L10——递归函数",
+		"type": "doc",
+		"updated": "20240720221712"
+	},
+	"Children": [
+		{
+			"ID": "20240720215339-hfcrix2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240720215339-hfcrix2",
+				"updated": "20240720221712"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "递归"
+				}
+			]
+		},
+		{
+			"ID": "20240720215407-3joujhv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720215407-3joujhv",
+				"updated": "20240720215418"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "所谓递归，就是让函数自己调用自己"
+				}
+			]
+		},
+		{
+			"ID": "20240720215439-u86vkth",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240720215439-u86vkth",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240720215439"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240720215439-tt35cj0",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240720215439-tt35cj0",
+						"updated": "20240720215503"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "注意，错误的递归函数（或者说没有终止条件的递归）会无限递归导致爆栈！"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240720215421-503ayf6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240720215421-503ayf6",
+				"style": "line-height: 22px;",
+				"updated": "20240720215720"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "static void Fun()\n{\n    Fun();\n}\n\nstatic void Main(string[] args)\n{\n    Fun();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240720215617-3vvf3sh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720215617-3vvf3sh",
+				"updated": "20240720215620"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "报错："
+				}
+			]
+		},
+		{
+			"ID": "20240720215614-13vpqxz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720215614-13vpqxz",
+				"updated": "20240720215614"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 495px;",
+						"style": "width: 485px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240720215614-2zz22ux.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 485px;\" parent-style=\"width: 495px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240720215632-7nnces6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240720215632-7nnces6",
+				"style": "line-height: 22px;",
+				"updated": "20240720215723"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Stack overflow.\nRepeat 24088 times:\n--------------------------------\n   at lesson11递归函数.Program.Fun()\n--------------------------------\n   at lesson11递归函数.Program.Main(System.String[])\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240720215507-t58bmpt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720215507-t58bmpt",
+				"updated": "20240720215519"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "一个正确的递归函数，必须要有结束调用的条件！\n用于条件判断的 这个条件 必须改变 能够达到停止的目的"
+				}
+			]
+		},
+		{
+			"ID": "20240720215703-ir7fzly",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720215703-ir7fzly",
+				"updated": "20240720215709"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "例如，用递归函数打印出 0 到 10"
+				}
+			]
+		},
+		{
+			"ID": "20240720215710-308ag1t",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240720215710-308ag1t",
+				"style": "line-height: 22px;",
+				"updated": "20240720215734"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "static void Fun(int a)\n{\n    Console.WriteLine(a);\n    ++a;\n    if (a \u003e 10)\n    {\n        return;\n    }\n    Fun(a);\n}\n\nstatic void Main(string[] args)\n{\n    Fun(0);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240720215728-nb0dnr0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720215728-nb0dnr0",
+				"updated": "20240720215737"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20240720215738-fem2ppl",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240720215738-fem2ppl",
+				"style": "line-height: 22px;",
+				"updated": "20240720215747"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240720220335-0dklfk8",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240720220335-0dklfk8",
+				"updated": "20240720221712"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关于递归和循环"
+				}
+			]
+		},
+		{
+			"ID": "20240720215753-stua6me",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720215753-stua6me",
+				"updated": "20240720220423"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "要注意，递归不是循环！循环是反复执行一段代码，执行结束回到开头，而递归是在函数执行途中调用自己，执行期间回到开头"
+				}
+			]
+		},
+		{
+			"ID": "20240720220215-9sjvtxo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720220215-9sjvtxo",
+				"updated": "20240720220343"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "只是有些递归可以优化为循环，例如尾递归，尾递归指的是函数在尾位置调用自身，\n上例就是尾递归，这样的递归常可以优化为循环，优秀的编译器会在编译时自动优化。"
+				}
+			]
+		},
+		{
+			"ID": "20240720220139-xfypnvo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720220139-xfypnvo",
+				"updated": "20240720220446"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "而某些递归则不容易优化为循环，或者改为循环反而降低性能或者徒增代码量，例如，遍历文件树"
+				}
+			]
+		},
+		{
+			"ID": "20240720220458-4kyroca",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720220458-4kyroca",
+				"updated": "20240720221635"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设有这样的数组，数组内部有字符串，或者字符串数组，字符串数组还可能嵌套数组，遍历这个数组中的所有字符串并输出："
+				}
+			]
+		},
+		{
+			"ID": "20240720220654-e3py06o",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240720220654-e3py06o",
+				"style": "line-height: 22px;",
+				"updated": "20240720221420"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "static void TraverseString(object[] array)\n{\n    for (int i = 0; i \u003c array.Length; ++i)\n    {\n        //如果遍历到的元素是数组，就将这个数组元素传入到自己，递归调用\n        if (array[i] is object[])\n        {\n            TraverseString((object[])array[i]);\n        }\n        else\n        {\n            Console.WriteLine(array[i]);\n        }\n    }\n}\n\nstatic void Main(string[] args)\n{\n    object[] tree =\n    {\n        \"aaaa\",\n        \"bbbb\",\n        new object[]\n        {\n            \"ccccaaaa\",\n            \"ccccbbbb\"\n        },\n        \"dddd\",\n        \"eeee\",\n        new object[]\n        {\n            \"ffffaaaa\",\n            \"ffffbbbb\",\n            new object []\n            {\n                \"ffffccccaaaa\",\n                \"ffffccccbbbb\"\n            }\n        },\n        \"gggg\",\n    };\n\n    TraverseString(tree);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240720220432-3s7i46s",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720220432-3s7i46s",
+				"updated": "20240720221429"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20240720221429-bzw364b",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240720221429-bzw364b",
+				"style": "line-height: 22px;",
+				"updated": "20240720221431"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "aaaa\nbbbb\nccccaaaa\nccccbbbb\ndddd\neeee\nffffaaaa\nffffbbbb\nffffccccaaaa\nffffccccbbbb\ngggg\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240720221454-7yuyw2e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720221454-7yuyw2e",
+				"updated": "20240720221712"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "上例中的数据集合就很适合使用递归去遍历整个数组的字符串，尤其是嵌套层数不确定的时候，使用递归会简化很多代码量"
+				}
+			]
+		}
+	]
+}
