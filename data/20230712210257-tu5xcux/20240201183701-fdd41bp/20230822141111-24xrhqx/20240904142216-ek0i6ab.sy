@@ -1,0 +1,996 @@
+{
+	"ID": "20240904142216-ek0i6ab",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240904142216-ek0i6ab",
+		"title": "CS3L23——object中的方法",
+		"type": "doc",
+		"updated": "20240904204644"
+	},
+	"Children": [
+		{
+			"ID": "20240904204043-0mu11kv",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240904204043-0mu11kv",
+				"updated": "20240904204644"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240904204048-das6ycq",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240904204048-das6ycq",
+				"style": "line-height: 22px;",
+				"updated": "20240904204644"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "//静态方法\nObject.Equals()\t\t\t\t//用来判断两个值是否相等，最终的判断权交给左侧对象的Equals成员方法（注意不是静态方法！）\nObject.ReferenceEquals()\t//比较两个对象是否是相同的引用，主要是用来比较引用类型的对象，值类型对象返回值始终是 false\n//成员方法\nobject.GetType()\t\t\t//在运行时获取对象的类型\nobject.MemberwiseClone()\t//该方法用于获取对象的浅拷贝对象，它会返回一个新的对象，新旧对象的引用类型成员都指向同一个数据\n//虚方法\nobject.Equals()\t\t\t\t//默认实现还是比较两者是否为同一个引用，可以重写该方法，定义自己的比较相等的规则\nobject.GetHashCode()\t\t//获取对象哈希码，可以通过重写该函数来自己定义对象的哈希码算法\nobject.ToString()\t\t\t//用于返回当前对象代表的字符串，默认会返回命名空间.类名，可以重写以返回自定义内容\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240904200237-do77vs5",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240904200237-do77vs5",
+				"updated": "20240904200416"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "object中定义的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240904200259-g82mjja",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240904200259-g82mjja",
+				"updated": "20240904200333"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "查看 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "object"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的定义，可以看到 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "object"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 有如下的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240904200250-9qdblcd",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240904200250-9qdblcd",
+				"style": "line-height: 22px;",
+				"updated": "20240904200416"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public class Object\n{\n    public Object();\n    ~Object();\n    public static bool Equals(Object? objA, Object? objB);\n    public static bool ReferenceEquals(Object? objA, Object? objB);\n    public virtual bool Equals(Object? obj);\n    public virtual int GetHashCode();\n    public Type GetType();\n    public virtual string? ToString();\n    protected Object MemberwiseClone();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240904200215-4wqffgu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240904200215-4wqffgu",
+				"updated": "20240904203150"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "object中的静态方法"
+				}
+			]
+		},
+		{
+			"ID": "20240904200450-mseucht",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240904200450-mseucht",
+				"name": "Object.Equals()",
+				"updated": "20240904203150"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Equals（静态方法）"
+				}
+			]
+		},
+		{
+			"ID": "20240904200524-7fe7dnb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240904200524-7fe7dnb",
+				"updated": "20240904203145"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "静态方法 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Equals"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，用来判断两个值是否相等，最终的判断权 交给左侧对象的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code block-ref",
+					"TextMarkBlockRefID": "20240904203007-qe6hvpx",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "Equals"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 成员方法（注意不是静态方法！）\n不管值类型还是引用类型都会按照左侧对象 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref code",
+					"TextMarkBlockRefID": "20240904203007-qe6hvpx",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "Equals"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 成员方法会在来进行比较"
+				}
+			]
+		},
+		{
+			"ID": "20240904201014-wzo9kfd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240904201014-wzo9kfd",
+				"updated": "20240904203150"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "引用类型，如果不重写其 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code block-ref",
+					"TextMarkBlockRefID": "20240904203007-qe6hvpx",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "Equals"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 成员方法，则判断规则为两个变量是否指向同一个堆空间数据（对象）"
+				}
+			]
+		},
+		{
+			"ID": "20240904200618-cxu6gic",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240904200618-cxu6gic",
+				"style": "line-height: 22px;",
+				"updated": "20240904200946"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class Test { }\n\ninternal class Program\n{\n    static void Main(string[] args)\n    {\n        Console.WriteLine(object.Equals(1, 1));\n    \n        Test t = new Test();\n        Test t2 = t;\n        Console.WriteLine(object.Equals(t, t2));\t//t和t2指向同一个堆空间的数据，因此是true\n        t2 = new Test();\n        Console.WriteLine(object.Equals(t, t2));\t//t和t2指向不同的堆空间的数据，因此是false\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240904200631-80m3tt7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240904200631-80m3tt7",
+				"updated": "20240904200633"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20240904200633-1hhemdj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240904200633-1hhemdj",
+				"style": "line-height: 22px;",
+				"updated": "20240904200658"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "True\nTrue\nFalse\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240904200513-rxl9ysk",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240904200513-rxl9ysk",
+				"name": "Object.ReferenceEquals()",
+				"updated": "20240904201407"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ReferenceEquals"
+				}
+			]
+		},
+		{
+			"ID": "20240904201154-dpyjdr7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240904201154-dpyjdr7",
+				"updated": "20240904201210"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "静态方法 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ReferenceEquals"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n比较两个对象是否是相同的引用，主要是用来比较引用类型的对象\n值类型对象返回值始终是 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "false"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240904201232-izg7xc5",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240904201232-izg7xc5",
+				"style": "line-height: 22px;",
+				"updated": "20240904201407"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class Test { }\n\ninternal class Program\n{\n    static void Main(string[] args)\n    {\n        Console.WriteLine(object.ReferenceEquals(1, 1));\n        Test t = new Test();\n        Test t2 = t;\n        Console.WriteLine(object.ReferenceEquals(t, t2));\n        t2 = new Test();\n        Console.WriteLine(object.ReferenceEquals(t, t2));\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240904201312-6ll49r6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240904201312-6ll49r6",
+				"updated": "20240904201315"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20240904201316-zrpu1z9",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240904201316-zrpu1z9",
+				"style": "line-height: 22px;",
+				"updated": "20240904201352"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "False\nTrue\nFalse\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240904200222-iqhqkx0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240904200222-iqhqkx0",
+				"updated": "20240904201748"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "object中的成员方法"
+				}
+			]
+		},
+		{
+			"ID": "20240904201521-vu65jkx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240904201521-vu65jkx",
+				"name": "object.GetType()",
+				"updated": "20240904201748"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "GetType"
+				}
+			]
+		},
+		{
+			"ID": "20240904201536-jg7ydac",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240904201536-jg7ydac",
+				"updated": "20240904201733"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "该方法在反射（"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "tag",
+					"TextMarkTextContent": "TODO"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​）相关知识点中是非常主要的方法，之后会具体的讲解这里返回的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Type"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 类型\n该方法的主要作用就是获取对象运行时的类型 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Type"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，通过 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Type"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 结合反射相关知识点可以做很多关于对象的操作"
+				}
+			]
+		},
+		{
+			"ID": "20240904201649-wvksq06",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240904201649-wvksq06",
+				"style": "line-height: 22px;",
+				"updated": "20240904201729"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class Test { }\n\ninternal class Program\n{\n    static void Main(string[] args)\n    {\n         Test t3 = new Test();\n         Type type = t.GetType();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240904201747-8ywqzwc",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240904201747-8ywqzwc",
+				"name": "object.MemberwiseClone()",
+				"updated": "20240904202951"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "MemberwiseClone"
+				}
+			]
+		},
+		{
+			"ID": "20240904201730-ba64329",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240904201730-ba64329",
+				"updated": "20240904202234"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "MemberwiseClone"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 是一个 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "protected"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法，也就是说只能在类及其子类的内部使用，\n如果想要外部使用需要声明一个 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "public"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法中调用，外部再调用这个"
+				}
+			]
+		},
+		{
+			"ID": "20240904201856-vk0dpr2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240904201856-vk0dpr2",
+				"updated": "20240904202951"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "该方法用于获取对象的浅拷贝对象，它会返回一个新的对象，\n但是 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "u",
+					"TextMarkTextContent": "新对象中的引用变量成员 会和 老对象的引用变量成员 一致"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，\n也就是说，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "两个对象的引用类型成员都指向同一个数据"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n这意味着，修改新对象的值类型的值，不会改变老对象的值类型的值\n而修改新对象的引用类型的值，会一并改变老对象引用类型的值"
+				}
+			]
+		},
+		{
+			"ID": "20240904201847-q0dlhg7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240904201847-q0dlhg7",
+				"updated": "20240904202024"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "浅拷贝意味着虽然是两个对象，但是其成员仍然共用一个引用类型的数据"
+				}
+			]
+		},
+		{
+			"ID": "20240904202026-an36dla",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240904202026-an36dla",
+				"style": "line-height: 22px;",
+				"updated": "20240904202548"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class Test\n{\n    public int i = 1;\n    public TestTwo tt = new TestTwo();\n  \n    public Test PublicMemberwiseClone()\n    {\n        //相当于返回一个克隆体，转换为test类\n        return MemberwiseClone() as Test;\n    }\n}\n\nclass TestTwo\n{\n    public int i = 2;\n}\n\ninternal class Program\n{\n    static void Main(string[] args)\n    {\n        Test t3 = new Test();\n        Test t4 = t3.PublicMemberwiseClone();\n        Console.WriteLine(\"修改浅拷贝对象前\");\n        Console.WriteLine(\"t3.i = \" + t3.i);\n        Console.WriteLine(\"t3.tt.i = \" + t3.tt.i);\n        Console.WriteLine(\"t4.i = \" + t4.i);\n        Console.WriteLine(\"t4.tt.i = \" + t4.tt.i);\n\n        t4.i = 20;\n        t4.tt.i = 21;\n        Console.WriteLine(\"修改浅拷贝对象后\");\n        Console.WriteLine(\"t3.i = \" + t3.i);\n        Console.WriteLine(\"t3.tt.i = \" + t3.tt.i);\n        Console.WriteLine(\"t4.i = \" + t4.i);\n        Console.WriteLine(\"t4.tt.i = \" + t4.tt.i);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240904202405-2dmjiq5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240904202405-2dmjiq5",
+				"updated": "20240904202407"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20240904202407-nz6p88d",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240904202407-nz6p88d",
+				"style": "line-height: 22px;",
+				"updated": "20240904202829"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "修改浅拷贝对象前\nt3.i = 1\nt3.tt.i = 2\nt4.i = 1\nt4.tt.i = 2\n修改浅拷贝对象后\nt3.i = 1\nt3.tt.i = 21\t//可见，修改了t4的引用成员tt的数据，t3的引用成员tt也受到的影响，则说明两个对象的tt指向同一个堆内存数据\nt4.i = 20\nt4.tt.i = 21\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240904200229-1ib38i0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240904200229-1ib38i0",
+				"updated": "20240904203630"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "object中的虚方法"
+				}
+			]
+		},
+		{
+			"ID": "20240904203007-qe6hvpx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240904203007-qe6hvpx",
+				"name": "object.Equals()",
+				"updated": "20240904203630"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Equals（成员虚方法）"
+				}
+			]
+		},
+		{
+			"ID": "20240904203015-vuxb365",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240904203015-vuxb365",
+				"updated": "20240904203030"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "默认实现还是比较两者是否为同一个引用，即相当于 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code block-ref",
+					"TextMarkBlockRefID": "20240904200513-rxl9ysk",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "ReferenceEquals"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n但是微软在所有值类型的基类 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "System.ValueType"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 中重写了该方法，用来比较值相等\n我们也可以重写该方法，定义自己的比较相等的规则"
+				}
+			]
+		},
+		{
+			"ID": "20240904203159-50s7x9h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240904203159-50s7x9h",
+				"updated": "20240904203312"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "重写 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Equals"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 成员方法后，将该类传入到 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref code",
+					"TextMarkBlockRefID": "20240904200450-mseucht",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "Object.Equals()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 后，比较的方式会改变"
+				}
+			]
+		},
+		{
+			"ID": "20240904195344-uu8txku",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240904195344-uu8txku",
+				"style": "line-height: 22px;",
+				"updated": "20240904203630"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class Test\n{\n    //这就是重写equals方法\n    public override bool Equals(object? obj)\n    {\n        // 在这里重写逻辑\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240904203433-gf48cbf",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240904203433-gf48cbf",
+				"name": "object.GetHashCode()",
+				"updated": "20240904203645"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "GetHashCode"
+				}
+			]
+		},
+		{
+			"ID": "20240904203531-k0vm7c9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240904203531-k0vm7c9",
+				"updated": "20240904203547"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "该方法是获取对象的哈希码（哈希码是一种通过算法算出的，表示对象的唯一编码，不同对象哈希码有可能一样，具体值根据哈希算法决定）\n我们可以通过重写该函数来自己定义对象的哈希码算法，正常情况下，我们用的极少，基本不用。"
+				}
+			]
+		},
+		{
+			"ID": "20240904203550-dajg6ue",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240904203550-dajg6ue",
+				"style": "line-height: 22px;",
+				"updated": "20240904203633"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class Test\n{\n    //这就是重写GetHashCode方法\n    public override int GetHashCode()\n    {\n        // 在这里重写逻辑\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240904203645-ozcjdy6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20240904203645-ozcjdy6",
+				"name": "object.ToString()",
+				"updated": "20240904204002"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Tostring"
+				}
+			]
+		},
+		{
+			"ID": "20240904203707-16o96ul",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240904203707-16o96ul",
+				"updated": "20240904203718"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "该方法用于返回当前对象代表的字符串，我们可以重写它定义的我们自己的对象转字符串规则\n该方法非常常用，当我们调用打印方法时，默认调用的就是对象的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Tostring"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法后打印出来的内容"
+				}
+			]
+		},
+		{
+			"ID": "20240904203720-7vhb2ho",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240904203720-7vhb2ho",
+				"style": "line-height: 22px;",
+				"updated": "20240904204002"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "namespace lesson22\n{\n    class TestTwo { }\n}\n\nclass Test\n{\n    //这就是重写Tostring方法\n    public override string ToString()\n    {\n        return \"MrTang申明的字符串\";\n    }\n}\n\ninternal class Program\n{\n    static void Main(string[] args)\n    {\n    \n        TestTwo tt2 = new TestTwo();\n        Console.WriteLine(tt2);\n        Test t = new Test();\t\t//重写了tostring之后的类\n        Console.WriteLine(t);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240904203853-nogvvj4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240904203853-nogvvj4",
+				"updated": "20240904203856"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20240904203859-xo5lcdn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240904203859-xo5lcdn",
+				"style": "line-height: 22px;",
+				"updated": "20240904203933"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "lesson22.TestTwo\nMrTang申明的字符串\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

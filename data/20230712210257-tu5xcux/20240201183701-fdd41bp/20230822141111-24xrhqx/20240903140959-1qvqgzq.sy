@@ -1,0 +1,737 @@
+{
+	"ID": "20240903140959-1qvqgzq",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240903140959-1qvqgzq",
+		"title": "CS3L18——多态vob",
+		"type": "doc",
+		"updated": "20240904141029"
+	},
+	"Children": [
+		{
+			"ID": "20240904140912-o1zt3qc",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240904140912-o1zt3qc",
+				"updated": "20240904141029"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240904140916-0mn226j",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240904140916-0mn226j",
+				"style": "line-height: 22px;",
+				"updated": "20240904141029"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "virtual\t\t//使用 virtual 修饰的方法，在子类里可以通过 override 去重写\noverride\t//重写父类 virtual 修饰的方法的关键字\nbase\t\t//在重写方法中调用父类方法的关键字\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240903140959-9muqo0m",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"alias": "override,base",
+				"id": "20240903140959-9muqo0m",
+				"name": "virtual",
+				"updated": "20240903142741"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "多态"
+				}
+			]
+		},
+		{
+			"ID": "20240903141049-vmla0ui",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240903141049-vmla0ui",
+				"updated": "20240903141510"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "多态就是按字面的意思就是“多种状态”，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "u",
+					"TextMarkTextContent": "让继承同一父类的子类们，在执行相同方法是有不同的表现"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n主要目的：同一父类的对象 执行相同行为（方法）有不同的表现"
+				}
+			]
+		},
+		{
+			"ID": "20240903141510-38gr9cd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240903141510-38gr9cd",
+				"updated": "20240903141519"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "多态要解决的问题：让同一个对象有唯一行为的特征"
+				}
+			]
+		},
+		{
+			"ID": "20240903141543-ecrdw7h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240903141543-ecrdw7h",
+				"updated": "20240904134734"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以前没有学习多态相关关键字时，要在子类重写一个父类方法需要使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "new"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 关键字\n但是 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "new"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 关键字在 里氏替换情况下，会出现问题，例如下面的代码："
+				}
+			]
+		},
+		{
+			"ID": "20240903141520-hc9tx7u",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240903141520-hc9tx7u",
+				"style": "line-height: 22px;",
+				"updated": "20240903141835"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class Father\n{\n    public void SpeakName()\n    {\n        Console.WriteLine(\"Father的方法\");\n    }\n}\nclass Son : Father \n{\n    public new void SpeakName()\n    {\n        Console.WriteLine(\"Son的方法\");\n    }\n}\n\ninternal class Program\n{\n    static void Main(string[] args)\n    {\n        Father f = new Son();\n        f.SpeakName();\t\t\t//这里就会出现问题，虽然是Son对象但却执行的是父类的方法\n        (f as Son).SpeakName();\t//用as可以解决这个执行父类方法的问题，但是这样就破坏了对象的唯一性，因为一个对象可以使用两种类的方法了\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240903141721-5n7yexy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240903141721-5n7yexy",
+				"updated": "20240903141809"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20240903141810-ew1et80",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240903141810-ew1et80",
+				"style": "line-height: 22px;",
+				"updated": "20240903141824"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Father的方法\nSon的方法\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240903141845-d7ib6nu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240903141845-d7ib6nu",
+				"updated": "20240903142134"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，当使用父类装载子类时，调用子类通过 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "new"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 覆盖的方法还是会调用父类的方法\n虽然用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "as"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 可以解决这个执行父类方法的问题，但是这样就破坏了对象的唯一性，因为一个对象可以使用两种类的方法了\n这也让里氏替换失去意义，因为我们还是要知道子类具体是什么类型才能执行子类方法"
+				}
+			]
+		},
+		{
+			"ID": "20240903142145-wswqupl",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240903142145-wswqupl",
+				"updated": "20240903142741"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "多态的实现"
+				}
+			]
+		},
+		{
+			"ID": "20240903142207-pkmqa6p",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240903142207-pkmqa6p",
+				"updated": "20240903142218"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们目前已经学过的多态：编译时多态 —— "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240720214555-hp6p4lk",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "函数重载"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，开始就写好的"
+				}
+			]
+		},
+		{
+			"ID": "20240903142207-448zdzh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240903142207-448zdzh",
+				"updated": "20240903142252"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们将学习的：运行时多态（vob、抽象函数、接口），这次是vob"
+				}
+			]
+		},
+		{
+			"ID": "20240903142225-bku8ho2",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240903142225-bku8ho2",
+				"updated": "20240903142225"
+			},
+			"Children": [
+				{
+					"ID": "20240903142225-u9a4l3k",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240903142225-u9a4l3k",
+						"updated": "20240903142225"
+					},
+					"Children": [
+						{
+							"ID": "20240903142225-adzo0br",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240903142225-adzo0br",
+								"updated": "20240903142250"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "v: "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "virtual"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（虚函数）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240903142226-rbw4hkb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240903142226-rbw4hkb",
+						"updated": "20240903142226"
+					},
+					"Children": [
+						{
+							"ID": "20240903142226-ixqlti2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240903142226-ixqlti2",
+								"updated": "20240903142245"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "o: "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "override"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（重写）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240903142227-7o7exsv",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240903142227-7o7exsv",
+						"updated": "20240903142227"
+					},
+					"Children": [
+						{
+							"ID": "20240903142227-axsyp3j",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240903142227-axsyp3j",
+								"updated": "20240903142438"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "b: "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "base"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（父类）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240903142741-yza2qst",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240903142741-yza2qst",
+				"updated": "20240903142741"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "父类里使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "virtual"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 修饰的方法，在子类里可以通过 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "override"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 去重写，子类重写的方法可以通过 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "base"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 来调用父类的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240903142322-7ggjdx4",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240903142322-7ggjdx4",
+				"style": "line-height: 22px;",
+				"updated": "20240903142613"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class GameObject\n{\n    public string name;\n    public GameObject(string name)\n    {\n        this.name = name;\n    }\n    //虚函数可以被子类重写\n    public virtual void Atk()\n    {\n        Console.WriteLine(\"游戏对象进行攻击\");\n    }\n}\n\nclass Player : GameObject\n{\n    public Player(string name) : base(name) { }\n\n    //重写虚函数\n    public override void Atk()\n    {\n        //base的作用，代表父类 可以通过base来保留父类的行为，就是调用父类的这个方法，是否使用视需求而定\n        base.Atk();\n        WriteLine(\"玩家对象进行攻击\");\n    }\n}\nclass Monster : GameObject\n{\n    public Monster(string name) : base(name) { }\n\n    public override void Atk()\n    {\n        WriteLine(\"怪物对象进行攻击\");\n    }\n}\n\ninternal class Program\n{\n    static void Main(string[] args)\n    {\n        //vob就可以彻底的覆盖父类的方法，保证了同一个对象有唯一行为的特征\n        GameObject p = new Player(\"MrTang\");\n        p.Atk();\n\n        GameObject m = new Monster(\"monster\");\n        m.Atk();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240903142500-qduh804",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240903142500-qduh804",
+				"updated": "20240903142522"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20240903142523-gt73stu",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240903142523-gt73stu",
+				"style": "line-height: 22px;",
+				"updated": "20240903142609"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "游戏对象进行攻击\n玩家对象进行攻击\n怪物对象进行攻击"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240903142615-d6wbuof",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240903142615-d6wbuof",
+				"updated": "20240903142748"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以看见，vob就可以彻底的覆盖父类的方法，保证了同一个对象有唯一行为的特征"
+				}
+			]
+		},
+		{
+			"ID": "20240903142702-vqgxm5d",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240903142702-vqgxm5d",
+				"updated": "20240903143125"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "里氏替换原则的意义也在这里体现，在函数传递时，可以将使用基类的参数，外部传入子类对象，\n在函数内部不需要关心这个基类继承了什么子类，我们只需要调用父类声明好的方法，就可以调用子类的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240903143133-28yw4ho",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240903143133-28yw4ho",
+				"updated": "20240903143522"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "例如一个拥有 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Atk"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 行为的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，外部可以传入各种各样的基于 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 派生的对象，\n尽管它们有不同的实现，成员也可能不同，但它们派生自 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，就一定有 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Atk"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 行为，\n因此函数内部也只需要调用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Atk"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 行为即可，而无需知道它是什么类型"
+				}
+			]
+		},
+		{
+			"ID": "20240903143906-m2lya1e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240903143906-m2lya1e",
+				"updated": "20240903143930"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "下面的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ObjectAtk"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 函数就可以接受派生自 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 各种参数，而不需要在意参数具体是什么类型"
+				}
+			]
+		},
+		{
+			"ID": "20240903142833-9mhn0ih",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240903142833-9mhn0ih",
+				"style": "line-height: 22px;",
+				"updated": "20240903143734"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class GameObject\n{\n    public virtual void Atk()\n    {\n        Console.WriteLine(\"游戏对象进行攻击\");\n    }\n}\n\nclass Player : GameObject\n{\n    public override void Atk()\n    {\n        WriteLine(\"玩家对象进行攻击\");\n    }\n}\nclass Monster : GameObject\n{\n    public override void Atk()\n    {\n        WriteLine(\"怪物对象进行攻击\");\n    }\n}\n\ninternal class Program\n{\n    static void Main(string[] args)\n    {\n        Player p = new Player(\"MrTang\");\n        Monster m = new Monster(\"monster\");\n\n        ObjectAtk(p);\n        ObjectAtk(m);\n    }\n\n    static void ObjectAtk(GameObject obj)\n    {\n        obj.Atk();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240903143733-c59o5bi",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240903143733-c59o5bi",
+				"updated": "20240903143737"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20240903143738-9s69bh1",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240903143738-9s69bh1",
+				"style": "line-height: 22px;",
+				"updated": "20240903143806"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "玩家对象进行攻击\n怪物对象进行攻击\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240903143808-dxay4b1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240903143808-dxay4b1",
+				"updated": "20240903143901"
+			}
+		}
+	]
+}

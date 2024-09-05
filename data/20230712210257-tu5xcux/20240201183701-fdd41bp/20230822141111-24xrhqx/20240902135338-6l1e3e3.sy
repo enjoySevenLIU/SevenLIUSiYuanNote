@@ -1,0 +1,1282 @@
+{
+	"ID": "20240902135338-6l1e3e3",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240902135338-6l1e3e3",
+		"title": "CS3L5——构造函数、析构函数和垃圾回收",
+		"type": "doc",
+		"updated": "20240904140216"
+	},
+	"Children": [
+		{
+			"ID": "20240904140047-3f5b429",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240904140047-3f5b429",
+				"updated": "20240904140216"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240904140056-e7vhy4b",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240904140056-e7vhy4b",
+				"style": "line-height: 22px;",
+				"updated": "20240904140216"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "this\t\t\t//this代表类自己，可以显式的指定指明自己的成员\n~类名()\t\t\t//析构函数，对象被销毁释放时调用，不常用\nGC.Collect();   //主动触发GC的方法，但是不会频繁使用，因为性能消耗较大，可能会卡顿\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240902135338-bx5vevd",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240902135338-bx5vevd",
+				"updated": "20240902145252"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "构造函数"
+				}
+			]
+		},
+		{
+			"ID": "20240902135519-a4t7e8f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902135519-a4t7e8f",
+				"updated": "20240902145252"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在实例化对象时，会调用的用于初始化的函数，主要就是用来初始化成员变量，如果不写则默认存在一个无参构造函数"
+				}
+			]
+		},
+		{
+			"ID": "20240902135519-5qqrmv2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240902135519-5qqrmv2",
+				"name": "this",
+				"updated": "20240902142949"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "构造函数的声明和使用"
+				}
+			]
+		},
+		{
+			"ID": "20240902135608-86q6hdj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902135608-86q6hdj",
+				"updated": "20240902135608"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "没有返回值，函数名与类名相同，没有特殊需求时一般都是 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "public"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的"
+				}
+			]
+		},
+		{
+			"ID": "20240902135810-6567f4p",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902135810-6567f4p",
+				"updated": "20240902135836"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "类中允许自己申明无参构造函数的，但是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240720222713-zoh7tfr",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "结构体"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "不允许"
+				}
+			]
+		},
+		{
+			"ID": "20240902135618-4suzr1k",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240902135618-4suzr1k",
+				"style": "line-height: 22px;",
+				"updated": "20240902135818"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class Person\n{\n    public string name;\n    public int age;\n\n    public Person()\n    {\n        name = \"liuqi\";\n        age = 18;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240902135802-uqikkzy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902135802-uqikkzy",
+				"updated": "20240902141430"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "new"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 对象时，就会调用构造函数"
+				}
+			]
+		},
+		{
+			"ID": "20240902141431-al0wwm6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240902141431-al0wwm6",
+				"style": "line-height: 22px;",
+				"updated": "20240902141525"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class Person\n{\n    public string name;\n    public int age;\n\n    public Person()\n    {\n\t\tConsole.WriteLine(\"无参构造函数被调用了\");\n        name = \"liuqi\";\n        age = 18;\n    }\n}\n\ninternal class Program\n{\n    static void Main(string[] args)\n    {\n        Person p = new Person();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240902141518-mfeir8l",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902141518-mfeir8l",
+				"updated": "20240902141521"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20240902141521-ka14eh3",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240902141521-ka14eh3",
+				"style": "line-height: 22px;",
+				"updated": "20240902141535"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "无参构造函数被调用了\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240902141614-3zz34dr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902141614-3zz34dr",
+				"updated": "20240902141710"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "构造函数可以被"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240720214555-hp6p4lk",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "重载"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，方便初始化函数，可以通过 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "this"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 来调用函数的对象自己"
+				}
+			]
+		},
+		{
+			"ID": "20240902141630-vi6thgc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240902141630-vi6thgc",
+				"style": "line-height: 22px;",
+				"updated": "20240902141854"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class Person\n{\n    public string name;\n    public int age;\n\n    public Person()\n    {\n        name = \"liuqi\";\n        age = 18;\n    }\n\n    public Person(string name, int age):this()\n    {\n        this.name = name;\n        this.age = age;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240902141812-mt4uzbb",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240902141812-mt4uzbb",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240902142028"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240902141930-v9rk7n6",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240902141930-v9rk7n6",
+						"updated": "20240902141940"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "注意！如果一个类不实现无参构造函数而实现了有参构造函数，会失去默认的无参构造"
+						}
+					]
+				},
+				{
+					"ID": "20240902141944-f04ixrc",
+					"Type": "NodeCodeBlock",
+					"IsFencedCodeBlock": true,
+					"Properties": {
+						"id": "20240902141944-f04ixrc",
+						"style": "line-height: 22px; background-color: var(--b3-font-background3);",
+						"updated": "20240902142028"
+					},
+					"Children": [
+						{
+							"Type": "NodeCodeBlockFenceOpenMarker",
+							"Data": "```"
+						},
+						{
+							"Type": "NodeCodeBlockFenceInfoMarker",
+							"CodeBlockInfo": "YyM="
+						},
+						{
+							"Type": "NodeCodeBlockCode",
+							"Data": "class Person\n{\n    public string name;\n    public int age;\n\n    public Person()\n    {\n        name = \"liuqi\";\n        age = 18;\n    }\n\n    public Person(string name, int age):this()\n    {\n        this.name = name;\n        this.age = age;\n    }\n}\n\ninternal class Program\n{\n    static void Main(string[] args)\n    {\n        // Person p = new Person();\n        Person p = new Person(\"MrTang\", 18)\n    }\n}\n"
+						},
+						{
+							"Type": "NodeCodeBlockFenceCloseMarker",
+							"Data": "```"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240902141927-5c76xw1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240902141927-5c76xw1",
+				"name": "this",
+				"updated": "20240902142943"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "构造函数的重用"
+				}
+			]
+		},
+		{
+			"ID": "20240902142111-8no9ms8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902142111-8no9ms8",
+				"updated": "20240902142146"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以通过 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "this"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，重用构造函数代码 会先使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "this()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的构造函数"
+				}
+			]
+		},
+		{
+			"ID": "20240902142150-fakqblx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902142150-fakqblx",
+				"updated": "20240902142200"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "声明语法为："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "访问修饰符 构造函数名(参数列表) : this(参数1,参数2...)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240902142148-vqir5q5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902142148-vqir5q5",
+				"updated": "20240902142926"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果重用 有参数的构造函数，则需要传入对应的参数，\n可以使用被外部调用的构造函数的形参，也可以用表达式或者常量，只要参数类型正确即可"
+				}
+			]
+		},
+		{
+			"ID": "20240902142222-uz52o44",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240902142222-uz52o44",
+				"style": "line-height: 22px;",
+				"updated": "20240902142611"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class Person\n{\n    public string name;\n    public int age;\n\n    public Person(string name)\n    {\n        this.name = name;\n    }\n\n\t// 这里被重用的函数是 Person(string name)\n    public Person(string name, int age) : this(name + \"这里也可以写表达式，只要参数类型是正确的！\")\n    {\n        WriteLine(\"双参数构造函数被调用了\");\n        this.age = age;\n    }\n\n    // 这里被重用的函数是 Person(string name, int age)\n    public Person() : this(\"MrTang\", 18)\n    {\n        WriteLine(\"无参构造函数被调用了\");\n    }\n}\n\ninternal class Program\n{\n    static void Main(string[] args)\n    {\n        Person p = new Person();\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240902142501-68av41h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902142501-68av41h",
+				"updated": "20240902142545"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20240902142545-qsgps3z",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240902142545-qsgps3z",
+				"style": "line-height: 22px;",
+				"updated": "20240902142548"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "双参数构造函数被调用了\n无参构造函数被调用了\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240902142843-6hpknmd",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240902142843-6hpknmd",
+				"updated": "20240902143517"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "析构函数"
+				}
+			]
+		},
+		{
+			"ID": "20240902143019-txij9i0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902143019-txij9i0",
+				"updated": "20240902143104"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "当引用类型的堆内存被回收时，会调用该函数，对于需要手动管理内存的语言（如C++），需要在析构函数中做一些内存回收处理\n但由于 C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 中由自动垃圾回收机制 GC，所以 C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 使用析构函数较少，一般用在某一个对象被垃圾回收的时候，做一些特殊处理"
+				}
+			]
+		},
+		{
+			"ID": "20240902143031-pa4crcf",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240902143031-pa4crcf",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240902143043"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240902143043-lwtjzwn",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240902143043-lwtjzwn",
+						"updated": "20240902143043"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "注意：析构函数在Unity的开发中几乎不使用"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240902143131-0t4yrb8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902143131-0t4yrb8",
+				"updated": "20240902143148"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "析构函数声明语法："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "~类名()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240902143105-k0vd9vi",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240902143105-k0vd9vi",
+				"style": "line-height: 22px;",
+				"updated": "20240902143128"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class Person\n{\n    ~Person()\n    {\n        WriteLine(\"垃圾被回收了\");\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240902143155-431ckgp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240902143155-431ckgp",
+				"name": "GC.Collect()",
+				"updated": "20240902145340"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的垃圾回收机制"
+				}
+			]
+		},
+		{
+			"ID": "20240902143537-k85kgh8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902143537-k85kgh8",
+				"updated": "20240902143826"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "垃圾回收，英文简写GC (Garbage Collecter)，垃圾回收的过程是遍历堆 (heap) 上动态分配的所有对象\n通过识别他们是否被引用来确定那些对象是垃圾 哪些对象仍然要被引用\n所谓垃圾就是没有被任何变量 对象引用的内容，垃圾就需要被回收释放"
+				}
+			]
+		},
+		{
+			"ID": "20240902143601-8hpt4su",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240902143601-8hpt4su",
+				"style": "line-height: 22px;",
+				"updated": "20240902143627"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "internal class Program\n{\n    static void Main(string[] args)\n    {\n        Person p = new Person();\n        p = null;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240902143627-m4lwq4g",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902143627-m4lwq4g",
+				"updated": "20240902143803"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "上面的代码中，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "p = null"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 后，之前 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "new"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 出来的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Person"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 对象就成为了垃圾，因为没有任何变量再引用它存在于堆上的数据了"
+				}
+			]
+		},
+		{
+			"ID": "20240902143809-4t2alfe",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902143809-4t2alfe",
+				"updated": "20240902143831"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "垃圾回收有很多种方法，如："
+				}
+			]
+		},
+		{
+			"ID": "20240902143819-04ah9hw",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240902143819-04ah9hw",
+				"updated": "20240902143819"
+			},
+			"Children": [
+				{
+					"ID": "20240902143819-atl11hr",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240902143819-atl11hr",
+						"updated": "20240902143819"
+					},
+					"Children": [
+						{
+							"ID": "20240902143819-mpr4rfq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240902143819-mpr4rfq",
+								"updated": "20240902143819"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "引用计数（Reference Counting）\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240902143821-au00rx2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240902143821-au00rx2",
+						"updated": "20240902143821"
+					},
+					"Children": [
+						{
+							"ID": "20240902143821-vmna8y3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240902143821-vmna8y3",
+								"updated": "20240902143821"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "标记清除（Mark Sweep）\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240902143821-70cwv9z",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240902143821-70cwv9z",
+						"updated": "20240902143821"
+					},
+					"Children": [
+						{
+							"ID": "20240902143821-gsamj7c",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240902143821-gsamj7c",
+								"updated": "20240902143821"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "标记整理（Mark Compact）\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240902143822-qvmq2qo",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240902143822-qvmq2qo",
+						"updated": "20240902143822"
+					},
+					"Children": [
+						{
+							"ID": "20240902143822-vo4qshh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240902143822-vo4qshh",
+								"updated": "20240902143822"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "复制集合（Copy Collection）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240902143833-mmto4jj",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20240902143833-mmto4jj",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color);",
+				"updated": "20240902143918"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20240902143849-bah49aj",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20240902143849-bah49aj",
+						"updated": "20240902143918"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "注意：GC 只负责堆（heap）内存的回收，引用类型都是存放在堆（heap）中的，所以它的分配和释放都通过垃圾回收机制来管理\n栈（Stack）上的内存是由系统自动管理的，值类型在栈（Stack）中分配内存的，它们有自己的生命周期，不用对它们进行管理，会自动分配和释放"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240902143854-qvcxi7n",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240902143854-qvcxi7n",
+				"updated": "20240902145340"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "中内存回收机制的大概原理"
+				}
+			]
+		},
+		{
+			"ID": "20240902143943-4pq1vfe",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902143943-4pq1vfe",
+				"updated": "20240902144454"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "将内存分为三代内存：0 代内存、1 代内存、2 代内存"
+				}
+			]
+		},
+		{
+			"ID": "20240902143937-p9jxaqd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902143937-p9jxaqd",
+				"updated": "20240902144557"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "其中，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "代"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 是垃圾回收机制使用的一种算法（分代算法）\n新分配的对象都会被配置在第 0 代内存里，每次分配都可能会进行垃圾回收以释放内存\n当 0 代内存满时而又要放入新数据时，就会就会触发垃圾回收"
+				}
+			]
+		},
+		{
+			"ID": "20240902144045-wqy9y7z",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902144045-wqy9y7z",
+				"updated": "20240902144459"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在一次内存回收过程开始时，垃圾回收器会认为堆中全是垃圾，会进行以下两步："
+				}
+			]
+		},
+		{
+			"ID": "20240902144049-v4zh2cn",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240902144049-v4zh2cn",
+				"updated": "20240902144941"
+			},
+			"Children": [
+				{
+					"ID": "20240902144059-b2wa59h",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240902144059-b2wa59h",
+						"updated": "20240902144059"
+					},
+					"Children": [
+						{
+							"ID": "20240902144059-rp396i5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240902144059-rp396i5",
+								"updated": "20240902144105"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "标记对象 从根（静态字段、方法参数）开始检查引用对象，\n"
+								}
+							]
+						},
+						{
+							"ID": "20240902144150-2in9eva",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240902144150-2in9eva",
+								"updated": "20240902144444"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "标记后为可达对象，未标记为不可达对象，不可达对象就被认为是垃圾"
+								}
+							]
+						},
+						{
+							"ID": "20240902144608-xr3tktu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240902144608-xr3tktu",
+								"updated": "20240902144633"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "例如一个实例化后没有变量再引用的对象，就是垃圾"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240902144059-p67dugd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240902144059-p67dugd",
+						"updated": "20240902144941"
+					},
+					"Children": [
+						{
+							"ID": "20240902144059-m1t28lg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240902144059-m1t28lg",
+								"updated": "20240902144649"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "搬迁对象，并压缩堆（这时会挂起执行托管代码进程），释放未被标记的对象，搬迁可达对象，修改引用地址"
+								}
+							]
+						},
+						{
+							"ID": "20240902144131-2dpa8by",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240902144131-2dpa8by",
+								"updated": "20240902144854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "例如 0 代内存里可达对象就会被搬迁到 1 代内存，不可达的对象被当作垃圾处理回收，搬迁完成后需要将对应地址进行改变为连续的数值\n若 1 代内存满后也会触发垃圾回收，同时也会触发 0 代垃圾回收（不管 0 代内存满没满）\n而 1 代可达对象也搬迁到 2 代内存，其他步骤类似于上个步骤"
+								}
+							]
+						},
+						{
+							"ID": "20240902144908-tlx0ps6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240902144908-tlx0ps6",
+								"updated": "20240902144941"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "若 2 代内存满后也会触发垃圾回收，同时也会触发 0 代和 1 代的垃圾回收，步骤同上"
+								}
+							]
+						},
+						{
+							"ID": "20240902144850-ysbu4g9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240902144850-ysbu4g9",
+								"updated": "20240902144850"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "0 代和 1 代内存的速度会快于 2 代内存速度，因为在 2 代内存中可能存在的垃圾更多"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240902144242-x7src8w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902144242-x7src8w",
+				"updated": "20240902145026"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "85000字节（83kb）以上的对象就是大对象，大对象总被认为是 2 代内存\n目的是减少性能消耗，提高性能，不会对大对象进行搬迁压缩"
+				}
+			]
+		},
+		{
+			"ID": "20240902145327-systwyt",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240902145327-systwyt",
+				"updated": "20240902145337"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主动触发GC的方法"
+				}
+			]
+		},
+		{
+			"ID": "20240902144311-wka432e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902144311-wka432e",
+				"updated": "20240902145046"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "GC是可以手动触发的，而不需要等待内存满后触发"
+				}
+			]
+		},
+		{
+			"ID": "20240902145052-lyftbki",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240902145052-lyftbki",
+				"style": "line-height: 22px;",
+				"updated": "20240902145130"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "internal class Program\n{\n    static void Main(string[] args)\n    {\n        GC.Collect();   //主动触发GC的方法，但是不会频繁使用，因为性能消耗较大，可能会卡顿\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240902145144-qrtiolw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240902145144-qrtiolw",
+				"updated": "20240902145204"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "建议在类似于读取等需要玩家等待的时段进行主动GC，例如显示读取条时"
+				}
+			]
+		}
+	]
+}
