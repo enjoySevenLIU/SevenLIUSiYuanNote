@@ -6,7 +6,7 @@
 		"id": "20240616164717-yoow9dd",
 		"title": "US2S3L11——ShaderLab属性类型和CG变量类型的匹配关系",
 		"type": "doc",
-		"updated": "20240616171406"
+		"updated": "20240616165852"
 	},
 	"Children": [
 		{
@@ -93,7 +93,7 @@
 			"HeadingLevel": 1,
 			"Properties": {
 				"id": "20240616164809-oq0d4e8",
-				"updated": "20240616171406"
+				"updated": "20240616165852"
 			},
 			"Children": [
 				{
@@ -147,7 +147,7 @@
 			"HeadingLevel": 2,
 			"Properties": {
 				"id": "20240616165633-4vk7h52",
-				"updated": "20240616171406"
+				"updated": "20240616165852"
 			},
 			"Children": [
 				{
@@ -536,7 +536,7 @@
 			"HeadingLevel": 2,
 			"Properties": {
 				"id": "20240616165931-o89nwu2",
-				"updated": "20240616171406"
+				"updated": "20241030114656"
 			},
 			"Children": [
 				{
@@ -580,7 +580,7 @@
 			"Properties": {
 				"id": "20240616170311-f4eo6on",
 				"style": "line-height: 22px;",
-				"updated": "20240616171231"
+				"updated": "20241030114656"
 			},
 			"Children": [
 				{
@@ -593,7 +593,7 @@
 				},
 				{
 					"Type": "NodeCodeBlockCode",
-					"Data": "Shader \"TeachShader/Lesson23\"\n{\n    Properties \n    {\n\t\t_MyColor(\"MyColor\", Color) = (0, 0, 0, 0)\n\n        _MyInt(\"MyInt\", Int) = 1\n        _MyFloat(\"MyFloat\", Float) = 1\n        _MyRange(\"MyRange\", Range(0, 5)) = 1\n        _MyVector(\"MyVector\", Vector) = (1, 2, 0, 0)\n        _My2D(\"My2D\", 2D) = \"\"{}\n        _My2DArray(\"My2DArray\", 2DArray) = \"\"{}\n        _MyCube(\"MyCube\", Cube) = \"\"{}\n        _My3D(\"My3D\", 3D) = \"\"{}\n    }\n\n    SubShader\n    {\n        Pass\n        {\n            CGPROGRAM\n            #pragma vertex myVert\n            #pragma fragment myFrag\n\n\t\t\tfixed4 _MyColor;\n\n            float _MyInt;\n            float _MyFloat;\n            fixed _MyRange;\n            float4 _MyVector;\n            sampler2D _My2D;\n            samplerCUBE _MyCube;\n\n            //从应用阶段获取对应语义数据后，传递给顶点着色器的回调函数的结构体\n            struct a2v { ... };\n\n            //从顶点着色器传递给片元着色器的结构体数据，同样这里的成员也需要用语义去进行修饰\n            struct v2f { ... };\n        \n            v2f myVert(a2v data)\n            {\n                v2f v2fData;                    //需要传递给片元着色器的数据\n\t\t\t\t//...\n                return v2fData;\n            }\n\n            fixed4 myFrag(v2f data) : SV_Target\n            {\n                return _MyColor;\t\t//直接使用声明的颜色属性\n            }\n            ENDCG\n        }\n    }\n}\n"
+					"Data": "Shader \"TeachShader/Lesson23\"\n{\n    Properties \n    {\n\t\t_MyColor(\"MyColor\", Color) = (0, 0, 0, 0)\n\n        _MyInt(\"MyInt\", Int) = 1\n        _MyFloat(\"MyFloat\", Float) = 1\n        _MyRange(\"MyRange\", Range(0, 5)) = 1\n        _MyVector(\"MyVector\", Vector) = (1, 2, 0, 0)\n        _My2D(\"My2D\", 2D) = \"\"{}\n        _My2DArray(\"My2DArray\", 2DArray) = \"\"{}\n        _MyCube(\"MyCube\", Cube) = \"\"{}\n        _My3D(\"My3D\", 3D) = \"\"{}\n    }\n\n    SubShader\n    {\n        Pass\n        {\n            CGPROGRAM\n            #pragma vertex myVert\n            #pragma fragment myFrag\n\n\t\t\tfixed4 _MyColor;\n\n            float _MyInt;\n            float _MyFloat;\n            fixed _MyRange;\n            float4 _MyVector;\n            sampler2D _My2D;\n            samplerCUBE _MyCube;\n\n            //从应用阶段获取对应语义数据后，传递给顶点着色器的回调函数的结构体\n            struct a2v { ... };\n\n            //从顶点着色器传递给片元着色器的结构体数据，同样这里的成员也需要用语义去进行修饰\n            struct v2f { ... };\n    \n            v2f myVert(a2v data)\n            {\n                v2f v2fData;                    //需要传递给片元着色器的数据\n\t\t\t\t//...\n                return v2fData;\n            }\n\n            fixed4 myFrag(v2f data) : SV_Target\n            {\n                return _MyColor;\t\t//直接使用声明的颜色属性\n            }\n            ENDCG\n        }\n    }\n}\n"
 				},
 				{
 					"Type": "NodeCodeBlockFenceCloseMarker",

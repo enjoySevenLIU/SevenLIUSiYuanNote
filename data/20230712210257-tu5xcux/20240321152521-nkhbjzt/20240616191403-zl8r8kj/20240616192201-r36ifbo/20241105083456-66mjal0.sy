@@ -1,0 +1,589 @@
+{
+	"ID": "20241105083456-66mjal0",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20241105083456-66mjal0",
+		"title": "US3S2L12——高光纹理综合实现",
+		"type": "doc",
+		"updated": "20241105091120"
+	},
+	"Children": [
+		{
+			"ID": "20241105084028-lczobm9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20241105084028-lczobm9",
+				"updated": "20241105091120"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "高光纹理综合实现"
+				}
+			]
+		},
+		{
+			"ID": "20241105084028-qu7yy5r",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241105084028-qu7yy5r",
+				"updated": "20241105084053"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "接下来将高光纹理的映射实现融合到之前实现的法线纹理 Shader 内，\n这里复用之前实现的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20241031103227-dkxubmy",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "切线空间下的法线纹理 Shader"
+				}
+			]
+		},
+		{
+			"ID": "20241105084028-4346jx8",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241105084028-4346jx8",
+				"style": "line-height: 22px;",
+				"updated": "20241105084028"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson51\"\n{\n    Properties\n    {\n        _MainColor(\"MainColor\", Color) = (1, 1, 1, 1)\n        _MainTex(\"MainTex\", 2D) = \"\"{}\n        _BumpMap(\"BumpMap\", 2D) = \"\"{}\n        _BumpScale(\"BumpScale\", Range(0, 1)) = 1\n        _SpecularColor(\"SpecularColor\", Color) = (1, 1, 1, 1)\n        _SpecularNum(\"SpecularNum\", Range(0, 20)) = 18\n    }\n    SubShader\n    {\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardBase\" }\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n\n            struct v2f\n            {\n                float4 pos: SV_POSITION;\n                //float2 uvTex: TEXCOORD0;\n                //float2 uvBump: TEXCOORD1; //可以使用两个float2来分别存储主要纹理的uv和法线纹理的uv\n                float4 uv: TEXCOORD0;       //可以使用一个float4来同时存储主要纹理的uv（xy存储）和法线纹理的uv（zw存储）\n                float3 lightDir: TEXCOORD1; //相对于切线空间下的光的方向\n                float3 viewDir: TEXCOORD2;  //相对于切线空间下的视角方向\n            };\n\n            float4 _MainColor;      //漫反射颜色\n            sampler2D _MainTex;     //颜色纹理\n            float4 _MainTex_ST;     //颜色纹理的缩放和平移\n            sampler2D _BumpMap;     //法线纹理\n            float4 _BumpMap_ST;     //法线纹理的缩放和平移\n            float _BumpScale;       //凹凸程度\n            float4 _SpecularColor;  //高光颜色\n            fixed _SpecularNum;     //光泽度\n\n            v2f vert (appdata_full v)\n            {\n                v2f data;\n            \n                data.pos = UnityObjectToClipPos(v.vertex);  //计算裁剪空间下顶点坐标\n                // 分别计算主纹理和法线纹理的缩放平移\n                data.uv.xy = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;\n                data.uv.zw = v.texcoord.xy * _BumpMap_ST.xy + _BumpMap_ST.zw;\n\n                // 计算副切线\n                float3 binormal = cross(normalize(v.tangent), normalize(v.normal)) * v.tangent.w;\n                // 得到模型空间到切线空间的转换矩阵\n                float3x3 rotation = float3x3(\n                    v.tangent.xyz,  //切线\n                    binormal,       //副切线\n                    v.normal        //法线\n                );\n            \n                data.lightDir = mul(rotation, ObjSpaceLightDir(v.vertex));   // 切线空间下的光的方向\n                data.viewDir = mul(rotation, ObjSpaceViewDir(v.vertex));    // 切线空间下的视角方向\n\n                return data;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                float4 packedNormal = tex2D(_BumpMap, i.uv.zw);     // 获取法线纹理的颜色数据\n                float3 tangentNormal = UnpackNormal(packedNormal);  // 将颜色数据逆运算并解压缩，得到切线空间下法线数据\n                // 将法线数据的xy乘以凹凸系数，根据xy修正z，避免凹凸系数影响光照亮度\n                tangentNormal.xy *= _BumpScale;                 \n                tangentNormal.z = sqrt(1.0 - saturate(dot(tangentNormal.xy, tangentNormal.xy)));\n\n                // 计算带纹理颜色的BlinnPhong光照计算，这里使用已经计算好的切线数据\n                fixed3 albedo = tex2D(_MainTex, i.uv.xy).rgb * _MainColor.rgb;  // 反射率\n\n                // 漫反射光照计算：这里需要使用已经计算完毕的切线数据和光照方向，注意！这里的 tangentNormal 无需归一化\n                fixed3 lambertColor = _LightColor0.rgb * albedo.rgb * max(0, dot(tangentNormal, normalize(i.lightDir)));\n                // 高光反射光照计算：这里需要使用已经计算完毕的切线数据和光照方向\n                float3 halfA = normalize(normalize(i.viewDir) + normalize(i.lightDir));     // 半角向量\n                fixed3 specularColor = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(tangentNormal, halfA)), _SpecularNum);\n                // 最终颜色计算\n                fixed3 color = UNITY_LIGHTMODEL_AMBIENT.rgb * albedo + lambertColor + specularColor;\n\n                return fixed4(color.rgb, 1);\n            }\n            ENDCG\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241105084107-u38qd2j",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241105084107-u38qd2j",
+				"updated": "20241105091120"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "将高光遮罩纹理实现融入其中"
+				}
+			]
+		},
+		{
+			"ID": "20241105084117-iohubl9",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241105084117-iohubl9",
+				"updated": "20241105084121"
+			},
+			"Children": [
+				{
+					"ID": "20241105084121-kc5n9d6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241105084121-kc5n9d6",
+						"updated": "20241105084121"
+					},
+					"Children": [
+						{
+							"ID": "20241105084121-gmx3aum",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241105084121-gmx3aum",
+								"updated": "20241105084121"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "从纹理中取出对应的遮罩掩码值（颜色的RGB值都可以使用）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241105084121-8q7d6w9",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241105084121-8q7d6w9",
+						"updated": "20241105084121"
+					},
+					"Children": [
+						{
+							"ID": "20241105084121-lmg6ar5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241105084121-lmg6ar5",
+								"updated": "20241105084127"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "用该掩码值和遮罩系数（我们自己定义的）相乘得到遮罩值"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241105084121-nzgujm1",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20241105084121-nzgujm1",
+						"updated": "20241105084121"
+					},
+					"Children": [
+						{
+							"ID": "20241105084121-eqdh04g",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241105084121-eqdh04g",
+								"updated": "20241105084121"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "用该遮罩值和高光反射计算出来的颜色相乘"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241105084644-fx1eq11",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241105084644-fx1eq11",
+				"updated": "20241105084802"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "属性需要添加高光遮罩纹理 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_SpecularMask"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 和遮罩系数 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_SpecularScale"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​："
+				}
+			]
+		},
+		{
+			"ID": "20241105084717-5pvfty7",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241105084717-5pvfty7",
+				"style": "line-height: 22px;",
+				"updated": "20241105084728"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Properties\n{\n    _MainColor(\"MainColor\", Color) = (1, 1, 1, 1)\n    _MainTex(\"MainTex\", 2D) = \"\"{}\n    _BumpMap(\"BumpMap\", 2D) = \"\"{}\n    _BumpScale(\"BumpScale\", Range(0, 1)) = 1\n    _SpecularMask(\"SpecularMask\", 2D) = \"\"{}\n    _SpecularScale(\"_SpecularScale\", Float) = 1\n    _SpecularColor(\"SpecularColor\", Color) = (1, 1, 1, 1)\n    _SpecularNum(\"SpecularNum\", Range(0, 20)) = 18\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241105084844-fu1tlly",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241105084844-fu1tlly",
+				"updated": "20241105084853"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "同时，片元着色器的高光反射计算部分也要修改为："
+				}
+			]
+		},
+		{
+			"ID": "20241105084846-vb18kej",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241105084846-vb18kej",
+				"style": "line-height: 22px;",
+				"updated": "20241105090417"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "struct v2f\n{\n    float4 pos: SV_POSITION;\n    float4 uv: TEXCOORD0;       //使用一个float4来同时存储主要纹理的uv（xy存储）和法线纹理的uv（zw存储）\n    float3 lightDir: TEXCOORD1; //相对于切线空间下的光的方向\n    float3 viewDir: TEXCOORD2;  //相对于切线空间下的视角方向\n};\n\nfloat4 _MainColor;          //漫反射颜色\nsampler2D _MainTex;         //颜色纹理\nfloat4 _MainTex_ST;         //颜色纹理的缩放和平移\nsampler2D _BumpMap;         //法线纹理\nfloat4 _BumpMap_ST;         //法线纹理的缩放和平移\nsampler2D _SpecularMask;    //高光纹理\nfloat4 _SpecularMask_ST;    //高光纹理的缩放和平移\nfloat _SpecularScale;       //遮罩系数\nfloat _BumpScale;           //凹凸程度\nfloat4 _SpecularColor;      //高光颜色\nfixed _SpecularNum;         //光泽度\n\nfixed4 frag (v2f i) : SV_Target\n{\n    float4 packedNormal = tex2D(_BumpMap, i.uv.zw);     // 获取法线纹理的颜色数据\n    float3 tangentNormal = UnpackNormal(packedNormal);  // 将颜色数据逆运算并解压缩，得到切线空间下法线数据\n    // 将法线数据的xy乘以凹凸系数，根据xy修正z，避免凹凸系数影响光照亮度\n    tangentNormal.xy *= _BumpScale;                   \n    tangentNormal.z = sqrt(1.0 - saturate(dot(tangentNormal.xy, tangentNormal.xy)));\n\n    // 计算带纹理颜色的BlinnPhong光照计算，这里使用已经计算好的切线数据\n    fixed3 albedo = tex2D(_MainTex, i.uv.xy).rgb * _MainColor.rgb;  // 反射率\n\n    // 漫反射光照计算：这里需要使用已经计算完毕的切线数据和光照方向，注意！这里的 tangentNormal 无需归一化\n    fixed3 lambertColor = _LightColor0.rgb * albedo.rgb * max(0, dot(tangentNormal, normalize(i.lightDir)));\n    // 高光反射光照计算：这里会使用高光纹理和遮罩系数来计算高光遮罩值，通过这个值来影响高光表现\n    fixed maskNum = tex2D(_SpecularMask, i.uv.xy).r;    // 从高光纹理的R通道内取出掩码值，uv可以直接套用主纹理使用的uv\n    fixed specularMaskNum = maskNum * _SpecularScale;   // 用掩码值和遮罩系数相乘得到遮罩值\n    float3 halfA = normalize(normalize(i.viewDir) + normalize(i.lightDir));     // 半角向量\n    fixed3 specularColor = \n        _LightColor0.rgb * _SpecularColor.rgb * \n        pow(max(0, dot(tangentNormal, halfA)), _SpecularNum) * \n        specularMaskNum;                                // 在原来的高光颜色上乘以遮罩值，得到最终高光颜色\n    // 最终颜色计算\n    fixed3 color = UNITY_LIGHTMODEL_AMBIENT.rgb * albedo + lambertColor + specularColor;\n\n    return fixed4(color.rgb, 1);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241105090436-0qoyi3r",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241105090436-0qoyi3r",
+				"updated": "20241105090437"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "完整 Shader 代码如下："
+				}
+			]
+		},
+		{
+			"ID": "20241105090437-x5etaeb",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241105090437-x5etaeb",
+				"style": "line-height: 22px;",
+				"updated": "20241105090533"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson55\"\n{\n    Properties\n    {\n        _MainColor(\"MainColor\", Color) = (1, 1, 1, 1)\n        _MainTex(\"MainTex\", 2D) = \"\"{}\n        _BumpMap(\"BumpMap\", 2D) = \"\"{}\n        _BumpScale(\"BumpScale\", Range(0, 1)) = 1\n        _SpecularMask(\"SpecularMask\", 2D) = \"\"{}\n        _SpecularScale(\"_SpecularScale\", Float) = 1\n        _SpecularColor(\"SpecularColor\", Color) = (1, 1, 1, 1)\n        _SpecularNum(\"SpecularNum\", Range(0, 20)) = 18\n    }\n    SubShader\n    {\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardBase\" }\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n\n            struct v2f\n            {\n                float4 pos: SV_POSITION;\n                float4 uv: TEXCOORD0;       //使用一个float4来同时存储主要纹理的uv（xy存储）和法线纹理的uv（zw存储）\n                float3 lightDir: TEXCOORD1; //相对于切线空间下的光的方向\n                float3 viewDir: TEXCOORD2;  //相对于切线空间下的视角方向\n            };\n\n            float4 _MainColor;          //漫反射颜色\n            sampler2D _MainTex;         //颜色纹理\n            float4 _MainTex_ST;         //颜色纹理的缩放和平移\n            sampler2D _BumpMap;         //法线纹理\n            float4 _BumpMap_ST;         //法线纹理的缩放和平移\n            sampler2D _SpecularMask;    //高光纹理\n            float4 _SpecularMask_ST;    //高光纹理的缩放和平移\n            float _SpecularScale;       //遮罩系数\n            float _BumpScale;           //凹凸程度\n            float4 _SpecularColor;      //高光颜色\n            fixed _SpecularNum;         //光泽度\n\n            v2f vert (appdata_full v)\n            {\n                v2f data;\n              \n                data.pos = UnityObjectToClipPos(v.vertex);  //计算裁剪空间下顶点坐标\n                // 分别计算主纹理和法线纹理的缩放平移\n                data.uv.xy = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;\n                data.uv.zw = v.texcoord.xy * _BumpMap_ST.xy + _BumpMap_ST.zw;\n\n                // 计算副切线\n                float3 binormal = cross(normalize(v.tangent), normalize(v.normal)) * v.tangent.w;\n                // 得到模型空间到切线空间的转换矩阵\n                float3x3 rotation = float3x3(\n                    v.tangent.xyz,  //切线\n                    binormal,       //副切线\n                    v.normal        //法线\n                );\n              \n                data.lightDir = mul(rotation, ObjSpaceLightDir(v.vertex));   // 切线空间下的光的方向\n                data.viewDir = mul(rotation, ObjSpaceViewDir(v.vertex));    // 切线空间下的视角方向\n\n                return data;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                float4 packedNormal = tex2D(_BumpMap, i.uv.zw);     // 获取法线纹理的颜色数据\n                float3 tangentNormal = UnpackNormal(packedNormal);  // 将颜色数据逆运算并解压缩，得到切线空间下法线数据\n                // 将法线数据的xy乘以凹凸系数，根据xy修正z，避免凹凸系数影响光照亮度\n                tangentNormal.xy *= _BumpScale;                   \n                tangentNormal.z = sqrt(1.0 - saturate(dot(tangentNormal.xy, tangentNormal.xy)));\n\n                // 计算带纹理颜色的BlinnPhong光照计算，这里使用已经计算好的切线数据\n                fixed3 albedo = tex2D(_MainTex, i.uv.xy).rgb * _MainColor.rgb;  // 反射率\n\n                // 漫反射光照计算：这里需要使用已经计算完毕的切线数据和光照方向，注意！这里的 tangentNormal 无需归一化\n                fixed3 lambertColor = _LightColor0.rgb * albedo.rgb * max(0, dot(tangentNormal, normalize(i.lightDir)));\n                // 高光反射光照计算：这里会使用高光纹理和遮罩系数来计算高光遮罩值，通过这个值来影响高光表现\n                fixed maskNum = tex2D(_SpecularMask, i.uv.xy).r;    // 从高光纹理的R通道内取出掩码值，uv可以直接套用主纹理使用的uv\n                fixed specularMaskNum = maskNum * _SpecularScale;   // 用掩码值和遮罩系数相乘得到遮罩值\n                float3 halfA = normalize(normalize(i.viewDir) + normalize(i.lightDir));     // 半角向量\n                fixed3 specularColor = \n                    _LightColor0.rgb * _SpecularColor.rgb * \n                    pow(max(0, dot(tangentNormal, halfA)), _SpecularNum) * \n                    specularMaskNum;                                // 在原来的高光颜色上乘以遮罩值，得到最终高光颜色\n                // 最终颜色计算\n                fixed3 color = UNITY_LIGHTMODEL_AMBIENT.rgb * albedo + lambertColor + specularColor;\n\n                return fixed4(color.rgb, 1);\n            }\n            ENDCG\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241105090300-qedii3f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241105090300-qedii3f",
+				"updated": "20241105090338"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果（左为不使用高光遮罩纹理，右为使用高光遮罩纹理）："
+				}
+			]
+		},
+		{
+			"ID": "20241105090304-aunws75",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241105090304-aunws75",
+				"updated": "20241105090304"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241105090304-dnijhq6.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241105090340-7n81gh4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241105090340-7n81gh4",
+				"updated": "20241105090757"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，不使用高光遮罩纹理的模型出现了很亮的亮班，\n而使用高光遮罩纹理的模型高光就没有那么明显，对于砖石材质来说更加自然了"
+				}
+			]
+		},
+		{
+			"ID": "20241105091120-ujoy64r",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20241105091120-ujoy64r",
+				"updated": "20241105091120"
+			},
+			"Children": [
+				{
+					"ID": "20241105084148-8p0kv7n",
+					"Type": "NodeHeading",
+					"HeadingLevel": 2,
+					"Properties": {
+						"id": "20241105084148-8p0kv7n",
+						"updated": "20241105091120"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "遮罩纹理中的RGBA值"
+						}
+					]
+				},
+				{
+					"ID": "20241105084155-qcd8xrk",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241105084155-qcd8xrk",
+						"updated": "20241105091120"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "对于高光遮罩纹理中的RGBA值，"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "strong",
+							"TextMarkTextContent": "从使用率上来讲是非常浪费的，因为我们只使用其中一个值就可以得到我们想要的数据"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "\n因此对于遮罩纹理来说，我们可以合理的利用其中的每一个值来存储我们想要的数据"
+						}
+					]
+				},
+				{
+					"ID": "20241105084155-vewtdf6",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241105084155-vewtdf6",
+						"updated": "20241105091120"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "随着以后的学习，我们可以在遮罩纹理当中存储更多信息，比如："
+						}
+					]
+				},
+				{
+					"ID": "20241105084240-majrbuy",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20241105084240-majrbuy",
+						"updated": "20241105091120"
+					},
+					"Children": [
+						{
+							"ID": "20241105084240-xcyseut",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241105084240-xcyseut",
+								"updated": "20241105084240"
+							},
+							"Children": [
+								{
+									"ID": "20241105084240-mjhr4c5",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241105084240-mjhr4c5",
+										"updated": "20241105084240"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "R值代表高光遮罩数据\n"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241105084241-nnvikf7",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241105084241-nnvikf7",
+								"updated": "20241105084241"
+							},
+							"Children": [
+								{
+									"ID": "20241105084241-kx4239s",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241105084241-kx4239s",
+										"updated": "20241105084241"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "G值代表透明遮罩数据\n"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241105084242-ho8dymu",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241105084242-ho8dymu",
+								"updated": "20241105084242"
+							},
+							"Children": [
+								{
+									"ID": "20241105084242-bb9ianm",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241105084242-bb9ianm",
+										"updated": "20241105084242"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "B值代表特效遮罩数据"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241105084222-f7cimly",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241105084222-f7cimly",
+						"updated": "20241105091120"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "等等，甚至可以用 n 张遮挡纹理存储 4*n 个会参与 每个片元渲染计算的值"
+						}
+					]
+				},
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				}
+			]
+		}
+	]
+}

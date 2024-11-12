@@ -1,0 +1,3613 @@
+{
+	"ID": "20241019183705-2wpblcj",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20241019183705-2wpblcj",
+		"title": "U4S5L19——SDF 材质球和参数设置",
+		"type": "doc",
+		"updated": "20241019195358"
+	},
+	"Children": [
+		{
+			"ID": "20241019183705-h599mrg",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20241019183705-h599mrg",
+				"updated": "20241019184501"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "SDF"
+				}
+			]
+		},
+		{
+			"ID": "20241019183917-uj6auya",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241019183917-uj6auya",
+				"updated": "20241019183931"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "SDF 是 有符号距离场 (Signed Distance Field) 的缩写，其中："
+				}
+			]
+		},
+		{
+			"ID": "20241019183931-0s1ylks",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20241019183931-0s1ylks",
+				"updated": "20241019183931"
+			},
+			"Children": [
+				{
+					"ID": "20241019183931-6zkltcc",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241019183931-6zkltcc",
+						"updated": "20241019183931"
+					},
+					"Children": [
+						{
+							"ID": "20241019183931-ewqn2xa",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241019183931-ewqn2xa",
+								"updated": "20241019183931"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "有符号(Signed)：指的是距离可以为正或负，表示一个点位于边界的内部（负值）还是外部（正值）\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241019183932-0zg4na3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241019183932-0zg4na3",
+						"updated": "20241019183932"
+					},
+					"Children": [
+						{
+							"ID": "20241019183932-t6c7py9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241019183932-t6c7py9",
+								"updated": "20241019183932"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "距离(Distance)：表示每个像素点到字符边缘的距离\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241019183933-1p2rhrj",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241019183933-1p2rhrj",
+						"updated": "20241019183933"
+					},
+					"Children": [
+						{
+							"ID": "20241019183933-xh9rdnz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241019183933-xh9rdnz",
+								"updated": "20241019183933"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "场(Field)：指的是整个字体或图形周围的距离值的分布"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241019183917-4ngv5f5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241019183917-4ngv5f5",
+				"updated": "20241019183941"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "它是一种用于高质量文本和图形渲染的技术，尤其适用于缩放或在低分辨率下保持边缘平滑的情况"
+				}
+			]
+		},
+		{
+			"ID": "20241019183917-8712ln0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241019183917-8712ln0",
+				"updated": "20241019184039"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "它的本质就是在一个 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240321152521-nkhbjzt",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "Shader"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "（着色器）中利用 SDF 相关算法规则来渲染文字\nSDF 技术生成的字体纹理并不是普通的位图，而是基于每个像素到字体边缘的距离值。\n这些距离值存储在纹理的灰度通道中，代表每个像素到字符边缘的距离信息。\n然后在渲染时，着色器根据这些距离值动态计算字体的边缘，最终渲染出平滑的字符轮廓。"
+				}
+			]
+		},
+		{
+			"ID": "20241019183917-dd7hoay",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241019183917-dd7hoay",
+				"updated": "20241019183958"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要在 TMP 中用于生成和渲染文本，能让字体在任意大小或距离下保持清晰和锐利的效果"
+				}
+			]
+		},
+		{
+			"ID": "20241019184000-o7tvwv1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241019184000-o7tvwv1",
+				"updated": "20241019184128"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "SDF 材质球指什么"
+				}
+			]
+		},
+		{
+			"ID": "20241019184052-8fdmsfr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241019184052-8fdmsfr",
+				"updated": "20241019184123"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们创建的字体资源使用的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240612163658-sluhrok",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "材质球"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，本质上就是一个使用了 SDF 相关 Shader 的材质球\n利用该Shader渲染出来的字体效果会更好，并且该Shader提供了很多可以被配置的参数\n我们可以在对应字体的材质球中修改这些参数，从而让我们的字体实现一些更复杂的美术表现效果"
+				}
+			]
+		},
+		{
+			"ID": "20241019184052-d95akbs",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241019184052-d95akbs",
+				"updated": "20241019184126"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此我们需要学习字体材质球中的这些参数，从而帮助我们利用它来实现我们的表现需求"
+				}
+			]
+		},
+		{
+			"ID": "20241019184128-9wqr5a4",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241019184128-9wqr5a4",
+				"updated": "20241019195349"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "SDF 材质球中的主要内容"
+				}
+			]
+		},
+		{
+			"ID": "20241019191003-97exfzl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241019191003-97exfzl",
+				"updated": "20241019191108"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以下的设置可以在字体资源的材质球上的对字体全局地进行设置，也可以单独为某个 TMP 控件设置，参数是一样的"
+				}
+			]
+		},
+		{
+			"ID": "20241019184532-pdqe2ex",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20241019184532-pdqe2ex",
+				"updated": "20241019195349"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20241019184530-49weg17",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241019184530-49weg17",
+						"updated": "20241019184533"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20241019184530-h1u69iz.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20241019184144-7mycgcj",
+					"Type": "NodeList",
+					"ListData": {
+						"Typ": 1
+					},
+					"Properties": {
+						"id": "20241019184144-7mycgcj",
+						"updated": "20241019195349"
+					},
+					"Children": [
+						{
+							"ID": "20241019184511-rvq2la8",
+							"Type": "NodeListItem",
+							"ListData": {
+								"Typ": 1,
+								"Delimiter": 46,
+								"Marker": "MS4=",
+								"Num": 1
+							},
+							"Properties": {
+								"id": "20241019184511-rvq2la8",
+								"updated": "20241019184844"
+							},
+							"Children": [
+								{
+									"ID": "20241019184511-lb2x8ws",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019184511-lb2x8ws",
+										"updated": "20241019184844"
+									},
+									"Children": [
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "block-ref",
+											"TextMarkBlockRefID": "20241019184817-ofn9dqm",
+											"TextMarkBlockRefSubtype": "s",
+											"TextMarkTextContent": "Face：基础表面设置"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019184511-xizi2jn",
+							"Type": "NodeListItem",
+							"ListData": {
+								"Typ": 1,
+								"Delimiter": 46,
+								"Marker": "Mi4=",
+								"Num": 2
+							},
+							"Properties": {
+								"id": "20241019184511-xizi2jn",
+								"updated": "20241019191927"
+							},
+							"Children": [
+								{
+									"ID": "20241019184511-7zyodmn",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019184511-7zyodmn",
+										"updated": "20241019191927"
+									},
+									"Children": [
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "block-ref",
+											"TextMarkBlockRefID": "20241019191726-4p39gdy",
+											"TextMarkBlockRefSubtype": "s",
+											"TextMarkTextContent": "Outline：边缘线效果设置"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019184511-sktusk2",
+							"Type": "NodeListItem",
+							"ListData": {
+								"Typ": 1,
+								"Delimiter": 46,
+								"Marker": "My4=",
+								"Num": 3
+							},
+							"Properties": {
+								"id": "20241019184511-sktusk2",
+								"updated": "20241019192423"
+							},
+							"Children": [
+								{
+									"ID": "20241019184512-7ovb9tw",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019184512-7ovb9tw",
+										"updated": "20241019192423"
+									},
+									"Children": [
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "block-ref",
+											"TextMarkBlockRefID": "20241019191910-n1jqtht",
+											"TextMarkBlockRefSubtype": "s",
+											"TextMarkTextContent": "Underlay：阴影(底层)效果设置"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019184511-xv9nepe",
+							"Type": "NodeListItem",
+							"ListData": {
+								"Typ": 1,
+								"Delimiter": 46,
+								"Marker": "NC4=",
+								"Num": 4
+							},
+							"Properties": {
+								"id": "20241019184511-xv9nepe",
+								"updated": "20241019192715"
+							},
+							"Children": [
+								{
+									"ID": "20241019184512-4hgxgqg",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019184512-4hgxgqg",
+										"updated": "20241019192715"
+									},
+									"Children": [
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "block-ref",
+											"TextMarkBlockRefID": "20241019192352-3dodulc",
+											"TextMarkBlockRefSubtype": "s",
+											"TextMarkTextContent": "Lighting：照明效果设置"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019184511-48rnd0w",
+							"Type": "NodeListItem",
+							"ListData": {
+								"Typ": 1,
+								"Delimiter": 46,
+								"Marker": "NS4=",
+								"Num": 5
+							},
+							"Properties": {
+								"id": "20241019184511-48rnd0w",
+								"updated": "20241019194640"
+							},
+							"Children": [
+								{
+									"ID": "20241019184512-d3blun2",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019184512-d3blun2",
+										"updated": "20241019194640"
+									},
+									"Children": [
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "block-ref",
+											"TextMarkBlockRefID": "20241019194424-89c061q",
+											"TextMarkBlockRefSubtype": "s",
+											"TextMarkTextContent": "Grow：发光效果设置"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019184743-qpaip4t",
+							"Type": "NodeListItem",
+							"ListData": {
+								"Typ": 1,
+								"Delimiter": 46,
+								"Marker": "Ni4=",
+								"Num": 6
+							},
+							"Properties": {
+								"id": "20241019184743-qpaip4t",
+								"updated": "20241019195349"
+							},
+							"Children": [
+								{
+									"ID": "20241019184743-yro5u84",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019184743-yro5u84",
+										"updated": "20241019195349"
+									},
+									"Children": [
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "block-ref",
+											"TextMarkBlockRefID": "20241019194953-8djzty2",
+											"TextMarkBlockRefSubtype": "s",
+											"TextMarkTextContent": "Debug Settings：调试设置"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20241019184817-ofn9dqm",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241019184817-ofn9dqm",
+				"updated": "20241019191520"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "基础表面设置"
+				}
+			]
+		},
+		{
+			"ID": "20241019185110-rpbdw33",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20241019185110-rpbdw33",
+				"updated": "20241019184922"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20241019185120-tq7011k",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241019185120-tq7011k",
+						"updated": "20241019185120"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20241019185120-obnx884.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20241019184855-7baz8zi",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20241019184855-7baz8zi",
+						"updated": "20241019184922"
+					},
+					"Children": [
+						{
+							"ID": "20241019184855-yg62e8m",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019184855-yg62e8m",
+								"updated": "20241019184855"
+							},
+							"Children": [
+								{
+									"ID": "20241019184855-xuwoghg",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019184855-xuwoghg",
+										"updated": "20241019185319"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Color:  文本表面颜色，该颜色会和 TMP 组件中设置的"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "block-ref",
+											"TextMarkBlockRefID": "20240625223357-g4nui0p",
+											"TextMarkBlockRefSubtype": "s",
+											"TextMarkTextContent": "颜色相乘"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "进行叠加"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019184900-5u1cuw8",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019184900-5u1cuw8",
+								"updated": "20241019185614"
+							},
+							"Children": [
+								{
+									"ID": "20241019184900-d8jgll7",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019184900-d8jgll7",
+										"updated": "20241019184925"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Texture：可以为文本添加贴图"
+										}
+									]
+								},
+								{
+									"ID": "20241019184926-p3cihgx",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20241019184926-p3cihgx",
+										"updated": "20241019185614"
+									},
+									"Children": [
+										{
+											"ID": "20241019184926-znyszzv",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019184926-znyszzv",
+												"updated": "20241019184926"
+											},
+											"Children": [
+												{
+													"ID": "20241019184926-lgji6yi",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019184926-lgji6yi",
+														"updated": "20241019184937"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Tiling：平铺（缩放）"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019184930-d1lw0b3",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019184930-d1lw0b3",
+												"updated": "20241019184930"
+											},
+											"Children": [
+												{
+													"ID": "20241019184930-bc7sfno",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019184930-bc7sfno",
+														"updated": "20241019184940"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Offset：偏移"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019184933-oee4pzk",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019184933-oee4pzk",
+												"updated": "20241019185614"
+											},
+											"Children": [
+												{
+													"ID": "20241019184933-9yaxnco",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019184933-9yaxnco",
+														"updated": "20241019190003"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Speed：移动速度（可以实现纹理滚动效果，配合"
+														},
+														{
+															"Type": "NodeTextMark",
+															"TextMarkType": "block-ref",
+															"TextMarkBlockRefID": "20241001171317-bwjli4j",
+															"TextMarkBlockRefSubtype": "s",
+															"TextMarkTextContent": "UV映射"
+														},
+														{
+															"Type": "NodeText",
+															"Data": "使用）"
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241019185432-2scmdf8",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019185432-2scmdf8",
+										"updated": "20241019185504"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "以此纹理为例："
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"style": "width: 181px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20241019185504-5f92316.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 181px;\"}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								},
+								{
+									"ID": "20241019185507-4g21ytu",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019185507-4g21ytu",
+										"updated": "20241019185522"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "显示效果："
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"style": "width: 75px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20241019185522-nr9h7u3.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 75px;\"}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019184918-8pdmnet",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019184918-8pdmnet",
+								"updated": "20241019184918"
+							},
+							"Children": [
+								{
+									"ID": "20241019184918-iat2jae",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019184918-iat2jae",
+										"updated": "20241019184922"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Softness：边缘柔和度，可以让文字边缘产生模糊感"
+										}
+									]
+								},
+								{
+									"ID": "20241019190842-etzwj2c",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019190842-etzwj2c",
+										"updated": "20241019190914"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "设置为0.5时的显示效果："
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20241019190914-8bqahq1.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019184922-zrdy9p3",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019184922-zrdy9p3",
+								"updated": "20241019184922"
+							},
+							"Children": [
+								{
+									"ID": "20241019184922-cociasr",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019184922-cociasr",
+										"updated": "20241019184922"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Dilate：拓展，类似改变粗细的效果"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20241019185123-q32s5hg",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241019185123-q32s5hg",
+				"updated": "20241019192743"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "边缘线和阴影设置"
+				}
+			]
+		},
+		{
+			"ID": "20241019191726-4p39gdy",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20241019191726-4p39gdy",
+				"updated": "20241019192743"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "边缘线设置"
+				}
+			]
+		},
+		{
+			"ID": "20241019191707-u88hgtz",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20241019191707-u88hgtz",
+				"updated": "20241019191720"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20241019191841-0bnzrnh",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241019191841-0bnzrnh",
+						"updated": "20241019191841"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20241019191841-4wm8uy0.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20241019191658-2ev4jdb",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20241019191658-2ev4jdb",
+						"updated": "20241019191720"
+					},
+					"Children": [
+						{
+							"ID": "20241019191658-woogdaw",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019191658-woogdaw",
+								"updated": "20241019191658"
+							},
+							"Children": [
+								{
+									"ID": "20241019191658-yof3ya4",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019191658-yof3ya4",
+										"updated": "20241019191700"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Color：边缘线颜色"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019191700-q2qqz2r",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019191700-q2qqz2r",
+								"updated": "20241019191720"
+							},
+							"Children": [
+								{
+									"ID": "20241019191700-uxw1hsk",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019191700-uxw1hsk",
+										"updated": "20241019191720"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Texture：边缘线纹理，会用纹理颜色和轮廓"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "block-ref",
+											"TextMarkBlockRefID": "20240625223357-g4nui0p",
+											"TextMarkBlockRefSubtype": "s",
+											"TextMarkTextContent": "颜色相乘"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "叠加"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019191704-c501mww",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019191704-c501mww",
+								"updated": "20241019191704"
+							},
+							"Children": [
+								{
+									"ID": "20241019191704-4hbsj51",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019191704-4hbsj51",
+										"updated": "20241019191704"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Thickness：轮廓粗细，值越大越粗"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20241019191738-ebfqys2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241019191738-ebfqys2",
+				"updated": "20241019191908"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以上图参数作为示例，显示效果："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241019191908-vvvh0uk.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241019191910-n1jqtht",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20241019191910-n1jqtht",
+				"updated": "20241019192740"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "阴影（底层）设置"
+				}
+			]
+		},
+		{
+			"ID": "20241019192159-opkdink",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241019192159-opkdink",
+				"updated": "20241019192438"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "需要勾选左上角的多选框才能生效"
+				}
+			]
+		},
+		{
+			"ID": "20241019192439-9e4l2lk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241019192439-9e4l2lk",
+				"updated": "20241019192532"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "阴影相当于在字的底部再渲染一个相同的字，以下的参数都是对整个底部的字的参数调整"
+				}
+			]
+		},
+		{
+			"ID": "20241019192257-8q20sig",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20241019192257-8q20sig",
+				"updated": "20241019192330"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20241019192151-6lw7xlp",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241019192151-6lw7xlp",
+						"updated": "20241019192258"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Properties": {
+								"style": "width: 528px;"
+							},
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20241019192151-mhb5fw9.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"width: 528px;\"}"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20241019192253-ysou0kh",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20241019192253-ysou0kh",
+						"updated": "20241019192330"
+					},
+					"Children": [
+						{
+							"ID": "20241019192253-qp2n12g",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019192253-qp2n12g",
+								"updated": "20241019192330"
+							},
+							"Children": [
+								{
+									"ID": "20241019192253-r4aztwr",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019192253-r4aztwr",
+										"updated": "20241019192330"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Underlay Type：底图阴影类型"
+										}
+									]
+								},
+								{
+									"ID": "20241019192330-ha131dc",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20241019192330-ha131dc",
+										"updated": "20241019192330"
+									},
+									"Children": [
+										{
+											"ID": "20241019192330-co6u0sp",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192330-co6u0sp",
+												"updated": "20241019192330"
+											},
+											"Children": [
+												{
+													"ID": "20241019192330-310ltw8",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192330-310ltw8",
+														"updated": "20241019192332"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "None：无阴影"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192333-pqb4kec",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192333-pqb4kec",
+												"updated": "20241019192333"
+											},
+											"Children": [
+												{
+													"ID": "20241019192333-bko1bol",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192333-bko1bol",
+														"updated": "20241019192336"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Normal：正常标准的底图样式"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192336-i185ypq",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192336-i185ypq",
+												"updated": "20241019192336"
+											},
+											"Children": [
+												{
+													"ID": "20241019192336-kwunuqy",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192336-kwunuqy",
+														"updated": "20241019192336"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Inner：反转底图，用原始文本遮罩它"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019192253-ip5akyh",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019192253-ip5akyh",
+								"updated": "20241019192253"
+							},
+							"Children": [
+								{
+									"ID": "20241019192253-8d9h518",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019192253-8d9h518",
+										"updated": "20241019192302"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Color：底图阴影的颜色"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019192302-e4a5vxl",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019192302-e4a5vxl",
+								"updated": "20241019192302"
+							},
+							"Children": [
+								{
+									"ID": "20241019192302-t2f4lxu",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019192302-t2f4lxu",
+										"updated": "20241019192321"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Offset X：阴影字的X偏移"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019192308-9gavglm",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019192308-9gavglm",
+								"updated": "20241019192308"
+							},
+							"Children": [
+								{
+									"ID": "20241019192308-0tgtimc",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019192308-0tgtimc",
+										"updated": "20241019192324"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Offset Y：阴影字的Y偏移"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019192310-ntncpe8",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019192310-ntncpe8",
+								"updated": "20241019192310"
+							},
+							"Children": [
+								{
+									"ID": "20241019192310-mxcpd7x",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019192310-mxcpd7x",
+										"updated": "20241019192325"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Dilate：阴影字的拓展，相当于粗细"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019192314-zaoj1mr",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019192314-zaoj1mr",
+								"updated": "20241019192314"
+							},
+							"Children": [
+								{
+									"ID": "20241019192314-91z1ydo",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019192314-91z1ydo",
+										"updated": "20241019192326"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Softness：阴影字的边缘柔和度，让阴影边界产生模糊感"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20241019192337-oq28wf3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241019192337-oq28wf3",
+				"updated": "20241019192351"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以上图参数作为示例，显示效果："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241019192351-5nfr6gc.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241019192352-3dodulc",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241019192352-3dodulc",
+				"updated": "20241019194515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "照明设置"
+				}
+			]
+		},
+		{
+			"ID": "20241019192853-0cdmn19",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241019192853-0cdmn19",
+				"updated": "20241019192853"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "需要勾选左上角的多选框才能生效"
+				}
+			]
+		},
+		{
+			"ID": "20241019192841-w2kf19k",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20241019192841-w2kf19k",
+				"updated": "20241019194354"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20241019194216-c8e5gk6",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241019194216-c8e5gk6",
+						"updated": "20241019194216"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Properties": {
+								"style": "width: 599px;"
+							},
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20241019194216-xk5vuo2.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"width: 599px;\"}"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20241019192831-db0p7sb",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20241019192831-db0p7sb",
+						"updated": "20241019194354"
+					},
+					"Children": [
+						{
+							"ID": "20241019192831-1ctvei4",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019192831-1ctvei4",
+								"updated": "20241019193700"
+							},
+							"Children": [
+								{
+									"ID": "20241019192831-nl86zbm",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019192831-nl86zbm",
+										"updated": "20241019193700"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Bevel：斜面设置，它可以让字体边缘呈现斜面效果"
+										}
+									]
+								},
+								{
+									"ID": "20241019193232-fn13t2e",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019193232-fn13t2e",
+										"updated": "20241019193257"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "此设置可能需要配合"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "block-ref",
+											"TextMarkBlockRefID": "20241019191726-4p39gdy",
+											"TextMarkBlockRefSubtype": "s",
+											"TextMarkTextContent": "边缘线"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "才能显示出效果"
+										}
+									]
+								},
+								{
+									"ID": "20241019192831-8tnfuam",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20241019192831-8tnfuam",
+										"updated": "20241019192831"
+									},
+									"Children": [
+										{
+											"ID": "20241019192930-1qgh0vn",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192930-1qgh0vn",
+												"updated": "20241019192930"
+											},
+											"Children": [
+												{
+													"ID": "20241019192930-qalntr5",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192930-qalntr5",
+														"updated": "20241019192938"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Type：斜面类型"
+														}
+													]
+												},
+												{
+													"ID": "20241019192939-lsyih8h",
+													"Type": "NodeList",
+													"ListData": {},
+													"Properties": {
+														"id": "20241019192939-lsyih8h",
+														"updated": "20241019192939"
+													},
+													"Children": [
+														{
+															"ID": "20241019192831-37ev07j",
+															"Type": "NodeListItem",
+															"ListData": {
+																"BulletChar": 42,
+																"Marker": "Kg=="
+															},
+															"Properties": {
+																"id": "20241019192831-37ev07j",
+																"updated": "20241019192831"
+															},
+															"Children": [
+																{
+																	"ID": "20241019192831-t1vz9ad",
+																	"Type": "NodeParagraph",
+																	"Properties": {
+																		"id": "20241019192831-t1vz9ad",
+																		"updated": "20241019192945"
+																	},
+																	"Children": [
+																		{
+																			"Type": "NodeText",
+																			"Data": "Outer Bevel：外斜面"
+																		}
+																	]
+																},
+																{
+																	"ID": "20241019192946-glr4pw6",
+																	"Type": "NodeParagraph",
+																	"Properties": {
+																		"id": "20241019192946-glr4pw6",
+																		"updated": "20241019193005"
+																	},
+																	"Children": [
+																		{
+																			"Type": "NodeText",
+																			"Data": "让字体产生带有倾斜侧面的凸起效果，相当于向中间凸起来"
+																		}
+																	]
+																}
+															]
+														},
+														{
+															"ID": "20241019192942-cunh1z0",
+															"Type": "NodeListItem",
+															"ListData": {
+																"BulletChar": 42,
+																"Marker": "Kg=="
+															},
+															"Properties": {
+																"id": "20241019192942-cunh1z0",
+																"updated": "20241019192942"
+															},
+															"Children": [
+																{
+																	"ID": "20241019192942-f6vv96u",
+																	"Type": "NodeParagraph",
+																	"Properties": {
+																		"id": "20241019192942-f6vv96u",
+																		"updated": "20241019192948"
+																	},
+																	"Children": [
+																		{
+																			"Type": "NodeText",
+																			"Data": "Inner Bevel：内斜面"
+																		}
+																	]
+																},
+																{
+																	"ID": "20241019192948-px2obcd",
+																	"Type": "NodeParagraph",
+																	"Properties": {
+																		"id": "20241019192948-px2obcd",
+																		"updated": "20241019193002"
+																	},
+																	"Children": [
+																		{
+																			"Type": "NodeText",
+																			"Data": "轮廓凸起的文本，相当于向中间凹进去"
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192831-zbmv2ye",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-zbmv2ye",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-rnlzbvu",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-rnlzbvu",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Amount：陡峭程度"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192831-dw0lou7",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-dw0lou7",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-umn6313",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-umn6313",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Offset：位置偏移"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192831-3yw30ng",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-3yw30ng",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-avimilw",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-avimilw",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Width：斜面大小"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192831-cbt8s4b",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-cbt8s4b",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-iegvoc2",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-iegvoc2",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Roundness：让斜面更加平滑，产生更多角度区域"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192831-vtwermy",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-vtwermy",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-5alg5ks",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-5alg5ks",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Clamp：限制斜面最大高度"
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241019193508-bmyt4sy",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019193508-bmyt4sy",
+										"updated": "20241019193624"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "显示示例："
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"style": "width: 94px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20241019193624-5wdgzb7.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 94px;\"}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019192831-ow4h4bw",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019192831-ow4h4bw",
+								"updated": "20241019194307"
+							},
+							"Children": [
+								{
+									"ID": "20241019192831-obow6or",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019192831-obow6or",
+										"updated": "20241019193708"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Local Lighting：本地照明设置"
+										}
+									]
+								},
+								{
+									"ID": "20241019194246-tnerwgg",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019194246-tnerwgg",
+										"updated": "20241019194307"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "对于光照相关知识，详见："
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "block-ref",
+											"TextMarkBlockRefID": "20240616192134-xcs523k",
+											"TextMarkBlockRefSubtype": "d",
+											"TextMarkTextContent": "US3S1——Shader入门-光照效果"
+										}
+									]
+								},
+								{
+									"ID": "20241019192831-luevbb3",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20241019192831-luevbb3",
+										"updated": "20241019192831"
+									},
+									"Children": [
+										{
+											"ID": "20241019192831-c6yc5ji",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-c6yc5ji",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-azrsb7e",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-azrsb7e",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Light Angle: 光照角度，模拟局部光的角度"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192831-x7hg1l9",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-x7hg1l9",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-177rqjr",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-177rqjr",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Specular Color：镜面反射颜色"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192831-7jcq636",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-7jcq636",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-9su63az",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-9su63az",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Specular Power：镜面发射强度"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192831-fruts8z",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-fruts8z",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-rns8vvd",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-rns8vvd",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Reflectivity Power：反射强度，值越大越能反应周围环境的颜色"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192831-g2d22pq",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-g2d22pq",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-5rjrt8y",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-5rjrt8y",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Diffuse Shadow：漫反射阴影，调整整体阴影的等级，值越高，阴影越强"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192831-43ipypc",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-43ipypc",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-19vu52a",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-19vu52a",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Amblent Shadow：环境阴影，调整环境光照水平"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019192831-jgzld8i",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019192831-jgzld8i",
+								"updated": "20241019194354"
+							},
+							"Children": [
+								{
+									"ID": "20241019192831-qwfdrn9",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019192831-qwfdrn9",
+										"updated": "20241019194224"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Bump Map：凹凸贴图设置"
+										}
+									]
+								},
+								{
+									"ID": "20241019194335-yphh0a6",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019194335-yphh0a6",
+										"updated": "20241019194354"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "关于发现贴图（"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "tag",
+											"TextMarkTextContent": "TODO"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​）"
+										}
+									]
+								},
+								{
+									"ID": "20241019192831-w26hecp",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20241019192831-w26hecp",
+										"updated": "20241019192831"
+									},
+									"Children": [
+										{
+											"ID": "20241019192831-jd0iyp6",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-jd0iyp6",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-rq5uqnw",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-rq5uqnw",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Texture：凹凸贴图"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192831-u2ygz79",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-u2ygz79",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-go98dax",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-go98dax",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Face：凹凸影响程度"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192831-1eemfwv",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-1eemfwv",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-zkv06nd",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-zkv06nd",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Outline：凹凸贴图对文本轮廓的影响程度"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019192831-bvhd4nd",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019192831-bvhd4nd",
+								"updated": "20241019194240"
+							},
+							"Children": [
+								{
+									"ID": "20241019192831-fce2nlp",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019192831-fce2nlp",
+										"updated": "20241019192919"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Environment Map：环境设置"
+										}
+									]
+								},
+								{
+									"ID": "20241019194228-o4gfdnk",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019194228-o4gfdnk",
+										"updated": "20241019194240"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "关于立方体贴图（"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "tag",
+											"TextMarkTextContent": "TODO"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​）"
+										}
+									]
+								},
+								{
+									"ID": "20241019192831-63u26sy",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20241019192831-63u26sy",
+										"updated": "20241019192831"
+									},
+									"Children": [
+										{
+											"ID": "20241019192831-aptb8ce",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-aptb8ce",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-3r4b3uu",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-3r4b3uu",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Face Color：立方体贴图对文本的颜色影响，会和文本进行颜色叠加"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192831-1wmymff",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-1wmymff",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-k1d5hbr",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-k1d5hbr",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Outline Color：立方体贴图对文本的轮廓颜色影响，会和轮廓进行颜色叠加"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192831-46bt3yf",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-46bt3yf",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-7mnuz2n",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-7mnuz2n",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Texture：环境的立方体贴图"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241019192831-s1uftla",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241019192831-s1uftla",
+												"updated": "20241019192831"
+											},
+											"Children": [
+												{
+													"ID": "20241019192831-jqyub7m",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241019192831-jqyub7m",
+														"updated": "20241019192831"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Rotation：旋转环境贴图"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20241019194359-tk9usl9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241019194359-tk9usl9",
+				"updated": "20241019194515"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以上图参数作为示例，显示效果："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 163px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241019194515-6ywu73z.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 163px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241019194424-89c061q",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241019194424-89c061q",
+				"updated": "20241019195028"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "发光设置"
+				}
+			]
+		},
+		{
+			"ID": "20241019194932-ou4xic7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241019194932-ou4xic7",
+				"updated": "20241019194933"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "需要勾选左上角的多选框才能生效"
+				}
+			]
+		},
+		{
+			"ID": "20241019194926-9qwkyt1",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20241019194926-9qwkyt1",
+				"updated": "20241019194756"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20241019194923-u83xbet",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241019194923-u83xbet",
+						"updated": "20241019194927"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20241019194923-g2529wi.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20241019194756-vx5jdtp",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20241019194756-vx5jdtp",
+						"updated": "20241019194756"
+					},
+					"Children": [
+						{
+							"ID": "20241019194756-rln45hk",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019194756-rln45hk",
+								"updated": "20241019194756"
+							},
+							"Children": [
+								{
+									"ID": "20241019194756-a0snjup",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019194756-a0snjup",
+										"updated": "20241019194756"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Color：发光颜色"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019194756-u4ko1wp",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019194756-u4ko1wp",
+								"updated": "20241019194756"
+							},
+							"Children": [
+								{
+									"ID": "20241019194756-6100enb",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019194756-6100enb",
+										"updated": "20241019194756"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Offset：发光效果中心偏移值"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019194756-frnftoh",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019194756-frnftoh",
+								"updated": "20241019194756"
+							},
+							"Children": [
+								{
+									"ID": "20241019194756-faau2tx",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019194756-faau2tx",
+										"updated": "20241019194756"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Inner：发光想过向内延伸距离"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019194756-v8by1an",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019194756-v8by1an",
+								"updated": "20241019194756"
+							},
+							"Children": [
+								{
+									"ID": "20241019194756-vixk11u",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019194756-vixk11u",
+										"updated": "20241019194756"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Outer：发光效果向外延伸距离"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019194756-dliww4j",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019194756-dliww4j",
+								"updated": "20241019194756"
+							},
+							"Children": [
+								{
+									"ID": "20241019194756-66lw9ye",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019194756-66lw9ye",
+										"updated": "20241019194756"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Power：发光强度"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20241019195016-ihq4nyk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241019195016-ihq4nyk",
+				"updated": "20241019195028"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以上图参数作为示例，显示效果："
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 166px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241019195028-uko9l2q.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 166px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241019194953-8djzty2",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241019194953-8djzty2",
+				"updated": "20241019195358"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "调试设置"
+				}
+			]
+		},
+		{
+			"ID": "20241019195104-pxhmscy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241019195104-pxhmscy",
+				"updated": "20241019195358"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要公布了 Shader 内部的一些属性，可以看到该 Shader 中更多的一些属性"
+				}
+			]
+		},
+		{
+			"ID": "20241019195318-1tzb578",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20241019195318-1tzb578",
+				"updated": "20241019195332"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20241019195306-hvtz4bh",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241019195306-hvtz4bh",
+						"updated": "20241019195319"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20241019195306-6wj5qz4.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20241019195311-tv8k5ug",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20241019195311-tv8k5ug",
+						"updated": "20241019195332"
+					},
+					"Children": [
+						{
+							"ID": "20241019195311-7u7w5up",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019195311-7u7w5up",
+								"updated": "20241019195311"
+							},
+							"Children": [
+								{
+									"ID": "20241019195311-3giq5vv",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019195311-3giq5vv",
+										"updated": "20241019195311"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Font Atlas：字体图集"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019195311-ah429gt",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019195311-ah429gt",
+								"updated": "20241019195311"
+							},
+							"Children": [
+								{
+									"ID": "20241019195311-lbvwbqe",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019195311-lbvwbqe",
+										"updated": "20241019195311"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Gradient Scale：渐变比例"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019195311-1v0co08",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019195311-1v0co08",
+								"updated": "20241019195311"
+							},
+							"Children": [
+								{
+									"ID": "20241019195311-mi0gho1",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019195311-mi0gho1",
+										"updated": "20241019195311"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Texture Width/Height：纹理宽高"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019195311-umnrze4",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019195311-umnrze4",
+								"updated": "20241019195332"
+							},
+							"Children": [
+								{
+									"ID": "20241019195311-h3geuqj",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019195311-h3geuqj",
+										"updated": "20241019195332"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Scale X"
+										},
+										{
+											"Type": "NodeBackslash",
+											"Data": "span",
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "/"
+												}
+											]
+										},
+										{
+											"Type": "NodeText",
+											"Data": "Y：SDF比例乘数，越大越清晰，越小越模糊"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019195311-dj7cn71",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019195311-dj7cn71",
+								"updated": "20241019195311"
+							},
+							"Children": [
+								{
+									"ID": "20241019195311-u3oftr6",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019195311-u3oftr6",
+										"updated": "20241019195311"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Sharpness：清晰度"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019195311-m7l2wug",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019195311-m7l2wug",
+								"updated": "20241019195311"
+							},
+							"Children": [
+								{
+									"ID": "20241019195311-0bwyi2c",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019195311-0bwyi2c",
+										"updated": "20241019195323"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Perspective Filter：透视过滤器"
+										}
+									]
+								},
+								{
+									"ID": "20241019195323-9p6fdex",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019195323-9p6fdex",
+										"updated": "20241019195323"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "使用透视摄像机时，调整该设置，可以让文本看起来更柔和"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019195311-6qmjtyr",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019195311-6qmjtyr",
+								"updated": "20241019195311"
+							},
+							"Children": [
+								{
+									"ID": "20241019195311-pyl7s34",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019195311-pyl7s34",
+										"updated": "20241019195311"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Offset X、Y：每个字符顶点位置的偏移量"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019195311-k2z8aa7",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019195311-k2z8aa7",
+								"updated": "20241019195311"
+							},
+							"Children": [
+								{
+									"ID": "20241019195311-77iu2tn",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019195311-77iu2tn",
+										"updated": "20241019195311"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Mask：蒙版 关闭蒙版 较硬蒙版 柔和蒙版"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019195311-vjm4j58",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019195311-vjm4j58",
+								"updated": "20241019195311"
+							},
+							"Children": [
+								{
+									"ID": "20241019195311-gznh5rm",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019195311-gznh5rm",
+										"updated": "20241019195311"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Clip Rect：剪辑矩形，用于设置遮罩矩阵范围"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019195311-d9ie6or",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019195311-d9ie6or",
+								"updated": "20241019195311"
+							},
+							"Children": [
+								{
+									"ID": "20241019195311-0i33mu1",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019195311-0i33mu1",
+										"updated": "20241019195311"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Stencil ID：模板ID"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019195311-3z73jxa",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019195311-3z73jxa",
+								"updated": "20241019195311"
+							},
+							"Children": [
+								{
+									"ID": "20241019195311-otpaq7l",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019195311-otpaq7l",
+										"updated": "20241019195311"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Stencil Comp：模板成分"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019195311-0f87atr",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019195311-0f87atr",
+								"updated": "20241019195311"
+							},
+							"Children": [
+								{
+									"ID": "20241019195311-vsdq6zl",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019195311-vsdq6zl",
+										"updated": "20241019195311"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Uset Ratios：使用率"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241019195311-2ahjwsk",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241019195311-2ahjwsk",
+								"updated": "20241019195311"
+							},
+							"Children": [
+								{
+									"ID": "20241019195311-8w602xh",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241019195311-8w602xh",
+										"updated": "20241019195311"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Cull Mode：裁剪模式"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		}
+	]
+}

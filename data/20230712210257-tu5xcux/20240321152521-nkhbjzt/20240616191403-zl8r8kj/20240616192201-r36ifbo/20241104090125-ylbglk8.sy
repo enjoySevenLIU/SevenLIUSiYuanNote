@@ -1,0 +1,315 @@
+{
+	"ID": "20241104090125-ylbglk8",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20241104090125-ylbglk8",
+		"title": "US3S2L10——渐变纹理综合实现",
+		"type": "doc",
+		"updated": "20241105090549"
+	},
+	"Children": [
+		{
+			"ID": "20241104090125-7zxlqvs",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20241104090125-7zxlqvs",
+				"updated": "20241105090549"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "渐变纹理综合实现"
+				}
+			]
+		},
+		{
+			"ID": "20241104090248-4r4ok8h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241104090248-4r4ok8h",
+				"updated": "20241104090434"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "接下来将渐变纹理的映射实现融合到之前实现的法线纹理 Shader 内，\n这里复用之前实现的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20241031103227-dkxubmy",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "切线空间下的法线纹理 Shader"
+				}
+			]
+		},
+		{
+			"ID": "20241104090434-3g899ay",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241104090434-3g899ay",
+				"style": "line-height: 22px;",
+				"updated": "20241105084015"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson51\"\n{\n    Properties\n    {\n        _MainColor(\"MainColor\", Color) = (1, 1, 1, 1)\n        _MainTex(\"MainTex\", 2D) = \"\"{}\n        _BumpMap(\"BumpMap\", 2D) = \"\"{}\n        _BumpScale(\"BumpScale\", Range(0, 1)) = 1\n        _SpecularColor(\"SpecularColor\", Color) = (1, 1, 1, 1)\n        _SpecularNum(\"SpecularNum\", Range(0, 20)) = 18\n    }\n    SubShader\n    {\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardBase\" }\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n\n            struct v2f\n            {\n                float4 pos: SV_POSITION;\n                //float2 uvTex: TEXCOORD0;\n                //float2 uvBump: TEXCOORD1; //可以使用两个float2来分别存储主要纹理的uv和法线纹理的uv\n                float4 uv: TEXCOORD0;       //可以使用一个float4来同时存储主要纹理的uv（xy存储）和法线纹理的uv（zw存储）\n                float3 lightDir: TEXCOORD1; //相对于切线空间下的光的方向\n                float3 viewDir: TEXCOORD2;  //相对于切线空间下的视角方向\n            };\n\n            float4 _MainColor;      //漫反射颜色\n            sampler2D _MainTex;     //颜色纹理\n            float4 _MainTex_ST;     //颜色纹理的缩放和平移\n            sampler2D _BumpMap;     //法线纹理\n            float4 _BumpMap_ST;     //法线纹理的缩放和平移\n            float _BumpScale;       //凹凸程度\n            float4 _SpecularColor;  //高光颜色\n            fixed _SpecularNum;     //光泽度\n\n            v2f vert (appdata_full v)\n            {\n                v2f data;\n              \n                data.pos = UnityObjectToClipPos(v.vertex);  //计算裁剪空间下顶点坐标\n                // 分别计算主纹理和法线纹理的缩放平移\n                data.uv.xy = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;\n                data.uv.zw = v.texcoord.xy * _BumpMap_ST.xy + _BumpMap_ST.zw;\n\n                // 计算副切线\n                float3 binormal = cross(normalize(v.tangent), normalize(v.normal)) * v.tangent.w;\n                // 得到模型空间到切线空间的转换矩阵\n                float3x3 rotation = float3x3(\n                    v.tangent.xyz,  //切线\n                    binormal,       //副切线\n                    v.normal        //法线\n                );\n              \n                data.lightDir = mul(rotation, ObjSpaceLightDir(v.vertex));   // 切线空间下的光的方向\n                data.viewDir = mul(rotation, ObjSpaceViewDir(v.vertex));    // 切线空间下的视角方向\n\n                return data;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                float4 packedNormal = tex2D(_BumpMap, i.uv.zw);     // 获取法线纹理的颜色数据\n                float3 tangentNormal = UnpackNormal(packedNormal);  // 将颜色数据逆运算并解压缩，得到切线空间下法线数据\n                // 将法线数据的xy乘以凹凸系数，根据xy修正z，避免凹凸系数影响光照亮度\n                tangentNormal.xy *= _BumpScale;                   \n                tangentNormal.z = sqrt(1.0 - saturate(dot(tangentNormal.xy, tangentNormal.xy)));\n\n                // 计算带纹理颜色的BlinnPhong光照计算，这里使用已经计算好的切线数据\n                fixed3 albedo = tex2D(_MainTex, i.uv.xy).rgb * _MainColor.rgb;  // 反射率\n\n                // 漫反射光照计算：这里需要使用已经计算完毕的切线数据和光照方向，注意！这里的 tangentNormal 无需归一化\n                fixed3 lambertColor = _LightColor0.rgb * albedo.rgb * max(0, dot(tangentNormal, normalize(i.lightDir)));\n                // 高光反射光照计算：这里需要使用已经计算完毕的切线数据和光照方向\n                float3 halfA = normalize(normalize(i.viewDir) + normalize(i.lightDir));     // 半角向量\n                fixed3 specularColor = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(tangentNormal, halfA)), _SpecularNum);\n                // 最终颜色计算\n                fixed3 color = UNITY_LIGHTMODEL_AMBIENT.rgb * albedo + lambertColor + specularColor;\n\n                return fixed4(color.rgb, 1);\n            }\n            ENDCG\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241104090451-8xej0me",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241104090451-8xej0me",
+				"updated": "20241104090531"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "然后，修改上述代码的实现，将渐变纹理贴图计算融合到其中"
+				}
+			]
+		},
+		{
+			"ID": "20241104090531-6xpofsc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241104090531-6xpofsc",
+				"updated": "20241104090617"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关键点：将原本的兰伯特光照模型修改为渐变纹理的计算方式（半兰伯特光照模型映射渐变纹理颜色）"
+				}
+			]
+		},
+		{
+			"ID": "20241104090618-gpquvht",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241104090618-gpquvht",
+				"updated": "20241104091440"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此，属性需要添加渐变纹理 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_RampTex"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​："
+				}
+			]
+		},
+		{
+			"ID": "20241104091419-zm8rnuz",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241104091419-zm8rnuz",
+				"style": "line-height: 22px;",
+				"updated": "20241104091427"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Properties\n{\n    _MainColor(\"MainColor\", Color) = (1, 1, 1, 1)\n    _MainTex(\"MainTex\", 2D) = \"\"{}\n    _BumpMap(\"BumpMap\", 2D) = \"\"{}\n    _BumpScale(\"BumpScale\", Range(0, 1)) = 1\n    _RampTex(\"_RampTex\", 2D) = \"\"{}\n    _SpecularColor(\"SpecularColor\", Color) = (1, 1, 1, 1)\n    _SpecularNum(\"SpecularNum\", Range(0, 20)) = 18\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241104091441-djko80o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241104091441-djko80o",
+				"updated": "20241104091503"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "同时，片元着色器的漫反射计算部分也要修改为："
+				}
+			]
+		},
+		{
+			"ID": "20241104091504-dxvuk1p",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241104091504-dxvuk1p",
+				"style": "line-height: 22px;",
+				"updated": "20241104091654"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "struct v2f\n{\n    float4 pos: SV_POSITION;\n    float4 uv: TEXCOORD0;       //可以使用一个float4来同时存储主要纹理的uv（xy存储）和法线纹理的uv（zw存储）\n    float3 lightDir: TEXCOORD1; //相对于切线空间下的光的方向\n    float3 viewDir: TEXCOORD2;  //相对于切线空间下的视角方向\n};\n\nfloat4 _MainColor;      //漫反射颜色\nsampler2D _MainTex;     //颜色纹理\nfloat4 _MainTex_ST;     //颜色纹理的缩放和平移\nsampler2D _BumpMap;     //法线纹理\nfloat4 _BumpMap_ST;     //法线纹理的缩放和平移\nsampler2D _RampTex;     //渐变纹理\nfloat4 _RampTex_ST;     //渐变纹理的缩放和平移（很少使用）\nfloat _BumpScale;       //凹凸程度\nfloat4 _SpecularColor;  //高光颜色\nfixed _SpecularNum;     //光泽度\n\nfixed4 frag (v2f i) : SV_Target\n{\n    float4 packedNormal = tex2D(_BumpMap, i.uv.zw);     // 获取法线纹理的颜色数据\n    float3 tangentNormal = UnpackNormal(packedNormal);  // 将颜色数据逆运算并解压缩，得到切线空间下法线数据\n    // 将法线数据的xy乘以凹凸系数，根据xy修正z，避免凹凸系数影响光照亮度\n    tangentNormal.xy *= _BumpScale;                 \n    tangentNormal.z = sqrt(1.0 - saturate(dot(tangentNormal.xy, tangentNormal.xy)));\n\n    // 计算带纹理颜色的BlinnPhong光照计算，这里使用已经计算好的切线数据\n    fixed3 albedo = tex2D(_MainTex, i.uv.xy).rgb * _MainColor.rgb;  // 反射率\n\n    // 漫反射光照计算：使用已经计算完毕的切线数据和光照方向，结合渐变纹理，先计算渐变纹理的uv坐标，再计算漫反射颜色\n    fixed halfLambertNum = dot(tangentNormal, normalize(i.lightDir)) * 0.5 + 0.5;\n    fixed3 diffuseColor = _LightColor0.rgb * albedo.rgb * tex2D(_RampTex, fixed2(halfLambertNum, halfLambertNum)).rgb;\n    // 高光反射光照计算：这里需要使用已经计算完毕的切线数据和光照方向\n    float3 halfA = normalize(normalize(i.viewDir) + normalize(i.lightDir));     // 半角向量\n    fixed3 specularColor = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(tangentNormal, halfA)), _SpecularNum);\n    // 最终颜色计算\n    fixed3 color = UNITY_LIGHTMODEL_AMBIENT.rgb * albedo + diffuseColor + specularColor;\n\n    return fixed4(color.rgb, 1);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241104092325-g8gmut7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241104092325-g8gmut7",
+				"updated": "20241104092333"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "完整 Shader 代码如下："
+				}
+			]
+		},
+		{
+			"ID": "20241104092334-wlibhzm",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241104092334-wlibhzm",
+				"style": "line-height: 22px;",
+				"updated": "20241105090549"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson54\"\n{\n    Properties\n    {\n        _MainColor(\"MainColor\", Color) = (1, 1, 1, 1)\n        _MainTex(\"MainTex\", 2D) = \"\"{}\n        _BumpMap(\"BumpMap\", 2D) = \"\"{}\n        _BumpScale(\"BumpScale\", Range(0, 1)) = 1\n        _RampTex(\"_RampTex\", 2D) = \"\"{}\n        _SpecularColor(\"SpecularColor\", Color) = (1, 1, 1, 1)\n        _SpecularNum(\"SpecularNum\", Range(0, 20)) = 18\n    }\n    SubShader\n    {\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardBase\" }\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n\n            struct v2f\n            {\n                float4 pos: SV_POSITION;\n                float4 uv: TEXCOORD0;       //可以使用一个float4来同时存储主要纹理的uv（xy存储）和法线纹理的uv（zw存储）\n                float3 lightDir: TEXCOORD1; //相对于切线空间下的光的方向\n                float3 viewDir: TEXCOORD2;  //相对于切线空间下的视角方向\n            };\n\n            float4 _MainColor;      //漫反射颜色\n            sampler2D _MainTex;     //颜色纹理\n            float4 _MainTex_ST;     //颜色纹理的缩放和平移\n            sampler2D _BumpMap;     //法线纹理\n            float4 _BumpMap_ST;     //法线纹理的缩放和平移\n            sampler2D _RampTex;      //渐变纹理\n            float4 _RampTex_ST;     //渐变纹理的缩放和平移（很少使用）\n            float _BumpScale;       //凹凸程度\n            float4 _SpecularColor;  //高光颜色\n            fixed _SpecularNum;     //光泽度\n\n            v2f vert (appdata_full v)\n            {\n                v2f data;\n              \n                data.pos = UnityObjectToClipPos(v.vertex);  //计算裁剪空间下顶点坐标\n                // 分别计算主纹理和法线纹理的缩放平移\n                data.uv.xy = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;\n                data.uv.zw = v.texcoord.xy * _BumpMap_ST.xy + _BumpMap_ST.zw;\n\n                // 计算副切线\n                float3 binormal = cross(normalize(v.tangent), normalize(v.normal)) * v.tangent.w;\n                // 得到模型空间到切线空间的转换矩阵\n                float3x3 rotation = float3x3(\n                    v.tangent.xyz,  //切线\n                    binormal,       //副切线\n                    v.normal        //法线\n                );\n              \n                data.lightDir = mul(rotation, ObjSpaceLightDir(v.vertex));   // 切线空间下的光的方向\n                data.viewDir = mul(rotation, ObjSpaceViewDir(v.vertex));    // 切线空间下的视角方向\n\n                return data;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                float4 packedNormal = tex2D(_BumpMap, i.uv.zw);     // 获取法线纹理的颜色数据\n                float3 tangentNormal = UnpackNormal(packedNormal);  // 将颜色数据逆运算并解压缩，得到切线空间下法线数据\n                // 将法线数据的xy乘以凹凸系数，根据xy修正z，避免凹凸系数影响光照亮度\n                tangentNormal.xy *= _BumpScale;                   \n                tangentNormal.z = sqrt(1.0 - saturate(dot(tangentNormal.xy, tangentNormal.xy)));\n\n                // 计算带纹理颜色的BlinnPhong光照计算，这里使用已经计算好的切线数据\n                fixed3 albedo = tex2D(_MainTex, i.uv.xy).rgb * _MainColor.rgb;  // 反射率\n\n                // 漫反射光照计算：使用已经计算完毕的切线数据和光照方向，结合渐变纹理，先计算渐变纹理的uv坐标，再计算漫反射颜色\n                fixed halfLambertNum = dot(tangentNormal, normalize(i.lightDir)) * 0.5 + 0.5;\n                fixed3 diffuseColor = _LightColor0.rgb * albedo.rgb * tex2D(_RampTex, fixed2(halfLambertNum, halfLambertNum)).rgb;\n                // 高光反射光照计算：这里需要使用已经计算完毕的切线数据和光照方向\n                float3 halfA = normalize(normalize(i.viewDir) + normalize(i.lightDir));     // 半角向量\n                fixed3 specularColor = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(tangentNormal, halfA)), _SpecularNum);\n                // 最终颜色计算\n                fixed3 color = UNITY_LIGHTMODEL_AMBIENT.rgb * albedo + diffuseColor + specularColor;\n\n                return fixed4(color.rgb, 1);\n            }\n            ENDCG\n        }\n    }\n}"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241104091605-s8vt9ec",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241104091605-s8vt9ec",
+				"updated": "20241104092507"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果（左侧直接使用BlinnPhong光照模型，右侧在BlinnPhong光照模型的基础上半兰伯特光照计算漫反射并使用渐变贴图）："
+				}
+			]
+		},
+		{
+			"ID": "20241104092320-ssgmdtw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241104092320-ssgmdtw",
+				"updated": "20241104092320"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241104092320-9xaab9q.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241104092321-4mjfiix",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241104092321-4mjfiix",
+				"updated": "20241104092601"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，左侧的明暗变化更平滑，较为拟真，而右侧更明暗界线分明一些，更加卡通化"
+				}
+			]
+		}
+	]
+}
