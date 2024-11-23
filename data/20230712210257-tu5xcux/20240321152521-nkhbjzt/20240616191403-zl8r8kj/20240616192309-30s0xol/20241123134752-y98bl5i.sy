@@ -1,0 +1,874 @@
+{
+	"ID": "20241123134752-y98bl5i",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20241123134752-y98bl5i",
+		"title": "US3S3L7——双面渲染",
+		"type": "doc",
+		"updated": "20241123142103"
+	},
+	"Children": [
+		{
+			"ID": "20241123134752-cnnw6o1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241123134752-cnnw6o1",
+				"updated": "20241123140219"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "双面渲染的透明效果的需求"
+				}
+			]
+		},
+		{
+			"ID": "20241123135244-0b01ij6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241123135244-0b01ij6",
+				"updated": "20241123135249"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于现实世界的半透明物体，我们不仅可以透过它看到其他物体的样子，也可以看到这个物体自己的内部结构"
+				}
+			]
+		},
+		{
+			"ID": "20241123135253-0zlledx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241123135253-0zlledx",
+				"updated": "20241123140117"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但是我们之前实现的 透明度测试 和 透明度混合 相关Shader，都无法看到模型的内部结构\n如下图，左边的立方体使用透明混合，右边的立方体使用透明测试，它们都无法看到模型内部的结构"
+				}
+			]
+		},
+		{
+			"ID": "20241123140008-uvqaxt2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241123140008-uvqaxt2",
+				"updated": "20241123140028"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241123140008-4iq7tml.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241123140013-wy9liq4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241123140013-wy9liq4",
+				"updated": "20241123140025"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "而双面渲染的透明效果 Shader 就是来解决该问题的，\n让我们不仅可以透过半透明物体看到其他物体的样子，还可以看到自己的内部结构"
+				}
+			]
+		},
+		{
+			"ID": "20241123140214-df6a4pp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241123140214-df6a4pp",
+				"updated": "20241123140535"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "双面渲染的透明效果的基本原理"
+				}
+			]
+		},
+		{
+			"ID": "20241123140226-8ubs7s7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241123140226-8ubs7s7",
+				"updated": "20241123140437"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "基本原理：默认情况下，Unity会自动剔除物体的背面，而只渲染物体的正面\n双面渲染的基本原理就是利用我们之前学习过的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code block-ref",
+					"TextMarkBlockRefID": "20240612204819-2b0fg9p",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "Cull"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 剔除指令来进行指定操作"
+				}
+			]
+		},
+		{
+			"ID": "20241123140438-8va016g",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20241123140438-8va016g",
+				"updated": "20241123140502"
+			},
+			"Children": [
+				{
+					"ID": "20241123140439-a5p01av",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241123140439-a5p01av",
+						"updated": "20241123140455"
+					},
+					"Children": [
+						{
+							"ID": "20241123140439-ef6uixd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241123140439-ef6uixd",
+								"updated": "20241123140455"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Cull Back"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ —— 背面剔除"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241123140440-wjk2uu7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241123140440-wjk2uu7",
+						"updated": "20241123140458"
+					},
+					"Children": [
+						{
+							"ID": "20241123140440-9m89gd6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241123140440-9m89gd6",
+								"updated": "20241123140458"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Cull Front"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ —— 正面剔除"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241123140440-dbo6xjl",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241123140440-dbo6xjl",
+						"updated": "20241123140502"
+					},
+					"Children": [
+						{
+							"ID": "20241123140440-fs54h2x",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241123140440-fs54h2x",
+								"updated": "20241123140502"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Cull Off"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ —— 不剔除"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241123140240-o7hr5k4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241123140240-o7hr5k4",
+				"updated": "20241123140256"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "不设置的话，默认为背面剔除"
+				}
+			]
+		},
+		{
+			"ID": "20241123140313-l8fvfvu",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20241123140313-l8fvfvu",
+				"updated": "20241123140508"
+			},
+			"Children": [
+				{
+					"ID": "20241123140314-rnodwhd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241123140314-rnodwhd",
+						"updated": "20241123140314"
+					},
+					"Children": [
+						{
+							"ID": "20241123140314-hns7vmk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241123140314-hns7vmk",
+								"updated": "20241123140314"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对于透明度测试 Shader，由于它无需混合，因此我们直接 关闭剔除 即可"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241123140316-qblagtz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241123140316-qblagtz",
+						"updated": "20241123140508"
+					},
+					"Children": [
+						{
+							"ID": "20241123140316-5uuzz6t",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241123140316-5uuzz6t",
+								"updated": "20241123140508"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对于透明度混合 Shader，由于它需要进行混合，需要使用两个 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，一个用于渲染背面，一个用于渲染正面"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241123140311-kznv70v",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241123140311-kznv70v",
+				"updated": "20241123140517"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "两个 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 中除了剔除命令不同，其他代码和之前一致"
+				}
+			]
+		},
+		{
+			"ID": "20241123140535-2hkbq31",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241123140535-2hkbq31",
+				"updated": "20241123141151"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现双面渲染的透明效果Shader"
+				}
+			]
+		},
+		{
+			"ID": "20241123140547-41psfkp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20241123140547-41psfkp",
+				"updated": "20241123141151"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "透明度测试"
+				}
+			]
+		},
+		{
+			"ID": "20241123140553-ixvgmsp",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241123140553-ixvgmsp",
+				"updated": "20241123140553"
+			},
+			"Children": [
+				{
+					"ID": "20241123140553-bi6dz6n",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241123140553-bi6dz6n",
+						"updated": "20241123140553"
+					},
+					"Children": [
+						{
+							"ID": "20241123140553-5kez7fw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241123140553-5kez7fw",
+								"updated": "20241123140638"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "复用之前实现的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20241120123139-t3fekhe",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "透明度测试"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 相关Shader代码"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241123140553-g5rk4x4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241123140553-g5rk4x4",
+						"updated": "20241123140553"
+					},
+					"Children": [
+						{
+							"ID": "20241123140553-g1wn2lo",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241123140553-g1wn2lo",
+								"updated": "20241123140753"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中关闭剔除 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Cull Off"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241123140837-r9gy192",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241123140837-r9gy192",
+				"updated": "20241123140848"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现的 Shader 代码如下："
+				}
+			]
+		},
+		{
+			"ID": "20241123140849-hrkc0lv",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241123140849-hrkc0lv",
+				"style": "line-height: 22px;",
+				"updated": "20241123141151"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson59_AlphaTest\"\n{\n    Properties\n    {\n        _MainTex(\"MainTex\", 2D) = \"\"{}                          // 纹理贴图\n        _MainColor(\"MainColor\", Color) = (1, 1, 1, 1)           // 漫反射颜色\n        _SpecularColor(\"SpecularColor\", Color) = (1, 1, 1, 1)   // 高光反射颜色\n        _SpecularNum(\"SpecularNum\", Range(0, 20)) = 15          // 光泽度\n        _Cutoff(\"Curoff\", Range(0, 1)) = 0                      // 透明测试阈值\n    }\n    SubShader\n    {\n        Tags { \"Queue\"=\"AlphaTest\" \"IgnoreProjector\"=\"True\" \"RenderType\"=\"TransparentCutout\"}\n\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardBase\" }\n            Cull Off    // 关闭剔除，让模型双面都可以渲染\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n\n            // 贴图纹理对应的映射成员\n            sampler2D _MainTex;\n            float4 _MainTex_ST;\n            // 漫反射颜色、高光反射颜色、光泽度\n            fixed4 _MainColor;\n            fixed4 _SpecularColor;\n            float _SpecularNum;\n            // 透明测试阈值\n            fixed _Cutoff;\n\n            struct v2f\n            {\n                float4 pos: SV_POSITION;    // 裁剪空间下的顶点坐标\n                float2 uv: TEXCOORD0;       // 纹理UV坐标\n                float3 wNormal: NORMAL;     // 世界空间下的法线\n                float3 wPos: TEXCOORD1;     // 世界空间下的顶点坐标\n            };\n\n            v2f vert (appdata_base v)\n            {\n                v2f data;\n                data.pos = UnityObjectToClipPos(v.vertex);                  // 将模型空间下的法线转换到世界空间下\n                data.uv = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;  // 计算UV\n                data.wNormal = UnityObjectToWorldNormal(v.normal);          // 法线转换到世界空间\n                data.wPos = mul(unity_ObjectToWorld, v.vertex);             // 顶点转换到世界空间\n\n                return data;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                fixed4 texColor = tex2D(_MainTex, i.uv);                    // 颜色纹理的颜色信息\n                clip(texColor.a - _Cutoff);                                 // A通道减去阈值传入到Clip函数内，若A值小于阈值就会被裁剪\n\n                fixed3 albedo = texColor.rgb * _MainColor.rgb;              // 反射率，即纹理颜色和漫反射材质颜色乘法叠加共同决定的颜色\n      \n                // 漫反射颜色\n                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);      // 指向光源的方向\n                fixed3 lambertColor = _LightColor0.rgb * albedo.rgb * max(0, dot(i.wNormal, lightDir));\n      \n                // 高光反射颜色\n                float3 viewDir = normalize(UnityWorldSpaceViewDir(i.wPos)); // 视角方向\n                float3 halfA = normalize(viewDir + lightDir);               // 半角向量\n                fixed3 specularColor = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(i.wNormal, halfA)), _SpecularNum);\n\n                // 最终颜色 = 环境光 * 反射颜色 + 漫反射颜色 + 高光反射颜色\n                fixed3 color = UNITY_LIGHTMODEL_AMBIENT.rgb * albedo + lambertColor + specularColor;\n\n                return fixed4(color.rgb, 1);\n            }\n            ENDCG\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241123140548-lhma0ie",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20241123140548-lhma0ie",
+				"updated": "20241123142103"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "透明度混合"
+				}
+			]
+		},
+		{
+			"ID": "20241123140551-39u5xc3",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241123140551-39u5xc3",
+				"updated": "20241123140551"
+			},
+			"Children": [
+				{
+					"ID": "20241123140551-trlis6m",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241123140551-trlis6m",
+						"updated": "20241123140551"
+					},
+					"Children": [
+						{
+							"ID": "20241123140551-o0rky7s",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241123140551-o0rky7s",
+								"updated": "20241123140647"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "复用之前实现的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20241121121110-xa0nvgw",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "透明度混合"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 相关Shader代码"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241123140551-hypzazn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241123140551-hypzazn",
+						"updated": "20241123140551"
+					},
+					"Children": [
+						{
+							"ID": "20241123140551-o4ibm1d",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241123140551-o4ibm1d",
+								"updated": "20241123140624"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "复制之前的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，变成两个一模一样的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241123140551-gv8kp13",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20241123140551-gv8kp13",
+						"updated": "20241123140551"
+					},
+					"Children": [
+						{
+							"ID": "20241123140551-6ax1wsz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241123140551-6ax1wsz",
+								"updated": "20241123140617"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在第一个 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中剔除正面 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Cull Front"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，在第二个 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中剔除背面 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Cull Back"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20241123140617-65tcfzs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241123140617-65tcfzs",
+								"updated": "20241123140617"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "相当于一个片元先渲染背面再渲染正面"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241123141753-qc1ozga",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241123141753-qc1ozga",
+				"updated": "20241123141754"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现的 Shader 代码如下："
+				}
+			]
+		},
+		{
+			"ID": "20241123141743-gsc9oh8",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241123141743-gsc9oh8",
+				"style": "line-height: 22px;",
+				"updated": "20241123141745"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson59_Transparent\"\n{\n    Properties\n    {\n        _MainTex(\"MainTex\", 2D) = \"\"{}                          // 纹理贴图\n        _MainColor(\"MainColor\", Color) = (1, 1, 1, 1)           // 漫反射颜色\n        _SpecularColor(\"SpecularColor\", Color) = (1, 1, 1, 1)   // 高光反射颜色\n        _SpecularNum(\"SpecularNum\", Range(0, 20)) = 15          // 光泽度\n        _AlphaScale(\"AlphaScale\", Range(0, 1)) = 1              // 对象总体透明度\n    }\n    SubShader\n    {\n        Tags { \"Queue\"=\"Transparent\" \"IgnoreProjector\"=\"True\" \"RenderType\"=\"Transparent\" }\n\n        // 渲染背面的Pass\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardBase\" }\n            ZWrite Off                          //半透明效果关闭深度写入\n            Blend SrcAlpha OneMinusSrcAlpha     //设置混合因子\n            Cull Front                          //剔除正面，先渲染背面\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n\n            // 贴图纹理对应的映射成员\n            sampler2D _MainTex;\n            float4 _MainTex_ST;\n            // 漫反射颜色、高光反射颜色、光泽度\n            fixed4 _MainColor;\n            fixed4 _SpecularColor;\n            float _SpecularNum;\n            // 对象整体透明度\n            fixed _AlphaScale;\n\n            struct v2f\n            {\n                float4 pos: SV_POSITION;    // 裁剪空间下的顶点坐标\n                float2 uv: TEXCOORD0;       // 纹理UV坐标\n                float3 wNormal: NORMAL;     // 世界空间下的法线\n                float3 wPos: TEXCOORD1;     // 世界空间下的顶点坐标\n            };\n\n            v2f vert (appdata_base v)\n            {\n                v2f data;\n                data.pos = UnityObjectToClipPos(v.vertex);                  // 将模型空间下的法线转换到世界空间下\n                data.uv = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;  // 计算UV\n                data.wNormal = UnityObjectToWorldNormal(v.normal);          // 法线转换到世界空间\n                data.wPos = mul(unity_ObjectToWorld, v.vertex);             // 顶点转换到世界空间\n\n                return data;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                fixed4 texColor = tex2D(_MainTex, i.uv);                    // 取出纹理的颜色\n                fixed3 albedo = texColor.rgb * _MainColor.rgb;              // 反射率，即纹理颜色和漫反射材质颜色乘法叠加共同决定的颜色\n      \n                // 漫反射颜色\n                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);      // 指向光源的方向\n                fixed3 lambertColor = _LightColor0.rgb * albedo.rgb * max(0, dot(i.wNormal, lightDir));\n      \n                // 高光反射颜色\n                float3 viewDir = normalize(UnityWorldSpaceViewDir(i.wPos)); // 视角方向\n                float3 halfA = normalize(viewDir + lightDir);               // 半角向量\n                fixed3 specularColor = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(i.wNormal, halfA)), _SpecularNum);\n\n                // 最终颜色 = 环境光 * 反射颜色 + 漫反射颜色 + 高光反射颜色\n                fixed3 color = UNITY_LIGHTMODEL_AMBIENT.rgb * albedo + lambertColor + specularColor;\n                // 最终透明度 = A通道值 * 整体透明度\n                return fixed4(color.rgb, texColor.a * _AlphaScale);\n            }\n            ENDCG\n        }\n\n        // 渲染正面的Pass\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardBase\" }\n            ZWrite Off                          //半透明效果关闭深度写入\n            Blend SrcAlpha OneMinusSrcAlpha     //设置混合因子\n            Cull Back                           //剔除背面，渲染正面\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n\n            // 贴图纹理对应的映射成员\n            sampler2D _MainTex;\n            float4 _MainTex_ST;\n            // 漫反射颜色、高光反射颜色、光泽度\n            fixed4 _MainColor;\n            fixed4 _SpecularColor;\n            float _SpecularNum;\n            // 对象整体透明度\n            fixed _AlphaScale;\n\n            struct v2f\n            {\n                float4 pos: SV_POSITION;    // 裁剪空间下的顶点坐标\n                float2 uv: TEXCOORD0;       // 纹理UV坐标\n                float3 wNormal: NORMAL;     // 世界空间下的法线\n                float3 wPos: TEXCOORD1;     // 世界空间下的顶点坐标\n            };\n\n            v2f vert (appdata_base v)\n            {\n                v2f data;\n                data.pos = UnityObjectToClipPos(v.vertex);                  // 将模型空间下的法线转换到世界空间下\n                data.uv = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;  // 计算UV\n                data.wNormal = UnityObjectToWorldNormal(v.normal);          // 法线转换到世界空间\n                data.wPos = mul(unity_ObjectToWorld, v.vertex);             // 顶点转换到世界空间\n\n                return data;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                fixed4 texColor = tex2D(_MainTex, i.uv);                    // 取出纹理的颜色\n                fixed3 albedo = texColor.rgb * _MainColor.rgb;              // 反射率，即纹理颜色和漫反射材质颜色乘法叠加共同决定的颜色\n      \n                // 漫反射颜色\n                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);      // 指向光源的方向\n                fixed3 lambertColor = _LightColor0.rgb * albedo.rgb * max(0, dot(i.wNormal, lightDir));\n      \n                // 高光反射颜色\n                float3 viewDir = normalize(UnityWorldSpaceViewDir(i.wPos)); // 视角方向\n                float3 halfA = normalize(viewDir + lightDir);               // 半角向量\n                fixed3 specularColor = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(i.wNormal, halfA)), _SpecularNum);\n\n                // 最终颜色 = 环境光 * 反射颜色 + 漫反射颜色 + 高光反射颜色\n                fixed3 color = UNITY_LIGHTMODEL_AMBIENT.rgb * albedo + lambertColor + specularColor;\n                // 最终透明度 = A通道值 * 整体透明度\n                return fixed4(color.rgb, texColor.a * _AlphaScale);\n            }\n            ENDCG\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241123141757-wcda16i",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241123141757-wcda16i",
+				"updated": "20241123142007"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果如下（下方是不使用双面渲染的混合和透明测试，上方是使用双面渲染的混合和透明测试）："
+				}
+			]
+		},
+		{
+			"ID": "20241123141930-kwe7h7e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241123141930-kwe7h7e",
+				"updated": "20241123141930"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241123141930-ja7w5od.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241123142103-x2ntn0z",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241123142103-x2ntn0z",
+				"updated": "20241123142103"
+			}
+		}
+	]
+}
