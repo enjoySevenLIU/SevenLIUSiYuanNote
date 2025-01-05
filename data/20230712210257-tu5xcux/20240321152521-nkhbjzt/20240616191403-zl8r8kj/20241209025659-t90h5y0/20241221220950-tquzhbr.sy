@@ -1,0 +1,2422 @@
+{
+	"ID": "20241221220950-tquzhbr",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20241221220950-tquzhbr",
+		"title": "US3S8L8——镜面效果",
+		"type": "doc",
+		"updated": "20241222142709"
+	},
+	"Children": [
+		{
+			"ID": "20241221220951-kj6pdme",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241221220951-kj6pdme",
+				"updated": "20241221221040"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "镜面效果原理"
+				}
+			]
+		},
+		{
+			"ID": "20241221221029-1ojq9mt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241221221029-1ojq9mt",
+				"updated": "20241221221039"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "镜面效果的原理，就是将摄像机看到的画面渲染到渲染纹理当中，再在Shader中利用该渲染纹理进行翻转渲染即可"
+				}
+			]
+		},
+		{
+			"ID": "20241221221040-hi052mk",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241221221040-hi052mk",
+				"updated": "20241222142258"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "镜面效果准备工作"
+				}
+			]
+		},
+		{
+			"ID": "20241221221058-zj9pl5h",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241221221058-zj9pl5h",
+				"updated": "20241222142258"
+			},
+			"Children": [
+				{
+					"ID": "20241221221101-3ij6j1s",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241221221101-3ij6j1s",
+						"updated": "20241221221101"
+					},
+					"Children": [
+						{
+							"ID": "20241221221101-kjgrsho",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241221221101-kjgrsho",
+								"updated": "20241221221101"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "创建测试场景"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241221221101-wktlnoi",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241221221101-wktlnoi",
+						"updated": "20241222142258"
+					},
+					"Children": [
+						{
+							"ID": "20241221221101-yabfe37",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241221221101-yabfe37",
+								"updated": "20241221221101"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "创建一个摄像机用来得到镜子看到的画面"
+								}
+							]
+						},
+						{
+							"ID": "20241222142258-bnb0ut6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241222142258-bnb0ut6",
+								"updated": "20241222142258"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 308px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20241222142258-k6x0yxc.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 308px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241221221101-2mdpbtf",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20241221221101-2mdpbtf",
+						"updated": "20241222140153"
+					},
+					"Children": [
+						{
+							"ID": "20241222140104-m3x15fw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241222140104-m3x15fw",
+								"updated": "20241222140120"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "创建 Custom Render Texture 将其和摄像机关联"
+								}
+							]
+						},
+						{
+							"ID": "20241222140153-scxljzs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241222140153-scxljzs",
+								"updated": "20241222140153"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 426px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20241222140153-njirk55.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 426px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241221221104-wuiiuuj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241221221104-wuiiuuj",
+				"name": "Custom Render Texture",
+				"updated": "20241222140011"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义渲染纹理参数"
+				}
+			]
+		},
+		{
+			"ID": "20241222135601-5d4t1b4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241222135601-5d4t1b4",
+				"updated": "20241222135617"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Custom Render Texture（CRT）是在 Unity 5.4 版本引入的一种特殊类型的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240411155939-z0goj0j",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "Render Texture"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "。\n它不仅继承了 Render Texture 的所有特性，还增加了额外的功能，例如时间轴控制和空间更新模式。"
+				}
+			]
+		},
+		{
+			"ID": "20241221224812-c40vdbe",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241221224812-c40vdbe",
+				"updated": "20241222135333"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关于 Custom Render Texture，详情可见："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "a",
+					"TextMarkAHref": "https://docs.unity.cn/cn/2022.3/Manual/class-CustomRenderTexture.html",
+					"TextMarkTextContent": "自定义渲染纹理 - Unity 手册"
+				}
+			]
+		},
+		{
+			"ID": "20241221222154-oi4i8hb",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20241221222154-oi4i8hb",
+				"updated": "20241221222129"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20241221222917-rtrzo0r",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241221222917-rtrzo0r",
+						"updated": "20241221222917"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20241221222917-v0zrrah.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"ID": "20241221222129-hbcxrf3",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20241221222129-hbcxrf3",
+						"updated": "20241221222129"
+					},
+					"Children": [
+						{
+							"ID": "20241221222129-kgie3w8",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"fold": "1",
+								"id": "20241221222129-kgie3w8",
+								"updated": "20241221222129"
+							},
+							"Children": [
+								{
+									"ID": "20241221222129-b6yxbzx",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222129-b6yxbzx",
+										"updated": "20241221222439"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Dimension：渲染纹理的维度"
+										}
+									]
+								},
+								{
+									"ID": "20241221222236-nkdvgy4",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222236-nkdvgy4",
+										"updated": "20241221222236"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"style": "width: 218px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20241221222236-9fpsk6g.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 218px;\"}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								},
+								{
+									"ID": "20241221222157-lswjfd9",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20241221222157-lswjfd9",
+										"updated": "20241221222157"
+									},
+									"Children": [
+										{
+											"ID": "20241221222156-asssvm1",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222156-asssvm1",
+												"updated": "20241221222156"
+											},
+											"Children": [
+												{
+													"ID": "20241221222156-t2oluin",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222156-t2oluin",
+														"updated": "20241221222203"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "2D：2D 纹理"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241221222159-7oz3f1m",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222159-7oz3f1m",
+												"updated": "20241221222159"
+											},
+											"Children": [
+												{
+													"ID": "20241221222159-7k2xfao",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222159-7k2xfao",
+														"updated": "20241221222204"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "2D：2D 数组纹理"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241221222204-f325tzv",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222204-f325tzv",
+												"updated": "20241221222204"
+											},
+											"Children": [
+												{
+													"ID": "20241221222204-z688at0",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222204-z688at0",
+														"updated": "20241221222207"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Cube：立方体纹理"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241221222207-d8vie9e",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222207-d8vie9e",
+												"updated": "20241221222207"
+											},
+											"Children": [
+												{
+													"ID": "20241221222207-cidxyv1",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222207-cidxyv1",
+														"updated": "20241221222207"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "3D：3D纹理"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222129-yaj8413",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241221222129-yaj8413",
+								"updated": "20241221222129"
+							},
+							"Children": [
+								{
+									"ID": "20241221222129-5ya5wsw",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222129-5ya5wsw",
+										"updated": "20241221222129"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Size：像素尺寸"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222129-vumgtg4",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241221222129-vumgtg4",
+								"updated": "20241221222129"
+							},
+							"Children": [
+								{
+									"ID": "20241221222129-ikwzvif",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222129-ikwzvif",
+										"updated": "20241221222129"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Anti-aliasing：抗锯齿效果，级别越高，抗锯齿效果越好"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222129-wv0taww",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"fold": "1",
+								"id": "20241221222129-wv0taww",
+								"updated": "20241221222129"
+							},
+							"Children": [
+								{
+									"ID": "20241221222129-nf8ldnq",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222129-nf8ldnq",
+										"updated": "20241221222213"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Enable Compatible Format：是否启用兼容格式"
+										}
+									]
+								},
+								{
+									"ID": "20241221222213-wrhu248",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222213-wrhu248",
+										"updated": "20241221222213"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "避免由于特定硬件或驱动程序不支持某些格式而引起的渲染问题"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222129-gxtd1xs",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241221222129-gxtd1xs",
+								"updated": "20241221222129"
+							},
+							"Children": [
+								{
+									"ID": "20241221222129-r1t87t0",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222129-r1t87t0",
+										"updated": "20241221222129"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Color Format：渲染纹理格式"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222129-azeug91",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241221222129-azeug91",
+								"updated": "20241221222129"
+							},
+							"Children": [
+								{
+									"ID": "20241221222129-lo2tfh0",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222129-lo2tfh0",
+										"updated": "20241221222129"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Depth Stencil Format：深度模板格式"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222129-6eqv67d",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241221222129-6eqv67d",
+								"updated": "20241221222129"
+							},
+							"Children": [
+								{
+									"ID": "20241221222129-zvs6u5m",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222129-zvs6u5m",
+										"updated": "20241221222253"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Enable Mip Maps：是否允许渲染纹理使用"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222709-32n2s70",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"fold": "1",
+								"id": "20241221222709-32n2s70",
+								"updated": "20241221222709"
+							},
+							"Children": [
+								{
+									"ID": "20241221222714-tqkcurd",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222714-tqkcurd",
+										"updated": "20241221222714"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Mipmap Dynamic Scaling：动态缩放"
+										}
+									]
+								},
+								{
+									"ID": "20241221222714-4fe6zvl",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222714-4fe6zvl",
+										"updated": "20241221222714"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "该渲染纹理根据显示分辨率或其他条件动态调整其大小。启用此选项可以帮助优化性能，特别是在高分辨率显示设备上。"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222715-3kywd3k",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"fold": "1",
+								"id": "20241221222715-3kywd3k",
+								"updated": "20241221222715"
+							},
+							"Children": [
+								{
+									"ID": "20241221222718-hoz4hsj",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222718-hoz4hsj",
+										"updated": "20241221222718"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Random Write：随机写入"
+										}
+									]
+								},
+								{
+									"ID": "20241221222718-yki9900",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222718-yki9900",
+										"updated": "20241221222718"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "允许在计算着色器（Compute Shader）或其他GPU程序中进行随机写操作。这对于需要进行复杂计算或并行处理的任务非常有用，例如粒子系统、流体模拟或其他基于GPU的运算"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222129-ofis98o",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"fold": "1",
+								"id": "20241221222129-ofis98o",
+								"updated": "20241221222129"
+							},
+							"Children": [
+								{
+									"ID": "20241221222129-n1kh23e",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222129-n1kh23e",
+										"updated": "20241221222330"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Wrap Mode：纹理平铺模式"
+										}
+									]
+								},
+								{
+									"ID": "20241221222630-oog1n58",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222630-oog1n58",
+										"updated": "20241221222630"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"style": "width: 256px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20241221222630-7zt9dz9.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 256px;\"}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								},
+								{
+									"ID": "20241221222621-6yu81yq",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20241221222621-6yu81yq",
+										"updated": "20241221222621"
+									},
+									"Children": [
+										{
+											"ID": "20241221222328-twzizlr",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222328-twzizlr",
+												"updated": "20241221222328"
+											},
+											"Children": [
+												{
+													"ID": "20241221222328-g708iov",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222328-g708iov",
+														"updated": "20241221222332"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Repeat：重复自身"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241221222332-ja58ck4",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222332-ja58ck4",
+												"updated": "20241221222332"
+											},
+											"Children": [
+												{
+													"ID": "20241221222332-ndgifpk",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222332-ndgifpk",
+														"updated": "20241221222334"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Clamp：拉伸纹理边缘"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241221222335-nvh13wt",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222335-nvh13wt",
+												"updated": "20241221222335"
+											},
+											"Children": [
+												{
+													"ID": "20241221222335-cou8zkl",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222335-cou8zkl",
+														"updated": "20241221222337"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Mirror：镜像"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241221222337-k3vk90z",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222337-k3vk90z",
+												"updated": "20241221222337"
+											},
+											"Children": [
+												{
+													"ID": "20241221222337-co6thfy",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222337-co6thfy",
+														"updated": "20241221222340"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Mirror Once：首次镜像"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241221222340-gdwj426",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222340-gdwj426",
+												"updated": "20241221222340"
+											},
+											"Children": [
+												{
+													"ID": "20241221222340-bjoak0t",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222340-bjoak0t",
+														"updated": "20241221222340"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Per-axis：UV指定轴向"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222129-9mttl0n",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"fold": "1",
+								"id": "20241221222129-9mttl0n",
+								"updated": "20241221222129"
+							},
+							"Children": [
+								{
+									"ID": "20241221222129-lm4ql4h",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222129-lm4ql4h",
+										"updated": "20241221222345"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Filter Mode：拉伸时的过滤模式"
+										}
+									]
+								},
+								{
+									"ID": "20241221222642-car5abl",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222642-car5abl",
+										"updated": "20241221222642"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"style": "width: 258px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20241221222642-zbzsfwb.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 258px;\"}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								},
+								{
+									"ID": "20241221222634-rzj6zst",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20241221222634-rzj6zst",
+										"updated": "20241221222634"
+									},
+									"Children": [
+										{
+											"ID": "20241221222346-ziy8j9q",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222346-ziy8j9q",
+												"updated": "20241221222346"
+											},
+											"Children": [
+												{
+													"ID": "20241221222346-u66l8ip",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222346-u66l8ip",
+														"updated": "20241221222349"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Point：块状过滤"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241221222349-gjt87b7",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222349-gjt87b7",
+												"updated": "20241221222349"
+											},
+											"Children": [
+												{
+													"ID": "20241221222349-443rdyx",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222349-443rdyx",
+														"updated": "20241221222351"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Bilinear：模糊过滤"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241221222351-by3vf2a",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222351-by3vf2a",
+												"updated": "20241221222351"
+											},
+											"Children": [
+												{
+													"ID": "20241221222351-jkeratt",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222351-jkeratt",
+														"updated": "20241221222356"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Trilinear：类似Bilinear，但纹理也在不同 Mip 级别之间过滤"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222129-b6yyx9o",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"fold": "1",
+								"id": "20241221222129-b6yyx9o",
+								"updated": "20241221222129"
+							},
+							"Children": [
+								{
+									"ID": "20241221222129-vqty85m",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222129-vqty85m",
+										"updated": "20241221222359"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Shadow Sampling Mode：主要用于处理自定义渲染纹理在阴影计算中的采样模式"
+										}
+									]
+								},
+								{
+									"ID": "20241221222705-xe82wxo",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222705-xe82wxo",
+										"updated": "20241221222705"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"style": "width: 341px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20241221222705-kfj4y3i.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 341px;\"}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								},
+								{
+									"ID": "20241221222654-wzjqeou",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20241221222654-wzjqeou",
+										"updated": "20241221222654"
+									},
+									"Children": [
+										{
+											"ID": "20241221222359-q3v61fr",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222359-q3v61fr",
+												"updated": "20241221222359"
+											},
+											"Children": [
+												{
+													"ID": "20241221222359-xcy732t",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222359-xcy732t",
+														"updated": "20241221222404"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "None：不使用阴影采样模式。自定义渲染纹理将不会用于阴影贴图采样"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241221222404-k6oiqif",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222404-k6oiqif",
+												"updated": "20241221222404"
+											},
+											"Children": [
+												{
+													"ID": "20241221222404-4isnmzj",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222404-4isnmzj",
+														"updated": "20241221222404"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Compare Depths：使用深度比较进行阴影采样。这种模式通常用于标准阴影映射技术，比较光源深度与当前像素深度以确定阴影"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222129-sd1iz1d",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20241221222129-sd1iz1d",
+								"updated": "20241221222129"
+							},
+							"Children": [
+								{
+									"ID": "20241221222129-rg3j45y",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222129-rg3j45y",
+										"updated": "20241221222129"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Material：自定义纹理材质"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222129-xx0mihr",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"fold": "1",
+								"id": "20241221222129-xx0mihr",
+								"updated": "20241221222129"
+							},
+							"Children": [
+								{
+									"ID": "20241221222129-ca8hywt",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222129-ca8hywt",
+										"updated": "20241221222409"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Initialization Mode：初始化纹理频率"
+										}
+									]
+								},
+								{
+									"ID": "20241221222410-19t2kqd",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20241221222410-19t2kqd",
+										"updated": "20241221222410"
+									},
+									"Children": [
+										{
+											"ID": "20241221222410-owh1du4",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222410-owh1du4",
+												"updated": "20241221222410"
+											},
+											"Children": [
+												{
+													"ID": "20241221222410-vv67vyc",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222410-vv67vyc",
+														"updated": "20241221222412"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "OnLoad：创建时初始化一次"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241221222412-6gxyd8d",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222412-6gxyd8d",
+												"updated": "20241221222412"
+											},
+											"Children": [
+												{
+													"ID": "20241221222412-howp6pd",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222412-howp6pd",
+														"updated": "20241221222414"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Realtime：每一帧初始化纹理"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241221222414-9kif5ce",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222414-9kif5ce",
+												"updated": "20241221222414"
+											},
+											"Children": [
+												{
+													"ID": "20241221222414-0p34426",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222414-0p34426",
+														"updated": "20241221222414"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "OnDemand：通过脚本按需初始化纹理"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222129-wh9wk1d",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"fold": "1",
+								"id": "20241221222129-wh9wk1d",
+								"updated": "20241221222129"
+							},
+							"Children": [
+								{
+									"ID": "20241221222129-2193by2",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222129-2193by2",
+										"updated": "20241221222930"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Source：纹理如何初始化"
+										}
+									]
+								},
+								{
+									"ID": "20241221223010-xuh9odl",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221223010-xuh9odl",
+										"updated": "20241221223010"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"style": "width: 319px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20241221223010-mmn21se.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 319px;\"}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								},
+								{
+									"ID": "20241221223010-ivutslz",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20241221223010-ivutslz",
+										"updated": "20241221223010"
+									},
+									"Children": [
+										{
+											"ID": "20241221222930-u1ynvcj",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222930-u1ynvcj",
+												"updated": "20241221222930"
+											},
+											"Children": [
+												{
+													"ID": "20241221222930-bsc6jhk",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222930-bsc6jhk",
+														"updated": "20241221222934"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Texture and Color：叠加颜色来初始化纹理"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241221222934-v87a24d",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221222934-v87a24d",
+												"updated": "20241221222934"
+											},
+											"Children": [
+												{
+													"ID": "20241221222934-djs9gje",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221222934-djs9gje",
+														"updated": "20241221222934"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Material：使用材质初始化纹理"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222129-mnpqxf9",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"fold": "1",
+								"id": "20241221222129-mnpqxf9",
+								"updated": "20241221222129"
+							},
+							"Children": [
+								{
+									"ID": "20241221222129-n23zyld",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222129-n23zyld",
+										"updated": "20241221222129"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Update Mode：自定义渲染纹理的频率"
+										}
+									]
+								},
+								{
+									"ID": "20241221223036-g7fymto",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221223036-g7fymto",
+										"updated": "20241221223036"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Properties": {
+												"style": "width: 333px;"
+											},
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20241221223036-5g4h5xn.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeKramdownSpanIAL",
+											"Data": "{: style=\"width: 333px;\"}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								},
+								{
+									"ID": "20241221223059-u70ii7b",
+									"Type": "NodeList",
+									"ListData": {},
+									"Properties": {
+										"id": "20241221223059-u70ii7b",
+										"updated": "20241221223059"
+									},
+									"Children": [
+										{
+											"ID": "20241221223059-d0ueiut",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221223059-d0ueiut",
+												"updated": "20241221223059"
+											},
+											"Children": [
+												{
+													"ID": "20241221223059-ajjn2od",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221223059-ajjn2od",
+														"updated": "20241221223059"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "OnLoad：创建时初始化一次"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241221223059-2dwdeki",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221223059-2dwdeki",
+												"updated": "20241221223059"
+											},
+											"Children": [
+												{
+													"ID": "20241221223059-4gjts3v",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221223059-4gjts3v",
+														"updated": "20241221223059"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "Realtime：每一帧初始化纹理"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241221223059-5ksbxbk",
+											"Type": "NodeListItem",
+											"ListData": {
+												"BulletChar": 42,
+												"Marker": "Kg=="
+											},
+											"Properties": {
+												"id": "20241221223059-5ksbxbk",
+												"updated": "20241221223059"
+											},
+											"Children": [
+												{
+													"ID": "20241221223059-m907qj0",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241221223059-m907qj0",
+														"updated": "20241221223059"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "OnDemand：通过脚本按需初始化纹理"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222129-skb6yz8",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"fold": "1",
+								"id": "20241221222129-skb6yz8",
+								"updated": "20241221222129"
+							},
+							"Children": [
+								{
+									"ID": "20241221222129-vwjyzpa",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222129-vwjyzpa",
+										"updated": "20241221223133"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Double Buffered：启用双缓冲技术，可在某些应用场景中提升性能和稳定性"
+										}
+									]
+								},
+								{
+									"ID": "20241221223124-7mutnmj",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221223124-7mutnmj",
+										"updated": "20241221223124"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "双缓冲技术涉及使用两个缓冲区来交替存储和处理数据，从而减少由于直接读写同一个缓冲区引起的竞争和冲突"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221223115-zze1c32",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"fold": "1",
+								"id": "20241221223115-zze1c32",
+								"updated": "20241221223115"
+							},
+							"Children": [
+								{
+									"ID": "20241221223115-tn9us86",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221223115-tn9us86",
+										"updated": "20241221223142"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Wrap Update Zones：控制更新区域的环绕方式"
+										}
+									]
+								},
+								{
+									"ID": "20241221223140-8zhhffq",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221223140-8zhhffq",
+										"updated": "20241221223140"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "对于处理需要特定边缘处理或重复性内容的渲染效果非常有用"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241221222129-meb0jt1",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"fold": "1",
+								"id": "20241221222129-meb0jt1",
+								"updated": "20241221222129"
+							},
+							"Children": [
+								{
+									"ID": "20241221222129-sj308uz",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221222129-sj308uz",
+										"updated": "20241221223146"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Updte Zone Space：用于控制纹理坐标更新方式的选项"
+										}
+									]
+								},
+								{
+									"ID": "20241221223146-q6stxvc",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241221223146-q6stxvc",
+										"updated": "20241221223146"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "它主要影响如何在Shader中处理纹理坐标，特别是在对应于动态纹理的情况下"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20241222140011-5zcj9v6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241222140011-5zcj9v6",
+				"updated": "20241222142709"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现镜面效果Shader"
+				}
+			]
+		},
+		{
+			"ID": "20241222140019-kc9xli6",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241222140019-kc9xli6",
+				"updated": "20241222142649"
+			},
+			"Children": [
+				{
+					"ID": "20241222140309-wfx4cfm",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241222140309-wfx4cfm",
+						"updated": "20241222140309"
+					},
+					"Children": [
+						{
+							"ID": "20241222140309-j8f9hvb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241222140309-j8f9hvb",
+								"updated": "20241222140338"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "新建Shader，复用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240710211945-ki6ph40",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "US3S2L1——纹理颜色采样"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " Shader"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241222140309-9gbh05c",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241222140309-9gbh05c",
+						"updated": "20241222140309"
+					},
+					"Children": [
+						{
+							"ID": "20241222140309-nzi145d",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241222140309-nzi145d",
+								"updated": "20241222140431"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在顶点着色器中，让UV坐标的X轴反向（坐标范围0~1，想要反向直接用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "1 - uv.x"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，这是为了实现镜面效果）即可"
+								}
+							]
+						},
+						{
+							"ID": "20241222140810-jei4i1p",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241222140810-jei4i1p",
+								"style": "line-height: 22px;",
+								"updated": "20241222140946"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "v2f_img vert (appdata_base v)\n{\n    v2f_img data;\n    data.pos = UnityObjectToClipPos(v.vertex);                  //将顶点转换到裁剪空间下\n    data.uv = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;  //根据属性设置的缩放和偏移量，修正顶点UV坐标，确保缩放偏移后也能正确映射\n    data.uv.x = 1 - data.uv.x;                                  //由于需要镜面效果，因此纹理方向在x轴上需要反向\n    return data;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241222140309-hwup1ct",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20241222140309-hwup1ct",
+						"updated": "20241222140309"
+					},
+					"Children": [
+						{
+							"ID": "20241222140309-mz8cawq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241222140309-mz8cawq",
+								"updated": "20241222140435"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将渲染纹理应用到该 Shader 的纹理中"
+								}
+							]
+						},
+						{
+							"ID": "20241222142434-xy0bm44",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241222142434-xy0bm44",
+								"updated": "20241222142434"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 400px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20241222142434-x3m8zm7.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 400px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241222142606-khj5vyf",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20241222142606-khj5vyf",
+						"updated": "20241222142649"
+					},
+					"Children": [
+						{
+							"ID": "20241222142606-atj6h5o",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241222142606-atj6h5o",
+								"updated": "20241222142649"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "添加 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Fallback \u0026quot;Diffuse\u0026quot;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，使得镜子可以投射阴影"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241222140436-je0k5em",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241222140436-je0k5em",
+				"updated": "20241222142306"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20241222142337-bwiywlh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241222142337-bwiywlh",
+				"updated": "20241222142337"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 298px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241222142337-kneo9sq.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 298px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241222142652-ss5f7zi",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241222142652-ss5f7zi",
+				"updated": "20241222142702"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "完整 Shader 效果如下："
+				}
+			]
+		},
+		{
+			"ID": "20241222142702-0rk2cct",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241222142702-0rk2cct",
+				"style": "line-height: 22px;",
+				"updated": "20241222142709"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson83_Mirror\"\n{\n    Properties\n    {\n        _MainTex(\"MainTex\", 2D) = \"\"{}\n    }\n    SubShader\n    {\n        Pass\n        {\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n\n            sampler2D _MainTex;\n            float4 _MainTex_ST;\n\n            v2f_img vert (appdata_base v)\n            {\n                v2f_img data;\n                data.pos = UnityObjectToClipPos(v.vertex);                  //将顶点转换到裁剪空间下\n                data.uv = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;  //根据属性设置的缩放和偏移量，修正顶点UV坐标，确保缩放偏移后也能正确映射\n                data.uv.x = 1 - data.uv.x;                                  //由于需要镜面效果，因此纹理方向在x轴上需要反向\n                return data;\n            }\n\n            fixed4 frag (v2f_img i) : SV_Target\n            {\n                fixed4 color = tex2D(_MainTex, i.uv);                       //根据UV坐标，将纹理上颜色映射到模型上\n                return color;\n            }\n            ENDCG\n        }\n    }\n\n    Fallback \"Diffuse\"\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

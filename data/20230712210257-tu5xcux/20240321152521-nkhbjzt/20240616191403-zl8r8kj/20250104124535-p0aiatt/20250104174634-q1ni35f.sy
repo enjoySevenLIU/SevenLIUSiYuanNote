@@ -1,0 +1,2940 @@
+{
+	"ID": "20250104174634-q1ni35f",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20250104174634-q1ni35f",
+		"title": "US3S10L5——亮度、饱和度、对比度",
+		"type": "doc",
+		"updated": "20250105005343"
+	},
+	"Children": [
+		{
+			"ID": "20250104181627-7km3vnc",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20250104181627-7km3vnc",
+				"updated": "20250104181701"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "改变屏幕的亮度、饱和度、对比度"
+				}
+			]
+		},
+		{
+			"ID": "20250104181634-q58bh5p",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104181634-q58bh5p",
+				"updated": "20250104181701"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "亮度、饱和度和对比度的计算规则是在视觉科学、色彩理论和图像处理技术的基础上逐步发展起来的，\n这些规则不是由某个人发明的，而是通过多年的研究和实践得出的，\n这些计算方法被广泛应用于各种图像处理工具和计算机图形学中，用于实现图像的调整和优化"
+				}
+			]
+		},
+		{
+			"ID": "20250104174634-5drlrst",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250104174634-5drlrst",
+				"updated": "20250104174910"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "颜色亮度的基本原理"
+				}
+			]
+		},
+		{
+			"ID": "20250104174725-jb5x118",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104174725-jb5x118",
+				"updated": "20250104174737"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "想要改变图像颜色的亮度，只需要对图像的每个像素进行加法(减法-加负数)或乘法(除法-乘小数)运算即可实现"
+				}
+			]
+		},
+		{
+			"ID": "20250104174737-ul4nkrv",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250104174737-ul4nkrv",
+				"updated": "20250104174809"
+			},
+			"Children": [
+				{
+					"ID": "20250104174737-sb02h29",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104174737-sb02h29",
+						"updated": "20250104174807"
+					},
+					"Children": [
+						{
+							"ID": "20250104174737-0dqx0gu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104174737-0dqx0gu",
+								"updated": "20250104174807"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "增加亮度就是增加像素的 RGB 值"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104174738-v8uckjq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104174738-v8uckjq",
+						"updated": "20250104174809"
+					},
+					"Children": [
+						{
+							"ID": "20250104174738-2fhm7zq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104174738-2fhm7zq",
+								"updated": "20250104174809"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "减小亮度则是减少像素的 RGB 值"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104174735-z5ywbm6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104174735-z5ywbm6",
+				"updated": "20250104174805"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "也就是说我们只需要在 Shader 当中加入一个控制亮度的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "float"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 类型的变量\n然后用颜色的 RGB 乘以该变量或者加上该变量即可，一般我们会采用乘法的形式"
+				}
+			]
+		},
+		{
+			"ID": "20250104174747-47lyr1c",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104174747-47lyr1c",
+				"updated": "20250104174752"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "即：最终颜色 "
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "="
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 原始颜色 "
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "*"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 亮度变量"
+				}
+			]
+		},
+		{
+			"ID": "20250104174752-pk8intw",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250104174752-pk8intw",
+				"updated": "20250104174910"
+			},
+			"Children": [
+				{
+					"ID": "20250104174752-qecxnej",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104174752-qecxnej",
+						"updated": "20250104174909"
+					},
+					"Children": [
+						{
+							"ID": "20250104174752-ujz2fjn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104174752-ujz2fjn",
+								"updated": "20250104174909"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "亮度变量 \u003e 1 时，图像变亮"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104174753-f6047i2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104174753-f6047i2",
+						"updated": "20250104174909"
+					},
+					"Children": [
+						{
+							"ID": "20250104174753-z6xs7g7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104174753-z6xs7g7",
+								"updated": "20250104174909"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "亮度变量 \u003c 1 时，图像变暗"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104174753-a9ms979",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104174753-a9ms979",
+						"updated": "20250104174910"
+					},
+					"Children": [
+						{
+							"ID": "20250104174753-rpgg5w9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104174753-rpgg5w9",
+								"updated": "20250104174910"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "亮度变量 "
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "="
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 1 时，图像不变"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104174905-74adpse",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250104174905-74adpse",
+				"updated": "20250104181006"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "颜色饱和度的基本原理"
+				}
+			]
+		},
+		{
+			"ID": "20250104180746-i7zp7fg",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20250104180746-i7zp7fg",
+				"updated": "20250104180837"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20250104180747-h0nsdav",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250104180747-h0nsdav",
+						"updated": "20250104180828"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "色彩的饱和度（saturation）指色彩的鲜艳程度，也称作纯度。在hue-saturation-value（HSV）色彩模型下，饱和度是色彩的3个属性之一，另外两个属性为色相（hue）和明度（value）；在此模型下色相的取值范围为0°到360°，饱和度和明度取值范围为 0 到 100%。在色彩学中，原色饱和度最高，随着饱和度降低，色彩变得暗淡直至成为无彩色，即失去色相的色彩。"
+						}
+					]
+				},
+				{
+					"ID": "20250104180830-pq1oed0",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250104180830-pq1oed0",
+						"style": "text-align: right;",
+						"updated": "20250104180837"
+					},
+					"Children": [
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "a",
+							"TextMarkAHref": "https://baike.baidu.com/item/%E9%A5%B1%E5%92%8C%E5%BA%A6/3430026",
+							"TextMarkTextContent": "饱和度（色彩概念）_百度百科"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104174931-xouxg07",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104174931-xouxg07",
+				"updated": "20250104175027"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "想要改变图像颜色的饱和度，只需要对图像的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "每个像素的颜色值"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 相对于 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "灰度颜色"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 进行插值来实现"
+				}
+			]
+		},
+		{
+			"ID": "20250104175320-9q8ntpz",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20250104175320-9q8ntpz",
+				"updated": "20250104181006"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20250104175320-01jp2bb",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250104175320-01jp2bb",
+						"updated": "20250104175330"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "灰度颜色（Grayscale Color）是指只含有亮度信息而没有色相和饱和度的颜色，即图像中的每个像素只有从黑到白的不同灰度级别。\n在最简单的形式中，灰度图像的每个像素可以由一个值表示，这个值通常是从 0（黑色）到 255（白色）之间的整数。"
+						}
+					]
+				},
+				{
+					"ID": "20250104175640-iz8g1d6",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250104175640-iz8g1d6",
+						"updated": "20250104181006"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "利用图像颜色 RGB 计算一个平均值，即可得到一个灰度值，因为人眼对不同颜色敏感度不同，因此会对三个颜色分别乘以不同的权数，用加权平均法来计算灰度值"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104175014-lun3m94",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104175014-lun3m94",
+				"updated": "20250104175014"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "基本原理为以下三步："
+				}
+			]
+		},
+		{
+			"ID": "20250104174950-e5qpynz",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250104174950-e5qpynz",
+				"updated": "20250104180511"
+			},
+			"Children": [
+				{
+					"ID": "20250104174950-izmxnb9",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250104174950-izmxnb9",
+						"updated": "20250104180432"
+					},
+					"Children": [
+						{
+							"ID": "20250104174950-eg8i51x",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104174950-eg8i51x",
+								"updated": "20250104174950"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "计算灰度值（亮度）\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104175007-mhtdybe",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104175007-mhtdybe",
+								"updated": "20250104175931"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "利用图像颜色RGB计算一个平均值，得到一个灰度值\n但是由于人眼对不同颜色的敏感度不同，所以在计算平均值时不会直接使用算数平均："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "\\frac{R+G+B}{3}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104175932-7lwy3fx",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104175932-7lwy3fx",
+								"updated": "20250104180009"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在图形学中我们一般使用加权平均法来计算灰度值，\n所谓加权平均法就是通过对不同数据分配不同权重，计算出更符合实际情况的平均值\n常用的权重基于 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "a",
+									"TextMarkAHref": "https://baike.baidu.com/item/Rec.709%E8%89%B2%E5%BD%A9%E6%A0%87%E5%87%86/19034573",
+									"TextMarkTextContent": "Rec. 709 标准"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "（高清电视和许多数字图像格式中常用的标准）"
+								}
+							]
+						},
+						{
+							"ID": "20250104175947-zun761l",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250104175947-zun761l",
+								"updated": "20250104175947"
+							},
+							"Children": [
+								{
+									"ID": "20250104175947-tucvqom",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104175947-tucvqom",
+										"updated": "20250104175947"
+									},
+									"Children": [
+										{
+											"ID": "20250104175947-6qg7tex",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104175947-6qg7tex",
+												"updated": "20250104175947"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "R 红色通道的权重：0.2126\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250104175947-20zlddi",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104175947-20zlddi",
+										"updated": "20250104175947"
+									},
+									"Children": [
+										{
+											"ID": "20250104175947-1hzg7px",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104175947-1hzg7px",
+												"updated": "20250104175947"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "G 绿色通道的权重：0.7152\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250104175948-pzsxj1p",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104175948-pzsxj1p",
+										"updated": "20250104175948"
+									},
+									"Children": [
+										{
+											"ID": "20250104175948-vlzwnzv",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104175948-vlzwnzv",
+												"updated": "20250104175948"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "B 蓝色通道的权重：0.0722"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250104175944-zn0dkwn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104175944-zn0dkwn",
+								"updated": "20250104180432"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "这些权重反映了人眼对绿色最敏感，对蓝色最不敏感\n加权平均法公式：灰度值（亮度）"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "L = 0.2126 \\times R + 0.7152 \\times G + 0.0722 \\times B"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104174959-uvp74zz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250104174959-uvp74zz",
+						"updated": "20250104174959"
+					},
+					"Children": [
+						{
+							"ID": "20250104174959-hhu9zaa",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104174959-hhu9zaa",
+								"updated": "20250104180237"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "生成灰度颜色"
+								}
+							]
+						},
+						{
+							"ID": "20250104180237-7wf005o",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104180237-7wf005o",
+								"updated": "20250104180306"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "利用第一步中计算出来的灰度值，生成一个灰度颜色："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "灰度颜色 = (L, L, L)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104175004-hq0gfa4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250104175004-hq0gfa4",
+						"updated": "20250104180511"
+					},
+					"Children": [
+						{
+							"ID": "20250104175004-sqzfn2o",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104175004-sqzfn2o",
+								"updated": "20250104180310"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "插值计算"
+								}
+							]
+						},
+						{
+							"ID": "20250104180310-lm4k2ah",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104180310-lm4k2ah",
+								"updated": "20250104180347"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用插值函数 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "lerp"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，在灰度颜色和原始颜色之间进行插值运算，\n插值系数就是用于控制饱和度的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "float"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 类型的变量，公式如下："
+								}
+							]
+						},
+						{
+							"ID": "20250104180333-k0uf3pl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104180333-k0uf3pl",
+								"updated": "20250104180405"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "最终颜色 = lerp(灰度颜色, 原始颜色, 饱和度变量)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250104180353-xcnog2t",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104180353-xcnog2t",
+								"updated": "20250104180458"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "lerp"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 计算原理："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "最终颜色 = 灰度颜色 + (原始颜色 − 灰度颜色) \\times 饱和度变量"
+								}
+							]
+						},
+						{
+							"ID": "20250104180335-snwa74x",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250104180335-snwa74x",
+								"updated": "20250104180511"
+							},
+							"Children": [
+								{
+									"ID": "20250104180337-u1h77t2",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104180337-u1h77t2",
+										"updated": "20250104180509"
+									},
+									"Children": [
+										{
+											"ID": "20250104180337-85ddqfr",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104180337-85ddqfr",
+												"updated": "20250104180509"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "饱和度变量 "
+												},
+												{
+													"Type": "NodeBackslash",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "="
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": " 0 时，结果为灰度颜色"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250104180339-i8kqa16",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104180339-i8kqa16",
+										"updated": "20250104180510"
+									},
+									"Children": [
+										{
+											"ID": "20250104180339-11o3jdr",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104180339-11o3jdr",
+												"updated": "20250104180510"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "饱和度变量 "
+												},
+												{
+													"Type": "NodeBackslash",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "="
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": " 1 时，保持原始颜色不变"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250104180339-4pem2a4",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104180339-4pem2a4",
+										"updated": "20250104180510"
+									},
+									"Children": [
+										{
+											"ID": "20250104180339-4x5gq8a",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104180339-4x5gq8a",
+												"updated": "20250104180510"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "饱和度变量 "
+												},
+												{
+													"Type": "NodeBackslash",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "="
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": " 0"
+												},
+												{
+													"Type": "NodeBackslash",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "~"
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": "1 之间时，灰度颜色和原始颜色的混合"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250104180339-8me652n",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104180339-8me652n",
+										"updated": "20250104180511"
+									},
+									"Children": [
+										{
+											"ID": "20250104180339-pcnn6bq",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104180339-pcnn6bq",
+												"updated": "20250104180511"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "饱和度变量 \u003e 1 时，颜色的RGB值超出原始范围，从而使颜色看起来更饱和"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104180546-jhy2le5",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250104180546-jhy2le5",
+				"updated": "20250104181619"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "颜色对比度的基本原理"
+				}
+			]
+		},
+		{
+			"ID": "20250104181040-zcgedqh",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20250104181040-zcgedqh",
+				"updated": "20250104181619"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20250104181040-h7uqu19",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250104181040-h7uqu19",
+						"updated": "20250104181619"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "对比度指的是一幅图像中明暗区域最亮的白和最暗的黑之间不同亮度层级的测量，\n差异范围越大代表对比越大，差异范围越小代表对比越小，\n好的对比率 120:1 就可容易地显示生动、丰富的色彩，\n当对比率高达 300:1 时，便可支持各阶的颜色。"
+						}
+					]
+				},
+				{
+					"ID": "20250104181103-z7kz0zf",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250104181103-z7kz0zf",
+						"style": "text-align: right;",
+						"updated": "20250104181108"
+					},
+					"Children": [
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "a",
+							"TextMarkAHref": "https://baike.baidu.com/item/%E5%AF%B9%E6%AF%94%E5%BA%A6/1196082",
+							"TextMarkTextContent": "对比度_百度百科"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104181125-qr1t22r",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104181125-qr1t22r",
+				"updated": "20250104181148"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "想要改变图像颜色的对比度，只需要对图像的每个像素的颜色值，相对于中性灰色进行插值来实现"
+				}
+			]
+		},
+		{
+			"ID": "20250104181151-px11acc",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20250104181151-px11acc",
+				"updated": "20250104181327"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20250104181246-rt26oa2",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250104181246-rt26oa2",
+						"updated": "20250104181327"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "中性灰色，是指在 RGB 色彩模式下，R:G:B "
+						},
+						{
+							"Type": "NodeBackslash",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "="
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": " 1:1:1 ，\n即红绿蓝三色数值相等，即为中性灰，当 R"
+						},
+						{
+							"Type": "NodeBackslash",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "="
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "G"
+						},
+						{
+							"Type": "NodeBackslash",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "="
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "B"
+						},
+						{
+							"Type": "NodeBackslash",
+							"Data": "span",
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "="
+								}
+							]
+						},
+						{
+							"Type": "NodeText",
+							"Data": "128，被称作“绝对中性灰”"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104181147-ovap7x8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104181147-ovap7x8",
+				"updated": "20250104181147"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "基本原理为以下两步："
+				}
+			]
+		},
+		{
+			"ID": "20250104181133-ldcceka",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250104181133-ldcceka",
+				"updated": "20250104181555"
+			},
+			"Children": [
+				{
+					"ID": "20250104181133-heipy77",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250104181133-heipy77",
+						"updated": "20250104181133"
+					},
+					"Children": [
+						{
+							"ID": "20250104181133-ryn92jb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104181133-ryn92jb",
+								"updated": "20250104181340"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "声明中性灰色变量，即 RGB 都为 0.5 的颜色变量\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104181341-q2nr9tw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104181341-q2nr9tw",
+								"updated": "20250104181348"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "中性灰颜色 = (0.5,0.5,0.5)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104181133-a5drvo4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250104181133-a5drvo4",
+						"updated": "20250104181555"
+					},
+					"Children": [
+						{
+							"ID": "20250104181133-vohrwfp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104181133-vohrwfp",
+								"updated": "20250104181133"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在中性灰色和原始颜色之间进行插值运算\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104181434-s6l4jhv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104181434-s6l4jhv",
+								"updated": "20250104181459"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "最终颜色 = lerp(中性灰色, 原始颜色, 对比度变量)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250104181505-g7p77kg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104181505-g7p77kg",
+								"updated": "20250104181555"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "lerp"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 计算原理："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "最终颜色 = 中性灰色 + (原始颜色 − 中性灰色) \\times 对比度变量"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104181436-9b11swz",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250104181436-9b11swz",
+								"updated": "20250104181439"
+							},
+							"Children": [
+								{
+									"ID": "20250104181439-b7hxi5i",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104181439-b7hxi5i",
+										"updated": "20250104181439"
+									},
+									"Children": [
+										{
+											"ID": "20250104181439-3rfhtfl",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104181439-3rfhtfl",
+												"updated": "20250104181443"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "对比度变量 "
+												},
+												{
+													"Type": "NodeBackslash",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "="
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": " 0 时，此时对比度降到最低，变为中性灰色"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250104181440-tivqau7",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104181440-tivqau7",
+										"updated": "20250104181440"
+									},
+									"Children": [
+										{
+											"ID": "20250104181440-509s4bg",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104181440-509s4bg",
+												"updated": "20250104181443"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "对比度变量 "
+												},
+												{
+													"Type": "NodeBackslash",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "="
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": " 1 时，保持原始颜色不变"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250104181441-31xlp4u",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104181441-31xlp4u",
+										"updated": "20250104181441"
+									},
+									"Children": [
+										{
+											"ID": "20250104181441-zmsm8b1",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104181441-zmsm8b1",
+												"updated": "20250104181445"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "对比度变量 "
+												},
+												{
+													"Type": "NodeBackslash",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "="
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": " 0"
+												},
+												{
+													"Type": "NodeBackslash",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "~"
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": "1 之间时，降低对比度效果，图像的亮度差异减少，使图像颜色看起来更平淡"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250104181441-tj5ei6a",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104181441-tj5ei6a",
+										"updated": "20250104181441"
+									},
+									"Children": [
+										{
+											"ID": "20250104181441-z2ygze8",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104181441-z2ygze8",
+												"updated": "20250104181445"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "对比度变量 \u003e 1 时，颜色的RGB值超出原始范围，从而使颜色亮部更亮，暗部更暗，从而增加对比度"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104181601-olr89rd",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250104181601-olr89rd",
+				"updated": "20250105004729"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现亮度、饱和度、对比度屏幕后期处理效果对应 Shader"
+				}
+			]
+		},
+		{
+			"ID": "20250104182009-dmaaywb",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250104182009-dmaaywb",
+				"updated": "20250105002933"
+			},
+			"Children": [
+				{
+					"ID": "20250104182231-bhnnyyv",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250104182231-bhnnyyv",
+						"updated": "20250104182231"
+					},
+					"Children": [
+						{
+							"ID": "20250104182231-2bdrltq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104182231-2bdrltq",
+								"updated": "20250104182240"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "新建一个 Shader，名为 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "BrightnessSaturationContrast"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（亮度饱和度对比度），删除其中无用代码"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104182231-cdp9g37",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250104182231-cdp9g37",
+						"updated": "20250104182231"
+					},
+					"Children": [
+						{
+							"ID": "20250104182231-fb6xprc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104182231-fb6xprc",
+								"updated": "20250104182231"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "声明变量，并进行属性映射\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104182250-4odlfsx",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250104182250-4odlfsx",
+								"updated": "20250104182253"
+							},
+							"Children": [
+								{
+									"ID": "20250104182253-ucac9m4",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104182253-ucac9m4",
+										"updated": "20250104182253"
+									},
+									"Children": [
+										{
+											"ID": "20250104182253-m3sewpp",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104182253-m3sewpp",
+												"updated": "20250104182307"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "主纹理 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "_MainTex"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 2D\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250104182254-zgeug7k",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104182254-zgeug7k",
+										"updated": "20250104182254"
+									},
+									"Children": [
+										{
+											"ID": "20250104182254-2otvhjj",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104182254-2otvhjj",
+												"updated": "20250104182310"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "亮度 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "_Brightness"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ Float\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250104182255-oqp67kr",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104182255-oqp67kr",
+										"updated": "20250104182255"
+									},
+									"Children": [
+										{
+											"ID": "20250104182255-di62b6z",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104182255-di62b6z",
+												"updated": "20250104182315"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "饱和度 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "_Saturation"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ Float\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250104182255-uj45f3w",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104182255-uj45f3w",
+										"updated": "20250104182255"
+									},
+									"Children": [
+										{
+											"ID": "20250104182255-r49xeug",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104182255-r49xeug",
+												"updated": "20250104182317"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "对比度 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "_Contrast"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ Float"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250104182759-k3g1l6o",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104182759-k3g1l6o",
+								"style": "line-height: 22px;",
+								"updated": "20250104183512"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Properties\n{\n    _MainTex(\"Texture\", 2D) = \"white\"{}\n    _Brightness(\"Brightness\", Float) = 1    // 亮度变量\n    _Saturation(\"Saturation\", Float) = 1    // 饱和度变量\n    _Contrast(\"Contrast\", Float) = 1        // 对比度变量\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104182231-j436va2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250104182231-j436va2",
+						"updated": "20250105002933"
+					},
+					"Children": [
+						{
+							"ID": "20250104182231-iq3ug93",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104182231-iq3ug93",
+								"updated": "20250104182231"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "设置深度测试、剔除、深度写入"
+								}
+							]
+						},
+						{
+							"ID": "20250104182545-rzs7coh",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250104182545-rzs7coh",
+								"updated": "20250104182613"
+							},
+							"Children": [
+								{
+									"ID": "20250104182613-iaoilqh",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104182613-iaoilqh",
+										"updated": "20250104182613"
+									},
+									"Children": [
+										{
+											"ID": "20250104182613-8t6t5s8",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104182613-8t6t5s8",
+												"updated": "20250104182641"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code block-ref",
+													"TextMarkBlockRefID": "20240612204959-woux783",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "ZTest Always"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 开启深度测试"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250104182614-ve6eulx",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104182614-ve6eulx",
+										"updated": "20250104182614"
+									},
+									"Children": [
+										{
+											"ID": "20250104182614-25crpzp",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104182614-25crpzp",
+												"updated": "20250104182649"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code block-ref",
+													"TextMarkBlockRefID": "20240612204819-2b0fg9p",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "Cull Off"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 关闭剔除"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250104182615-fj7rx2p",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104182615-fj7rx2p",
+										"updated": "20250104182615"
+									},
+									"Children": [
+										{
+											"ID": "20250104182615-498aaqc",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104182615-498aaqc",
+												"updated": "20250104182711"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref code",
+													"TextMarkBlockRefID": "20240612204920-0vut5cr",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "ZWrite Off"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 关闭深度写入"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250104182547-hq5x6il",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104182547-hq5x6il",
+								"updated": "20250104182739"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "这样的设置是屏幕后处理的标配，因为屏幕后处理效果相当于在场景上绘制了一个与屏幕同宽高的四边形面片\n这样做的目的是避免它"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "“挡住”"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "后面的渲染物体，比如我们在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnRenderImage"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 前加入 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "[ImageEffectOpaque]"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 特性时\n透明物体会晚于该该屏幕后处理效果渲染，如果不关闭深度写入会影响后面的透明相关 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250105002928-e5vso5b",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250105002928-e5vso5b",
+								"style": "line-height: 22px;",
+								"updated": "20250105002933"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Pass\n{\n    ZTest Always\n    Cull Off\n    ZWrite Off\n  \n    CGPROGRAM\n    // ...\n    ENDCG\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104182231-ke14ltx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20250104182231-ke14ltx",
+						"updated": "20250104182231"
+					},
+					"Children": [
+						{
+							"ID": "20250104182231-g928506",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104182231-g928506",
+								"updated": "20250104182231"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "结构体相关\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104182743-uck48aj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104182743-uck48aj",
+								"updated": "20250104182743"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "顶点、纹理坐标"
+								}
+							]
+						},
+						{
+							"ID": "20250104183452-jts78bh",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104183452-jts78bh",
+								"style": "line-height: 22px;",
+								"updated": "20250104183510"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "struct v2f\n{\n    float2 uv : TEXCOORD0;\n    float4 vertex : SV_POSITION;\n};\n\nsampler2D _MainTex;\nfloat4 _MainTex_ST;\nhalf _Brightness;\nhalf _Saturation;\nhalf _Contrast;\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104182231-syzugnn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20250104182231-syzugnn",
+						"updated": "20250104183809"
+					},
+					"Children": [
+						{
+							"ID": "20250104182231-wnugivy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104182231-wnugivy",
+								"updated": "20250104182231"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "顶点着色器\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104182744-2vmykc6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104182744-2vmykc6",
+								"updated": "20250104182744"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "顶点转裁剪空间，uv缩放偏移"
+								}
+							]
+						},
+						{
+							"ID": "20250104183516-y7ubxgq",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104183516-y7ubxgq",
+								"style": "line-height: 22px;",
+								"updated": "20250104183809"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "v2f vert (appdata_base v)\n{\n    v2f o;\n    o.vertex = UnityObjectToClipPos(v.vertex);  // 顶点转换到裁剪空间下\n    o.uv = TRANSFORM_TEX(v.texcoord, _MainTex); // 缩放偏移UV坐标\n    return o;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104182231-b4wj17m",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ni4=",
+						"Num": 6
+					},
+					"Properties": {
+						"id": "20250104182231-b4wj17m",
+						"updated": "20250104183815"
+					},
+					"Children": [
+						{
+							"ID": "20250104182231-cuj9ows",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104182231-cuj9ows",
+								"updated": "20250104182231"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "片元着色器\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104182745-garpmk7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104182745-garpmk7",
+								"updated": "20250104183530"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对主纹理进行采样，分别利用公式计算 亮度、饱和度、对比度，返回处理后的颜色"
+								}
+							]
+						},
+						{
+							"ID": "20250104183533-doruqco",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104183533-doruqco",
+								"style": "line-height: 22px;",
+								"updated": "20250105001033"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "fixed4 frag (v2f i) : SV_Target\n{\n    fixed4 renderTexColor = tex2D(_MainTex, i.uv);\n    // 亮度计算\n    fixed3 finalColor = renderTexColor.rgb * _Brightness;\n    // 饱和度计算\n    fixed L = 0.2126 * finalColor.r + 0.7152 * finalColor + 0.722 * finalColor.b;\n    fixed3 LColor = fixed3(L, L, L);\n    finalColor = lerp(LColor, finalColor, _Saturation);\n    // 对比度计算\n    fixed3 avgColor = fixed3(0.5, 0.5, 0.5);\n    finalColor = lerp(avgColor, finalColor, _Contrast);\n\n    return fixed4(finalColor.rgb, 1);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250105001034-nkzu36z",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ny4=",
+						"Num": 7
+					},
+					"Properties": {
+						"id": "20250105001034-nkzu36z",
+						"updated": "20250105001112"
+					},
+					"Children": [
+						{
+							"ID": "20250105001034-2e3ffvu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105001034-2e3ffvu",
+								"updated": "20250105001035"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "FallBack Off"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250105001035-mib9ex6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105001035-mib9ex6",
+								"updated": "20250105001112"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "这里不需要后备 Shader，因为如果 Shader 不支持就直接不执行了"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104183546-i6sn7dt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104183546-i6sn7dt",
+				"updated": "20250104183846"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "完整 Shader 代码如下："
+				}
+			]
+		},
+		{
+			"ID": "20250104183846-5da8h0a",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250104183846-5da8h0a",
+				"style": "line-height: 22px;",
+				"updated": "20250105004729"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"PostEffect/BrightnessSaturationContrast\"\n{\n    Properties\n    {\n        _MainTex(\"Texture\", 2D) = \"white\"{}\n        _Brightness(\"Brightness\", Float) = 1    // 亮度变量\n        _Saturation(\"Saturation\", Float) = 1    // 饱和度变量\n        _Contrast(\"Contrast\", Float) = 1        // 对比度变量\n    }\n    SubShader\n    {\n        Tags { \"RenderType\"=\"Opaque\" }\n\n        Pass\n        {\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n\n            struct v2f\n            {\n                float2 uv : TEXCOORD0;\n                float4 vertex : SV_POSITION;\n            };\n\n            sampler2D _MainTex;\n            float4 _MainTex_ST;\n            half _Brightness;\n            half _Saturation;\n            half _Contrast;\n\n            v2f vert (appdata_base v)\n            {\n                v2f o;\n                o.vertex = UnityObjectToClipPos(v.vertex);  // 顶点转换到裁剪空间下\n                o.uv = TRANSFORM_TEX(v.texcoord, _MainTex); // 缩放偏移UV坐标\n                return o;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                fixed4 renderTexColor = tex2D(_MainTex, i.uv);\n                // 亮度计算\n                fixed3 finalColor = renderTexColor.rgb * _Brightness;\n                // 饱和度计算\n                fixed L = 0.2126 * finalColor.r + 0.7152 * finalColor + 0.722 * finalColor.b;\n                fixed3 LColor = fixed3(L, L, L);\n                finalColor = lerp(LColor, finalColor, _Saturation);\n                // 对比度计算\n                fixed3 avgColor = fixed3(0.5, 0.5, 0.5);\n                finalColor = lerp(avgColor, finalColor, _Contrast);\n\n                return fixed4(finalColor.rgb, 1);\n            }\n            ENDCG\n        }\n    }\n\n    Fallback Off\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250104183854-xmbam4a",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250104183854-xmbam4a",
+				"updated": "20250105005343"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现亮度、饱和度、对比度屏幕后期处理效果对应 C#代码"
+				}
+			]
+		},
+		{
+			"ID": "20250104183909-y8tz0gt",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250104183909-y8tz0gt",
+				"updated": "20250104184719"
+			},
+			"Children": [
+				{
+					"ID": "20250104183917-ufk2mp8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250104183917-ufk2mp8",
+						"updated": "20250104183917"
+					},
+					"Children": [
+						{
+							"ID": "20250104183917-368pjgb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104183917-368pjgb",
+								"updated": "20250104183923"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "创建 C# 脚本，名为 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "BrightnessSaturationContrast"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（亮度饱和度对比度）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104183917-odm4p6m",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250104183917-odm4p6m",
+						"updated": "20250104184027"
+					},
+					"Children": [
+						{
+							"ID": "20250104183917-8rdpg34",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104183917-8rdpg34",
+								"updated": "20250104184027"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "继承屏幕后处理基类 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "PostEffect"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250104183956-0vq3m7l",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104183956-0vq3m7l",
+								"updated": "20250104184007"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "基类代码详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20250104163836-9iiumg9",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "US3S10L4——屏幕后处理基类"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104183917-iqdlpq0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250104183917-iqdlpq0",
+						"updated": "20250104183917"
+					},
+					"Children": [
+						{
+							"ID": "20250104183917-d631v6f",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104183917-d631v6f",
+								"updated": "20250104183917"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "声明亮度饱和度对比度变量，用于控制效果变化"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104183917-b3cwg04",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20250104183917-b3cwg04",
+						"updated": "20250104184719"
+					},
+					"Children": [
+						{
+							"ID": "20250104183917-ra3808h",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104183917-ra3808h",
+								"updated": "20250104184719"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重写 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnRenderImage"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UpdateProperty"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​）方法，在其中设置材质球对应属性"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104183933-zrz9i4p",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250104183933-zrz9i4p",
+				"style": "line-height: 22px;",
+				"updated": "20250105005343"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class BrightnessSaturationContrast : PostEffect\n{\n    [Range(0f, 5f)]\n    public float Brightness = 1f;\n    [Range(0f, 3f)]\n    public float Saturation = 1f;\n    [Range(0f, 5f)]\n    public float Contrast = 1f;\n\n    protected override void UpdateProperty()\n    {\n        if (PostEffectMaterial != null)\n        {\n            PostEffectMaterial.SetFloat(\"_Brightness\", Brightness);\n            PostEffectMaterial.SetFloat(\"_Saturation\", Saturation);\n            PostEffectMaterial.SetFloat(\"_Contrast\", Contrast);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250104184726-bnh5d2t",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104184726-bnh5d2t",
+				"updated": "20250104185017"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20250104185017-alpavc3",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250104185017-alpavc3",
+				"updated": "20250104190330"
+			},
+			"Children": [
+				{
+					"ID": "20250104185106-qamdb8h",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104185106-qamdb8h",
+						"updated": "20250104185923"
+					},
+					"Children": [
+						{
+							"ID": "20250104185106-a3vdjhc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104185106-a3vdjhc",
+								"updated": "20250104185408"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "原始图像"
+								}
+							]
+						},
+						{
+							"ID": "20250104185839-exx36rh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104185839-exx36rh",
+								"updated": "20250104185923"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 464px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image-20250104185740-6p5vgbr"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250104185740-6p5vgbr.jpg"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 464px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104185018-bzl9wpz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104185018-bzl9wpz",
+						"updated": "20250104190107"
+					},
+					"Children": [
+						{
+							"ID": "20250104185018-rz5ddwk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104185018-rz5ddwk",
+								"updated": "20250104190005"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "亮度为1.5"
+								}
+							]
+						},
+						{
+							"ID": "20250104190044-vpf7qjj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104190044-vpf7qjj",
+								"updated": "20250104190107"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 462px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image-20250104190000-icvbuqd"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250104190000-icvbuqd.jpg"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 462px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104185033-hl6egyo",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104185033-hl6egyo",
+						"updated": "20250104190317"
+					},
+					"Children": [
+						{
+							"ID": "20250104185033-4ohjm4o",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104185033-4ohjm4o",
+								"updated": "20250104185037"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "饱和度为1.5"
+								}
+							]
+						},
+						{
+							"ID": "20250104190317-irt1olr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104190317-irt1olr",
+								"updated": "20250104190317"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 463px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image-20250104190140-sjultut"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250104190140-sjultut.jpg"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 463px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104185023-9drn5cj",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104185023-9drn5cj",
+						"updated": "20250104190330"
+					},
+					"Children": [
+						{
+							"ID": "20250104185023-t2yyd07",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104185023-t2yyd07",
+								"updated": "20250104190218"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对比度为1.5"
+								}
+							]
+						},
+						{
+							"ID": "20250104190330-iwd8bn9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104190330-iwd8bn9",
+								"updated": "20250104190330"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 462px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image-20250104190208-3af3x18"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250104190208-3af3x18.jpg"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 462px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104185728-sai4yq4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104185728-sai4yq4",
+				"updated": "20250104185728"
+			}
+		}
+	]
+}

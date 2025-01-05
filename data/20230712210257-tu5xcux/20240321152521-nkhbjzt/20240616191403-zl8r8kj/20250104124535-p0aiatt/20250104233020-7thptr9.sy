@@ -1,0 +1,3592 @@
+{
+	"ID": "20250104233020-7thptr9",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20250104233020-7thptr9",
+		"title": "US3S10L6——边缘检测",
+		"type": "doc",
+		"updated": "20250105165202"
+	},
+	"Children": [
+		{
+			"ID": "20250104233020-9skj0hf",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20250104233020-9skj0hf",
+				"updated": "20250104233646"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "边缘检测效果"
+				}
+			]
+		},
+		{
+			"ID": "20250104233229-xtwtxpg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104233229-xtwtxpg",
+				"updated": "20250104233315"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "边缘检测效果，是一种用于突出图像中的边缘，使物体的轮廓更加明显的图像处理技术\n边缘检测的主要目的是找到图像中亮度变化显著的区域，这些区域通常对应于物体的边界\n边缘检测相当于利用 Shader 代码自动给屏幕图像进行描边处理，下图就是边缘检测的例子："
+				}
+			]
+		},
+		{
+			"ID": "20250104233301-ypjjstv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104233301-ypjjstv",
+				"updated": "20250104233301"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250104233301-dmqc71m.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250104233425-fupp2sv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104233425-fupp2sv",
+				"updated": "20250104233425"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 814px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250104233425-8ou6z05.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 814px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250104233444-65denii",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250104233444-65denii",
+				"updated": "20250104233646"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "边缘检测效果的基本原理"
+				}
+			]
+		},
+		{
+			"ID": "20250104233457-nn8uwnf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104233457-nn8uwnf",
+				"updated": "20250104233527"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "一句话概括 Unity Shader 中实现边缘检测效果的基本原理："
+				}
+			]
+		},
+		{
+			"ID": "20250104233511-zm9sljv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104233511-zm9sljv",
+				"updated": "20250104233522"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "计算每个像素的灰度值，用灰度值结合卷积核进行卷积运算，得到该像素的梯度值，"
+				}
+			]
+		},
+		{
+			"ID": "20250104233522-8dqak76",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250104233522-8dqak76",
+				"updated": "20250104233522"
+			},
+			"Children": [
+				{
+					"ID": "20250104233522-hwi7nov",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104233522-hwi7nov",
+						"updated": "20250104233522"
+					},
+					"Children": [
+						{
+							"ID": "20250104233522-sc8ejyk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104233522-sc8ejyk",
+								"updated": "20250104233522"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "梯度值越大越靠近边界，越趋近于描边颜色\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104233522-yaka14c",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104233522-yaka14c",
+						"updated": "20250104233522"
+					},
+					"Children": [
+						{
+							"ID": "20250104233522-fi28kti",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104233522-fi28kti",
+								"updated": "20250104233522"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "梯度值越小表明不是边界位置，越趋近于原始颜色"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104233518-uy9rxv7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104233518-uy9rxv7",
+				"updated": "20250104233519"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关键知识点：灰度值、卷积、卷积核、梯度值"
+				}
+			]
+		},
+		{
+			"ID": "20250104233532-cgcf3ue",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20250104233532-cgcf3ue",
+				"updated": "20250104233646"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "灰度值"
+				}
+			]
+		},
+		{
+			"ID": "20250104233540-vhpiot7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104233540-vhpiot7",
+				"updated": "20250104233553"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "灰度值指只含有亮度信息而没有色相和饱和度的颜色，即图像中的每个像素只有从黑到白的不同灰度级别。\n在最简单的形式中，灰度图像的每个像素可以由一个值表示，这个值通常是从 0（黑色）到 255（白色）之间的整数。"
+				}
+			]
+		},
+		{
+			"ID": "20250104233604-zl8j6q0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104233604-zl8j6q0",
+				"updated": "20250104233644"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "利用图像颜色 RGB 计算一个平均值，即可得到一个灰度值，因为人眼对不同颜色敏感度不同，\n因此会对三个颜色分别乘以不同的权数，用加权平均法来计算灰度值，下面是基于 Rec. 709 标准计算的灰度值：\n灰度值（亮度）"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "L = 0.2126 \\times R + 0.7152 \\times G + 0.0722 \\times B"
+				}
+			]
+		},
+		{
+			"ID": "20250104233646-3z3a0hx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20250104233646-3z3a0hx",
+				"updated": "20250104235429"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "卷积"
+				}
+			]
+		},
+		{
+			"ID": "20250104233650-9w1vc7l",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104233650-9w1vc7l",
+				"updated": "20250104233730"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "卷积"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "是一种数学计算方式"
+				}
+			]
+		},
+		{
+			"ID": "20250104233840-urv4ixv",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20250104233840-urv4ixv",
+				"updated": "20250104233914"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20250104233842-cssenf0",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250104233842-cssenf0",
+						"updated": "20250104233907"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "在泛函分析中，卷积、旋积或褶积（英语：Convolution）是通过两个函数 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "inline-math",
+							"TextMarkInlineMathContent": "f"
+						},
+						{
+							"Type": "NodeText",
+							"Data": " 和 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "inline-math",
+							"TextMarkInlineMathContent": "g"
+						},
+						{
+							"Type": "NodeText",
+							"Data": " 生成第三个函数的一种数学运算，\n其本质是一种特殊的积分变换，表征函数 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "inline-math",
+							"TextMarkInlineMathContent": "f"
+						},
+						{
+							"Type": "NodeText",
+							"Data": " 与 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "inline-math",
+							"TextMarkInlineMathContent": "g"
+						},
+						{
+							"Type": "NodeText",
+							"Data": " 经过翻转和平移的重叠部分函数值乘积对重叠长度的积分。\n如果将参加卷积的一个函数看作区间的指示函数，卷积还可以被看作是“滑动平均”的推广。"
+						}
+					]
+				},
+				{
+					"ID": "20250104233910-hrjsbfl",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250104233910-hrjsbfl",
+						"style": "text-align: right;",
+						"updated": "20250104233914"
+					},
+					"Children": [
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "a",
+							"TextMarkAHref": "https://baike.baidu.com/item/%E5%8D%B7%E7%A7%AF/9411006",
+							"TextMarkTextContent": "卷积_百度百科"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104233702-nh91m01",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104233702-nh91m01",
+				"updated": "20250104233756"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们首先通过一个比喻来理解卷积在边缘检测中的作用，\n它就像是要用一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "放大镜（卷积核）"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "在图片上移动，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "放大镜（卷积核）"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的作用是帮助我们看到图片上的细微变化。\n当我们用这个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "放大镜（卷积核）"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "扫描整张图片时，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "它能帮助我们发现图片上哪些地方颜色突然变化，这些突然变化的地方往往就是物体的边缘了"
+				}
+			]
+		},
+		{
+			"ID": "20250104233616-lt0r4kh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104233616-lt0r4kh",
+				"updated": "20250104234138"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们有一张 5*5 的图像，每一个格子代表一个像素，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "格子中的数据表示该像素的灰度值"
+				}
+			]
+		},
+		{
+			"ID": "20250104234039-nr3knpg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104234039-nr3knpg",
+				"updated": "20250104234050"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250104234039-extrd0h.png"
+						},
+						{
+							"Type": "NodeLinkSpace"
+						},
+						{
+							"Type": "NodeLinkTitle",
+							"Data": "一个5*5的图像"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250104234017-steh2gf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104234017-steh2gf",
+				"updated": "20250104234017"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设我们有一个 3*3 的卷积核（放大镜）"
+				}
+			]
+		},
+		{
+			"ID": "20250104234114-t3ic4ua",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104234114-t3ic4ua",
+				"updated": "20250104234131"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250104234114-7fz6gkx.png"
+						},
+						{
+							"Type": "NodeLinkSpace"
+						},
+						{
+							"Type": "NodeLinkTitle",
+							"Data": "一个 3*3 的卷积核"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250104234050-j5m63na",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104234050-j5m63na",
+				"updated": "20250104234244"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果你想要求出图中红色格子的梯度值（值越大表示越靠近边缘），"
+				}
+			]
+		},
+		{
+			"ID": "20250104234232-ignkzcm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104234232-ignkzcm",
+				"updated": "20250104234232"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250104234232-kyvms3s.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250104234242-lnve0ss",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104234242-lnve0ss",
+				"updated": "20250104234245"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "那么只需要用卷积核和对应位置像素的灰度值，进行如下计算："
+				}
+			]
+		},
+		{
+			"ID": "20250104234632-rhkh09n",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20250104234632-rhkh09n",
+				"updated": "20250104234632"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20250104234304-hmu76h9",
+					"Type": "NodeMathBlock",
+					"Properties": {
+						"id": "20250104234304-hmu76h9",
+						"updated": "20250104234632"
+					},
+					"Children": [
+						{
+							"Type": "NodeMathBlockOpenMarker"
+						},
+						{
+							"Type": "NodeMathBlockContent",
+							"Data": "\\begin{align*}\n   1 \\times 1 + 2 \\times 0 + 3 \\times -1 \u0026  \\\\\n +\\ 1 \\times 1 + 2 \\times 0 + 3 \\times -1 \u0026 \\\\\n +\\ 1 \\times 1 + 2 \\times 0 + 3 \\times -1 \u0026 = -3\n\\end{align*}"
+						},
+						{
+							"Type": "NodeMathBlockCloseMarker"
+						}
+					]
+				},
+				{
+					"ID": "20250104234302-xtwl4ir",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250104234302-xtwl4ir",
+						"updated": "20250104234632"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Properties": {
+								"style": "width: 337px;"
+							},
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20250104234302-omtxuay.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"width: 337px;\"}"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20250104234633-708ft6g",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104234633-708ft6g",
+				"updated": "20250104234649"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "最终算出来的结果就表示该像素的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "梯度值"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，我们便可以用该值决定边缘效果了"
+				}
+			]
+		},
+		{
+			"ID": "20250104234706-vf2rf9t",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104234706-vf2rf9t",
+				"updated": "20250104234715"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "从卷积的计算方式我们可以得知，其中卷积核（也被称为边缘检测因子）是非常重要的一个元素，\n在图形学中，有三种常用的卷积核（边缘检测因子），他们分别是："
+				}
+			]
+		},
+		{
+			"ID": "20250104234922-b64derx",
+			"Type": "NodeSuperBlock",
+			"Properties": {
+				"id": "20250104234922-b64derx",
+				"updated": "20250104234918"
+			},
+			"Children": [
+				{
+					"Type": "NodeSuperBlockOpenMarker"
+				},
+				{
+					"Type": "NodeSuperBlockLayoutMarker",
+					"Data": "col"
+				},
+				{
+					"ID": "20250104234727-bydjlg1",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20250104234727-bydjlg1",
+						"updated": "20250104234922"
+					},
+					"Children": [
+						{
+							"ID": "20250104234728-txgag0a",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20250104234728-txgag0a",
+								"updated": "20250104234728"
+							},
+							"Children": [
+								{
+									"ID": "20250104234728-nx13dqy",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250104234728-nx13dqy",
+										"updated": "20250104234728"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Roberts 算子：由拉里·罗伯茨(Larry Roberts)于1965年提出\n"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250104234728-k8ic4u2",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20250104234728-k8ic4u2",
+								"updated": "20250104234728"
+							},
+							"Children": [
+								{
+									"ID": "20250104234728-kv68fwu",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250104234728-kv68fwu",
+										"updated": "20250104234728"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Prewitt 算子：由约翰·普雷维特(John Prewitt)于1970年提出\n"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250104234729-khuy421",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20250104234729-khuy421",
+								"updated": "20250104234729"
+							},
+							"Children": [
+								{
+									"ID": "20250104234729-if8e404",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250104234729-if8e404",
+										"updated": "20250104234729"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Sobel 算子：由欧文·索贝尔(Irwin Sobel)于1968年提出"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104234918-skm184f",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250104234918-skm184f",
+						"updated": "20250104234918"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						},
+						{
+							"Type": "NodeImage",
+							"Data": "span",
+							"Properties": {
+								"style": "width: 528px;"
+							},
+							"Children": [
+								{
+									"Type": "NodeBang"
+								},
+								{
+									"Type": "NodeOpenBracket"
+								},
+								{
+									"Type": "NodeLinkText",
+									"Data": "image"
+								},
+								{
+									"Type": "NodeCloseBracket"
+								},
+								{
+									"Type": "NodeOpenParen"
+								},
+								{
+									"Type": "NodeLinkDest",
+									"Data": "assets/image-20250104234918-exgxxmp.png"
+								},
+								{
+									"Type": "NodeCloseParen"
+								}
+							]
+						},
+						{
+							"Type": "NodeKramdownSpanIAL",
+							"Data": "{: style=\"width: 528px;\"}"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​"
+						}
+					]
+				},
+				{
+					"Type": "NodeSuperBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20250104234718-wywfv97",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104234718-wywfv97",
+				"updated": "20250104234722"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "他们各有千秋，但是在图形学中最常用的还是 Sobel 算子，因为它更适合高精度的边缘检测"
+				}
+			]
+		},
+		{
+			"ID": "20250104234759-28nbu7j",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104234759-28nbu7j",
+				"updated": "20250104235108"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以看到三种算子都包含了两个方向的卷积核，他们"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "分别用来检测水平和竖直方向上的边缘信息"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "边缘检测的卷积计算"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "时，只需要"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "对每个像素进行两次卷积计算"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "即可\n这样就可以"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "得到两个方向的梯度值"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "G_x"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 和 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "G_y"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，而"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "该像素"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "整体梯度值"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "G = |G_x| + |G_y|"
+				}
+			]
+		},
+		{
+			"ID": "20250104235109-h3l0kw5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104235109-h3l0kw5",
+				"updated": "20250104235243"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "现在我们已经知道了通过卷积获取梯度值的基本原理，\n那么我们只需要定义一个描边颜色，利用 Shader 中的内置函数 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "lerp"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n在 原始颜色 和 描边颜色 之间利用梯度值进行插值即可"
+				}
+			]
+		},
+		{
+			"ID": "20250104235247-52r85u7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104235247-52r85u7",
+				"updated": "20250104235304"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "最终颜色 = lerp(原始颜色, 描边颜色, 梯度值)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250104235246-f12y43z",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104235246-f12y43z",
+				"updated": "20250104235246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "梯度值越大表明越接近边缘，则颜色越接近描边颜色；反之越接近原始颜色"
+				}
+			]
+		},
+		{
+			"ID": "20250104235337-kx7h998",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104235337-kx7h998",
+				"updated": "20250104235347"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "基本原理总结："
+				}
+			]
+		},
+		{
+			"ID": "20250104234928-mqo2b0p",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250104234928-mqo2b0p",
+				"updated": "20250104235426"
+			},
+			"Children": [
+				{
+					"ID": "20250104235350-1ipn8zi",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250104235350-1ipn8zi",
+						"updated": "20250104235426"
+					},
+					"Children": [
+						{
+							"ID": "20250104235350-4pbmock",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104235350-4pbmock",
+								"updated": "20250104235426"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "得到当前像素以及其上、下、左、右、左上、左下、右上、右下共9个像素的灰度值"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104235351-1vl6nv3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250104235351-1vl6nv3",
+						"updated": "20250104235414"
+					},
+					"Children": [
+						{
+							"ID": "20250104235351-0ds76t1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104235351-0ds76t1",
+								"updated": "20250104235414"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "用这 9 个灰度值和 Sobel 算子进行卷积计算得到梯度值 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "G = |G_x| + |G_y|"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104235351-17beynl",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250104235351-17beynl",
+						"updated": "20250104235402"
+					},
+					"Children": [
+						{
+							"ID": "20250104235351-3g195fj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104235351-3g195fj",
+								"updated": "20250104235402"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "计算 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "最终颜色 = lerp(原始颜色, 描边颜色, 梯度值)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104235429-2n7kihw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20250104235429-2n7kihw",
+				"name": "_TexelSize",
+				"updated": "20250105135455"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "访问纹理对应的每个纹素——得到当前像素周围8个像素位置"
+				}
+			]
+		},
+		{
+			"ID": "20250104235502-l6lint7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104235502-l6lint7",
+				"updated": "20250104235725"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "想要获取当前像素周围 8 个像素的位置，我们需要补充一个知识点，即：\nUnity 提供给我们用于访问纹理对应的每个纹素（像素）的大小的变量："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "float4 纹理名_TexelSize"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n它类似 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "纹理名_ST"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（用于获取纹理缩放偏移的变量），其中的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "xyzw"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 分别代表（假设纹理宽高为 1024"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "*"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "768）:"
+				}
+			]
+		},
+		{
+			"ID": "20250104235554-prikf1p",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250104235554-prikf1p",
+				"updated": "20250104235614"
+			},
+			"Children": [
+				{
+					"ID": "20250104235554-nbj3bao",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104235554-nbj3bao",
+						"updated": "20250104235554"
+					},
+					"Children": [
+						{
+							"ID": "20250104235554-4rttar5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104235554-4rttar5",
+								"updated": "20250104235643"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "x"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：1 / 纹理宽度 "
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "="
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "\\frac{1}{1024}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104235555-z82ugmo",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104235555-z82ugmo",
+						"updated": "20250104235555"
+					},
+					"Children": [
+						{
+							"ID": "20250104235555-sefnxje",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104235555-sefnxje",
+								"updated": "20250104235652"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "y"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：1 / 纹理高度 "
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "="
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "\\frac{1}{768}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104235555-gv403vl",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104235555-gv403vl",
+						"updated": "20250104235555"
+					},
+					"Children": [
+						{
+							"ID": "20250104235555-cprli3i",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104235555-cprli3i",
+								"updated": "20250104235613"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "z"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：纹理宽度 "
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "="
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 1024"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104235556-62tbn5m",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104235556-62tbn5m",
+						"updated": "20250104235614"
+					},
+					"Children": [
+						{
+							"ID": "20250104235556-v28pbr3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104235556-v28pbr3",
+								"updated": "20250104235614"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "w"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：纹理高度 "
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "="
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 768"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104235652-qe54jj2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104235652-qe54jj2",
+				"updated": "20250104235828"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以利用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "float4 纹理名_TexelSize"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 纹素信息得到当前像素周围 8 个像素位置\n可以进行 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "uv"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 坐标偏移计算，在顶点着色器函数或者片元着色器函数中计算都行\n但是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "建议在顶点着色器函数中计算，可以节约计算量"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，片元着色器中直接使用插值的结果也不会影响纹理坐标的计算结果"
+				}
+			]
+		},
+		{
+			"ID": "20250104235828-4ru8g04",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250104235828-4ru8g04",
+				"style": "line-height: 22px;",
+				"updated": "20250105000459"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "aGxzbA=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "half2 uv = v.texcoord;\n// 对uv坐标偏移 1/纹理宽度 和 1 / 纹理高度，这就相当于偏移了一个像素\no.uv[0] = uv + _MainTex_TexelSize.xy * half2(-1, -1);\no.uv[1] = uv + _MainTex_TexelSize.xy * half2(0, -1);\no.uv[2] = uv + _MainTex_TexelSize.xy * half2(1, -1);\no.uv[3] = uv + _MainTex_TexelSize.xy * half2(-1, 0);\no.uv[4] = uv + _MainTex_TexelSize.xy * half2(0, 0);\no.uv[5] = uv + _MainTex_TexelSize.xy * half2(1, 0);\no.uv[6] = uv + _MainTex_TexelSize.xy * half2(-1, 1);\no.uv[7] = uv + _MainTex_TexelSize.xy * half2(0, 1);\no.uv[8] = uv + _MainTex_TexelSize.xy * half2(1, 1);\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250105000052-j9y974y",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250105000052-j9y974y",
+				"updated": "20250105144400"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "边缘检测效果的具体实现"
+				}
+			]
+		},
+		{
+			"ID": "20250105001751-b6e8qe4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250105001751-b6e8qe4",
+				"updated": "20250105002038"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "新建场景，在场景中随意使用一张风景图，作为 Sprite 对象，将其填充满 Game 窗口，用于测试，以下图作为测试图片："
+				}
+			]
+		},
+		{
+			"ID": "20250105002002-peyf0qe",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250105002002-peyf0qe",
+				"updated": "20250105144400"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 558px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image-20250105001900-zt1x9tp"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250105001900-zt1x9tp.jpg"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 558px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250105000620-13kvz5p",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20250105000620-13kvz5p",
+				"updated": "20250105005824"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现边缘检测屏幕后期处理效果对应Shader"
+				}
+			]
+		},
+		{
+			"ID": "20250105000858-pqd2pd3",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250105000858-pqd2pd3",
+				"updated": "20250105005815"
+			},
+			"Children": [
+				{
+					"ID": "20250105000914-qsf2ipi",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250105000914-qsf2ipi",
+						"updated": "20250105000914"
+					},
+					"Children": [
+						{
+							"ID": "20250105000914-j44v6vd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105000914-j44v6vd",
+								"updated": "20250105000950"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "新建 Shader，取名边缘检测 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "EdgeDetection"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，删除无用代码"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250105000914-y148uqd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250105000914-y148uqd",
+						"updated": "20250105000914"
+					},
+					"Children": [
+						{
+							"ID": "20250105000914-nhm1318",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105000914-nhm1318",
+								"updated": "20250105000914"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "声明属性，进行属性映射\n"
+								}
+							]
+						},
+						{
+							"ID": "20250105000916-djbeauo",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250105000916-djbeauo",
+								"updated": "20250105000917"
+							},
+							"Children": [
+								{
+									"ID": "20250105000917-4ms74p4",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250105000917-4ms74p4",
+										"updated": "20250105000917"
+									},
+									"Children": [
+										{
+											"ID": "20250105000917-x2j79mr",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250105000917-x2j79mr",
+												"updated": "20250105000945"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "主纹理 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "_MainTex"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250105000918-ix92zku",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250105000918-ix92zku",
+										"updated": "20250105000918"
+									},
+									"Children": [
+										{
+											"ID": "20250105000918-l59e63p",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250105000918-l59e63p",
+												"updated": "20250105000943"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "边缘描边用的颜色 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "_EdgeColor"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​\n"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250105000918-2ntl5by",
+							"Type": "NodeBlockquote",
+							"Properties": {
+								"id": "20250105000918-2ntl5by",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color); --b3-parent-background: var(--b3-card-warning-background);",
+								"updated": "20250105002646"
+							},
+							"Children": [
+								{
+									"Type": "NodeBlockquoteMarker",
+									"Data": "\u003e"
+								},
+								{
+									"ID": "20250105002646-3e4nmkt",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250105002646-3e4nmkt",
+										"updated": "20250105002646"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "注意！在属性映射时使用内置纹素变量 "
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "_MainTex_TexelSize"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250105002644-eaje5td",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250105002644-eaje5td",
+								"style": "line-height: 22px;",
+								"updated": "20250105002657"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Properties\n{\n    _MainTex(\"Texture\", 2D) = \"white\"{}\n    _EdgeColor(\"EdgeColor\", Color) = (0, 0, 0, 0)\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20250105002657-0zhrgj9",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250105002657-0zhrgj9",
+								"style": "line-height: 22px;",
+								"updated": "20250105002714"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "#pragma vertex vert\n#pragma fragment frag\n\n#include \"UnityCG.cginc\"\n\nsampler2D _MainTex;\nfloat4 _MainTex_ST;\nhalf4 _MainTex_TexelSize;\nfixed4 _EdgeColor;\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250105000914-e4o4zzc",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250105000914-e4o4zzc",
+						"updated": "20250105000914"
+					},
+					"Children": [
+						{
+							"ID": "20250105000914-idbpsse",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105000914-idbpsse",
+								"updated": "20250105000914"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "屏幕后处理效果标配\n"
+								}
+							]
+						},
+						{
+							"ID": "20250105000953-trncuix",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250105000953-trncuix",
+								"updated": "20250105000954"
+							},
+							"Children": [
+								{
+									"ID": "20250105000954-ozxy94e",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250105000954-ozxy94e",
+										"updated": "20250105000954"
+									},
+									"Children": [
+										{
+											"ID": "20250105000954-g3665wu",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250105000954-g3665wu",
+												"updated": "20250105002941"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ZTest Always"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250105000955-yg86rdl",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250105000955-yg86rdl",
+										"updated": "20250105000955"
+									},
+									"Children": [
+										{
+											"ID": "20250105000955-v71pgi8",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250105000955-v71pgi8",
+												"updated": "20250105002942"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Cull Off"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250105000955-0btywek",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250105000955-0btywek",
+										"updated": "20250105000955"
+									},
+									"Children": [
+										{
+											"ID": "20250105000955-beo9vnd",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250105000955-beo9vnd",
+												"updated": "20250105002943"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ZWrite Off"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250105002731-sgadq7l",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250105002731-sgadq7l",
+								"style": "line-height: 22px;",
+								"updated": "20250105002917"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Pass\n{\n    ZTest Always\n    Cull Off\n    ZWrite Off\n  \n    CGPROGRAM\n    // ...\n    ENDCG\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250105000914-ibgvbt3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20250105000914-ibgvbt3",
+						"updated": "20250105000914"
+					},
+					"Children": [
+						{
+							"ID": "20250105000914-hnms1vr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105000914-hnms1vr",
+								"updated": "20250105000914"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "结构体相关\n"
+								}
+							]
+						},
+						{
+							"ID": "20250105000958-1iz3giu",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250105000958-1iz3giu",
+								"updated": "20250105001000"
+							},
+							"Children": [
+								{
+									"ID": "20250105001000-by79l72",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250105001000-by79l72",
+										"updated": "20250105001000"
+									},
+									"Children": [
+										{
+											"ID": "20250105001000-lbir0er",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250105001000-lbir0er",
+												"updated": "20250105001000"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "顶点\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250105001001-yonfrij",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250105001001-yonfrij",
+										"updated": "20250105001001"
+									},
+									"Children": [
+										{
+											"ID": "20250105001001-o03k7xw",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250105001001-o03k7xw",
+												"updated": "20250105001006"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "uv 数组，用于存储 9 个像素点的 uv 坐标"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250105002835-o9guh8p",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250105002835-o9guh8p",
+								"style": "line-height: 22px;",
+								"updated": "20250105002839"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "struct v2f\n{\n    half2 uv[9] : TEXCOORD0;        // 用于存储9个像素UV坐标的变量\n    float4 vertex : SV_POSITION;\n};\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250105000914-20wleg2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20250105000914-20wleg2",
+						"updated": "20250105000914"
+					},
+					"Children": [
+						{
+							"ID": "20250105000914-vvj4vvl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105000914-vvj4vvl",
+								"updated": "20250105000914"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "顶点着色器\n"
+								}
+							]
+						},
+						{
+							"ID": "20250105001009-ekjw5iz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105001009-ekjw5iz",
+								"updated": "20250105001018"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "顶点坐标转换，用 uv 数组装载 9 个像素 uv 坐标"
+								}
+							]
+						},
+						{
+							"ID": "20250105004811-vq36vdo",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250105004811-vq36vdo",
+								"style": "line-height: 22px;",
+								"updated": "20250105004825"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "v2f vert (appdata_base v)\n{\n    v2f o;\n    o.vertex = UnityObjectToClipPos(v.vertex);  // 将顶点坐标转换到裁剪空间下\n    half2 uv = v.texcoord;\n    // 对uv坐标（范围0~1）偏移 1/纹理宽度 和 1 / 纹理高度，这就相当于偏移了一个像素\n    o.uv[0] = uv + _MainTex_TexelSize.xy * half2(-1, -1);\n    o.uv[1] = uv + _MainTex_TexelSize.xy * half2(0, -1);\n    o.uv[2] = uv + _MainTex_TexelSize.xy * half2(1, -1);\n    o.uv[3] = uv + _MainTex_TexelSize.xy * half2(-1, 0);\n    o.uv[4] = uv + _MainTex_TexelSize.xy * half2(0, 0);\n    o.uv[5] = uv + _MainTex_TexelSize.xy * half2(1, 0);\n    o.uv[6] = uv + _MainTex_TexelSize.xy * half2(-1, 1);\n    o.uv[7] = uv + _MainTex_TexelSize.xy * half2(0, 1);\n    o.uv[8] = uv + _MainTex_TexelSize.xy * half2(1, 1);\n\n    return o;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250105000914-5lihh52",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ni4=",
+						"Num": 6
+					},
+					"Properties": {
+						"id": "20250105000914-5lihh52",
+						"updated": "20250105005815"
+					},
+					"Children": [
+						{
+							"ID": "20250105000914-7hw1018",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105000914-7hw1018",
+								"updated": "20250105000914"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "片元着色器\n"
+								}
+							]
+						},
+						{
+							"ID": "20250105001021-mvtndwu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105001021-mvtndwu",
+								"updated": "20250105001132"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "利用卷积获取梯度值（可以声明一个 Sobel 算子计算函数和一个灰度值计算函数）\n利用梯度值在原始颜色和边缘颜色之间进行插值得到最终颜色"
+								}
+							]
+						},
+						{
+							"ID": "20250105004828-r52fzg3",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250105004828-r52fzg3",
+								"style": "line-height: 22px;",
+								"updated": "20250105005815"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "// 计算颜色的灰度值\nfixed calcLuminance(fixed4 color)\n{\n    return 0.2126 * color.r + 0.7152 * color.g + 0.0722 * color.b;\n}\n\n// Sobel算子卷积计算，计算此像素的梯度值\nhalf Sobel(v2f i)\n{\n    // Sobel算子的两个卷积核\n    half Gx[9] = { -1, -2, -1,\n                    0,  0,  0,\n                    1,  2,  1 };\n    half Gy[9] = { -1, 0, 1,\n                   -2, 0, 2,\n                   -1, 0, 1 };\n\n    half L;             // 灰度值\n    half edgeX = 0;     // 水平方向梯度值\n    half edgeY = 0;     // 竖直方向梯度值\n  \n    // 分别采样九个像素点的颜色，计算其灰度值，然后计算两个方向的梯度值\n    for (int index = 0; index \u003c 9; index++)\n    {\n        L = calcLuminance(tex2D(_MainTex, i.uv[index]));\n        edgeX += L * Gx[index];\n        edgeY += L * Gy[index];\n    }\n\n    // 返回最终的一个像素的梯度值\n    return abs(edgeX) + abs(edgeY);\n}\n\nfixed4 frag (v2f i) : SV_Target\n{\n    // 利用Sobel算子计算梯度值，再在原始颜色和边缘线颜色之间利用梯度值进行插值计算最终颜色\n    half edge = Sobel(i);\n    fixed4 color = lerp(tex2D(_MainTex, i.uv[4]), _EdgeColor, edge);\n    return color;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250105000914-f9b0d00",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ny4=",
+						"Num": 7
+					},
+					"Properties": {
+						"id": "20250105000914-f9b0d00",
+						"updated": "20250105001116"
+					},
+					"Children": [
+						{
+							"ID": "20250105000914-73nqbjg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105000914-73nqbjg",
+								"updated": "20250105001025"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "FallBack Off"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250105001116-1s7j3w9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105001116-1s7j3w9",
+								"updated": "20250105001116"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "这里不需要后备 Shader，因为如果 Shader 不支持就直接不执行了"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250105004747-jwq6ux9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250105004747-jwq6ux9",
+				"updated": "20250105004756"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "完整 Shader 代码如下："
+				}
+			]
+		},
+		{
+			"ID": "20250105004756-ox6c4cj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250105004756-ox6c4cj",
+				"style": "line-height: 22px;",
+				"updated": "20250105005824"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"PostEffect/EdgeDetection\"\n{\n    Properties\n    {\n        _MainTex(\"Texture\", 2D) = \"white\"{}\n        _EdgeColor(\"EdgeColor\", Color) = (0, 0, 0, 0)\n    }\n    SubShader\n    {\n        Tags { \"RenderType\"=\"Opaque\" }\n\n        Pass\n        {\n            ZTest Always\n            Cull Off\n            ZWrite Off\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n\n            struct v2f\n            {\n                half2 uv[9] : TEXCOORD0;        // 用于存储9个像素UV坐标的变量\n                float4 vertex : SV_POSITION;\n            };\n\n            sampler2D _MainTex;\n            float4 _MainTex_ST;\n            half4 _MainTex_TexelSize;\n            fixed4 _EdgeColor;\n\n            v2f vert (appdata_base v)\n            {\n                v2f o;\n                o.vertex = UnityObjectToClipPos(v.vertex);  // 将顶点坐标转换到裁剪空间下\n                half2 uv = v.texcoord;\n                // 对uv坐标（范围0~1）偏移 1/纹理宽度 和 1 / 纹理高度，这就相当于偏移了一个像素\n                o.uv[0] = uv + _MainTex_TexelSize.xy * half2(-1, -1);\n                o.uv[1] = uv + _MainTex_TexelSize.xy * half2(0, -1);\n                o.uv[2] = uv + _MainTex_TexelSize.xy * half2(1, -1);\n                o.uv[3] = uv + _MainTex_TexelSize.xy * half2(-1, 0);\n                o.uv[4] = uv + _MainTex_TexelSize.xy * half2(0, 0);\n                o.uv[5] = uv + _MainTex_TexelSize.xy * half2(1, 0);\n                o.uv[6] = uv + _MainTex_TexelSize.xy * half2(-1, 1);\n                o.uv[7] = uv + _MainTex_TexelSize.xy * half2(0, 1);\n                o.uv[8] = uv + _MainTex_TexelSize.xy * half2(1, 1);\n\n                return o;\n            }\n\n            // 计算颜色的灰度值\n            fixed calcLuminance(fixed4 color)\n            {\n                return 0.2126 * color.r + 0.7152 * color.g + 0.0722 * color.b;\n            }\n\n            // Sobel算子卷积计算，计算此像素的梯度值\n            half Sobel(v2f i)\n            {\n                // Sobel算子的两个卷积核\n                half Gx[9] = { -1, -2, -1,\n                                0,  0,  0,\n                                1,  2,  1 };\n                half Gy[9] = { -1, 0, 1,\n                               -2, 0, 2,\n                               -1, 0, 1 };\n\n                half L;             // 灰度值\n                half edgeX = 0;     // 水平方向梯度值\n                half edgeY = 0;     // 竖直方向梯度值\n            \n                // 分别采样九个像素点的颜色，计算其灰度值，然后计算两个方向的梯度值\n                for (int index = 0; index \u003c 9; index++)\n                {\n                    L = calcLuminance(tex2D(_MainTex, i.uv[index]));\n                    edgeX += L * Gx[index];\n                    edgeY += L * Gy[index];\n                }\n\n                // 返回最终的一个像素的梯度值\n                return abs(edgeX) + abs(edgeY);\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                // 利用Sobel算子计算梯度值，再在原始颜色和边缘线颜色之间利用梯度值进行插值计算最终颜色\n                half edge = Sobel(i);\n                fixed4 color = lerp(tex2D(_MainTex, i.uv[4]), _EdgeColor, edge);\n                return color;\n            }\n            ENDCG\n        }\n    }\n\n    Fallback Off\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250105000849-wdwz3ar",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20250105000849-wdwz3ar",
+				"updated": "20250105165202"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现边缘检测屏幕后期处理效果对应C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "代码"
+				}
+			]
+		},
+		{
+			"ID": "20250105000855-kz5lz9h",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250105000855-kz5lz9h",
+				"updated": "20250105165202"
+			},
+			"Children": [
+				{
+					"ID": "20250105004958-yscwbkx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250105004958-yscwbkx",
+						"updated": "20250105004958"
+					},
+					"Children": [
+						{
+							"ID": "20250105004958-zhx1b8a",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105004958-zhx1b8a",
+								"updated": "20250105005005"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "创建 C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 脚本，名为 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "EdgeDetection"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（边缘检测）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250105004958-00xhlpu",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250105004958-00xhlpu",
+						"updated": "20250105165202"
+					},
+					"Children": [
+						{
+							"ID": "20250105004958-l5ozm4u",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105004958-l5ozm4u",
+								"updated": "20250105165202"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "继承屏幕后处理基类 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "PostEffect"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250105005009-mwm1ju4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105005009-mwm1ju4",
+								"updated": "20250105005029"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "具体代码详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20250104163836-9iiumg9",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "US3S10L4——屏幕后处理基类"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250105004958-gnfor9c",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250105004958-gnfor9c",
+						"updated": "20250105004958"
+					},
+					"Children": [
+						{
+							"ID": "20250105004958-05fz544",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105004958-05fz544",
+								"updated": "20250105004958"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "声明边缘颜色变量，用于控制效果变化"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250105004958-2ai2h1n",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20250105004958-2ai2h1n",
+						"updated": "20250105005057"
+					},
+					"Children": [
+						{
+							"ID": "20250105004958-ur6ej37",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105004958-ur6ej37",
+								"updated": "20250105005057"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重写 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UpdateProperty"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 方法，设置材质球属性"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250105005058-9vb5e3f",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250105005058-9vb5e3f",
+				"style": "line-height: 22px;",
+				"updated": "20250105005427"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class EdgeDetection : PostEffect\n{\n    public Color edgeColor;\n\n    protected override void UpdateProperty()\n    {\n        if (PostEffectMaterial != null)\n        {\n            PostEffectMaterial.SetColor(\"_EdgeColor\", edgeColor);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250105005437-17t6h59",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250105005437-17t6h59",
+				"updated": "20250105005457"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20250105005605-9z24fhd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250105005605-9z24fhd",
+				"updated": "20250105144556"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 530px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250105005937-cvejnsu.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 530px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250105005608-a45m23l",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250105005608-a45m23l",
+				"updated": "20250105005646"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以看到，颜色变化明显的部分，都有描边效果"
+				}
+			]
+		},
+		{
+			"ID": "20250105005607-r4fg2zj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20250105005607-r4fg2zj",
+				"updated": "20250105011910"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "加入纯色背景功能"
+				}
+			]
+		},
+		{
+			"ID": "20250105010115-87vveem",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250105010115-87vveem",
+				"updated": "20250105010223"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们在边缘描边时，有时只想保留描边的边缘线，不想要显示原图的背景颜色\n比如把整个背景变为白色、黑色、等等自定义颜色\n而抛弃掉原本图片的颜色信息，效果就像是一张描边图片"
+				}
+			]
+		},
+		{
+			"ID": "20250105010300-l9ilalu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250105010300-l9ilalu",
+				"updated": "20250105010322"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 814px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250104233425-8ou6z05.png"
+						},
+						{
+							"Type": "NodeLinkSpace"
+						},
+						{
+							"Type": "NodeLinkTitle",
+							"Data": "最右边的图片就是一个纯色背景只剩描边的效果"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 814px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250105010346-m4zy5jt",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250105010346-m4zy5jt",
+				"updated": "20250105011826"
+			},
+			"Children": [
+				{
+					"ID": "20250105010349-uvqvmx1",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250105010349-uvqvmx1",
+						"updated": "20250105011826"
+					},
+					"Children": [
+						{
+							"ID": "20250105010349-mgd5e2e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105010349-mgd5e2e",
+								"updated": "20250105010358"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在上节课的 Shader 代码中进行修改"
+								}
+							]
+						},
+						{
+							"ID": "20250105010353-759fofu",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20250105010353-759fofu",
+								"updated": "20250105011826"
+							},
+							"Children": [
+								{
+									"ID": "20250105010415-jbxt2pk",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20250105010415-jbxt2pk",
+										"updated": "20250105011817"
+									},
+									"Children": [
+										{
+											"ID": "20250105010415-wx96oal",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250105010415-wx96oal",
+												"updated": "20250105010415"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "新属性声明 属性映射\n"
+												}
+											]
+										},
+										{
+											"ID": "20250105010441-feb7ez1",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20250105010441-feb7ez1",
+												"updated": "20250105010512"
+											},
+											"Children": [
+												{
+													"ID": "20250105010512-p2tl6ve",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20250105010512-p2tl6ve",
+														"updated": "20250105010512"
+													},
+													"Children": [
+														{
+															"ID": "20250105010512-4082frt",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20250105010512-4082frt",
+																"updated": "20250105010512"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "添加背景颜色程度变量 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "_BackgroundExtent"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ "
+																}
+															]
+														},
+														{
+															"ID": "20250105010530-g8wyjvv",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20250105010530-g8wyjvv",
+																"updated": "20250105010530"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "0 表示保留图片原始颜色，1 表示完全抛弃图片原始颜色，0~1 之间可以自己控制保留程度\n"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20250105010512-0btjnms",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20250105010512-0btjnms",
+														"updated": "20250105010512"
+													},
+													"Children": [
+														{
+															"ID": "20250105010512-xsll4lw",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20250105010512-xsll4lw",
+																"updated": "20250105010516"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "添加自定义背景颜色 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "_BackgroundColor"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​，定义用于替换图片原始颜色的颜色"
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20250105010527-84bp3tv",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20250105010527-84bp3tv",
+												"style": "line-height: 22px;",
+												"updated": "20250105011817"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "Yw=="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "Properties\n{\n    _MainTex(\"Texture\", 2D) = \"white\"{}\n    _EdgeColor(\"EdgeColor\", Color) = (0, 0, 0, 0)               // 边缘颜色\n    _BackgroundExtent(\"BackgroundExtent\", Range(0, 1)) = 0      // 背景颜色程度，程度越大原始颜色抛弃越多\n    _BackgroundColor(\"BackgroundColor\", Color) = (1, 1, 1, 1)   // 自定义背景颜色，定义用于替换原始颜色的颜色\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250105010415-ugi7s3e",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20250105010415-ugi7s3e",
+										"updated": "20250105011826"
+									},
+									"Children": [
+										{
+											"ID": "20250105010415-krzeeyl",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250105010415-krzeeyl",
+												"updated": "20250105010415"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "修改片元着色器\n"
+												}
+											]
+										},
+										{
+											"ID": "20250105010438-w4gs6jd",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20250105010438-w4gs6jd",
+												"updated": "20250105010521"
+											},
+											"Children": [
+												{
+													"ID": "20250105010521-guatfoj",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20250105010521-guatfoj",
+														"updated": "20250105010521"
+													},
+													"Children": [
+														{
+															"ID": "20250105010521-uko0rkc",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20250105010521-uko0rkc",
+																"updated": "20250105010523"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "利用插值运算，记录 纯色背景 中像素描边颜色"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20250105010521-o9odx59",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20250105010521-o9odx59",
+														"updated": "20250105010521"
+													},
+													"Children": [
+														{
+															"ID": "20250105010521-8xuo34u",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20250105010521-8xuo34u",
+																"updated": "20250105010521"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "利用插值运算，在 原始图片描边 和 纯色图片描边 之间用程度变量进行控制"
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20250105011801-ofprpcm",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20250105011801-ofprpcm",
+												"style": "line-height: 22px;",
+												"updated": "20250105011826"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "Yw=="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "fixed4 frag (v2f i) : SV_Target\n{\n    // 利用Sobel算子计算梯度值，再在原始颜色和边缘线颜色之间利用梯度值进行插值计算最终颜色\n    half edge = Sobel(i);\n    fixed4 blendEdgeColor = lerp(tex2D(_MainTex, i.uv[4]), _EdgeColor, edge);   // 混合原始颜色的边缘颜色\n    fixed4 onlyEdgeColor = lerp(_BackgroundColor, _EdgeColor, edge);            // 混合背景颜色的边缘颜色\n    // 通过背景颜色程度来控制纯色描边和原始颜色描边两个颜色之间的过渡\n    return lerp(blendEdgeColor, onlyEdgeColor, _BackgroundExtent);\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250105010419-tcv2zb7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250105010419-tcv2zb7",
+						"updated": "20250105011757"
+					},
+					"Children": [
+						{
+							"ID": "20250105010419-w26yoau",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250105010419-w26yoau",
+								"updated": "20250105010426"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在上节课的C#代码中进行修改"
+								}
+							]
+						},
+						{
+							"ID": "20250105010424-ew45dv4",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250105010424-ew45dv4",
+								"updated": "20250105010429"
+							},
+							"Children": [
+								{
+									"ID": "20250105010429-uufb55i",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250105010429-uufb55i",
+										"updated": "20250105010429"
+									},
+									"Children": [
+										{
+											"ID": "20250105010429-20sc9rk",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250105010429-20sc9rk",
+												"updated": "20250105010429"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "添加背景颜色程度变量\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250105010430-a1cuq5c",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250105010430-a1cuq5c",
+										"updated": "20250105010430"
+									},
+									"Children": [
+										{
+											"ID": "20250105010430-38yvfzc",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250105010430-38yvfzc",
+												"updated": "20250105010430"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "添加自定义背景光颜色\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250105010430-xjteyn2",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250105010430-xjteyn2",
+										"updated": "20250105010430"
+									},
+									"Children": [
+										{
+											"ID": "20250105010430-3yvnm7i",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250105010430-3yvnm7i",
+												"updated": "20250105010435"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "在 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "UpdateProperty"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 函数中添加属性设置"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250105011747-lfz7jdo",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250105011747-lfz7jdo",
+								"style": "line-height: 22px;",
+								"updated": "20250105011757"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using UnityEngine;\n\npublic class EdgeDetection : PostEffect\n{\n    public Color edgeColor = Color.black;\n    public Color backgroundColor = Color.white;\n    [Range(0f, 1f)] public float backgroundExtent;\n\n    protected override void UpdateProperty()\n    {\n        if (PostEffectMaterial != null)\n        {\n            PostEffectMaterial.SetColor(\"_EdgeColor\", edgeColor);\n            PostEffectMaterial.SetFloat(\"_BackgroundExtent\", backgroundExtent);\n            PostEffectMaterial.SetColor(\"_BackgroundColor\", backgroundColor);\n        }\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250105011736-czif0z1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250105011736-czif0z1",
+				"updated": "20250105011910"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果（边缘颜色为黑色，背景颜色为白色，背景颜色程度为1）："
+				}
+			]
+		},
+		{
+			"ID": "20250105011742-cr0sp9v",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250105011742-cr0sp9v",
+				"updated": "20250105011742"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 561px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250105011742-gbp06d5.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 561px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250105011840-xbtrdha",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250105011840-xbtrdha",
+				"updated": "20250105011846"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "完整 Shader 代码如下："
+				}
+			]
+		},
+		{
+			"ID": "20250105011847-fnh61ky",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250105011847-fnh61ky",
+				"style": "line-height: 22px;",
+				"updated": "20250105011852"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"PostEffect/EdgeDetection\"\n{\n    Properties\n    {\n        _MainTex(\"Texture\", 2D) = \"white\"{}\n        _EdgeColor(\"EdgeColor\", Color) = (0, 0, 0, 0)               // 边缘颜色\n        _BackgroundExtent(\"BackgroundExtent\", Range(0, 1)) = 0      // 背景颜色程度，程度越大原始颜色抛弃越多\n        _BackgroundColor(\"BackgroundColor\", Color) = (1, 1, 1, 1)   // 自定义背景颜色，定义用于替换原始颜色的颜色\n    }\n    SubShader\n    {\n        Tags { \"RenderType\"=\"Opaque\" }\n\n        Pass\n        {\n            ZTest Always\n            Cull Off\n            ZWrite Off\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n\n            struct v2f\n            {\n                half2 uv[9] : TEXCOORD0;        // 用于存储9个像素UV坐标的变量\n                float4 vertex : SV_POSITION;\n            };\n\n            sampler2D _MainTex;\n            float4 _MainTex_ST;\n            half4 _MainTex_TexelSize;\n            fixed4 _EdgeColor;\n            fixed _BackgroundExtent;\n            fixed4 _BackgroundColor;\n\n            v2f vert (appdata_base v)\n            {\n                v2f o;\n                o.vertex = UnityObjectToClipPos(v.vertex);  // 将顶点坐标转换到裁剪空间下\n                half2 uv = v.texcoord;\n                // 对uv坐标（范围0~1）偏移 1/纹理宽度 和 1 / 纹理高度，这就相当于偏移了一个像素\n                o.uv[0] = uv + _MainTex_TexelSize.xy * half2(-1, -1);\n                o.uv[1] = uv + _MainTex_TexelSize.xy * half2(0, -1);\n                o.uv[2] = uv + _MainTex_TexelSize.xy * half2(1, -1);\n                o.uv[3] = uv + _MainTex_TexelSize.xy * half2(-1, 0);\n                o.uv[4] = uv + _MainTex_TexelSize.xy * half2(0, 0);\n                o.uv[5] = uv + _MainTex_TexelSize.xy * half2(1, 0);\n                o.uv[6] = uv + _MainTex_TexelSize.xy * half2(-1, 1);\n                o.uv[7] = uv + _MainTex_TexelSize.xy * half2(0, 1);\n                o.uv[8] = uv + _MainTex_TexelSize.xy * half2(1, 1);\n\n                return o;\n            }\n\n            // 计算颜色的灰度值\n            fixed calcLuminance(fixed4 color)\n            {\n                return 0.2126 * color.r + 0.7152 * color.g + 0.0722 * color.b;\n            }\n\n            // Sobel算子卷积计算，计算此像素的梯度值\n            half Sobel(v2f i)\n            {\n                // Sobel算子的两个卷积核\n                half Gx[9] = { -1, -2, -1,\n                                0,  0,  0,\n                                1,  2,  1 };\n                half Gy[9] = { -1, 0, 1,\n                               -2, 0, 2,\n                               -1, 0, 1 };\n\n                half L;             // 灰度值\n                half edgeX = 0;     // 水平方向梯度值\n                half edgeY = 0;     // 竖直方向梯度值\n            \n                // 分别采样九个像素点的颜色，计算其灰度值，然后计算两个方向的梯度值\n                for (int index = 0; index \u003c 9; index++)\n                {\n                    L = calcLuminance(tex2D(_MainTex, i.uv[index]));\n                    edgeX += L * Gx[index];\n                    edgeY += L * Gy[index];\n                }\n\n                // 返回最终的一个像素的梯度值\n                return abs(edgeX) + abs(edgeY);\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                // 利用Sobel算子计算梯度值，再在原始颜色和边缘线颜色之间利用梯度值进行插值计算最终颜色\n                half edge = Sobel(i);\n                fixed4 blendEdgeColor = lerp(tex2D(_MainTex, i.uv[4]), _EdgeColor, edge);   // 混合原始颜色的边缘颜色\n                fixed4 onlyEdgeColor = lerp(_BackgroundColor, _EdgeColor, edge);            // 混合背景颜色的边缘颜色\n                // 通过背景颜色程度来控制纯色描边和原始颜色描边两个颜色之间的过渡\n                return lerp(blendEdgeColor, onlyEdgeColor, _BackgroundExtent);\n            }\n            ENDCG\n        }\n    }\n\n    Fallback Off\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

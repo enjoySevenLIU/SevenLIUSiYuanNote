@@ -1,0 +1,1703 @@
+{
+	"ID": "20241206124735-bq800kz",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20241206124735-bq800kz",
+		"title": "US3S6L6——光照衰减和阴影",
+		"type": "doc",
+		"updated": "20241208022527"
+	},
+	"Children": [
+		{
+			"ID": "20241206124737-4gwxw7e",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20241206124737-4gwxw7e",
+				"updated": "20241208022443"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20241206124737-tp8dklh",
+					"Type": "NodeHeading",
+					"HeadingLevel": 3,
+					"Properties": {
+						"id": "20241206124737-tp8dklh",
+						"updated": "20241208022443"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "知识回顾"
+						}
+					]
+				},
+				{
+					"ID": "20241206124737-zdrp3ca",
+					"Type": "NodeList",
+					"ListData": {
+						"Typ": 1
+					},
+					"Properties": {
+						"id": "20241206124737-zdrp3ca",
+						"updated": "20241206124737"
+					},
+					"Children": [
+						{
+							"ID": "20241206124737-gm4to3o",
+							"Type": "NodeListItem",
+							"ListData": {
+								"Typ": 1,
+								"Delimiter": 46,
+								"Marker": "MS4=",
+								"Num": 1
+							},
+							"Properties": {
+								"id": "20241206124737-gm4to3o",
+								"updated": "20241206124737"
+							},
+							"Children": [
+								{
+									"ID": "20241206124737-nqyyylb",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241206124737-nqyyylb",
+										"updated": "20241206124737"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "多种光源的效果实现"
+										}
+									]
+								},
+								{
+									"ID": "20241206124737-y7lon2n",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241206124737-y7lon2n",
+										"updated": "20241206124737"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "在 Additional Pass（附加渲染通道）中根据光源类型，计算出不同的光源衰减值，参与到最终的颜色计算中"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241206124737-suce1hh",
+							"Type": "NodeListItem",
+							"ListData": {
+								"Typ": 1,
+								"Delimiter": 46,
+								"Marker": "Mi4=",
+								"Num": 2
+							},
+							"Properties": {
+								"id": "20241206124737-suce1hh",
+								"updated": "20241206124737"
+							},
+							"Children": [
+								{
+									"ID": "20241206124737-amk033z",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241206124737-amk033z",
+										"updated": "20241206124737"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "计算阴影时需要使用的三剑客"
+										}
+									]
+								},
+								{
+									"ID": "20241206124737-f1y69bm",
+									"Type": "NodeList",
+									"ListData": {
+										"Typ": 1
+									},
+									"Properties": {
+										"id": "20241206124737-f1y69bm",
+										"updated": "20241206124737"
+									},
+									"Children": [
+										{
+											"ID": "20241206124737-wajs6az",
+											"Type": "NodeListItem",
+											"ListData": {
+												"Typ": 1,
+												"Delimiter": 46,
+												"Marker": "MS4=",
+												"Num": 1
+											},
+											"Properties": {
+												"id": "20241206124737-wajs6az",
+												"updated": "20241206124737"
+											},
+											"Children": [
+												{
+													"ID": "20241206124737-qfk3g1y",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241206124737-qfk3g1y",
+														"updated": "20241206124737"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "​"
+														},
+														{
+															"Type": "NodeTextMark",
+															"TextMarkType": "code",
+															"TextMarkTextContent": "SHADOW_COORDS"
+														},
+														{
+															"Type": "NodeText",
+															"Data": "​（阴影坐标宏)"
+														}
+													]
+												},
+												{
+													"ID": "20241206124737-19sm5vp",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241206124737-19sm5vp",
+														"updated": "20241206124737"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "在 "
+														},
+														{
+															"Type": "NodeTextMark",
+															"TextMarkType": "code",
+															"TextMarkTextContent": "v2f"
+														},
+														{
+															"Type": "NodeText",
+															"Data": "​ 结构体中声明，本质是声明了一个表示阴影映射纹理坐标的变量"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241206124737-mkopxwy",
+											"Type": "NodeListItem",
+											"ListData": {
+												"Typ": 1,
+												"Delimiter": 46,
+												"Marker": "Mi4=",
+												"Num": 2
+											},
+											"Properties": {
+												"id": "20241206124737-mkopxwy",
+												"updated": "20241206124737"
+											},
+											"Children": [
+												{
+													"ID": "20241206124737-nfatf51",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241206124737-nfatf51",
+														"updated": "20241206124737"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "​"
+														},
+														{
+															"Type": "NodeTextMark",
+															"TextMarkType": "code",
+															"TextMarkTextContent": "TRANSFER_SHADOW"
+														},
+														{
+															"Type": "NodeText",
+															"Data": "​（转移阴影宏）"
+														}
+													]
+												},
+												{
+													"ID": "20241206124737-dit2fg9",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241206124737-dit2fg9",
+														"updated": "20241206124737"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "在顶点着色器中调用，本质是将顶点进行坐标转换并存储到 "
+														},
+														{
+															"Type": "NodeTextMark",
+															"TextMarkType": "code",
+															"TextMarkTextContent": "_ShadowCoord"
+														},
+														{
+															"Type": "NodeText",
+															"Data": "​ 阴影纹理坐标变量中"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20241206124737-lvrs9t3",
+											"Type": "NodeListItem",
+											"ListData": {
+												"Typ": 1,
+												"Delimiter": 46,
+												"Marker": "My4=",
+												"Num": 3
+											},
+											"Properties": {
+												"id": "20241206124737-lvrs9t3",
+												"updated": "20241206124737"
+											},
+											"Children": [
+												{
+													"ID": "20241206124737-680688y",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241206124737-680688y",
+														"updated": "20241206124737"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "​"
+														},
+														{
+															"Type": "NodeTextMark",
+															"TextMarkType": "code",
+															"TextMarkTextContent": "SHADOW_ATTENUATION"
+														},
+														{
+															"Type": "NodeText",
+															"Data": "​（阴影衰减宏）"
+														}
+													]
+												},
+												{
+													"ID": "20241206124737-sf5zpea",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20241206124737-sf5zpea",
+														"updated": "20241206124737"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "本质是利用 "
+														},
+														{
+															"Type": "NodeTextMark",
+															"TextMarkType": "code",
+															"TextMarkTextContent": "_ShadowCoord"
+														},
+														{
+															"Type": "NodeText",
+															"Data": "​ 对阴影映射纹理进行采用，将采样得到的深度值进行比较，以计算出一个 "
+														},
+														{
+															"Type": "NodeTextMark",
+															"TextMarkType": "code",
+															"TextMarkTextContent": "fixed3"
+														},
+														{
+															"Type": "NodeText",
+															"Data": "​ 的阴影衰减值"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241206124737-f587hsr",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241206124737-f587hsr",
+						"updated": "20241206124737"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "最终之所以能够接受阴影，主要就是因为利用了最终得到的阴影衰减值参与到了最终的颜色计算中"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241208022443-68mp7vk",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241208022443-68mp7vk",
+				"updated": "20241208022527"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20241208022450-quvkvgc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241208022450-quvkvgc",
+				"style": "line-height: 22px;",
+				"updated": "20241208022527"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "UNITY_LIGHT_ATTENUATION\t\t// Unity内计算光源和阴影的综合衰减值的宏\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241206124737-uvu1xxw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20241206124737-uvu1xxw",
+				"name": "UNITY_LIGHT_ATTENUATION",
+				"updated": "20241208022454"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "光照衰减和阴影"
+				}
+			]
+		},
+		{
+			"ID": "20241206124737-qi3p15n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241206124737-qi3p15n",
+				"updated": "20241206124737"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过之前的学习，我们发现光照衰减和接受阴影相关的计算是类似的\n关键点都是通过计算出一个衰减值，参与到颜色计算中，都是用 (漫反射+高光反射) 的结果乘以对应的衰减值\n由于它们对最终颜色影响的计算非常类似，都是通过乘法进行运算"
+				}
+			]
+		},
+		{
+			"ID": "20241206124737-g5rxt7n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241206124737-g5rxt7n",
+				"updated": "20241206124737"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Unity"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 中专门提供了对应的宏，来综合处理光照衰减和阴影衰减的计算\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AutoLight.cginc"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 内置文件中的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UNITY_LIGHT_ATTENUATION"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（Unity 光照衰减宏）\n该宏中会统一的对 光照衰减进行计算，并且也会计算出 阴影衰减值，\n最后将两者相乘得到综合衰减值，我们只需要利用该宏来处理 光照和阴影的衰减即可\n我们可以在 Unity 安装目录的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Editor/Data/CGIncludes"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 中找到该内置文件，查看该宏的逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20241206124737-xndou7l",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241206124737-xndou7l",
+				"updated": "20241206124737"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 637px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241206124201-cpzifzi.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 637px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241206125340-ipie5bi",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241206125340-ipie5bi",
+				"updated": "20241206125523"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "下列代码是光源为点光源情况下 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UNITY_LIGHT_ATTENUATION"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的定义："
+				}
+			]
+		},
+		{
+			"ID": "20241206124737-d02amhl",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241206124737-d02amhl",
+				"updated": "20241206124737"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "#ifdef POINT\nsampler2D_float _LightTexture0;\nunityShadowCoord4x4 unity_WorldToLight;\n    #define UNITY_LIGHT_ATTENUATION(destName, input, worldPos) \\\n        unityShadowCoord3 lightCoord = mul(unity_WorldToLight, unityShadowCoord4(worldPos, 1)).xyz; \\\n        fixed shadow = UNITY_SHADOW_ATTENUATION(input, worldPos); \\\n        fixed destName = tex2D(_LightTexture0, dot(lightCoord, lightCoord).rr).r * shadow;\n#endif\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241206124737-ptn6yy9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241206124737-ptn6yy9",
+				"updated": "20241206124737"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UNITY_LIGHT_ATTENUATION"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 需要三个参数："
+				}
+			]
+		},
+		{
+			"ID": "20241206124737-go6j3o5",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20241206124737-go6j3o5",
+				"updated": "20241206125621"
+			},
+			"Children": [
+				{
+					"ID": "20241206124737-gt2lyq9",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241206124737-gt2lyq9",
+						"updated": "20241206125621"
+					},
+					"Children": [
+						{
+							"ID": "20241206124737-9zpw0ph",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241206124737-9zpw0ph",
+								"updated": "20241206125621"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "destName"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：衰减值变量名称"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241206124737-5qes0ob",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241206124737-5qes0ob",
+						"updated": "20241206124737"
+					},
+					"Children": [
+						{
+							"ID": "20241206124737-0eple9b",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241206124737-0eple9b",
+								"updated": "20241206124737"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "input"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：结构体"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241206124737-mld5fuy",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241206124737-mld5fuy",
+						"updated": "20241206124737"
+					},
+					"Children": [
+						{
+							"ID": "20241206124737-kim761u",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241206124737-kim761u",
+								"updated": "20241206124737"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "worldPos"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：世界坐标系下的坐标"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241206124737-9l2qfe7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241206124737-9l2qfe7",
+				"updated": "20241206124737"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "分析 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UNITY_LIGHT_ATTENUATION"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的定义的逻辑，不难看出它进行了三步计算："
+				}
+			]
+		},
+		{
+			"ID": "20241206124737-c5wt10z",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241206124737-c5wt10z",
+				"updated": "20241206124910"
+			},
+			"Children": [
+				{
+					"ID": "20241206124737-o1d3zfz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241206124737-o1d3zfz",
+						"updated": "20241206124910"
+					},
+					"Children": [
+						{
+							"ID": "20241206124737-hzl6qcd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241206124737-hzl6qcd",
+								"updated": "20241206124910"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20241126125516-jjo122v",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "unity_WorldToLight"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 进行矩阵乘法将世界坐标系坐标转换为光源坐标系下的坐标"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241206124737-906wjm8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241206124737-906wjm8",
+						"updated": "20241206124737"
+					},
+					"Children": [
+						{
+							"ID": "20241206124737-48x5301",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241206124737-48x5301",
+								"updated": "20241206124818"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UNITY_SHADOW_ATTENUATION"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 来计算阴影衰减值"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241206124819-jopwn5c",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20241206124819-jopwn5c",
+						"updated": "20241206124904"
+					},
+					"Children": [
+						{
+							"ID": "20241206124819-bz8ee5i",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241206124819-bz8ee5i",
+								"updated": "20241206124904"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用光源坐标从 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20241126125101-k31q18g",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "_LightTexture0"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 采样，获取"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241206124822-dcnfvde",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241206124822-dcnfvde",
+				"updated": "20241206125529"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "下列代码是光源为聚光灯和平行光情况下 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UNITY_LIGHT_ATTENUATION"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的定义："
+				}
+			]
+		},
+		{
+			"ID": "20241206125530-ttaqb32",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241206125530-ttaqb32",
+				"updated": "20241206125732"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "// 聚光灯\n#ifdef SPOT\nsampler2D_float _LightTexture0;\nunityShadowCoord4x4 unity_WorldToLight;\nsampler2D_float _LightTextureB0;\ninline fixed UnitySpotCookie(unityShadowCoord4 LightCoord)\n{\n    return tex2D(_LightTexture0, LightCoord.xy / LightCoord.w + 0.5).w;\n}\ninline fixed UnitySpotAttenuate(unityShadowCoord3 LightCoord)\n{\n    return tex2D(_LightTextureB0, dot(LightCoord, LightCoord).xx).r;\n}\n#if !defined(UNITY_HALF_PRECISION_FRAGMENT_SHADER_REGISTERS)\n#define DECLARE_LIGHT_COORD(input, worldPos) unityShadowCoord4 lightCoord = mul(unity_WorldToLight, unityShadowCoord4(worldPos, 1))\n#else\n#define DECLARE_LIGHT_COORD(input, worldPos) unityShadowCoord4 lightCoord = input._LightCoord\n#endif\n    #define UNITY_LIGHT_ATTENUATION(destName, input, worldPos) \\\n        DECLARE_LIGHT_COORD(input, worldPos); \\\n        fixed shadow = UNITY_SHADOW_ATTENUATION(input, worldPos); \\\n        fixed destName = (lightCoord.z \u003e 0) * UnitySpotCookie(lightCoord) * UnitySpotAttenuate(lightCoord.xyz) * shadow;\n#endif\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241206125625-xssggi3",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241206125625-xssggi3",
+				"updated": "20241206125738"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "// 平行光\n#ifdef DIRECTIONAL\n    #define UNITY_LIGHT_ATTENUATION(destName, input, worldPos) fixed destName = UNITY_SHADOW_ATTENUATION(input, worldPos);\n#endif\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241206125643-fw8lq7k",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241206125643-fw8lq7k",
+				"updated": "20241206125833"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以上宏定义的的主要区别是出现在平行光，聚光灯，点光源的光源衰减值计算逻辑上，其他的步骤是差不多的"
+				}
+			]
+		},
+		{
+			"ID": "20241206125833-snjpwk8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241206125833-snjpwk8",
+				"updated": "20241206125933"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此，我们完全可以直接使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UNITY_LIGHT_ATTENUATION"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 来计算综合处理光照和阴影的衰减逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20241206125934-8hsofs1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241206125934-8hsofs1",
+				"updated": "20241206133226"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "光照衰减和阴影的综合实现"
+				}
+			]
+		},
+		{
+			"ID": "20241206130047-w4b79kx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241206130047-w4b79kx",
+				"updated": "20241206130108"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们将利用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AutoLight.cginc"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 内置文件中的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "UNITY_LIGHT_ATTENUATION"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（Unity光照衰减宏）来综合处理光照衰减和阴影相关的逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20241206130108-0w381ir",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241206130108-0w381ir",
+				"updated": "20241206131947"
+			},
+			"Children": [
+				{
+					"ID": "20241206130108-mylf6ri",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241206130108-mylf6ri",
+						"updated": "20241206130108"
+					},
+					"Children": [
+						{
+							"ID": "20241206130108-rc0a82d",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241206130108-rc0a82d",
+								"updated": "20241206130306"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "创建一个新的 Shader 并复用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20241205122240-r012cen",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "上节课"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "中的代码"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241206130108-6iwr28g",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241206130108-6iwr28g",
+						"updated": "20241206130108"
+					},
+					"Children": [
+						{
+							"ID": "20241206130108-341xulk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241206130108-341xulk",
+								"updated": "20241206130715"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20241205122905-7rgy3bt",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "SHADOW_COORDS"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 和 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20241205122917-9nz8nwt",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "TRANSFER_SHADOW"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，在 Additional Pass 附加渲染通道中也添加上"
+								}
+							]
+						},
+						{
+							"ID": "20241206130221-bj3auxb",
+							"Type": "NodeBlockquote",
+							"Properties": {
+								"id": "20241206130221-bj3auxb",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color); --b3-parent-background: var(--b3-card-warning-background);",
+								"updated": "20241206130554"
+							},
+							"Children": [
+								{
+									"Type": "NodeBlockquoteMarker",
+									"Data": "\u003e"
+								},
+								{
+									"ID": "20241206130554-erq4yx7",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241206130554-erq4yx7",
+										"updated": "20241206130554"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "注意：需要在附加渲染通道中包含内置文件 "
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "AutoLight.cginc"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​（因为阴影计算相关宏来自于它，"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "UNITY_LIGHT_ATTENUATION"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​ 光照衰减宏也来自于它）"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241206130800-xnm8any",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241206130800-xnm8any",
+								"updated": "20241206130957"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "struct v2f\n{\n    float4 pos: SV_POSITION;        //裁剪空间下的顶点坐标\n    float3 wNormal: NORMAL;         //世界空间下的法线\n    float3 wPos: TEXCOORD0;         //世界空间下的顶点坐标\n    SHADOW_COORDS(2)                //阴影坐标宏，主要用于存储阴影纹理坐标\n};\n\nv2f vert (appdata_base v)\n{\n    v2f v2fData;\n    v2fData.pos = UnityObjectToClipPos(v.vertex);               //顶点转换到裁剪空间\n    v2fData.wNormal = UnityObjectToWorldNormal(v.normal);       //法线转换到世界空间\n    v2fData.wPos = mul(unity_ObjectToWorld, v.vertex).xyz;      //顶点转换到世界空间\n    TRANSFER_SHADOW(v2fData)    //计算阴影映射纹理坐标，它会在内部去进行计算，并存储结构体的SHADOW_COORDS(2)内部\n    return v2fData;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241206130108-hy69sea",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20241206130108-hy69sea",
+						"name": "multi_compile_fwdadd_fullshadows",
+						"updated": "20241206130108"
+					},
+					"Children": [
+						{
+							"ID": "20241206130108-m17eomt",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241206130108-m17eomt",
+								"updated": "20241206130126"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "为了让 Additional Pass 附加渲染通道能够添加阴影效果，需要将编译指令进行修改\n"
+								}
+							]
+						},
+						{
+							"ID": "20241206130129-40orlmj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241206130129-40orlmj",
+								"updated": "20241206130142"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将原本的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "#pragma multi_compile_fwdadd"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，修改为 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "#pragma multi_compile_fwdadd_fullshadows"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n这样 Unity 会生成多个包括支持和不支持阴影的 Shader 变体，从而为额外的逐像素光源计算阴影，并传递给 Shader 了"
+								}
+							]
+						},
+						{
+							"ID": "20241206130411-aedvbxh",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241206130411-aedvbxh",
+								"updated": "20241206130459"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "// Additional Pass 附加渲染通道\nPass\n{\n    Tags { \"LightMode\" = \"ForwardAdd\" }\n    // 使用线性减淡效果进行光照混合\n    Blend One One\n\n    CGPROGRAM\n    #pragma vertex vert\n    #pragma fragment frag\n    // 帮助我们编译所有支持和不支持阴影光照变体，并确保光照衰减相关的变量能够正确复制到对应的变量中\n    #pragma multi_compile_fwdadd_fullshadows\n\n    #include \"UnityCG.cginc\"\n    #include \"Lighting.cginc\"\n    #include \"AutoLight.cginc\"\n\t// ...\n    ENDCG\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241206130108-ix8vrsx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20241206130108-ix8vrsx",
+						"updated": "20241206131947"
+					},
+					"Children": [
+						{
+							"ID": "20241206130108-qvxr7lg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241206130108-qvxr7lg",
+								"updated": "20241206130317"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "修改两个 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 的片元着色器中衰减计算相关的代码"
+								}
+							]
+						},
+						{
+							"ID": "20241206130154-0s052g6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241206130154-0s052g6",
+								"updated": "20241206130159"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UNITY_LIGHT_ATTENUATION"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 宏替代原有逻辑，该宏需要传入3个参数"
+								}
+							]
+						},
+						{
+							"ID": "20241206130150-8w9ftdg",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20241206130150-8w9ftdg",
+								"updated": "20241206131947"
+							},
+							"Children": [
+								{
+									"ID": "20241206130150-25ajbze",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20241206130150-25ajbze",
+										"updated": "20241206131944"
+									},
+									"Children": [
+										{
+											"ID": "20241206130150-x0nom1b",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241206130150-x0nom1b",
+												"updated": "20241206131944"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "第一个参数：是用来存储最终衰减值的变量名（不用声明，内部会声明）"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241206130151-8aykgzb",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20241206130151-8aykgzb",
+										"updated": "20241206131946"
+									},
+									"Children": [
+										{
+											"ID": "20241206130151-asi1roj",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241206130151-asi1roj",
+												"updated": "20241206131946"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "第二个参数：是片元着色器中传入的 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "v2f"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 结构体对象"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241206130152-085wp3f",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20241206130152-085wp3f",
+										"updated": "20241206131947"
+									},
+									"Children": [
+										{
+											"ID": "20241206130152-0mghymm",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241206130152-0mghymm",
+												"updated": "20241206131947"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "第三个参数：是顶点相对于世界坐标系的位置"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241206130147-2u4l7f4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241206130147-2u4l7f4",
+								"updated": "20241206131936"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "最终将得到的衰减结果和（漫反射 + 高光反射）的结果相乘即可"
+								}
+							]
+						},
+						{
+							"ID": "20241206131740-xltgawh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241206131740-xltgawh",
+								"updated": "20241206131745"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Bass Pass："
+								}
+							]
+						},
+						{
+							"ID": "20241206131757-33tdngm",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241206131757-33tdngm",
+								"updated": "20241206131822"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "fixed3 getFragLambertColor(in float3 wNormal)\n{\n    float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);  //将光源0的位置标准化，得到方向，用于计算夹角\n    //兰伯特光照模型的实现，这里的颜色计算只取rgb，不考虑透明度的情况\n    fixed3 color = _LightColor0.rgb * _MainColor.rgb * max(0, dot(wNormal, lightDir));\n    return color;\n}\n\nfixed3 getFragSpecularColor(in float3 wPos, in float3 wNormal)\n{\n    float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - wPos);    //计算观察方向\n    float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);          //标准化光源方向\n    float3 halfA = normalize(viewDir + lightDir);                   //将光源方向和观察方向相加得到其半角向量，并标准化\n    //Blinn-Phong高光反射模型的实现，这里的颜色计算只取rgb，不考虑透明度的情况\n    fixed3 color = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(wNormal, halfA)), _SpecularNum);\n    return color;\n}\n\nfixed4 frag (v2f i) : SV_Target\n{\n    //计算Blinn-Phong式光照模型需要的各种颜色\n    fixed3 lambertColor = getFragLambertColor(i.wNormal);           //计算漫反射\n    fixed3 specularColor = getFragSpecularColor(i.wPos, i.wNormal); //计算高光反射颜色\n    // 利用灯光衰减和阴影衰减计算宏统一进行衰减值的计算，其中atten是衰减值变量名，宏内部会自动声明，因此我们不需要再自己声明了\n    UNITY_LIGHT_ATTENUATION(atten, i, i.wPos)\n    fixed3 blinnPhongColor = UNITY_LIGHTMODEL_AMBIENT.rgb + (lambertColor + specularColor) * atten;\n\n    return fixed4(blinnPhongColor.rgb, 1);  //因为传递过来的颜色变量不包括透明度，因此这里需要手动指定透明度\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20241206131745-g991xzn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241206131745-g991xzn",
+								"updated": "20241206131756"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Additional Pass："
+								}
+							]
+						},
+						{
+							"ID": "20241206131010-2ay6lc0",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241206131010-2ay6lc0",
+								"updated": "20241206131726"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "fixed4 frag (v2f i) : SV_Target\n{\n    // 漫反射颜色的计算\n    fixed3 worldNormal = normalize(i.wNormal);\n    // 光的方向\n#if defined(_DIRECTIONAL_LIGHT)\n    fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz);             // 平行光 光的方向就是它的位置\n#else\n    fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz - i.wPos);    // 点光源和聚光灯 光的方向 是 光的位置 - 顶点位置\n#endif\n    fixed3 diffuse = _LightColor0.rgb * _MainColor.rgb * max(0, dot(worldNormal, worldLightDir));\n\n    // 高光反射颜色的计算\n    fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.wPos.xyz);  // 视角方向\n    fixed3 halfDir = normalize(worldLightDir + viewDir);                // 半角向量\n    fixed3 specular = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(worldNormal, halfDir)), _SpecularNum);\n\n    // 利用灯光衰减和阴影衰减计算宏统一进行衰减值的计算，其中atten是衰减值变量名，宏内部会自动声明，因此我们不需要再自己声明了\n    UNITY_LIGHT_ATTENUATION(atten, i, i.wPos)\n\n    // 附加渲染通道内不需要再加上环境光颜色了，因为它只需要计算一次，而之前已经在基础渲染通道中计算了\n    return fixed4((diffuse + specular) * atten, 1);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241206132611-mlm5tpt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241206132611-mlm5tpt",
+				"updated": "20241206132738"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果（左为 Additional Pass 不进行阴影衰减计算的 Shader，右为 Additional Pass 进行阴影衰减综合计算的 Shader）："
+				}
+			]
+		},
+		{
+			"ID": "20241206132740-v70ruhc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241206132740-v70ruhc",
+				"updated": "20241206133134"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "中间的立方体会遮挡红色点光源发出的光（光源开启 Shadow），用于测试后两个立方体是否能够接收来自其他光源投射过来的光源"
+				}
+			]
+		},
+		{
+			"ID": "20241206132614-vdopum9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241206132614-vdopum9",
+				"updated": "20241206132614"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241206132614-nihmtju.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241206132923-s3g7iba",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241206132923-s3g7iba",
+				"updated": "20241206133221"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，左边的立方体能够投射各个光源的阴影，也能接受平行光的阴影，但是不能接受点光源的阴影\n而右边的立方体能够接受来自点光源的阴影，也能接受平行光的阴影，也能投射阴影"
+				}
+			]
+		},
+		{
+			"ID": "20241206133206-4h2ilj0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241206133206-4h2ilj0",
+				"updated": "20241206133215"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "完整 Shader 代码如下："
+				}
+			]
+		},
+		{
+			"ID": "20241206133216-yj7gpw4",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241206133216-yj7gpw4",
+				"updated": "20241206133226"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson68_ForwardLighting\"\n{\n    Properties\n    {\n        _MainColor(\"MainColor\", Color) = (1, 1, 1, 1)           //材质的漫反射颜色\n        _SpecularColor(\"SpecularColor\", Color) = (1, 1, 1, 1)   //材质高光反射颜色\n        _SpecularNum(\"SpecularNum\", Range(0, 20)) = 0.5         //光泽度\n    }\n    SubShader\n    {\n        // Bass Pass 基础渲染通道\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardBase\" }\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            // 帮助我们编译所有光照变体，并确保光照衰减相关的变量能够正确复制到对应的变量中\n            #pragma multi_compile_fwdbase\n\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n            #include \"AutoLight.cginc\"          //引用包含计算阴影会使用的宏的cginc文件\n\n            struct v2f\n            {\n                float4 pos: SV_POSITION;        //裁剪空间下的顶点坐标\n                float3 wNormal: NORMAL;         //世界空间下的法线\n                float3 wPos: TEXCOORD0;         //世界空间下的顶点坐标\n                SHADOW_COORDS(2)                //阴影坐标宏，主要用于存储阴影纹理坐标\n            };\n\n            fixed4 _MainColor;      //属性设置的漫反射颜色\n            fixed4 _SpecularColor;  //属性设置的材质高光颜色\n            float _SpecularNum;     //属性设置的光泽度\n\n            //计算兰伯特光照模型 颜色相关函数（逐片元）\n            //参数：\n            //  wNormal: 世界空间下顶点的法线信息\n            fixed3 getFragLambertColor(in float3 wNormal)\n            {\n                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);  //将光源0的位置标准化，得到方向，用于计算夹角\n                //兰伯特光照模型的实现，这里的颜色计算只取rgb，不考虑透明度的情况\n                fixed3 color = _LightColor0.rgb * _MainColor.rgb * max(0, dot(wNormal, lightDir));\n                return color;\n            }\n\n            //计算Blinn-Phong高光反射光照模型 颜色相关函数（逐片元）\n            //参数：\n            //  wPos: 世界空间下顶点坐标\n            //  wNormal: 世界空间下顶点的法线信息\n            fixed3 getFragSpecularColor(in float3 wPos, in float3 wNormal)\n            {\n                float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - wPos);    //计算观察方向\n                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);          //标准化光源方向\n                float3 halfA = normalize(viewDir + lightDir);                   //将光源方向和观察方向相加得到其半角向量，并标准化\n                //Blinn-Phong高光反射模型的实现，这里的颜色计算只取rgb，不考虑透明度的情况\n                fixed3 color = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(wNormal, halfA)), _SpecularNum);\n                return color;\n            }\n\n            v2f vert (appdata_base v)\n            {\n                v2f v2fData;\n                v2fData.pos = UnityObjectToClipPos(v.vertex);             //顶点转换到裁剪空间\n                v2fData.wNormal = UnityObjectToWorldNormal(v.normal);       //法线转换到世界空间\n                v2fData.wPos = mul(unity_ObjectToWorld, v.vertex).xyz;      //顶点转换到世界空间\n                TRANSFER_SHADOW(v2fData)    //计算阴影映射纹理坐标，它会在内部去进行计算，并存储结构体的SHADOW_COORDS(2)内部\n\n                return v2fData;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                //计算Blinn-Phong式光照模型需要的各种颜色\n                fixed3 lambertColor = getFragLambertColor(i.wNormal);           //计算漫反射\n                fixed3 specularColor = getFragSpecularColor(i.wPos, i.wNormal); //计算高光反射颜色\n                // 利用灯光衰减和阴影衰减计算宏统一进行衰减值的计算，其中atten是衰减值变量名，宏内部会自动声明，因此我们不需要再自己声明了\n                UNITY_LIGHT_ATTENUATION(atten, i, i.wPos)\n                fixed3 blinnPhongColor = UNITY_LIGHTMODEL_AMBIENT.rgb + (lambertColor + specularColor) * atten;\n          \n                return fixed4(blinnPhongColor.rgb, 1);  //因为传递过来的颜色变量不包括透明度，因此这里需要手动指定透明度\n            }\n            ENDCG\n        }\n\n        // Additional Pass 附加渲染通道\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardAdd\" }\n            // 使用线性减淡效果进行光照混合\n            Blend One One\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            // 帮助我们编译所有光照变体，并确保光照衰减相关的变量能够正确复制到对应的变量中\n            #pragma multi_compile_fwdadd_fullshadows\n\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n            #include \"AutoLight.cginc\"\n\n            struct v2f\n            {\n                float4 pos: SV_POSITION;        //裁剪空间下的顶点坐标\n                float3 wNormal: NORMAL;         //世界空间下的法线\n                float3 wPos: TEXCOORD0;         //世界空间下的顶点坐标\n                SHADOW_COORDS(2)                //阴影坐标宏，主要用于存储阴影纹理坐标\n            };\n\n            fixed4 _MainColor;      //属性设置的漫反射颜色\n            fixed4 _SpecularColor;  //属性设置的材质高光颜色\n            float _SpecularNum;     //属性设置的光泽度\n\n            v2f vert (appdata_base v)\n            {\n                v2f v2fData;\n                v2fData.pos = UnityObjectToClipPos(v.vertex);               //顶点转换到裁剪空间\n                v2fData.wNormal = UnityObjectToWorldNormal(v.normal);       //法线转换到世界空间\n                v2fData.wPos = mul(unity_ObjectToWorld, v.vertex).xyz;      //顶点转换到世界空间\n                TRANSFER_SHADOW(v2fData)    //计算阴影映射纹理坐标，它会在内部去进行计算，并存储结构体的SHADOW_COORDS(2)内部\n                return v2fData;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                // 漫反射颜色的计算\n                fixed3 worldNormal = normalize(i.wNormal);\n                // 光的方向\n            #if defined(_DIRECTIONAL_LIGHT)\n                fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz);             // 平行光 光的方向就是它的位置\n            #else\n                fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz - i.wPos);    // 点光源和聚光灯 光的方向 是 光的位置 - 顶点位置\n            #endif\n                fixed3 diffuse = _LightColor0.rgb * _MainColor.rgb * max(0, dot(worldNormal, worldLightDir));\n\n                // 高光反射颜色的计算\n                fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.wPos.xyz);  // 视角方向\n                fixed3 halfDir = normalize(worldLightDir + viewDir);                // 半角向量\n                fixed3 specular = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(worldNormal, halfDir)), _SpecularNum);\n\n                // 利用灯光衰减和阴影衰减计算宏统一进行衰减值的计算，其中atten是衰减值变量名，宏内部会自动声明，因此我们不需要再自己声明了\n                UNITY_LIGHT_ATTENUATION(atten, i, i.wPos)\n\n                // 附加渲染通道内不需要再加上环境光颜色了，因为它只需要计算一次，而之前已经在基础渲染通道中计算了\n                return fixed4((diffuse + specular) * atten, 1);\n            }\n            ENDCG\n        }\n    }\n\n    Fallback \"Specular\"\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,1303 @@
+{
+	"ID": "20250104160152-1n6zns7",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20250104160152-1n6zns7",
+		"title": "US3S10L3——屏幕后处理基本实现原理",
+		"type": "doc",
+		"updated": "20250105142438"
+	},
+	"Children": [
+		{
+			"ID": "20250104160253-woy9kh1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250104160253-woy9kh1",
+				"updated": "20250104160911"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity中屏幕后期处理效果的基本实现原理"
+				}
+			]
+		},
+		{
+			"ID": "20250104160339-hls1o1e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104160339-hls1o1e",
+				"updated": "20250104160405"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "从上文可以知道，想要完成屏幕后期处理效果，最关键的问题在于："
+				}
+			]
+		},
+		{
+			"ID": "20250104160405-bga32tz",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250104160405-bga32tz",
+				"updated": "20250104160418"
+			},
+			"Children": [
+				{
+					"ID": "20250104160405-yeox3sz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250104160405-yeox3sz",
+						"updated": "20250104160411"
+					},
+					"Children": [
+						{
+							"ID": "20250104160405-ph7em35",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104160405-ph7em35",
+								"updated": "20250104160411"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如何获取"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "游戏画面渲染完毕后的画面信息"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104160405-s6qwg6h",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250104160405-s6qwg6h",
+						"updated": "20250104160418"
+					},
+					"Children": [
+						{
+							"ID": "20250104160405-ai63wxp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104160405-ai63wxp",
+								"updated": "20250104160418"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如何为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "获取到的画面信息添加自定义效果"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104160349-y2c0xbr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104160349-y2c0xbr",
+				"updated": "20250104160424"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "只要搞清楚这两点，自然就明白了基本实现原理："
+				}
+			]
+		},
+		{
+			"ID": "20250104160424-uu75l57",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250104160424-uu75l57",
+				"updated": "20250104160839"
+			},
+			"Children": [
+				{
+					"ID": "20250104160424-rnk74di",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250104160424-rnk74di",
+						"updated": "20250104160424"
+					},
+					"Children": [
+						{
+							"ID": "20250104160424-lj7gyvv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104160424-lj7gyvv",
+								"updated": "20250104160429"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如何获取"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "游戏画面渲染完毕后的画面信息"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104160431-eoqqmkf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104160431-eoqqmkf",
+								"updated": "20250104160812"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "之前在学习 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20241221193339-2wszm8t",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "渲染目标纹理"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 时学习过，在 Unity 中获取渲染纹理的常用方法有三种：\n​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240411155939-z0goj0j",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "RenderTexture"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（渲染纹理）、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref code",
+									"TextMarkBlockRefID": "20241222144207-ppxtcwp",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "GrabPass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（Shader 内使用）、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnRenderImage"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n我们在处理屏幕后期处理效果时会使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnRenderImage"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 函数来获取 游戏画面渲染完毕后的画面信息"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104160424-e4kkni8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250104160424-e4kkni8",
+						"updated": "20250104160839"
+					},
+					"Children": [
+						{
+							"ID": "20250104160424-ow59hfr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104160424-ow59hfr",
+								"updated": "20250104160820"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如何为"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "获取到的画面信息添加自定义效果"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104160821-lekzwqg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104160821-lekzwqg",
+								"updated": "20250104160839"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "主要思路是将获取到的游戏画面"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "作为 自定义Shader 的主纹理"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "通过 自定义Shader 利用捕获的画面来实现自定义效果"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104160859-1jokgsp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "[ImageEffectOpaque]",
+				"id": "20250104160859-1jokgsp",
+				"name": "OnRenderImage()",
+				"updated": "20250104161746"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "捕获画面的关键 —— OnRenderImage函数"
+				}
+			]
+		},
+		{
+			"ID": "20250104160932-gxitvby",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104160932-gxitvby",
+				"updated": "20250104161039"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "OnRenderImage()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 是在继承了 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code block-ref",
+					"TextMarkBlockRefID": "20230708163049-sje2nzo",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "MonoBehaviour"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的脚本中能够被自动调用的函数（类似生命周期函数）\n它会在图像的渲染操作完成后调用，它的固定写法是："
+				}
+			]
+		},
+		{
+			"ID": "20250104161039-xotilbk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250104161039-xotilbk",
+				"style": "line-height: 22px;",
+				"updated": "20250104161047"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void OnRenderImage(RenderTexture source, RenderTexture destination) { }\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250104161039-otpy8if",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250104161039-otpy8if",
+				"updated": "20250104161216"
+			},
+			"Children": [
+				{
+					"ID": "20250104161216-0ri95dn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104161216-0ri95dn",
+						"updated": "20250104161216"
+					},
+					"Children": [
+						{
+							"ID": "20250104161216-xm95onq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104161216-xm95onq",
+								"updated": "20250104161216"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "第一个参数 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "source"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：源渲染纹理，当前渲染得到的屏幕图像存储在该参数当中\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104161217-04fiq9f",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104161217-04fiq9f",
+						"updated": "20250104161217"
+					},
+					"Children": [
+						{
+							"ID": "20250104161217-hpzmn2i",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104161217-hpzmn2i",
+								"updated": "20250104161217"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "第二个参数 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "destination"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：目标渲染纹理，将经过处理后的图像写入到目标纹理中用于最终的显示"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104161053-3jrl67q",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104161053-3jrl67q",
+				"updated": "20250104161054"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过该函数我们便可以得到当前渲染的游戏画面，并在该函数中对画面对应的渲染纹理进行处理后用于最终显示"
+				}
+			]
+		},
+		{
+			"ID": "20250104161720-62tea8r",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104161720-62tea8r",
+				"updated": "20250104161746"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "一般来说，实现屏幕后处理的脚本都是挂载在摄像机上的"
+				}
+			]
+		},
+		{
+			"ID": "20250104160934-pok0ca6",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20250104160934-pok0ca6",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color); --b3-parent-background: var(--b3-card-warning-background);",
+				"updated": "20250104161542"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20250104161117-l88gdqb",
+					"Type": "NodeHeading",
+					"HeadingLevel": 4,
+					"Properties": {
+						"id": "20250104161117-l88gdqb",
+						"updated": "20250104161542"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "注意！"
+						}
+					]
+				},
+				{
+					"ID": "20250104161121-kmcizt7",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250104161121-kmcizt7",
+						"updated": "20250104161159"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "该函数得到的源纹理默认是在所有的不透明和透明的 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "Pass"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​ 执行完毕后调用的，\n基于该源纹理进行修改会对游戏场景中所有游戏对象产生影响，"
+						}
+					]
+				},
+				{
+					"ID": "20250104161401-0vjv1wg",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250104161401-0vjv1wg",
+						"updated": "20250104161406"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "如果你想要在不透明的 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "Pass"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​ 执行完毕后就调用该函数，只需要在该函数前加上特性 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "[ImageEffectOpaque]"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​，这样就不会对透明物体产生影响"
+						}
+					]
+				},
+				{
+					"ID": "20250104161514-zed7lt1",
+					"Type": "NodeCodeBlock",
+					"IsFencedCodeBlock": true,
+					"Properties": {
+						"id": "20250104161514-zed7lt1",
+						"style": "line-height: 22px;",
+						"updated": "20250104161542"
+					},
+					"Children": [
+						{
+							"Type": "NodeCodeBlockFenceOpenMarker",
+							"Data": "```"
+						},
+						{
+							"Type": "NodeCodeBlockFenceInfoMarker",
+							"CodeBlockInfo": "YyM="
+						},
+						{
+							"Type": "NodeCodeBlockCode",
+							"Data": "[ImageEffectOpaque]\nprivate void OnRenderImage(RenderTexture source, RenderTexture destination) { }\n"
+						},
+						{
+							"Type": "NodeCodeBlockFenceCloseMarker",
+							"Data": "```"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104161256-ba3bt1e",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250104161256-ba3bt1e",
+				"name": "Graphics.Blit()",
+				"updated": "20250105142438"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现效果的关键 —— Graphics.Blit函数"
+				}
+			]
+		},
+		{
+			"ID": "20250104161807-4z0bvbw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104161807-4z0bvbw",
+				"updated": "20250104161823"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Graphics.Blit()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 用于将一个图像从一个纹理复制到另一个纹理，同时可以在这个过程中用着色器对图像进行处理\n它有很多重载，我们主要讲解几个常用的："
+				}
+			]
+		},
+		{
+			"ID": "20250104161827-2kc70xr",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250104161827-2kc70xr",
+				"updated": "20250105142438"
+			},
+			"Children": [
+				{
+					"ID": "20250104161829-bvb9otb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250104161829-bvb9otb",
+						"updated": "20250104161829"
+					},
+					"Children": [
+						{
+							"ID": "20250104161829-fp6m2m2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104161829-fp6m2m2",
+								"updated": "20250104161834"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将源纹理直接复制到目标纹理\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104161835-2174r71",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104161835-2174r71",
+								"style": "line-height: 22px;",
+								"updated": "20250104161837"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Graphics.Blit(Texture source, RenderTexture dest)\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20250104162150-y3kzpew",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104162150-y3kzpew",
+								"updated": "20250104162158"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用示例："
+								}
+							]
+						},
+						{
+							"ID": "20250104162158-64nsj9e",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104162158-64nsj9e",
+								"style": "line-height: 22px;",
+								"updated": "20250104162159"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private void OnRenderImage(RenderTexture source, RenderTexture destination)\n{\n    Graphics.Blit(source, destination);     // 将原纹理直接赋值到目标纹理\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104161829-uhz1cq9",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250104161829-uhz1cq9",
+						"updated": "20250105142438"
+					},
+					"Children": [
+						{
+							"ID": "20250104161829-8bbwuit",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104161829-8bbwuit",
+								"updated": "20250104161842"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将源纹理复制到目标纹理并应用一个材质\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104161848-nrzs97a",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104161848-nrzs97a",
+								"style": "line-height: 22px;",
+								"updated": "20250105142438"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Graphics.Blit(Texture source, RenderTexture dest, Material mat, int pass = -1);\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20250104161843-tevy558",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250104161843-tevy558",
+								"updated": "20250104161858"
+							},
+							"Children": [
+								{
+									"ID": "20250104161858-6oyyn02",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104161858-6oyyn02",
+										"updated": "20250104161858"
+									},
+									"Children": [
+										{
+											"ID": "20250104161858-6t493qq",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104161858-6t493qq",
+												"updated": "20250104162420"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "source"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 源纹理参数会被传递给 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "mat"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 材质中 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Shader"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 中名为 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "_MainTex"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 的纹理属性用于进行处理"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250104161859-btu5dro",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250104161859-btu5dro",
+										"updated": "20250104161859"
+									},
+									"Children": [
+										{
+											"ID": "20250104161859-r6ri3wn",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250104161859-r6ri3wn",
+												"updated": "20250104161943"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "pass"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 参数默认值为 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "-1"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，表示会依次调用 Shader 内的所有 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Pass"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 进行处理，否则，只会调用给定索引的 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Pass"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​​"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250104162518-ssalv6i",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104162518-ssalv6i",
+								"updated": "20250104162613"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "source"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 源纹理在经过 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "mat"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 材质中 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Shader"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 处理后，最终会将 Shader 输出的颜色渲染到 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "dest"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 上，改变屏幕显示内容"
+								}
+							]
+						},
+						{
+							"ID": "20250104162205-8zh5nj1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104162205-8zh5nj1",
+								"updated": "20250104162209"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用示例："
+								}
+							]
+						},
+						{
+							"ID": "20250104162209-4b6qmba",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104162209-4b6qmba",
+								"style": "line-height: 22px;",
+								"updated": "20250104163514"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using UnityEngine;\n\npublic class Lesson100 : MonoBehaviour\n{\n    public Material material;\n\n    private void OnRenderImage(RenderTexture source, RenderTexture destination)\n    {\n        Graphics.Blit(source, destination, material);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20250104162406-pj0daef",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104162406-pj0daef",
+								"updated": "20250104163044"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将此脚本挂载到主摄像机上，然后使用之前实现的棋盘格程序纹理 Shader 的材质，这个材质会直接渲染棋盘格颜色"
+								}
+							]
+						},
+						{
+							"ID": "20250104163344-l28vdnw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104163344-l28vdnw",
+								"updated": "20250104163344"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 331px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250104163344-axvafr3.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 331px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250104163332-98whnfd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104163332-98whnfd",
+								"updated": "20250104163332"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Shader 代码详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20241222182649-gi1034n",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "US3S8L11——Shader代码动态生成程序纹理"
+								}
+							]
+						},
+						{
+							"ID": "20250104163045-9r0yrrc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104163045-9r0yrrc",
+								"updated": "20250104163233"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "显示效果："
+								}
+							]
+						},
+						{
+							"ID": "20250104163259-cy9mukc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104163259-cy9mukc",
+								"updated": "20250104163259"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 480px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250104163259-qpnlwtl.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 480px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250104163307-e8btc98",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104163307-e8btc98",
+								"updated": "20250104163601"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可见，虽然这个材质内没有使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "source"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 屏幕内容纹理，\n但是"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "因为材质会直接输出棋盘格颜色，并渲染到"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code strong",
+									"TextMarkTextContent": "destination"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "目标纹理内了，因此整个屏幕都变成了棋盘格样式的"
+								}
+							]
+						},
+						{
+							"ID": "20250104163615-7qbgu8t",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104163615-7qbgu8t",
+								"updated": "20250104163657"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "也就是说，如果能够合理的在 Shader 内传入的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "source"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 屏幕内容纹理，就可以对屏幕显示内容作出修改"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104161945-0p7aags",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104161945-0p7aags",
+				"updated": "20250104161945"
+			}
+		}
+	]
+}

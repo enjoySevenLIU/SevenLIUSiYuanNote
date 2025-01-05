@@ -1,0 +1,669 @@
+{
+	"ID": "20241208013852-tu2l5c4",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20241208013852-tu2l5c4",
+		"title": "US3S6L8——透明度混合物体阴影实现",
+		"type": "doc",
+		"updated": "20241208025343"
+	},
+	"Children": [
+		{
+			"ID": "20241208013853-gl9nxfs",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20241208013853-gl9nxfs",
+				"updated": "20241208023332"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20241208023301-vlmetnv",
+					"Type": "NodeHeading",
+					"HeadingLevel": 3,
+					"Properties": {
+						"id": "20241208023301-vlmetnv",
+						"updated": "20241208023332"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "知识回顾"
+						}
+					]
+				},
+				{
+					"ID": "20241208023303-x312jt5",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241208023303-x312jt5",
+						"updated": "20241208023313"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "透明度测试只能处理极端效果（完全透明和完全不透明）\n而透明度混合可以帮助我们实现半透明效果"
+						}
+					]
+				},
+				{
+					"ID": "20241208023316-ayae5zy",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241208023316-ayae5zy",
+						"updated": "20241208023316"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "它的基本原理：关闭深度写入，开启混合，让片元颜色和颜色缓冲区中颜色进行混合计算"
+						}
+					]
+				},
+				{
+					"ID": "20241208023321-1k10js4",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241208023321-1k10js4",
+						"updated": "20241208023332"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "相关内容详见："
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "block-ref",
+							"TextMarkBlockRefID": "20241121121110-xa0nvgw",
+							"TextMarkBlockRefSubtype": "d",
+							"TextMarkTextContent": "US3S3L5——透明度混合"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241208023334-5hi0wod",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241208023334-5hi0wod",
+				"updated": "20241208025343"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "透明度混合 Shader 处理阴影"
+				}
+			]
+		},
+		{
+			"ID": "20241208024523-nhym93g",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208024523-nhym93g",
+				"updated": "20241208024616"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "复用之前实现的透明混合 Shader，具体内容详见："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20241121121110-xa0nvgw",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "US3S3L5——透明度混合"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20241122122716-yk7ji9p",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "US3S3L6——开启深度写入的半透明"
+				}
+			]
+		},
+		{
+			"ID": "20241208023355-t27rq2z",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208023355-t27rq2z",
+				"updated": "20241208024007"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "根据 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20241208013848-9xi0gsm",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "透明度测试实现阴影接收和投射"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 的思路，如果想要物体产生阴影效果无非就两步："
+				}
+			]
+		},
+		{
+			"ID": "20241208023540-36r323s",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241208023540-36r323s",
+				"updated": "20241208024510"
+			},
+			"Children": [
+				{
+					"ID": "20241208023540-haw96aq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241208023540-haw96aq",
+						"updated": "20241208024510"
+					},
+					"Children": [
+						{
+							"ID": "20241208023540-wytjztc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208023540-wytjztc",
+								"updated": "20241208023928"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "投射阴影：在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "FallBack"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中关联内置的对应 Shader（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "\u0026quot;Transparent/VertexLit\u0026quot;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​）"
+								}
+							]
+						},
+						{
+							"ID": "20241208024505-a33xk4l",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241208024505-a33xk4l",
+								"style": "line-height: 22px;",
+								"updated": "20241208024510"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Fallback \"Tranparent/VertexLit\"\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241208023540-ziknbdj",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241208023540-ziknbdj",
+						"updated": "20241208023540"
+					},
+					"Children": [
+						{
+							"ID": "20241208023540-wtb17fo",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208023540-wtb17fo",
+								"updated": "20241208023559"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "接受阴影：在 Shader 中书写计算阴影衰减值的相关代码"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241208023525-lj2ktei",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208023525-lj2ktei",
+				"updated": "20241208023605"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此对于透明度混合的 Shader 也会使用同样的思路去制作"
+				}
+			]
+		},
+		{
+			"ID": "20241208023602-u9ffl7r",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208023602-u9ffl7r",
+				"updated": "20241208024336"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但是！由于透明度混合需要关闭深度写入，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "而阴影相关的处理需要用到深度值参与计算"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n因此 Unity 中从性能方面考虑（要计算半透明物体的的阴影表现效果是相对复杂的）\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "所有的内置半透明 Shader 都不会产生阴影效果"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "（例如 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "\u0026quot;Transparent/VertexLit\u0026quot;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​）"
+				}
+			]
+		},
+		{
+			"ID": "20241208023722-c80fmky",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208023722-c80fmky",
+				"updated": "20241208023736"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此："
+				}
+			]
+		},
+		{
+			"ID": "20241208023736-p4fvwyx",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241208023736-p4fvwyx",
+				"updated": "20241208023858"
+			},
+			"Children": [
+				{
+					"ID": "20241208023736-zmpkcr6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241208023736-zmpkcr6",
+						"updated": "20241208023736"
+					},
+					"Children": [
+						{
+							"ID": "20241208023736-nlolod4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208023736-nlolod4",
+								"updated": "20241208023745"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "透明混合 Shader 想要投射阴影时"
+								}
+							]
+						},
+						{
+							"ID": "20241208023738-x9l14w0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208023738-x9l14w0",
+								"updated": "20241208023759"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "不管在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "FallBack"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中写入哪种自带的半透明混合 Shader，都不会有投射阴影的效果，因为深度不会写入"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241208023736-q02opai",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241208023736-q02opai",
+						"updated": "20241208023858"
+					},
+					"Children": [
+						{
+							"ID": "20241208023736-v2wu8wd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208023736-v2wu8wd",
+								"updated": "20241208023804"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "透明混合 Shader 想要接受阴影时\n"
+								}
+							]
+						},
+						{
+							"ID": "20241208023806-r3cfoum",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208023806-r3cfoum",
+								"updated": "20241208023858"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Unity 内置关于阴影接收计算的相关宏，不会计算处理透明混合Shader\n即：混合因子设置为半透明效果（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Blend SrcAlpha OneMinusSrcAlpha"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​）的 Shader\n"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "因为透明混合物体的深度值和遮挡关系，无法直接用传统的深度缓冲和阴影贴图来处理"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241208023822-dnyabhq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208023822-dnyabhq",
+				"updated": "20241208025343"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "结论：Unity 中不会直接为透明度混合 Shader 处理阴影，目前学习的内容暂时不能支持我们直接为半透明混合物体生成一个较为合理的阴影"
+				}
+			]
+		},
+		{
+			"ID": "20241208024020-9i4ywet",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241208024020-9i4ywet",
+				"updated": "20241208025222"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "强制生成阴影"
+				}
+			]
+		},
+		{
+			"ID": "20241208024126-757seso",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208024126-757seso",
+				"updated": "20241208024158"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以尝试让透明混合 Shader 强制投射阴影，在 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "FallBack"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 中设置一个非透明 Shader，比如 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "VertexLit"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Diffuse"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 等\n用其中的灯光模式设置为阴影投射的渲染通道来参与阴影映射纹理的计算，把该物体当成一个实体物体处理"
+				}
+			]
+		},
+		{
+			"ID": "20241208024150-v1ot5xw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208024150-v1ot5xw",
+				"updated": "20241208024150"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但是，这种效果并不真实，不建议使用"
+				}
+			]
+		},
+		{
+			"ID": "20241208024816-vtvt8l0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241208024816-vtvt8l0",
+				"style": "line-height: 22px;",
+				"updated": "20241208024853"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson70_Transparent\"\n{\n    Properties\n    {\n        _MainTex(\"MainTex\", 2D) = \"\"{}                          // 纹理贴图\n        _MainColor(\"MainColor\", Color) = (1, 1, 1, 1)           // 漫反射颜色\n        _SpecularColor(\"SpecularColor\", Color) = (1, 1, 1, 1)   // 高光反射颜色\n        _SpecularNum(\"SpecularNum\", Range(0, 20)) = 15          // 光泽度\n        _AlphaScale(\"AlphaScale\", Range(0, 1)) = 1              // 对象总体透明度\n    }\n    SubShader { /*...*/ }\n\n    Fallback \"VertexLit\"\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241208024855-07tlxy9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208024855-07tlxy9",
+				"updated": "20241208025002"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "效果显示（右为强制开启阴影投射的Shader）："
+				}
+			]
+		},
+		{
+			"ID": "20241208024928-oi7chs7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208024928-oi7chs7",
+				"updated": "20241208024928"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 388px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241208024928-1x1ll04.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 388px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241208024931-hbheg7p",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208024931-hbheg7p",
+				"updated": "20241208025222"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以看到，强制开启阴影后，虽然存在阴影，但是这个阴影和非透明物体的阴影无异，没有阴影淡化，阴影也没有颜色，且没有接受阴影效果"
+				}
+			]
+		}
+	]
+}

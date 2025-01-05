@@ -1,0 +1,1720 @@
+{
+	"ID": "20241210083343-v6xrqao",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20241210083343-v6xrqao",
+		"title": "CS4L22——迭代器",
+		"type": "doc",
+		"updated": "20241215002655"
+	},
+	"Children": [
+		{
+			"ID": "20241215002209-68420rs",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241215002209-68420rs",
+				"updated": "20241215002655"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20241215002222-cqy9wlj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241215002222-cqy9wlj",
+				"style": "line-height: 22px;",
+				"updated": "20241215002655"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "IEnumerable\t\t\t// 可迭代接口，需要实现返回迭代器IEnumerator的方法\nIEnumerator\t\t\t// 迭代器接口，内部维护一个光标来迭代获取其中的元素\nIEnumerable\u003cT\u003e\t\t// 可迭代泛型接口，需要实现返回迭代器IEnumerator\u003cT\u003e的方法，可以限制foreach迭代的变量类型\nIEnumerator\u003cT\u003e\t\t// 迭代器泛型接口，内部维护一个光标来迭代获取其中的元素，迭代的类型被泛型约束\nyield return\t\t// 返回值为IEnumerator的方法可以使用的语法糖，相当于返回一个值后挂起函数，再次执行函数时会从上次yield return的地方向后执行\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241210083343-27brwpf",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20241210083343-27brwpf",
+				"updated": "20241214235100"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "迭代器"
+				}
+			]
+		},
+		{
+			"ID": "20241214222653-85t5ia2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241214222653-85t5ia2",
+				"updated": "20241214232729"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "迭代器（"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "iterator"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​）有时又称光标（"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "cursor"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​），是程序设计的软件设计模式，\n迭代器模式提供一个方法顺序访问一个聚合对象中的各个元素，而又不暴露其内部的标识"
+				}
+			]
+		},
+		{
+			"ID": "20241214222702-vhslpx6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241214222702-vhslpx6",
+				"updated": "20241214222727"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "从表现结果上看，迭代器是可以在容器对象（例如链表或者数组）上遍历访问的接口，设计人员无需关心容器对象的内存分配的实现细节"
+				}
+			]
+		},
+		{
+			"ID": "20241214222720-8sa69xm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241214222720-8sa69xm",
+				"updated": "20241214222819"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "foreach"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 遍历的类，都是实现了迭代器的接口"
+				}
+			]
+		},
+		{
+			"ID": "20241214222820-de0i6s9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "IEnumerator",
+				"id": "20241214222820-de0i6s9",
+				"name": "IEnumerable",
+				"updated": "20241214235100"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "标准迭代器的实现方法"
+				}
+			]
+		},
+		{
+			"ID": "20241214222733-rmqkpxx",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20241214222733-rmqkpxx",
+				"updated": "20241214222901"
+			},
+			"Children": [
+				{
+					"ID": "20241214222901-e48ohen",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241214222901-e48ohen",
+						"updated": "20241214222901"
+					},
+					"Children": [
+						{
+							"ID": "20241214222901-196dpjh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241214222901-196dpjh",
+								"updated": "20241214222901"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "关键接口："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "IEnumerator"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "IEnumerable"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241214222901-07f4obp",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241214222901-07f4obp",
+						"updated": "20241214222901"
+					},
+					"Children": [
+						{
+							"ID": "20241214222901-9smm5yj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241214222901-9smm5yj",
+								"updated": "20241214222901"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "命名空间："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "using System.Collections;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241214232251-ndjrrhj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241214232251-ndjrrhj",
+				"updated": "20241214232522"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "迭代器的一个最常用的用途就是 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "foreach"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 遍历，首先拆解 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "foreach"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 遍历执行的内容"
+				}
+			]
+		},
+		{
+			"ID": "20241214230159-di7vbcr",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20241214230159-di7vbcr",
+				"updated": "20241214235100"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "foreach 的本质"
+				}
+			]
+		},
+		{
+			"ID": "20241214231753-ejelwbx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241214231753-ejelwbx",
+				"updated": "20241214231815"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "拆解 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "foreach"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 中具体每一步做的事情："
+				}
+			]
+		},
+		{
+			"ID": "20241214231621-4k95pyz",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241214231621-4k95pyz",
+				"updated": "20241214234745"
+			},
+			"Children": [
+				{
+					"ID": "20241214231707-ms0r9gl",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241214231707-ms0r9gl",
+						"updated": "20241214234745"
+					},
+					"Children": [
+						{
+							"ID": "20241214231707-cvfijsd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241214231707-cvfijsd",
+								"updated": "20241214234745"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "首先会调用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "in"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 后面这个对象的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GetEnumerator()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 方法，来获取 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "IEnumerator"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 对象"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241214231707-h303m6x",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241214231707-h303m6x",
+						"updated": "20241214232837"
+					},
+					"Children": [
+						{
+							"ID": "20241214231707-cglkuci",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241214231707-cglkuci",
+								"updated": "20241214232526"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "执行得到的这个 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "IEnumerator"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 对象中的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "MoveNext()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 方法"
+								}
+							]
+						},
+						{
+							"ID": "20241214231920-ctg8oxm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241214231920-ctg8oxm",
+								"updated": "20241214232837"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "其中，前两个步骤只会执行一次！接下来就是反复循环三四步，直到第三步的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "MoveNext()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 返回 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "false"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241214231707-lxjdo3x",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20241214231707-lxjdo3x",
+						"updated": "20241214232840"
+					},
+					"Children": [
+						{
+							"ID": "20241214231707-i9wo05t",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241214231707-i9wo05t",
+								"updated": "20241214232840"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "只要 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "MoveNext()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 方法的返回值是 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "true"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，就会去从 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "IEnumerator"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Current"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 属性取值，然后赋值给 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "in"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 前面的变量，执行 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "foreach"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 语句块"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241214231707-2rvfm46",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20241214231707-2rvfm46",
+						"updated": "20241214232536"
+					},
+					"Children": [
+						{
+							"ID": "20241214231707-7qi3q34",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241214231707-7qi3q34",
+								"updated": "20241214232536"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "执行 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "foreach"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 语句块执行完毕，回到第三步，直到 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "MoveNext()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 方法返回 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "false"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "foreach"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 结束"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241214225802-qcztvi8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241214225802-qcztvi8",
+				"updated": "20241214232743"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此，如果要使自定义类可以使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "foreach"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 遍历，\n则必须要实现一个 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GetEnumerator"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法，也就是 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerable"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 内声明的方法，返回的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerator"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 对象就是被迭代的主体"
+				}
+			]
+		},
+		{
+			"ID": "20241214233743-hjgl9ck",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241214233743-hjgl9ck",
+				"updated": "20241214234832"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "而被迭代的，实现 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerator"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的对象，需要在内部存储一个光标（"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "cursor"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​），类似于当前迭代到的对象，索引之类，\n然后，在 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "MoveNext()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法中，需要将这个光标向后移动，让光标指向下一个对象，根据对象存在与否返回 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "bool"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 值，\n如果光标移动后可以指向一个对象，就返回 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "true"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，告诉外部可以通过 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Current"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 取值，如果光标越界或溢出，就返回 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "false"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，告诉外部迭代结束，\n而 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Reset()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法则需要将光标移动到最开始的位置上，同时，此方法一般是在内部调用，因此，可以在 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GetEnumerator()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法处调用"
+				}
+			]
+		},
+		{
+			"ID": "20241214232454-cb5vaoi",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241214232454-cb5vaoi",
+				"updated": "20241214232639"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "一个类可以通过同时继承 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerator"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 和 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerable"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 并实现其中的方法，也可以只继承 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerable"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，然后返回另一个 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerator"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 对象"
+				}
+			]
+		},
+		{
+			"ID": "20241214234616-9nst6om",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241214234616-9nst6om",
+				"updated": "20241214234635"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设自定义类同时继承 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerator"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 和 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerable"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 并实现其中的方法，让 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "foreach"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 可以迭代循环"
+				}
+			]
+		},
+		{
+			"ID": "20241214234612-bpi8lmo",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241214234612-bpi8lmo",
+				"style": "line-height: 22px;",
+				"updated": "20241214235023"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\n\nclass CustomList : IEnumerable, IEnumerator\n{\n    private int[] list;\n    private int position = -1;\n\n    public CustomList()\n    {\n        list = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };\n    }\n\n    // IEnumerable需要实现的内容\n    public IEnumerator GetEnumerator()\n    {\n        return this;\n    }\n\n    // IEnumerator需要实现的内容\n    public object Current =\u003e list[position];\n    // 移动光标，迭代到下一次\n    public bool MoveNext()\n    {\n        position++;                         // 移动光标\n        return position \u003c list.Length;      // 检测光标是否溢出越界，溢出越界就证明迭代结束\n    }\n    // 重置光标，一般在IEnumerable.GetEnumerator()内调用\n    public void Reset()\n    {\n        position = -1;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241214235025-dlf9vbp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241214235025-dlf9vbp",
+				"updated": "20241214235047"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这样，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "foreach"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 就可以正常迭代了"
+				}
+			]
+		},
+		{
+			"ID": "20241214235049-vnrt2zh",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241214235049-vnrt2zh",
+				"style": "line-height: 22px;",
+				"updated": "20241214235053"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "CustomList list = new CustomList();\nforeach (int item in list)\n{\n    Console.WriteLine(item);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241214235055-fopk6on",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241214235055-fopk6on",
+				"updated": "20241214235057"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20241214235057-dosgy52",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241214235057-dosgy52",
+				"style": "line-height: 22px;",
+				"updated": "20241214235100"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "1\n2\n3\n4\n5\n6\n7\n8\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241214223133-kvst358",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241214223133-kvst358",
+				"name": "yield return",
+				"updated": "20241215000029"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "用 yield return 语法糖实现迭代器"
+				}
+			]
+		},
+		{
+			"ID": "20241214223136-r6wtipd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241214223136-r6wtipd",
+				"updated": "20241214235745"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "yield return"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 是 C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 提供给我们的语法糖，它可以用于返回值为 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerator"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的函数内\n所谓语法糖，也称糖衣语法，主要作用就是将复杂逻辑简单化，可以增加程序的可读性，从而减少程序代码出错的机会"
+				}
+			]
+		},
+		{
+			"ID": "20241214235741-741bdcn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241214235741-741bdcn",
+				"updated": "20241214235743"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "yield"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 关键字是配合迭代器使用，可以理解为暂时返回，保留当前的状态，\n下次调用从 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "yield return"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的位置继续，原理其实和上面的标准迭代器一样，但是 C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 帮我们自动写好了代码\n"
+				}
+			]
+		},
+		{
+			"ID": "20241214223159-u80azx1",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20241214223159-u80azx1",
+				"updated": "20241214223214"
+			},
+			"Children": [
+				{
+					"ID": "20241214223214-1dr3qf0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241214223214-1dr3qf0",
+						"updated": "20241214223214"
+					},
+					"Children": [
+						{
+							"ID": "20241214223214-dr56dnl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241214223214-dr56dnl",
+								"updated": "20241214223214"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "关键接口："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "IEnumerable"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241214223214-7kyoijf",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241214223214-7kyoijf",
+						"updated": "20241214223214"
+					},
+					"Children": [
+						{
+							"ID": "20241214223214-3ehksua",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241214223214-3ehksua",
+								"updated": "20241214223214"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "命名空间："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "using System.Collections;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241214223200-s5j6dlk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241214223200-s5j6dlk",
+				"updated": "20241214223206"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "让想要通过 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "foreach"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 遍历的自定义类实现接口中的方法 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GetEnumerator"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 即可"
+				}
+			]
+		},
+		{
+			"ID": "20241214235245-p4k33sj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241214235245-p4k33sj",
+				"style": "line-height: 22px;",
+				"updated": "20241214235936"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\n\nclass YieldTest : IEnumerable\n{\n    private int[] list;\n\n    public YieldTest()\n    {\n        list = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };\n    }\n\n    public IEnumerator GetEnumerator()\n    {\n        for (int i = 0; i \u003c list.Length; i++)\n        {\n            yield return list[i];   // 走到这里先返回一个值，下次调用的时候在接着这里继续向下执行\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241214235759-szr54uy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241214235759-szr54uy",
+				"updated": "20241215000002"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "yield"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 关键字背后的原理和之前实现的标准迭代器一样，只是 C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 编译器后续会根据这个关键字自动生成那些标准迭代器语句"
+				}
+			]
+		},
+		{
+			"ID": "20241214235922-4a8ktw4",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241214235922-4a8ktw4",
+				"style": "line-height: 22px;",
+				"updated": "20241214235929"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "YieldTest list = new YieldTest();\nforeach (int item in list)\n{\n    Console.WriteLine(item);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241214235938-vra7aom",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241214235938-vra7aom",
+				"updated": "20241214235939"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20241214235939-dy866xi",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241214235939-dy866xi",
+				"style": "line-height: 22px;",
+				"updated": "20241214235946"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "1\n2\n3\n4\n5\n6\n7\n8\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241215000026-1cv2b65",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241215000026-1cv2b65",
+				"name": "IEnumerable\u0026lt;T\u0026gt;",
+				"updated": "20241215002119"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "用 yield return 语法糖为泛型类实现迭代器"
+				}
+			]
+		},
+		{
+			"ID": "20241215000721-2o8rah2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241215000721-2o8rah2",
+				"updated": "20241215000741"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "泛型类也可以直接使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerable"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 以支持迭代器"
+				}
+			]
+		},
+		{
+			"ID": "20241215000034-0ayc6sg",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241215000034-0ayc6sg",
+				"style": "line-height: 22px;",
+				"updated": "20241215000639"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class YieldTest\u003cT\u003e : IEnumerable\n{\n    private T[] array;\n\n    public YieldTest(T[] array)\n    {\n        this.array = array;\n    }\n\n    public IEnumerator GetEnumerator()\n    {\n        for (int i = 0; i \u003c array.Length; i++)\n        {\n            yield return array[i];   // 走到这里先返回一个值，下次调用的时候在接着这里继续向下执行\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241215000743-bx3uius",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241215000743-bx3uius",
+				"style": "line-height: 22px;",
+				"updated": "20241215000748"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "YieldTest\u003cstring\u003e list = new YieldTest\u003cstring\u003e(new string[] { \"aaa\", \"bbb\", \"ccc\", \"ddd\", \"eee\" });\nforeach (string item in list)\n{\n    Console.WriteLine(item);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241215000749-5kbr7y3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241215000749-5kbr7y3",
+				"updated": "20241215000750"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20241215000750-jo6v0mc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241215000750-jo6v0mc",
+				"style": "line-height: 22px;",
+				"updated": "20241215000754"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "aaa\nbbb\nccc\nddd\neee\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241215000836-t89851n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241215000836-t89851n",
+				"updated": "20241215002110"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerable"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 也有泛型接口："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerable\u0026lt;T\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，它可以限制迭代器迭代的类型，同时也可以限制 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "foreach"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 循环时的变量类型，避免类型出错，\n由于 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerable\u0026lt;T\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 继承了 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerable"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，因此实现 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerator\u0026lt;T\u0026gt; GetEnumerator()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法的同时，\n还需要实现 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerator GetEnumerator()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，但因为和泛型函数同名了，因此需要"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240904133300-abu4fzg",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "显式实现接口"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "： "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerator IEnumerable.GetEnumerator()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241215001611-xi936gs",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241215001611-xi936gs",
+				"updated": "20241215002119"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这样，除非将 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerable\u0026lt;T\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 对象得到的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerator\u0026lt;T\u0026gt;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 对象转换为 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "IEnumerator"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 对象，否则迭代器迭代的类型都是由 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "T"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 决定的："
+				}
+			]
+		},
+		{
+			"ID": "20241215001817-w5s551y",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241215001817-w5s551y",
+				"style": "line-height: 22px;",
+				"updated": "20241215002000"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class YieldTest\u003cT\u003e : IEnumerable\u003cT\u003e\n{\n    private T[] array;\n\n    public YieldTest(T[] array)\n    {\n        this.array = array;\n    }\n\n    public IEnumerator\u003cT\u003e GetEnumerator()\n    {\n        for (int i = 0; i \u003c array.Length; i++)\n        {\n            // yield return 1;          // error: 无法将类型“int”隐式转换为“T”\n            yield return array[i];      // 走到这里先返回一个值，下次调用的时候在接着这里继续向下执行\n        }\n    }\n\n\t// 这个函数也可以直接 return GetEnumerator()（返回值为IEnumerator\u003cT\u003e的），因为IEnumerator\u003cT\u003e是继承于IEnumerator的\n    IEnumerator IEnumerable.GetEnumerator()\n    {\n        for (int i = 0; i \u003c array.Length; i++)\n        {\n            yield return 1;             // 这里可以返回任意类型的值，因为IEnumerator不限制迭代器迭代的类型\n            yield return array[i];      // 走到这里先返回一个值，下次调用的时候在接着这里继续向下执行\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241215001236-wkbcsxc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241215001236-wkbcsxc",
+				"style": "line-height: 22px;",
+				"updated": "20241215002017"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "YieldTest\u003cstring\u003e list = new YieldTest\u003cstring\u003e(new string[] { \"aaa\", \"bbb\", \"ccc\", \"ddd\", \"eee\" });\nforeach (string item in list)\n{\n    Console.WriteLine(item);\n}\n// foreach (int item in list) {}    // error: 无法将类型“int”隐式转换为“T”\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241215002018-vhyp9j0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241215002018-vhyp9j0",
+				"updated": "20241215002019"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20241215002019-i0ypc8z",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241215002019-i0ypc8z",
+				"style": "line-height: 22px;",
+				"updated": "20241215002030"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "aaa\nbbb\nccc\nddd\neee\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

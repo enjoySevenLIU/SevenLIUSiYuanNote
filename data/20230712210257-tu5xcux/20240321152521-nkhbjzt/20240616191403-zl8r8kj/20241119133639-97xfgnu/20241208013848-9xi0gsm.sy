@@ -1,0 +1,1198 @@
+{
+	"ID": "20241208013848-9xi0gsm",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20241208013848-9xi0gsm",
+		"title": "US3S6L7——透明度测试物体阴影实现",
+		"type": "doc",
+		"updated": "20241208023354"
+	},
+	"Children": [
+		{
+			"ID": "20241208013849-4k8gstw",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20241208013849-4k8gstw",
+				"updated": "20241208015155"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20241208014927-pegs3pq",
+					"Type": "NodeHeading",
+					"HeadingLevel": 3,
+					"Properties": {
+						"id": "20241208014927-pegs3pq",
+						"updated": "20241208015155"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "知识回顾"
+						}
+					]
+				},
+				{
+					"ID": "20241208014937-0mbfqsc",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241208014937-0mbfqsc",
+						"updated": "20241208015143"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "在游戏开发中，要让对象的某些部位完全透明而其他部位完全不透明，就会使用透明测试\n这种透明需求往往不需要半透明效果，相对比较极端，只有看得见和看不见之分，比如树叶、草、栅栏等等"
+						}
+					]
+				},
+				{
+					"ID": "20241208014953-4nkbnuo",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241208014953-4nkbnuo",
+						"updated": "20241208015121"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "透明度测试基本原理：通过一个阈值来决定哪些像素应该被保留，哪些应该被丢弃"
+						}
+					]
+				},
+				{
+					"ID": "20241208015145-fk681st",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241208015145-fk681st",
+						"updated": "20241208015155"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "相关内容详见："
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "block-ref",
+							"TextMarkBlockRefID": "20241120123139-t3fekhe",
+							"TextMarkBlockRefSubtype": "d",
+							"TextMarkTextContent": "US3S3L4——透明度测试"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241208015726-8fmq4og",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241208015726-8fmq4og",
+				"updated": "20241208023350"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "让透明度测试 Shader 投射阴影"
+				}
+			]
+		},
+		{
+			"ID": "20241208015746-ew7sqom",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241208015746-ew7sqom",
+				"updated": "20241208020806"
+			},
+			"Children": [
+				{
+					"ID": "20241208015909-nntixiz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241208015909-nntixiz",
+						"updated": "20241208015909"
+					},
+					"Children": [
+						{
+							"ID": "20241208015909-8579lhu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208015909-8579lhu",
+								"updated": "20241208015923"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "复用之前实现的透明测试 Shader"
+								}
+							]
+						},
+						{
+							"ID": "20241208015925-334nnv0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208015925-334nnv0",
+								"updated": "20241208015934"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "具体内容详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20241120123139-t3fekhe",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "US3S3L4——透明度测试"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241208015749-os1x9mw",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241208015749-os1x9mw",
+						"updated": "20241208015749"
+					},
+					"Children": [
+						{
+							"ID": "20241208015749-wle52af",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208015749-wle52af",
+								"updated": "20241208015810"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "同样使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "FallBack"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 的形式投射阴影\n"
+								}
+							]
+						},
+						{
+							"ID": "20241208015812-fgbt2v9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208015812-fgbt2v9",
+								"updated": "20241208015900"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "但是需要注意的是，这里 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "FallBack"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 的内容为："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Transparent/Cutout/VertexLit"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n该默认 Shader 中会把裁剪后的物体深度信息写入到 阴影映射纹理和摄像机深度图中"
+								}
+							]
+						},
+						{
+							"ID": "20241208015817-wad9rjn",
+							"Type": "NodeBlockquote",
+							"Properties": {
+								"id": "20241208015817-wad9rjn",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color); --b3-parent-background: var(--b3-card-warning-background);",
+								"updated": "20241208015847"
+							},
+							"Children": [
+								{
+									"Type": "NodeBlockquoteMarker",
+									"Data": "\u003e"
+								},
+								{
+									"ID": "20241208015847-ns08qxn",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20241208015847-ns08qxn",
+										"updated": "20241208015855"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "注意：使用该默认 Shader 计算投射阴影时，需要使用 "
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "_Cutoff"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​ 属性 和 "
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "_Color"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​ 属性来进行相关计算\n因此我们必须保证我们的 Shader 当中有名字为 "
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "_Cutoff"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​ 的阈值属性 和 "
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "_Color"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​ 的漫反射颜色属性，否则无法得到正确阴影结果"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241208020321-wb0s0vu",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241208020321-wb0s0vu",
+								"style": "line-height: 22px;",
+								"updated": "20241208020343"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Shader \"TeachShader/Lesson69_AlphaTestShadow\"\n{\n    Properties\n    {\n        _MainTex(\"MainTex\", 2D) = \"\"{}                          // 纹理贴图\n        _Color(\"MainColor\", Color) = (1, 1, 1, 1)           \t// 漫反射颜色\n        _SpecularColor(\"SpecularColor\", Color) = (1, 1, 1, 1)   // 高光反射颜色\n        _SpecularNum(\"SpecularNum\", Range(0, 20)) = 15          // 光泽度\n        _Cutoff(\"Curoff\", Range(0, 1)) = 0                      // 透明测试阈值\n    }\n    SubShader\n    {\n        Tags { \"Queue\"=\"AlphaTest\" \"IgnoreProjector\"=\"True\" \"RenderType\"=\"TransparentCutout\"}\n\n        Pass { /*...*/ }\n\n    Fallback \"Transparent/Cutout/VertexLit\"\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241208015749-lavpaom",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20241208015749-lavpaom",
+						"updated": "20241208020806"
+					},
+					"Children": [
+						{
+							"ID": "20241208015749-7o0uj3a",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208015749-7o0uj3a",
+								"updated": "20241208020004"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "为了得到正确的阴影效果，需要将该物体的 Cast Shadows（投射阴影）属性设置为 Two Sided（双面）"
+								}
+							]
+						},
+						{
+							"ID": "20241208020136-yj1wziw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208020136-yj1wziw",
+								"updated": "20241208020136"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 282px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20241208020136-j6ahkj3.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 282px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20241208020026-pymfrkp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208020026-pymfrkp",
+								"updated": "20241208020654"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "这会强制让 Unity 计算阴影隐射纹理时计算所有面的深度信息。\n如果不设置，默认将物体渲染到阴影隐射纹理和摄像机深度图时只会考虑物体的正面\n背对光源的面不会参与计算，设置为双面后即可参与计算，得到正确的结果"
+								}
+							]
+						},
+						{
+							"ID": "20241208020458-iw33llx",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208020458-iw33llx",
+								"updated": "20241208020707"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "不开启 Two Sided 时的错误效果："
+								}
+							]
+						},
+						{
+							"ID": "20241208020608-1d7etdy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208020608-1d7etdy",
+								"updated": "20241208020709"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20241208020608-j9ndz9f.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20241208020709-mbblbyd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208020709-mbblbyd",
+								"updated": "20241208020806"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可以看到，立方体只有一部分面投射了阴影"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241208020457-tn2rb6n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208020457-tn2rb6n",
+				"updated": "20241208020815"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这时，使用透明测试 Shader 的立方体就可以投射阴影了："
+				}
+			]
+		},
+		{
+			"ID": "20241208020930-hqxb9cg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208020930-hqxb9cg",
+				"updated": "20241208023022"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241208020930-mgtvozs.png"
+						},
+						{
+							"Type": "NodeLinkSpace"
+						},
+						{
+							"Type": "NodeLinkTitle",
+							"Data": "中间为未实现阴影投射的Shader效果，右边为实现了阴影投射的Shader效果"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241208021629-ie54g6q",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241208021629-ie54g6q",
+				"updated": "20241208023354"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "让透明度测试 Shader 接收阴影"
+				}
+			]
+		},
+		{
+			"ID": "20241208021636-wjqzp2t",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208021636-wjqzp2t",
+				"updated": "20241208021644"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "和我们之前处理接收阴影的方式一样，主要分5步骤："
+				}
+			]
+		},
+		{
+			"ID": "20241208021644-7l8dddd",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241208021644-7l8dddd",
+				"updated": "20241208022905"
+			},
+			"Children": [
+				{
+					"ID": "20241208021644-3pkhdf4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241208021644-3pkhdf4",
+						"updated": "20241208021644"
+					},
+					"Children": [
+						{
+							"ID": "20241208021644-k76o03z",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208021644-k76o03z",
+								"updated": "20241208021859"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "添加编译指令 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "#pragma multi_compile_fwdbase"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20241208021656-o23sbfw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208021656-o23sbfw",
+								"updated": "20241208021800"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "用于帮助我们编译所有变体，并且保证衰减相关光照变量能够正确赋值到对应的内置变量中"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241208021644-5ian2cf",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241208021644-5ian2cf",
+						"updated": "20241208021644"
+					},
+					"Children": [
+						{
+							"ID": "20241208021644-kv28266",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208021644-kv28266",
+								"updated": "20241208021702"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "包含内置文件 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "#include \u0026quot;AutoLight.cginc\u0026quot;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20241208021903-l35ezyg",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241208021903-l35ezyg",
+								"style": "line-height: 22px;",
+								"updated": "20241208021917"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "CGPROGRAM\n#pragma vertex vert\n#pragma fragment frag\n#pragma multi_compile_fwdbase\n\n#include \"UnityCG.cginc\"\n#include \"Lighting.cginc\"\n#include \"AutoLight.cginc\"\n// ...\nENDCG\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241208021644-8jxuffr",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20241208021644-8jxuffr",
+						"updated": "20241208021644"
+					},
+					"Children": [
+						{
+							"ID": "20241208021644-irp3hf6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208021644-irp3hf6",
+								"updated": "20241208021930"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "v2f"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 结构体中声明阴影坐标宏："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SHADOW_COORDS(n)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20241208021717-c6bsxrj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208021717-c6bsxrj",
+								"updated": "20241208021943"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "n"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 为下一个可用的插值寄存器的索引值（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "v2f"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 结构体内部有几个 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "TEXCOORD"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 就填几）"
+								}
+							]
+						},
+						{
+							"ID": "20241208021947-0fc9vxy",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241208021947-0fc9vxy",
+								"style": "line-height: 22px;",
+								"updated": "20241208022026"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "struct v2f\n{\n    float4 pos: SV_POSITION;    // 裁剪空间下的顶点坐标\n    float2 uv: TEXCOORD0;       // 纹理UV坐标\n    float3 wNormal: NORMAL;     // 世界空间下的法线\n    float3 wPos: TEXCOORD1;     // 世界空间下的顶点坐标\n    SHADOW_COORDS(2)            // 阴影坐标宏\n};\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241208021644-s9kethf",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20241208021644-s9kethf",
+						"updated": "20241208022358"
+					},
+					"Children": [
+						{
+							"ID": "20241208021644-a4ex3f6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208021644-a4ex3f6",
+								"updated": "20241208022358"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在顶点着色器中使用坐标转换宏："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20241205122917-b0wqa08",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "TRANSFER_SHADOW"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20241208022121-cnoyye4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208022121-cnoyye4",
+								"updated": "20241208022228"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "TRANSFER_SHADOW()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 内传入 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "v2f"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 结构体变量，其中 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "v2f"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 结构体内顶点坐标成员名必须是 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "pos"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20241208022028-3xkpqzh",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241208022028-3xkpqzh",
+								"style": "line-height: 22px;",
+								"updated": "20241208022302"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "v2f vert (appdata_base v)\n{\n    v2f data;\n    data.pos = UnityObjectToClipPos(v.vertex);                  // 将模型空间下的法线转换到世界空间下\n    data.uv = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;  // 计算UV\n    data.wNormal = UnityObjectToWorldNormal(v.normal);          // 法线转换到世界空间\n    data.wPos = mul(unity_ObjectToWorld, v.vertex);             // 顶点转换到世界空间\n    TRANSFER_SHADOW(data);                                      // 阴影坐标转换宏\n\n    return data;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241208021644-uip3uwk",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20241208021644-uip3uwk",
+						"updated": "20241208022905"
+					},
+					"Children": [
+						{
+							"ID": "20241208021644-2sbyiiw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208021644-2sbyiiw",
+								"updated": "20241208022538"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在顶点着色器中使用 Unity 光照衰减计算宏："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20241206124737-uvu1xxw",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "UNITY_LIGHT_ATTENUATION"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20241208022327-8r8hs9p",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241208022327-8r8hs9p",
+								"updated": "20241208022642"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "UNITY_LIGHT_ATTENUATION()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 内分别传入衰减值变量名（宏内部自动声明，无需再自行声明），"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "v2f"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 结构体变量，顶点世界坐标位置"
+								}
+							]
+						},
+						{
+							"ID": "20241208022324-tv2qiot",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241208022324-tv2qiot",
+								"style": "line-height: 22px;",
+								"updated": "20241208022905"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "fixed4 frag (v2f i) : SV_Target\n{\n    fixed4 texColor = tex2D(_MainTex, i.uv);                    // 颜色纹理的颜色信息\n    clip(texColor.a - _Cutoff);                                 // A通道减去阈值传入到Clip函数内，若A值小于阈值就会被裁剪\n\n    fixed3 albedo = texColor.rgb * _Color.rgb;                  // 反射率，即纹理颜色和漫反射材质颜色乘法叠加共同决定的颜色\n\n    // 漫反射颜色\n    float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);      // 指向光源的方向\n    fixed3 lambertColor = _LightColor0.rgb * albedo.rgb * max(0, dot(i.wNormal, lightDir));\n\n    // 高光反射颜色\n    float3 viewDir = normalize(UnityWorldSpaceViewDir(i.wPos)); // 视角方向\n    float3 halfA = normalize(viewDir + lightDir);               // 半角向量\n    fixed3 specularColor = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(i.wNormal, halfA)), _SpecularNum);\n\n    // 衰减值计算\n    UNITY_LIGHT_ATTENUATION(atten, i, i.wPos)\n\n    // 最终颜色 = 环境光 * 反射颜色 + 漫反射颜色 + 高光反射颜色\n    fixed3 color = UNITY_LIGHTMODEL_AMBIENT.rgb * albedo + (lambertColor + specularColor) * atten;\n\n    return fixed4(color.rgb, 1);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241208021753-3kev7fg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208021753-3kev7fg",
+				"updated": "20241208022916"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20241208023008-i0dxnl8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208023008-i0dxnl8",
+				"updated": "20241208023101"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241208023008-aaqlecz.png"
+						},
+						{
+							"Type": "NodeLinkSpace"
+						},
+						{
+							"Type": "NodeLinkTitle",
+							"Data": "中为未实现阴影投射和接收Shader效果，右为实现了阴影投射和接收Shader效果"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241208023009-y1akuob",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208023009-y1akuob",
+				"updated": "20241208023137"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，现在的透明测试 Shader 可以投射和接收阴影了"
+				}
+			]
+		},
+		{
+			"ID": "20241208023139-khctini",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241208023139-khctini",
+				"updated": "20241208023149"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "完整 Shader 代码如下："
+				}
+			]
+		},
+		{
+			"ID": "20241208023150-i39qxx7",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241208023150-i39qxx7",
+				"style": "line-height: 22px;",
+				"updated": "20241208023154"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson69_AlphaTestShadow\"\n{\n    Properties\n    {\n        _MainTex(\"MainTex\", 2D) = \"\"{}                          // 纹理贴图\n        _Color(\"MainColor\", Color) = (1, 1, 1, 1)           // 漫反射颜色\n        _SpecularColor(\"SpecularColor\", Color) = (1, 1, 1, 1)   // 高光反射颜色\n        _SpecularNum(\"SpecularNum\", Range(0, 20)) = 15          // 光泽度\n        _Cutoff(\"Curoff\", Range(0, 1)) = 0                      // 透明测试阈值\n    }\n    SubShader\n    {\n        Tags { \"Queue\"=\"AlphaTest\" \"IgnoreProjector\"=\"True\" \"RenderType\"=\"TransparentCutout\"}\n\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardBase\" }\n            Cull Off    // 关闭剔除，让模型双面都可以渲染\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            #pragma multi_compile_fwdbase\n\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n            #include \"AutoLight.cginc\"\n\n            // 贴图纹理对应的映射成员\n            sampler2D _MainTex;\n            float4 _MainTex_ST;\n            // 漫反射颜色、高光反射颜色、光泽度\n            fixed4 _Color;\n            fixed4 _SpecularColor;\n            float _SpecularNum;\n            // 透明测试阈值\n            fixed _Cutoff;\n\n            struct v2f\n            {\n                float4 pos: SV_POSITION;    // 裁剪空间下的顶点坐标\n                float2 uv: TEXCOORD0;       // 纹理UV坐标\n                float3 wNormal: NORMAL;     // 世界空间下的法线\n                float3 wPos: TEXCOORD1;     // 世界空间下的顶点坐标\n                SHADOW_COORDS(2)            // 阴影坐标宏\n            };\n\n            v2f vert (appdata_base v)\n            {\n                v2f data;\n                data.pos = UnityObjectToClipPos(v.vertex);                  // 将模型空间下的法线转换到世界空间下\n                data.uv = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;  // 计算UV\n                data.wNormal = UnityObjectToWorldNormal(v.normal);          // 法线转换到世界空间\n                data.wPos = mul(unity_ObjectToWorld, v.vertex);             // 顶点转换到世界空间\n                TRANSFER_SHADOW(data);                                      // 阴影坐标转换宏\n\n                return data;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                fixed4 texColor = tex2D(_MainTex, i.uv);                    // 颜色纹理的颜色信息\n                clip(texColor.a - _Cutoff);                                 // A通道减去阈值传入到Clip函数内，若A值小于阈值就会被裁剪\n\n                fixed3 albedo = texColor.rgb * _Color.rgb;                  // 反射率，即纹理颜色和漫反射材质颜色乘法叠加共同决定的颜色\n      \n                // 漫反射颜色\n                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);      // 指向光源的方向\n                fixed3 lambertColor = _LightColor0.rgb * albedo.rgb * max(0, dot(i.wNormal, lightDir));\n      \n                // 高光反射颜色\n                float3 viewDir = normalize(UnityWorldSpaceViewDir(i.wPos)); // 视角方向\n                float3 halfA = normalize(viewDir + lightDir);               // 半角向量\n                fixed3 specularColor = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(i.wNormal, halfA)), _SpecularNum);\n\n                // 衰减值计算\n                UNITY_LIGHT_ATTENUATION(atten, i, i.wPos)\n\n                // 最终颜色 = 环境光 * 反射颜色 + 漫反射颜色 + 高光反射颜色\n                fixed3 color = UNITY_LIGHTMODEL_AMBIENT.rgb * albedo + (lambertColor + specularColor) * atten;\n\n                return fixed4(color.rgb, 1);\n            }\n            ENDCG\n        }\n    }\n\n    Fallback \"Transparent/Cutout/VertexLit\"\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

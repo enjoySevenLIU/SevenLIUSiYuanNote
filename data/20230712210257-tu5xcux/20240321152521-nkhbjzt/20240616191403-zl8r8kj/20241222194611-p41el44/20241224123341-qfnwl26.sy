@@ -1,0 +1,1277 @@
+{
+	"ID": "20241224123341-qfnwl26",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20241224123341-qfnwl26",
+		"title": "US3S9L2——序列帧动画",
+		"type": "doc",
+		"updated": "20241225000415"
+	},
+	"Children": [
+		{
+			"ID": "20241224123341-o4u0939",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241224123341-o4u0939",
+				"updated": "20241224235531"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "分析利用纹理坐标制作序列帧动画的原理"
+				}
+			]
+		},
+		{
+			"ID": "20241224235510-uf2ehl5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241224235510-uf2ehl5",
+				"updated": "20241224235531"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Shader实现序列帧动画的关键点是：UV 坐标原点为左下角，而序列帧图集 “原点” 为左上角\n我们需要注意采样开始位置的转换"
+				}
+			]
+		},
+		{
+			"ID": "20241224123804-r4pz4ye",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241224123804-r4pz4ye",
+				"updated": "20241224123918"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以下图为例，制作一个序列帧爆炸动画（不需要使用 Unity 的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20230729170905-2q6ezxf",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "Sprite Editor"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 去分割图集）："
+				}
+			]
+		},
+		{
+			"ID": "20241224123909-gr46qb5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241224123909-gr46qb5",
+				"updated": "20241224123909"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 305px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "boom"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/boom-20241224123909-cp1va1j.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 305px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241224123704-t7n07rv",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20241224123704-t7n07rv",
+				"updated": "20241224124626"
+			},
+			"Children": [
+				{
+					"ID": "20241224123704-zreuhyp",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241224123704-zreuhyp",
+						"updated": "20241224123704"
+					},
+					"Children": [
+						{
+							"ID": "20241224123657-6vkqu0c",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241224123657-6vkqu0c",
+								"updated": "20241224123657"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "关键点\n"
+								}
+							]
+						},
+						{
+							"ID": "20241224123705-59tukjd",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20241224123705-59tukjd",
+								"updated": "20241224123707"
+							},
+							"Children": [
+								{
+									"ID": "20241224123707-da05oew",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20241224123707-da05oew",
+										"updated": "20241224123707"
+									},
+									"Children": [
+										{
+											"ID": "20241224123707-4jhco6v",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241224123707-4jhco6v",
+												"updated": "20241224123710"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "UV 坐标范围 0~1，原点为图片左下角"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241224123707-18cj3af",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20241224123707-18cj3af",
+										"updated": "20241224123707"
+									},
+									"Children": [
+										{
+											"ID": "20241224123707-iyqlsij",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241224123707-iyqlsij",
+												"updated": "20241224123707"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "图集序列帧动画播放顺序为从左到右，从上到下"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241224123704-05oflg6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241224123704-05oflg6",
+						"updated": "20241224123715"
+					},
+					"Children": [
+						{
+							"ID": "20241224123657-xzmn9tm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241224123657-xzmn9tm",
+								"updated": "20241224123715"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "分析问题"
+								}
+							]
+						},
+						{
+							"ID": "20241224123715-ky7x9sr",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20241224123715-ky7x9sr",
+								"updated": "20241224123715"
+							},
+							"Children": [
+								{
+									"ID": "20241224123715-a0v9s06",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20241224123715-a0v9s06",
+										"updated": "20241224123715"
+									},
+									"Children": [
+										{
+											"ID": "20241224123715-q1h0qu7",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241224123715-q1h0qu7",
+												"updated": "20241224123715"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如何得到当前应该播放哪一帧动画？"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241224123715-23uerqq",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20241224123715-23uerqq",
+										"updated": "20241224123715"
+									},
+									"Children": [
+										{
+											"ID": "20241224123715-htcyswa",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241224123715-htcyswa",
+												"updated": "20241224123726"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "如何将采样规则从 0~1 修改为在指定范围内采样？"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241224123704-97aumle",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241224123704-97aumle",
+						"updated": "20241224124626"
+					},
+					"Children": [
+						{
+							"ID": "20241224123657-mvbigvs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241224123657-mvbigvs",
+								"updated": "20241224123657"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "问题解决思路\n"
+								}
+							]
+						},
+						{
+							"ID": "20241224123717-tuqmvc0",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20241224123717-tuqmvc0",
+								"updated": "20241224124626"
+							},
+							"Children": [
+								{
+									"ID": "20241224123721-umzxehm",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20241224123721-umzxehm",
+										"updated": "20241224124626"
+									},
+									"Children": [
+										{
+											"ID": "20241224123721-jhyn7et",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241224123721-jhyn7et",
+												"updated": "20241224124626"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "用内置时间参数 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code block-ref",
+													"TextMarkBlockRefID": "20241224122550-3kjgrru",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "_Time.y"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 参与计算得到具体哪一帧\n"
+												}
+											]
+										},
+										{
+											"ID": "20241224123735-acxh6xz",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241224123735-acxh6xz",
+												"updated": "20241224123735"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "时间是不停增长的数值，用它对总帧数取余，便可以循环获取到当前帧数"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241224123721-79widfd",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20241224123721-79widfd",
+										"updated": "20241224124606"
+									},
+									"Children": [
+										{
+											"ID": "20241224123721-hvzfdoj",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241224123721-hvzfdoj",
+												"updated": "20241224123721"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "利用时间得到当前应该绘制哪一帧后\n"
+												}
+											]
+										},
+										{
+											"ID": "20241224123738-1lxvi7z",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241224123738-1lxvi7z",
+												"updated": "20241224124606"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "我们只需要确认从当前小图片中，采样开始位置，采样范围即可，\n采样开始位置，可以利用当前帧和行列一起计算，采样范围可以将 0~1 范围 缩放转换到 小图范围内"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241224124751-ll74buf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241224124751-ll74buf",
+				"updated": "20241224230218"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们按照顺序，从左到右，从上到下的选定不同小图的范围，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "改变 UV 坐标和采样范围"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，依次给小图采样\n每过一帧就切换到下一个小图采样，通过在大图内依次采样不同的小图的方式，实现序列帧动画效果"
+				}
+			]
+		},
+		{
+			"ID": "20241224232252-6ztz8qu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241224232252-6ztz8qu",
+				"updated": "20241224232252"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 258px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241224232252-zfri8kh.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 258px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241224225803-p08i6m0",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241224225803-p08i6m0",
+				"updated": "20241225000415"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "用 Shader 实现序列帧动画"
+				}
+			]
+		},
+		{
+			"ID": "20241224225528-63xbbxr",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241224225528-63xbbxr",
+				"updated": "20241225000415"
+			},
+			"Children": [
+				{
+					"ID": "20241224230500-je2poge",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241224230500-je2poge",
+						"updated": "20241224230500"
+					},
+					"Children": [
+						{
+							"ID": "20241224230500-0y5vktb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241224230500-0y5vktb",
+								"updated": "20241224230504"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "新建 Shader，删除无用代码"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241224230500-i4eeh6l",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241224230500-i4eeh6l",
+						"updated": "20241224230500"
+					},
+					"Children": [
+						{
+							"ID": "20241224230500-7z69xfz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241224230500-7z69xfz",
+								"updated": "20241224230500"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "声明属性，进行属性映射\n"
+								}
+							]
+						},
+						{
+							"ID": "20241224230508-mgh3h6s",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241224230508-mgh3h6s",
+								"updated": "20241224230512"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "包括主纹理、图集行列、序列帧切换速度"
+								}
+							]
+						},
+						{
+							"ID": "20241224230739-uk5zppk",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241224230739-uk5zppk",
+								"style": "line-height: 22px;",
+								"updated": "20241224232553"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Properties\n{\n    _MainTex (\"Texture\", 2D) = \"white\" {}   // 序列帧图集纹理\n    _Rows(\"Rows\", int) = 8                  // 图集的行数\n    _Columns(\"Columns\", int) = 8            // 图集的列数\n    _Speed(\"Speed\", float) = 1              // 切换动画速度变量\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241224230500-e1v9tep",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20241224230500-e1v9tep",
+						"updated": "20241225000415"
+					},
+					"Children": [
+						{
+							"ID": "20241224230500-6vl7i63",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241224230500-6vl7i63",
+								"updated": "20241224231101"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "设置透明 Shader 相关内容"
+								}
+							]
+						},
+						{
+							"ID": "20241224231102-ns79wvn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241224231102-ns79wvn",
+								"updated": "20241225000415"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "往往这种序列帧图集图片都会有透明区域，因此需要使用透明混合相关的设置，具体详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20241121121110-xa0nvgw",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "US3S3L5——透明度混合"
+								}
+							]
+						},
+						{
+							"ID": "20241224230517-esoqgpb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241224230517-esoqgpb",
+								"updated": "20241224231253"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "设置渲染标签的渲染类型为透明，队列为透明，并忽略投影机\n关闭深度写入，开启混合，需要使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SrcAlpha OneMinusSrcAlpha"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 混合"
+								}
+							]
+						},
+						{
+							"ID": "20241224231253-ich9gl3",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241224231253-ich9gl3",
+								"style": "line-height: 22px;",
+								"updated": "20241224231334"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "SubShader\n{\n    Tags { \"RenderType\"=\"Transparent\" \"IgnoreProjector\"=\"True\" \"Queue\"=\"Transparent\"}\n\n    Pass\n    {\n        ZWrite Off\n        Blend SrcAlpha OneMinusSrcAlpha\n\n        CGPROGRAM\n        //...\n        ENDCG\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241224230500-8sews75",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20241224230500-8sews75",
+						"updated": "20241224230500"
+					},
+					"Children": [
+						{
+							"ID": "20241224230500-y1al4ua",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241224230500-y1al4ua",
+								"updated": "20241224230500"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "结构体\n"
+								}
+							]
+						},
+						{
+							"ID": "20241224230545-e1bl1gc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241224230545-e1bl1gc",
+								"updated": "20241224230545"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "只需要顶点坐标和纹理坐标"
+								}
+							]
+						},
+						{
+							"ID": "20241224231337-vt6sjty",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241224231337-vt6sjty",
+								"style": "line-height: 22px;",
+								"updated": "20241224232636"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "struct v2f\n{\n    float2 uv : TEXCOORD0;\n    float4 vertex : SV_POSITION;\n};\n\nsampler2D _MainTex;\nfloat4 _MainTex_ST;\nfloat _Rows;\nfloat _Columns;\nfloat _Speed;\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241224230500-ulc6e40",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20241224230500-ulc6e40",
+						"updated": "20241224230500"
+					},
+					"Children": [
+						{
+							"ID": "20241224230500-xpw3797",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241224230500-xpw3797",
+								"updated": "20241224230500"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "顶点着色器\n"
+								}
+							]
+						},
+						{
+							"ID": "20241224230547-pieoxs5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241224230547-pieoxs5",
+								"updated": "20241224230547"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "只需要进行坐标转换和纹理坐标赋值"
+								}
+							]
+						},
+						{
+							"ID": "20241224231502-x4s5snf",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241224231502-x4s5snf",
+								"style": "line-height: 22px;",
+								"updated": "20241224231508"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "v2f vert (appdata_base v)\n{\n    v2f o;\n    o.vertex = UnityObjectToClipPos(v.vertex);\n    o.uv = v.texcoord;\n    return o;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241224230500-rfviy9c",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ni4=",
+						"Num": 6
+					},
+					"Properties": {
+						"id": "20241224230500-rfviy9c",
+						"updated": "20241224230500"
+					},
+					"Children": [
+						{
+							"ID": "20241224230500-xpatw2u",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241224230500-xpatw2u",
+								"updated": "20241224230500"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "片元着色器\n"
+								}
+							]
+						},
+						{
+							"ID": "20241224230551-nwgwqzt",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20241224230551-nwgwqzt",
+								"updated": "20241224230551"
+							},
+							"Children": [
+								{
+									"ID": "20241224230551-68315re",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20241224230551-68315re",
+										"updated": "20241224230551"
+									},
+									"Children": [
+										{
+											"ID": "20241224230551-citzr7j",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241224230551-citzr7j",
+												"updated": "20241224230553"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "利用时间计算帧数\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241224230553-cv2o7ce",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20241224230553-cv2o7ce",
+										"updated": "20241224230553"
+									},
+									"Children": [
+										{
+											"ID": "20241224230553-1sycuqw",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241224230553-1sycuqw",
+												"updated": "20241224234245"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "利用帧数计算当前 uv 采样起始位置（得到小图片 uv 起始位置，注意起始位置要在小图的左下角）"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241224230554-p3awgpp",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20241224230554-p3awgpp",
+										"updated": "20241224230554"
+									},
+									"Children": [
+										{
+											"ID": "20241224230554-d4tlphs",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241224230554-d4tlphs",
+												"updated": "20241224230727"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "计算 uv 缩放比例（将 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "inline-math",
+													"TextMarkInlineMathContent": "0 \\sim 1"
+												},
+												{
+													"Type": "NodeText",
+													"Data": " 转换到 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "inline-math",
+													"TextMarkInlineMathContent": "0 \\sim \\frac{1}{n}"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "）"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241224230554-5955wi0",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NC4=",
+										"Num": 4
+									},
+									"Properties": {
+										"id": "20241224230554-5955wi0",
+										"updated": "20241224230554"
+									},
+									"Children": [
+										{
+											"ID": "20241224230554-ryfmdk8",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241224230554-ryfmdk8",
+												"updated": "20241224234225"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "进行 uv 偏移计算（在小图片格子中采样，需要先缩放后偏移）"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241224230555-1wrr534",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "NS4=",
+										"Num": 5
+									},
+									"Properties": {
+										"id": "20241224230555-1wrr534",
+										"updated": "20241224230555"
+									},
+									"Children": [
+										{
+											"ID": "20241224230555-r5et2ja",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241224230555-r5et2ja",
+												"updated": "20241224230556"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "采样"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241224231510-b5hpwl6",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241224231510-b5hpwl6",
+								"style": "line-height: 22px;",
+								"updated": "20241224234205"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "fixed4 frag (v2f i) : SV_Target\n{\n    // 利用时间计算当前播放帧数索引\n    float frameIndex = floor(_Time.y * _Speed) % (_Rows * _Columns);\n    // 计算UV起始坐标\n    float2 frameUV = float2(\n        // 计算U轴起始位置，其中 / _Columns 是为了让U轴起始位置处于 0~1\n        frameIndex % _Columns / _Columns,                 \n        // 计算V轴起始位置，其中+1是为了让起始位置位于格子左下角，/ _Rows是为了让V轴起始位置处于 0~1，\n        // (floor(frameIndex / _Columns) + 1) / _Rows 得的是左边上段，因为采样是从左下角开始的，因此需要1-..\n        1 - (floor(frameIndex / _Columns) + 1) / _Rows);\n    // 计算uv缩放比例\n    float2 size = float2(1 / _Columns, 1 / _Rows);\n    float2 uv = i.uv * size + frameUV;  // 先缩放，是采样范围缩小到0 ~ 1/8，然后加上起始位置\n  \n    return tex2D(_MainTex, uv);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241224235001-r3g94z3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241224235001-r3g94z3",
+				"updated": "20241224235417"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果（播放速度 20）："
+				}
+			]
+		},
+		{
+			"ID": "20241224235321-nq8k6bs",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241224235321-nq8k6bs",
+				"updated": "20241224235321"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241224235321-fwrz8m5.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241224233339-s2jwuv9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241224233339-s2jwuv9",
+				"updated": "20241224233401"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "完整 Shader 代码如下："
+				}
+			]
+		},
+		{
+			"ID": "20241224233401-fq7fsqb",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241224233401-fq7fsqb",
+				"style": "line-height: 22px;",
+				"updated": "20241224234254"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson92_SequentialFrameAnimation\"\n{\n    Properties\n    {\n        _MainTex (\"Texture\", 2D) = \"white\" {}   // 序列帧图集纹理\n        _Rows(\"Rows\", int) = 8                  // 图集的行数\n        _Columns(\"Columns\", int) = 8            // 图集的列数\n        _Speed(\"Speed\", float) = 1              // 切换动画速度变量\n    }\n    SubShader\n    {\n        Tags { \"RenderType\"=\"Transparent\" \"IgnoreProjector\"=\"True\" \"Queue\"=\"Transparent\"}\n\n        Pass\n        {\n            ZWrite Off\n            Blend SrcAlpha OneMinusSrcAlpha\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n\n            struct v2f\n            {\n                float2 uv : TEXCOORD0;\n                float4 vertex : SV_POSITION;\n            };\n\n            sampler2D _MainTex;\n            float4 _MainTex_ST;\n            float _Rows;\n            float _Columns;\n            float _Speed;\n\n            v2f vert (appdata_base v)\n            {\n                v2f o;\n                o.vertex = UnityObjectToClipPos(v.vertex);\n                o.uv = v.texcoord;\n                return o;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                // 利用时间计算当前播放帧数索引\n                float frameIndex = floor(_Time.y * _Speed) % (_Rows * _Columns);\n                // 计算UV起始坐标\n                float2 frameUV = float2(\n                    // 计算U轴起始位置，其中 / _Columns 是为了让U轴起始位置处于 0~1\n                    frameIndex % _Columns / _Columns,               \n                    // 计算V轴起始位置，其中+1是为了让起始位置位于格子左下角，/ _Rows是为了让V轴起始位置处于 0~1，\n                    // (floor(frameIndex / _Columns) + 1) / _Rows 得的是左边上段，因为采样是从左下角开始的，因此需要1-...\n                    1 - (floor(frameIndex / _Columns) + 1) / _Rows);\n                // 计算uv缩放比例\n                float2 size = float2(1 / _Columns, 1 / _Rows);\n                float2 uv = i.uv * size + frameUV;  // 先缩放，是采样范围缩小到0 ~ 1/8，然后加上起始位置\n            \n                return tex2D(_MainTex, uv);\n            }\n            ENDCG\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241224234956-rjskpr1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241224234956-rjskpr1",
+				"updated": "20241224234956"
+			}
+		}
+	]
+}

@@ -7,22 +7,344 @@
 		"scroll": "\u0026#123;\u0026quot;rootId\u0026quot;:\u0026quot;20231101210450-bm246ki\u0026quot;,\u0026quot;startId\u0026quot;:\u0026quot;20231101210450-j8h234k\u0026quot;,\u0026quot;endId\u0026quot;:\u0026quot;20231101210450-j8h234k\u0026quot;,\u0026quot;scrollTop\u0026quot;:0,\u0026quot;focusId\u0026quot;:\u0026quot;20231101210450-j8h234k\u0026quot;,\u0026quot;focusStart\u0026quot;:9,\u0026quot;focusEnd\u0026quot;:9\u0026#125;",
 		"title": "CS5L11——CSharp 9 功能和语法",
 		"type": "doc",
-		"updated": "20240703135125"
+		"updated": "20241215010120"
 	},
 	"Children": [
 		{
 			"ID": "20231101210450-j8h234k",
-			"Type": "NodeParagraph",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
 			"Properties": {
 				"id": "20231101210450-j8h234k",
-				"updated": "20231113155224"
+				"name": "new()",
+				"updated": "20241215010120"
 			},
 			"Children": [
 				{
 					"Type": "NodeText",
-					"Data": "没有讲解，后补"
+					"Data": "目标类型化 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "new"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
 				}
 			]
+		},
+		{
+			"ID": "20241215003628-hooi1pl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241215003628-hooi1pl",
+				"updated": "20241215004734"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在已知变量类型的情况下，使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "new"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 实例化对象时可以直接省略掉 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "new"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 关键字后面的类型，使变量的赋值语句变得更简单\n相比 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code block-ref",
+					"TextMarkBlockRefID": "20241210083402-y6xuwvc",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "var"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，它可以不仅可以用于临时变量初始化时，还可以用于类的成员变量以及对变量的重新赋值的情况"
+				}
+			]
+		},
+		{
+			"ID": "20241215004926-ucqce8b",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241215004926-ucqce8b",
+				"updated": "20241215005451"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实际上，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "new()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 在所有可以推导出类型的上下文中，都可以使用，包括在初始化器内部，只要能够确定赋值类型是什么"
+				}
+			]
+		},
+		{
+			"ID": "20241215004709-j7jc7dh",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241215004709-j7jc7dh",
+				"style": "line-height: 22px;",
+				"updated": "20241215005343"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "class Test {}\n\nclass Program\n{\n    List\u003cint\u003e numbers = new();\n    Test obj = new();\n    static Dictionary\u003cstring, List\u003cTest\u003e\u003e? testDict;\n\n    static void Main()\n    {\n        testDict = new() \n        {\n            {\"111\", new() { new() }},           //这里的第一个new()是List\u003cTest\u003e，后面的new()是Test\n            {\"222\", new() { new(), new() }},    //这里的第一个new()是List\u003cTest\u003e，后面的new()是Test\n        };\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241215005511-a5csx4f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241215005511-a5csx4f",
+				"updated": "20241215005936"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "不适用此特性的场景包括："
+				}
+			]
+		},
+		{
+			"ID": "20241215005529-swa5iko",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20241215005529-swa5iko",
+				"updated": "20241215010120"
+			},
+			"Children": [
+				{
+					"ID": "20241215005954-5q9lyii",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241215005954-5q9lyii",
+						"updated": "20241215010120"
+					},
+					"Children": [
+						{
+							"ID": "20241215005954-fmvuuxj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241215005954-fmvuuxj",
+								"updated": "20241215010120"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "该方法不适用于里氏替换，也就是父类装子类的情况，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "new"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 的子类必须显式指定，否则会出现歧义！"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241215005940-l6g13ia",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241215005940-l6g13ia",
+						"updated": "20241215005940"
+					},
+					"Children": [
+						{
+							"ID": "20241215005940-uza4nv3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241215005940-uza4nv3",
+								"updated": "20241215005940"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "as"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 操作时无法正确推导，以 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "int"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 为例"
+								}
+							]
+						},
+						{
+							"ID": "20241215005529-7xh4bwq",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241215005529-7xh4bwq",
+								"style": "line-height: 22px;",
+								"updated": "20241215005840"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Console.Write(new() as int); \t// error: \"new()\" 没有目标类型\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241215005943-a05f57k",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241215005943-a05f57k",
+						"updated": "20241215005943"
+					},
+					"Children": [
+						{
+							"ID": "20241215005943-0utrtpy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241215005943-0utrtpy",
+								"updated": "20241215005948"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "var"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 时也无法推导"
+								}
+							]
+						},
+						{
+							"ID": "20241215005529-cf0fn2l",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241215005529-cf0fn2l",
+								"style": "line-height: 22px;",
+								"updated": "20241215005908"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "var x = new();\t// error: \"new()\" 没有目标类型\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241215005529-4lad21p",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241215005529-4lad21p",
+				"updated": "20241215005946"
+			}
+		},
+		{
+			"ID": "20241215005529-lccwb4f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241215005529-lccwb4f",
+				"updated": "20241215005956"
+			}
 		}
 	]
 }

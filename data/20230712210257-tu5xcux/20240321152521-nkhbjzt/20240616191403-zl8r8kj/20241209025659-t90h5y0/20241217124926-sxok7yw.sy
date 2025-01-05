@@ -1,0 +1,2619 @@
+{
+	"ID": "20241217124926-sxok7yw",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20241217124926-sxok7yw",
+		"title": "US3S8L3——动态生成立方体纹理",
+		"type": "doc",
+		"updated": "20241219015634"
+	},
+	"Children": [
+		{
+			"ID": "20241219002319-5rn0odm",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241219002319-5rn0odm",
+				"updated": "20241219005333"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20241219002327-ka0rtjj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241219002327-ka0rtjj",
+				"style": "line-height: 22px;",
+				"updated": "20241219005333"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "camera.RenderToCubemap()\t// 摄像机根据所在位置动态生成立方体纹理\nCubemap\t\t\t\t\t\t// 立方体纹理类\nRenderTexture\t\t\t\t// 渲染纹理类，可以作为立方体纹理\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241217124926-5g02ss1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241217124926-5g02ss1",
+				"updated": "20241219002316"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "为什么要动态生成立方体纹理？"
+				}
+			]
+		},
+		{
+			"ID": "20241217125026-nv8see7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241217125026-nv8see7",
+				"updated": "20241219002316"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20241209025905-i5ffu4e",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "立方体纹理"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 中提到过，立方体纹理的其中一个最大的作用就是环境映射，\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "在实现反射、折射等等效果时，需要用到立方体纹理来制作对应效果，"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n而立方体纹理中最重要的就是组成它的 6 张 2D 纹理图片"
+				}
+			]
+		},
+		{
+			"ID": "20241217125100-x5z1qvm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241217125100-x5z1qvm",
+				"updated": "20241217125123"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于之前学过的天空盒来说，6 张 2D 纹理图片可以根据想要的美术表现效果来进行自定义制作，\n提前把纹理制作好，直接使用即可，这种立方体纹理往往是被提前做好的，是场景中物体们共用的，"
+				}
+			]
+		},
+		{
+			"ID": "20241217125127-38go7lt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241217125127-38go7lt",
+				"updated": "20241217125129"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但如果制作反射、折射等效果还是使用这样的立方体纹理，效果肯定不够理想，因为物体在场景上的位置不同，产生的对应效果也会是不同的"
+				}
+			]
+		},
+		{
+			"ID": "20241217125117-xlrokup",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241217125117-xlrokup",
+				"updated": "20241217125824"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "举例说明：以下图为例，假设我们希望立方体可以反射出周围光照，\n如果只使用提前做好的立方体纹理（例如天空盒）做反射，那么周围球体等其他物体是不会被反射出来的"
+				}
+			]
+		},
+		{
+			"ID": "20241217125535-58bbvhh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241217125535-58bbvhh",
+				"updated": "20241217125535"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241217125535-rxekt4u.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241217125815-51tupjf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241217125815-51tupjf",
+				"updated": "20241218225224"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此，为了更好更真实的表现效果，对于场景中不同位置的物体，我们应该为它们"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "在各自的位置上生成不同的立方体纹理"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "（6 张 2D 纹理贴图）"
+				}
+			]
+		},
+		{
+			"ID": "20241217125833-kkufbkl",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241217125833-kkufbkl",
+				"updated": "20241218222704"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如何动态生成立方体纹理？"
+				}
+			]
+		},
+		{
+			"ID": "20241217125857-x208qrq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241217125857-x208qrq",
+				"updated": "20241217125905"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们将结合"
+				}
+			]
+		},
+		{
+			"ID": "20241217125905-aojegtc",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241217125905-aojegtc",
+				"updated": "20241217130026"
+			},
+			"Children": [
+				{
+					"ID": "20241217125905-hb1aqbi",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241217125905-hb1aqbi",
+						"updated": "20241217130008"
+					},
+					"Children": [
+						{
+							"ID": "20241217125905-wnls49h",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241217125905-wnls49h",
+								"updated": "20241218222654"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Unity编辑器拓展"
+								}
+							]
+						},
+						{
+							"ID": "20241218222654-6evqp2t",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241218222654-6evqp2t",
+								"updated": "20241218222654"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "具体知识详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240317220544-aihpc4z",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "UED——Unity编辑器拓展"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241217125905-ss4z3hm",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241217125905-ss4z3hm",
+						"updated": "20241217130026"
+					},
+					"Children": [
+						{
+							"ID": "20241217125905-y93coov",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241217125905-y93coov",
+								"updated": "20241217130026"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref code",
+									"TextMarkBlockRefID": "20230709193827-nst3dof",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "Camera"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "RenderToCubemap()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 方法"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241217125903-76z3j7e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241217125903-76z3j7e",
+				"updated": "20241218222659"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这两个知识点，在对应位置生成对应的立方体纹理贴图，对于一些场景展示类项目，我们不需要实时生成，只需要在编辑器模式下生成一次即可"
+				}
+			]
+		},
+		{
+			"ID": "20241218222704-x9bjlz9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241218222704-x9bjlz9",
+				"updated": "20241218222704"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "主要要完成的功能为："
+				}
+			]
+		},
+		{
+			"ID": "20241217125859-jh6tz3x",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241217125859-jh6tz3x",
+				"updated": "20241217130114"
+			},
+			"Children": [
+				{
+					"ID": "20241217125859-drm6k28",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241217125859-drm6k28",
+						"updated": "20241217130114"
+					},
+					"Children": [
+						{
+							"ID": "20241217125859-yi0jq54",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241217125859-yi0jq54",
+								"updated": "20241217130114"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "自定义编辑器窗口，关联对象（通过对象来指定位置）和 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Cubemap"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 变量"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241217125859-nche5nb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241217125859-nche5nb",
+						"updated": "20241217130101"
+					},
+					"Children": [
+						{
+							"ID": "20241217125859-jbm7i6b",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241217125859-jbm7i6b",
+								"updated": "20241217130101"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "自定义窗口中有一个生成按钮，点击后使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Camera"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "RenderToCubemap()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 自动生成对应的6张2D纹理贴图"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241217125857-s4qcsya",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241217125857-s4qcsya",
+				"updated": "20241217130128"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "其中编辑器窗口相关功能使用 Unity 编辑器拓展相关知识\n自动生成立方体纹理贴图功能使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Camera"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 中的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "RenderToCubemap()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法\n该方法可以将任意位置观察到的场景图像存储到 6 张图像中"
+				}
+			]
+		},
+		{
+			"ID": "20241217130146-dlxcckc",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "Cubemap",
+				"id": "20241217130146-dlxcckc",
+				"name": "camera.RenderToCubemap()",
+				"updated": "20241219014058"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "动态生成立方体纹理"
+				}
+			]
+		},
+		{
+			"ID": "20241218225906-ewcg1ap",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241218225906-ewcg1ap",
+				"updated": "20241218230106"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "camera.RenderToCubemap()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 会基于 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Camera"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 所依附的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "所在的位置"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "生成立方体纹理（立方体纹理呈现的就是此位置周围的环境）"
+				}
+			]
+		},
+		{
+			"ID": "20241218230107-bwvvyz6",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20241218230107-bwvvyz6",
+				"updated": "20241219000513"
+			},
+			"Children": [
+				{
+					"ID": "20241218230109-ok7paiy",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241218230109-ok7paiy",
+						"updated": "20241218230109"
+					},
+					"Children": [
+						{
+							"ID": "20241218230109-8ls7b5t",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241218230109-8ls7b5t",
+								"updated": "20241218230531"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数一：需要保存立方体纹理的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Cubemap"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（也可以使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240411155939-z0goj0j",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "RenderTexture"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241218235947-h7bvdbv",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241218235947-h7bvdbv",
+						"updated": "20241219000513"
+					},
+					"Children": [
+						{
+							"ID": "20241218235947-xwlshq6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241218235947-xwlshq6",
+								"updated": "20241219000507"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数二：指示渲染到立方体贴图的哪个面，默认是同时渲染六个面，传入 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CubemapFace"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 枚举即可（需要转换为 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "int"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 类型）"
+								}
+							]
+						},
+						{
+							"ID": "20241219000507-5set7iw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241219000507-5set7iw",
+								"updated": "20241219000513"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CubemapFace"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 定义如下："
+								}
+							]
+						},
+						{
+							"ID": "20241219000319-1f5vov9",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241219000319-1f5vov9",
+								"style": "line-height: 22px;",
+								"updated": "20241219000442"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public enum CubemapFace\n{\n    Unknown = -1,\n    PositiveX,\n    NegativeX,\n    PositiveY,\n    NegativeY,\n    PositiveZ,\n    NegativeZ\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241218230125-cm0244q",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20241218230125-cm0244q",
+						"updated": "20241218230125"
+					},
+					"Children": [
+						{
+							"ID": "20241218230125-7t0vmao",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241218230125-7t0vmao",
+								"updated": "20241218230218"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "返回值：是否渲染成功的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "bool"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 值"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241217130152-k3x9rz9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241217130152-k3x9rz9",
+				"updated": "20241217130211"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "按照上文提到的制作思路来实现逻辑："
+				}
+			]
+		},
+		{
+			"ID": "20241217130156-pmv7cc7",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241217130156-pmv7cc7",
+				"updated": "20241218233516"
+			},
+			"Children": [
+				{
+					"ID": "20241217130156-pznox5j",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241217130156-pznox5j",
+						"updated": "20241217130156"
+					},
+					"Children": [
+						{
+							"ID": "20241217130156-iu9810s",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241217130156-iu9810s",
+								"updated": "20241217130227"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "新建一个脚本 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "RenderToCubemap"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 放在 Editor 文件夹中"
+								}
+							]
+						},
+						{
+							"ID": "20241218222942-swvwchw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241218222942-swvwchw",
+								"updated": "20241218222942"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20241218222942-jmmvmzz.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241217130156-a8x5z60",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241217130156-a8x5z60",
+						"updated": "20241217130156"
+					},
+					"Children": [
+						{
+							"ID": "20241217130156-u2jyugl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241217130156-u2jyugl",
+								"updated": "20241218223329"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "让该类继承 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240318150332-fv7t097",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "EditorWindow"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 将其作为一个编辑器窗口类"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241217130156-ypgrhiz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20241217130156-ypgrhiz",
+						"updated": "20241217130156"
+					},
+					"Children": [
+						{
+							"ID": "20241217130156-dckgv8h",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241217130156-dckgv8h",
+								"updated": "20241217130156"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "实现打开该窗口的静态函数"
+								}
+							]
+						},
+						{
+							"ID": "20241218223254-g6ddmch",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241218223254-g6ddmch",
+								"updated": "20241218223407"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "创建编辑器窗口知识详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240318150332-xrfadxc",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "UEDL2——自定义窗口拓展"
+								}
+							]
+						},
+						{
+							"ID": "20241218224508-10na1od",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241218224508-10na1od",
+								"style": "line-height: 22px;",
+								"updated": "20241218224522"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class RenderToCubeMap : EditorWindow\n{\n    [MenuItem(\"Tools/立方体纹理动态生成/打开生成窗口\")]\n    static void OpenWindow()\n    {\n        RenderToCubeMap window = EditorWindow.GetWindow\u003cRenderToCubeMap\u003e(\"立方体纹理生成窗口\");\n        window.Show();\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241217130156-8h6yqip",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20241217130156-8h6yqip",
+						"updated": "20241217130156"
+					},
+					"Children": [
+						{
+							"ID": "20241217130156-q9sgbv0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241217130156-q9sgbv0",
+								"updated": "20241217130251"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "实现 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnGUI()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中的窗口布局，添加以下控件"
+								}
+							]
+						},
+						{
+							"ID": "20241217130234-iq3vxxv",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20241217130234-iq3vxxv",
+								"updated": "20241217130247"
+							},
+							"Children": [
+								{
+									"ID": "20241217130247-2e1vhbq",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20241217130247-2e1vhbq",
+										"updated": "20241217130247"
+									},
+									"Children": [
+										{
+											"ID": "20241217130247-yy1qsh7",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241217130247-yy1qsh7",
+												"updated": "20241217130247"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "关联位置对象的控件"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241217130247-5feyyej",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20241217130247-5feyyej",
+										"updated": "20241217130247"
+									},
+									"Children": [
+										{
+											"ID": "20241217130247-z32wj97",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241217130247-z32wj97",
+												"updated": "20241217130247"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "关联立方体纹理贴图的空间"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241217130247-u2in32k",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20241217130247-u2in32k",
+										"updated": "20241217130247"
+									},
+									"Children": [
+										{
+											"ID": "20241217130247-59r9jrj",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241217130247-59r9jrj",
+												"updated": "20241218224856"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "生成按钮 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code block-ref",
+													"TextMarkBlockRefID": "20240208145040-66co3vf",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "GUILayout.Button()"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241218224631-xwpsz4c",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241218224631-xwpsz4c",
+								"updated": "20241218224701"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "其中，要关联一个对象，需要使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240319222247-hdplndo",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "EditorGUILayout.ObjectField()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 方法"
+								}
+							]
+						},
+						{
+							"ID": "20241218224525-rrajx2q",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241218224525-rrajx2q",
+								"style": "line-height: 22px;",
+								"updated": "20241218231516"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public class RenderToCubeMap : EditorWindow\n{\n    private GameObject renderObj;\n    private Cubemap cubemap;\n    private void OnGUI()\n    {\n        GUILayout.Label(\"立方体纹理生成所在位置的对象\");\n        renderObj = (EditorGUILayout.ObjectField(renderObj, typeof(GameObject), true)) as GameObject;\n        GUILayout.Label(\"保存立方体纹理数据的Cubemap文件\");\n        cubemap = (EditorGUILayout.ObjectField(cubemap, typeof(Cubemap), true)) as Cubemap;\n        if (GUILayout.Button(\"生成立方体纹理\"))\n        {\n            if (renderObj == null || cubemap == null)\n            {\n                EditorUtility.DisplayDialog(\"提醒\", \"在生成立方体纹理前，需要先关联需要生成立方体纹理的对象和保存纹理的立方体贴图\", \"确认\");\n                return;\n            }\n\t\t\t// 动态生成立方体纹理\n\t\t\t// ...\n        }\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241217130156-wvw0kd0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20241217130156-wvw0kd0",
+						"updated": "20241218233516"
+					},
+					"Children": [
+						{
+							"ID": "20241217130156-a4axgnq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241217130156-a4axgnq",
+								"updated": "20241217130156"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "实现具体逻辑\n"
+								}
+							]
+						},
+						{
+							"ID": "20241217130253-5vmwanw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241217130253-5vmwanw",
+								"updated": "20241217130258"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注意点："
+								}
+							]
+						},
+						{
+							"ID": "20241217130258-4ytx769",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20241217130258-4ytx769",
+								"updated": "20241218233516"
+							},
+							"Children": [
+								{
+									"ID": "20241217130258-s56w0cl",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20241217130258-s56w0cl",
+										"updated": "20241217130302"
+									},
+									"Children": [
+										{
+											"ID": "20241217130258-6sg6adn",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241217130258-6sg6adn",
+												"updated": "20241218231211"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "我们需要在指定位置（关联的对象上）动态创建一个空物体，并为它添加摄像机 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Camera"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，再通过此 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Camera"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 生成立方体纹理贴图"
+												}
+											]
+										},
+										{
+											"ID": "20241218231138-jw9an31",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241218231138-jw9an31",
+												"updated": "20241218231145"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "创建该对象为临时对象，使用完毕后直接删除即可"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241217130258-15zu59z",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20241217130258-15zu59z",
+										"updated": "20241217130308"
+									},
+									"Children": [
+										{
+											"ID": "20241217130258-fcrne47",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241217130258-fcrne47",
+												"updated": "20241217130308"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "cubemap"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 上需要勾选 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Readable"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241217130258-qwinu7k",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20241217130258-qwinu7k",
+										"updated": "20241218233516"
+									},
+									"Children": [
+										{
+											"ID": "20241217130258-619h06w",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241217130258-619h06w",
+												"updated": "20241218233516"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "Face size 分辨率决定了清晰度，但也决定了 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Cubemap"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 的大小，因此需要根据项目的实际情况去选择"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20241218231347-nud7j75",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241218231347-nud7j75",
+								"updated": "20241218231347"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 399px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20241218231347-6sxge2q.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 399px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20241218231249-t79h30n",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241218231249-t79h30n",
+								"style": "line-height: 22px;",
+								"updated": "20241218231535"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private GameObject renderObj;\nprivate Cubemap cubemap;\n\nprivate void OnGUI()\n{\n    GUILayout.Label(\"立方体纹理生成所在位置的对象\");\n    renderObj = (EditorGUILayout.ObjectField(renderObj, typeof(GameObject), true)) as GameObject;\n    GUILayout.Label(\"保存立方体纹理数据的Cubemap文件\");\n    cubemap = (EditorGUILayout.ObjectField(cubemap, typeof(Cubemap), true)) as Cubemap;\n    if (GUILayout.Button(\"生成立方体纹理\"))\n    {\n        if (renderObj == null || cubemap == null)\n        {\n            EditorUtility.DisplayDialog(\"提醒\", \"在生成立方体纹理前，需要先关联需要生成立方体纹理的对象和保存纹理的立方体贴图\", \"确认\");\n            return;\n        }\n        // 动态的生成立方体纹理\n        GameObject tempObj = new GameObject(\"临时对象\");\n        tempObj.transform.position = renderObj.transform.position;\n        Camera camera = tempObj.AddComponent\u003cCamera\u003e();\n        // 使用 RenderToCubemap 方法生成6张2D纹理贴图，用于立方体纹理\n        camera.RenderToCubemap(cubemap);\n        DestroyImmediate(tempObj);\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241218231553-dxrzn3i",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241218231553-dxrzn3i",
+				"updated": "20241218231620"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "完整代码如下："
+				}
+			]
+		},
+		{
+			"ID": "20241218231621-a6pqd5s",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241218231621-a6pqd5s",
+				"style": "line-height: 22px;",
+				"updated": "20241218231631"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEditor;\nusing UnityEngine;\n\npublic class RenderToCubeMap : EditorWindow\n{\n    private GameObject renderObj;\n    private Cubemap cubemap;\n\n    [MenuItem(\"Tools/立方体纹理动态生成/打开生成窗口\")]\n    static void OpenWindow()\n    {\n        RenderToCubeMap window = EditorWindow.GetWindow\u003cRenderToCubeMap\u003e(\"立方体纹理生成窗口\");\n        window.Show();\n    }\n\n    private void OnGUI()\n    {\n        GUILayout.Label(\"立方体纹理生成所在位置的对象\");\n        renderObj = (EditorGUILayout.ObjectField(renderObj, typeof(GameObject), true)) as GameObject;\n        GUILayout.Label(\"保存立方体纹理数据的Cubemap文件\");\n        cubemap = (EditorGUILayout.ObjectField(cubemap, typeof(Cubemap), true)) as Cubemap;\n        if (GUILayout.Button(\"生成立方体纹理\"))\n        {\n            if (renderObj == null || cubemap == null)\n            {\n                EditorUtility.DisplayDialog(\"提醒\", \"在生成立方体纹理前，需要先关联需要生成立方体纹理的对象和保存纹理的立方体贴图\", \"确认\");\n                return;\n            }\n            // 动态的生成立方体纹理\n            GameObject tempObj = new GameObject(\"临时对象\");\n            tempObj.transform.position = renderObj.transform.position;\n            Camera camera = tempObj.AddComponent\u003cCamera\u003e();\n            // 使用 RenderToCubemap 方法生成6张2D纹理贴图，用于立方体纹理\n            camera.RenderToCubemap(cubemap);\n            DestroyImmediate(tempObj);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241218231631-z6z5syi",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241218231631-z6z5syi",
+				"updated": "20241218231652"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "现在就可以生成立方体纹理，假设要为场景内如下对象生成立方体纹理："
+				}
+			]
+		},
+		{
+			"ID": "20241218231837-n8pand2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241218231837-n8pand2",
+				"updated": "20241218231847"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241217125535-rxekt4u.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241218231848-lgsfx0j",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241218231848-lgsfx0j",
+				"updated": "20241218232229"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先创建两个用于存储立方体纹理数据的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Cubemap"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 文件（Project 窗口右键 — Create — Legacy — Cubemap）\n然后分别将 要立方体纹理生成所在位置的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 和 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Cubemap"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 文件 关联到实现的编辑器窗口上，点击 “生成立方体纹理”"
+				}
+			]
+		},
+		{
+			"ID": "20241218231822-2mw748x",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241218231822-2mw748x",
+				"updated": "20241218231822"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 517px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241218231822-ag67z1z.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 517px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241218232209-yq23g98",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241218232209-yq23g98",
+				"updated": "20241218232331"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "此时，关联的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Cubemap"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 文件就保存了立方体纹理数据，可以在预览窗口上看到："
+				}
+			]
+		},
+		{
+			"ID": "20241218232449-k73kvts",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241218232449-k73kvts",
+				"updated": "20241218232449"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 380px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241218232449-jmm8pq2.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 380px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241218232837-v8w3qmp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20241218232837-v8w3qmp",
+				"updated": "20241219014058"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "将立方体纹理生成到 Render Texture 上"
+				}
+			]
+		},
+		{
+			"ID": "20241218232857-pxbhdj3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241218232857-pxbhdj3",
+				"updated": "20241218233607"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "camera.RenderToCubemap()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 除了将立方体纹理数据生成到 Cubemap 文件内，还可以生成到 Render Texture 文件上\n其中 Render Texture 的 Dimension 属性需要设置为 Cube ，才能将数据生成到 Render Texture 内\n而 Render Texture 的 size 属性决定了立方体纹理的清晰度和大小"
+				}
+			]
+		},
+		{
+			"ID": "20241219010449-fygopu9",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20241219010449-fygopu9",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color); --b3-parent-background: var(--b3-card-warning-background);",
+				"updated": "20241219014058"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20241219010450-jm9g2eh",
+					"Type": "NodeHeading",
+					"HeadingLevel": 4,
+					"Properties": {
+						"id": "20241219010450-jm9g2eh",
+						"updated": "20241219014058"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "注意！"
+						}
+					]
+				},
+				{
+					"ID": "20241219010457-u74w9pr",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241219010457-u74w9pr",
+						"updated": "20241219011325"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "虽然 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "RenderTexture"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​ 可以当作立方体纹理使用，但是 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "RenderTexture"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​ 的数据在默认情况下不会被保存中，\n这意味着，在保存场景时，只生成一次的 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "RenderTexture"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​ 的立方体纹理数据会被直接丢弃，导致反射贴图变黑，\n"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "strong",
+							"TextMarkTextContent": "因此"
+						},
+						{
+							"Type": "NodeText",
+							"Data": " "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code strong",
+							"TextMarkTextContent": "RenderTexture"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​ "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "strong",
+							"TextMarkTextContent": "不适用于持久化存储立方体纹理，而适用于运行时动态生成立方体纹理的场景"
+						}
+					]
+				},
+				{
+					"ID": "20241219011010-8q9m0el",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20241219011010-8q9m0el",
+						"updated": "20241219014058"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "下文的例子，虽然还是在编辑器环境下为 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "code",
+							"TextMarkTextContent": "RenderTexture"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "​ 一次生成立方体纹理数据，\n但是一旦在保存场景，贴图会直接变黑，"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "u",
+							"TextMarkTextContent": "因此，下文的编辑器生成例子仅供参考，不要用在实际运行环境内"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241218233601-56k5b36",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241218233601-56k5b36",
+				"updated": "20241218234038"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "它的生成方法和上文中使用的 Cubemap 差不多，这里不再阐述："
+				}
+			]
+		},
+		{
+			"ID": "20241218234038-j4shubg",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241218234038-j4shubg",
+				"style": "line-height: 22px;",
+				"updated": "20241218234231"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEditor;\nusing UnityEngine;\n\npublic class RenderToCubeMap : EditorWindow\n{\n    private GameObject renderObj;\n    private Cubemap cubemap;\n    private RenderTexture renderTexture;\n\n    [MenuItem(\"Tools/立方体纹理动态生成/打开生成窗口\")]\n    static void OpenWindow()\n    {\n        RenderToCubeMap window = EditorWindow.GetWindow\u003cRenderToCubeMap\u003e(\"立方体纹理生成窗口\");\n        window.Show();\n    }\n\n    private void OnGUI()\n    {\n        GUILayout.Label(\"立方体纹理生成所在位置的对象\");\n        renderObj = (EditorGUILayout.ObjectField(renderObj, typeof(GameObject), true)) as GameObject;\n    \n        GUILayout.Label(\"保存立方体纹理数据的Cubemap文件\");\n        cubemap = (EditorGUILayout.ObjectField(cubemap, typeof(Cubemap), true)) as Cubemap;\n        if (GUILayout.Button(\"生成立方体纹理到Cubemap文件\"))\n        {\n            if (renderObj == null || cubemap == null)\n            {\n                EditorUtility.DisplayDialog(\"提醒\", \"在生成立方体纹理前，需要先关联需要生成立方体纹理的对象和保存纹理的Cubemap\", \"确认\");\n                return;\n            }\n            // 动态的生成立方体纹理\n            GameObject tempObj = new GameObject(\"临时对象\");\n            tempObj.transform.position = renderObj.transform.position;\n            Camera camera = tempObj.AddComponent\u003cCamera\u003e();\n            // 使用 RenderToCubemap 方法生成6张2D纹理贴图，用于立方体纹理\n            camera.RenderToCubemap(cubemap);\n            DestroyImmediate(tempObj);\n        }\n    \n        GUILayout.Label(\"保存立方体纹理数据的RenderTexture文件\");\n        renderTexture = (EditorGUILayout.ObjectField(renderTexture, typeof(RenderTexture), true)) as RenderTexture;\n        if (GUILayout.Button(\"生成立方体纹理到RenderTexture\"))\n        {\n            if (renderObj == null || renderTexture == null)\n            {\n                EditorUtility.DisplayDialog(\"提醒\", \"在生成立方体纹理前，需要先关联需要生成立方体纹理的对象和保存纹理的RenderTexture\", \"确认\");\n                return;\n            }\n            // 动态的生成立方体纹理\n            GameObject tempObj = new GameObject(\"临时对象\");\n            tempObj.transform.position = renderObj.transform.position;\n            Camera camera = tempObj.AddComponent\u003cCamera\u003e();\n            // 使用 RenderToCubemap 方法生成6张2D纹理贴图，用于立方体纹理\n            camera.RenderToCubemap(renderTexture);\n            DestroyImmediate(tempObj);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241218233642-ebsqz7a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241218233642-ebsqz7a",
+				"updated": "20241218234211"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20241218234212-m3sd01b",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241218234212-m3sd01b",
+				"updated": "20241218234212"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 580px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241218234212-ttlvjzc.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 580px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241218235318-86nx8ed",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241218235318-86nx8ed",
+				"updated": "20241219011339"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "值得一提的是，生成到 Render Texture 上的运行时间要比生成到 Cubemap 上的时间要短得多，\n以下为测试代码（使用 C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": " "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Stopwatch"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 测试，生成位置相同的 512*512 质量的 Cube 贴图）："
+				}
+			]
+		},
+		{
+			"ID": "20241218235417-ry93525",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241218235417-ry93525",
+				"style": "line-height: 22px;",
+				"updated": "20241218235509"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "private void OnGUI()\n{\n    GUILayout.Label(\"立方体纹理生成所在位置的对象\");\n    renderObj = (EditorGUILayout.ObjectField(renderObj, typeof(GameObject), true)) as GameObject;\n  \n    GUILayout.Label(\"保存立方体纹理数据的Cubemap文件\");\n    cubemap = (EditorGUILayout.ObjectField(cubemap, typeof(Cubemap), true)) as Cubemap;\n    if (GUILayout.Button(\"生成立方体纹理到Cubemap文件\"))\n    {\n        Stopwatch stopwatch = new Stopwatch();\n        stopwatch.Start();\n        if (renderObj == null || cubemap == null)\n        {\n            EditorUtility.DisplayDialog(\"提醒\", \"在生成立方体纹理前，需要先关联需要生成立方体纹理的对象和保存纹理的Cubemap\", \"确认\");\n            return;\n        }\n        // 动态的生成立方体纹理\n        GameObject tempObj = new GameObject(\"临时对象\");\n        tempObj.transform.position = renderObj.transform.position;\n        Camera camera = tempObj.AddComponent\u003cCamera\u003e();\n        // 使用 RenderToCubemap 方法生成6张2D纹理贴图，用于立方体纹理\n        camera.RenderToCubemap(cubemap);\n        DestroyImmediate(tempObj);\n        stopwatch.Stop();\n        UnityEngine.Debug.Log($\"Cubemap 生成时间为：{stopwatch.ElapsedMilliseconds} ms\");\n    }\n  \n    GUILayout.Label(\"保存立方体纹理数据的RenderTexture文件\");\n    renderTexture = (EditorGUILayout.ObjectField(renderTexture, typeof(RenderTexture), true)) as RenderTexture;\n    if (GUILayout.Button(\"生成立方体纹理到RenderTexture\"))\n    {\n        Stopwatch stopwatch = new Stopwatch();\n        stopwatch.Start();\n        if (renderObj == null || renderTexture == null)\n        {\n            EditorUtility.DisplayDialog(\"提醒\", \"在生成立方体纹理前，需要先关联需要生成立方体纹理的对象和保存纹理的RenderTexture\", \"确认\");\n            return;\n        }\n        // 动态的生成立方体纹理\n        GameObject tempObj = new GameObject(\"临时对象\");\n        tempObj.transform.position = renderObj.transform.position;\n        Camera camera = tempObj.AddComponent\u003cCamera\u003e();\n        // 使用 RenderToCubemap 方法生成6张2D纹理贴图，用于立方体纹理\n        camera.RenderToCubemap(renderTexture);\n        DestroyImmediate(tempObj);\n        stopwatch.Stop();\n        UnityEngine.Debug.Log($\"RenderTexture 生成时间为：{stopwatch.ElapsedMilliseconds} ms\");\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241218235514-3s5xu36",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241218235514-3s5xu36",
+				"updated": "20241218235648"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "运行时间对比："
+				}
+			]
+		},
+		{
+			"ID": "20241218235657-gzfmfg0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241218235657-gzfmfg0",
+				"updated": "20241218235657"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 364px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241218235657-6fvcua4.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 364px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241217130310-bkya54n",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20241217130310-bkya54n",
+				"updated": "20241219015634"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在运行时动态生成立方体纹理"
+				}
+			]
+		},
+		{
+			"ID": "20241217130322-l7sr359",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241217130322-l7sr359",
+				"updated": "20241219015634"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Camera"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 中的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "RenderToCubemap"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 也可以在运行时实时动态生成立方体纹理，但是要注意对性能的影响，\n 如果每帧都需要渲染立方体贴图的所有六个面，生成操作开销将会很大"
+				}
+			]
+		},
+		{
+			"ID": "20241217130325-vc8yytb",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241217130325-vc8yytb",
+				"updated": "20241219012040"
+			},
+			"Children": [
+				{
+					"ID": "20241217130325-wnjofnn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241217130325-wnjofnn",
+						"updated": "20241217130356"
+					},
+					"Children": [
+						{
+							"ID": "20241217130325-n00tra4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241217130325-n00tra4",
+								"updated": "20241217130356"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20230708150954-t2fbdtv",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "LateUpdate"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中使用"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241217130325-jzqz9yd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241217130325-jzqz9yd",
+						"updated": "20241217130325"
+					},
+					"Children": [
+						{
+							"ID": "20241217130325-8rjbmhe",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241217130325-8rjbmhe",
+								"updated": "20241217130325"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "降低立方体纹理贴图的分辨率"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241217130325-4ule8h0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20241217130325-4ule8h0",
+						"updated": "20241219000304"
+					},
+					"Children": [
+						{
+							"ID": "20241217130325-dw0c5ce",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241217130325-dw0c5ce",
+								"updated": "20241219000304"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "分帧渲染，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "RenderToCubemap()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 有重载（使用第二个参数），可以一个面一个面的渲染"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241217130325-62ly98d",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20241217130325-62ly98d",
+						"updated": "20241217130325"
+					},
+					"Children": [
+						{
+							"ID": "20241217130325-7np4alh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241217130325-7np4alh",
+								"updated": "20241217130351"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "降低更新频率，不要每帧执行"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241218235721-s75ynvr",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20241218235721-s75ynvr",
+						"updated": "20241219012040"
+					},
+					"Children": [
+						{
+							"ID": "20241218235721-ph18gad",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241218235721-ph18gad",
+								"updated": "20241219012040"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "改用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "RenderTexture"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 来接收立方体纹理数据"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241217130351-xo75is4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241217130351-xo75is4",
+				"updated": "20241217130352"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "等等"
+				}
+			]
+		},
+		{
+			"ID": "20241219013800-i1gnj81",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241219013800-i1gnj81",
+				"updated": "20241219013827"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "以下面的代码为例："
+				}
+			]
+		},
+		{
+			"ID": "20241219012154-dvyshxd",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241219012154-dvyshxd",
+				"style": "line-height: 22px;",
+				"updated": "20241219015144"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class RealTimeCubeRender : MonoBehaviour\n{\n    private Camera _camera;\n    public RenderTexture _renderTexture;\n\n    void Start()\n    {\n        _camera = gameObject.AddComponent\u003cCamera\u003e();\n        _camera.enabled = false;\n    }\n\n    private void LateUpdate()\n    {\n\t\t// 每帧为外部关联的 RenderTexture 生成立方体纹理数据，以实现实时反射效果\n        _camera.RenderToCubemap(_renderTexture);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241219013815-kibunrx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241219013815-kibunrx",
+				"updated": "20241219014704"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "将该脚本依附某个 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 上，再关联一个 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "RenderTexture"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，这个对象就可以实时的在 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 位置上生成立方体纹理\n假设，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 使用了基于此 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "RenderTexture"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的立方体纹理实现反射的 Shader，\n那么这个 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GameObject"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 就可以实时的反射周围的对象了，而不需要再手动重新生成立方体纹理"
+				}
+			]
+		},
+		{
+			"ID": "20241219014549-yysfw60",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241219014549-yysfw60",
+				"updated": "20241219014629"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "反射效果相关内容详见："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20241219001301-uqtlfhe",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "US3S8L4——反射效果"
+				}
+			]
+		},
+		{
+			"ID": "20241219014826-yi4yg06",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241219014826-yi4yg06",
+				"updated": "20241219014826"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 471px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241219014826-mzcv0ii.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 471px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		}
+	]
+}

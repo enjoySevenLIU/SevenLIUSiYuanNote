@@ -1,0 +1,2025 @@
+{
+	"ID": "20250104145128-r0gbm4r",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20250104145128-r0gbm4r",
+		"title": "US3S10L2——C#代码修改材质参数",
+		"type": "doc",
+		"updated": "20250104162728"
+	},
+	"Children": [
+		{
+			"ID": "20250104155206-fx2e4j9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250104155206-fx2e4j9",
+				"updated": "20250104160109"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20250104155210-j6ipwzr",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250104155210-j6ipwzr",
+				"style": "line-height: 22px;",
+				"updated": "20250104160109"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Renderer\t\t\t\t\t\t// 渲染器基类，MeshRenderer和SkinMeshRenderer都派生于此\nrenderer.material\t\t\t\t// 获取渲染器上使用的第一个实例化材质，也就是材质的副本，修改此属性得到的材质只会影响到一个对象\nrenderer.sharedMaterial\t\t\t// 获取渲染器上使用的第一个共享材质，修改此属性得到的材质影响到所有使用材质的对象\nrenderer.materials\t\t\t\t// 获取渲染器上使用的所有实例化材质\nrenderer.sharedMaterials\t\t// 获取渲染器上使用的所有共享材质\nMaterial\t\t\t\t\t\t// 材质类\nmaterial.color\t\t\t\t\t// 修改材质的主颜色\nmaterial.mainTexture\t\t\t// 修改材质的主贴图\nmaterial.Set__()\t\t\t\t// 设置材质的某个属性，具体使用什么方法由属性的类型决定\nmaterial.shader\t\t\t\t\t// 设置材质使用的Shader\nShader.Find()\t\t\t\t\t// 通过Shader名获取某个Shader\nmaterial.Has__()\t\t\t\t// 检查材质的某个属性是否存在，具体使用什么方法由属性的类型决定\nmaterial.Get__()\t\t\t\t// 获取材质的某个属性的当前值，具体使用什么方法由属性的类型决定\nmaterial.renderQueue\t\t\t// 材质的渲染队列属性\nmaterial.SetTextureOffset()\t\t// 设置材质的某个贴图的采样偏移\nmaterial.SetTextureScale()\t\t// 设置材质的某个贴图的采样缩放\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250104155005-skdsdrk",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20250104155005-skdsdrk",
+				"name": "Material",
+				"updated": "20250104155026"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "代码修改材质"
+				}
+			]
+		},
+		{
+			"ID": "20250104155010-m2yy2dj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104155010-m2yy2dj",
+				"updated": "20250104155026"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity 中想要通过 C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 代码修改 Shader 相关参数信息，我们一般都是通过材质去进行修改的，需要使用材质提供的各种相关方法进行修改"
+				}
+			]
+		},
+		{
+			"ID": "20250104145201-ft85hzx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "renderer.sharedMaterial,renderer.materials,renderer.sharedMaterials",
+				"id": "20250104145201-ft85hzx",
+				"name": "renderer.material",
+				"updated": "20250104150713"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "得到对象使用的材质的方式"
+				}
+			]
+		},
+		{
+			"ID": "20250104145128-zsh33mp",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250104145128-zsh33mp",
+				"updated": "20250104145321"
+			},
+			"Children": [
+				{
+					"ID": "20250104145215-2w7yy8a",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250104145215-2w7yy8a",
+						"updated": "20250104145215"
+					},
+					"Children": [
+						{
+							"ID": "20250104145215-5lvb64r",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104145215-5lvb64r",
+								"updated": "20250104145218"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取到对象的渲染器 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Renderer"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104145221-l5gz9bi",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104145221-l5gz9bi",
+								"updated": "20250104145248"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20250104125535-bkgm8d4",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "MeshRenderer"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 和 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20250104130058-op9r9az",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "SkinnedMeshRenderer"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 都继承 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Renderer"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，我们可以用里式替换原则父类获取、装载子类对象"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104145215-q5rwuzd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250104145215-q5rwuzd",
+						"updated": "20250104145321"
+					},
+					"Children": [
+						{
+							"ID": "20250104145215-jtl3wl2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104145215-jtl3wl2",
+								"updated": "20250104145215"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过渲染器获取到对应材质\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104145253-2fs3g8k",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104145253-2fs3g8k",
+								"updated": "20250104145321"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "我们可以利用渲染器中的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "material"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 或者 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "sharedMaterial"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 来获取物体的材质，\n如果存在多个材质，可以使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "renderer.materials"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 或 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "renderer.sharedMaterials"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 来获取"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104150107-xnydwfj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250104150107-xnydwfj",
+				"style": "line-height: 22px;",
+				"updated": "20250104150253"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "void Start()\n{\n    Renderer renderer = gameObject.GetComponent\u003cRenderer\u003e();\n    if (renderer != null)\n    {\n        Material material = renderer.material;                  //得到主材质球\n        Material sharedMaterial = renderer.sharedMaterial;\n        Material[] materials = renderer.materials;              //得到所有的材质球\n        Material[] sharedMaterials = renderer.sharedMaterials;\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250104150254-11yqw27",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104150254-11yqw27",
+				"updated": "20250104150519"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "material"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 和 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "sharedMaterial"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的区别"
+				}
+			]
+		},
+		{
+			"ID": "20250104150318-5hauoue",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250104150318-5hauoue",
+				"updated": "20250104150713"
+			},
+			"Children": [
+				{
+					"ID": "20250104150318-zeffi2z",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104150318-zeffi2z",
+						"updated": "20250104150713"
+					},
+					"Children": [
+						{
+							"ID": "20250104150318-c6tukzj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104150318-c6tukzj",
+								"updated": "20250104150829"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "renderer.material"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​："
+								}
+							]
+						},
+						{
+							"ID": "20250104150322-bgau9m8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104150322-bgau9m8",
+								"updated": "20250104150445"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "material"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 属性会返回对象的实例化材质，相当于它会为对象创建一个该材质的独立副本，\n当你通过 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "material"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 属性修改材质时，这些更改只会影响这个特定对象，而不会影响使用相同材质的其他对象\n"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "使用"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code strong",
+									"TextMarkTextContent": "material"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "会增加内存消耗，因为每个对象都有自己独立的材质副本，但是可以单独修改单个对象"
+								}
+							]
+						},
+						{
+							"ID": "20250104150509-49j2ay2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104150509-49j2ay2",
+								"updated": "20250104150713"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "简单来说就是，修改 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "material"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 属性得到的材质只会影响到一个对象"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104150319-8ig9e18",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250104150319-8ig9e18",
+						"updated": "20250104150319"
+					},
+					"Children": [
+						{
+							"ID": "20250104150319-vbdhngg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104150319-vbdhngg",
+								"updated": "20250104150827"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "renderer.sharedMaterial"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​："
+								}
+							]
+						},
+						{
+							"ID": "20250104150412-kkpuap4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104150412-kkpuap4",
+								"updated": "20250104150441"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "sharedMaterial"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 属性会返回对象的共享材质，相当于它返回的是所有使用这个材质的对象共享的同一个材质实例\n当你通过 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "sharedMaterial"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 属性修改材质时，这些更改会影响所有使用这个材质的对象，\n"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "使用"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code strong",
+									"TextMarkTextContent": "sharedMaterial"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "不会增加内存消耗，但是会批量修改所有使用该材质的对象"
+								}
+							]
+						},
+						{
+							"ID": "20250104150611-nutd7yv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104150611-nutd7yv",
+								"updated": "20250104150717"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "简单来说就是，修改 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "sharedMaterials"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 属性得到的材质影响到所有使用材质的对象"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104150442-ftqncqz",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250104150442-ftqncqz",
+				"updated": "20250104162728"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "修改材质属性的方式"
+				}
+			]
+		},
+		{
+			"ID": "20250104150847-0izf17y",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250104150847-0izf17y",
+				"updated": "20250104162728"
+			},
+			"Children": [
+				{
+					"ID": "20250104151041-gf441vu",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250104151041-gf441vu",
+						"name": "material.color",
+						"updated": "20250104151041"
+					},
+					"Children": [
+						{
+							"ID": "20250104151041-johwvzu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104151041-johwvzu",
+								"updated": "20250104151041"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "颜色\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104151042-g5fglry",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104151042-g5fglry",
+								"updated": "20250104151046"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "材质对象中有 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "color"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 成员用于颜色修改"
+								}
+							]
+						},
+						{
+							"ID": "20250104151215-2w21lp4",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104151215-2w21lp4",
+								"style": "line-height: 22px;",
+								"updated": "20250104151226"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public Color color = Color.white;\n\nvoid Start()\n{\n    Renderer renderer = gameObject.GetComponent\u003cRenderer\u003e();\n    if (renderer != null)\n    {\n        Material material = renderer.sharedMaterial;\n        material.color = color;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104151041-cqgmlg0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250104151041-cqgmlg0",
+						"name": "material.mainTexture",
+						"updated": "20250104151305"
+					},
+					"Children": [
+						{
+							"ID": "20250104151041-yw4c5w4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104151041-yw4c5w4",
+								"updated": "20250104151041"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "纹理\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104151050-cf5e9jj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104151050-cf5e9jj",
+								"updated": "20250104151053"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "材质对象中有 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "mainTexture"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 成员用于主纹理修改"
+								}
+							]
+						},
+						{
+							"ID": "20250104151302-fjc9xr4",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104151302-fjc9xr4",
+								"style": "line-height: 22px;",
+								"updated": "20250104151305"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public Texture texture = null;\n\nvoid Start()\n{\n    Renderer renderer = gameObject.GetComponent\u003cRenderer\u003e();\n    if (renderer != null)\n    {\n        Material material = renderer.sharedMaterial;\n        material.mainTexture = texture;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104151041-cb1cfh7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250104151041-cb1cfh7",
+						"name": "material.Set()",
+						"updated": "20250104162728"
+					},
+					"Children": [
+						{
+							"ID": "20250104151041-07904mn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104151041-07904mn",
+								"updated": "20250104151056"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通用修改方式\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104151058-ukccvcf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104151058-ukccvcf",
+								"updated": "20250104151550"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "材质中有各种 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Set"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 方法（例如："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SetColor"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SetTextrue"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SetFloat"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 等等），\n用于修改"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240612172335-ffvbsa6",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "Shader的属性"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "，通过传入属性名，以及对应值进行赋值"
+								}
+							]
+						},
+						{
+							"ID": "20250104151127-68rd0s1",
+							"Type": "NodeBlockquote",
+							"Properties": {
+								"id": "20250104151127-68rd0s1",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color); --b3-parent-background: var(--b3-card-warning-background);",
+								"updated": "20250104151128"
+							},
+							"Children": [
+								{
+									"Type": "NodeBlockquoteMarker",
+									"Data": "\u003e"
+								},
+								{
+									"ID": "20250104151128-ueyjvn3",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250104151128-ueyjvn3",
+										"updated": "20250104153414"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "注意：属性值以 "
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "code",
+											"TextMarkTextContent": "SubShader"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​ 中声明的属性名（也就是声明属性时，括号左侧的名字）为准，而不是面板上的显示属性名"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250104151338-aorp37h",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104151338-aorp37h",
+								"updated": "20250104151801"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "以下面的 Shader 的属性为例："
+								}
+							]
+						},
+						{
+							"ID": "20250104151612-1zmoljx",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104151612-1zmoljx",
+								"style": "line-height: 22px;",
+								"updated": "20250104153808"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Shader \"TeachShader/Lesson80_Fresnel\"\n{\n    Properties\n    {\n        _Color(\"Color\", Color) = (1, 1, 1, 1)               // 漫反射颜色\n        _Cube(\"Cubemap\", Cube) = \"\"{}                       // 立方体纹理\n        _FresnelScale(\"_FresnelScale\", Range(0, 1)) = 1     // 菲涅尔反射中对应介质的反射率\n    }\n    SubShader {/*...*/}\n    Fallback \"Reflective/VertexLit\"\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20250104162700-grzbqwo",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104162700-grzbqwo",
+								"updated": "20250104162712"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Shader 详细代码详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20241221182240-f77j2o6",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "US3S8L6——菲涅尔反射"
+								}
+							]
+						},
+						{
+							"ID": "20250104152141-ip0krys",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104152141-ip0krys",
+								"updated": "20250104153143"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设要修改场景内使用同一材质（材质使用上文的Shader）的对象："
+								}
+							]
+						},
+						{
+							"ID": "20250104152958-eiw7qum",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104152958-eiw7qum",
+								"updated": "20250104152958"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 317px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250104152958-jf5scok.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 317px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250104152100-jpn2ja3",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104152100-jpn2ja3",
+								"style": "line-height: 22px;",
+								"updated": "20250104162649"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using UnityEngine;\n\npublic class Lesson99 : MonoBehaviour\n{\n    public Color color = Color.white;\n    public Texture cube = null;\n    [Range(0, 1)] public float fresnelScale;\n\n    void Start()\n    {\n        Renderer renderer = gameObject.GetComponent\u003cRenderer\u003e();\n        if (renderer != null)\n        {\n            Material material = renderer.material;\n            material.SetColor(\"_Color\", color);\n            material.SetTexture(\"_Cube\", cube);\n            material.SetFloat(\"_FresnelScale\", fresnelScale);\n        }\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20250104153050-jhu6yxp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104153050-jhu6yxp",
+								"updated": "20250104153055"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "参数（脚本只需要挂载到一个对象上）："
+								}
+							]
+						},
+						{
+							"ID": "20250104153023-u16ntwd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104153023-u16ntwd",
+								"updated": "20250104153023"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 287px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250104153023-72q63f0.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 287px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250104152114-4pmp3mk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104152114-4pmp3mk",
+								"updated": "20250104153054"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "显示效果："
+								}
+							]
+						},
+						{
+							"ID": "20250104153114-fjgjv0r",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104153114-fjgjv0r",
+								"updated": "20250104153114"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 284px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250104153114-bwim97p.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 284px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250104153221-v6q37sa",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104153221-v6q37sa",
+								"updated": "20250104153257"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "此时，材质的参数都会改变："
+								}
+							]
+						},
+						{
+							"ID": "20250104153248-w0xrga7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104153248-w0xrga7",
+								"updated": "20250104153248"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 307px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250104153248-97dl83t.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 307px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250104153148-63zmwj8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104153148-63zmwj8",
+								"updated": "20250104153205"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果使用的是 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "renderer.material"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​："
+								}
+							]
+						},
+						{
+							"ID": "20250104153205-n1uf97y",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104153205-n1uf97y",
+								"style": "line-height: 22px;",
+								"updated": "20250104162728"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "using UnityEngine;\n\npublic class Lesson99 : MonoBehaviour\n{\n    public Color color = Color.white;\n    public Texture cube = null;\n    [Range(0, 1)] public float fresnelScale;\n\n    void Start()\n    {\n        Renderer renderer = gameObject.GetComponent\u003cRenderer\u003e();\n        if (renderer != null)\n        {\n            Material material = renderer.material;\n            material.SetColor(\"_Color\", color);\n            material.SetTexture(\"_Cube\", cube);\n            material.SetFloat(\"_FresnelScale\", fresnelScale);\n        }\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20250104153324-i6jr58q",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104153324-i6jr58q",
+								"updated": "20250104153327"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "显示效果："
+								}
+							]
+						},
+						{
+							"ID": "20250104153328-zddv3re",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104153328-zddv3re",
+								"updated": "20250104153328"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 285px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250104153328-91uh78h.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 285px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250104153520-dx043sj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104153520-dx043sj",
+								"updated": "20250104153552"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可见，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "renderer.material"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 只能修改该对象上材质的参数"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104151041-6vn7d3b",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"alias": "Shader.Find()",
+						"id": "20250104151041-6vn7d3b",
+						"name": "material.shader",
+						"updated": "20250104153804"
+					},
+					"Children": [
+						{
+							"ID": "20250104151041-8cauv5q",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104151041-8cauv5q",
+								"updated": "20250104151143"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "修改材质使用的 Shader\n"
+								}
+							]
+						},
+						{
+							"ID": "20250104151145-uhyqrrs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104151145-uhyqrrs",
+								"updated": "20250104153640"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "调用材质中 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "shader"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 属性进行修改，利用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Shader.Find(Shader名)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 方法得到对应 Shader\n其中，Shader 名是 Shader 文件首行声明的那个 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240612171147-wrmsl2y",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "Shader 名字"
+								}
+							]
+						},
+						{
+							"ID": "20250104153741-9lmwf1m",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104153741-9lmwf1m",
+								"updated": "20250104153748"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "以此 Shader 为例："
+								}
+							]
+						},
+						{
+							"ID": "20250104153748-crqs58w",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104153748-crqs58w",
+								"style": "line-height: 22px;",
+								"updated": "20250104153804"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Shader \"TeachShader/Lesson80_Fresnel\"\n{\n\t//...\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20250104153646-a860jgs",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104153646-a860jgs",
+								"style": "line-height: 22px;",
+								"updated": "20250104153735"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    Renderer renderer = gameObject.GetComponent\u003cRenderer\u003e();\n    if (renderer != null)\n    {\n        Material material = renderer.material;\n        material.shader = Shader.Find(\"Unlit/Lesson80_Fresnel\");\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104151137-k22dk3d",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250104151137-k22dk3d",
+				"updated": "20250104155244"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "材质中常用方法"
+				}
+			]
+		},
+		{
+			"ID": "20250104153919-g1uwvjy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104153919-g1uwvjy",
+				"updated": "20250104153931"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "除了刚才学习的修改属性的相关方法，材质中还有："
+				}
+			]
+		},
+		{
+			"ID": "20250104153931-3wty7k7",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250104153931-3wty7k7",
+				"updated": "20250104155244"
+			},
+			"Children": [
+				{
+					"ID": "20250104153931-5x0j5g5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250104153931-5x0j5g5",
+						"name": "material.Has()",
+						"updated": "20250104155244"
+					},
+					"Children": [
+						{
+							"ID": "20250104153931-c22dxxd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104153931-c22dxxd",
+								"updated": "20250104153931"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "判断某类型指定名字属性是否存在"
+								}
+							]
+						},
+						{
+							"ID": "20250104154059-bzmyd1x",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104154059-bzmyd1x",
+								"updated": "20250104154133"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在设置某个属性前，可以先通过 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "material.HasColor()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 传入属性名，来确认是否存在这个属性"
+								}
+							]
+						},
+						{
+							"ID": "20250104153937-l1ew9iq",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104153937-l1ew9iq",
+								"style": "line-height: 22px;",
+								"updated": "20250104155244"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public Color color = Color.white;\npublic Texture cube = null;\n[Range(0, 1)] public float fresnelScale;\n\nvoid Start()\n{\n    Renderer renderer = gameObject.GetComponent\u003cRenderer\u003e();\n    if (renderer != null)\n    {\n        Material material = renderer.material;\n        if (material.HasColor(\"_Color\"))\n        {\n            material.SetColor(\"_Color\", color);\n        }\n\n        if (material.HasColor(\"_FresnelScale\"))\n        {\n            material.SetFloat(\"_FresnelScale\", fresnelScale);\n        }\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104153931-cwnkb9l",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250104153931-cwnkb9l",
+						"name": "material.Get()",
+						"updated": "20250104155240"
+					},
+					"Children": [
+						{
+							"ID": "20250104153931-48a90e2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104153931-48a90e2",
+								"updated": "20250104153931"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "获取某个属性值"
+								}
+							]
+						},
+						{
+							"ID": "20250104154255-ijrz2hx",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104154255-ijrz2hx",
+								"updated": "20250104154347"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过各种 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "material.Get"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 方法，可以获取当前材质的各种属性的值"
+								}
+							]
+						},
+						{
+							"ID": "20250104154146-98exgso",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104154146-98exgso",
+								"style": "line-height: 22px;",
+								"updated": "20250104155240"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    Renderer renderer = gameObject.GetComponent\u003cRenderer\u003e();\n    if (renderer != null)\n    {\n        Material material = renderer.material;\n        if (material.HasColor(\"_Color\"))\n        {\n            Color curColor = material.GetColor(\"_Color\");\n        }\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20250104154350-liz0930",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104154350-liz0930",
+								"updated": "20250104154351"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "输出："
+								}
+							]
+						},
+						{
+							"ID": "20250104154502-sw0yyfd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104154502-sw0yyfd",
+								"updated": "20250104154502"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250104154502-4ipz0jw.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104153931-11bmkwx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250104153931-11bmkwx",
+						"name": "material.renderQueue",
+						"updated": "20250104155235"
+					},
+					"Children": [
+						{
+							"ID": "20250104153931-p6v4ygg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104153931-p6v4ygg",
+								"updated": "20250104153931"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "修改渲染队列"
+								}
+							]
+						},
+						{
+							"ID": "20250104154558-hntwzdu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104154558-hntwzdu",
+								"updated": "20250104154625"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "material.renderQueue"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 可以在运行时修改材质的"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240612194041-x2l9cdo",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "渲染队列"
+								}
+							]
+						},
+						{
+							"ID": "20250104154524-i7x0xby",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104154524-i7x0xby",
+								"style": "line-height: 22px;",
+								"updated": "20250104155235"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    Renderer renderer = gameObject.GetComponent\u003cRenderer\u003e();\n    if (renderer != null)\n    {\n        Material material = renderer.material;\n        material.renderQueue = 2000;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250104153931-a345u6b",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"alias": "material.SetTextureScale()",
+						"id": "20250104153931-a345u6b",
+						"name": "material.SetTextureOffset()",
+						"updated": "20250104155233"
+					},
+					"Children": [
+						{
+							"ID": "20250104153931-a11g9o2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104153931-a11g9o2",
+								"updated": "20250104153933"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "设置纹理缩放偏移"
+								}
+							]
+						},
+						{
+							"ID": "20250104154744-l6xgsc9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250104154744-l6xgsc9",
+								"updated": "20250104154834"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "material.SetTextureOffset()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 和 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "material.SetTextureScale()"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 可以设置材质上某个纹理的偏移与缩放"
+								}
+							]
+						},
+						{
+							"ID": "20250104154649-c2ce1sr",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250104154649-c2ce1sr",
+								"style": "line-height: 22px;",
+								"updated": "20250104155233"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    Renderer renderer = gameObject.GetComponent\u003cRenderer\u003e();\n    if (renderer != null)\n    {\n        Material material = renderer.material;\n        material.SetTextureOffset(\"_MainTex\", new Vector2(0.5f, 0.5f));\n        material.SetTextureScale(\"_MainTex\", new Vector2(0.5f, 0.5f));\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250104153933-7qnp1tx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250104153933-7qnp1tx",
+				"updated": "20250104153934"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "等等"
+				}
+			]
+		}
+	]
+}

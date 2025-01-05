@@ -1,0 +1,1144 @@
+{
+	"ID": "20241205122240-r012cen",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20241205122240-r012cen",
+		"title": "US3S6L4——让物体接收阴影",
+		"type": "doc",
+		"updated": "20241221161913"
+	},
+	"Children": [
+		{
+			"ID": "20241206125029-ip0a943",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241206125029-ip0a943",
+				"updated": "20241206125312"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20241206125036-e5z0rm1",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241206125036-e5z0rm1",
+				"updated": "20241206125312"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "SHADOW_COORDS\t\t\t// 阴影坐标宏，主要用于存储阴影纹理坐标\nTRANSFER_SHADOW\t\t\t// 转移阴影宏，计算阴影映射纹理坐标，它会在内部去进行计算，并存储到v2f结构体的SHADOW_COORDS(2)内部\nSHADOW_ATTENUATION\t\t// 阴影衰减宏，该宏会在内部利用v2f中的阴影纹理坐标变量（ShadowCoord）对相关纹理进行采样，计算阴影衰减值\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20241205122240-9o32m15",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241205122240-9o32m15",
+				"updated": "20241205122510"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "让物体接收阴影的思路"
+				}
+			]
+		},
+		{
+			"ID": "20241205122434-73lys7o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241205122434-73lys7o",
+				"updated": "20241205122455"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "目前我们已经能够让物体投射阴影了，所谓的投射阴影，\n其实就是让物体参与到光源的阴影映射纹理计算中，最终才能影响其他物体在接收阴影时的采样结果"
+				}
+			]
+		},
+		{
+			"ID": "20241205122458-zt34ct1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241205122458-zt34ct1",
+				"updated": "20241205122504"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "由此可见让物体接收阴影的主要思路，其实就是要从阴影隐射纹理中进行采样，然后将采样结果用于最终的颜色计算中"
+				}
+			]
+		},
+		{
+			"ID": "20241205122507-49y3j82",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241205122507-49y3j82",
+				"updated": "20241205122510"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "总体的流程就是:"
+				}
+			]
+		},
+		{
+			"ID": "20241205122510-pcvb52u",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241205122510-pcvb52u",
+				"updated": "20241205122510"
+			},
+			"Children": [
+				{
+					"ID": "20241205122510-cc2odmc",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241205122510-cc2odmc",
+						"updated": "20241205122510"
+					},
+					"Children": [
+						{
+							"ID": "20241205122510-7wdm1wp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241205122510-7wdm1wp",
+								"updated": "20241205122510"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在顶点着色器中进行顶点坐标转换（将顶点坐标 转换为 阴影映射纹理坐标）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241205122510-iga1hds",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241205122510-iga1hds",
+						"updated": "20241205122510"
+					},
+					"Children": [
+						{
+							"ID": "20241205122510-9nzlxxx",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241205122510-9nzlxxx",
+								"updated": "20241205122515"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在片元着色器中使用阴影映射纹理坐标在阴影映射纹理中进行采样，通过得到的深度值判断片元（像素）是否在阴影中，以计算出阴影衰减值"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241205122510-w5kmusu",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20241205122510-w5kmusu",
+						"updated": "20241205122510"
+					},
+					"Children": [
+						{
+							"ID": "20241205122510-r6s8ng5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241205122510-r6s8ng5",
+								"updated": "20241205122510"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将采样结果参与到最终的颜色计算中"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241205122604-jefqrsx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20241205122604-jefqrsx",
+				"updated": "20241221161913"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现物体接收阴影效果"
+				}
+			]
+		},
+		{
+			"ID": "20241205122537-hl805f3",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20241205122537-hl805f3",
+				"updated": "20241221161913"
+			},
+			"Children": [
+				{
+					"ID": "20241205122618-xsp5s4y",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20241205122618-xsp5s4y",
+						"updated": "20241205122618"
+					},
+					"Children": [
+						{
+							"ID": "20241205122618-bhr4c9v",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241205122618-bhr4c9v",
+								"updated": "20241205122808"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "创建一个新的 Shader，复用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20241204123549-jqerwvn",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "让物体投射阴影的Shader"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 到新 Shader 中，在此基础上实现接受阴影的效果"
+								}
+							]
+						},
+						{
+							"ID": "20241205122719-k5qjt63",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241205122719-k5qjt63",
+								"updated": "20241205122854"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "这里使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "FallBack \u0026quot;Specular\u0026quot;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 来实现投射阴影的效果"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241205122618-gzfb6bf",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20241205122618-gzfb6bf",
+						"updated": "20241221161913"
+					},
+					"Children": [
+						{
+							"ID": "20241205122618-x671cq5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241205122618-x671cq5",
+								"updated": "20241205122618"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "接受阴影的三剑客（三个宏）\n"
+								}
+							]
+						},
+						{
+							"ID": "20241205122657-5o50aww",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241205122657-5o50aww",
+								"updated": "20241205122901"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "这里只修改 Bass Pass 中的代码，来感受下接受阴影的流程\n首先我们需要在 Bass Pass 当中引用包含内置文件 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "#include \u0026quot;AutoLight.cginc\u0026quot;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​\n该内置文件中，有用于计算阴影时需要使用的三剑客"
+								}
+							]
+						},
+						{
+							"ID": "20241205123612-1zw5g6y",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20241205123612-1zw5g6y",
+								"updated": "20241205123621"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "CGPROGRAM\n#pragma vertex vert\n#pragma fragment frag\n// 帮助我们编译所有光照变体，并确保光照衰减相关的变量能够正确复制到对应的变量中\n#pragma multi_compile_fwdbase\n\n#include \"UnityCG.cginc\"\n#include \"Lighting.cginc\"\n#include \"AutoLight.cginc\"          //引用包含计算阴影会使用的宏的cginc文件\n// ...\nENDCG\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20241205122910-g6q2mxy",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20241205122910-g6q2mxy",
+								"updated": "20241221161913"
+							},
+							"Children": [
+								{
+									"ID": "20241205122905-6p8sv6d",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20241205122905-6p8sv6d",
+										"name": "SHADOW_COORDS",
+										"updated": "20241205125223"
+									},
+									"Children": [
+										{
+											"ID": "20241205122905-7rgy3bt",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241205122905-7rgy3bt",
+												"updated": "20241205122937"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "SHADOW_COORDS"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​（阴影坐标宏）"
+												}
+											]
+										},
+										{
+											"ID": "20241205122915-1eh5oyj",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241205122915-1eh5oyj",
+												"updated": "20241205123000"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "该宏在 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "v2f"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 结构体（顶点着色器返回值）中使用，本质上就是声明了一个用于对阴影纹理进行采样的坐标\n在内部实际上就是声明了一个名为 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "_ShadowCoord"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 的阴影纹理坐标变量，需要注意的是：\n在使用时 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "SHADOW_COORDS(2)"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 传入参数 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "2"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，表示需要时下一个可用的插值寄存器的索引值"
+												}
+											]
+										},
+										{
+											"ID": "20241205125222-o49bymx",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241205125222-o49bymx",
+												"updated": "20241205125223"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "使用此宏时，句末不需要加 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": ";"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 分号"
+												}
+											]
+										},
+										{
+											"ID": "20241205123624-mfxf81c",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20241205123624-mfxf81c",
+												"updated": "20241205124659"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "Yw=="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "struct v2f\n{\n    float4 pos: SV_POSITION;        //裁剪空间下的顶点坐标\n    float3 wNormal: NORMAL;         //世界空间下的法线\n    float3 wPos: TEXCOORD0;         //世界空间下的顶点坐标\n    SHADOW_COORDS(2)                //阴影坐标宏，主要用于存储阴影纹理坐标\n};\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241205122917-b0wqa08",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20241205122917-b0wqa08",
+										"name": "TRANSFER_SHADOW",
+										"updated": "20241221161913"
+									},
+									"Children": [
+										{
+											"ID": "20241205122917-9nz8nwt",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241205122917-9nz8nwt",
+												"updated": "20241205123012"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "TRANSFER_SHADOW"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​（转移阴影宏）"
+												}
+											]
+										},
+										{
+											"ID": "20241205122921-79d104y",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241205122921-79d104y",
+												"updated": "20241205123029"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "该宏在顶点着色器函数中调用，传入对应的 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "v2f"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 结构体对象，该宏会在内部自己判断应该使用哪种阴影映射技术（SM、SSSM）\n最终的目的就是将顶点进行坐标转换并存储到 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "_ShadowCoord"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 阴影纹理坐标变量中"
+												}
+											]
+										},
+										{
+											"ID": "20241205125201-lut0btl",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241205125201-lut0btl",
+												"updated": "20241205125219"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "使用此宏时，句末不需要加 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": ";"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 分号"
+												}
+											]
+										},
+										{
+											"ID": "20241205123756-wrsfidd",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20241205123756-wrsfidd",
+												"style": "line-height: 22px;",
+												"updated": "20241208022247"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "Yw=="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "// appdata_base 包含的顶点成员必须命名为 vertex\n// v2f 包含的顶点位置成员必须命名为 pos\nv2f vert (appdata_base v)\n{\n    v2f v2fData;\n    v2fData.pos = UnityObjectToClipPos(v.vertex);               //顶点转换到裁剪空间\n    v2fData.wNormal = UnityObjectToWorldNormal(v.normal);       //法线转换到世界空间\n    v2fData.wPos = mul(unity_ObjectToWorld, v.vertex).xyz;      //顶点转换到世界空间\n    TRANSFER_SHADOW(v2fData)    //计算阴影映射纹理坐标，它会在内部去进行计算，并存储到v2f结构体的SHADOW_COORDS(2)内部\n\n    return v2fData;\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20241205123042-8bzigoe",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241205123042-8bzigoe",
+												"updated": "20241205123042"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "需要注意的是："
+												}
+											]
+										},
+										{
+											"ID": "20241205123029-zkju0ro",
+											"Type": "NodeList",
+											"ListData": {
+												"Typ": 1
+											},
+											"Properties": {
+												"id": "20241205123029-zkju0ro",
+												"updated": "20241221161913"
+											},
+											"Children": [
+												{
+													"ID": "20241205123029-4q7dhru",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MS4=",
+														"Num": 1
+													},
+													"Properties": {
+														"id": "20241205123029-4q7dhru",
+														"updated": "20241221161913"
+													},
+													"Children": [
+														{
+															"ID": "20241205123029-mqr02rx",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20241205123029-mqr02rx",
+																"updated": "20241205124354"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "该宏会在内部使用顶点着色器中传入的结构体，该结构体中顶点的命名必须是 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "vertex"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​\n"
+																}
+															]
+														},
+														{
+															"ID": "20241205124355-2fc4lbk",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20241205124355-2fc4lbk",
+																"updated": "20241221161913"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "上面的示例代码中参数 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code block-ref",
+																	"TextMarkBlockRefID": "20240616182612-fikcbut",
+																	"TextMarkBlockRefSubtype": "s",
+																	"TextMarkTextContent": "appdata_base"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ 内的顶点就是命名为 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "vertex"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20241205123029-ooijlm1",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Mi4=",
+														"Num": 2
+													},
+													"Properties": {
+														"id": "20241205123029-ooijlm1",
+														"updated": "20241205123029"
+													},
+													"Children": [
+														{
+															"ID": "20241205123029-4vkgamg",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20241205123029-4vkgamg",
+																"updated": "20241205123040"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "该宏会在内部使用顶点着色器的返回结构体，其中的顶点位置命名必须是 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "pos"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																}
+															]
+														},
+														{
+															"ID": "20241205124446-1arc4bk",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20241205124446-1arc4bk",
+																"updated": "20241205124555"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "上面的示例代码中 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "v2f"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ 结构体内的顶点位置就必须命名为 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "pos"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20241205122924-bn2kdfd",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20241205122924-bn2kdfd",
+										"name": "SHADOW_ATTENUATION",
+										"updated": "20241205125238"
+									},
+									"Children": [
+										{
+											"ID": "20241205122924-lc6klzh",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241205122924-lc6klzh",
+												"updated": "20241205123053"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "SHADOW_ATTENUATION"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​（阴影衰减宏）\n"
+												}
+											]
+										},
+										{
+											"ID": "20241205123054-hfhtfdp",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241205123054-hfhtfdp",
+												"updated": "20241205123133"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "该宏在片元着色器中调用，传入对应的 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "v2f"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 结构体对象，\n该宏会在内部利用 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "v2f"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 中的 阴影纹理坐标变量（"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ShadowCoord"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​）对相关纹理进行采样\n将采样得到的深度值进行比较，以计算出一个 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "fixed3"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 的阴影衰减值，\n我们只需要使用它返回的结果和（漫反射+高光反射）的结果相乘即可"
+												}
+											]
+										},
+										{
+											"ID": "20241205125227-2mrazy5",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20241205125227-2mrazy5",
+												"updated": "20241205125238"
+											},
+											"Children": [
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "strong",
+													"TextMarkTextContent": "使用此宏时，句末必须加"
+												},
+												{
+													"Type": "NodeText",
+													"Data": " "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code strong",
+													"TextMarkTextContent": ";"
+												},
+												{
+													"Type": "NodeText",
+													"Data": " "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "strong",
+													"TextMarkTextContent": "分号"
+												}
+											]
+										},
+										{
+											"ID": "20241205125013-r0zqijd",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20241205125013-r0zqijd",
+												"updated": "20241205125147"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "Yw=="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "fixed4 frag (v2f i) : SV_Target\n{\n    //计算Blinn-Phong式光照模型需要的各种颜色\n    fixed3 lambertColor = getFragLambertColor(i.wNormal);           //计算漫反射\n    fixed3 specularColor = getFragSpecularColor(i.wPos, i.wNormal); //计算高光反射颜色\n    fixed3 shadow = SHADOW_ATTENUATION(i);                          //得到阴影衰减值\n    fixed atten = 1;                                                //衰减值，由于Bass Pass只处理平行光，因此衰减值默认为1\n    //计算Blinn-Phong式光照模型颜色，衰减值 需要乘以 漫反射颜色 和 高光反射颜色 的和，还要再乘以阴影衰减值\n    fixed3 blinnPhongColor = UNITY_LIGHTMODEL_AMBIENT.rgb + (lambertColor + specularColor) * atten * shadow;\n\n    return fixed4(blinnPhongColor.rgb, 1);  //因为传递过来的颜色变量不包括透明度，因此这里需要手动指定透明度\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20241205122618-q6j0cp6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20241205122618-q6j0cp6",
+						"updated": "20241205123209"
+					},
+					"Children": [
+						{
+							"ID": "20241205122618-biie0ug",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241205122618-biie0ug",
+								"updated": "20241205122618"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "注意\n"
+								}
+							]
+						},
+						{
+							"ID": "20241205123137-xm34wwx",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20241205123137-xm34wwx",
+								"updated": "20241205123209"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "目前处理的方式只是大致了解接受阴影的流程，我们还没有对 Additional Pass 附加渲染通道进行处理\n后续再统一处理光照衰减和阴影，得到最终效果"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20241205125108-cwwz3uy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241205125108-cwwz3uy",
+				"updated": "20241205125625"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果（左为使用 Unity 默认 Shader，中为使用未实现接收阴影的 Shader，右为使用实现接收阴影的 Shader）："
+				}
+			]
+		},
+		{
+			"ID": "20241205125510-z9p5kmp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241205125510-z9p5kmp",
+				"updated": "20241205125510"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20241205125510-uc7ursi.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20241205125626-j8vkjxw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241205125626-j8vkjxw",
+				"updated": "20241205125715"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，按照按照上述步骤实现了接收阴影逻辑后，物体就可以受到阴影的影响"
+				}
+			]
+		},
+		{
+			"ID": "20241205125717-ps4jfni",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20241205125717-ps4jfni",
+				"updated": "20241205125731"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "完整 Shader 代码如下："
+				}
+			]
+		},
+		{
+			"ID": "20241205125731-2ih79sk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20241205125731-2ih79sk",
+				"updated": "20241205125739"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson67_ForwardLighting\"\n{\n    Properties\n    {\n        _MainColor(\"MainColor\", Color) = (1, 1, 1, 1)           //材质的漫反射颜色\n        _SpecularColor(\"SpecularColor\", Color) = (1, 1, 1, 1)   //材质高光反射颜色\n        _SpecularNum(\"SpecularNum\", Range(0, 20)) = 0.5         //光泽度\n    }\n    SubShader\n    {\n        // Bass Pass 基础渲染通道\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardBase\" }\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            // 帮助我们编译所有光照变体，并确保光照衰减相关的变量能够正确复制到对应的变量中\n            #pragma multi_compile_fwdbase\n\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n            #include \"AutoLight.cginc\"          //引用包含计算阴影会使用的宏的cginc文件\n\n            struct v2f\n            {\n                float4 pos: SV_POSITION;      //裁剪空间下的顶点坐标\n                float3 wNormal: NORMAL;         //世界空间下的法线\n                float3 wPos: TEXCOORD0;         //世界空间下的顶点坐标\n                SHADOW_COORDS(2)                //阴影坐标宏，主要用于存储阴影纹理坐标\n            };\n\n            fixed4 _MainColor;      //属性设置的漫反射颜色\n            fixed4 _SpecularColor;  //属性设置的材质高光颜色\n            float _SpecularNum;     //属性设置的光泽度\n\n            //计算兰伯特光照模型 颜色相关函数（逐片元）\n            //参数：\n            //  wNormal: 世界空间下顶点的法线信息\n            fixed3 getFragLambertColor(in float3 wNormal)\n            {\n                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);  //将光源0的位置标准化，得到方向，用于计算夹角\n                //兰伯特光照模型的实现，这里的颜色计算只取rgb，不考虑透明度的情况\n                fixed3 color = _LightColor0.rgb * _MainColor.rgb * max(0, dot(wNormal, lightDir));\n                return color;\n            }\n\n            //计算Blinn-Phong高光反射光照模型 颜色相关函数（逐片元）\n            //参数：\n            //  wPos: 世界空间下顶点坐标\n            //  wNormal: 世界空间下顶点的法线信息\n            fixed3 getFragSpecularColor(in float3 wPos, in float3 wNormal)\n            {\n                float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - wPos);    //计算观察方向\n                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);          //标准化光源方向\n                float3 halfA = normalize(viewDir + lightDir);                   //将光源方向和观察方向相加得到其半角向量，并标准化\n                //Blinn-Phong高光反射模型的实现，这里的颜色计算只取rgb，不考虑透明度的情况\n                fixed3 color = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(wNormal, halfA)), _SpecularNum);\n                return color;\n            }\n\n            v2f vert (appdata_base v)\n            {\n                v2f v2fData;\n                v2fData.pos = UnityObjectToClipPos(v.vertex);             //顶点转换到裁剪空间\n                v2fData.wNormal = UnityObjectToWorldNormal(v.normal);       //法线转换到世界空间\n                v2fData.wPos = mul(unity_ObjectToWorld, v.vertex).xyz;      //顶点转换到世界空间\n                TRANSFER_SHADOW(v2fData)    //计算阴影映射纹理坐标，它会在内部去进行计算，并存储结构体的SHADOW_COORDS(2)内部\n\n                return v2fData;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                //计算Blinn-Phong式光照模型需要的各种颜色\n                fixed3 lambertColor = getFragLambertColor(i.wNormal);           //计算漫反射\n                fixed3 specularColor = getFragSpecularColor(i.wPos, i.wNormal); //计算高光反射颜色\n                fixed3 shadow = SHADOW_ATTENUATION(i);                          //得到阴影衰减值\n                fixed atten = 1;                                                //衰减值，由于Bass Pass只处理平行光，因此衰减值默认为1\n                //计算Blinn-Phong式光照模型颜色，衰减值 需要乘以 漫反射颜色 和 高光反射颜色 的和，还要再乘以阴影衰减值\n                fixed3 blinnPhongColor = UNITY_LIGHTMODEL_AMBIENT.rgb + (lambertColor + specularColor) * atten * shadow;\n          \n                return fixed4(blinnPhongColor.rgb, 1);  //因为传递过来的颜色变量不包括透明度，因此这里需要手动指定透明度\n            }\n            ENDCG\n        }\n\n        // Additional Pass 附加渲染通道\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardAdd\" }\n            // 使用线性减淡效果进行光照混合\n            Blend One One\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            // 帮助我们编译所有光照变体，并确保光照衰减相关的变量能够正确复制到对应的变量中\n            #pragma multi_compile_fwdadd\n\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n            #include \"AutoLight.cginc\"\n\n            struct v2f\n            {\n                float4 svPos : SV_POSITION;     //裁剪空间下的顶点坐标\n                float3 wNormal : NORMAL;        //世界空间下的法线\n                float3 wPos : TEXCOORD0;        //世界空间下的顶点坐标\n            };\n\n            fixed4 _MainColor;      //属性设置的漫反射颜色\n            fixed4 _SpecularColor;  //属性设置的材质高光颜色\n            float _SpecularNum;     //属性设置的光泽度\n\n            v2f vert (appdata_base v)\n            {\n                v2f v2fData;\n                v2fData.svPos = UnityObjectToClipPos(v.vertex);             //顶点转换到裁剪空间\n                v2fData.wNormal = UnityObjectToWorldNormal(v.normal);       //法线转换到世界空间\n                v2fData.wPos = mul(unity_ObjectToWorld, v.vertex).xyz;      //顶点转换到世界空间\n                return v2fData;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                // 漫反射颜色的计算\n                fixed3 worldNormal = normalize(i.wNormal);\n                // 光的方向\n            #if defined(_DIRECTIONAL_LIGHT)\n                fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz);             // 平行光 光的方向就是它的位置\n            #else\n                fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz - i.wPos);    // 点光源和聚光灯 光的方向 是 光的位置 - 顶点位置\n            #endif\n                fixed3 diffuse = _LightColor0.rgb * _MainColor.rgb * max(0, dot(worldNormal, worldLightDir));\n\n                // 高光反射颜色的计算\n                fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.wPos.xyz);  // 视角方向\n                fixed3 halfDir = normalize(worldLightDir + viewDir);                // 半角向量\n                fixed3 specular = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(worldNormal, halfDir)), _SpecularNum);\n\n                // 衰减值的计算\n            #ifdef USING_DIRECTIONAL_LIGHT  //如果光源是平行光，Unity就会定义USING_DIRECTIONAL_LIGHT这个宏，因此会进入这段逻辑\n                // 平行光逻辑\n                fixed atten = 1;\n            #else\n                // 如果未定义USING_DIRECTIONAL_LIGHT，则说明此光源非平行光\n            #if defined(POINT)\n                // 点光源逻辑\n                float3 lightCoord = mul(unity_WorldToLight, float4(i.wPos, 1)).xyz;\n                fixed atten = tex2D(_LightTexture0, dot(lightCoord, lightCoord).xx).UNITY_ATTEN_CHANNEL;\n            #elif defined(SPOT)\n                // 聚光灯逻辑\n                float4 lightCoord = mul(unity_WorldToLight, float4(i.wPos, 1));\n                fixed atten = (lightCoord.z \u003e 0) *\n                              tex2D(_LightTexture0, lightCoord.xy / lightCoord.w + 0.5).w *\n                              tex2D(_LightTextureB0, dot(lightCoord, lightCoord).xx).UNITY_ATTEN_CHANNEL;\n            #else\n                // 其他逻辑\n                fixed atten = 1;\n            #endif\n            #endif\n\n                // 附加渲染通道内不需要再加上环境光颜色了，因为它只需要计算一次，而之前已经在基础渲染通道中计算了\n                fixed3 blinnPhongColor = (diffuse + specular) * atten;\n                return fixed4(blinnPhongColor.rgb, 1);\n            }\n            ENDCG\n        }\n    }\n\n    Fallback \"Specular\"\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}

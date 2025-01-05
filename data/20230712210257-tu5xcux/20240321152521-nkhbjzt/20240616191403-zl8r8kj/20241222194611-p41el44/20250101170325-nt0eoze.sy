@@ -1,0 +1,1828 @@
+{
+	"ID": "20250101170325-nt0eoze",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20250101170325-nt0eoze",
+		"title": "US3S9L6——顶点动画的注意事项",
+		"type": "doc",
+		"updated": "20250104125719"
+	},
+	"Children": [
+		{
+			"ID": "20250101170325-7e8xwih",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250101170325-7e8xwih",
+				"updated": "20250101173555"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "顶点动画的注意事项 —— 批处理相关"
+				}
+			]
+		},
+		{
+			"ID": "20250101170450-u4d0hw8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101170450-u4d0hw8",
+				"updated": "20250101173555"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在之前的顶点动画相关课程中一再强调，我们需要在渲染标签中添加 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code block-ref",
+					"TextMarkBlockRefID": "20240612201203-3wtpxo5",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "\u0026quot;DisableBatching\u0026quot;=\u0026quot;True\u0026quot;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​\n来让该 Shader 渲染的对象不进行批处理，目的是让基于模型空间的计算能够正确进行，不会影响最终的渲染结果"
+				}
+			]
+		},
+		{
+			"ID": "20250101170529-1owqq1s",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20250101170529-1owqq1s",
+				"updated": "20250101170914"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "为什么批处理会影响顶点动画"
+				}
+			]
+		},
+		{
+			"ID": "20250101170546-0w9wq33",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101170546-0w9wq33",
+				"updated": "20250101170708"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity 中默认有静态批处理和动态批处理，批处理的主要作用是 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "合并多个对象，将他们作为一个 DrawCall 进行处理"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n之所以批处理会对顶点动画带来影响，是因为：不同的对象会拥有不同的变换矩阵（位置、旋转、缩放）\n而批处理后，他们的变换矩阵会进行统一处理："
+				}
+			]
+		},
+		{
+			"ID": "20250101170614-di52x67",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101170614-di52x67",
+				"updated": "20250101170619"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "举例："
+				}
+			]
+		},
+		{
+			"ID": "20250101170619-fzhn68f",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250101170619-fzhn68f",
+				"updated": "20250101170624"
+			},
+			"Children": [
+				{
+					"ID": "20250101170619-e6ku68n",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250101170619-e6ku68n",
+						"updated": "20250101170622"
+					},
+					"Children": [
+						{
+							"ID": "20250101170619-fxjfk9t",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101170619-fxjfk9t",
+								"updated": "20250101170622"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "物体A：位于世界空间位置 (0, 0, 0)，无旋转。"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250101170619-fy6fk7k",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250101170619-fy6fk7k",
+						"updated": "20250101170624"
+					},
+					"Children": [
+						{
+							"ID": "20250101170619-8553h98",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101170619-8553h98",
+								"updated": "20250101170624"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "物体B：位于世界空间位置 (5, 0, 0)，无旋转。"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250101170617-kjj83g3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101170617-kjj83g3",
+				"updated": "20250101170751"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "他们是两个独立的对象，拥有不同的变换矩阵，于是批处理与否带来的区别就是："
+				}
+			]
+		},
+		{
+			"ID": "20250101170613-kzflmtz",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250101170613-kzflmtz",
+				"updated": "20250101170753"
+			},
+			"Children": [
+				{
+					"ID": "20250101170657-rsdlcy4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250101170657-rsdlcy4",
+						"updated": "20250101170753"
+					},
+					"Children": [
+						{
+							"ID": "20250101170657-8hver2r",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101170657-8hver2r",
+								"updated": "20250101170657"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "不进行批处理时：\n"
+								}
+							]
+						},
+						{
+							"ID": "20250101170700-bp7ik0l",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101170700-bp7ik0l",
+								"updated": "20250101170753"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "每个对象的变换矩阵会单独传递给 Shader，顶点的模型空间位置会根据各自的变换进行正确计算"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250101170658-zpyvbxk",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250101170658-zpyvbxk",
+						"updated": "20250101170715"
+					},
+					"Children": [
+						{
+							"ID": "20250101170658-km0id34",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101170658-km0id34",
+								"updated": "20250101170658"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "进行批处理时：\n"
+								}
+							]
+						},
+						{
+							"ID": "20250101170701-uhns845",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101170701-uhns845",
+								"updated": "20250101170715"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "启用批处理后，Unity 会将对象 A 和对象 B 合并为一个 Draw Call，并使用一个统一的变换矩阵\n比如在静态批处理中，Unity 会将对象 A 和对象 B 的顶点合并为一个网格，并使用统一的变换进行渲染"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250101170655-vy9gg11",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101170655-vy9gg11",
+				"updated": "20250101170758"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "批处理后顶点位置是混合的，Shader 中无法区分不同对象的模型空间位置，因此可能带来的问题有:"
+				}
+			]
+		},
+		{
+			"ID": "20250101170800-omaitfs",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250101170800-omaitfs",
+				"updated": "20250101170800"
+			},
+			"Children": [
+				{
+					"ID": "20250101170800-7zgwe8d",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250101170800-7zgwe8d",
+						"updated": "20250101170800"
+					},
+					"Children": [
+						{
+							"ID": "20250101170800-1a16uih",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101170800-1a16uih",
+								"updated": "20250101170800"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "顶点动画失效：\n"
+								}
+							]
+						},
+						{
+							"ID": "20250101170803-8cmzqz0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101170803-8cmzqz0",
+								"updated": "20250101170835"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "假设你希望顶点在模型空间的 x 方向上进行 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "sin"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 波动动画。\n如果对象 A 和对象 B 的模型空间位置被混合，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "波动动画会变得不可预测"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250101170802-bp5nqs8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250101170802-bp5nqs8",
+						"updated": "20250101170802"
+					},
+					"Children": [
+						{
+							"ID": "20250101170802-rjlir3e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101170802-rjlir3e",
+								"updated": "20250101170839"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "变换混淆：\n"
+								}
+							]
+						},
+						{
+							"ID": "20250101170855-rui0tp5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101170855-rui0tp5",
+								"updated": "20250101170855"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对象 A 和对象 B 有不同的变换矩阵。\n如果批处理后使用统一的变换矩阵，Shader 无法区分每个顶点属于哪个对象，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "导致所有顶点的动画效果混淆"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250101170728-qd5al1w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101170728-qd5al1w",
+				"updated": "20250101170851"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "总结：批处理会让对象失去独立性，相当于将多个对象之间独立的模型空间坐标系合并为一个坐标系\n从而影响顶点的相对位置和变换矩阵等信息，导致顶点动画结果异常，因此我们通过渲染标签来关闭批处理"
+				}
+			]
+		},
+		{
+			"ID": "20250101170914-mqxu7vw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20250101170914-mqxu7vw",
+				"updated": "20250101171012"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关闭批处理带来的问题"
+				}
+			]
+		},
+		{
+			"ID": "20250101170925-c40at4l",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101170925-c40at4l",
+				"updated": "20250101170941"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关闭批处理带来的最直接问题就是导致："
+				}
+			]
+		},
+		{
+			"ID": "20250101170939-38wkpf2",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250101170939-38wkpf2",
+				"updated": "20250101170939"
+			},
+			"Children": [
+				{
+					"ID": "20250101170939-dvx37jo",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250101170939-dvx37jo",
+						"updated": "20250101170939"
+					},
+					"Children": [
+						{
+							"ID": "20250101170939-69yz43e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101170939-69yz43e",
+								"updated": "20250101170939"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "DrawCall的提升\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250101170939-gmiazlx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250101170939-gmiazlx",
+						"updated": "20250101170939"
+					},
+					"Children": [
+						{
+							"ID": "20250101170939-r4sgcgu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101170939-r4sgcgu",
+								"updated": "20250101170939"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "DrawCall的提升可能会带来性能问题"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250101170929-pmefg75",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101170929-pmefg75",
+				"updated": "20250101170936"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果 DrawCall 的增加并没有带来性能问题，那我们可以通过关闭批处理来解决顶点动画问题"
+				}
+			]
+		},
+		{
+			"ID": "20250101170935-oqjmeq4",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101170935-oqjmeq4",
+				"updated": "20250101170935"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如果带来了性能问题，并且必须优化带有顶点动画的Shader，我们应该如何解决呢？"
+				}
+			]
+		},
+		{
+			"ID": "20250101171011-kzgzbvd",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20250101171011-kzgzbvd",
+				"updated": "20250101171109"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如何解决关闭批处理带来的问题"
+				}
+			]
+		},
+		{
+			"ID": "20250101171019-uxxkfyl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101171019-uxxkfyl",
+				"updated": "20250101171157"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先 Shader 内需要开启批处理，然后采取如下的几种方案"
+				}
+			]
+		},
+		{
+			"ID": "20250101171039-x8fjlk9",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250101171039-x8fjlk9",
+				"updated": "20250101173409"
+			},
+			"Children": [
+				{
+					"ID": "20250101171039-gci2z5d",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"alias": "mesh.vertices,mesh.colors",
+						"id": "20250101171039-gci2z5d",
+						"name": "meshFilter.mesh",
+						"updated": "20250101171039"
+					},
+					"Children": [
+						{
+							"ID": "20250101171039-ffr1iid",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101171039-ffr1iid",
+								"updated": "20250101171039"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "顶点颜色\n"
+								}
+							]
+						},
+						{
+							"ID": "20250101171041-4erp1nj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101171041-4erp1nj",
+								"updated": "20250101171102"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "利用顶点颜色来存储每个顶点的位置信息或相对位置信息，\n我们在 C# 代码中获取模型网格顶点数据，将数据存储到网格的颜色属性中\n在 Shader 中通过颜色属性获取顶点信息"
+								}
+							]
+						},
+						{
+							"ID": "20250101171227-unqe7qd",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250101171227-unqe7qd",
+								"style": "line-height: 22px;",
+								"updated": "20250101171800"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    // 获取网格组件\n    MeshFilter meshFilter = GetComponent\u003cMeshFilter\u003e();\n    if (meshFilter != null)\n    {\n        // 通过网格组件，即可得到网格信息，进而得到所有的顶点信息，这些顶点信息可以存储到颜色数组内\n        Mesh mesh = meshFilter.mesh;\n        Vector3[] vertices = mesh.vertices;\n        Color[] colors = new Color[vertices.Length];\n        for (int i = 0; i \u003c vertices.Length; i++)\n        {\n            // 将模型空间位置存储在顶点颜色中\n            colors[i] = new Color(vertices[i].x, vertices[i].y, vertices[i].z, 1);\n        }\n        // 将颜色数组赋值到网格的颜色信息中即可\n        mesh.colors = colors;\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20250101171555-rn9my8w",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101171555-rn9my8w",
+								"updated": "20250101171637"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "之后在 Shader 中，直接在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref code",
+									"TextMarkBlockRefID": "20240616182612-1w0c0lf",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "appdata_full"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 结构体中点出颜色成员 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "color"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，即可利用它获取到顶点信息"
+								}
+							]
+						},
+						{
+							"ID": "20250101171855-252qufl",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250101171855-252qufl",
+								"style": "line-height: 22px;",
+								"updated": "20250101171954"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "v2f vert(appdata_full v)\n{\n    v2f o;\n    float4 vertex = v.color;\n    // ...\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250101171039-bsmn084",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"alias": "mesh.uv2",
+						"id": "20250101171039-bsmn084",
+						"name": "mesh.uv",
+						"updated": "20250101173409"
+					},
+					"Children": [
+						{
+							"ID": "20250101171039-iw1ytd2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101171039-iw1ytd2",
+								"updated": "20250101171052"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "UV通道"
+								}
+							]
+						},
+						{
+							"ID": "20250101171048-6lumatw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101171048-6lumatw",
+								"updated": "20250101172942"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "和上面的顶点颜色方案类似，只是把相关信息存储到 UV 通道中而已，\n但是一个 UV 通道只能存储 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Vector2[]"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 的值，因此可能会使用两个 UV 通道，\n若使用两个 UV 通道，而第二个 UV 通道会只使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Vector2[]"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 的一个分量，因此 UV 通道的方法一般在存储两个值时使用\n注意，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Mesh"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 内可以点出多个 UV 通道，其中默认的 UV 通道 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "mesh.uv"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 不可使用，其他的 UV 通道只要未被占用就都可以使用"
+								}
+							]
+						},
+						{
+							"ID": "20250101172006-kolc030",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250101172006-kolc030",
+								"style": "line-height: 22px;",
+								"updated": "20250101173404"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "void Start()\n{\n    // 获取网格组件\n    MeshFilter meshFilter = GetComponent\u003cMeshFilter\u003e();\n    if (meshFilter != null)\n    {\n        // 通过网格组件，即可得到网格信息，进而得到所有的顶点信息，这些顶点信息可以存储到Vector2数组内\n        Mesh mesh = meshFilter.mesh;\n        Vector3[] vertices = mesh.vertices;\n        Vector2[] uvData1 = new Vector2[vertices.Length];\n        Vector2[] uvData2 = new Vector2[vertices.Length];\n        for (int i = 0; i \u003c vertices.Length; i++)\n        {\n            // 将模型空间位置存储在Vector2s数据内中\n            uvData1[i] = new Vector2(vertices[i].x, vertices[i].y);\n            uvData2[i] = new Vector2(vertices[i].z, 1);\n        }\n        // 将两个Vector2数组赋值到网格的其他UV通道内即可（只要此UV通道未被占用即可使用，不能使用第一个通道）\n        mesh.uv2 = new Vector2[uvData1.Length];\n        mesh.uv3 = new Vector2[uvData2.Length];\n    }\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20250101172228-ijzyg0v",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101172228-ijzyg0v",
+								"updated": "20250101173342"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "之后在 Shader 中，直接在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref code",
+									"TextMarkBlockRefID": "20240616182612-1w0c0lf",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "appdata_full"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 结构体中点出对应的 uv 通道，即可利用它获取到顶点信息"
+								}
+							]
+						},
+						{
+							"ID": "20250101173343-ztrjlic",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250101173343-ztrjlic",
+								"style": "line-height: 22px;",
+								"updated": "20250101173409"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "v2f vert(appdata_full v)\n{\n    v2f o;\n    float4 vertex = float4(v.texcoord1.xy, v.texcoord2.xy);\n    // ...\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250101171107-snd6zox",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101171107-snd6zox",
+				"updated": "20250101171109"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "等等"
+				}
+			]
+		},
+		{
+			"ID": "20250101173454-n01p8i6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250101173454-n01p8i6",
+				"updated": "20250104125719"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "顶点动画的注意事项 —— 阴影相关"
+				}
+			]
+		},
+		{
+			"ID": "20250101173505-qipl3m4",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250101173505-qipl3m4",
+				"updated": "20250101173717"
+			},
+			"Children": [
+				{
+					"ID": "20250101173717-dqzgqjx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250101173717-dqzgqjx",
+						"updated": "20250101173717"
+					},
+					"Children": [
+						{
+							"ID": "20250101173717-5kvym67",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101173717-5kvym67",
+								"updated": "20250101173717"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如何让对象投射阴影，详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20241204123549-jqerwvn",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "US3S6L3——让物体投射阴影"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250101173717-fmx8dry",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250101173717-fmx8dry",
+						"updated": "20250101173717"
+					},
+					"Children": [
+						{
+							"ID": "20250101173717-5ooew17",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101173717-5ooew17",
+								"updated": "20250101173717"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "透明度混合物体投射阴影相关，详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20241208013852-tu2l5c4",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "US3S6L8——透明度混合物体阴影实现"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250101173721-b1suarr",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20250101173721-b1suarr",
+				"updated": "20250104125719"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "顶点动画物体投射阴影"
+				}
+			]
+		},
+		{
+			"ID": "20250101173739-3ojxz8h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101173739-3ojxz8h",
+				"updated": "20250101174303"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们可以为有顶点动画的物体，使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LightMode"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（灯光模式）为 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ShadowCaster"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（阴影投射）的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（渲染通道），这样它便能投射阴影\n但是如果我们直接使用内置的这种 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（默认 Shader 中的，通过 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "FallBack"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 寻找到的）投射的阴影会是不正确的，\n因为默认 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 当中并不会使用新的顶点位置来投射，而是按照模型原来的顶点位置来计算阴影的，举例："
+				}
+			]
+		},
+		{
+			"ID": "20250101173745-czvb741",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250101173745-czvb741",
+				"updated": "20250104125719"
+			},
+			"Children": [
+				{
+					"ID": "20250101173745-ij8fcil",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250101173745-ij8fcil",
+						"updated": "20250101173745"
+					},
+					"Children": [
+						{
+							"ID": "20250101173745-7vge1zz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101173745-7vge1zz",
+								"updated": "20250101173802"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "新建一个 Shader，复用流动的2D河流的 Shader 代码"
+								}
+							]
+						},
+						{
+							"ID": "20250101173803-p5k35e5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101173803-p5k35e5",
+								"updated": "20250101173811"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "具体详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20241225002416-nj2owy8",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "US3S9L4——顶点波动效果——流动的河流"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250101173745-69k1qk7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250101173745-69k1qk7",
+						"updated": "20250101175324"
+					},
+					"Children": [
+						{
+							"ID": "20250101173745-tjtw9y3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101173745-tjtw9y3",
+								"updated": "20250101173825"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "为其加上一个不透明的 FallBack Shader 比如 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "VertexLit"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250101174307-pzqze2b",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250101174307-pzqze2b",
+								"style": "line-height: 22px;",
+								"updated": "20250101175324"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Shader \"TeachShader/Lesson97\"\n{\n    Properties {/*...*/}\n    SubShader {/*...*/}\n\n    Fallback \"VertexLit\"\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250101173745-giiajog",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250101173745-giiajog",
+						"updated": "20250104125719"
+					},
+					"Children": [
+						{
+							"ID": "20250101173745-u95jb03",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101173745-u95jb03",
+								"updated": "20250104125719"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20250104125535-bkgm8d4",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "MeshRenderer"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中开启双面投射阴影"
+								}
+							]
+						},
+						{
+							"ID": "20250101174857-mbuxkc0",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101174857-mbuxkc0",
+								"updated": "20250101174857"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 272px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250101174857-bp49cmk.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 272px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250101174734-45edl4i",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101174734-45edl4i",
+				"updated": "20250101174738"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20250101174739-t6vu3qp",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101174739-t6vu3qp",
+				"updated": "20250101174739"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 513px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250101174739-p4mg0f2.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 513px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250101173829-j9weufm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101173829-j9weufm",
+				"updated": "20250101174749"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，这时我们使用该 Shader 投射出来的阴影是没有经过顶点动画变化的模型阴影"
+				}
+			]
+		},
+		{
+			"ID": "20250101173840-w95mxon",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20250101173840-w95mxon",
+				"updated": "20250101180042"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "让顶点动画物体投射正确的阴影"
+				}
+			]
+		},
+		{
+			"ID": "20250101180035-obucoqj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101180035-obucoqj",
+				"updated": "20250101180042"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "想要让带有顶点动画的对象产生正确的阴影，我们需要自定义 投射阴影的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（渲染通道），在其中加入对顶点的变换计算即可"
+				}
+			]
+		},
+		{
+			"ID": "20250101174115-3yn8jyx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101174115-3yn8jyx",
+				"updated": "20250101174144"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们需要自定义一个 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LightMode"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（灯光模式）为 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ShadowCaster"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（阴影投射）的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（渲染通道），在顶点着色器函数中进行顶点相关的计算"
+				}
+			]
+		},
+		{
+			"ID": "20250101174119-bta9dg5",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250101174119-bta9dg5",
+				"updated": "20250101175824"
+			},
+			"Children": [
+				{
+					"ID": "20250101174119-tptnnx4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250101174119-tptnnx4",
+						"updated": "20250101174119"
+					},
+					"Children": [
+						{
+							"ID": "20250101174119-6fzx5nu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101174119-6fzx5nu",
+								"updated": "20250101175253"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "基于上文创建的 Shader ，再复用基础阴影投射渲染通道代码中自行实现的阴影投射的Pass"
+								}
+							]
+						},
+						{
+							"ID": "20250101175049-qlcge6n",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101175049-qlcge6n",
+								"updated": "20250101175135"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "代码详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20241204123549-jqerwvn",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "US3S6L3——让物体投射阴影"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 的 让物体投射阴影的部分"
+								}
+							]
+						},
+						{
+							"ID": "20250101175156-pv47lag",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250101175156-pv47lag",
+								"style": "line-height: 22px;",
+								"updated": "20250101175320"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "// ShadowCaster Pass 投影阴影通道\npass\n{\n    Tags { \"LightMode\" = \"ShadowCaster\" }\n\n    CGPROGRAM\n    #pragma vertex vert\n    #pragma fragment frag\n    // 告诉Unity编译器生成多个着色器变体，用于支持不同类型的阴影（SM，SSSM等等），确保着色器能够在所有可能的阴影投射模式下正确渲染\n    #pragma multi_compile_shadowcaster\n\n    #include \"UnityCG.cginc\"\n\n    struct v2f\n    {\n        V2F_SHADOW_CASTER;\t// 顶点到片元着色器阴影投射结构体数据宏，定义了一些标准的成员变量，这些变量用于在阴影投射路径中传递顶点数据到片元着色器\n    };\n\n    v2f vert(appdata_base v)\n    {\n        v2f data;\n        TRANSFER_SHADOW_CASTER_NORMALOFFSET(data);\t// 转移阴影投射器法线偏移宏，用于在顶点着色器中计算和传递阴影投射所需的变量\n        return data;\n    }\n\n    fixed4 frag(v2f i) : SV_Target\n    {\n        SHADOW_CASTER_FRAGMENT(i);\t//阴影投射片元宏，将深度值写入到阴影映射纹理中\n    }\n    ENDCG\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250101174119-71dorf9",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250101174119-71dorf9",
+						"updated": "20250101174119"
+					},
+					"Children": [
+						{
+							"ID": "20250101174119-fj49qzp",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101174119-fj49qzp",
+								"updated": "20250101174205"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在该 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中加入 波形频率、波长的倒数、波形幅度 属性的映射"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250101174119-q8czi6g",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250101174119-q8czi6g",
+						"updated": "20250101175804"
+					},
+					"Children": [
+						{
+							"ID": "20250101174119-gouip08",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101174119-gouip08",
+								"updated": "20250101174208"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在该 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中的顶点着色器函数中 加入顶点的偏移计算（直接复制前面的代码）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250101174119-2h0x5y3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20250101174119-2h0x5y3",
+						"updated": "20250101175824"
+					},
+					"Children": [
+						{
+							"ID": "20250101174119-upqg9tq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250101174119-upqg9tq",
+								"updated": "20250101175824"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "直接对模型空间中顶点进行偏移，不用进行裁剪坐标空间变换以及 UV 相关计算"
+								}
+							]
+						},
+						{
+							"ID": "20250101175757-gl0v80h",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250101175757-gl0v80h",
+								"style": "line-height: 22px;",
+								"updated": "20250101175808"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "float _WaveAmplitude;\nfloat _WaveFrequency;\nfloat _InvWaveLength;\n\nstruct v2f\n{\n    V2F_SHADOW_CASTER;\t// 顶点到片元着色器阴影投射结构体数据宏，定义了一些标准的成员变量，这些变量用于在阴影投射路径中传递顶点数据到片元着色器\n};\n\nv2f vert(appdata_base v)\n{\n    v2f data;\n    // 模型空间下的偏移计算，假设此模型的横轴是Z轴，纵轴是Y轴，因此需要沿着模型的Z轴去偏移顶点Y轴上的位置\n    float4 offset;\n    offset.x = sin(_Time.y * _WaveFrequency + v.vertex.z * _InvWaveLength) * _WaveAmplitude;\n    offset.yzw = float3(0, 0, 0);\n    v.vertex += offset;                         // 由于下面的语句会自动执行裁剪空间的转换，因此这里只需要去偏移顶点即可\n    TRANSFER_SHADOW_CASTER_NORMALOFFSET(data);\t// 转移阴影投射器法线偏移宏，用于在顶点着色器中计算和传递阴影投射所需的变量\n    return data;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250101175851-fwx079f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101175851-fwx079f",
+				"updated": "20250101175857"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20250101175858-yl5n038",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101175858-yl5n038",
+				"updated": "20250101175858"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 598px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250101175858-1w79am6.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 598px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250101175919-5z2t0ld",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101175919-5z2t0ld",
+				"updated": "20250101180004"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，通过自定义投影阴影通道的逻辑，这时我们使用该 Shader 投射出来的阴影就是经过顶点动画变化的模型阴影"
+				}
+			]
+		},
+		{
+			"ID": "20250101175930-z8q42po",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250101175930-z8q42po",
+				"updated": "20250101180012"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "完整 Shader 如下："
+				}
+			]
+		},
+		{
+			"ID": "20250101180012-kaaz8tk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250101180012-kaaz8tk",
+				"style": "line-height: 22px;",
+				"updated": "20250101180018"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson97\"\n{\n    Properties\n    {\n        _MainTex(\"Texture\", 2D) = \"white\" {}            // 主纹理\n        _Color(\"Color\", color) = (1, 1, 1, 1)           // 叠加颜色\n        _WaveAmplitude(\"WaveAmplitude\", Float) = 1      // 波动幅度\n        _WaveFrequency(\"WaveFrequency\", Float) = 1      // 波动频率\n        _InvWaveLength(\"InvWaveLength\", Float) = 1      // 波长倒数\n        _Speed(\"Speed\", Float) = 1                      // 纹理变化速度\n    }\n\n    SubShader\n    {\n        Tags { \"RenderType\"=\"Transparent\" \"Queue\"=\"Transparent\" \"IgnoreProjector\"=\"True\" \"DisableBatching\"=\"True\"}\n\n        Pass\n        {\n            ZWrite Off\n            Blend SrcAlpha OneMinusSrcAlpha\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n\n            struct v2f\n            {\n                float2 uv : TEXCOORD0;\n                float4 vertex : SV_POSITION;\n            };\n\n            sampler2D _MainTex;\n            float4 _MainTex_ST;\n            fixed4 _Color;\n            float _WaveAmplitude;\n            float _WaveFrequency;\n            float _InvWaveLength;\n            float _Speed;\n\n            v2f vert (appdata_base v)\n            {\n                v2f o;\n                // 模型空间下的偏移计算，假设此模型的横轴是Z轴，纵轴是Y轴，因此需要沿着模型的Z轴去偏移顶点Y轴上的位置\n                float4 offset;\n                offset.x = sin(_Time.y * _WaveFrequency + v.vertex.z * _InvWaveLength) * _WaveAmplitude;\n                offset.yzw = float3(0, 0, 0);\n                o.vertex = UnityObjectToClipPos(v.vertex + offset);\n                // 计算uv坐标\n                o.uv = v.texcoord * _MainTex_ST.xy + _MainTex_ST.zw;\n                o.uv += float2(0, _Time.y * _Speed);\n                return o;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                // 从纹理采样并叠加颜色\n                fixed4 color = tex2D(_MainTex, i.uv);\n                color.rgb *= _Color.rgb;\n                return color;\n            }\n            ENDCG\n        }\n\n        // ShadowCaster Pass 投影阴影通道\n        pass\n        {\n            Tags { \"LightMode\" = \"ShadowCaster\" }\n      \n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            // 告诉Unity编译器生成多个着色器变体，用于支持不同类型的阴影（SM，SSSM等等），确保着色器能够在所有可能的阴影投射模式下正确渲染\n            #pragma multi_compile_shadowcaster\n      \n            #include \"UnityCG.cginc\"\n\n            float _WaveAmplitude;\n            float _WaveFrequency;\n            float _InvWaveLength;\n      \n            struct v2f\n            {\n                V2F_SHADOW_CASTER;\t// 顶点到片元着色器阴影投射结构体数据宏，定义了一些标准的成员变量，这些变量用于在阴影投射路径中传递顶点数据到片元着色器\n            };\n      \n            v2f vert(appdata_base v)\n            {\n                v2f data;\n                // 模型空间下的偏移计算，假设此模型的横轴是Z轴，纵轴是Y轴，因此需要沿着模型的Z轴去偏移顶点Y轴上的位置\n                float4 offset;\n                offset.x = sin(_Time.y * _WaveFrequency + v.vertex.z * _InvWaveLength) * _WaveAmplitude;\n                offset.yzw = float3(0, 0, 0);\n                v.vertex += offset;                         // 由于下面的语句会自动执行裁剪空间的转换，因此这里只需要去偏移顶点即可\n                TRANSFER_SHADOW_CASTER_NORMALOFFSET(data);\t// 转移阴影投射器法线偏移宏，用于在顶点着色器中计算和传递阴影投射所需的变量\n                return data;\n            }\n      \n            fixed4 frag(v2f i) : SV_Target\n            {\n                SHADOW_CASTER_FRAGMENT(i);\t//阴影投射片元宏，将深度值写入到阴影映射纹理中\n            }\n            ENDCG\n        }\n    }\n\n    Fallback \"VertexLit\"\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		}
+	]
+}
