@@ -1,0 +1,597 @@
+{
+	"ID": "20250127160109-nv3uj2h",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20250127160109-nv3uj2h",
+		"title": "US4L8-2——柏林噪声纹理生成工具实现",
+		"type": "doc",
+		"updated": "20250127202541"
+	},
+	"Children": [
+		{
+			"ID": "20250127165246-vz72rvz",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250127165246-vz72rvz",
+				"updated": "20250127165500"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20250127165251-zp5mfwe",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250127165251-zp5mfwe",
+				"style": "line-height: 22px;",
+				"updated": "20250127165500"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Mathf.PerlinNoise()\t\t\t// 传入柏林噪声空间中的xy值，返回噪声值\ntexture2D.EncodeToPNG()\t\t// 将Texture2D对象保存为png格式的byte[]数据，之后方便保存\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250127160109-5tvzp6b",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20250127160109-5tvzp6b",
+				"updated": "20250127202541"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "柏林噪声纹理生成工具"
+				}
+			]
+		},
+		{
+			"ID": "20250127160146-pzw5qq5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127160146-pzw5qq5",
+				"updated": "20250127165245"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这里要实现的柏林噪声纹理生成工具，就是利用 Unity 提供给我们的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Mathf.PerlinNoise()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法\n将噪声数据存储在图片中的工具，我们利用程序代码去生成柏林噪声纹理"
+				}
+			]
+		},
+		{
+			"ID": "20250127160212-76or037",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250127160212-76or037",
+				"updated": "20250127202541"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "制作编辑器拓展UI界面"
+				}
+			]
+		},
+		{
+			"ID": "20250127160301-7llohoo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127160301-7llohoo",
+				"updated": "20250127160317"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "前置知识点："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20240317220544-aihpc4z",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "UED——Unity编辑器拓展"
+				}
+			]
+		},
+		{
+			"ID": "20250127160319-mi9vtez",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127160319-mi9vtez",
+				"updated": "20250127161139"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "先将必要的 柏林噪声纹理参数 和 生成按钮 显示在窗口上"
+				}
+			]
+		},
+		{
+			"ID": "20250127161118-4rs8k7x",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250127161118-4rs8k7x",
+				"style": "line-height: 22px;",
+				"updated": "20250127202541"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.IO;\nusing UnityEditor;\nusing UnityEngine;\n\npublic class PerlinNoiseTextureTool : EditorWindow\n{\n    private int textureWidth = 512;                     // 生成纹理的宽\n    private int textureHeight = 512;                    // 生成纹理的高\n    private int scale = 20;                             // 纹理的缩放\n    private string textureName = \"PerlinNoiseTexture\"; // 生成的纹理名\n    private string savePath = Application.dataPath;     // 保存路径\n\n    [MenuItem(\"Tools/柏林噪声生成工具/打开窗口\")]\n    public static void ShowWindow()\n    {\n        EditorWindow.GetWindow\u003cPerlinNoiseTextureTool\u003e(\"柏林噪声生成工具\").Show();\n    }\n\n    private void OnGUI()\n    {\n        GUILayout.Label(\"柏林噪声纹理设置\");\n        textureWidth = EditorGUILayout.IntField(\"纹理宽\", textureWidth);\n        textureHeight = EditorGUILayout.IntField(\"纹理高\", textureHeight);\n        scale = EditorGUILayout.IntField(\"缩放\", scale);\n        textureName = EditorGUILayout.TextField(\"生成纹理名\", textureName);\n        savePath = EditorGUILayout.TextField(\"保存路径\", savePath);\n        if (GUILayout.Button(\"选择保存路径\"))\n        {\n            savePath = EditorUtility.SaveFolderPanel(\"选择噪声纹理保存路径\", savePath, string.Empty);\n            if (string.IsNullOrEmpty(savePath))\n            {\n                savePath = Application.dataPath;\n            }\n        }\n\n        if (GUILayout.Button(\"生成柏林噪声纹理\"))\n        {\n            // TODO.. 生成柏林噪声纹理的逻辑\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250127161146-chqpgnl",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127161146-chqpgnl",
+				"updated": "20250127161149"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20250127164111-lejmazb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127164111-lejmazb",
+				"updated": "20250127164111"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 530px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250127164111-8m6m8gl.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 530px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250127161202-lbnvl4l",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250127161202-lbnvl4l",
+				"name": "Mathf.PerlinNoise()",
+				"updated": "20250127202534"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity提供的生成柏林噪声的方法"
+				}
+			]
+		},
+		{
+			"ID": "20250127161309-4ytadyb",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250127161309-4ytadyb",
+				"style": "line-height: 22px;",
+				"updated": "20250127161317"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "float Mathf.PerlinNoise(float x, float y)\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250127161244-fe99xyv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127161244-fe99xyv",
+				"updated": "20250127161324"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "该函数是 Unity 提供的一个用于生成 Perlin Noise 的函数，主要用于生成平滑、连续的伪随机值。\n它广泛应用于纹理生成、地形生成、动画和特效等需要平滑过渡的场景"
+				}
+			]
+		},
+		{
+			"ID": "20250127161328-nzw4mxy",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127161328-nzw4mxy",
+				"updated": "20250127164124"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "传入的两个参数是二维坐标点（需要注意传入的相邻值间隔最好不要太大，否则可能输出纯灰色的图），通常用于表示柏林噪声空间中的位置，\n返回值为一个浮点数，范围为 0"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "~"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "1 之间（返回值可能会稍微低于 0.0 或超过 1.0。）\n返回的噪声值具有连续性，即相邻输入值对应的输出值是平滑过渡的"
+				}
+			]
+		},
+		{
+			"ID": "20250127161340-i0d9js5",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20250127161340-i0d9js5",
+				"name": "texture2D.EncodeToPNG()",
+				"updated": "20250127202534"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "生成柏林噪声纹理图片"
+				}
+			]
+		},
+		{
+			"ID": "20250127161404-03mlz9k",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127161404-03mlz9k",
+				"updated": "20250127165032"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "首先实例化一个新的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Texture2D"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 并根据设置的参数设置尺寸，然后遍历其每一个像素，\n根据像素所在位置生成柏林噪声值，其中传入的参数可以由 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "scale"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 属性修改\n将生成的柏林噪声值作为像素的颜色 RGB 值存储到像素内，然后使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "texture2D.EncodeToPNG()"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 将 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Texture2D"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 转换为 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "png"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 格式的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "byte[]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 数据，\n最后将 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "byte[]"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 数据使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "File.WriteAllBytes"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法来存储为 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": ".png"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 文件"
+				}
+			]
+		},
+		{
+			"ID": "20250127164139-ze0qxv2",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250127164139-ze0qxv2",
+				"style": "line-height: 22px;",
+				"updated": "20250127164800"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "// 生成柏林噪声纹理的逻辑\nTexture2D texture = new Texture2D(textureWidth, textureHeight);\n// 遍历纹理每一个像素，为其设置颜色，颜色的rgb值就是噪声值\nfor (int x = 0; x \u003c textureWidth; x++)\n{\n    for (int y = 0; y \u003c textureHeight; y++)\n    {\n        float noiseValue = Mathf.PerlinNoise((float)x / textureWidth * scale, (float)y / textureWidth * scale);\n        texture.SetPixel(x, y, new Color(noiseValue, noiseValue, noiseValue));\n    }\n}\ntexture.Apply();\n// 使用texture2D.EncodeToPNG方法可以将Texture2D保存为byte[]形式的png格式图片，之后即可保存该图片\nFile.WriteAllBytes(Path.Join(savePath, textureName + \".png\"), texture.EncodeToPNG());\nAssetDatabase.Refresh();\nEditorUtility.DisplayDialog(\"提示\", \"噪声纹理生成完毕\", \"确定\");\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250127164806-vodtkvb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127164806-vodtkvb",
+				"updated": "20250127164831"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "完整的生成柏林噪声的 C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 脚本如下："
+				}
+			]
+		},
+		{
+			"ID": "20250127164832-qsrvsq5",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250127164832-qsrvsq5",
+				"style": "line-height: 22px;",
+				"updated": "20250127202534"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using System.IO;\nusing UnityEditor;\nusing UnityEngine;\n\npublic class PerlinNoiseTextureTool : EditorWindow\n{\n    private int textureWidth = 512;                     // 生成纹理的宽\n    private int textureHeight = 512;                    // 生成纹理的高\n    private int scale = 20;                             // 纹理的缩放\n    private string textureName = \"PerlinNoiseTexture\"; // 生成的纹理名\n    private string savePath = Application.dataPath;     // 保存路径\n\n    [MenuItem(\"Tools/柏林噪声生成工具/打开窗口\")]\n    public static void ShowWindow()\n    {\n        EditorWindow.GetWindow\u003cPerlinNoiseTextureTool\u003e(\"柏林噪声生成工具\").Show();\n    }\n\n    private void OnGUI()\n    {\n        GUILayout.Label(\"柏林噪声纹理设置\");\n        textureWidth = EditorGUILayout.IntField(\"纹理宽\", textureWidth);\n        textureHeight = EditorGUILayout.IntField(\"纹理高\", textureHeight);\n        scale = EditorGUILayout.IntField(\"缩放\", scale);\n        textureName = EditorGUILayout.TextField(\"生成纹理名\", textureName);\n        savePath = EditorGUILayout.TextField(\"保存路径\", savePath);\n        if (GUILayout.Button(\"选择保存路径\"))\n        {\n            string newPath = EditorUtility.SaveFolderPanel(\"选择噪声纹理保存路径\", savePath, string.Empty);\n            if (!string.IsNullOrEmpty(newPath))\n            {\n                savePath = newPath;\n            }\n        }\n\n        if (GUILayout.Button(\"生成柏林噪声纹理\"))\n        {\n            // 生成柏林噪声纹理的逻辑\n            Texture2D texture = new Texture2D(textureWidth, textureHeight);\n            // 遍历纹理每一个像素，为其设置颜色，颜色的rgb值就是噪声值\n            for (int x = 0; x \u003c textureWidth; x++)\n            {\n                for (int y = 0; y \u003c textureHeight; y++)\n                {\n                    float noiseValue = Mathf.PerlinNoise((float)x / textureWidth * scale, (float)y / textureWidth * scale);\n                    texture.SetPixel(x, y, new Color(noiseValue, noiseValue, noiseValue));\n                }\n            }\n            texture.Apply();\n            // 使用texture2D.EncodeToPNG方法可以将Texture2D保存为byte[]形式的png格式图片，之后即可保存该图片\n            File.WriteAllBytes(Path.Join(savePath, textureName + \".png\"), texture.EncodeToPNG());\n            AssetDatabase.Refresh();\n            EditorUtility.DisplayDialog(\"提示\", \"噪声纹理生成完毕\", \"确定\");\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250127164906-64itlzw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127164906-64itlzw",
+				"updated": "20250127165137"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "生成的柏林噪声图如下（宽高为512，缩放为20）："
+				}
+			]
+		},
+		{
+			"ID": "20250127165154-kg7ppc7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127165154-kg7ppc7",
+				"updated": "20250127165154"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 183px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "PerlinNoinseTexture"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/PerlinNoinseTexture-20250127165154-hk4mf4i.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 183px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250127165200-mdio2vq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127165200-mdio2vq",
+				"updated": "20250127165200"
+			}
+		}
+	]
+}

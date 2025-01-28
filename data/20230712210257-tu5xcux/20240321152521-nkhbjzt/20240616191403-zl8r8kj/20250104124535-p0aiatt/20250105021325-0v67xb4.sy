@@ -6,7 +6,7 @@
 		"id": "20250105021325-0v67xb4",
 		"title": "US3S10L8——Bloom效果",
 		"type": "doc",
-		"updated": "20250105181117"
+		"updated": "20250125172339"
 	},
 	"Children": [
 		{
@@ -3219,7 +3219,7 @@
 			"HeadingLevel": 3,
 			"Properties": {
 				"id": "20250105172643-xtb6gel",
-				"updated": "20250105181117"
+				"updated": "20250125172326"
 			},
 			"Children": [
 				{
@@ -3262,7 +3262,7 @@
 			"ListData": {},
 			"Properties": {
 				"id": "20250105173002-bmq2u55",
-				"updated": "20250105181117"
+				"updated": "20250125172326"
 			},
 			"Children": [
 				{
@@ -3274,7 +3274,7 @@
 					},
 					"Properties": {
 						"id": "20250105173002-513t33i",
-						"updated": "20250105181117"
+						"updated": "20250125172326"
 					},
 					"Children": [
 						{
@@ -3308,7 +3308,7 @@
 							},
 							"Properties": {
 								"id": "20250105172941-5t37s9e",
-								"updated": "20250105181117"
+								"updated": "20250125172326"
 							},
 							"Children": [
 								{
@@ -3422,7 +3422,7 @@
 									"Properties": {
 										"id": "20250105172941-psah03n",
 										"name": "UNITY_UV_STARTS_AT_TOP",
-										"updated": "20250105181117"
+										"updated": "20250125172326"
 									},
 									"Children": [
 										{
@@ -3527,12 +3527,12 @@
 											"Type": "NodeParagraph",
 											"Properties": {
 												"id": "20250105173107-3nm7esz",
-												"updated": "20250105173132"
+												"updated": "20250125172142"
 											},
 											"Children": [
 												{
 													"Type": "NodeText",
-													"Data": "如果这个宏被定义，说明当前平台的纹理坐标系的 y 轴原点在顶部，还可以在该宏中用纹素进行判断\n如果纹素的 y 小于 0，为负数，表示需要对 y 轴进行调整，配合起来使用就是"
+													"Data": "如果这个宏被定义，说明当前平台的纹理坐标系的 y 轴原点在顶部，还可以在该宏中用纹素进行判断\n如果纹素的 y 小于 0，为负数，表示需要对 y 轴进行调整，配合起来使用就是："
 												}
 											]
 										},
@@ -3543,7 +3543,7 @@
 											"Properties": {
 												"id": "20250105173107-6o4r0ff",
 												"style": "line-height: 22px;",
-												"updated": "20250105174743"
+												"updated": "20250125172137"
 											},
 											"Children": [
 												{
@@ -3556,11 +3556,34 @@
 												},
 												{
 													"Type": "NodeCodeBlockCode",
-													"Data": "    // 用宏判断uv坐标是否被翻转\n#if UNITY_UV_STARTS_AT_TOP\n    // 如果纹素的y小于0，为负数，表示需要对Y轴进行调整\n    o.uv.w = _MainTex_TexelSize.y \u003c 0 ? 1 - o.uv.w : o.uv.w;\n#endif\n"
+													"Data": "    // 用宏判断uv坐标是否被翻转\n#if UNITY_UV_STARTS_AT_TOP\n    // 如果纹素的y小于0，为负数，表示需要对Y轴进行调整\n    if (_MainTex_TexelSize.y \u003c 0) \n        o.uv.w = 1 - o.uv.w;\n#endif\n"
 												},
 												{
 													"Type": "NodeCodeBlockFenceCloseMarker",
 													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20250125172143-egbbg8y",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125172143-egbbg8y",
+												"updated": "20250125172326"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "指的一提的是，虽然说 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "if"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 在 Shader 内需要少用，但是在这里，屏幕后处理的屏幕贴图仅有4个顶点，\n因此屏幕后处理的 Shader 的顶点着色器一帧只会执行 4 次，对性能影响不大"
 												}
 											]
 										},
@@ -3594,7 +3617,7 @@
 											"Properties": {
 												"id": "20250105174803-l8rup42",
 												"style": "line-height: 22px;",
-												"updated": "20250105174810"
+												"updated": "20250125172131"
 											},
 											"Children": [
 												{
@@ -3607,7 +3630,7 @@
 												},
 												{
 													"Type": "NodeCodeBlockCode",
-													"Data": "v2fBloom vertBloom(appdata_base v)\n{\n    v2fBloom o;\n    o.pos = UnityObjectToClipPos(v.vertex);\n    o.uv.xy = v.texcoord;       // 亮度纹理和主纹理要采样相同的地方进行颜色叠加\n    o.uv.zw = v.texcoord;\n\n    // 用宏判断uv坐标是否被翻转\n#if UNITY_UV_STARTS_AT_TOP\n    // 如果纹素的y小于0，为负数，表示需要对Y轴进行调整\n    o.uv.w = _MainTex_TexelSize.y \u003c 0 ? 1 - o.uv.w : o.uv.w;\n#endif\n\n    return o;\n}\n"
+													"Data": "v2fBloom vertBloom(appdata_base v)\n{\n    v2fBloom o;\n    o.pos = UnityObjectToClipPos(v.vertex);\n    o.uv.xy = v.texcoord;       // 亮度纹理和主纹理要采样相同的地方进行颜色叠加\n    o.uv.zw = v.texcoord;\n\n    // 用宏判断uv坐标是否被翻转\n#if UNITY_UV_STARTS_AT_TOP\n    // 如果纹素的y小于0，为负数，表示需要对Y轴进行调整\n    if (_MainTex_TexelSize.y \u003c 0) \n        o.uv.w = 1 - o.uv.w;\n#endif\n\n    return o;\n}\n"
 												},
 												{
 													"Type": "NodeCodeBlockFenceCloseMarker",
@@ -3878,7 +3901,7 @@
 			"HeadingLevel": 2,
 			"Properties": {
 				"id": "20250105180517-f16q2nr",
-				"updated": "20250105180616"
+				"updated": "20250125172339"
 			},
 			"Children": [
 				{
@@ -3908,7 +3931,7 @@
 			"Properties": {
 				"id": "20250105180540-wjsbn5h",
 				"style": "line-height: 22px;",
-				"updated": "20250105180555"
+				"updated": "20250125172339"
 			},
 			"Children": [
 				{
@@ -3921,7 +3944,7 @@
 				},
 				{
 					"Type": "NodeCodeBlockCode",
-					"Data": "Shader \"PostEffect/Bloom\"\n{\n    Properties\n    {\n        _MainTex(\"Texture\", 2D) = \"white\"{}\n        _Bloom(\"Bloom\", 2D) = \"\"{}                              // 提取出来的亮度区域纹理\n        _LuminanceThreshold(\"_LuminanceThreshold\", Float) = 0.5 // 亮度阈值\n        _BlurSpread(\"BlurSpread\", Float) = 1                    // 模糊半径\n    }\n\n    SubShader\n    {\n        CGINCLUDE\n        #include \"UnityCG.cginc\"\n\n        sampler2D _MainTex;\n        half4 _MainTex_TexelSize;\n        sampler2D _Bloom;\n        float _LuminanceThreshold;\n        float _BlurSize;\n\n        struct v2f\n        {\n            float2 uv : TEXCOORD0;\n            float4 vertex : SV_POSITION;\n        };\n\n        // 计算颜色的亮度值（灰度值）\n        fixed luminance(fixed4 color)\n        {\n            return 0.2126 * color.r + 0.7152 * color.g + 0.0722 * color.b;\n        }\n\n        ENDCG\n\n        Tags { \"RenderType\"=\"Opaque\" }\n\n        ZTest Always\n        Cull Off\n        ZWrite Off\n    \n        // 提取亮度区域纹理的Pass\n        Pass\n        {\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n\n            v2f vert(appdata_base v)\n            {\n                v2f o;\n                o.vertex = UnityObjectToClipPos(v.vertex);\n                o.uv = v.texcoord;\n                return o;\n            }\n\n            fixed4 frag(v2f i) : SV_Target\n            {\n                // 采样原纹理颜色，得到亮度贡献值，返回颜色*纹理贡献值即得到亮度区域纹理\n                fixed4 color = tex2D(_MainTex, i.uv);\n                fixed value = clamp(luminance(color) - _LuminanceThreshold, 0, 1);\n                return color * value;\n            }\n\n            ENDCG\n        }\n\n        // 复用高斯模糊的两个Pass\n        UsePass \"PostEffect/GaussianBlur/GAUSSIAN_BLUR_HORIZONTAL\"\n        UsePass \"PostEffect/GaussianBlur/GAUSSIAN_BLUR_VERTICAL\"\n\n        // 合并源图像和模糊后的亮度区域纹理的Pass\n        Pass\n        {\n            CGPROGRAM\n            #pragma vertex vertBloom\n            #pragma fragment fragBloom\n\n            #include \"UnityCG.cginc\"\n\n            struct v2fBloom\n            {\n                float4 pos : SV_POSITION;\n                half4 uv : TEXCOORD0;       // xy主要用于对主纹理进行采样，zw主要用于亮度模糊后的纹理采样\n            };\n\n            v2fBloom vertBloom(appdata_base v)\n            {\n                v2fBloom o;\n                o.pos = UnityObjectToClipPos(v.vertex);\n                o.uv.xy = v.texcoord;       // 亮度纹理和主纹理要采样相同的地方进行颜色叠加\n                o.uv.zw = v.texcoord;\n\n                // 用宏判断uv坐标是否被翻转\n            #if UNITY_UV_STARTS_AT_TOP\n                // 如果纹素的y小于0，为负数，表示需要对Y轴进行调整\n                o.uv.w = _MainTex_TexelSize.y \u003c 0 ? 1 - o.uv.w : o.uv.w;\n            #endif\n\n                return o;\n            }\n\n            fixed4 fragBloom(v2fBloom i) : SV_Target\n            {\n                // 将两个纹理颜色叠加起来\n                return tex2D(_MainTex, i.uv.xy) + tex2D(_Bloom, i.uv.zw);\n            }\n\n            ENDCG\n        }\n    }\n\n    Fallback Off\n}\n"
+					"Data": "Shader \"PostEffect/Bloom\"\n{\n    Properties\n    {\n        _MainTex(\"Texture\", 2D) = \"white\"{}\n        _Bloom(\"Bloom\", 2D) = \"\"{}                              // 提取出来的亮度区域纹理\n        _LuminanceThreshold(\"_LuminanceThreshold\", Float) = 0.5 // 亮度阈值\n        _BlurSpread(\"BlurSpread\", Float) = 1                    // 模糊半径\n    }\n\n    SubShader\n    {\n        CGINCLUDE\n        #include \"UnityCG.cginc\"\n\n        sampler2D _MainTex;\n        half4 _MainTex_TexelSize;\n        sampler2D _Bloom;\n        float _LuminanceThreshold;\n        float _BlurSize;\n\n        struct v2f\n        {\n            float2 uv : TEXCOORD0;\n            float4 vertex : SV_POSITION;\n        };\n\n        // 计算颜色的亮度值（灰度值）\n        fixed luminance(fixed4 color)\n        {\n            return 0.2126 * color.r + 0.7152 * color.g + 0.0722 * color.b;\n        }\n\n        ENDCG\n\n        Tags { \"RenderType\"=\"Opaque\" }\n\n        ZTest Always\n        Cull Off\n        ZWrite Off\n    \n        // 提取亮度区域纹理的Pass\n        Pass\n        {\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n\n            v2f vert(appdata_base v)\n            {\n                v2f o;\n                o.vertex = UnityObjectToClipPos(v.vertex);\n                o.uv = v.texcoord;\n                return o;\n            }\n\n            fixed4 frag(v2f i) : SV_Target\n            {\n                // 采样原纹理颜色，得到亮度贡献值，返回颜色*纹理贡献值即得到亮度区域纹理\n                fixed4 color = tex2D(_MainTex, i.uv);\n                fixed value = clamp(luminance(color) - _LuminanceThreshold, 0, 1);\n                return color * value;\n            }\n\n            ENDCG\n        }\n\n        // 复用高斯模糊的两个Pass\n        UsePass \"PostEffect/GaussianBlur/GAUSSIAN_BLUR_HORIZONTAL\"\n        UsePass \"PostEffect/GaussianBlur/GAUSSIAN_BLUR_VERTICAL\"\n\n        // 合并源图像和模糊后的亮度区域纹理的Pass\n        Pass\n        {\n            CGPROGRAM\n            #pragma vertex vertBloom\n            #pragma fragment fragBloom\n\n            #include \"UnityCG.cginc\"\n\n            struct v2fBloom\n            {\n                float4 pos : SV_POSITION;\n                half4 uv : TEXCOORD0;       // xy主要用于对主纹理进行采样，zw主要用于亮度模糊后的纹理采样\n            };\n\n            v2fBloom vertBloom(appdata_base v)\n            {\n                v2fBloom o;\n                o.pos = UnityObjectToClipPos(v.vertex);\n                o.uv.xy = v.texcoord;       // 亮度纹理和主纹理要采样相同的地方进行颜色叠加\n                o.uv.zw = v.texcoord;\n\n                // 用宏判断uv坐标是否被翻转\n            #if UNITY_UV_STARTS_AT_TOP\n                // 如果纹素的y小于0，为负数，表示需要对Y轴进行调整\n                if (_MainTex_TexelSize.y \u003c 0) \n                    o.uv.w = 1 - o.uv.w;\n            #endif\n\n                return o;\n            }\n\n            fixed4 fragBloom(v2fBloom i) : SV_Target\n            {\n                // 将两个纹理颜色叠加起来\n                return tex2D(_MainTex, i.uv.xy) + tex2D(_Bloom, i.uv.zw);\n            }\n\n            ENDCG\n        }\n    }\n\n    Fallback Off\n}\n"
 				},
 				{
 					"Type": "NodeCodeBlockFenceCloseMarker",

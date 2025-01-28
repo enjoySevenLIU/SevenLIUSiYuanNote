@@ -1,0 +1,601 @@
+{
+	"ID": "20250128190406-jqdlkw3",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20250128190406-jqdlkw3",
+		"title": "US5L5——EnumDrawer和KeywordEnumDrawer",
+		"type": "doc",
+		"updated": "20250128194239"
+	},
+	"Children": [
+		{
+			"ID": "20250128192525-i43gwsz",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250128192525-i43gwsz",
+				"updated": "20250128192645"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20250128192530-3onu03y",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250128192530-3onu03y",
+				"style": "line-height: 22px;",
+				"updated": "20250128192645"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[Enum()]\t\t\t// 让float属性在Inspector窗口中显示一个下拉列表\n[KeywordEnum()]\t\t// 让属性在Inspector窗口中显示一个下拉列表，同时生成对应的选项关键字\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250128190406-3tquweg",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "[Enum]",
+				"id": "20250128190406-3tquweg",
+				"name": "EnumDrawer",
+				"updated": "20250128192222"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "EnumDrawer的使用"
+				}
+			]
+		},
+		{
+			"ID": "20250128190501-igrj03h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128190501-igrj03h",
+				"updated": "20250128190534"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "作用："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "EnumDrawer"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 是 Unity 自带的继承自 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "MaterialPropertyDrawer"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（材质属性绘制器）的类\n使用它修饰属性，可以让该属性在 Inspector 窗口中显示一个下拉列表，供用户选择，使用方式为："
+				}
+			]
+		},
+		{
+			"ID": "20250128190525-0d222sh",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250128190525-0d222sh",
+				"style": "line-height: 22px;",
+				"updated": "20250128190537"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[Enum(显示名1, 值1, 显示名2, 值2, ...)] 属性名(\"显示名称\", Float) = 默认值\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250128190535-dqs6hdn",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128190535-dqs6hdn",
+				"updated": "20250128192222"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例（基于运行时逻辑）："
+				}
+			]
+		},
+		{
+			"ID": "20250128190938-pqoacqj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250128190938-pqoacqj",
+				"style": "line-height: 22px;",
+				"updated": "20250128191734"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson131\"\n{\n    Properties\n    {\n        _MainTex(\"Texture\", 2D) = \"white\"{}\n        [Enum(Tex, 0, Red, 1, Green, 2, Blue, 3)] _TestEnum(\"TestEnum\", Float) = 0\n    }\n    SubShader\n    {\n        Tags { \"RenderType\"=\"Opaque\" }\n        LOD 100\n\n        Pass\n        {\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            // make fog work\n            #pragma multi_compile_fog\n\n            #include \"UnityCG.cginc\"\n\n            struct appdata\n            {\n                float4 vertex : POSITION;\n                float2 uv : TEXCOORD0;\n            };\n\n            struct v2f\n            {\n                float2 uv : TEXCOORD0;\n                UNITY_FOG_COORDS(1)\n                float4 vertex : SV_POSITION;\n            };\n\n            sampler2D _MainTex;\n            float4 _MainTex_ST;\n            fixed _TestEnum;\n\n            v2f vert (appdata v)\n            {\n                v2f o;\n                o.vertex = UnityObjectToClipPos(v.vertex);\n                o.uv = TRANSFORM_TEX(v.uv, _MainTex);\n                UNITY_TRANSFER_FOG(o,o.vertex);\n                return o;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                // sample the texture\n                fixed4 col = fixed4(0, 0, 0, 0);\n                if (_TestEnum == 0) \n                { \n                    col = tex2D(_MainTex, i.uv);\n                }\n                else if (_TestEnum == 1) \n                { \n                    col = fixed4(1, 0, 0, 1);\n                }\n                else if (_TestEnum == 2) \n                { \n                    col = fixed4(0, 1, 0, 1);\n                }\n                else\n                {\n                    col = fixed4(0, 0, 1, 1);\n                }\n\n                // apply fog\n                UNITY_APPLY_FOG(i.fogCoord, col);\n                return col;\n            }\n            ENDCG\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250128190946-9wo2s61",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128190946-9wo2s61",
+				"updated": "20250128191011"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20250128191012-8jpxedg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128191012-8jpxedg",
+				"updated": "20250128191012"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 397px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250128191012-5j0yfp1.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 397px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250128191121-birhd71",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128191121-birhd71",
+				"updated": "20250128191154"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这样，我们即可通过 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "TestEnum"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 动态控制材质的颜色"
+				}
+			]
+		},
+		{
+			"ID": "20250128191014-jxvyfkp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "[KeywordEnum]",
+				"id": "20250128191014-jxvyfkp",
+				"name": "KeywordEnumDrawer",
+				"updated": "20250128192212"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "KeywordEnumDrawer的使用"
+				}
+			]
+		},
+		{
+			"ID": "20250128191156-qtguv4l",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128191156-qtguv4l",
+				"updated": "20250128191224"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "作用："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "KeywordEnumDrawer"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 同样是 Unity 自带的继承自 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "MaterialPropertyDrawer"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（材质属性绘制器）的类，主要使用它和关键词建立联系"
+				}
+			]
+		},
+		{
+			"ID": "20250128191227-0j2iv3i",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128191227-0j2iv3i",
+				"updated": "20250128191243"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用方式："
+				}
+			]
+		},
+		{
+			"ID": "20250128191247-nfhw6y5",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250128191247-nfhw6y5",
+				"style": "line-height: 22px;",
+				"updated": "20250128191251"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "[KeywordEnum(显示名1, 显示名2 ...)] 属性名(\"显示名称\", Float) = 0\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250128191241-qhspua8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128191241-qhspua8",
+				"updated": "20250128191820"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "当我们使用它时，会自动生成对应关键字（会变成大写） "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_属性名_显示名1"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_属性名_显示名2"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ ....\n同样的在 Shader 的 CG 代码块部分使用时，需要使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "#pragma shader_feature"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 或 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "#pragma multi_compile"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 来生成的关键词"
+				}
+			]
+		},
+		{
+			"ID": "20250128191821-xmhdinr",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250128191821-xmhdinr",
+				"style": "line-height: 22px;",
+				"updated": "20250128191827"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Properties\n{\n    _MainTex(\"Texture\", 2D) = \"white\"{}\n    // _TestKeywordEnum属性会自动生成以下关键字：\n    // _TESTKEYWORDENUM_TEX、_TESTKEYWORDENUM_RED、_TESTKEYWORDENUM_GREEN、_TESTKEYWORDENUM_BLUE\n    [KeywordEnum(Tex, Red, Green, Blue)] _TestKeywordEnum(\"TestEnum\", Float) = 0\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250128191828-xngoino",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250128191828-xngoino",
+				"style": "line-height: 22px;",
+				"updated": "20250128192144"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "CGPROGRAM\n#pragma vertex vert\n#pragma fragment frag\n// make fog work\n#pragma multi_compile_fog\n// 关联关键词\n#pragma shader_feature _TESTKEYWORDENUM_TEX _TESTKEYWORDENUM_RED _TESTKEYWORDENUM_GREEN _TESTKEYWORDENUM_BLUE\n// ...\nENDCG\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250128191929-jjxj9gi",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250128191929-jjxj9gi",
+				"style": "line-height: 22px;",
+				"updated": "20250128192151"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "fixed4 frag (v2f i) : SV_Target\n{\n    // 使用关键词\n    fixed4 col = fixed4(0, 0, 0, 0);\n#if defined(_TESTKEYWORDENUM_TEX)\n    col = tex2D(_MainTex, i.uv);\n#elif defined(_TESTKEYWORDENUM_RED)\n    col = fixed4(1, 0, 0, 1);\n#elif defined(_TESTKEYWORDENUM_GREEN)\n    col = fixed4(0, 1, 0, 1);\n#elif defined(_TESTKEYWORDENUM_BLUE)\n    col = fixed4(0, 0, 1, 1);\n#else\n    col = fixed4(0, 0, 0, 0);\n#endif\n    // apply fog\n    UNITY_APPLY_FOG(i.fogCoord, col);\n    return col;\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250128192145-2y3zal6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128192145-2y3zal6",
+				"updated": "20250128192212"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用示例（基于变体）："
+				}
+			]
+		},
+		{
+			"ID": "20250128192156-rqj15mz",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250128192156-rqj15mz",
+				"style": "line-height: 22px;",
+				"updated": "20250128192201"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"TeachShader/Lesson131\"\n{\n    Properties\n    {\n        _MainTex(\"Texture\", 2D) = \"white\"{}\n        // _TestKeywordEnum属性会自动生成以下关键字：\n        // _TESTKEYWORDENUM_TEX、_TESTKEYWORDENUM_RED、_TESTKEYWORDENUM_GREEN、_TESTKEYWORDENUM_BLUE\n        [KeywordEnum(Tex, Red, Green, Blue)] _TestKeywordEnum(\"TestEnum\", Float) = 0\n    }\n    SubShader\n    {\n        Tags { \"RenderType\"=\"Opaque\" }\n        LOD 100\n\n        Pass\n        {\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            // make fog work\n            #pragma multi_compile_fog\n            #pragma shader_feature _TESTKEYWORDENUM_TEX _TESTKEYWORDENUM_RED _TESTKEYWORDENUM_GREEN _TESTKEYWORDENUM_BLUE\n\n            #include \"UnityCG.cginc\"\n\n            struct appdata\n            {\n                float4 vertex : POSITION;\n                float2 uv : TEXCOORD0;\n            };\n\n            struct v2f\n            {\n                float2 uv : TEXCOORD0;\n                UNITY_FOG_COORDS(1)\n                float4 vertex : SV_POSITION;\n            };\n\n            sampler2D _MainTex;\n            float4 _MainTex_ST;\n            fixed _TestEnum;\n\n            v2f vert (appdata v)\n            {\n                v2f o;\n                o.vertex = UnityObjectToClipPos(v.vertex);\n                o.uv = TRANSFORM_TEX(v.uv, _MainTex);\n                UNITY_TRANSFER_FOG(o,o.vertex);\n                return o;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                // sample the texture\n                fixed4 col = fixed4(0, 0, 0, 0);\n            #if defined(_TESTKEYWORDENUM_TEX)\n                col = tex2D(_MainTex, i.uv);\n            #elif defined(_TESTKEYWORDENUM_RED)\n                col = fixed4(1, 0, 0, 1);\n            #elif defined(_TESTKEYWORDENUM_GREEN)\n                col = fixed4(0, 1, 0, 1);\n            #elif defined(_TESTKEYWORDENUM_BLUE)\n                col = fixed4(0, 0, 1, 1);\n            #else\n                col = fixed4(0, 0, 0, 0);\n            #endif\n                // apply fog\n                UNITY_APPLY_FOG(i.fogCoord, col);\n                return col;\n            }\n            ENDCG\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250128192206-gjobche",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128192206-gjobche",
+				"updated": "20250128192206"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20250128192206-xhgx9yh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128192206-xhgx9yh",
+				"updated": "20250128192206"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 397px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250128191012-5j0yfp1.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 397px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		}
+	]
+}

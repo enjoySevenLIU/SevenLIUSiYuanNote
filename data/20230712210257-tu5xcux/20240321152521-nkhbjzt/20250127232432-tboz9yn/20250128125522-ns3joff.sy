@@ -1,0 +1,2240 @@
+{
+	"ID": "20250128125522-ns3joff",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20250128125522-ns3joff",
+		"title": "US5L1——ShaderGUI类",
+		"type": "doc",
+		"updated": "20250128144855"
+	},
+	"Children": [
+		{
+			"ID": "20250128140529-2bqcr93",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20250128140529-2bqcr93",
+				"updated": "20250128140549"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20250128140549-dc2pdtk",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250128140549-dc2pdtk",
+						"updated": "20250128140549"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "前置知识："
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "block-ref",
+							"TextMarkBlockRefID": "20230712211009-ys55mha",
+							"TextMarkBlockRefSubtype": "d",
+							"TextMarkTextContent": "UG1——IMGUI系列"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "，"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "block-ref",
+							"TextMarkBlockRefID": "20240317220544-aihpc4z",
+							"TextMarkBlockRefSubtype": "d",
+							"TextMarkTextContent": "UED——Unity编辑器拓展"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250128144218-dc6k2cn",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250128144218-dc6k2cn",
+				"updated": "20250128144855"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20250128144223-q8qqdrq",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250128144223-q8qqdrq",
+				"style": "line-height: 22px;",
+				"updated": "20250128144855"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "ShaderGUI\t\t\t\t\t\t\t// 用于自定义材质Inspector界面的基类，通过继承ShaderGUI，可以完全控制材质编辑界面的布局和功能\nvoid OnGUI() {}\t\t\t\t\t\t// 继承ShaderGUI的类需要重写该方法以实现自定义材质Inspector界面\nMaterialEditor\t\t\t\t\t\t// 提供与材质交互的接口，比如材质属性值等\nmaterialEditor.target\t\t\t\t// 可以利用它获取到材质球，需要手动as一次\nmaterialEditor.ShaderProperty()\t\t// 可以将属性设置为对应名字，并且使用默认GUI显示\nMaterialProperty\t\t\t\t\t// 在Shader的属性语句块中定义的属性\nmaterialProperty.displayName\t\t// 获取属性名\nmaterialProperty._Value\t\t\t\t// 获取属性当前的值，需要类型+Value来获取对应类型的值\nmaterialProperty.floatValue\t\t\t// 获取float属性的当前值\nmaterialProperty.textureValue\t\t// 获取贴图属性的当前值\nshaderGUI.FindProperty()\t\t\t// 通过属性名直接获取到对应属性对象的方法\nmaterial.renderQueue\t\t\t\t// 材质的渲染队列属性\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250128125522-zgo2p9w",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20250128125522-zgo2p9w",
+				"updated": "20250128130150"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义材质面板"
+				}
+			]
+		},
+		{
+			"ID": "20250128125911-wsy1duq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128125911-wsy1duq",
+				"updated": "20250128125930"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "我们目前可以通过在 Shader 中添加属性的形式，把一些我们希望从外部设置的内容在材质球的 Inspector 窗口中显示"
+				}
+			]
+		},
+		{
+			"ID": "20250128130048-niwuqp6",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250128130048-niwuqp6",
+				"style": "line-height: 22px;",
+				"updated": "20250128130125"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Properties\n{\n    _MainTex(\"MainTex\", 2D) = \"\"{}                      // 主纹理\n    _BumpMap(\"BumpMap\", 2D) = \"\"{}                      // 法线纹理\n    _Cube(\"Cubemap\", Cube) = \"\"{}                       // 立方体纹理\n    _Distortion(\"Distortion\", Range(0, 10)) = 0         // 控制扭曲程度的变量\n    _WaveXSpeed(\"WaveXSpeed\", Range(-0.1, 0.1)) = 0.01  // 控制水波水平速度偏移的属性\n    _WaveYSpeed(\"WaveYSpeed\", Range(-0.1, 0.1)) = 0.01  // 控制水波竖直速度偏移的属性\n    _FresnelScale(\"FresnelScale\", Range(0, 1)) = 1      // 菲涅尔反射率\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250128130150-r5oefyj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128130150-r5oefyj",
+				"updated": "20250128130150"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 350px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250128130150-88qy6mx.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 350px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250128130047-bovxapg",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128130047-bovxapg",
+				"updated": "20250128130047"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义材质面板指的就是，Unity 除了这些默认的显示内容外，还可以让我们自定义材质球的 Inspector 窗口显示"
+				}
+			]
+		},
+		{
+			"ID": "20250128125938-7c1m5ph",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20250128125938-7c1m5ph",
+				"name": "ShaderGUI",
+				"updated": "20250128143816"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ShaderGUI"
+				}
+			]
+		},
+		{
+			"ID": "20250128125944-7eoo106",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128125944-7eoo106",
+				"updated": "20250128130009"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "它是一个用于自定义材质 Inspector 界面 的基类，通过继承 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ShaderGUI"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，你可以完全控制材质编辑界面的布局和功能\n而不仅仅局限于 Shader 的 属性（"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Properties"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​）语句块定义的默认行为"
+				}
+			]
+		},
+		{
+			"ID": "20250128125948-r2gi144",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128125948-r2gi144",
+				"updated": "20250128130021"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ShaderGUI"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 可以让我们："
+				}
+			]
+		},
+		{
+			"ID": "20250128130021-c34504o",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250128130021-c34504o",
+				"updated": "20250128130025"
+			},
+			"Children": [
+				{
+					"ID": "20250128130021-dd3trtq",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250128130021-dd3trtq",
+						"updated": "20250128130021"
+					},
+					"Children": [
+						{
+							"ID": "20250128130021-zfx6q10",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250128130021-zfx6q10",
+								"updated": "20250128130021"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "自定义材质界面布局"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250128130021-ozl1akg",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250128130021-ozl1akg",
+						"updated": "20250128130021"
+					},
+					"Children": [
+						{
+							"ID": "20250128130021-527ofhw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250128130021-527ofhw",
+								"updated": "20250128130021"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过脚本逻辑，可以基于某些属性值动态隐藏或禁用其他属性"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250128130021-ijpk9qa",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250128130021-ijpk9qa",
+						"updated": "20250128130021"
+					},
+					"Children": [
+						{
+							"ID": "20250128130021-fd0azfe",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250128130021-fd0azfe",
+								"updated": "20250128130021"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "添加高级功能，比如通过添加按钮控件，触发某些操作，如实时更新材质预览，显示调试信息等"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250128130021-r6b0ept",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20250128130021-r6b0ept",
+						"updated": "20250128130025"
+					},
+					"Children": [
+						{
+							"ID": "20250128130021-0qb5ose",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250128130021-0qb5ose",
+								"updated": "20250128130025"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "增强材质编辑体验，使美术人员或其他开发者无需关心底层 Shader 实现，而是通过友好的界面快速调整材质"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250128125947-klhnaek",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128125947-klhnaek",
+				"updated": "20250128125947"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "等等"
+				}
+			]
+		},
+		{
+			"ID": "20250128130025-wldo4bw",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250128130025-wldo4bw",
+				"updated": "20250128131609"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "ShaderGUI类的基本使用"
+				}
+			]
+		},
+		{
+			"ID": "20250128130258-8swe1k2",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250128130258-8swe1k2",
+				"updated": "20250128130339"
+			},
+			"Children": [
+				{
+					"ID": "20250128130339-qx1aan0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250128130339-qx1aan0",
+						"updated": "20250128130339"
+					},
+					"Children": [
+						{
+							"ID": "20250128130339-5ttmz7b",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250128130339-5ttmz7b",
+								"updated": "20250128130339"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "自定义 C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 脚本继承 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ShaderGUI"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250128130339-fvrbsby",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250128130339-fvrbsby",
+						"updated": "20250128130339"
+					},
+					"Children": [
+						{
+							"ID": "20250128130339-hdedz2x",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250128130339-hdedz2x",
+								"updated": "20250128130339"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "重写 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnGUI"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 方法"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250128130339-eyo1day",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250128130339-eyo1day",
+						"updated": "20250128130339"
+					},
+					"Children": [
+						{
+							"ID": "20250128130339-n2380me",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250128130339-n2380me",
+								"updated": "20250128130339"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnGUI"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 方法中书写自定义布局逻辑"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250128130339-tk50obx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20250128130339-tk50obx",
+						"updated": "20250128130339"
+					},
+					"Children": [
+						{
+							"ID": "20250128130339-hfhqihs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250128130339-hfhqihs",
+								"updated": "20250128130339"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Shader"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 语句块最后加入 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "CustomEditor \u0026quot;自定义C#脚本名\u0026quot;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250128130323-cue26b0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128130323-cue26b0",
+				"updated": "20250128130343"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这样便可以让使用该 Shader 的材质面板使用自定义布局规则"
+				}
+			]
+		},
+		{
+			"ID": "20250128131326-6pozlst",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128131326-6pozlst",
+				"updated": "20250128131353"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设要对下面的 Shader 自定义材质 Inspector 界面："
+				}
+			]
+		},
+		{
+			"ID": "20250128130514-xtgl8ls",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250128130514-xtgl8ls",
+				"style": "line-height: 22px;",
+				"updated": "20250128131317"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"Unlit/CustomInspectorTest\"\n{\n    Properties\n    {\n        _MainTex(\"Texture\", 2D) = \"white\"{}\n        _TestFloat(\"TestFloat\", Float) = 1\n    }\n    SubShader {/*...*/}\n\n    CustomEditor \"Lesson127_CustomShaderInspector\"\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250128131356-uqvgnp1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128131356-uqvgnp1",
+				"updated": "20250128131404"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "当直接调用基类的方法时："
+				}
+			]
+		},
+		{
+			"ID": "20250128131405-divb4dr",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250128131405-divb4dr",
+				"style": "line-height: 22px;",
+				"updated": "20250128131412"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEditor;\n\npublic class Lesson127_CustomShaderInspector : ShaderGUI\n{\n    public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties)\n    {\n        base.OnGUI(materialEditor, properties);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250128131415-5urnamo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128131415-5urnamo",
+				"updated": "20250128131418"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20250128131432-lwp7q77",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128131432-lwp7q77",
+				"updated": "20250128131432"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 454px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250128131432-jlf1kge.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 454px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250128131438-jfrcx6a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128131438-jfrcx6a",
+				"updated": "20250128131457"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "base.OnGUI"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的逻辑就是原来的绘制逻辑"
+				}
+			]
+		},
+		{
+			"ID": "20250128131557-i05z9ef",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128131557-i05z9ef",
+				"updated": "20250128131609"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "当 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "OnGUI"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 不实现任何内容时："
+				}
+			]
+		},
+		{
+			"ID": "20250128130443-4wh6m0j",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250128130443-4wh6m0j",
+				"style": "line-height: 22px;",
+				"updated": "20250128131018"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEditor;\n\npublic class Lesson127_CustomShaderInspector : ShaderGUI\n{\n    public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties)\n    {\n        // base.OnGUI(materialEditor, properties);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250128131037-0za5atv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128131037-0za5atv",
+				"updated": "20250128131044"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20250128131033-digjbd5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128131033-digjbd5",
+				"updated": "20250128131033"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 475px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250128131033-dj88n0u.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 475px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250128131034-jzbc51u",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128131034-jzbc51u",
+				"updated": "20250128131136"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，当 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "OnGUI"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 没有逻辑时，Shader 在 Inspector 窗口上也没有任何内容"
+				}
+			]
+		},
+		{
+			"ID": "20250128131319-pwpy5kn",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250128131319-pwpy5kn",
+				"updated": "20250128141039"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "自定义材质面板"
+				}
+			]
+		},
+		{
+			"ID": "20250128131703-1vtl40w",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128131703-1vtl40w",
+				"updated": "20250128131738"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "ShaderGUI"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 自定义材质面板的核心方法就是我们重写的："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 方法"
+				}
+			]
+		},
+		{
+			"ID": "20250128140656-izb9bk2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128140656-izb9bk2",
+				"updated": "20250128140656"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "其中两个参数非常重要："
+				}
+			]
+		},
+		{
+			"ID": "20250128131738-r4a810e",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250128131738-r4a810e",
+				"updated": "20250128141012"
+			},
+			"Children": [
+				{
+					"ID": "20250128131738-khkm8t7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250128131738-khkm8t7",
+						"name": "MaterialEditor",
+						"updated": "20250128131738"
+					},
+					"Children": [
+						{
+							"ID": "20250128131738-74a3lss",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250128131738-74a3lss",
+								"updated": "20250128131744"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "materialEditor"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：提供与材质交互的接口，比如材质属性值等\n"
+								}
+							]
+						},
+						{
+							"ID": "20250128131747-jk8qol1",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250128131747-jk8qol1",
+								"updated": "20250128131817"
+							},
+							"Children": [
+								{
+									"ID": "20250128131817-3jlv5w0",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250128131817-3jlv5w0",
+										"name": "materialEditor.target",
+										"updated": "20250128131817"
+									},
+									"Children": [
+										{
+											"ID": "20250128131817-fa5s3a3",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250128131817-fa5s3a3",
+												"updated": "20250128131817"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "关键属性："
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "target"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，可以利用它获取到材质球"
+												}
+											]
+										},
+										{
+											"ID": "20250128132950-nxubg5d",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20250128132950-nxubg5d",
+												"style": "line-height: 22px;",
+												"updated": "20250128133034"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties)\n{\n    // 获取当前材质球\n    Material material = materialEditor.target as Material;\n    // 之后即可利用材质球去Set或者Get属性的值\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250128131818-2v2xanb",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250128131818-2v2xanb",
+										"name": "materialEditor.ShaderProperty()",
+										"updated": "20250128133109"
+									},
+									"Children": [
+										{
+											"ID": "20250128131818-2cfwj30",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250128131818-2cfwj30",
+												"updated": "20250128133054"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "关键方法："
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "ShaderProperty(MaterialProperty对象, \u0026quot;名字\u0026quot;)"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，可以将属性设置为对应名字，并且使用默认 GUI 显示"
+												}
+											]
+										},
+										{
+											"ID": "20250128133213-b3wompj",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20250128133213-b3wompj",
+												"updated": "20250128133214"
+											},
+											"Children": [
+												{
+													"ID": "20250128133214-jlu7dn8",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20250128133214-jlu7dn8",
+														"updated": "20250128133214"
+													},
+													"Children": [
+														{
+															"ID": "20250128133214-c4ol0ei",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20250128133214-c4ol0ei",
+																"updated": "20250128133226"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数一：要显示的 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "MaterialProperty"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ 对象"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20250128133226-sp11e1h",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20250128133226-sp11e1h",
+														"updated": "20250128133226"
+													},
+													"Children": [
+														{
+															"ID": "20250128133226-dvi3j9x",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20250128133226-dvi3j9x",
+																"updated": "20250128133319"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参数二：属性名显示文本，可以自定义，也可以直接使用 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "materialProperty.displayName"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ 用 Shader 定义的属性名设置"
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20250128133056-mk9xppr",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20250128133056-mk9xppr",
+												"style": "line-height: 22px;",
+												"updated": "20250128133109"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties)\n{\n    // 之后即可利用材质球去Set或者Get属性的值\n    foreach (MaterialProperty property in properties)\n    {\n        materialEditor.ShaderProperty(property, property.displayName);\n    }\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20250128133145-2l62ax4",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250128133145-2l62ax4",
+												"updated": "20250128133149"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "显示效果："
+												}
+											]
+										},
+										{
+											"ID": "20250128133210-mqwxexv",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250128133210-mqwxexv",
+												"updated": "20250128133210"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Properties": {
+														"style": "width: 492px;"
+													},
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20250128133210-23a2qgg.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeKramdownSpanIAL",
+													"Data": "{: style=\"width: 492px;\"}"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250128131738-r6q6fox",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250128131738-r6q6fox",
+						"name": "MaterialProperty",
+						"updated": "20250128140506"
+					},
+					"Children": [
+						{
+							"ID": "20250128131738-loubab5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250128131738-loubab5",
+								"updated": "20250128131835"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "properties"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：包含所有在 Shader 的属性语句块中定义的属性"
+								}
+							]
+						},
+						{
+							"ID": "20250128133525-6ym8twq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250128133525-6ym8twq",
+								"updated": "20250128134929"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可以通过 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "foreach"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 遍历 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "properties"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 的所有 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "MaterialProperty"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，也就是 Shader 内定义的属性\n也可以直接使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "FindProperty"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 来直接查找某个特定的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "MaterialProperty"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 属性"
+								}
+							]
+						},
+						{
+							"ID": "20250128131821-63fm2us",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250128131821-63fm2us",
+								"updated": "20250128140454"
+							},
+							"Children": [
+								{
+									"ID": "20250128131822-khs8i5p",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250128131822-khs8i5p",
+										"name": "materialProperty.displayName",
+										"updated": "20250128131822"
+									},
+									"Children": [
+										{
+											"ID": "20250128131822-tv2i4h9",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250128131822-tv2i4h9",
+												"updated": "20250128133627"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "MaterialProperty"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 关键属性："
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "displayName"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，获取属性名"
+												}
+											]
+										},
+										{
+											"ID": "20250128134026-6crw04g",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250128134026-6crw04g",
+												"updated": "20250128134235"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "我们可以通过 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "displayName"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 来判断是否是特定属性"
+												}
+											]
+										},
+										{
+											"ID": "20250128133630-u1iywal",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20250128133630-u1iywal",
+												"style": "line-height: 22px;",
+												"updated": "20250128134433"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "using UnityEditor;\nusing UnityEngine;\n\npublic class Lesson127_CustomShaderInspector : ShaderGUI\n{\n    private float testFloatValue;\n\n    public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties)\n    {\n        // 获取当前材质球\n        Material material = materialEditor.target as Material;\n\n        foreach (MaterialProperty property in properties)\n        {\n            // 如果是TestFloat就自定义其显示\n            if (property.displayName == \"TestFloat\")\n            {\n                testFloatValue = EditorGUILayout.Slider(\"自定义float属性\", testFloatValue, -1, 1);\n                material.SetFloat(property.displayName, testFloatValue);\n            }\n            // 其他属性按照原样绘制\n            else\n            {\n                materialEditor.ShaderProperty(property, property.displayName);\n            }\n        }\n    }\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20250128133641-xgpb2fr",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250128133641-xgpb2fr",
+												"updated": "20250128133641"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "显示效果："
+												}
+											]
+										},
+										{
+											"ID": "20250128134454-xnga0mh",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250128134454-xnga0mh",
+												"updated": "20250128134454"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Properties": {
+														"style": "width: 478px;"
+													},
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20250128134454-urnmc43.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeKramdownSpanIAL",
+													"Data": "{: style=\"width: 478px;\"}"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20250128134133-ic1n057",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250128134133-ic1n057",
+												"updated": "20250128134154"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "可见，"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "TestFloat"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 这个属性的显示方式被改变了"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250128135835-rjlre96",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"alias": "materialProperty.floatValue,materialProperty.textureValue",
+										"id": "20250128135835-rjlre96",
+										"name": "materialProperty._Value",
+										"updated": "20250128140454"
+									},
+									"Children": [
+										{
+											"ID": "20250128135835-cx92x61",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250128135835-cx92x61",
+												"updated": "20250128140226"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "通过 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "类型+Value"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 的属性可以直接获取材质的 Shader 属性当前值"
+												}
+											]
+										},
+										{
+											"ID": "20250128140331-pai8xef",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250128140331-pai8xef",
+												"updated": "20250128140506"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "除了通过获取材质球然后使用 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Get"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 和 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "Set"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 的方法去获取或设置对应的属性的值，\n还可以使用 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "materialProperty.类型+Value"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 的属性直接获取和修改对应属性的值，\n例如 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "floatValue"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 即可获取 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "float"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 类型属性当前的值、"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "textureValue"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 即可获取贴图类型属性的当前值"
+												}
+											]
+										},
+										{
+											"ID": "20250128135922-aau8sdq",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20250128135922-aau8sdq",
+												"style": "line-height: 22px;",
+												"updated": "20250128135958"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties)\n{\n    // 获取当前材质球\n    Material material = materialEditor.target as Material;\n\n    // 自定义一个拖动条去设置TestFloat属性\n    property = FindProperty(\"_TestFloat\", properties);\n    property.floatValue = EditorGUILayout.Slider(\"自定义float属性\", property.floatValue, -1, 1);\n    material.SetFloat(property.displayName, property.floatValue);\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250128134832-qflq4sx",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250128134832-qflq4sx",
+										"name": "shaderGUI.FindProperty()",
+										"updated": "20250128135004"
+									},
+									"Children": [
+										{
+											"ID": "20250128134832-bzwxdtf",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250128134832-bzwxdtf",
+												"updated": "20250128134932"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "直接查找某个属性："
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "MaterialProperty 属性对象 = FindProperty(\u0026quot;属性名\u0026quot;, properties)"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20250128134933-mm9l2s4",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250128134933-mm9l2s4",
+												"updated": "20250128135310"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "可以利用 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "FindProperty"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 方法，通过属性名直接获取到对应属性对象，而不用从 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "properties"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 遍历查找"
+												}
+											]
+										},
+										{
+											"ID": "20250128134954-pf9017y",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20250128134954-pf9017y",
+												"style": "line-height: 22px;",
+												"updated": "20250128135621"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties)\n{\n    // 获取当前材质球\n    Material material = materialEditor.target as Material;\n\n    MaterialProperty property = FindProperty(\"_MainTex\", properties);\n    materialEditor.ShaderProperty(property, property.displayName);\n    // 自定义一个拖动条去设置TestFloat属性\n    property = FindProperty(\"_TestFloat\", properties);\n    property.floatValue = EditorGUILayout.Slider(\"自定义float属性\", property.floatValue, -1, 1);\n    material.SetFloat(property.displayName, property.floatValue);\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20250128135600-732ier1",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250128135600-732ier1",
+												"updated": "20250128135603"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "显示效果："
+												}
+											]
+										},
+										{
+											"ID": "20250128135606-8bvsl7v",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250128135606-8bvsl7v",
+												"updated": "20250128135606"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Properties": {
+														"style": "width: 451px;"
+													},
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20250128135606-0j6v1pr.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeKramdownSpanIAL",
+													"Data": "{: style=\"width: 451px;\"}"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250128140644-7z9894g",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250128140644-7z9894g",
+						"name": "material.renderQueue",
+						"updated": "20250128141012"
+					},
+					"Children": [
+						{
+							"ID": "20250128140644-tk6f4i3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250128140644-tk6f4i3",
+								"updated": "20250128140917"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果要设置材质的渲染队列，可以使用 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "material.renderQueue"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 属性去获取和修改"
+								}
+							]
+						},
+						{
+							"ID": "20250128140918-e6idt9l",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250128140918-e6idt9l",
+								"style": "line-height: 22px;",
+								"updated": "20250128140952"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties)\n{\n    // 获取当前材质球\n    Material material = materialEditor.target as Material;\n    material.renderQueue = EditorGUILayout.IntField(\"渲染队列\", material.renderQueue);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20250128141008-sx2w51q",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250128141008-sx2w51q",
+								"updated": "20250128141012"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "显示效果"
+								}
+							]
+						},
+						{
+							"ID": "20250128141007-i4arems",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250128141007-i4arems",
+								"updated": "20250128141007"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250128141007-r9935bh.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250128134511-yf578gz",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128134511-yf578gz",
+				"updated": "20250128134708"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "示例："
+				}
+			]
+		},
+		{
+			"ID": "20250128134708-025gr4b",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250128134708-025gr4b",
+				"style": "line-height: 22px;",
+				"updated": "20250128141023"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEditor;\nusing UnityEngine;\n\npublic class Lesson127_CustomShaderInspector : ShaderGUI\n{\n    private bool isShow;\n\n    public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties)\n    {\n        if (GUILayout.Button(isShow ? \"隐藏所有属性设置\" : \"显示所有属性设置\"))\n        {\n            isShow = !isShow;\n        }\n\n        // 获取当前材质球\n        Material material = materialEditor.target as Material;\n\n        if (GUILayout.Button(\"重置材质球属性\"))\n        {\n            material.SetTexture(\"_MainTex\", null);\n            material.SetFloat(\"_TestFloat\", 0);\n        }\n\n        if (isShow)\n        {\n            MaterialProperty property = FindProperty(\"_MainTex\", properties);\n            materialEditor.ShaderProperty(property, property.displayName);\n            // 自定义一个拖动条去设置TestFloat属性\n            property = FindProperty(\"_TestFloat\", properties);\n            property.floatValue = EditorGUILayout.Slider(\"自定义float属性\", property.floatValue, -1, 1);\n            material.SetFloat(property.displayName, property.floatValue);\n            material.renderQueue = EditorGUILayout.IntField(\"渲染队列\", material.renderQueue);\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250128134714-icbtqqu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128134714-icbtqqu",
+				"updated": "20250128141038"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20250128141039-tm8rv7d",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128141039-tm8rv7d",
+				"updated": "20250128141039"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 478px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250128141039-9x00ytb.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 478px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250128132736-pypz66q",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250128132736-pypz66q",
+				"updated": "20250128132736"
+			}
+		}
+	]
+}

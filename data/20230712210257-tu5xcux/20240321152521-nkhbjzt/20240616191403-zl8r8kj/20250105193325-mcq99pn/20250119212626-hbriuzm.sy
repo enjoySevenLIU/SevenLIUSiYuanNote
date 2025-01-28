@@ -1,0 +1,2345 @@
+{
+	"ID": "20250119212626-hbriuzm",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20250119212626-hbriuzm",
+		"title": "US3S11L2——深度和法线纹理背后的原理",
+		"type": "doc",
+		"updated": "20250121130317"
+	},
+	"Children": [
+		{
+			"ID": "20250119212626-1cj4df9",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20250119212626-1cj4df9",
+				"updated": "20250119214607"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20250119212635-645d4su",
+					"Type": "NodeHeading",
+					"HeadingLevel": 2,
+					"Properties": {
+						"id": "20250119212635-645d4su",
+						"updated": "20250119214607"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "知识回顾 —— 裁剪空间变换"
+						}
+					]
+				},
+				{
+					"ID": "20250119212645-1srrkuv",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250119212645-1srrkuv",
+						"updated": "20250119214607"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "具体内容详见："
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "block-ref",
+							"TextMarkBlockRefID": "20240604125407-vvez177",
+							"TextMarkBlockRefSubtype": "d",
+							"TextMarkTextContent": "US2S1L13——观察空间变换"
+						},
+						{
+							"Type": "NodeText",
+							"Data": "、"
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "block-ref",
+							"TextMarkBlockRefID": "20240604134323-f0ac4no",
+							"TextMarkBlockRefSubtype": "d",
+							"TextMarkTextContent": "US2S1L14——齐次裁剪空间和NDC空间"
+						},
+						{
+							"Type": "NodeText",
+							"Data": " 等裁剪空间相关内容"
+						}
+					]
+				},
+				{
+					"ID": "20250119212723-ie9tkx4",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20250119212723-ie9tkx4",
+						"updated": "20250119213513"
+					},
+					"Children": [
+						{
+							"ID": "20250119212852-71kahqj",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20250119212852-71kahqj",
+								"updated": "20250119212852"
+							},
+							"Children": [
+								{
+									"ID": "20250119212852-4mku346",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250119212852-4mku346",
+										"updated": "20250119212852"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "观察空间：也被称为摄像机空间，遵循右手坐标系原则，观察空间中原点为摄像机位置，x、y、z轴正方向分别对应摄像机的右、上、后方"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250119212854-v16p4ly",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20250119212854-v16p4ly",
+								"updated": "20250119213513"
+							},
+							"Children": [
+								{
+									"ID": "20250119212854-7h1oxd4",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250119212854-7h1oxd4",
+										"updated": "20250119213241"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "裁剪空间：也被称为齐次裁剪空间，是一个非常特殊的空间，它的坐标范围为 (-1,-1,-1) 到 (1,1,1) 的一个正方体范围"
+										}
+									]
+								},
+								{
+									"ID": "20250119213239-ifw2gks",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250119213239-ifw2gks",
+										"updated": "20250119213239"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "我们需要将摄像机视锥体变换到其中，其中相对复杂的是 摄像机 的 "
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "strong",
+											"TextMarkTextContent": "透视投影"
+										},
+										{
+											"Type": "NodeText",
+											"Data": " 和 "
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "strong",
+											"TextMarkTextContent": "正交投影"
+										},
+										{
+											"Type": "NodeText",
+											"Data": " 到 "
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "strong",
+											"TextMarkTextContent": "齐次裁剪空间"
+										},
+										{
+											"Type": "NodeText",
+											"Data": " 的 "
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "strong",
+											"TextMarkTextContent": "变换矩阵推导"
+										}
+									]
+								},
+								{
+									"ID": "20250119213022-46j69e3",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250119213022-46j69e3",
+										"updated": "20250119213221"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20240604153535-65cylv2.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								},
+								{
+									"ID": "20250119213222-aav06ci",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250119213222-aav06ci",
+										"updated": "20250119213234"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										},
+										{
+											"Type": "NodeImage",
+											"Data": "span",
+											"Children": [
+												{
+													"Type": "NodeBang"
+												},
+												{
+													"Type": "NodeOpenBracket"
+												},
+												{
+													"Type": "NodeLinkText",
+													"Data": "image"
+												},
+												{
+													"Type": "NodeCloseBracket"
+												},
+												{
+													"Type": "NodeOpenParen"
+												},
+												{
+													"Type": "NodeLinkDest",
+													"Data": "assets/image-20240605193547-tghmp5r.png"
+												},
+												{
+													"Type": "NodeCloseParen"
+												}
+											]
+										},
+										{
+											"Type": "NodeText",
+											"Data": "​"
+										}
+									]
+								},
+								{
+									"ID": "20250119213304-7lu1tlt",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250119213304-7lu1tlt",
+										"updated": "20250119213434"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "其中，正交投影的齐次裁剪空间坐标的转换矩阵为："
+										}
+									]
+								},
+								{
+									"ID": "20250119213404-s06igsu",
+									"Type": "NodeMathBlock",
+									"Properties": {
+										"id": "20250119213404-s06igsu",
+										"updated": "20250119213414"
+									},
+									"Children": [
+										{
+											"Type": "NodeMathBlockOpenMarker"
+										},
+										{
+											"Type": "NodeMathBlockContent",
+											"Data": "\\begin{pmatrix}\n  \\frac{1}{Aspect \\times Size} \u0026 0 \u0026 0 \u0026 0 \\\\\n  0 \u0026 \\frac{1}{Size} \u0026 0 \u0026 0 \\\\\n  0 \u0026 0 \u0026 -\\frac{2}{Far - Near} \u0026 -\\frac{Near+Far}{Far - Near} \\\\\n  0 \u0026 0 \u0026 0 \u0026 1 \\\\\n\\end{pmatrix}"
+										},
+										{
+											"Type": "NodeMathBlockCloseMarker"
+										}
+									]
+								},
+								{
+									"ID": "20250119213416-inxmnn1",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250119213416-inxmnn1",
+										"updated": "20250119213440"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "透视投影的齐次裁剪空间坐标的转换矩阵为："
+										}
+									]
+								},
+								{
+									"ID": "20250119213441-3419fdt",
+									"Type": "NodeMathBlock",
+									"Properties": {
+										"id": "20250119213441-3419fdt",
+										"updated": "20250119213501"
+									},
+									"Children": [
+										{
+											"Type": "NodeMathBlockOpenMarker"
+										},
+										{
+											"Type": "NodeMathBlockContent",
+											"Data": "\\begin{pmatrix}\n  \\frac{1}{Aspect \\cdot \\tan(\\frac{FOV}{2})} \u0026 0 \u0026 0 \u0026 0 \\\\\n  0 \u0026 \\frac{1}{\\tan(\\frac{FOV}{2})} \u0026 0 \u0026 0 \\\\\n  0 \u0026 0 \u0026 -\\frac{Far + Near}{Far - Near} \u0026 -\\frac{2 Far\\cdot Near}{Far - Near} \\\\\n  0 \u0026 0 \u0026 -1 \u0026 0 \\\\\n\\end{pmatrix}"
+										},
+										{
+											"Type": "NodeMathBlockCloseMarker"
+										}
+									]
+								},
+								{
+									"ID": "20250119213502-3d0fcs9",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250119213502-3d0fcs9",
+										"updated": "20250119213513"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "利用观察空间中的点根据使用的摄像机类型决定和哪一个变换矩阵进行矩阵乘法后，便可以得到齐次裁剪空间下的坐标信息"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250119213019-y148orj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250119213019-y148orj",
+				"updated": "20250119214537"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "深度纹理中存储的是什么信息"
+				}
+			]
+		},
+		{
+			"ID": "20250119213543-8kui3sq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250119213543-8kui3sq",
+				"updated": "20250119213803"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity 中的深度纹理中存储的信息，也就是 Shader 中使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_CameraDepthTexture"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 或 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_CameraDepthNormalsTexture"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 采样的信息，\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "是进行裁剪空间变换后的 z 分量再转换到 0~1 之后的结果"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，"
+				}
+			]
+		},
+		{
+			"ID": "20250119214207-i51yqz0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250119214207-i51yqz0",
+				"updated": "20250119214537"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 300px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250119214207-4ydd4eg.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 300px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250119214534-vjyjkzq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250119214534-vjyjkzq",
+				"updated": "20250119214534"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因为齐次裁剪空间坐标范围为 -1"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "~"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "1，而纹理中存储的信息范围是 0"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "~"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "1，因此 Unity 会将其利用以下公式进行转换："
+				}
+			]
+		},
+		{
+			"ID": "20250119213732-3hpjc1e",
+			"Type": "NodeMathBlock",
+			"Properties": {
+				"id": "20250119213732-3hpjc1e",
+				"updated": "20250119213743"
+			},
+			"Children": [
+				{
+					"Type": "NodeMathBlockOpenMarker"
+				},
+				{
+					"Type": "NodeMathBlockContent",
+					"Data": "深度纹理值 = 0.5 \\times z + 0.5"
+				},
+				{
+					"Type": "NodeMathBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20250119213711-vr457ru",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250119213711-vr457ru",
+				"updated": "20250119213759"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "也就是说，我们通过深度纹理直接采样得到的深度纹理值，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "是进行裁剪空间变换后的 z 分量再转换到 0~1 之后的结果"
+				}
+			]
+		},
+		{
+			"ID": "20250119214213-kptesrj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250119214213-kptesrj",
+				"updated": "20250119214441"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "法线纹理中存储的是什么消息"
+				}
+			]
+		},
+		{
+			"ID": "20250119214229-urow4mf",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250119214229-urow4mf",
+				"updated": "20250119214343"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity 中的法线纹理中存储的信息，也就是 Shader 中使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "_CameraDepthNormalsTexture"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 采样得到的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "float4"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 中的部分信息\n它是观察空间下的法线再转换到 0"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "~"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "1 之后的结果，"
+				}
+			]
+		},
+		{
+			"ID": "20250119214352-a8rzdvr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250119214352-a8rzdvr",
+				"updated": "20250119214357"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因为观察空间下的单位向量的分量取值范围是 -1"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "~"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "1，而纹理中存储的信息范围是 0"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "~"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "1，因此 Unity 会将其利用以下公式进行转换："
+				}
+			]
+		},
+		{
+			"ID": "20250119214421-6ytlht0",
+			"Type": "NodeMathBlock",
+			"Properties": {
+				"id": "20250119214421-6ytlht0",
+				"updated": "20250119214440"
+			},
+			"Children": [
+				{
+					"Type": "NodeMathBlockOpenMarker"
+				},
+				{
+					"Type": "NodeMathBlockContent",
+					"Data": "法线纹理值 = (观察空间下法线 + 1) \\times 0.5"
+				},
+				{
+					"Type": "NodeMathBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20250119214359-p0meskq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250119214359-p0meskq",
+				"updated": "20250119214419"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "也就是说我们通过法线纹理直接采样得到的法线纹理值，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "是观察空间下的法线再转换到 0~1 之后的结果"
+				}
+			]
+		},
+		{
+			"ID": "20250119214441-w5ugrnx",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250119214441-w5ugrnx",
+				"updated": "20250120124205"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "Unity 是如何得到深度和法线纹理的"
+				}
+			]
+		},
+		{
+			"ID": "20250119214636-c6c54rc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250119214636-c6c54rc",
+				"updated": "20250119214659"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在 Unity 中深度和法线纹理一般通过两种途径获取："
+				}
+			]
+		},
+		{
+			"ID": "20250119214659-ic10l75",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250119214659-ic10l75",
+				"updated": "20250119214706"
+			},
+			"Children": [
+				{
+					"ID": "20250119214659-uiojgxh",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250119214659-uiojgxh",
+						"updated": "20250119214703"
+					},
+					"Children": [
+						{
+							"ID": "20250119214659-3oieulw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250119214659-3oieulw",
+								"updated": "20250119214703"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "从 G-buffer 几何缓冲区中获取"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250119214700-sqtv14e",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250119214700-sqtv14e",
+						"updated": "20250119214706"
+					},
+					"Children": [
+						{
+							"ID": "20250119214700-90lr3h6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250119214700-90lr3h6",
+								"updated": "20250119214706"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "由一个专门的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 渲染而来"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250119214658-axlosye",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250119214658-axlosye",
+				"updated": "20250119214745"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "具体 Unity 是通过哪种方式获取，取决于使用的渲染路径和设备的硬件限制。"
+				}
+			]
+		},
+		{
+			"ID": "20250119214745-i7alv6y",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250119214745-i7alv6y",
+				"updated": "20250119214836"
+			},
+			"Children": [
+				{
+					"ID": "20250119214745-2y3yhsu",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250119214745-2y3yhsu",
+						"updated": "20250119214821"
+					},
+					"Children": [
+						{
+							"ID": "20250119214745-0di30uj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250119214745-0di30uj",
+								"updated": "20250119214815"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "当使用"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong block-ref",
+									"TextMarkBlockRefID": "20241123165740-670iqoh",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "延迟渲染路径"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "时，深度和法线纹理可以直接访问到"
+								}
+							]
+						},
+						{
+							"ID": "20250119214754-73zkerz",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250119214754-73zkerz",
+								"updated": "20250119214821"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "因为延迟渲染路径会把信息存储到 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "G-buffer 几何缓冲区"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "中（深度和法线等信息都存储在其中）。\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250119214746-uhyf1yf",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250119214746-uhyf1yf",
+						"updated": "20250119214836"
+					},
+					"Children": [
+						{
+							"ID": "20250119214746-439cyke",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250119214746-439cyke",
+								"updated": "20250119214827"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "而当"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "无法直接获取"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "到深度和法线纹理时（比如硬件不支持延迟渲染路径或使用的是前向渲染路径时）"
+								}
+							]
+						},
+						{
+							"ID": "20250119214750-1u7jifg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250119214750-1u7jifg",
+								"updated": "20250119214836"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "Unity 会通过一个单独的"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code strong",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "来进行渲染"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "，获取深度和法线信息。"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250119214836-6sehbxx",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250119214836-6sehbxx",
+				"updated": "20250120120842"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "需要注意的是，当使用单独的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 渲染获得深度和法线纹理时，两者是有区别的，对于深度纹理来说：\nUnity 内部会使用"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "着色器替换技术（根据渲染类型替换内部 Shader）"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "选择"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "渲染类型"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "\u0026quot;RenderType\u0026quot; = \u0026quot;Opaque\u0026quot;"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​（不透明物体），\n然后判断它们的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "渲染队列"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code block-ref",
+					"TextMarkBlockRefID": "20240612194041-x2l9cdo",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "Queue"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 是否小于等于 2500（ "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Background"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ - 1000、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Geometry"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ - 2000、"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "AlphaTest"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ - 2450）"
+				}
+			]
+		},
+		{
+			"ID": "20250119215137-ha11rpe",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250119215137-ha11rpe",
+				"updated": "20250120120820"
+			},
+			"Children": [
+				{
+					"ID": "20250119215138-l6w06so",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250119215138-l6w06so",
+						"updated": "20250120120820"
+					},
+					"Children": [
+						{
+							"ID": "20250119215138-u6iq63r",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250119215138-u6iq63r",
+								"updated": "20250120120820"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "满足这个条件"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "，就会"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "使用物体投射阴影时的"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code strong",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240615191133-56z8a1m",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "LightMode"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 为 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code block-ref",
+									"TextMarkBlockRefID": "20240615191302-ye6wrjp",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "ShadowCaster"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​）来得到深度纹理"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250119215139-ezqk5ax",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250119215139-ezqk5ax",
+						"updated": "20250119215411"
+					},
+					"Children": [
+						{
+							"ID": "20250119215139-f0qwsgw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250119215139-f0qwsgw",
+								"updated": "20250119215411"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果没有这个 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "那么该物体不会出现在深度纹理中！"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250119215130-l3sdnzc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250119215130-l3sdnzc",
+				"updated": "20250119215359"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此这里的重点是，如果我们希望物体能够正确的出现在深度纹理中："
+				}
+			]
+		},
+		{
+			"ID": "20250119215345-76saxxi",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250119215345-76saxxi",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color); --b3-parent-background: var(--b3-card-warning-background);",
+				"updated": "20250120120904"
+			},
+			"Children": [
+				{
+					"ID": "20250119215345-curmqkc",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250119215345-curmqkc",
+						"updated": "20250120120904"
+					},
+					"Children": [
+						{
+							"ID": "20250119215345-ebc1yan",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250119215345-ebc1yan",
+								"updated": "20250120120904"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "必须在 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Shader"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中正确的设置 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "\u0026quot;RenderType\u0026quot;"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 标签"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250119215349-gci65b2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250119215349-gci65b2",
+						"updated": "20250119215435"
+					},
+					"Children": [
+						{
+							"ID": "20250119215349-bvmptq4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250119215349-bvmptq4",
+								"updated": "20250119215435"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "必须有投射阴影用的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-font-background6);"
+									},
+									"TextMarkType": "code block-ref text",
+									"TextMarkBlockRefID": "20240615191133-56z8a1m",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "LightMode"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-font-background6);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 为 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"Properties": {
+										"style": "background-color: var(--b3-font-background6);"
+									},
+									"TextMarkType": "code block-ref text",
+									"TextMarkBlockRefID": "20240615191302-ye6wrjp",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "ShadowCaster"
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"background-color: var(--b3-font-background6);\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 的 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250119215331-1uaj11m",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250119215331-1uaj11m",
+				"updated": "20250120123518"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "对于"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "法线纹理"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "来说："
+				}
+			]
+		},
+		{
+			"ID": "20250120123522-ddo1u1i",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250120123522-ddo1u1i",
+				"updated": "20250120124147"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "Unity 底层会使用一个单独的"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code strong",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "把整个场景再次渲染一次，"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "从而得到深度和法线信息，\n这里为什么是深度和法线信息呢：因为当需要得到法线纹理时，Unity 中是和深度一起获取的，\n这两个纹理在上节课的使用知识点中有讲解 ("
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code block-ref",
+					"TextMarkBlockRefID": "20250119123656-2ua8wsc",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "_CameraDepthNormalsTexture"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​)\n这个 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Pass"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 包含在 Unity 内置的 Shader 中，我们可以在官方下载源文件解压后进行查看"
+				}
+			]
+		},
+		{
+			"ID": "20250120124103-boxm8gw",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250120124103-boxm8gw",
+				"updated": "20250120124103"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250120124103-6r856fz.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250120124204-obts8u7",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250120124204-obts8u7",
+				"updated": "20250121130317"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "深度和法线纹理使用时调用的函数原理"
+				}
+			]
+		},
+		{
+			"ID": "20250120124225-bd6dtv7",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250120124225-bd6dtv7",
+				"updated": "20250120124237"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过上节课的学习，我们知道，想要在 Shader 当中使用深度和法线纹理需要做以下的事情："
+				}
+			]
+		},
+		{
+			"ID": "20250120124237-he5f3j3",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250120124237-he5f3j3",
+				"updated": "20250121130247"
+			},
+			"Children": [
+				{
+					"ID": "20250120124239-3j7o9j5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250120124239-3j7o9j5",
+						"updated": "20250120124239"
+					},
+					"Children": [
+						{
+							"ID": "20250120124239-oce9k7t",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250120124239-oce9k7t",
+								"updated": "20250120124312"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "设置 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Camera"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 的深度纹理模式"
+								}
+							]
+						},
+						{
+							"ID": "20250120124410-z17vcsx",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250120124410-z17vcsx",
+								"updated": "20250120124419"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "YyM="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "private void Start()\n{\n    Camera.main.depthTextureMode = DepthTextureMode.Depth;\t\t\t\t\t\t\t\t\t// 获取一张深度纹理\n    Camera.main.depthTextureMode = DepthTextureMode.DepthNormals;\t\t\t\t\t\t\t// 获取一张深度+法线纹理\n    Camera.main.depthTextureMode = DepthTextureMode.Depth | DepthTextureMode.DepthNormals;\t// 获取深度纹理 和 深度+法线纹理\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250120124313-u3h8pxa",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250120124313-u3h8pxa",
+						"updated": "20250120124313"
+					},
+					"Children": [
+						{
+							"ID": "20250120124313-5xqss46",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250120124313-5xqss46",
+								"updated": "20250120124335"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在 Shader 中声明深度纹理或法线纹理的变量"
+								}
+							]
+						},
+						{
+							"ID": "20250120124421-ctfcmfc",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250120124421-ctfcmfc",
+								"updated": "20250120124504"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "sampler2D _CameraDepthTexture;\t\t\t// 深度纹理\nsampler2D _CameraDepthNormalsTexture;\t// 深度+法线纹理\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250120124335-46myt1r",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250120124335-46myt1r",
+						"updated": "20250121130247"
+					},
+					"Children": [
+						{
+							"ID": "20250120124335-tspdvyn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250120124335-tspdvyn",
+								"updated": "20250120124406"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过内置函数采样、转换得到深度值和法线信息"
+								}
+							]
+						},
+						{
+							"ID": "20250120124506-60ws3wm",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20250120124506-60ws3wm",
+								"updated": "20250121130247"
+							},
+							"Children": [
+								{
+									"ID": "20250120124508-bqwbm2h",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20250120124508-bqwbm2h",
+										"updated": "20250121130247"
+									},
+									"Children": [
+										{
+											"ID": "20250120124508-j8p9qg6",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250120124508-j8p9qg6",
+												"updated": "20250120124516"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "获取深度纹理的深度值"
+												}
+											]
+										},
+										{
+											"ID": "20250120124524-nfo0kd1",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20250120124524-nfo0kd1",
+												"updated": "20250121130247"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "Yw=="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "fixed4 frag(v2f i) : SV_Target\n{\n    float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv);  // 使用基本深度纹理采样，得到的结果是非线性的\n    float viewDepth = LinearEyeDepth(depth);                        // 将非线性的深度值转换到观察空间下\n    float linearDepth = Linear01Depth(depth);                   \t// 将非线性的深度值转换为[0,1]区间内的线性深度值\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250120124519-vsvnml1",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20250120124519-vsvnml1",
+										"updated": "20250120124519"
+									},
+									"Children": [
+										{
+											"ID": "20250120124519-csfxvhr",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250120124519-csfxvhr",
+												"updated": "20250120124523"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "获取深度+法线纹理的法线消息"
+												}
+											]
+										},
+										{
+											"ID": "20250120124530-k17mdgt",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20250120124530-k17mdgt",
+												"updated": "20250120124549"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "Yw=="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "fixed4 frag(v2f i) : SV_Target\n{\n    float depth;                                                    // 用于存储深度值的变量\n    float3 normals;                                                 // 用于存储法线的变量\n    float4 depthNormal = tex2D(_CameraDepthNormalsTexture, i.uv);   // 对深度+法线纹理进行采样（xy是法线消息，zw是深度消息）\n    DecodeDepthNormal(depthNormal, depth, normals);                 // 一次处理得到深度值和法线消息\n    depth = DecodeFloatRG(depthNormal.zw);                          // 单独得到深度值\n    normals = DecodeViewNormalStereo(depthNormal);                  // 单独得到法线消息\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250120125328-7j4fp0u",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250120125328-7j4fp0u",
+				"updated": "20250120125350"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过对这些宏和函数的介绍，大家只要记住，直接采样出来的深度和法线信息是不会直接使用的，\n我们需要将他们通过内置函数进行转换，得到最终我们会使用的观察空间下的深度和法线信息"
+				}
+			]
+		},
+		{
+			"ID": "20250120124235-6i6p134",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20250120124235-6i6p134",
+				"name": "SAMPLE_DEPTH_TEXTURE",
+				"updated": "20250121130317"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "SAMPLE_DEPTH_TEXTURE"
+				}
+			]
+		},
+		{
+			"ID": "20250120124633-mj54omt",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250120124633-mj54omt",
+				"updated": "20250120124658"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "它是用于从深度纹理中进行采样的宏，相比直接用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "tex2D"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 进行采样，它在内部会帮助我们适配各种不同的平台，\n因为不同平台对深度纹理的采样规则会有所不同，因此我们使用它。\n它采样得到的深度值是裁剪空间下的 z 分量转换到 0"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "~"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "1 之间的结果"
+				}
+			]
+		},
+		{
+			"ID": "20250120124620-nsyaqno",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250120124620-nsyaqno",
+				"updated": "20250121130317"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "fixed4 frag(v2f i) : SV_Target\n{\n    float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv);  // 使用基本深度纹理采样，得到的结果是非线性的\n    float viewDepth = LinearEyeDepth(depth);                        // 将非线性的深度值转换到观察空间下\n    float linearDepth = Linear01Depth(depth);                   \t// 将非线性的深度值转换为[0,1]区间内的线性深度值\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250120124712-jwzlfxd",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250120124712-jwzlfxd",
+				"updated": "20250120124757"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "SAMPLE_DEPTH_TEXTURE"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 得到的深度值是非线性的，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "所谓的非线性值的是指在透视摄像机的裁剪空间中"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong u",
+					"TextMarkTextContent": "深度值分部不均匀"
+				}
+			]
+		},
+		{
+			"ID": "20250120124725-nmys125",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250120124725-nmys125",
+				"updated": "20250120124726"
+			},
+			"Children": [
+				{
+					"ID": "20250120124726-hg8ibyb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250120124726-hg8ibyb",
+						"updated": "20250120124726"
+					},
+					"Children": [
+						{
+							"ID": "20250120124726-xpbb53h",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250120124726-xpbb53h",
+								"updated": "20250120124726"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "当深度值接近裁剪面近时，深度值变化迅速，精度高\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250120124727-5vzgnr5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250120124727-5vzgnr5",
+						"updated": "20250120124727"
+					},
+					"Children": [
+						{
+							"ID": "20250120124727-99hpt57",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250120124727-99hpt57",
+								"updated": "20250120124727"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "当深度值接远裁剪面近时，深度值变化缓慢，精度低"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250120124724-j3vevqo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250120124724-j3vevqo",
+				"updated": "20250120124740"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "更直观的解释：一个相机在观察一个3D场景时，近处的物体移动一点，视觉上变化很大，所以需要更高的精度来记录这种变化。\n而远处的物体移动同样的距离，视觉上的变化很小，因此可以使用较低的精度来记录"
+				}
+			]
+		},
+		{
+			"ID": "20250120124831-ex0xdm9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250120124831-ex0xdm9",
+				"updated": "20250121130314"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此为了让我们在 Shader 中利用深度值进行的计算更加准确，我们需要获得线性的深度值，只需要把裁剪空间下的深度值转换到观察空间下，便可以得到线性的深度值\nUnity Shader 中提供了如下的内置函数："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "LinearEyeDepth"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 和 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "Linear01Depth"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 都可以得到观察空间下的线性深度值，两个方法区别在于取值范围"
+				}
+			]
+		},
+		{
+			"ID": "20250120124911-gv018ta",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250120124911-gv018ta",
+				"updated": "20250120124921"
+			},
+			"Children": [
+				{
+					"ID": "20250120124911-e0xv0uy",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250120124911-e0xv0uy",
+						"updated": "20250120124917"
+					},
+					"Children": [
+						{
+							"ID": "20250120124911-mjhfmgj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250120124911-mjhfmgj",
+								"updated": "20250120124917"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "LinearEyeDepth"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：得到的是像素到摄像机的实际距离\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250120124912-4smu0es",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250120124912-4smu0es",
+						"updated": "20250120124921"
+					},
+					"Children": [
+						{
+							"ID": "20250120124912-8gq66z2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250120124912-8gq66z2",
+								"updated": "20250120124921"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Linear01Depth"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​：得到的是实际距离被压缩到 0"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "~"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "1 之间的值"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250120125009-sh7315b",
+			"Type": "NodeHeading",
+			"HeadingLevel": 3,
+			"Properties": {
+				"id": "20250120125009-sh7315b",
+				"name": "DecodeDepthNormal",
+				"updated": "20250120125307"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "DecodeDepthNormal"
+				}
+			]
+		},
+		{
+			"ID": "20250120125049-hsc7wck",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250120125049-hsc7wck",
+				"updated": "20250120125131"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "DecodeDepthNormal"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 函数内部其实也是执行的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "DecodeFloatRG"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 和 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "DecodeViewNormalStereo"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 函数，\n它的作用就是得到观察空间下的对应像素的 法线 和 线性 深度值 (0"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "~"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "1)"
+				}
+			]
+		},
+		{
+			"ID": "20250120125133-di1i5je",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250120125133-di1i5je",
+				"updated": "20250120125139"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "你可以一次性的获得两个信息，也可以选择分别调用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "DecodeFloatRG"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 和 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "DecodeViewNormalStereo"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 单独获取深度和法线信息"
+				}
+			]
+		},
+		{
+			"ID": "20250120125247-zsbf3a5",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250120125247-zsbf3a5",
+				"updated": "20250120125253"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "fixed4 frag(v2f i) : SV_Target\n{\n    float depth;                                                    // 用于存储深度值的变量\n    float3 normals;                                                 // 用于存储法线的变量\n    float4 depthNormal = tex2D(_CameraDepthNormalsTexture, i.uv);   // 对深度+法线纹理进行采样（xy是法线消息，zw是深度消息）\n    DecodeDepthNormal(depthNormal, depth, normals);                 // 一次处理得到深度值和法线消息\n    depth = DecodeFloatRG(depthNormal.zw);                          // 单独得到深度值\n    normals = DecodeViewNormalStereo(depthNormal);                  // 单独得到法线消息\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250120125147-9eyhfui",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250120125147-9eyhfui",
+				"updated": "20250120125307"
+			},
+			"Children": [
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "函数中具体做的事情，就是利用法线的"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code strong",
+					"TextMarkTextContent": "xy"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "算出"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code strong",
+					"TextMarkTextContent": "z"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "，得到最终的法线信息；\n然后，将裁剪空间下的非线性深度值 转换为观察空间下线性的范围为 0~1 的深度值"
+				}
+			]
+		},
+		{
+			"ID": "20250120125300-5vzi3tj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250120125300-5vzi3tj",
+				"updated": "20250120125300"
+			}
+		}
+	]
+}

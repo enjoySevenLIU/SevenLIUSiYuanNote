@@ -6,7 +6,7 @@
 		"id": "20241221182240-f77j2o6",
 		"title": "US3S8L6——菲涅尔反射",
 		"type": "doc",
-		"updated": "20241221193248"
+		"updated": "20250127215900"
 	},
 	"Children": [
 		{
@@ -787,7 +787,7 @@
 			"HeadingLevel": 2,
 			"Properties": {
 				"id": "20241221183842-u2p1o0f",
-				"updated": "20241221191251"
+				"updated": "20250127215900"
 			},
 			"Children": [
 				{
@@ -804,7 +804,7 @@
 			},
 			"Properties": {
 				"id": "20241221184113-g9249ri",
-				"updated": "20241221191243"
+				"updated": "20250127215900"
 			},
 			"Children": [
 				{
@@ -873,7 +873,7 @@
 					},
 					"Properties": {
 						"id": "20241221184152-251c442",
-						"updated": "20241221191243"
+						"updated": "20250127215900"
 					},
 					"Children": [
 						{
@@ -906,7 +906,7 @@
 							"Properties": {
 								"id": "20241221184748-rz2az2e",
 								"style": "line-height: 22px;",
-								"updated": "20241221191243"
+								"updated": "20250127215900"
 							},
 							"Children": [
 								{
@@ -919,7 +919,7 @@
 								},
 								{
 									"Type": "NodeCodeBlockCode",
-									"Data": "Properties\n{\n    _Cube(\"Cubemap\", Cube) = \"\"{}                       // 立方体纹理\n    _FresnelScale(\"_FresnelScale\", Range(0, 1)) = 1     // 菲涅尔反射中，对应介质的反射率\n}\n"
+									"Data": "Properties\n{\n    _Cube(\"Cubemap\", Cube) = \"\"{}                       // 立方体纹理\n    _FresnelScale(\"FresnelScale\", Range(0, 1)) = 1      // 菲涅尔反射中，对应介质的反射率\n}\n"
 								},
 								{
 									"Type": "NodeCodeBlockFenceCloseMarker",
@@ -1250,7 +1250,7 @@
 			"Properties": {
 				"id": "20241221190832-va5t09k",
 				"style": "line-height: 22px;",
-				"updated": "20241221191251"
+				"updated": "20250126114321"
 			},
 			"Children": [
 				{
@@ -1263,7 +1263,7 @@
 				},
 				{
 					"Type": "NodeCodeBlockCode",
-					"Data": "Shader \"TeachShader/Lesson79_FresnelBase\"\n{\n    Properties\n    {\n        _Cube(\"Cubemap\", Cube) = \"\"{}                       // 立方体纹理\n        _FresnelScale(\"_FresnelScale\", Range(0, 1)) = 1     // 菲涅尔反射中，对应介质的反射率\n    }\n    SubShader\n    {\n        Tags { \"RenderType\" = \"Opaque\" \"Queue\" = \"Geometry\" }\n\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardBase\" }\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n\n            samplerCUBE _Cube;\n            float _FresnelScale;\n\n            struct v2f\n            {\n                float4 pos: SV_POSITION;            // 裁剪空间下的顶点坐标\n                float3 worldNormal: NORMAL;         // 世界空间下的法线\n                float3 worldViewDir: TEXCOORD0;     // 世界空间下的视角方向\n                float3 worldReflection: TEXCOORD1;  // 世界空间下的反射向量\n            };\n\n            v2f vert(appdata_base v)\n            {\n                v2f data;\n                data.pos = UnityObjectToClipPos(v.vertex);                              // 顶点坐标转裁剪坐标\n                data.worldNormal = UnityObjectToWorldNormal(v.normal);                  // 顶点法线转世界坐标\n                fixed3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;               // 顶点坐标装世界坐标\n                data.worldViewDir = UnityWorldSpaceViewDir(worldPos);                   // 计算世界空间下视角所在方向\n                data.worldReflection = reflect(-data.worldViewDir, data.worldNormal);   // 通过反向视角方向得到反射方向\n\n                return data;\n            }\n\n            fixed4 frag(v2f i): SV_TARGET\n            {\n                // 从立方体纹理内采样得到反射颜色\n                fixed4 cubemapColor = texCUBE(_Cube, i.worldReflection);\n                // 根据schlick菲涅尔近似公式，计算菲涅尔反射率\n                fixed fresnal = _FresnelScale + (1 - _FresnelScale) * pow((1 - dot(normalize(i.worldViewDir), normalize(i.worldNormal))), 5);\n                // 计算最终颜色\n                return cubemapColor * fresnal;\n            }\n            ENDCG\n        }\n    }\n}\n"
+					"Data": "Shader \"TeachShader/Lesson79_FresnelBase\"\n{\n    Properties\n    {\n        _Cube(\"Cubemap\", Cube) = \"\"{}                       // 立方体纹理\n        _FresnelScale(\"FresnelScale\", Range(0, 1)) = 1     // 菲涅尔反射中，对应介质的反射率\n    }\n    SubShader\n    {\n        Tags { \"RenderType\" = \"Opaque\" \"Queue\" = \"Geometry\" }\n\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardBase\" }\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n\n            samplerCUBE _Cube;\n            float _FresnelScale;\n\n            struct v2f\n            {\n                float4 pos: SV_POSITION;            // 裁剪空间下的顶点坐标\n                float3 worldNormal: NORMAL;         // 世界空间下的法线\n                float3 worldViewDir: TEXCOORD0;     // 世界空间下的视角方向\n                float3 worldReflection: TEXCOORD1;  // 世界空间下的反射向量\n            };\n\n            v2f vert(appdata_base v)\n            {\n                v2f data;\n                data.pos = UnityObjectToClipPos(v.vertex);                              // 顶点坐标转裁剪坐标\n                data.worldNormal = UnityObjectToWorldNormal(v.normal);                  // 顶点法线转世界坐标\n                fixed3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;               // 顶点坐标装世界坐标\n                data.worldViewDir = UnityWorldSpaceViewDir(worldPos);                   // 计算世界空间下视角所在方向\n                data.worldReflection = reflect(-data.worldViewDir, data.worldNormal);   // 通过反向视角方向得到反射方向\n\n                return data;\n            }\n\n            fixed4 frag(v2f i): SV_TARGET\n            {\n                // 从立方体纹理内采样得到反射颜色\n                fixed4 cubemapColor = texCUBE(_Cube, i.worldReflection);\n                // 根据schlick菲涅尔近似公式，计算菲涅尔反射率\n                fixed fresnal = _FresnelScale + (1 - _FresnelScale) * pow((1 - dot(normalize(i.worldViewDir), normalize(i.worldNormal))), 5);\n                // 计算最终颜色\n                return cubemapColor * fresnal;\n            }\n            ENDCG\n        }\n    }\n}\n"
 				},
 				{
 					"Type": "NodeCodeBlockFenceCloseMarker",

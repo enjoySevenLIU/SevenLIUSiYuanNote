@@ -1,0 +1,3296 @@
+{
+	"ID": "20250125142757-qmmr6oo",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20250125142757-qmmr6oo",
+		"title": "US3S11L6——深度纹理实现全局雾效",
+		"type": "doc",
+		"updated": "20250125193428"
+	},
+	"Children": [
+		{
+			"ID": "20250125143041-sw3w3ii",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20250125143041-sw3w3ii",
+				"updated": "20250125143257"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20250125143043-l6lxkxm",
+					"Type": "NodeHeading",
+					"HeadingLevel": 2,
+					"Properties": {
+						"id": "20250125143043-l6lxkxm",
+						"updated": "20250125143257"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "知识回顾 —— 全局雾效的三种计算方式"
+						}
+					]
+				},
+				{
+					"ID": "20250125143102-vfr2yit",
+					"Type": "NodeList",
+					"ListData": {},
+					"Properties": {
+						"id": "20250125143102-vfr2yit",
+						"updated": "20250125143125"
+					},
+					"Children": [
+						{
+							"ID": "20250125143125-xgtptpf",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20250125143125-xgtptpf",
+								"updated": "20250125143125"
+							},
+							"Children": [
+								{
+									"ID": "20250125143125-xjewtj3",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250125143125-xjewtj3",
+										"updated": "20250125143213"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Linear（线性）："
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "inline-math",
+											"TextMarkInlineMathContent": "f = \\frac{end - |d|}{end-start}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "\n"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250125143137-un90jtk",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20250125143137-un90jtk",
+								"updated": "20250125143137"
+							},
+							"Children": [
+								{
+									"ID": "20250125143137-u5zr9tw",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250125143137-u5zr9tw",
+										"updated": "20250125143220"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Exponential（指数）："
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "inline-math",
+											"TextMarkInlineMathContent": "f = 1 - e^{-density \\cdot |d|}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "\n"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250125143147-0aoitkm",
+							"Type": "NodeListItem",
+							"ListData": {
+								"BulletChar": 42,
+								"Marker": "Kg=="
+							},
+							"Properties": {
+								"id": "20250125143147-0aoitkm",
+								"updated": "20250125143147"
+							},
+							"Children": [
+								{
+									"ID": "20250125143147-m71pgwm",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250125143147-m71pgwm",
+										"updated": "20250125143226"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Exponential Squared（指数平方）："
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "inline-math",
+											"TextMarkInlineMathContent": "f=1-e^{-(density-|d|)^2}"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "\n"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125143230-zakgupp",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250125143230-zakgupp",
+						"updated": "20250125143257"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "它们都是用来计算雾的混合因子 "
+						},
+						{
+							"Type": "NodeTextMark",
+							"TextMarkType": "inline-math",
+							"TextMarkInlineMathContent": "f"
+						},
+						{
+							"Type": "NodeText",
+							"Data": " 的， 有了混合因子，会用雾的颜色和物体本来的颜色进行混合计算："
+						}
+					]
+				},
+				{
+					"ID": "20250125143247-wd3ggqw",
+					"Type": "NodeMathBlock",
+					"Properties": {
+						"id": "20250125143247-wd3ggqw",
+						"updated": "20250125143255"
+					},
+					"Children": [
+						{
+							"Type": "NodeMathBlockOpenMarker"
+						},
+						{
+							"Type": "NodeMathBlockContent",
+							"Data": "最终的颜色 = (1-f) \\times 物体的颜色 + f \\times 雾的颜色"
+						},
+						{
+							"Type": "NodeMathBlockCloseMarker"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250125142757-ctqmbmh",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250125142757-ctqmbmh",
+				"updated": "20250125143445"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "为什么要实现屏幕后处理效果的全局雾效"
+				}
+			]
+		},
+		{
+			"ID": "20250125142909-lbrnvd0",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125142909-lbrnvd0",
+				"updated": "20250125143334"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "既然 Unity 中已经提供了全局雾效，那为什么我们还要自己来实现呢？主要是因为"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "Unity 自带的全局雾效有以下几个缺点"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "："
+				}
+			]
+		},
+		{
+			"ID": "20250125143005-i1z95xj",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250125143005-i1z95xj",
+				"updated": "20250125143006"
+			},
+			"Children": [
+				{
+					"ID": "20250125143006-5z6dv0f",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250125143006-5z6dv0f",
+						"updated": "20250125143006"
+					},
+					"Children": [
+						{
+							"ID": "20250125143006-ru8u3x6",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125143006-ru8u3x6",
+								"updated": "20250125143029"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "需要为每个自定义 Shader 按规则书写雾效处理代码"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125143024-vrahrgd",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250125143024-vrahrgd",
+						"updated": "20250125143024"
+					},
+					"Children": [
+						{
+							"ID": "20250125143024-ptvv8r4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125143024-ptvv8r4",
+								"updated": "20250125143024"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "自带的全局雾效无法实现一些自定义效果\n"
+								}
+							]
+						},
+						{
+							"ID": "20250125143031-7bbexjv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125143031-7bbexjv",
+								"updated": "20250125143033"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "比如："
+								}
+							]
+						},
+						{
+							"ID": "20250125143033-oqfvkve",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250125143033-oqfvkve",
+								"updated": "20250125143033"
+							},
+							"Children": [
+								{
+									"ID": "20250125143033-hyj66pl",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250125143033-hyj66pl",
+										"updated": "20250125143033"
+									},
+									"Children": [
+										{
+											"ID": "20250125143033-500teei",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125143033-500teei",
+												"updated": "20250125143033"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "基于高度的雾效- 可以用来做出悬浮的水雾效果\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250125143033-g42glfn",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250125143033-g42glfn",
+										"updated": "20250125143033"
+									},
+									"Children": [
+										{
+											"ID": "20250125143033-kvjojjc",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125143033-kvjojjc",
+												"updated": "20250125143033"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "不规则的雾效（结合噪声图实现）- 可以为雾增加随机性和不规则形\n"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250125143034-41avdpx",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250125143034-41avdpx",
+										"updated": "20250125143034"
+									},
+									"Children": [
+										{
+											"ID": "20250125143034-wvxcdl9",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125143034-wvxcdl9",
+												"updated": "20250125143034"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "动态变化的雾、基于纹理的雾等等"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250125143011-u8cw8oq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125143011-u8cw8oq",
+				"updated": "20250125143022"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "总体而言，就是 Unity 自带的全局雾效只能满足最基础的效果，较为局限。"
+				}
+			]
+		},
+		{
+			"ID": "20250125143312-tv2qyf9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125143312-tv2qyf9",
+				"updated": "20250125143401"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此我们通过：结合深度纹理来制作屏幕后处理的全局雾效，来让大家感受同一种效果的不同实现思路。\n而基于深度纹理的全局雾效，它相对于Unity自带的全局雾效的好处是："
+				}
+			]
+		},
+		{
+			"ID": "20250125143401-wxyexjy",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250125143401-wxyexjy",
+				"updated": "20250125143423"
+			},
+			"Children": [
+				{
+					"ID": "20250125143401-lymcg7p",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250125143401-lymcg7p",
+						"updated": "20250125143409"
+					},
+					"Children": [
+						{
+							"ID": "20250125143401-aizutck",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125143401-aizutck",
+								"updated": "20250125143409"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "一次屏幕后处理便可以得到雾的效果，不用为每个自定义 Shader 添加雾效代码"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125143402-isnrv2d",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250125143402-isnrv2d",
+						"updated": "20250125143423"
+					},
+					"Children": [
+						{
+							"ID": "20250125143402-yeap73b",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125143402-yeap73b",
+								"updated": "20250125143423"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "可以基于该全局雾效拓展出多种雾效，可以方便的模拟出线性、指数、指数平方雾效，甚至实现一些基于高度的雾效、使用噪声图的雾效、动态变化的雾效等等"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250125143445-7767swa",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250125143445-7767swa",
+				"updated": "20250125163750"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "利用深度纹理实现全局雾效的基本原理"
+				}
+			]
+		},
+		{
+			"ID": "20250125143458-cifx3ra",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250125143458-cifx3ra",
+				"updated": "20250125143458"
+			},
+			"Children": [
+				{
+					"ID": "20250125143458-4izspmf",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250125143458-4izspmf",
+						"updated": "20250125143458"
+					},
+					"Children": [
+						{
+							"ID": "20250125143458-2qk876j",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125143458-2qk876j",
+								"updated": "20250125143458"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Linear（线性）："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "f = \\frac{end - |d|}{end-start}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125143458-syq7wen",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250125143458-syq7wen",
+						"updated": "20250125143458"
+					},
+					"Children": [
+						{
+							"ID": "20250125143458-lx1r59a",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125143458-lx1r59a",
+								"updated": "20250125143458"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Exponential（指数）："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "f = 1 - e^{-density \\cdot |d|}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125143458-2l5pyqx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250125143458-2l5pyqx",
+						"updated": "20250125143458"
+					},
+					"Children": [
+						{
+							"ID": "20250125143458-flgyla7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125143458-flgyla7",
+								"updated": "20250125143458"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Exponential Squared（指数平方）："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "f=1-e^{-(density-|d|)^2}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250125143504-vbb1fjr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125143504-vbb1fjr",
+				"updated": "20250125144420"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "通过这三个公式，我们发现，想要计算全局雾效关键点是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "得到离摄像机的距离"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，\n因为对于：雾开始的位置 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "start"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "、雾最浓的位置 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "end"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "、雾的浓度 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "density"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "、自然对数的底 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "e"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，它们都是已知的或自定义的。"
+				}
+			]
+		},
+		{
+			"ID": "20250125144421-q4n4fli",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125144421-q4n4fli",
+				"updated": "20250125144453"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此我们想要实现基于深度纹理的屏幕后处理的全局雾效的关键点就是：如何利用深度纹理来获得每个像素在世界空间下的位置？"
+				}
+			]
+		},
+		{
+			"ID": "20250125144459-1cj3w8z",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125144459-1cj3w8z",
+				"updated": "20250125144610"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这样才能计算出物体离摄像机的距离，才能利用雾的计算公式计算混合因子来实现雾效！\n之前学习的"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20250122115219-lcofa31",
+					"TextMarkBlockRefSubtype": "s",
+					"TextMarkTextContent": "基于深度纹理实现的运动模糊"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "相关知识中，我们也利用了深度纹理获取了像素点在世界空间下的位置"
+				}
+			]
+		},
+		{
+			"ID": "20250125144517-m09ng50",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250125144517-m09ng50",
+				"style": "line-height: 22px;",
+				"updated": "20250125144547"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv);  // 采集深度值\n// 将UV坐标和深度值作为组合坐标，并从0~1范围扩大到-1~1范围\nfloat4 nowClipPos = float4(i.uv.x * 2 - 1, i.uv.y * 2 - 1, depth * 2 - 1, 1);\nfloat4 worldPos = mul(_ClipToWorldMatrix, nowClipPos);          // 计算世界空间下的点\nworldPos /= worldPos.w;                                         // 透视除法，保证w分量为1，为标准坐标\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250125144626-728g4y6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125144626-728g4y6",
+				"updated": "20250125144645"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "但是这种做法有一个"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "很大的缺点"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，那就是"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "性能消耗较高"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，原因主要有以下两点："
+				}
+			]
+		},
+		{
+			"ID": "20250125144632-1ikf3h4",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250125144632-1ikf3h4",
+				"updated": "20250125144632"
+			},
+			"Children": [
+				{
+					"ID": "20250125144632-02e4edz",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250125144632-02e4edz",
+						"updated": "20250125144632"
+					},
+					"Children": [
+						{
+							"ID": "20250125144632-hk1lnfv",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125144632-hk1lnfv",
+								"updated": "20250125144632"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在片元着色器函数中进行计算，计算次数较大\n"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125144632-bplkrin",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250125144632-bplkrin",
+						"updated": "20250125144632"
+					},
+					"Children": [
+						{
+							"ID": "20250125144632-03axpfg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125144632-03axpfg",
+								"updated": "20250125144632"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "每次都进行了矩阵变换计算，计算量较大"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250125144630-0b9j667",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125144630-0b9j667",
+				"updated": "20250125144656"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此在"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "实现全局雾效时"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，我们"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "将不会使用这种方式"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，而是使用一种性能更好的计算方式！"
+				}
+			]
+		},
+		{
+			"ID": "20250125144651-bv35am3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125144651-bv35am3",
+				"updated": "20250125144806"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这种性能更好的新方法的主要思路，还是利用深度纹理来获得每个像素在世界空间下的位置，\n除此以外我们还需要获得摄像机指向像素对应世界坐标的方向向量，并利用坐标偏移的方式得到像素的世界坐标！"
+				}
+			]
+		},
+		{
+			"ID": "20250125144830-bsfd832",
+			"Type": "NodeMathBlock",
+			"Properties": {
+				"id": "20250125144830-bsfd832",
+				"updated": "20250125144839"
+			},
+			"Children": [
+				{
+					"Type": "NodeMathBlockOpenMarker"
+				},
+				{
+					"Type": "NodeMathBlockContent",
+					"Data": "像素的世界坐标 = 摄像机位置 + 观察空间线性深度值 \\times 摄像机指向像素世界坐标的方向向量"
+				},
+				{
+					"Type": "NodeMathBlockCloseMarker"
+				}
+			]
+		},
+		{
+			"ID": "20250125145158-1g0j69y",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125145158-1g0j69y",
+				"updated": "20250125145158"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250125145158-ohbwpmr.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250125145202-6rgkkit",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125145202-6rgkkit",
+				"updated": "20250125145347"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "简单来说，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "就是通过对 摄像机坐标 向 指向像素对应世界坐标的方向向量 偏移 此像素的线性深度值 的距离，即可得到像素点在世界空间下的位置"
+				}
+			]
+		},
+		{
+			"ID": "20250125144807-72c0uun",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125144807-72c0uun",
+				"updated": "20250125145351"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "而其中摄像机位置已知，观察空间线性深度值已知（从深度纹理中采样后计算），\n那么关键点就是："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "如何计算出摄像机指向像素世界坐标的方向向量"
+				}
+			]
+		},
+		{
+			"ID": "20250125145401-f4ht7ye",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125145401-f4ht7ye",
+				"updated": "20250125145411"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "据此得到关键思路："
+				}
+			]
+		},
+		{
+			"ID": "20250125145411-aknd97v",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250125145411-aknd97v",
+				"updated": "20250125160411"
+			},
+			"Children": [
+				{
+					"ID": "20250125145419-t9hvn3s",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250125145419-t9hvn3s",
+						"updated": "20250125160242"
+					},
+					"Children": [
+						{
+							"ID": "20250125145419-wxy1sc7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125145419-wxy1sc7",
+								"updated": "20250125145419"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "顶点着色器中：\n"
+								}
+							]
+						},
+						{
+							"ID": "20250125145424-22mqn51",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20250125145424-22mqn51",
+								"updated": "20250125160242"
+							},
+							"Children": [
+								{
+									"ID": "20250125145425-fi31612",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20250125145425-fi31612",
+										"updated": "20250125145709"
+									},
+									"Children": [
+										{
+											"ID": "20250125145425-jyp71mb",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125145425-jyp71mb",
+												"updated": "20250125145458"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "屏幕后处理中处理的内容是一张抓取的屏幕图像，相当于是一个面片，它具有 4 个顶点（四个角）"
+												}
+											]
+										},
+										{
+											"ID": "20250125145546-yrij6lv",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125145546-yrij6lv",
+												"updated": "20250125152206"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "我们其实可以认为屏幕后处理中处理的屏幕图像的四个顶点，就是摄像机视锥体中近裁剪面的四个角\n因为在裁剪空间变换中，我们是将 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref",
+													"TextMarkBlockRefID": "20240604125407-vvez177",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "观察空间"
+												},
+												{
+													"Type": "NodeText",
+													"Data": " 变换到了 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref",
+													"TextMarkBlockRefID": "20240604134323-f0ac4no",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "裁剪空间"
+												},
+												{
+													"Type": "NodeText",
+													"Data": " 再到 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "block-ref",
+													"TextMarkBlockRefID": "20240604135832-np7i034",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "NDC空间"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "（归一化的设备坐标空间） 中，\n最终又变换到了屏幕空间中，可以理解相当于把近裁剪面变换到了屏幕空间中。\n因此"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "strong",
+													"TextMarkTextContent": "近裁剪面的四个角相当于是屏幕图像四个顶点在世界空间下的位置"
+												}
+											]
+										},
+										{
+											"ID": "20250125152237-2pfrc5h",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125152237-2pfrc5h",
+												"updated": "20250125152237"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Properties": {
+														"style": "width: 371px;"
+													},
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20250125152237-jjca4mi.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeKramdownSpanIAL",
+													"Data": "{: style=\"width: 371px;\"}"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20250125153139-k5103gy",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125153139-k5103gy",
+												"updated": "20250125153326"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "这也就是说，我们可以在顶点着色器阶段将四个点的射线方向计算好，\n剩下的每个像素的射线方向都会在顶点到片元着色器阶段插值计算完毕，这样大大降低了计算量"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250125145426-v8453dd",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20250125145426-v8453dd",
+										"updated": "20250125160242"
+									},
+									"Children": [
+										{
+											"ID": "20250125145426-dvc2gil",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125145426-dvc2gil",
+												"updated": "20250125155029"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "通过 C"
+												},
+												{
+													"Type": "NodeBackslash",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "#"
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": " 代码计算四个顶点在世界坐标系下的射线方向后传递给顶点着色器"
+												}
+											]
+										},
+										{
+											"ID": "20250125153322-o26e9b3",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125153322-o26e9b3",
+												"updated": "20250125153353"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "这一步我们可以在 C"
+												},
+												{
+													"Type": "NodeBackslash",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "#"
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": " 中计算好，然后将结果作为参数传递到 Shader 的变量中，在顶点着色器中使用即可"
+												}
+											]
+										},
+										{
+											"ID": "20250125153414-e6e64ry",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125153414-e6e64ry",
+												"updated": "20250125154650"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Properties": {
+														"style": "width: 374px;"
+													},
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20250125153414-j3a9bmj.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeKramdownSpanIAL",
+													"Data": "{: style=\"width: 374px;\"}"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​​"
+												}
+											]
+										},
+										{
+											"ID": "20250125153807-iy5giuu",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125153807-iy5giuu",
+												"updated": "20250125153835"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "四个顶点在世界坐标系下的射线方向的推导步骤如下："
+												}
+											]
+										},
+										{
+											"ID": "20250125154531-6e7vr79",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125154531-6e7vr79",
+												"updated": "20250125154644"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "其中，FOV 是摄像机视野角度，Near 是摄像机到近裁剪面的距离，aspect 是屏幕宽高比"
+												}
+											]
+										},
+										{
+											"ID": "20250125154651-t6rl4t8",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125154651-t6rl4t8",
+												"updated": "20250125154651"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Properties": {
+														"style": "width: 319px;"
+													},
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20250125153614-tvj33pg.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeKramdownSpanIAL",
+													"Data": "{: style=\"width: 319px;\"}"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20250125153835-n4rokec",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20250125153835-n4rokec",
+												"style": "line-height: 22px;",
+												"updated": "20250125154611"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "float halfH = Near * tan(FOV/2);\t\t\t// 通过摄像机到近裁剪面的距离乘以tan(视锥角度/2)，得到近裁剪面的高的一半\nfloat halfW = halfH * aspect;\t\t\t\t// 通过近裁剪面的高的一半乘以屏幕的宽高比，得到近裁剪面的宽的一半\nVector3 toTop = Camera.up * halfH;\t\t\t// 得到近裁剪面正中央到近裁剪面的顶部中心点的向量\nVector3 toRight = Camera.Right * halfW;\t\t// 得到近裁剪面正中央到近裁剪面的右侧中心点的向量\n// 通过对摄像机坐标到近裁剪面的中心点的方向向量的偏移，即可得到四个顶点在世界坐标系下的射线方向\nVector3 TopLeft = Camera.forward * Near + toTop - toRight;\nVector3 TopRight = Camera.forward * Near + toTop - toRight;\nVector3 BottomLeft = Camera.forward * Near - toTop + toRight;\nVector3 BottomRight = Camera.forward * Near - toTop + toRight;\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20250125153726-mx84pmp",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125153726-mx84pmp",
+												"updated": "20250125154715"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "推导出来了四个顶点的方向向量，我们是不是就可以利用它们得到四个顶点的世界空间下坐标了呢？\n比如得到左上角的方向向量的单位向量，然后乘以左上角顶点对应像素点的深度值："
+												}
+											]
+										},
+										{
+											"ID": "20250125154723-pzyuy6d",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20250125154723-pzyuy6d",
+												"style": "line-height: 22px;",
+												"updated": "20250125154805"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "左上角像素点对应世界坐标 = 摄像机位置 + TopLeft.Normalized * Depth；\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20250125154709-o7icjat",
+											"Type": "NodeBlockquote",
+											"Properties": {
+												"id": "20250125154709-o7icjat",
+												"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color); --b3-parent-background: var(--b3-card-warning-background);",
+												"updated": "20250125154744"
+											},
+											"Children": [
+												{
+													"Type": "NodeBlockquoteMarker",
+													"Data": "\u003e"
+												},
+												{
+													"ID": "20250125154744-1kjy64p",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20250125154744-1kjy64p",
+														"updated": "20250125154801"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "注意，如果这样去计算，那么得到的结果是错误的！！！！\n因为深度值 "
+														},
+														{
+															"Type": "NodeTextMark",
+															"TextMarkType": "code",
+															"TextMarkTextContent": "Depth"
+														},
+														{
+															"Type": "NodeText",
+															"Data": "​ 即使我们将其转换为观察空间下的线性值，"
+														},
+														{
+															"Type": "NodeTextMark",
+															"TextMarkType": "strong",
+															"TextMarkTextContent": "它表示的也是离摄像机在 Z 轴方向的距离，"
+														},
+														{
+															"Type": "NodeText",
+															"Data": "\n并不是两点之间的距离（欧式距离），因此我们还需要对该向量进行处理！"
+														}
+													]
+												},
+												{
+													"ID": "20250125155017-efoozxh",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20250125155017-efoozxh",
+														"updated": "20250125155017"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "​"
+														},
+														{
+															"Type": "NodeImage",
+															"Data": "span",
+															"Properties": {
+																"style": "width: 261px;"
+															},
+															"Children": [
+																{
+																	"Type": "NodeBang"
+																},
+																{
+																	"Type": "NodeOpenBracket"
+																},
+																{
+																	"Type": "NodeLinkText",
+																	"Data": "image"
+																},
+																{
+																	"Type": "NodeCloseBracket"
+																},
+																{
+																	"Type": "NodeOpenParen"
+																},
+																{
+																	"Type": "NodeLinkDest",
+																	"Data": "assets/image-20250125155017-bays29n.png"
+																},
+																{
+																	"Type": "NodeCloseParen"
+																}
+															]
+														},
+														{
+															"Type": "NodeKramdownSpanIAL",
+															"Data": "{: style=\"width: 261px;\"}"
+														},
+														{
+															"Type": "NodeText",
+															"Data": "​"
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20250125155037-ybg60gf",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125155037-ybg60gf",
+												"updated": "20250125155048"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "我们可以利用相似三角形的原理，推导出深度值和两点之间距离（欧式距离）的关系："
+												}
+											]
+										},
+										{
+											"ID": "20250125155056-eh86pio",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125155056-eh86pio",
+												"updated": "20250125155056"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												},
+												{
+													"Type": "NodeImage",
+													"Data": "span",
+													"Properties": {
+														"style": "width: 326px;"
+													},
+													"Children": [
+														{
+															"Type": "NodeBang"
+														},
+														{
+															"Type": "NodeOpenBracket"
+														},
+														{
+															"Type": "NodeLinkText",
+															"Data": "image"
+														},
+														{
+															"Type": "NodeCloseBracket"
+														},
+														{
+															"Type": "NodeOpenParen"
+														},
+														{
+															"Type": "NodeLinkDest",
+															"Data": "assets/image-20250125155056-6kfu5wk.png"
+														},
+														{
+															"Type": "NodeCloseParen"
+														}
+													]
+												},
+												{
+													"Type": "NodeKramdownSpanIAL",
+													"Data": "{: style=\"width: 326px;\"}"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										},
+										{
+											"ID": "20250125155101-ex6uz8s",
+											"Type": "NodeMathBlock",
+											"Properties": {
+												"id": "20250125155101-ex6uz8s",
+												"updated": "20250125155402"
+											},
+											"Children": [
+												{
+													"Type": "NodeMathBlockOpenMarker"
+												},
+												{
+													"Type": "NodeMathBlockContent",
+													"Data": "\\frac{Depth}{Near} = \\frac{dis}{TL} \\\\\n\\ \\\\\ndis=\\frac{|TL|}{Near} \\times Depth"
+												},
+												{
+													"Type": "NodeMathBlockCloseMarker"
+												}
+											]
+										},
+										{
+											"ID": "20250125155400-dfvevi2",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125155400-dfvevi2",
+												"updated": "20250125160229"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "因此，"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "左上角像素点对应世界坐标 = 摄像机位置 + TL.Normalized * Depth"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ ，\n就变为了："
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "左上角像素点对应世界坐标 = 摄像机位置 + TL.Normalized * |TL| / Near * Depth"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​，这里 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "|TL|"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 指的是 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "TL"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 的模长"
+												}
+											]
+										},
+										{
+											"ID": "20250125155606-wzh4so5",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125155606-wzh4so5",
+												"updated": "20250125160203"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "那也就意味着，真正最终和深度一起计算的确定世界坐标位置的方向向量其实就是 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "TL.Normalized *|TL| / Near"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​\n由于近裁剪面 4 个点是对称的，"
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "|TL| / Near"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 可以通用 ，只需要变换前面的单位向量即可"
+												}
+											]
+										},
+										{
+											"ID": "20250125155740-nkq4wvb",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125155740-nkq4wvb",
+												"updated": "20250125155818"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "通过推导，我们已经得到了四个顶点对应的方向向量信息了"
+												}
+											]
+										},
+										{
+											"ID": "20250125155820-3tp94xk",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20250125155820-3tp94xk",
+												"style": "line-height: 22px;",
+												"updated": "20250125160159"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "YyM="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "float Scale = TopLeft.magnitude / Near\nVector3 RayTL = TopLeft.Normalized * Scale\nVector3 RayTR = TopRight.Normalized * Scale\nVector3 RayBL = BottomLeft.Normalized * Scale\nVector3 RayBR = BottomRight.Normalized * Scale\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										},
+										{
+											"ID": "20250125160241-niny65o",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125160241-niny65o",
+												"updated": "20250125160242"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "我们只需要在顶点着色器中根据顶点的位置设置对应的向量即可！"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125145422-mqtxhky",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250125145422-mqtxhky",
+						"updated": "20250125160411"
+					},
+					"Children": [
+						{
+							"ID": "20250125145422-85eobjt",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125145422-85eobjt",
+								"updated": "20250125145422"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "片元着色器中：\n"
+								}
+							]
+						},
+						{
+							"ID": "20250125145433-loba5co",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20250125145433-loba5co",
+								"updated": "20250125160411"
+							},
+							"Children": [
+								{
+									"ID": "20250125145435-gecz7yv",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20250125145435-gecz7yv",
+										"updated": "20250125145444"
+									},
+									"Children": [
+										{
+											"ID": "20250125145435-tmya799",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125145435-tmya799",
+												"updated": "20250125145444"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "当数据传递到片元着色器要处理每个像素时，像素对应的射线方向是基于 4 个顶点的射线插值计算而来（无需我们自己计算）"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250125145436-9bk5cot",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20250125145436-9bk5cot",
+										"updated": "20250125145505"
+									},
+									"Children": [
+										{
+											"ID": "20250125145436-zkk7ts8",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125145436-zkk7ts8",
+												"updated": "20250125145505"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "利用 像素世界坐标 "
+												},
+												{
+													"Type": "NodeBackslash",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "="
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": " 摄像机位置 + 深度值 "
+												},
+												{
+													"Type": "NodeBackslash",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "*"
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": " 世界空间下射线方向 得到 对应像素在世界空间下位置"
+												}
+											]
+										},
+										{
+											"ID": "20250125160323-7ro3mxt",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125160323-7ro3mxt",
+												"updated": "20250125160349"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "我们已经有了对应的射线，直接从深度纹理中采样获取深度值，并利用 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code block-ref",
+													"TextMarkBlockRefID": "20250119124433-ad1ihvh",
+													"TextMarkBlockRefSubtype": "s",
+													"TextMarkTextContent": "LinearEyeDepth"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​ 内置函数得到像素到摄像机的实际距离\n便可以利用上面的公式进行计算，得到每个像素在世界空间下的位置了"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250125145436-89x9796",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "My4=",
+										"Num": 3
+									},
+									"Properties": {
+										"id": "20250125145436-89x9796",
+										"updated": "20250125160411"
+									},
+									"Children": [
+										{
+											"ID": "20250125145436-7ij2ux9",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125145436-7ij2ux9",
+												"updated": "20250125145436"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "利用得到的世界空间下位置利用雾的公式计算出对应雾效颜色"
+												}
+											]
+										},
+										{
+											"ID": "20250125160405-hj8szh1",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125160405-hj8szh1",
+												"updated": "20250125160409"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "有了世界空间下的位置，我们就可以利用雾的计算公式进行雾效的混合因子计算，\n利用算出的雾效混合因子参与雾颜色和像素颜色的混合运算即可\n"
+												}
+											]
+										},
+										{
+											"ID": "20250125160410-cfvw67m",
+											"Type": "NodeBlockquote",
+											"Properties": {
+												"id": "20250125160410-cfvw67m",
+												"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color); --b3-parent-background: var(--b3-card-warning-background);",
+												"updated": "20250125160411"
+											},
+											"Children": [
+												{
+													"Type": "NodeBlockquoteMarker",
+													"Data": "\u003e"
+												},
+												{
+													"ID": "20250125160411-1fnuae1",
+													"Type": "NodeParagraph",
+													"Properties": {
+														"id": "20250125160411-1fnuae1",
+														"updated": "20250125160411"
+													},
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "注意：在之后的具体实现中，我们将基于线性公式实现基于高度的全局雾效"
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250125160416-4dgkkpj",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250125160416-4dgkkpj",
+				"updated": "20250125165735"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现 利用深度纹理实现全局雾效屏幕后期处理效果 对应 C# 脚本"
+				}
+			]
+		},
+		{
+			"ID": "20250125163757-zjy61lu",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250125163757-zjy61lu",
+				"updated": "20250125164023"
+			},
+			"Children": [
+				{
+					"ID": "20250125163830-mkppkmx",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250125163830-mkppkmx",
+						"updated": "20250125163830"
+					},
+					"Children": [
+						{
+							"ID": "20250125163830-zopm8h4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125163830-zopm8h4",
+								"updated": "20250125163836"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "新建 C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 代码，取名 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "FogWithDepthTexture"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125163830-of413es",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250125163830-of413es",
+						"updated": "20250125164023"
+					},
+					"Children": [
+						{
+							"ID": "20250125163830-xla8yhy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125163830-xla8yhy",
+								"updated": "20250125164001"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "继承 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "PostEffect"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，重写 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "OnRenderImage"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250125164003-v9qfwsc",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125164003-v9qfwsc",
+								"updated": "20250125164023"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "具体代码详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20250104163836-9iiumg9",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "US3S10L4——屏幕后处理基类"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125163830-0mknwij",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250125163830-0mknwij",
+						"updated": "20250125163830"
+					},
+					"Children": [
+						{
+							"ID": "20250125163830-i1qphdy",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125163830-i1qphdy",
+								"updated": "20250125163844"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Start"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 中开启深度纹理"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125163830-lnisgn8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20250125163830-lnisgn8",
+						"updated": "20250125163830"
+					},
+					"Children": [
+						{
+							"ID": "20250125163830-kmvywjq",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125163830-kmvywjq",
+								"updated": "20250125163830"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "声明雾相关属性\n"
+								}
+							]
+						},
+						{
+							"ID": "20250125163846-ij0nii1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125163846-ij0nii1",
+								"updated": "20250125163846"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "颜色、浓度、开始距离、最浓距离"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125163830-xniieqs",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20250125163830-xniieqs",
+						"updated": "20250125163830"
+					},
+					"Children": [
+						{
+							"ID": "20250125163830-pj2k2tn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125163830-pj2k2tn",
+								"updated": "20250125163830"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "根据上节课的原理，计算四个顶点的四个射线向量"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125163830-zqrsowh",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ni4=",
+						"Num": 6
+					},
+					"Properties": {
+						"id": "20250125163830-zqrsowh",
+						"updated": "20250125163830"
+					},
+					"Children": [
+						{
+							"ID": "20250125163830-88925xs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125163830-88925xs",
+								"updated": "20250125163855"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "通过 4*4 的矩阵装载各摄像向量，传递给材质\n"
+								}
+							]
+						},
+						{
+							"ID": "20250125163857-plntw7g",
+							"Type": "NodeBlockquote",
+							"Properties": {
+								"id": "20250125163857-plntw7g",
+								"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color); --b3-parent-background: var(--b3-card-warning-background);",
+								"updated": "20250125163859"
+							},
+							"Children": [
+								{
+									"Type": "NodeBlockquoteMarker",
+									"Data": "\u003e"
+								},
+								{
+									"ID": "20250125163859-r816jxl",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250125163859-r816jxl",
+										"updated": "20250125163920"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "注意：为了方便之后考虑 UV 翻转问题，我们按左下、右下、右上、左上的逆时针顺序存储"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125163830-94p1tin",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ny4=",
+						"Num": 7
+					},
+					"Properties": {
+						"id": "20250125163830-94p1tin",
+						"updated": "20250125163830"
+					},
+					"Children": [
+						{
+							"ID": "20250125163830-hvfzl7d",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125163830-hvfzl7d",
+								"updated": "20250125163830"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "将定义好的颜色、浓度、开始距离、最浓距离传递给材质球"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250125163958-4l7ivcy",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250125163958-4l7ivcy",
+				"style": "line-height: 22px;",
+				"updated": "20250125165704"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class FogWithDepthTexture : PostEffect\n{\n    public Color fogColor = Color.gray;             // 雾的颜色\n    [Range(0f, 1f)] public float fogDensity = 1f;   // 雾的浓度\n    public float fogStart = 0f;                     // 雾开始的距离\n    public float fogEnd = 5f;                       // 雾最浓时的距离\n    private Matrix4x4 rayMatrix;                    // 用于传递4个向量的参数\n\n    void Start()\n    {\n        Camera.main.depthTextureMode = DepthTextureMode.Depth;\n    }\n\n    protected override void UpdateProperty()\n    {\n        if (PostEffectMaterial == null)\n            return;\n\n        float fov = Camera.main.fieldOfView / 2f;   // 摄像机视口夹角\n        float near = Camera.main.nearClipPlane;     // 摄像机到其近裁剪面的距离\n        float aspect = Camera.main.aspect;          // 窗口比例\n        // 计算近裁剪面宽高的一半\n        float halfH = near * Mathf.Tan(fov * Mathf.Deg2Rad);\n        float halfW = halfH * aspect;\n        // 计算竖直向上和水平向右的偏移向量\n        Vector3 toTop = Camera.main.transform.up * halfH;\n        Vector3 toRight = Camera.main.transform.right * halfW;\n        // 计算指向四个顶点的向量\n        Vector3 topLeft = Camera.main.transform.forward * near + toTop - toRight;\n        Vector3 topRight = Camera.main.transform.forward * near + toTop + toRight;\n        Vector3 bottomLeft = Camera.main.transform.forward * near - toTop - toRight;\n        Vector3 bottomRight = Camera.main.transform.forward * near - toTop + toRight;\n        // 为了让深度值计算出来的是两点间距离，所以需要乘以一个缩放值，得到真正的需要的四条射线的向量\n        float scale = topLeft.magnitude / near;\n        topLeft = topLeft.normalized * scale;\n        topRight = topRight.normalized * scale;\n        bottomLeft = bottomLeft.normalized * scale;\n        bottomRight = bottomRight.normalized * scale;\n        // 注意：为了方便之后考虑 UV 翻转问题，我们按左下、右下、右上、左上的逆时针顺序存储\n        rayMatrix.SetRow(0, bottomLeft);\n        rayMatrix.SetRow(1, bottomRight);\n        rayMatrix.SetRow(2, topLeft);\n        rayMatrix.SetRow(3, topRight);\n        // 设置材质球相关属性（Shader属性）\n        PostEffectMaterial.SetColor(\"_FogColor\", fogColor);\n        PostEffectMaterial.SetFloat(\"_FogDensity\", fogDensity);\n        PostEffectMaterial.SetFloat(\"_FogStart\", fogStart);\n        PostEffectMaterial.SetFloat(\"_FogEnd\", fogEnd);\n        PostEffectMaterial.SetMatrix(\"_RayMatrix\", rayMatrix);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250125165735-j0y5jzh",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250125165735-j0y5jzh",
+				"updated": "20250125193428"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现 利用深度纹理实现全局雾效屏幕后期处理效果 对应 Shader"
+				}
+			]
+		},
+		{
+			"ID": "20250125173138-pmmzdt1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125173138-pmmzdt1",
+				"updated": "20250125173149"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这里我们将基于线性公式实现基于高度的全局雾效："
+				}
+			]
+		},
+		{
+			"ID": "20250125165748-tn4o792",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250125165748-tn4o792",
+				"updated": "20250125170005"
+			},
+			"Children": [
+				{
+					"ID": "20250125165756-a44z2bh",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250125165756-a44z2bh",
+						"updated": "20250125165756"
+					},
+					"Children": [
+						{
+							"ID": "20250125165756-78kv2ue",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125165756-78kv2ue",
+								"updated": "20250125165811"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "新建 Shader 文件，取名和 C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 脚本相同，删除无用代码"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125165814-4hfezfk",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250125165814-4hfezfk",
+						"updated": "20250125165814"
+					},
+					"Children": [
+						{
+							"ID": "20250125165814-aymjt84",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125165814-aymjt84",
+								"updated": "20250125165824"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "声明属性，映射属性，注意属性和C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 脚本中命名相同\n"
+								}
+							]
+						},
+						{
+							"ID": "20250125165824-0rh6e2e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125165824-0rh6e2e",
+								"updated": "20250125165827"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "包括深度纹理、矩阵、纹素属性"
+								}
+							]
+						},
+						{
+							"ID": "20250125173154-g5zog6a",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250125173154-g5zog6a",
+								"style": "line-height: 22px;",
+								"updated": "20250125173224"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "Properties\n{\n    _MainTex(\"Texture\", 2D) = \"white\"{}\n    _FogColor(\"FogColor\", Color) = (1, 1, 1, 1) // 雾的颜色\n    _FogDensity(\"FogDensity\", Float) = 1        // 雾的浓度\n    _FogStart(\"FogStart\", Float) = 0            // 雾开始的距离\n    _FogEnd(\"FogEnd\", Float) = 10               // 雾最浓时的距离\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						},
+						{
+							"ID": "20250125173203-xgupymu",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250125173203-xgupymu",
+								"style": "line-height: 22px;",
+								"updated": "20250125173222"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "sampler2D _MainTex;\nhalf4 _MainTex_TexelSize;       // 纹素，用于判断翻转\nsampler2D _CameraDepthTexture;\nfixed4 _FogColor;\nfixed _FogDensity;\nfloat _FogStart;\nfloat _FogEnd;\n// 存储了摄像机坐标到其近裁剪面4个顶点方法向量的矩阵，其中0-左下，1-右下，2-右上，3-左上\nfloat4x4 _RayMatrix;\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125165756-nxov4jp",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250125165756-nxov4jp",
+						"updated": "20250125170005"
+					},
+					"Children": [
+						{
+							"ID": "20250125165756-d66as9n",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125165756-d66as9n",
+								"updated": "20250125165833"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "屏幕后处理标配设置"
+								}
+							]
+						},
+						{
+							"ID": "20250125165829-3k175bi",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125165829-3k175bi",
+								"updated": "20250125170005"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ZTest Always"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Cull Off"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ZWrite Off"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250125173228-kieqv6h",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250125173228-kieqv6h",
+								"style": "line-height: 22px;",
+								"updated": "20250125173244"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "SubShader\n{\n    ZTest Always\n    Cull Off\n    ZWrite Off\n\n    Pass {/*...*/}\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125165756-87y7nan",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20250125165756-87y7nan",
+						"updated": "20250125165756"
+					},
+					"Children": [
+						{
+							"ID": "20250125165756-jo7tl7u",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125165756-jo7tl7u",
+								"updated": "20250125165842"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "v2f"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 结构体\n"
+								}
+							]
+						},
+						{
+							"ID": "20250125165849-yfyttuq",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250125165849-yfyttuq",
+								"updated": "20250125165850"
+							},
+							"Children": [
+								{
+									"ID": "20250125165850-39f8rq1",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250125165850-39f8rq1",
+										"updated": "20250125165850"
+									},
+									"Children": [
+										{
+											"ID": "20250125165850-jvase74",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125165850-jvase74",
+												"updated": "20250125165907"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "考虑翻转的深度纹理 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "half2 uv_depth : TEXCOORD1"
+												},
+												{
+													"Type": "NodeText",
+													"Data": "​"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250125165850-glqzuzr",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250125165850-glqzuzr",
+										"updated": "20250125165850"
+									},
+									"Children": [
+										{
+											"ID": "20250125165850-lx6gjlk",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125165850-lx6gjlk",
+												"updated": "20250125165902"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "射线向量 "
+												},
+												{
+													"Type": "NodeTextMark",
+													"TextMarkType": "code",
+													"TextMarkTextContent": "float4 ray : TEXCOORD2"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250125173247-k19vuwo",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250125173247-k19vuwo",
+								"style": "line-height: 22px;",
+								"updated": "20250125173257"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "struct v2f\n{\n    float2 uv : TEXCOORD0;\n    float2 uv_depth : TEXCOORD1;    // 深度纹理UV\n    float4 ray : TEXCOORD2;         // 顶点射线，指向四个角的方向向量\n    float4 vertex : SV_POSITION;\n};\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125165756-pil4h83",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20250125165756-pil4h83",
+						"updated": "20250125165756"
+					},
+					"Children": [
+						{
+							"ID": "20250125165756-4e0uurw",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125165756-4e0uurw",
+								"updated": "20250125165924"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "顶点着色器（图片有四个顶点，会进入四次，我们需要判断每一个顶点使用哪一个射线向量）\n"
+								}
+							]
+						},
+						{
+							"ID": "20250125165927-sdifp14",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125165927-sdifp14",
+								"updated": "20250125173307"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "坐标转换、UV赋值（需要考虑深度纹理翻转），根据 UV 坐标判断顶点位置，决定赋值哪一个向量，同样需要考虑翻转"
+								}
+							]
+						},
+						{
+							"ID": "20250125173309-3z8jgl7",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250125173309-3z8jgl7",
+								"style": "line-height: 22px;",
+								"updated": "20250125173321"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "v2f vert (appdata_base v)\n{\n    v2f o;\n    o.vertex = UnityObjectToClipPos(v.vertex);\n    o.uv = v.texcoord;\n    o.uv_depth = v.texcoord;\n    // 因为屏幕贴图只有四个顶点，因此顶点着色器只会执行4次，\n    // 因此，我们可以通过顶点的UV坐标和中心点坐标比较，以确认当前的顶点位置\n    int index = 0;\n    if (v.texcoord.x \u003c 0.5 \u0026\u0026 v.texcoord.y \u003c 0.5) \n        index = 0;      // 左下\n    else if (v.texcoord.x \u003e 0.5 \u0026\u0026 v.texcoord.y \u003c 0.5)\n        index = 1;      // 右下\n    else if (v.texcoord.x \u003e 0.5 \u0026\u0026 v.texcoord.y \u003e 0.5)\n        index = 2;      // 右上\n    else\n        index = 3;      // 左上\n\n    // 用宏判断uv坐标是否被翻转\n#if UNITY_UV_STARTS_AT_TOP\n    // 如果纹素的y小于0，为负数，表示需要对深度的UV和顶点Y轴进行翻转\n    if (_MainTex_TexelSize.y \u003c 0)\n    {\n        o.uv_depth.y = 1 - o.uv_depth.y;\n        index = 3 - index;\n    }\n#endif\n\n    // 根据顶点的位置，决定少用哪一个射线向量\n    o.ray = _RayMatrix[index];\n    return o;\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125165756-atwudzb",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ni4=",
+						"Num": 6
+					},
+					"Properties": {
+						"id": "20250125165756-atwudzb",
+						"updated": "20250125165756"
+					},
+					"Children": [
+						{
+							"ID": "20250125165756-qpvdtc2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125165756-qpvdtc2",
+								"updated": "20250125165756"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "片元着色器\n"
+								}
+							]
+						},
+						{
+							"ID": "20250125165947-52jrp7z",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125165947-52jrp7z",
+								"updated": "20250125170023"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "深度纹理采样，转换到观察空间下离摄像机的实际距离："
+								}
+							]
+						},
+						{
+							"ID": "20250125170028-riwaakc",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250125170028-riwaakc",
+								"updated": "20250125170028"
+							},
+							"Children": [
+								{
+									"ID": "20250125170028-hdz1637",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250125170028-hdz1637",
+										"updated": "20250125170028"
+									},
+									"Children": [
+										{
+											"ID": "20250125170028-753cwag",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125170028-753cwag",
+												"updated": "20250125173327"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "利用 摄像机位置 + 深度值 "
+												},
+												{
+													"Type": "NodeBackslash",
+													"Data": "span",
+													"Children": [
+														{
+															"Type": "NodeText",
+															"Data": "*"
+														}
+													]
+												},
+												{
+													"Type": "NodeText",
+													"Data": " 射线向量 得到世界空间坐标"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250125170029-39gzxqt",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250125170029-39gzxqt",
+										"updated": "20250125170029"
+									},
+									"Children": [
+										{
+											"ID": "20250125170029-juu8k7k",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250125170029-juu8k7k",
+												"updated": "20250125170032"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "利用雾公式 算出混合因子，我们这里不使用传统雾公式"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250125170026-z1htl8s",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125170026-z1htl8s",
+								"updated": "20250125170026"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "我们实现一种特殊的基于高度的线性雾效，并且把浓度也用上，利用混合因子，进行颜色混合"
+								}
+							]
+						},
+						{
+							"ID": "20250125173324-z30gsqx",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250125173324-z30gsqx",
+								"style": "line-height: 22px;",
+								"updated": "20250125173911"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "fixed4 frag (v2f i) : SV_Target\n{\n    // 获取观察空间下离摄像机的实际距离（Z分量）并计算世界空间下的像素坐标\n    float linearDepth = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv_depth));\n    float3 worldPos = _WorldSpaceCameraPos + linearDepth * i.ray;\n    // 雾相关的计算，可以根据自己需求修改计算方法，这里是基于高度的全局雾效\n    float f = (_FogEnd - worldPos.y) / (_FogEnd - _FogStart);   // 计算混合因子\n    f = saturate(f * _FogDensity);                              // 乘以雾的浓度，取0~1之间，超过则取极值\n    // 利用插值，在两个颜色之间进行融合\n    fixed3 color = lerp(tex2D(_MainTex, i.uv).rgb, _FogColor.rgb, f);\n\n    return fixed4(color.rgb, 1);\n}\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250125165756-8w71rb6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ny4=",
+						"Num": 7
+					},
+					"Properties": {
+						"id": "20250125165756-8w71rb6",
+						"updated": "20250125165950"
+					},
+					"Children": [
+						{
+							"ID": "20250125165756-a4rpz2o",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250125165756-a4rpz2o",
+								"updated": "20250125165950"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "FallBack Off"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250125174524-rjcxpjz",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250125174524-rjcxpjz",
+				"style": "line-height: 22px;",
+				"updated": "20250125193428"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"PostEffect/FogWithDepthTexture\"\n{\n    Properties\n    {\n        _MainTex(\"Texture\", 2D) = \"white\"{}\n        _FogColor(\"FogColor\", Color) = (1, 1, 1, 1) // 雾的颜色\n        _FogDensity(\"FogDensity\", Float) = 1        // 雾的浓度\n        _FogStart(\"FogStart\", Float) = 0            // 雾开始的距离\n        _FogEnd(\"FogEnd\", Float) = 10               // 雾最浓时的距离\n    }\n    SubShader\n    {\n        ZTest Always\n        Cull Off\n        ZWrite Off\n\n        Pass\n        {\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n\n            #include \"UnityCG.cginc\"\n\n            struct v2f\n            {\n                float2 uv : TEXCOORD0;\n                float2 uv_depth : TEXCOORD1;    // 深度纹理UV\n                float4 ray : TEXCOORD2;         // 顶点射线，指向四个角的方向向量\n                float4 vertex : SV_POSITION;\n            };\n\n            sampler2D _MainTex;\n            half4 _MainTex_TexelSize;       // 纹素，用于判断翻转\n            sampler2D _CameraDepthTexture;\n            fixed4 _FogColor;\n            fixed _FogDensity;\n            float _FogStart;\n            float _FogEnd;\n            // 存储了摄像机坐标到其近裁剪面4个顶点方法向量的矩阵，其中0-左下，1-右下，2-右上，3-左上\n            float4x4 _RayMatrix;\n\n            v2f vert (appdata_base v)\n            {\n                v2f o;\n                o.vertex = UnityObjectToClipPos(v.vertex);\n                o.uv = v.texcoord;\n                o.uv_depth = v.texcoord;\n                // 因为屏幕贴图只有四个顶点，因此顶点着色器只会执行4次，\n                // 因此，我们可以通过顶点的UV坐标和中心点坐标比较，以确认当前的顶点位置\n                int index = 0;\n                if (v.texcoord.x \u003c 0.5 \u0026\u0026 v.texcoord.y \u003c 0.5) \n                    index = 0;      // 左下\n                else if (v.texcoord.x \u003e 0.5 \u0026\u0026 v.texcoord.y \u003c 0.5)\n                    index = 1;      // 右下\n                else if (v.texcoord.x \u003e 0.5 \u0026\u0026 v.texcoord.y \u003e 0.5)\n                    index = 2;      // 右上\n                else\n                    index = 3;      // 左上\n\n                // 用宏判断uv坐标是否被翻转\n            #if UNITY_UV_STARTS_AT_TOP\n                // 如果纹素的y小于0，为负数，表示需要对深度的UV和顶点Y轴进行翻转\n                if (_MainTex_TexelSize.y \u003c 0)\n                {\n                    o.uv_depth.y = 1 - o.uv_depth.y;\n                    index = 3 - index;\n                }\n            #endif\n\n                // 根据顶点的位置，决定少用哪一个射线向量\n                o.ray = _RayMatrix[index];\n                return o;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                // 获取观察空间下离摄像机的实际距离（Z分量）并计算世界空间下的像素坐标\n                float linearDepth = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv_depth));\n                float3 worldPos = _WorldSpaceCameraPos + linearDepth * i.ray;\n                // 雾相关的计算，可以根据自己需求修改计算方法，这里是基于高度的全局雾效\n                float f = (_FogEnd - worldPos.y) / (_FogEnd - _FogStart);   // 使用世界空间的像素坐标高度计算混合因子\n                f = saturate(f * _FogDensity);                              // 乘以雾的浓度，取0~1之间，超过则取极值\n                // 利用插值，在两个颜色之间进行融合\n                fixed3 color = lerp(tex2D(_MainTex, i.uv).rgb, _FogColor.rgb, f);\n\n                return fixed4(color.rgb, 1);\n            }\n\n            ENDCG\n        }\n    }\n  \n    Fallback Off\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250125173151-qlbh6ez",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125173151-qlbh6ez",
+				"updated": "20250125174518"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20250125174713-nqdbars",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125174713-nqdbars",
+				"updated": "20250125174713"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 658px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250125174713-l2j8d9l.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 658px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250125174541-euv5j3u",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125174541-euv5j3u",
+				"updated": "20250125174749"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，这里实现了一个基于物体高度的雾效（一种水雾效果），物体在世界空间下高度越低，雾效越浓烈"
+				}
+			]
+		}
+	]
+}

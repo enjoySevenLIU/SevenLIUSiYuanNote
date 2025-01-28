@@ -4,9 +4,9 @@
 	"Type": "NodeDocument",
 	"Properties": {
 		"id": "20250105181135-tiars4j",
-		"title": "US3S10L9——运动模糊",
+		"title": "US3S10L9——基于累积缓存的运动模糊",
 		"type": "doc",
-		"updated": "20250106003746"
+		"updated": "20250125134823"
 	},
 	"Children": [
 		{
@@ -1199,7 +1199,7 @@
 			"HeadingLevel": 2,
 			"Properties": {
 				"id": "20250105183217-jsuubgl",
-				"updated": "20250105190315"
+				"updated": "20250125134823"
 			},
 			"Children": [
 				{
@@ -2252,12 +2252,54 @@
 			]
 		},
 		{
+			"ID": "20250125134657-yjfwkay",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250125134657-yjfwkay",
+				"updated": "20250125134708"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "完整 Shader 代码如下："
+				}
+			]
+		},
+		{
+			"ID": "20250125134708-n0ptm04",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250125134708-n0ptm04",
+				"style": "line-height: 22px;",
+				"updated": "20250125134823"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "Yw=="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "Shader \"PostEffect/MotionBlur\"\n{\n    Properties\n    {\n        _MainTex(\"Texture\", 2D) = \"white\"{}\n        _BlurAmount(\"BlurAmount\", Float) = 0.5      // 模糊程度\n    }\n    SubShader\n    {\n        CGINCLUDE\n\n        #include \"UnityCG.cginc\"\n    \n        sampler2D _MainTex;\n        fixed _BlurAmount;\n    \n        struct v2f\n        {\n            float2 uv : TEXCOORD0;\n            float4 vertex : SV_POSITION;\n        };\n\n        v2f vert (appdata_base v)\n        {\n            v2f o;\n            o.vertex = UnityObjectToClipPos(v.vertex);\n            o.uv = v.texcoord;\n            return o;\n        }\n\n        ENDCG\n\n        Tags { \"RenderType\"=\"Opaque\" }\n\n        ZTest Always\n        Cull Off\n        ZWrite Off\n\n        // 第一个Pass 用于混合RGB通道\n        Pass\n        {\n            Blend SrcAlpha OneMinusSrcAlpha // 混合方式：(源颜色 * _BlurAmount) + (目标颜色 * (1 - _BlurAmount))\n            ColorMask RGB                   // 只改变颜色缓冲区中的RGB通道\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment fragRGB\n\n            fixed4 fragRGB (v2f i) : SV_Target\n            {\n                // 将模糊程度变量作为SrcAlpha值，这样来混合源图像颜色和颜色缓冲区的颜色\n                return fixed4(tex2D(_MainTex, i.uv).rgb, _BlurAmount);\n            }\n            ENDCG\n        }\n\n        // 第二个Pass 用于混合A通道\n        Pass\n        {\n            Blend One Zero                  // 混合方式：只使用源颜色\n            ColorMask A                     // 只改变颜色缓冲区中的A通道\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment fragA\n\n            fixed4 fragA (v2f i) : SV_Target\n            {\n                // 完全保留主纹理的A通道的值，写入到颜色缓冲区内\n                return tex2D(_MainTex, i.uv);\n            }\n            ENDCG\n        }\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
 			"ID": "20250105183226-zqjp66j",
 			"Type": "NodeHeading",
 			"HeadingLevel": 2,
 			"Properties": {
 				"id": "20250105183226-zqjp66j",
-				"updated": "20250105193011"
+				"updated": "20250111161848"
 			},
 			"Children": [
 				{
@@ -2911,6 +2953,14 @@
 					"Data": "可以看到，当场景内的物体移动时，因为保留了之前的渲染结果混合到目前的这一帧，就显示出了运动模糊的效果"
 				}
 			]
+		},
+		{
+			"ID": "20250111161848-8vsz6vm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250111161848-8vsz6vm",
+				"updated": "20250111161848"
+			}
 		}
 	]
 }

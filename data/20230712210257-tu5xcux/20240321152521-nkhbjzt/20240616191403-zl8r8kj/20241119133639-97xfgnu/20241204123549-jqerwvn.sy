@@ -6,7 +6,7 @@
 		"id": "20241204123549-jqerwvn",
 		"title": "US3S6L3——让物体投射阴影",
 		"type": "doc",
-		"updated": "20250101180316"
+		"updated": "20250127210407"
 	},
 	"Children": [
 		{
@@ -438,7 +438,7 @@
 			"HeadingLevel": 2,
 			"Properties": {
 				"id": "20241204125014-sg0634p",
-				"updated": "20241204131232"
+				"updated": "20250127205100"
 			},
 			"Children": [
 				{
@@ -469,7 +469,7 @@
 			},
 			"Properties": {
 				"id": "20241204125144-hvp5hmp",
-				"updated": "20241204130723"
+				"updated": "20250127205100"
 			},
 			"Children": [
 				{
@@ -1003,7 +1003,7 @@
 					},
 					"Properties": {
 						"id": "20241204125208-i04yo6s",
-						"updated": "20241204130723"
+						"updated": "20250127205100"
 					},
 					"Children": [
 						{
@@ -1026,7 +1026,8 @@
 							"IsFencedCodeBlock": true,
 							"Properties": {
 								"id": "20241204130550-bcovpau",
-								"updated": "20241204130723"
+								"style": "line-height: 22px;",
+								"updated": "20250127205100"
 							},
 							"Children": [
 								{
@@ -1039,7 +1040,7 @@
 								},
 								{
 									"Type": "NodeCodeBlockCode",
-									"Data": "// ShadowCaster Pass 投影阴影通道\npass\n{\n    Tags { \"LightMode\" = \"ShadowCaster\" }\n\n    CGPROGRAM\n    #pragma vertex vert\n    #pragma fragment frag\n    // 告诉Unity编译器生成多个着色器变体，用于支持不同类型的阴影（SM，SSSM等等），确保着色器能够在所有可能的阴影投射模式下正确渲染\n    #pragma multi_compile_shadowcaster\n\n    #include \"UnityCG.cginc\"\n\n    struct v2f\n    {\n        V2F_SHADOW_CASTER;\t// 顶点到片元着色器阴影投射结构体数据宏，定义了一些标准的成员变量，这些变量用于在阴影投射路径中传递顶点数据到片元着色器\n    };\n\n    v2f vert(appdata_base v)\n    {\n        v2f data;\n        TRANSFER_SHADOW_CASTER_NORMALOFFSET(data);\t// 转移阴影投射器法线偏移宏，用于在顶点着色器中计算和传递阴影投射所需的变量\n        return data;\n    }\n\n    fixed4 frag(v2f i) : SV_Target\n    {\n        SHADOW_CASTER_FRAGMENT(i);\t//阴影投射片元宏，将深度值写入到阴影映射纹理中\n    }\n    ENDCG\n}\n\n"
+									"Data": "// ShadowCaster Pass 投影阴影通道\nPass\n{\n    Tags { \"LightMode\" = \"ShadowCaster\" }\n\n    CGPROGRAM\n    #pragma vertex vert\n    #pragma fragment frag\n    // 告诉Unity编译器生成多个着色器变体，用于支持不同类型的阴影（SM，SSSM等等），确保着色器能够在所有可能的阴影投射模式下正确渲染\n    #pragma multi_compile_shadowcaster\n\n    #include \"UnityCG.cginc\"\n\n    struct v2f\n    {\n        V2F_SHADOW_CASTER;\t// 顶点到片元着色器阴影投射结构体数据宏，定义了一些标准的成员变量，这些变量用于在阴影投射路径中传递顶点数据到片元着色器\n    };\n\n    v2f vert(appdata_base v)\n    {\n        v2f data;\n        TRANSFER_SHADOW_CASTER_NORMALOFFSET(data);\t// 转移阴影投射器法线偏移宏，用于在顶点着色器中计算和传递阴影投射所需的变量\n        return data;\n    }\n\n    fixed4 frag(v2f i) : SV_Target\n    {\n        SHADOW_CASTER_FRAGMENT(i);\t//阴影投射片元宏，将深度值写入到阴影映射纹理中\n    }\n    ENDCG\n}\n\n"
 								},
 								{
 									"Type": "NodeCodeBlockFenceCloseMarker",
@@ -1146,7 +1147,8 @@
 			"IsFencedCodeBlock": true,
 			"Properties": {
 				"id": "20241204131044-e3t64v7",
-				"updated": "20241204131232"
+				"style": "line-height: 22px;",
+				"updated": "20250127205054"
 			},
 			"Children": [
 				{
@@ -1159,7 +1161,7 @@
 				},
 				{
 					"Type": "NodeCodeBlockCode",
-					"Data": "Shader \"TeachShader/Lesson66ForwardLighting\"\n{\n    Properties\n    {\n        _MainColor(\"MainColor\", Color) = (1, 1, 1, 1)           //材质的漫反射颜色\n        _SpecularColor(\"SpecularColor\", Color) = (1, 1, 1, 1)   //材质高光反射颜色\n        _SpecularNum(\"SpecularNum\", Range(0, 20)) = 0.5         //光泽度\n    }\n    SubShader\n    {\n        // Bass Pass 基础渲染通道\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardBase\" }\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            // 帮助我们编译所有光照变体，并确保光照衰减相关的变量能够正确复制到对应的变量中\n            #pragma multi_compile_fwdbase\n\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n\n            struct v2f\n            {\n                float4 svPos : SV_POSITION;     //裁剪空间下的顶点坐标\n                float3 wNormal : NORMAL;        //世界空间下的法线\n                float3 wPos : TEXCOORD0;        //世界空间下的顶点坐标\n            };\n\n            fixed4 _MainColor;      //属性设置的漫反射颜色\n            fixed4 _SpecularColor;  //属性设置的材质高光颜色\n            float _SpecularNum;     //属性设置的光泽度\n\n            //计算兰伯特光照模型 颜色相关函数（逐片元）\n            //参数：\n            //  wNormal: 世界空间下顶点的法线信息\n            fixed3 getFragLambertColor(in float3 wNormal)\n            {\n                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);  //将光源0的位置标准化，得到方向，用于计算夹角\n                //兰伯特光照模型的实现，这里的颜色计算只取rgb，不考虑透明度的情况\n                fixed3 color = _LightColor0.rgb * _MainColor.rgb * max(0, dot(wNormal, lightDir));\n                return color;\n            }\n\n            //计算Blinn-Phong高光反射光照模型 颜色相关函数（逐片元）\n            //参数：\n            //  wPos: 世界空间下顶点坐标\n            //  wNormal: 世界空间下顶点的法线信息\n            fixed3 getFragSpecularColor(in float3 wPos, in float3 wNormal)\n            {\n                float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - wPos);    //计算观察方向\n                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);          //标准化光源方向\n                float3 halfA = normalize(viewDir + lightDir);                   //将光源方向和观察方向相加得到其半角向量，并标准化\n                //Blinn-Phong高光反射模型的实现，这里的颜色计算只取rgb，不考虑透明度的情况\n                fixed3 color = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(wNormal, halfA)), _SpecularNum);\n                return color;\n            }\n\n            v2f vert (appdata_base v)\n            {\n                v2f v2fData;\n                v2fData.svPos = UnityObjectToClipPos(v.vertex);             //顶点转换到裁剪空间\n                v2fData.wNormal = UnityObjectToWorldNormal(v.normal);       //法线转换到世界空间\n                v2fData.wPos = mul(unity_ObjectToWorld, v.vertex).xyz;      //顶点转换到世界空间\n                return v2fData;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                //计算Blinn-Phong式光照模型需要的各种颜色\n                fixed3 lambertColor = getFragLambertColor(i.wNormal);           //计算漫反射\n                fixed3 specularColor = getFragSpecularColor(i.wPos, i.wNormal); //计算高光反射颜色\n                fixed atten = 1;                                                //衰减值，由于Bass Pass只处理平行光，因此衰减值默认为1\n                //计算Blinn-Phong式光照模型颜色，衰减值 需要乘以 漫反射颜色 和 高光反射颜色 的和\n                fixed3 blinnPhongColor = UNITY_LIGHTMODEL_AMBIENT.rgb + (lambertColor + specularColor) * atten;\n          \n                return fixed4(blinnPhongColor.rgb, 1);  //因为传递过来的颜色变量不包括透明度，因此这里需要手动指定透明度\n            }\n            ENDCG\n        }\n\n        // Additional Pass 附加渲染通道\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardAdd\" }\n            // 使用线性减淡效果进行光照混合\n            Blend One One\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            // 帮助我们编译所有光照变体，并确保光照衰减相关的变量能够正确复制到对应的变量中\n            #pragma multi_compile_fwdadd\n\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n            #include \"AutoLight.cginc\"\n\n            struct v2f\n            {\n                float4 svPos : SV_POSITION;     //裁剪空间下的顶点坐标\n                float3 wNormal : NORMAL;        //世界空间下的法线\n                float3 wPos : TEXCOORD0;        //世界空间下的顶点坐标\n            };\n\n            fixed4 _MainColor;      //属性设置的漫反射颜色\n            fixed4 _SpecularColor;  //属性设置的材质高光颜色\n            float _SpecularNum;     //属性设置的光泽度\n\n            v2f vert (appdata_base v)\n            {\n                v2f v2fData;\n                v2fData.svPos = UnityObjectToClipPos(v.vertex);             //顶点转换到裁剪空间\n                v2fData.wNormal = UnityObjectToWorldNormal(v.normal);       //法线转换到世界空间\n                v2fData.wPos = mul(unity_ObjectToWorld, v.vertex).xyz;      //顶点转换到世界空间\n                return v2fData;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                // 漫反射颜色的计算\n                fixed3 worldNormal = normalize(i.wNormal);\n                // 光的方向\n            #if defined(_DIRECTIONAL_LIGHT)\n                fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz);             // 平行光 光的方向就是它的位置\n            #else\n                fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz - i.wPos);    // 点光源和聚光灯 光的方向 是 光的位置 - 顶点位置\n            #endif\n                fixed3 diffuse = _LightColor0.rgb * _MainColor.rgb * max(0, dot(worldNormal, worldLightDir));\n\n                // 高光反射颜色的计算\n                fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.wPos.xyz);  // 视角方向\n                fixed3 halfDir = normalize(worldLightDir + viewDir);                // 半角向量\n                fixed3 specular = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(worldNormal, halfDir)), _SpecularNum);\n\n                // 衰减值的计算\n            #ifdef USING_DIRECTIONAL_LIGHT  //如果光源是平行光，Unity就会定义USING_DIRECTIONAL_LIGHT这个宏，因此会进入这段逻辑\n                // 平行光逻辑\n                fixed atten = 1;\n            #else\n                // 如果未定义USING_DIRECTIONAL_LIGHT，则说明此光源非平行光\n            #if defined(POINT)\n                // 点光源逻辑\n                float3 lightCoord = mul(unity_WorldToLight, float4(i.wPos, 1)).xyz;\n                fixed atten = tex2D(_LightTexture0, dot(lightCoord, lightCoord).xx).UNITY_ATTEN_CHANNEL;\n            #elif defined(SPOT)\n                // 聚光灯逻辑\n                float4 lightCoord = mul(unity_WorldToLight, float4(i.wPos, 1));\n                fixed atten = (lightCoord.z \u003e 0) *\n                              tex2D(_LightTexture0, lightCoord.xy / lightCoord.w + 0.5).w *\n                              tex2D(_LightTextureB0, dot(lightCoord, lightCoord).xx).UNITY_ATTEN_CHANNEL;\n            #else\n                // 其他逻辑\n                fixed atten = 1;\n            #endif\n            #endif\n\n                // 附加渲染通道内不需要再加上环境光颜色了，因为它只需要计算一次，而之前已经在基础渲染通道中计算了\n                return fixed4((diffuse + specular) * atten, 1);\n            }\n            ENDCG\n        }\n\n        // ShadowCaster Pass 投影阴影通道\n        pass\n        {\n            Tags { \"LightMode\" = \"ShadowCaster\" }\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            #pragma multi_compile_shadowcaster\n\n            #include \"UnityCG.cginc\"\n\n            struct v2f\n            {\n                V2F_SHADOW_CASTER;\n            };\n\n            v2f vert(appdata_base v)\n            {\n                v2f data;\n                TRANSFER_SHADOW_CASTER_NORMALOFFSET(data);\n                return data;\n            }\n\n            fixed4 frag(v2f i) : SV_Target\n            {\n                SHADOW_CASTER_FRAGMENT(i);\n            }\n            ENDCG\n        }\n    }\n}\n"
+					"Data": "Shader \"TeachShader/Lesson66ForwardLighting\"\n{\n    Properties\n    {\n        _MainColor(\"MainColor\", Color) = (1, 1, 1, 1)           //材质的漫反射颜色\n        _SpecularColor(\"SpecularColor\", Color) = (1, 1, 1, 1)   //材质高光反射颜色\n        _SpecularNum(\"SpecularNum\", Range(0, 20)) = 0.5         //光泽度\n    }\n    SubShader\n    {\n        // Bass Pass 基础渲染通道\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardBase\" }\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            // 帮助我们编译所有光照变体，并确保光照衰减相关的变量能够正确复制到对应的变量中\n            #pragma multi_compile_fwdbase\n\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n\n            struct v2f\n            {\n                float4 svPos : SV_POSITION;     //裁剪空间下的顶点坐标\n                float3 wNormal : NORMAL;        //世界空间下的法线\n                float3 wPos : TEXCOORD0;        //世界空间下的顶点坐标\n            };\n\n            fixed4 _MainColor;      //属性设置的漫反射颜色\n            fixed4 _SpecularColor;  //属性设置的材质高光颜色\n            float _SpecularNum;     //属性设置的光泽度\n\n            //计算兰伯特光照模型 颜色相关函数（逐片元）\n            //参数：\n            //  wNormal: 世界空间下顶点的法线信息\n            fixed3 getFragLambertColor(in float3 wNormal)\n            {\n                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);  //将光源0的位置标准化，得到方向，用于计算夹角\n                //兰伯特光照模型的实现，这里的颜色计算只取rgb，不考虑透明度的情况\n                fixed3 color = _LightColor0.rgb * _MainColor.rgb * max(0, dot(wNormal, lightDir));\n                return color;\n            }\n\n            //计算Blinn-Phong高光反射光照模型 颜色相关函数（逐片元）\n            //参数：\n            //  wPos: 世界空间下顶点坐标\n            //  wNormal: 世界空间下顶点的法线信息\n            fixed3 getFragSpecularColor(in float3 wPos, in float3 wNormal)\n            {\n                float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - wPos);    //计算观察方向\n                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);          //标准化光源方向\n                float3 halfA = normalize(viewDir + lightDir);                   //将光源方向和观察方向相加得到其半角向量，并标准化\n                //Blinn-Phong高光反射模型的实现，这里的颜色计算只取rgb，不考虑透明度的情况\n                fixed3 color = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(wNormal, halfA)), _SpecularNum);\n                return color;\n            }\n\n            v2f vert (appdata_base v)\n            {\n                v2f v2fData;\n                v2fData.svPos = UnityObjectToClipPos(v.vertex);             //顶点转换到裁剪空间\n                v2fData.wNormal = UnityObjectToWorldNormal(v.normal);       //法线转换到世界空间\n                v2fData.wPos = mul(unity_ObjectToWorld, v.vertex).xyz;      //顶点转换到世界空间\n                return v2fData;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                //计算Blinn-Phong式光照模型需要的各种颜色\n                fixed3 lambertColor = getFragLambertColor(i.wNormal);           //计算漫反射\n                fixed3 specularColor = getFragSpecularColor(i.wPos, i.wNormal); //计算高光反射颜色\n                fixed atten = 1;                                                //衰减值，由于Bass Pass只处理平行光，因此衰减值默认为1\n                //计算Blinn-Phong式光照模型颜色，衰减值 需要乘以 漫反射颜色 和 高光反射颜色 的和\n                fixed3 blinnPhongColor = UNITY_LIGHTMODEL_AMBIENT.rgb + (lambertColor + specularColor) * atten;\n      \n                return fixed4(blinnPhongColor.rgb, 1);  //因为传递过来的颜色变量不包括透明度，因此这里需要手动指定透明度\n            }\n            ENDCG\n        }\n\n        // Additional Pass 附加渲染通道\n        Pass\n        {\n            Tags { \"LightMode\" = \"ForwardAdd\" }\n            // 使用线性减淡效果进行光照混合\n            Blend One One\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            // 帮助我们编译所有光照变体，并确保光照衰减相关的变量能够正确复制到对应的变量中\n            #pragma multi_compile_fwdadd\n\n            #include \"UnityCG.cginc\"\n            #include \"Lighting.cginc\"\n            #include \"AutoLight.cginc\"\n\n            struct v2f\n            {\n                float4 svPos : SV_POSITION;     //裁剪空间下的顶点坐标\n                float3 wNormal : NORMAL;        //世界空间下的法线\n                float3 wPos : TEXCOORD0;        //世界空间下的顶点坐标\n            };\n\n            fixed4 _MainColor;      //属性设置的漫反射颜色\n            fixed4 _SpecularColor;  //属性设置的材质高光颜色\n            float _SpecularNum;     //属性设置的光泽度\n\n            v2f vert (appdata_base v)\n            {\n                v2f v2fData;\n                v2fData.svPos = UnityObjectToClipPos(v.vertex);             //顶点转换到裁剪空间\n                v2fData.wNormal = UnityObjectToWorldNormal(v.normal);       //法线转换到世界空间\n                v2fData.wPos = mul(unity_ObjectToWorld, v.vertex).xyz;      //顶点转换到世界空间\n                return v2fData;\n            }\n\n            fixed4 frag (v2f i) : SV_Target\n            {\n                // 漫反射颜色的计算\n                fixed3 worldNormal = normalize(i.wNormal);\n                // 光的方向\n            #if defined(_DIRECTIONAL_LIGHT)\n                fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz);             // 平行光 光的方向就是它的位置\n            #else\n                fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz - i.wPos);    // 点光源和聚光灯 光的方向 是 光的位置 - 顶点位置\n            #endif\n                fixed3 diffuse = _LightColor0.rgb * _MainColor.rgb * max(0, dot(worldNormal, worldLightDir));\n\n                // 高光反射颜色的计算\n                fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.wPos.xyz);  // 视角方向\n                fixed3 halfDir = normalize(worldLightDir + viewDir);                // 半角向量\n                fixed3 specular = _LightColor0.rgb * _SpecularColor.rgb * pow(max(0, dot(worldNormal, halfDir)), _SpecularNum);\n\n                // 衰减值的计算\n            #ifdef USING_DIRECTIONAL_LIGHT  //如果光源是平行光，Unity就会定义USING_DIRECTIONAL_LIGHT这个宏，因此会进入这段逻辑\n                // 平行光逻辑\n                fixed atten = 1;\n            #else\n                // 如果未定义USING_DIRECTIONAL_LIGHT，则说明此光源非平行光\n            #if defined(POINT)\n                // 点光源逻辑\n                float3 lightCoord = mul(unity_WorldToLight, float4(i.wPos, 1)).xyz;\n                fixed atten = tex2D(_LightTexture0, dot(lightCoord, lightCoord).xx).UNITY_ATTEN_CHANNEL;\n            #elif defined(SPOT)\n                // 聚光灯逻辑\n                float4 lightCoord = mul(unity_WorldToLight, float4(i.wPos, 1));\n                fixed atten = (lightCoord.z \u003e 0) *\n                              tex2D(_LightTexture0, lightCoord.xy / lightCoord.w + 0.5).w *\n                              tex2D(_LightTextureB0, dot(lightCoord, lightCoord).xx).UNITY_ATTEN_CHANNEL;\n            #else\n                // 其他逻辑\n                fixed atten = 1;\n            #endif\n            #endif\n\n                // 附加渲染通道内不需要再加上环境光颜色了，因为它只需要计算一次，而之前已经在基础渲染通道中计算了\n                return fixed4((diffuse + specular) * atten, 1);\n            }\n            ENDCG\n        }\n\n        // ShadowCaster Pass 投影阴影通道\n        Pass\n        {\n            Tags { \"LightMode\" = \"ShadowCaster\" }\n\n            CGPROGRAM\n            #pragma vertex vert\n            #pragma fragment frag\n            #pragma multi_compile_shadowcaster\n\n            #include \"UnityCG.cginc\"\n\n            struct v2f\n            {\n                V2F_SHADOW_CASTER;\n            };\n\n            v2f vert(appdata_base v)\n            {\n                v2f data;\n                TRANSFER_SHADOW_CASTER_NORMALOFFSET(data);\n                return data;\n            }\n\n            fixed4 frag(v2f i) : SV_Target\n            {\n                SHADOW_CASTER_FRAGMENT(i);\n            }\n            ENDCG\n        }\n    }\n}\n"
 				},
 				{
 					"Type": "NodeCodeBlockFenceCloseMarker",
@@ -1173,7 +1175,7 @@
 			"HeadingLevel": 2,
 			"Properties": {
 				"id": "20241204130954-r9i59co",
-				"updated": "20250101180316"
+				"updated": "20250127210407"
 			},
 			"Children": [
 				{
@@ -1210,23 +1212,93 @@
 			"Type": "NodeParagraph",
 			"Properties": {
 				"id": "20250101180049-utp1bwv",
-				"updated": "20250101180316"
+				"updated": "20250127210337"
 			},
 			"Children": [
 				{
 					"Type": "NodeText",
-					"Data": "除非需要自定义投影的效果，或者 Shader 执行了模型顶点的偏移，需要让阴影同步呈现效果，\n例如："
+					"Data": "除非需要自定义投影的效果，或者 Shader 执行了模型顶点的偏移，需要让阴影同步呈现效果，例如："
+				}
+			]
+		},
+		{
+			"ID": "20250127210335-7nz0ubn",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250127210335-7nz0ubn",
+				"updated": "20250127210407"
+			},
+			"Children": [
+				{
+					"ID": "20250127210336-xkk45vu",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250127210336-xkk45vu",
+						"updated": "20250127210336"
+					},
+					"Children": [
+						{
+							"ID": "20250127210336-uwcqpy3",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250127210336-uwcqpy3",
+								"updated": "20250127210336"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20250101170325-nt0eoze",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "US3S9L6——顶点动画的注意事项"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 中的让顶点动画物体投射正确的阴影部分，就使用了自定义的投影通道"
+								}
+							]
+						}
+					]
 				},
 				{
-					"Type": "NodeTextMark",
-					"TextMarkType": "block-ref",
-					"TextMarkBlockRefID": "20250101170325-nt0eoze",
-					"TextMarkBlockRefSubtype": "d",
-					"TextMarkTextContent": "US3S9L6——顶点动画的注意事项"
-				},
-				{
-					"Type": "NodeText",
-					"Data": " 中的让顶点动画物体投射正确的阴影部分，就使用了自定义的投影通道"
+					"ID": "20250127210339-ylyj9s8",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250127210339-ylyj9s8",
+						"updated": "20250127210407"
+					},
+					"Children": [
+						{
+							"ID": "20250127210339-ogfe749",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250127210339-ogfe749",
+								"updated": "20250127210407"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20250127165657-35p4huj",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "US4L8-3——消融效果"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 中让阴影和模型同步出现消融效果"
+								}
+							]
+						}
+					]
 				}
 			]
 		}

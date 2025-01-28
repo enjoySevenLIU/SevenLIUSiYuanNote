@@ -1,0 +1,1471 @@
+{
+	"ID": "20250127165723-l3hdkxv",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20250127165723-l3hdkxv",
+		"title": "US4L8-5——噪声雾效",
+		"type": "doc",
+		"updated": "20250127232313"
+	},
+	"Children": [
+		{
+			"ID": "20250127165723-p1ar6jp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20250127165723-p1ar6jp",
+				"updated": "20250127230437"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "噪声雾效"
+				}
+			]
+		},
+		{
+			"ID": "20250127222813-u52sicv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127222813-u52sicv",
+				"updated": "20250127222846"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "因此所谓的噪声雾效，其实就是在我们之前已经实现的屏幕后处理效果中的全局雾效中，\n结合噪声和内置时间参数，去实现出不规则、动态的全局雾效，让我们的雾效更具动态感，真实感！"
+				}
+			]
+		},
+		{
+			"ID": "20250127222847-c6eo4f8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127222847-c6eo4f8",
+				"updated": "20250127222915"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实现的全局雾效相关内容可见："
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "block-ref",
+					"TextMarkBlockRefID": "20250125142757-qmmr6oo",
+					"TextMarkBlockRefSubtype": "d",
+					"TextMarkTextContent": "US3S11L6——深度纹理实现全局雾效"
+				}
+			]
+		},
+		{
+			"ID": "20250127223049-yhyj62a",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127223049-yhyj62a",
+				"updated": "20250127223122"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 320px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250127223049-wsppls6.png"
+						},
+						{
+							"Type": "NodeLinkSpace"
+						},
+						{
+							"Type": "NodeLinkTitle",
+							"Data": "均匀的雾效"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 320px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 294px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250127223058-u7ijhl9.png"
+						},
+						{
+							"Type": "NodeLinkSpace"
+						},
+						{
+							"Type": "NodeLinkTitle",
+							"Data": "不均匀的雾效"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 294px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250127223119-kr8igqu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250127223119-kr8igqu",
+				"updated": "20250127230437"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "噪声雾效基本原理"
+				}
+			]
+		},
+		{
+			"ID": "20250127223148-n4k9qfm",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127223148-n4k9qfm",
+				"updated": "20250127223207"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "一句话总结噪声雾效基本原理：\n"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "噪声雾效可以基于我们之前实现的屏幕后处理效果的全局雾效进行修改，通过添加噪声纹理结合 Shader 内置时间变量实现雾的不均匀以及动态效果"
+				}
+			]
+		},
+		{
+			"ID": "20250127223151-rfgy80n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127223151-rfgy80n",
+				"updated": "20250127223152"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关键点："
+				}
+			]
+		},
+		{
+			"ID": "20250127223152-8z6ng9d",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250127223152-8z6ng9d",
+				"updated": "20250127230437"
+			},
+			"Children": [
+				{
+					"ID": "20250127223152-oo7ic6s",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250127223152-oo7ic6s",
+						"updated": "20250127230435"
+					},
+					"Children": [
+						{
+							"ID": "20250127223152-kh9s024",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250127223152-kh9s024",
+								"updated": "20250127223152"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "不均匀效果的实现"
+								}
+							]
+						},
+						{
+							"ID": "20250127223223-tyv89lk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250127223223-tyv89lk",
+								"updated": "20250127223957"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "我们可以利用柏林噪声算法生成的噪声纹理灰度图来制作不均匀感。\n从灰度图中采样得到 0"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "~"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "1 范围的值，再通过减去 0.5 的方式将其区间变为 -0.5"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "~"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "0.5 之间，\n"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "并用这个系数参与最后的雾的混合因子计算中，从而让均匀的雾变得不均匀。"
+								}
+							]
+						},
+						{
+							"ID": "20250127223257-gs61qkf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250127223257-gs61qkf",
+								"updated": "20250127223306"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 183px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "PerlinNoinseTexture"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/PerlinNoinseTexture-20250127165154-hk4mf4i.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 183px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250127223325-55p0rxb",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250127223325-55p0rxb",
+								"style": "line-height: 22px;",
+								"updated": "20250127230435"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "float2 speed = _Time.y * float2(_FogXSpeed, _FogYSpeed);\t\t\t// 雾的动态计算\nfloat noise = (tex2D(_Noise, i.uv + speed).r - 0.5) * _NoiseAmount;\t// 把原本0~1的采样变化到-0.5~0.5，再乘以噪声系数，用于控制正负范围\n// ...\nfloat f = (_FogEnd - worldPos.y) / (_FogEnd - _FogStart);\t\t\t// 混合因子的计算\n// 取0~1之间，超过取极值，然后用该噪声系数参与到最终的雾的混合因子计算中，让雾的密度产生正负方向的动态扰动\nf = saturate(f * _FogDensity * (1 + noise));\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250127223152-aca7aad",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250127223152-aca7aad",
+						"updated": "20250127230437"
+					},
+					"Children": [
+						{
+							"ID": "20250127223152-h8uj524",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250127223152-h8uj524",
+								"updated": "20250127223152"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "动态效果的实现"
+								}
+							]
+						},
+						{
+							"ID": "20250127223801-4zb95pm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250127223801-4zb95pm",
+								"updated": "20250127224239"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "类似水波效果，自定义 x 轴和 y 轴的两个速度变量。利用 Shader 内置时间参数 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "_Time.y"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 得到累积变化。\n用该速度变量从噪声纹理中偏移采样，从而达到动态效果。"
+								}
+							]
+						},
+						{
+							"ID": "20250127224115-lprl2rh",
+							"Type": "NodeCodeBlock",
+							"IsFencedCodeBlock": true,
+							"Properties": {
+								"id": "20250127224115-lprl2rh",
+								"style": "line-height: 22px;",
+								"updated": "20250127230437"
+							},
+							"Children": [
+								{
+									"Type": "NodeCodeBlockFenceOpenMarker",
+									"Data": "```"
+								},
+								{
+									"Type": "NodeCodeBlockFenceInfoMarker",
+									"CodeBlockInfo": "Yw=="
+								},
+								{
+									"Type": "NodeCodeBlockCode",
+									"Data": "float2 speed = _Time.y * float2(_FogXSpeed, _FogYSpeed);\t\t\t// 雾的动态计算\nfloat noise = (tex2D(_Noise, i.uv + speed).r - 0.5) * _NoiseAmount;\t// 把原本0~1的采样变化到-0.5~0.5，再乘以噪声系数，用于控制正负范围\n// ...\nfloat f = (_FogEnd - worldPos.y) / (_FogEnd - _FogStart);\t\t\t// 混合因子的计算\n// 取0~1之间，超过取极值，然后用该噪声系数参与到最终的雾的混合因子计算中，让雾的密度产生正负方向的动态扰动\nf = saturate(f * _FogDensity * (1 + noise));\n"
+								},
+								{
+									"Type": "NodeCodeBlockFenceCloseMarker",
+									"Data": "```"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250127225124-tad8l4s",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250127225124-tad8l4s",
+				"updated": "20250127230612"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "噪声雾效 Shader 实现"
+				}
+			]
+		},
+		{
+			"ID": "20250127225128-8zi6uue",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250127225128-8zi6uue",
+				"updated": "20250127230557"
+			},
+			"Children": [
+				{
+					"ID": "20250127225141-t0yadj5",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250127225141-t0yadj5",
+						"updated": "20250127225141"
+					},
+					"Children": [
+						{
+							"ID": "20250127225141-4nedsmg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250127225141-4nedsmg",
+								"updated": "20250127225213"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "新建 Shader，命名为 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "NoiseFog"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​，复制屏幕后处理效果的全局雾效Shader"
+								}
+							]
+						},
+						{
+							"ID": "20250127225213-qg7wbaj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250127225213-qg7wbaj",
+								"updated": "20250127225224"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "代码详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20250125142757-qmmr6oo",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "US3S11L6——深度纹理实现全局雾效"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250127225141-vpbvauw",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250127225141-vpbvauw",
+						"updated": "20250127230557"
+					},
+					"Children": [
+						{
+							"ID": "20250127225141-gnd4b7m",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250127225141-gnd4b7m",
+								"updated": "20250127225315"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "修改 Shader 代码"
+								}
+							]
+						},
+						{
+							"ID": "20250127225228-3kwmvvz",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20250127225228-3kwmvvz",
+								"updated": "20250127230557"
+							},
+							"Children": [
+								{
+									"ID": "20250127225234-4b0qe0h",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20250127225234-4b0qe0h",
+										"updated": "20250127225234"
+									},
+									"Children": [
+										{
+											"ID": "20250127225234-cv3mskr",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250127225234-cv3mskr",
+												"updated": "20250127225234"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "属性添加\n"
+												}
+											]
+										},
+										{
+											"ID": "20250127225235-nhuk86s",
+											"Type": "NodeList",
+											"ListData": {},
+											"Properties": {
+												"id": "20250127225235-nhuk86s",
+												"updated": "20250127225236"
+											},
+											"Children": [
+												{
+													"ID": "20250127225236-yg7yk8b",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20250127225236-yg7yk8b",
+														"updated": "20250127225236"
+													},
+													"Children": [
+														{
+															"ID": "20250127225236-7diykfu",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20250127225236-7diykfu",
+																"updated": "20250127225313"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "噪声纹理 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "_Noise"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​\n"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20250127225238-qz6evil",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20250127225238-qz6evil",
+														"updated": "20250127225238"
+													},
+													"Children": [
+														{
+															"ID": "20250127225238-qbozaqv",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20250127225238-qbozaqv",
+																"updated": "20250127225311"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "噪声值偏移系数 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "_NoiseAmount"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​\n"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20250127225239-ejjisqf",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20250127225239-ejjisqf",
+														"updated": "20250127225239"
+													},
+													"Children": [
+														{
+															"ID": "20250127225239-fxk0jm0",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20250127225239-fxk0jm0",
+																"updated": "20250127225639"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "X 轴移动速度 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "_FogXSpeed"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20250127225253-jjd29il",
+													"Type": "NodeListItem",
+													"ListData": {
+														"BulletChar": 42,
+														"Marker": "Kg=="
+													},
+													"Properties": {
+														"id": "20250127225253-jjd29il",
+														"updated": "20250127225253"
+													},
+													"Children": [
+														{
+															"ID": "20250127225253-bgs1tm6",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20250127225253-bgs1tm6",
+																"updated": "20250127225638"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "Y 轴移动速度 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "_FogYSpeed"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​"
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20250127225242-frd1ob4",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250127225242-frd1ob4",
+												"updated": "20250127225243"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "属性映射"
+												}
+											]
+										},
+										{
+											"ID": "20250127225630-g4yr8xk",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20250127225630-g4yr8xk",
+												"style": "line-height: 22px;",
+												"updated": "20250127230017"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "Yw=="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "Properties\n{\n    _MainTex(\"Texture\", 2D) = \"white\"{}\n    _FogColor(\"FogColor\", Color) = (1, 1, 1, 1) // 雾的颜色\n    _FogDensity(\"FogDensity\", Float) = 1        // 雾的浓度\n    _FogStart(\"FogStart\", Float) = 0            // 雾开始的距离\n    _FogEnd(\"FogEnd\", Float) = 10               // 雾最浓时的距离\n    _Noise(\"Noise\", 2D) = \"\"{}                  // 噪声纹理\n    _NoiseAmount(\"NoiseAmount\", Float) = 1      // 噪声值偏移系数\n    _FogXSpeed(\"FogXSpeed\", Float) = 0.1        // X轴移动速度\n    _FogYSpeed(\"FogYSpeed\", Float) = 0.1        // Y轴移动速度\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250127230032-2q1ynh3",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20250127230032-2q1ynh3",
+										"updated": "20250127230557"
+									},
+									"Children": [
+										{
+											"ID": "20250127230032-zt6k20e",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250127230032-zt6k20e",
+												"updated": "20250127230040"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "片元着色器修改"
+												}
+											]
+										},
+										{
+											"ID": "20250127230041-vi6eocm",
+											"Type": "NodeList",
+											"ListData": {
+												"Typ": 1
+											},
+											"Properties": {
+												"id": "20250127230041-vi6eocm",
+												"updated": "20250127230041"
+											},
+											"Children": [
+												{
+													"ID": "20250127225234-jp0jqrj",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "MS4=",
+														"Num": 1
+													},
+													"Properties": {
+														"id": "20250127225234-jp0jqrj",
+														"updated": "20250127225234"
+													},
+													"Children": [
+														{
+															"ID": "20250127225234-rgvmc8k",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20250127225234-rgvmc8k",
+																"updated": "20250127230430"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "速度计算，噪声纹理偏移采样，从 0"
+																},
+																{
+																	"Type": "NodeBackslash",
+																	"Data": "span",
+																	"Children": [
+																		{
+																			"Type": "NodeText",
+																			"Data": "~"
+																		}
+																	]
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "1 范围转到 -0.5"
+																},
+																{
+																	"Type": "NodeBackslash",
+																	"Data": "span",
+																	"Children": [
+																		{
+																			"Type": "NodeText",
+																			"Data": "~"
+																		}
+																	]
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "0.5 范围，再乘以 "
+																},
+																{
+																	"Type": "NodeTextMark",
+																	"TextMarkType": "code",
+																	"TextMarkTextContent": "_NoiseAmount"
+																},
+																{
+																	"Type": "NodeText",
+																	"Data": "​ 噪声系数，用于控制正负范围"
+																}
+															]
+														},
+														{
+															"ID": "20250127230418-evuzzhk",
+															"Type": "NodeCodeBlock",
+															"IsFencedCodeBlock": true,
+															"Properties": {
+																"id": "20250127230418-evuzzhk",
+																"style": "line-height: 22px;",
+																"updated": "20250127230428"
+															},
+															"Children": [
+																{
+																	"Type": "NodeCodeBlockFenceOpenMarker",
+																	"Data": "```"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceInfoMarker",
+																	"CodeBlockInfo": "Yw=="
+																},
+																{
+																	"Type": "NodeCodeBlockCode",
+																	"Data": "// 计算噪声图采样偏移，把原本0~1的噪声范围值变化到-0.5~0.5，再乘以_NoiseAmount噪声系数，用于控制正负范围\nfloat2 speed = _Time.y * float2(_FogXSpeed, _FogYSpeed);\nfloat noise = (tex2D(_Noise, i.uv + speed).r - 0.5) * _NoiseAmount;\n\n"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceCloseMarker",
+																	"Data": "```"
+																}
+															]
+														}
+													]
+												},
+												{
+													"ID": "20250127225234-n2jf2m9",
+													"Type": "NodeListItem",
+													"ListData": {
+														"Typ": 1,
+														"Delimiter": 46,
+														"Marker": "Mi4=",
+														"Num": 2
+													},
+													"Properties": {
+														"id": "20250127225234-n2jf2m9",
+														"updated": "20250127225234"
+													},
+													"Children": [
+														{
+															"ID": "20250127225234-x6efgp5",
+															"Type": "NodeParagraph",
+															"Properties": {
+																"id": "20250127225234-x6efgp5",
+																"updated": "20250127225234"
+															},
+															"Children": [
+																{
+																	"Type": "NodeText",
+																	"Data": "参与雾混合因子计算"
+																}
+															]
+														},
+														{
+															"ID": "20250127230443-bwouiou",
+															"Type": "NodeCodeBlock",
+															"IsFencedCodeBlock": true,
+															"Properties": {
+																"id": "20250127230443-bwouiou",
+																"style": "line-height: 22px;",
+																"updated": "20250127230549"
+															},
+															"Children": [
+																{
+																	"Type": "NodeCodeBlockFenceOpenMarker",
+																	"Data": "```"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceInfoMarker",
+																	"CodeBlockInfo": "Yw=="
+																},
+																{
+																	"Type": "NodeCodeBlockCode",
+																	"Data": "// 乘以1 + noise是为了在正常计算出来的混合因子动进行上下的扰动\nf = saturate(f * _FogDensity * (1 + noise));                // 乘以雾的浓度，取0~1之间，超过则取极值\n"
+																},
+																{
+																	"Type": "NodeCodeBlockFenceCloseMarker",
+																	"Data": "```"
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"ID": "20250127230550-tdwfzq9",
+											"Type": "NodeCodeBlock",
+											"IsFencedCodeBlock": true,
+											"Properties": {
+												"id": "20250127230550-tdwfzq9",
+												"style": "line-height: 22px;",
+												"updated": "20250127230557"
+											},
+											"Children": [
+												{
+													"Type": "NodeCodeBlockFenceOpenMarker",
+													"Data": "```"
+												},
+												{
+													"Type": "NodeCodeBlockFenceInfoMarker",
+													"CodeBlockInfo": "Yw=="
+												},
+												{
+													"Type": "NodeCodeBlockCode",
+													"Data": "fixed4 frag (v2f i) : SV_Target\n{\n    // 获取观察空间下离摄像机的实际距离（Z分量）并计算世界空间下的像素坐标\n    float linearDepth = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv_depth));\n    float3 worldPos = _WorldSpaceCameraPos + linearDepth * i.ray;\n    // 计算噪声图采样偏移，把原本0~1的噪声范围值变化到-0.5~0.5，在乘以_NoiseAmount噪声系数，用于控制正负范围\n    float2 speed = _Time.y * float2(_FogXSpeed, _FogYSpeed);\n    float noise = (tex2D(_Noise, i.uv + speed).r - 0.5) * _NoiseAmount;\n\n    // 雾相关的计算，可以根据自己需求修改计算方法，这里是基于高度的全局雾效\n    float f = (_FogEnd - worldPos.y) / (_FogEnd - _FogStart);   // 使用世界空间的像素坐标高度计算混合因子\n    // 乘以1 + noise是为了在正常计算出来的混合因子动进行上下的扰动\n    f = saturate(f * _FogDensity * (1 + noise));                // 乘以雾的浓度，取0~1之间，超过则取极值\n    // 利用插值，在两个颜色之间进行融合\n    fixed3 color = lerp(tex2D(_MainTex, i.uv).rgb, _FogColor.rgb, f);\n\n    return fixed4(color.rgb, 1);\n}\n"
+												},
+												{
+													"Type": "NodeCodeBlockFenceCloseMarker",
+													"Data": "```"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250127230612-sq2ex2n",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250127230612-sq2ex2n",
+				"updated": "20250127231426"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "噪声雾效 C"
+				},
+				{
+					"Type": "NodeBackslash",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "#"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 实现"
+				}
+			]
+		},
+		{
+			"ID": "20250127230619-5psyoz9",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250127230619-5psyoz9",
+				"updated": "20250127230715"
+			},
+			"Children": [
+				{
+					"ID": "20250127230643-ivkd04b",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250127230643-ivkd04b",
+						"updated": "20250127230643"
+					},
+					"Children": [
+						{
+							"ID": "20250127230643-p3zvf8p",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250127230643-p3zvf8p",
+								"updated": "20250127230647"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "新建 C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 代码 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "NoiseFog"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250127230643-sexyyuf",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250127230643-sexyyuf",
+						"updated": "20250127230704"
+					},
+					"Children": [
+						{
+							"ID": "20250127230643-sg28vi2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250127230643-sg28vi2",
+								"updated": "20250127230656"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "复用屏幕后处理效果的全局雾效 C"
+								},
+								{
+									"Type": "NodeBackslash",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "#"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 代码 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "FogWithDepthTexture"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250127230704-r2rnxf5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250127230704-r2rnxf5",
+								"updated": "20250127230704"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "代码详见："
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20250125142757-qmmr6oo",
+									"TextMarkBlockRefSubtype": "d",
+									"TextMarkTextContent": "US3S11L6——深度纹理实现全局雾效"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250127230643-sehyhx7",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250127230643-sehyhx7",
+						"updated": "20250127230715"
+					},
+					"Children": [
+						{
+							"ID": "20250127230643-yh86bm5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250127230643-yh86bm5",
+								"updated": "20250127230713"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "修改 C# 代码"
+								}
+							]
+						},
+						{
+							"ID": "20250127230708-s07ej1p",
+							"Type": "NodeList",
+							"ListData": {
+								"Typ": 1
+							},
+							"Properties": {
+								"id": "20250127230708-s07ej1p",
+								"updated": "20250127230715"
+							},
+							"Children": [
+								{
+									"ID": "20250127230708-yjuf9im",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "MS4=",
+										"Num": 1
+									},
+									"Properties": {
+										"id": "20250127230708-yjuf9im",
+										"updated": "20250127230708"
+									},
+									"Children": [
+										{
+											"ID": "20250127230708-y2ruqxa",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250127230708-y2ruqxa",
+												"updated": "20250127230708"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "添加成员变量\n"
+												}
+											]
+										},
+										{
+											"ID": "20250127230709-o6ynmo9",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250127230709-o6ynmo9",
+												"updated": "20250127230709"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "纹理、系数、速度"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250127230708-vyvjq24",
+									"Type": "NodeListItem",
+									"ListData": {
+										"Typ": 1,
+										"Delimiter": 46,
+										"Marker": "Mi4=",
+										"Num": 2
+									},
+									"Properties": {
+										"id": "20250127230708-vyvjq24",
+										"updated": "20250127230715"
+									},
+									"Children": [
+										{
+											"ID": "20250127230708-udwluoa",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250127230708-udwluoa",
+												"updated": "20250127230715"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "设置 Shader 参数"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250127230716-0ias08o",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250127230716-0ias08o",
+				"style": "line-height: 22px;",
+				"updated": "20250127231426"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "using UnityEngine;\n\npublic class NoiseFog : PostEffect\n{\n    public Color fogColor = Color.gray;             // 雾的颜色\n    [Range(0f, 1f)] public float fogDensity = 1f;   // 雾的浓度\n    public float fogStart = 0f;                     // 雾开始的距离\n    public float fogEnd = 5f;                       // 雾最浓时的距离\n    private Matrix4x4 rayMatrix;                    // 用于传递4个向量的参数\n    public Texture noiseTexture;                    // 噪声纹理\n    public float noiseAmount = 1f;                  // 噪声值偏移系数\n    public float fogXSpeed = 0.1f;                  // X轴移动速度\n    public float fogYSpeed = 0.1f;                  // Y轴移动速度\n\n    void Start()\n    {\n        Camera.main.depthTextureMode = DepthTextureMode.Depth;\n    }\n\n    protected override void UpdateProperty()\n    {\n        if (PostEffectMaterial == null)\n            return;\n\n        float fov = Camera.main.fieldOfView / 2f;   // 摄像机视口夹角\n        float near = Camera.main.nearClipPlane;     // 摄像机到其近裁剪面的距离\n        float aspect = Camera.main.aspect;          // 窗口比例\n        // 计算近裁剪面宽高的一半\n        float halfH = near * Mathf.Tan(fov * Mathf.Deg2Rad);\n        float halfW = halfH * aspect;\n        // 计算竖直向上和水平向右的偏移向量\n        Vector3 toTop = Camera.main.transform.up * halfH;\n        Vector3 toRight = Camera.main.transform.right * halfW;\n        // 计算指向四个顶点的向量\n        Vector3 topLeft = Camera.main.transform.forward * near + toTop - toRight;\n        Vector3 topRight = Camera.main.transform.forward * near + toTop + toRight;\n        Vector3 bottomLeft = Camera.main.transform.forward * near - toTop - toRight;\n        Vector3 bottomRight = Camera.main.transform.forward * near - toTop + toRight;\n        // 为了让深度值计算出来的是两点间距离，所以需要乘以一个缩放值，得到真正的需要的四条射线的向量\n        float scale = topLeft.magnitude / near;\n        topLeft = topLeft.normalized * scale;\n        topRight = topRight.normalized * scale;\n        bottomLeft = bottomLeft.normalized * scale;\n        bottomRight = bottomRight.normalized * scale;\n        // 注意：为了方便之后考虑 UV 翻转问题，我们按左下、右下、右上、左上的逆时针顺序存储\n        rayMatrix.SetRow(0, bottomLeft);\n        rayMatrix.SetRow(1, bottomRight);\n        rayMatrix.SetRow(2, topLeft);\n        rayMatrix.SetRow(3, topRight);\n        // 设置材质球相关属性（Shader属性）\n        PostEffectMaterial.SetColor(\"_FogColor\", fogColor);\n        PostEffectMaterial.SetFloat(\"_FogDensity\", fogDensity);\n        PostEffectMaterial.SetFloat(\"_FogStart\", fogStart);\n        PostEffectMaterial.SetFloat(\"_FogEnd\", fogEnd);\n        PostEffectMaterial.SetMatrix(\"_RayMatrix\", rayMatrix);\n        PostEffectMaterial.SetTexture(\"_Noise\", noiseTexture);\n        PostEffectMaterial.SetFloat(\"_NoiseAmount\", noiseAmount);\n        PostEffectMaterial.SetFloat(\"_FogXSpeed\", fogXSpeed);\n        PostEffectMaterial.SetFloat(\"_FogYSpeed\", fogYSpeed);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250127231141-2yvs73k",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250127231141-2yvs73k",
+				"updated": "20250127232313"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果"
+				}
+			]
+		},
+		{
+			"ID": "20250127231434-bupj6in",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127231434-bupj6in",
+				"updated": "20250127232136"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "噪声值偏移系数为1，X轴和Y轴移动速度都为0.1"
+				}
+			]
+		},
+		{
+			"ID": "20250127231421-u8dx7c3",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127231421-u8dx7c3",
+				"updated": "20250127231421"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 623px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250127231421-5qr6idm.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 623px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250127232138-6wiameu",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127232138-6wiameu",
+				"updated": "20250127232224"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，雾效呈现出来一种不均匀的，飘动的效果，雾的效果更接近于现实中的团雾了"
+				}
+			]
+		},
+		{
+			"ID": "20250127232313-sqeutvr",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250127232313-sqeutvr",
+				"updated": "20250127232313"
+			}
+		}
+	]
+}
