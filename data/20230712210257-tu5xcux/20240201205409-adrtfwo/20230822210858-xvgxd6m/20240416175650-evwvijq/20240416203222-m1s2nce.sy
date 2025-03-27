@@ -6,7 +6,7 @@
 		"id": "20240416203222-m1s2nce",
 		"title": "UFL4-1——事件中心具体实现",
 		"type": "doc",
-		"updated": "20240416221547"
+		"updated": "20250211011049"
 	},
 	"Children": [
 		{
@@ -583,7 +583,7 @@
 			"HeadingLevel": 2,
 			"Properties": {
 				"id": "20240416212336-8ew80eh",
-				"updated": "20240416212342"
+				"updated": "20250211011049"
 			},
 			"Children": [
 				{
@@ -599,7 +599,7 @@
 			"Properties": {
 				"id": "20240416212343-mh2jwkp",
 				"style": "line-height: 22px;",
-				"updated": "20240416212413"
+				"updated": "20250211011049"
 			},
 			"Children": [
 				{
@@ -612,7 +612,7 @@
 				},
 				{
 					"Type": "NodeCodeBlockCode",
-					"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\n\n/// \u003csummary\u003e\n/// 事件中心模块\n/// \u003c/summary\u003e\npublic class EventCenter : BaseManager\u003cEventCenter\u003e\n{\n    private Dictionary\u003cstring, UnityAction\u003e eventDic = new Dictionary\u003cstring, UnityAction\u003e();\n\n    private EventCenter() { }\n\n    /// \u003csummary\u003e\n    /// 触发事件\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventName\"\u003e要触发的事件名字\u003c/param\u003e\n    public void EventTrigger(string eventName)\n    {\n        //如果没有对象监听这个事件，则直接返回\n        if (!eventDic.ContainsKey(eventName))\n            return;\n        eventDic[eventName]?.Invoke(info);\n    }\n\n    /// \u003csummary\u003e\n    /// 添加事件监听者\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventName\"\u003e要监听的事件\u003c/param\u003e\n    /// \u003cparam name=\"action\"\u003e监听到事件后要执行的方法\u003c/param\u003e\n    public void AddEventListener(string eventName, UnityAction action)\n    {\n        if (eventDic.ContainsKey(eventName))\n            eventDic[eventName] += action;\n        else\n        {\n            //eventDic.Add(eventName, new UnityAction(action));     //不要这样写，会无法移除传入的方法\n            eventDic.Add(eventName, null);\n            eventDic[eventName] += action;\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 移除事件监听\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventName\"\u003e要移除监听的事件\u003c/param\u003e\n    /// \u003cparam name=\"action\"\u003e要移除监听的方法\u003c/param\u003e\n    public void RemoveEventListener(string eventName, UnityAction action)\n    {\n        if (eventDic.ContainsKey(eventName))\n            eventDic[eventName] -= action;\n    }\n\n    /// \u003csummary\u003e\n    /// 清除所有事件的监听\n    /// \u003c/summary\u003e\n    public void Clear()\n    {\n        eventDic.Clear();\n    }\n\n    /// \u003csummary\u003e\n    /// 清除某一个事件的监听\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventName\"\u003e\u003c/param\u003e\n    public void Clear(string eventName)\n    {\n        if (eventDic.ContainsKey(eventName))\n            eventDic.Remove(eventName);\n    }\n}\n"
+					"Data": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\nusing UnityEngine.Events;\n\n/// \u003csummary\u003e\n/// 事件中心模块\n/// \u003c/summary\u003e\npublic class EventCenter : BaseManager\u003cEventCenter\u003e\n{\n    private Dictionary\u003cstring, UnityAction\u003e eventDic = new Dictionary\u003cstring, UnityAction\u003e();\n\n    private EventCenter() { }\n\n    /// \u003csummary\u003e\n    /// 触发事件\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventName\"\u003e要触发的事件名字\u003c/param\u003e\n    public void EventTrigger(string eventName)\n    {\n        //如果没有对象监听这个事件，则直接返回\n        if (!eventDic.ContainsKey(eventName))\n            return;\n        eventDic[eventName]?.Invoke();\n    }\n\n    /// \u003csummary\u003e\n    /// 添加事件监听者\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventName\"\u003e要监听的事件\u003c/param\u003e\n    /// \u003cparam name=\"action\"\u003e监听到事件后要执行的方法\u003c/param\u003e\n    public void AddEventListener(string eventName, UnityAction action)\n    {\n        if (eventDic.ContainsKey(eventName))\n            eventDic[eventName] += action;\n        else\n        {\n            //eventDic.Add(eventName, new UnityAction(action));     //不要这样写，会无法移除传入的方法\n            eventDic.Add(eventName, null);\n            eventDic[eventName] += action;\n        }\n    }\n\n    /// \u003csummary\u003e\n    /// 移除事件监听\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventName\"\u003e要移除监听的事件\u003c/param\u003e\n    /// \u003cparam name=\"action\"\u003e要移除监听的方法\u003c/param\u003e\n    public void RemoveEventListener(string eventName, UnityAction action)\n    {\n        if (eventDic.ContainsKey(eventName))\n            eventDic[eventName] -= action;\n    }\n\n    /// \u003csummary\u003e\n    /// 清除所有事件的监听\n    /// \u003c/summary\u003e\n    public void Clear()\n    {\n        eventDic.Clear();\n    }\n\n    /// \u003csummary\u003e\n    /// 清除某一个事件的监听\n    /// \u003c/summary\u003e\n    /// \u003cparam name=\"eventName\"\u003e\u003c/param\u003e\n    public void Clear(string eventName)\n    {\n        if (eventDic.ContainsKey(eventName))\n            eventDic.Remove(eventName);\n    }\n}\n"
 				},
 				{
 					"Type": "NodeCodeBlockFenceCloseMarker",

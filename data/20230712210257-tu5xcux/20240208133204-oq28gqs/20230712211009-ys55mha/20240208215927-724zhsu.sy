@@ -1,1 +1,649 @@
-{"ID":"20240208215927-724zhsu","Spec":"1","Type":"NodeDocument","Properties":{"id":"20240208215927-724zhsu","title":"UG1L9——GUISkin","type":"doc","updated":"20241128125549"},"Children":[{"ID":"20240208215927-2kimabu","Type":"NodeHeading","HeadingLevel":2,"Properties":{"id":"20240208215927-2kimabu","updated":"20240208220019"},"Children":[{"Type":"NodeText","Data":"本章代码关键字"}]},{"ID":"20240208220019-mcqbpsn","Type":"NodeCodeBlock","IsFencedCodeBlock":true,"Properties":{"id":"20240208220019-mcqbpsn","style":"line-height: 22px;","updated":"20240208224033"},"Children":[{"Type":"NodeCodeBlockFenceOpenMarker","Data":"```"},{"Type":"NodeCodeBlockFenceInfoMarker","CodeBlockInfo":"YyM="},{"Type":"NodeCodeBlockCode","Data":"GUI.color\t\t\t\t//GUI全局着色颜色\nGUI.contentColor\t\t//文本着色颜色\nGUI.backgroundColor\t\t//背景着色颜色\nGUISkin\t\t\t\t\t//可以关联GUISkin文件，赋值给GUI.skin\nGUI.skin\t\t\t\t//设置修改默认的GUI控件样式，即不传入GUIStyle的UI控件的绘制都会有影响\n"},{"Type":"NodeCodeBlockFenceCloseMarker","Data":"```"}]},{"ID":"20240208221101-t565huf","Type":"NodeHeading","HeadingLevel":2,"Properties":{"alias":"GUI.contentColor,GUI.backgroundColor","id":"20240208221101-t565huf","name":"GUI.color","updated":"20241128125528"},"Children":[{"Type":"NodeText","Data":"全局颜色"}]},{"ID":"20240208221525-ycyd7q9","Type":"NodeParagraph","Properties":{"id":"20240208221525-ycyd7q9","updated":"20241128125528"},"Children":[{"Type":"NodeText","Data":"​"},{"Type":"NodeTextMark","TextMarkType":"code","TextMarkTextContent":"GUI.color"},{"Type":"NodeText","Data":"​ 是全局的着色颜色，影响背景和文本颜色，包括对style的影响，可以再该改回去\n​"},{"Type":"NodeTextMark","TextMarkType":"code","TextMarkTextContent":"GUI.contentColor"},{"Type":"NodeText","Data":"​ 是文本着色颜色（受到全局着色指令的影响 会与全局颜色做乘法）\n​"},{"Type":"NodeTextMark","TextMarkType":"code","TextMarkTextContent":"GUI.backgroundColor"},{"Type":"NodeText","Data":"​ 是背景着色颜色（受到全局着色指令的影响 会与全局颜色做乘法）"}]},{"ID":"20240208221156-rk7i1l2","Type":"NodeCodeBlock","IsFencedCodeBlock":true,"Properties":{"id":"20240208221156-rk7i1l2","style":"line-height: 22px;","updated":"20240208223211"},"Children":[{"Type":"NodeCodeBlockFenceOpenMarker","Data":"```"},{"Type":"NodeCodeBlockFenceInfoMarker","CodeBlockInfo":"YyM="},{"Type":"NodeCodeBlockCode","Data":"GUIStyle style;\n\nprivate void OnGUI()\n{\n    //全局的着色颜色 影响背景和文本颜色 包括对style的影响\n    GUI.color = Color.red;\n\n    //文本着色颜色（受到全局着色指令的影响 会与全局颜色做乘法）\n    GUI.contentColor = Color.yellow;\n    GUI.Button(new Rect(0, 0, 100, 30), \"测试按钮\");\n    //背景着色颜色（受到全局着色指令的影响 会与全局颜色做乘法）\n    GUI.backgroundColor = Color.red;\n    GUI.Label(new Rect(0, 50, 100, 30), \"测试按钮\", style);\n    //全局的着色颜色可以再改回去\n    GUI.color = Color.white;\n    GUI.Button(new Rect(0, 100, 100, 30), \"测试按钮\", style);\n}\n"},{"Type":"NodeCodeBlockFenceCloseMarker","Data":"```"}]},{"ID":"20240208221108-7ctgi7c","Type":"NodeHeading","HeadingLevel":2,"Properties":{"id":"20240208221108-7ctgi7c","name":"GUI.skin","updated":"20241128125549"},"Children":[{"Type":"NodeText","Data":"整体皮肤样式"}]},{"ID":"20240208221759-9ymex8g","Type":"NodeParagraph","Properties":{"id":"20240208221759-9ymex8g","updated":"20241128125542"},"Children":[{"Type":"NodeText","Data":"​"},{"Type":"NodeTextMark","TextMarkType":"code","TextMarkTextContent":"GUI.skin"},{"Type":"NodeText","Data":"​ 可以设置修改默认的GUI控件样式，即不传入 "},{"Type":"NodeTextMark","TextMarkType":"code","TextMarkTextContent":"GUIStyle"},{"Type":"NodeText","Data":"​ 的UI控件的绘制都会有影响"}]},{"ID":"20240208222622-0cjzqd5","Type":"NodeParagraph","Properties":{"id":"20240208222622-0cjzqd5","updated":"20241128125549"},"Children":[{"Type":"NodeText","Data":"Project窗口右键可以创建GUI Skin文件，它是所有GUI控件的style集合体\n该文件可以赋值到 "},{"Type":"NodeTextMark","TextMarkType":"code","TextMarkTextContent":"GUISkin"},{"Type":"NodeText","Data":"​ 变量上，然后 "},{"Type":"NodeTextMark","TextMarkType":"code","TextMarkTextContent":"GUISkin"},{"Type":"NodeText","Data":"​ 变量就可以赋值给 "},{"Type":"NodeTextMark","TextMarkType":"code","TextMarkTextContent":"GUI.skin"},{"Type":"NodeText","Data":"​，即可修改默认的GUI控件样式"}]},{"ID":"20240208223310-c71obfd","Type":"NodeParagraph","Properties":{"id":"20240208223310-c71obfd","updated":"20240208223327"},"Children":[{"Type":"NodeText","Data":"它可以帮助我们整套的设置自定义样式，相对单个控件设置style要方便一些"}]},{"ID":"20240208222617-lphr0uj","Type":"NodeParagraph","Properties":{"id":"20240208222617-lphr0uj","updated":"20240208222617"},"Children":[{"Type":"NodeText","Data":"​"},{"Type":"NodeImage","Data":"span","Properties":{"parent-style":"width: 380px;","style":"width: 370px;"},"Children":[{"Type":"NodeBang"},{"Type":"NodeOpenBracket"},{"Type":"NodeLinkText","Data":"image"},{"Type":"NodeCloseBracket"},{"Type":"NodeOpenParen"},{"Type":"NodeLinkDest","Data":"assets/image-20240208222617-27jxd36.png"},{"Type":"NodeCloseParen"}]},{"Type":"NodeKramdownSpanIAL","Data":"{: style=\"width: 370px;\" parent-style=\"width: 380px;\"}"},{"Type":"NodeText","Data":"​"}]},{"ID":"20240208220113-szcornb","Type":"NodeCodeBlock","IsFencedCodeBlock":true,"Properties":{"id":"20240208220113-szcornb","style":"line-height: 22px;","updated":"20240208223355"},"Children":[{"Type":"NodeCodeBlockFenceOpenMarker","Data":"```"},{"Type":"NodeCodeBlockFenceInfoMarker","CodeBlockInfo":"YyM="},{"Type":"NodeCodeBlockCode","Data":"public GUISkin skin;\n\nprivate void OnGUI()\n{\n    //GUISkin格式相当于所有GUI控件的style集合体，设置修改默认的GUI控件样式\n    GUI.skin = skin; //置空相当于没有设置\n    GUI.Button(new Rect(0, 0, 100, 30), \"测试按钮\");\n\n    GUI.skin = null; //置空相当于没有设置\n    GUI.Button(new Rect(0, 0, 100, 30), \"测试按钮\");\n}\n"},{"Type":"NodeCodeBlockFenceCloseMarker","Data":"```"}]}]}
+{
+	"ID": "20240208215927-724zhsu",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240208215927-724zhsu",
+		"title": "UG1L9——GUISkin",
+		"type": "doc",
+		"updated": "20250216235516"
+	},
+	"Children": [
+		{
+			"ID": "20240208215927-2kimabu",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240208215927-2kimabu",
+				"updated": "20240208220019"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "本章代码关键字"
+				}
+			]
+		},
+		{
+			"ID": "20240208220019-mcqbpsn",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240208220019-mcqbpsn",
+				"style": "line-height: 22px;",
+				"updated": "20240208224033"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "GUI.color\t\t\t\t//GUI全局着色颜色\nGUI.contentColor\t\t//文本着色颜色\nGUI.backgroundColor\t\t//背景着色颜色\nGUISkin\t\t\t\t\t//可以关联GUISkin文件，赋值给GUI.skin\nGUI.skin\t\t\t\t//设置修改默认的GUI控件样式，即不传入GUIStyle的UI控件的绘制都会有影响\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240208221101-t565huf",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "GUI.contentColor,GUI.backgroundColor",
+				"id": "20240208221101-t565huf",
+				"name": "GUI.color",
+				"updated": "20250216233815"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "全局颜色"
+				}
+			]
+		},
+		{
+			"ID": "20240208221525-ycyd7q9",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240208221525-ycyd7q9",
+				"updated": "20250216233815"
+			},
+			"Children": [
+				{
+					"ID": "20250216233806-mxsmrbo",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250216233806-mxsmrbo",
+						"updated": "20250216233815"
+					},
+					"Children": [
+						{
+							"ID": "20250216233806-ese3nn4",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250216233806-ese3nn4",
+								"updated": "20250216233815"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GUI.color"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 是全局的着色颜色，影响背景和文本颜色，包括对 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "style"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 的影响，可以再该改回去"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250216233807-j9pteaf",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250216233807-j9pteaf",
+						"updated": "20250216233809"
+					},
+					"Children": [
+						{
+							"ID": "20250216233807-cajstcg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250216233807-cajstcg",
+								"updated": "20250216233809"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GUI.contentColor"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 是文本着色颜色（受到全局着色指令的影响 会与全局颜色做乘法）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250216233808-0m1rbpu",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250216233808-0m1rbpu",
+						"updated": "20250216233808"
+					},
+					"Children": [
+						{
+							"ID": "20250216233808-j521gp8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250216233808-j521gp8",
+								"updated": "20250216233808"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "GUI.backgroundColor"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 是背景着色颜色（受到全局着色指令的影响 会与全局颜色做乘法）"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240208221156-rk7i1l2",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240208221156-rk7i1l2",
+				"style": "line-height: 22px;",
+				"updated": "20240208223211"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "GUIStyle style;\n\nprivate void OnGUI()\n{\n    //全局的着色颜色 影响背景和文本颜色 包括对style的影响\n    GUI.color = Color.red;\n\n    //文本着色颜色（受到全局着色指令的影响 会与全局颜色做乘法）\n    GUI.contentColor = Color.yellow;\n    GUI.Button(new Rect(0, 0, 100, 30), \"测试按钮\");\n    //背景着色颜色（受到全局着色指令的影响 会与全局颜色做乘法）\n    GUI.backgroundColor = Color.red;\n    GUI.Label(new Rect(0, 50, 100, 30), \"测试按钮\", style);\n    //全局的着色颜色可以再改回去\n    GUI.color = Color.white;\n    GUI.Button(new Rect(0, 100, 100, 30), \"测试按钮\", style);\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240208221108-7ctgi7c",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"alias": "GUISkin",
+				"id": "20240208221108-7ctgi7c",
+				"name": "GUI.skin",
+				"updated": "20250216235516"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "整体皮肤样式"
+				}
+			]
+		},
+		{
+			"ID": "20250216234901-osdtjr6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250216234901-osdtjr6",
+				"updated": "20250216235026"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUISkin"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 是所有 GUI 控件的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUIStyle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 集合体，包括按钮、文本等等样式，Project 窗口右键可以创建 GUI Skin 文件\n它可以帮助我们整套的设置自定义样式，相对每个控件设置 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUIStyle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 要方便一些"
+				}
+			]
+		},
+		{
+			"ID": "20240208222617-lphr0uj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240208222617-lphr0uj",
+				"updated": "20250216234955"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 380px;",
+						"style": "width: 370px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20240208222617-27jxd36.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 370px;\" parent-style=\"width: 380px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240208221759-9ymex8g",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240208221759-9ymex8g",
+				"updated": "20250216235122"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUI.skin"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 是全局的默认的 GUI 控件样式属性，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "会影响所有不传入"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code strong",
+					"TextMarkTextContent": "GUIStyle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "的 UI 控件的绘制，"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "\n​"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUISkin"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 文件可以关联到 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUISkin"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 类型变量上，然后 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUISkin"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 类型变量就可以赋值给 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUI.skin"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，即可修改默认的 GUI 控件样式"
+				}
+			]
+		},
+		{
+			"ID": "20240208220113-szcornb",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240208220113-szcornb",
+				"style": "line-height: 22px;",
+				"updated": "20240208223355"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "public GUISkin skin;\n\nprivate void OnGUI()\n{\n    //GUISkin格式相当于所有GUI控件的style集合体，设置修改默认的GUI控件样式\n    GUI.skin = skin; //置空相当于没有设置\n    GUI.Button(new Rect(0, 0, 100, 30), \"测试按钮\");\n\n    GUI.skin = null; //置空相当于没有设置\n    GUI.Button(new Rect(0, 0, 100, 30), \"测试按钮\");\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250216233826-c6kdw2f",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250216233826-c6kdw2f",
+				"updated": "20250216235502"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "除了修改全局样式，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUI.skin"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 还可以用于各个控件默认的全局样式，例如 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUI.skin.button"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 就可以获取到当前按钮默认样式 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUIStyle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，\n我们可以基于默认样式创建新的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUIStyle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，让控件在按照默认样式绘制时，可以修改部分样式属性，也不影响全局控件样式，例如："
+				}
+			]
+		},
+		{
+			"ID": "20250216235236-496ledh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250216235236-496ledh",
+				"updated": "20250216235509"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "例如，我们可以基于默认的按钮 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUIStyle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​，在此基础上做一定的修改（例如按钮左侧收缩效果）："
+				}
+			]
+		},
+		{
+			"ID": "20250216235516-tv1b2u5",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250216235516-tv1b2u5",
+				"style": "line-height: 22px;",
+				"updated": "20250216235516"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "RectOffset offset = GUI.skin.button.margin;\nGUIStyle newStyle = new(GUI.skin.button)\n{\n    margin = new RectOffset(20, offset.right, offset.top, offset.bottom),\n};\nGUILayout.Button(new GUIContent(\"newStyle1\"), newStyle);\nGUILayout.Button(new GUIContent(\"newStyle2\"), newStyle);\nGUILayout.Button(new GUIContent(\"DefaultStyle1\"));\nGUILayout.Button(new GUIContent(\"DefaultStyle2\"));\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250216235516-t5f34uj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250216235516-t5f34uj",
+				"updated": "20250216235516"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "显示效果："
+				}
+			]
+		},
+		{
+			"ID": "20250216235516-m5rq84o",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250216235516-m5rq84o",
+				"updated": "20250216235516"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250216234508-1b3rcem.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250216235516-275mefk",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250216235516-275mefk",
+				"updated": "20250216235516"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可见，我们实现了一个基于默认按钮的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUIStyle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 效果收缩左边的 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "GUIStyle"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		}
+	]
+}
