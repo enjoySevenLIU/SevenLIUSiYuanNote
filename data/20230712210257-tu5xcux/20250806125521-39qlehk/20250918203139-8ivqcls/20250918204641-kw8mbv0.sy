@@ -1,0 +1,1804 @@
+{
+	"ID": "20250918204641-kw8mbv0",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20250918204641-kw8mbv0",
+		"title": "UPL6-2——动态批处理",
+		"type": "doc",
+		"updated": "20250919002231"
+	},
+	"Children": [
+		{
+			"ID": "20250918204641-bqx0ina",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20250918204641-bqx0ina",
+				"updated": "20250919001050"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "动态批处理"
+				}
+			]
+		},
+		{
+			"ID": "20250918204824-elhs0lb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250918204824-elhs0lb",
+				"updated": "20250918204847"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "动态批处理（Dynamic Batching）是一种由 Unity 自动完成的 CPU 端优化技术\n它会在运行时把多个使用相同材质的动态物体的网格数据合并到一次 DrawCall 中\n从而减少 DrawCall 的调用次数，降低 CPU 提交渲染命令的开销"
+				}
+			]
+		},
+		{
+			"ID": "20250918204849-wzt3fvq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250918204849-wzt3fvq",
+				"updated": "20250918204850"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "它的 3 个重要优势："
+				}
+			]
+		},
+		{
+			"ID": "20250918204829-mzfnri6",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250918204829-mzfnri6",
+				"updated": "20250918204832"
+			},
+			"Children": [
+				{
+					"ID": "20250918204829-035dkyr",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250918204829-035dkyr",
+						"updated": "20250918204829"
+					},
+					"Children": [
+						{
+							"ID": "20250918204829-uvmj3x7",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918204829-uvmj3x7",
+								"updated": "20250918204829"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "批处理在运行时生成"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250918204829-omfj6da",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250918204829-omfj6da",
+						"updated": "20250918204832"
+					},
+					"Children": [
+						{
+							"ID": "20250918204829-j6tukp5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918204829-j6tukp5",
+								"updated": "20250918204832"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "批处理中包含的对象在不同帧之间可能有所不同，取决于哪些网格在主摄像机视图中当前可见"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250918204829-pec4209",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250918204829-pec4209",
+						"updated": "20250918204829"
+					},
+					"Children": [
+						{
+							"ID": "20250918204829-8tx2vtf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918204829-8tx2vtf",
+								"updated": "20250918204829"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "场景中运动的对象也可以批处理"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250918204824-98qy07e",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250918204824-98qy07e",
+				"updated": "20250918234328"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "它的主要原理是：\nUnity 在渲染时，原本需要将每个物体的网格、材质数据通过 CPU 发送给 GPU，即一次 DrawCall\n假设 3 个相同材质的 3D 对象（网格可不同，材质需相同），渲染他们需要 3 次 DrawCall\n但是如果在开启动态批处理时，并且这些对象满足动态批处理的限制条件\n那么动态批处理会将这 3 个对象合并为一个更大的网格缓冲区，并和相同的材质一起，通过一次 DrawCall 提交给 GPU，从而达到减少 DrawCall 的目的"
+				}
+			]
+		},
+		{
+			"ID": "20250918204908-09hxuza",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20250918204908-09hxuza",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color); --b3-parent-background: var(--b3-card-warning-background);",
+				"updated": "20250918204957"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20250918204957-rlermta",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250918204957-rlermta",
+						"updated": "20250918204957"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "注意：这种合并每帧都需要重新计算批次（即将满足条件的对象进行批处理），所以叫动态"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250918204824-8y6sqka",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250918204824-8y6sqka",
+				"updated": "20250918205024"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "说人话：动态批处理是一种 Unity 在运行时，由 CPU 自动将满足限制条件的多个动态物体网格合并成一个大网格，一次性提交给 GPU，从而减少 DrawCall 的技术"
+				}
+			]
+		},
+		{
+			"ID": "20250918204824-tef71kp",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20250918204824-tef71kp",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color); --b3-parent-background: var(--b3-card-warning-background);",
+				"updated": "20250918205114"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20250918205054-296rbk1",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250918205054-296rbk1",
+						"updated": "20250918205054"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "注意："
+						}
+					]
+				},
+				{
+					"ID": "20250918205026-a3pcnge",
+					"Type": "NodeList",
+					"ListData": {
+						"Typ": 1
+					},
+					"Properties": {
+						"id": "20250918205026-a3pcnge",
+						"updated": "20250918205114"
+					},
+					"Children": [
+						{
+							"ID": "20250918205026-d9l7jzp",
+							"Type": "NodeListItem",
+							"ListData": {
+								"Typ": 1,
+								"Delimiter": 46,
+								"Marker": "MS4=",
+								"Num": 1
+							},
+							"Properties": {
+								"id": "20250918205026-d9l7jzp",
+								"updated": "20250918205114"
+							},
+							"Children": [
+								{
+									"ID": "20250918205026-7ll9f93",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250918205026-7ll9f93",
+										"updated": "20250918205114"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "动态批处理是"
+										},
+										{
+											"Type": "NodeTextMark",
+											"TextMarkType": "strong",
+											"TextMarkTextContent": "内置渲染管线"
+										},
+										{
+											"Type": "NodeText",
+											"Data": "中的重要优化手段，SRP（URP / HDRP）管线中主要采用 SRP Batcher（我们之后会讲解）"
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250918205026-vzyiym6",
+							"Type": "NodeListItem",
+							"ListData": {
+								"Typ": 1,
+								"Delimiter": 46,
+								"Marker": "Mi4=",
+								"Num": 2
+							},
+							"Properties": {
+								"id": "20250918205026-vzyiym6",
+								"updated": "20250918205026"
+							},
+							"Children": [
+								{
+									"ID": "20250918205026-zdvte7t",
+									"Type": "NodeParagraph",
+									"Properties": {
+										"id": "20250918205026-zdvte7t",
+										"updated": "20250918205051"
+									},
+									"Children": [
+										{
+											"Type": "NodeText",
+											"Data": "Unity 中创建了一个对象，但是 DrawCall 并不是增长了 1 次，而是 n 次，是因为阴影、深度等贴图以及多 Pass、透明、子网格、多材质都会增加 DrawCall 的次数"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250918205210-c7c0je9",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250918205210-c7c0je9",
+				"updated": "20250919001050"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "如何开启动态批处理"
+				}
+			]
+		},
+		{
+			"ID": "20250918205217-qe4h24p",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250918205217-qe4h24p",
+				"updated": "20250919000655"
+			},
+			"Children": [
+				{
+					"ID": "20250919000647-dc1rz6p",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250919000647-dc1rz6p",
+						"updated": "20250919000647"
+					},
+					"Children": [
+						{
+							"ID": "20250919000647-fc2zs3e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250919000647-fc2zs3e",
+								"updated": "20250919000647"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "内置渲染管线：Player Settings ——\u003e Other Settings ——\u003e Rendering ——\u003e Dynamic Batching"
+								}
+							]
+						},
+						{
+							"ID": "20250919000641-2gewvhl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250919000641-2gewvhl",
+								"updated": "20250919000642"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250919000642-gbkp0ig.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250919000650-zd2k90n",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250919000650-zd2k90n",
+						"updated": "20250919000655"
+					},
+					"Children": [
+						{
+							"ID": "20250919000650-5adfx1v",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250919000650-5adfx1v",
+								"updated": "20250919000650"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "URP 管线：URP 管线，主要采用的是之后要讲解的 SRP Batcher 优化方案"
+								}
+							]
+						},
+						{
+							"ID": "20250919000655-y1ndyna",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250919000655-y1ndyna",
+								"updated": "20250919000655"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "在较新版本中（Unity 2023 之后）URP 管线中已不再怎么使用动态批处理，如果想要使用，需要切换为内置渲染管线"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250919000739-xzie4wo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250919000739-xzie4wo",
+				"updated": "20250919000934"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "假设场景上有 5 个使用相同材质的对象"
+				}
+			]
+		},
+		{
+			"ID": "20250919000829-p3t70cs",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250919000829-p3t70cs",
+				"updated": "20250919000906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"style": "width: 241px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "image"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/image-20250919000906-i755goi.png"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 241px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250919000911-z8f9gf3",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250919000911-z8f9gf3",
+				"updated": "20250919000914"
+			},
+			"Children": [
+				{
+					"ID": "20250919000914-jend1gi",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250919000914-jend1gi",
+						"updated": "20250919000914"
+					},
+					"Children": [
+						{
+							"ID": "20250919000914-hb5hq7f",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250919000914-hb5hq7f",
+								"updated": "20250919000938"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "未开启动态批处理时的 Batch 数"
+								}
+							]
+						},
+						{
+							"ID": "20250919000946-m0z3lw1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250919000946-m0z3lw1",
+								"updated": "20250919001004"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 260px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250919001004-5snvn4e.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 260px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250919000939-2nw768w",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250919000939-2nw768w",
+						"updated": "20250919000939"
+					},
+					"Children": [
+						{
+							"ID": "20250919000939-kla5o7e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250919000939-kla5o7e",
+								"updated": "20250919000945"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "开启动态批处理时的 Batch 数"
+								}
+							]
+						},
+						{
+							"ID": "20250919001011-nnt63z5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250919001011-nnt63z5",
+								"updated": "20250919001023"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								},
+								{
+									"Type": "NodeImage",
+									"Data": "span",
+									"Properties": {
+										"style": "width: 259px;"
+									},
+									"Children": [
+										{
+											"Type": "NodeBang"
+										},
+										{
+											"Type": "NodeOpenBracket"
+										},
+										{
+											"Type": "NodeLinkText",
+											"Data": "image"
+										},
+										{
+											"Type": "NodeCloseBracket"
+										},
+										{
+											"Type": "NodeOpenParen"
+										},
+										{
+											"Type": "NodeLinkDest",
+											"Data": "assets/image-20250919001023-az0byvo.png"
+										},
+										{
+											"Type": "NodeCloseParen"
+										}
+									]
+								},
+								{
+									"Type": "NodeKramdownSpanIAL",
+									"Data": "{: style=\"width: 259px;\"}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250919001027-dy08rqv",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250919001027-dy08rqv",
+				"updated": "20250919001050"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "可以看到，开启动态批处理后，Batch 数有明显的下降"
+				}
+			]
+		},
+		{
+			"ID": "20250918205245-qnor4z1",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250918205245-qnor4z1",
+				"updated": "20250918234418"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "动态批处理的限制"
+				}
+			]
+		},
+		{
+			"ID": "20250918205257-btk9rf8",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250918205257-btk9rf8",
+				"updated": "20250918234418"
+			},
+			"Children": [
+				{
+					"ID": "20250918205344-l3wxn3n",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250918205344-l3wxn3n",
+						"updated": "20250918205344"
+					},
+					"Children": [
+						{
+							"ID": "20250918205344-9jbfpqd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918205344-9jbfpqd",
+								"updated": "20250918205344"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "必须满足的硬性条件"
+								}
+							]
+						},
+						{
+							"ID": "20250918205349-6jxr8j1",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250918205349-6jxr8j1",
+								"updated": "20250918205416"
+							},
+							"Children": [
+								{
+									"ID": "20250918205416-4728a8b",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250918205416-4728a8b",
+										"updated": "20250918205416"
+									},
+									"Children": [
+										{
+											"ID": "20250918205416-3vnur1r",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250918205416-3vnur1r",
+												"updated": "20250918205705"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "顶点 ≤ 225 或 300（Unity 2021 之前为 300）"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250918205416-gx8xoan",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250918205416-gx8xoan",
+										"updated": "20250918205416"
+									},
+									"Children": [
+										{
+											"ID": "20250918205416-amsonmn",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250918205416-amsonmn",
+												"updated": "20250918205721"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "顶点 × 顶点属性 ≤ 900"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250918205412-0stl8cf",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918205412-0stl8cf",
+								"updated": "20250918205734"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "即，每个网格最多 225 或 300 个顶点。并且着色器使用的顶点属性不能超过 900\n其中，顶点属性是在 Shader 中会用来进行渲染计算的数据，常用属性有 顶点的 位置、法线、切线、多套 UV 纹理、顶点颜色、骨骼权重、骨骼索引等等"
+								}
+							]
+						},
+						{
+							"ID": "20250918205507-0l2ic1f",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918205507-0l2ic1f",
+								"updated": "20250918205757"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对于简单 Shader 来说，一般至少需要 位置、法线、UV 3 个属性，则："
+								}
+							]
+						},
+						{
+							"ID": "20250918205537-f24twwa",
+							"Type": "NodeList",
+							"ListData": {},
+							"Properties": {
+								"id": "20250918205537-f24twwa",
+								"updated": "20250918205539"
+							},
+							"Children": [
+								{
+									"ID": "20250918205539-iklm96p",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250918205539-iklm96p",
+										"updated": "20250918205539"
+									},
+									"Children": [
+										{
+											"ID": "20250918205539-y3cbfc3",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250918205539-y3cbfc3",
+												"updated": "20250918205902"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "若顶点最多 225 个，则 顶点 × 顶点属性 为 225 × 3 = 675"
+												}
+											]
+										}
+									]
+								},
+								{
+									"ID": "20250918205539-ktem947",
+									"Type": "NodeListItem",
+									"ListData": {
+										"BulletChar": 42,
+										"Marker": "Kg=="
+									},
+									"Properties": {
+										"id": "20250918205539-ktem947",
+										"updated": "20250918205539"
+									},
+									"Children": [
+										{
+											"ID": "20250918205539-qkr8cnj",
+											"Type": "NodeParagraph",
+											"Properties": {
+												"id": "20250918205539-qkr8cnj",
+												"updated": "20250918205914"
+											},
+											"Children": [
+												{
+													"Type": "NodeText",
+													"Data": "若顶点最多 300 个，则 顶点 × 顶点属性 为 300 × 3 = 900"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"ID": "20250918205534-o4vgqqj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918205534-o4vgqqj",
+								"updated": "20250918205922"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "此时 顶点数量 满足条件，顶点 × 顶点属性 也满足条件，就会进行动态批处理"
+								}
+							]
+						},
+						{
+							"ID": "20250918205926-zu3ycve",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918205926-zu3ycve",
+								"updated": "20250918210039"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "若对于一些复杂Shader，假设使用 5 个 属性，那么网格的顶点上限 就是 900 ÷ 5 = 180 个顶点\n只要超出 225 顶点（Unity 2021 之前为 300）或 顶点 × 顶点属性超过 900 任意一个限制，该网格将不会被动态批处理"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250918205344-ihrhoi4",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250918205344-ihrhoi4",
+						"updated": "20250918205344"
+					},
+					"Children": [
+						{
+							"ID": "20250918205344-fddcz94",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918205344-fddcz94",
+								"updated": "20250918205344"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "相同材质实例"
+								}
+							]
+						},
+						{
+							"ID": "20250918210041-11ywd2e",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210041-11ywd2e",
+								"updated": "20250918210046"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "不同对象之间，必须使用同一个 Material 对象（同一内存引用）\n并且材质属性、Shader 关键字、渲染状态必须完全一致"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250918205344-3xta3c6",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250918205344-3xta3c6",
+						"updated": "20250918234418"
+					},
+					"Children": [
+						{
+							"ID": "20250918205344-xn0dzkn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918205344-xn0dzkn",
+								"updated": "20250918233116"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "不能是 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "SkinnedMeshRenderer"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（蒙皮网格渲染器）"
+								}
+							]
+						},
+						{
+							"ID": "20250918210054-bjs09gg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210054-bjs09gg",
+								"updated": "20250918234418"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "一般骨骼动画模型会使用蒙皮网格渲染器，因为每帧 CPU 都要做蒙皮变形，数据不适合直接合并\n只有 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "MeshRenderer"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（网格渲染器）和 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ParticleSystem"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​（粒子系统）能进行动态批处理"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250918205344-8gt07j1",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20250918205344-8gt07j1",
+						"updated": "20250918205344"
+					},
+					"Children": [
+						{
+							"ID": "20250918205344-lzr81oh",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918205344-lzr81oh",
+								"updated": "20250918210104"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "对象不能再变换中包含镜像"
+								}
+							]
+						},
+						{
+							"ID": "20250918210105-ifrc3nk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210105-ifrc3nk",
+								"updated": "20250918210111"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "即 一个正比例缩放的游戏对象 和 一个负比例缩放的游戏对象 不能放在一起批处理"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250918205344-zgpuwij",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20250918205344-zgpuwij",
+						"updated": "20250918205344"
+					},
+					"Children": [
+						{
+							"ID": "20250918205344-uinm6vr",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918205344-uinm6vr",
+								"updated": "20250918205344"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "相同光照状态"
+								}
+							]
+						},
+						{
+							"ID": "20250918210114-nxzeyer",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210114-nxzeyer",
+								"updated": "20250918210118"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "如果使用了光照烘焙中的光照贴图，那必须保持使用的是同一个光照贴图\n并且 光照探针、反射探针、雾效开关 等必须一致，否则渲染状态切换会打断批处理。"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250918205344-tbz6wme",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ni4=",
+						"Num": 6
+					},
+					"Properties": {
+						"id": "20250918205344-tbz6wme",
+						"updated": "20250918205344"
+					},
+					"Children": [
+						{
+							"ID": "20250918205344-agmg5u1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918205344-agmg5u1",
+								"updated": "20250918205344"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "同一渲染队列"
+								}
+							]
+						},
+						{
+							"ID": "20250918210120-g34dbhs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210120-g34dbhs",
+								"updated": "20250918210138"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "block-ref",
+									"TextMarkBlockRefID": "20240612194041-x2l9cdo",
+									"TextMarkBlockRefSubtype": "s",
+									"TextMarkTextContent": "渲染队列"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "（Render Queue）必须一致，比如都在 不透明（"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Geometry"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​）队列，否则会被排序拆开"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250918205344-8c697fa",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Ny4=",
+						"Num": 7
+					},
+					"Properties": {
+						"id": "20250918205344-8c697fa",
+						"updated": "20250918205344"
+					},
+					"Children": [
+						{
+							"ID": "20250918205344-rc3fyh8",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918205344-rc3fyh8",
+								"updated": "20250918205344"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "材质不能开启 GPU Instancing"
+								}
+							]
+						},
+						{
+							"ID": "20250918210141-ougwpd2",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210141-ougwpd2",
+								"updated": "20250918210141"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "开启了 Enable GPU Instancing 会让 Unity 用 Instancing 路径，而不是动态批处理（两者互斥）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250918205344-5v3qo55",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "OC4=",
+						"Num": 8
+					},
+					"Properties": {
+						"id": "20250918205344-5v3qo55",
+						"updated": "20250918210152"
+					},
+					"Children": [
+						{
+							"ID": "20250918205344-1t2ds7c",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918205344-1t2ds7c",
+								"updated": "20250918210148"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Shader 最好单 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​"
+								}
+							]
+						},
+						{
+							"ID": "20250918210150-9pa7iog",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210150-9pa7iog",
+								"updated": "20250918210152"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "否则每个 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "Pass"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 都有单独的 DrawCall"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250918205257-keqmueh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250918205257-keqmueh",
+				"updated": "20250918205257"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "等等"
+				}
+			]
+		},
+		{
+			"ID": "20250918210203-slp4mqd",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250918210203-slp4mqd",
+				"updated": "20250919002231"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "适合使用动态批处理的情况"
+				}
+			]
+		},
+		{
+			"ID": "20250918210218-6ofb5l5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250918210218-6ofb5l5",
+				"updated": "20250918210243"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在使用内置渲染管线的情况下，大量使用相同材质的小型动态网格，并且满足批处理条件，且顶点数低于 225(300) / 900 属性限制"
+				}
+			]
+		},
+		{
+			"ID": "20250918210246-6ict8yb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250918210246-6ict8yb",
+				"updated": "20250918210246"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "关键点：物体是动态的，位置、旋转、缩放会发生改变，不能用静态批处理时，首选动态批处理"
+				}
+			]
+		},
+		{
+			"ID": "20250918210249-4lmm8n5",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250918210249-4lmm8n5",
+				"updated": "20250918210254"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "使用场景："
+				}
+			]
+		},
+		{
+			"ID": "20250918210254-kp8l8lm",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250918210254-kp8l8lm",
+				"updated": "20250918210254"
+			},
+			"Children": [
+				{
+					"ID": "20250918210254-6wumc09",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250918210254-6wumc09",
+						"updated": "20250918210254"
+					},
+					"Children": [
+						{
+							"ID": "20250918210254-g40c88q",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210254-g40c88q",
+								"updated": "20250918210302"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "游戏中的小道具、小物件"
+								}
+							]
+						},
+						{
+							"ID": "20250918210302-4zdooxt",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210302-4zdooxt",
+								"updated": "20250918210302"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "比如 地图上的金币、宝石、道具箱子、掉落物"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250918210254-yyzknki",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250918210254-yyzknki",
+						"updated": "20250918210254"
+					},
+					"Children": [
+						{
+							"ID": "20250918210254-35vtyqn",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210254-35vtyqn",
+								"updated": "20250918210254"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "简单的动态环境元素"
+								}
+							]
+						},
+						{
+							"ID": "20250918210303-cvjsa3l",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210303-cvjsa3l",
+								"updated": "20250918210303"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "比如 旋转的风扇叶片等"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250918210254-khvmyu3",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250918210254-khvmyu3",
+						"updated": "20250918210254"
+					},
+					"Children": [
+						{
+							"ID": "20250918210254-91fcdxu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210254-91fcdxu",
+								"updated": "20250918210254"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "低顶点数的动态建筑元素"
+								}
+							]
+						},
+						{
+							"ID": "20250918210305-aq3wab9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210305-aq3wab9",
+								"updated": "20250918210305"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "小路灯、小栅栏、路标等（材质相同、顶点少）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250918210254-2fteve0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20250918210254-2fteve0",
+						"updated": "20250918210254"
+					},
+					"Children": [
+						{
+							"ID": "20250918210254-0s8laty",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210254-0s8laty",
+								"updated": "20250918210254"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "粒子系统的网格粒子（Mesh Particle）"
+								}
+							]
+						},
+						{
+							"ID": "20250918210306-a8u10su",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210306-a8u10su",
+								"updated": "20250918210306"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "多个相同网格的小粒子，如果没用 GPU Instancing，也能走动态批处理"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250918210252-s03gmi9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250918210252-s03gmi9",
+				"updated": "20250918210252"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "等等"
+				}
+			]
+		},
+		{
+			"ID": "20250918210218-8x154rc",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250918210218-8x154rc",
+				"updated": "20250918210316"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "不太适合使用动态批处理的情况"
+				}
+			]
+		},
+		{
+			"ID": "20250918210316-tuoswwr",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20250918210316-tuoswwr",
+				"updated": "20250919002231"
+			},
+			"Children": [
+				{
+					"ID": "20250918210316-vb8k4ry",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20250918210316-vb8k4ry",
+						"updated": "20250918210316"
+					},
+					"Children": [
+						{
+							"ID": "20250918210316-dqmrt7i",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210316-dqmrt7i",
+								"updated": "20250918210316"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "网格顶点数大（超 225 或超 900 属性限制）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250918210316-tq6k3cr",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20250918210316-tq6k3cr",
+						"updated": "20250918210321"
+					},
+					"Children": [
+						{
+							"ID": "20250918210316-vm079id",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210316-vm079id",
+								"updated": "20250918210321"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "多 Pass Shader（描边、"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "ForwardAdd"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 多光源、阴影等）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250918210316-k0e7z85",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20250918210316-k0e7z85",
+						"updated": "20250918210316"
+					},
+					"Children": [
+						{
+							"ID": "20250918210316-4zqy5nl",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210316-4zqy5nl",
+								"updated": "20250918210316"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "材质多样化（不同材质实例会切断批处理）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250918210316-uuu739n",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20250918210316-uuu739n",
+						"updated": "20250918210316"
+					},
+					"Children": [
+						{
+							"ID": "20250918210316-o2vtfeu",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210316-o2vtfeu",
+								"updated": "20250918210316"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "Skinned Mesh（角色、骨骼动画模型）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250918210316-z7g3kuk",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NS4=",
+						"Num": 5
+					},
+					"Properties": {
+						"id": "20250918210316-z7g3kuk",
+						"updated": "20250919002231"
+					},
+					"Children": [
+						{
+							"ID": "20250918210316-i4dzmg9",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250918210316-i4dzmg9",
+								"updated": "20250919002231"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "URP / HDRP 管线，新版本，优先用 SRP Batcher + GPU Instancing"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

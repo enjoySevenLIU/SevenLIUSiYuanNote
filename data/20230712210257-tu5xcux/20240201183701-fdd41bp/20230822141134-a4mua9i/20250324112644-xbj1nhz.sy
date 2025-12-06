@@ -1,1 +1,925 @@
-{"ID":"20250324112644-xbj1nhz","Spec":"1","Type":"NodeDocument","Properties":{"id":"20250324112644-xbj1nhz","title":"CS4L25——插入排序","type":"doc","updated":"20250324113408"},"Children":[{"ID":"20250324112644-fl5v67r","Type":"NodeHeading","HeadingLevel":1,"Properties":{"id":"20250324112644-fl5v67r","updated":"20250324113408"},"Children":[{"Type":"NodeText","Data":"插入排序"}]},{"ID":"20250324113337-bj75wva","Type":"NodeParagraph","Properties":{"id":"20250324113337-bj75wva","updated":"20250324113340"},"Children":[{"Type":"NodeText","Data":"插入排序（insertion sort）是一种简单的排序算法，它的工作原理与手动整理一副牌的过程非常相似。"}]},{"ID":"20250324113101-3jfva08","Type":"NodeParagraph","Properties":{"id":"20250324113101-3jfva08","updated":"20250324113245"},"Children":[{"Type":"NodeText","Data":"将待排序数组分为两个区域，一个是排序区，另一个是未排序区，用一个索引值做分水岭，\n未排序区元素与排序区元素比较，插入到合适位置，直到未排序区清空"}]},{"ID":"20250324113408-kzhxq5j","Type":"NodeParagraph","Properties":{"id":"20250324113408-kzhxq5j","updated":"20250324113408"}}]}
+{
+	"ID": "20250324112644-xbj1nhz",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20250324112644-xbj1nhz",
+		"title": "CS4L25——插入排序",
+		"type": "doc",
+		"updated": "20250507135306"
+	},
+	"Children": [
+		{
+			"ID": "20250324112644-fl5v67r",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20250324112644-fl5v67r",
+				"updated": "20250507135306"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "插入排序"
+				}
+			]
+		},
+		{
+			"ID": "20250324113337-bj75wva",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250324113337-bj75wva",
+				"updated": "20250324113340"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "插入排序（insertion sort）是一种简单的排序算法，它的工作原理与手动整理一副牌的过程非常相似。"
+				}
+			]
+		},
+		{
+			"ID": "20250324113101-3jfva08",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250324113101-3jfva08",
+				"updated": "20250324113245"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "将待排序数组分为两个区域，一个是排序区，另一个是未排序区，用一个索引值做分水岭，\n未排序区元素与排序区元素比较，插入到合适位置，直到未排序区清空"
+				}
+			]
+		},
+		{
+			"ID": "20250507131957-40nfsoa",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250507131957-40nfsoa",
+				"updated": "20250507131957"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "插入排序动图"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/插入排序动图-20250507131957-bc1ei1i.gif"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20250507131959-wxxzuhi",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250507131959-wxxzuhi",
+				"updated": "20250507135306"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "插入算法的实现"
+				}
+			]
+		},
+		{
+			"ID": "20250507132903-2d21j3v",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250507132903-2d21j3v",
+				"updated": "20250507132906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "前提规则："
+				}
+			]
+		},
+		{
+			"ID": "20250507132906-3jbjpdx",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250507132906-3jbjpdx",
+				"updated": "20250507132933"
+			},
+			"Children": [
+				{
+					"ID": "20250507132910-opkp3x2",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250507132910-opkp3x2",
+						"updated": "20250507132910"
+					},
+					"Children": [
+						{
+							"ID": "20250507132910-r11upkg",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250507132910-r11upkg",
+								"updated": "20250507132915"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "排序开始前：首先认为第一个元素在排序区中，其他所有元素在未排序区中"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250507132919-0j5um5t",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250507132919-0j5um5t",
+						"updated": "20250507132933"
+					},
+					"Children": [
+						{
+							"ID": "20250507132919-6ikde1m",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250507132919-6ikde1m",
+								"updated": "20250507132933"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "排序开始后：每次将未排序区第一个元素取出和，排序区中元素比较从后往前，满足条件（较大或者较小），则排序区中元素往后移动一个位置"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250507132903-ysmaapz",
+			"Type": "NodeBlockquote",
+			"Properties": {
+				"id": "20250507132903-ysmaapz",
+				"style": "background-color: var(--b3-card-warning-background); color: var(--b3-card-warning-color); --b3-parent-background: var(--b3-card-warning-background);",
+				"updated": "20250507132940"
+			},
+			"Children": [
+				{
+					"Type": "NodeBlockquoteMarker",
+					"Data": "\u003e"
+				},
+				{
+					"ID": "20250507132940-6kj0z5p",
+					"Type": "NodeParagraph",
+					"Properties": {
+						"id": "20250507132940-6kj0z5p",
+						"updated": "20250507132940"
+					},
+					"Children": [
+						{
+							"Type": "NodeText",
+							"Data": "注意：所有数字都在一个数组中，所谓的两个区域是一个分水岭索引"
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250507132945-60v2zf0",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250507132945-60v2zf0",
+				"style": "line-height: 22px;",
+				"updated": "20250507135029"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "static void InsertionSort(int[] nums)\n{\n    // 第一步，取出未排序区的所有元素进行比较，i = 1的原因：默认第一个元素就在排序区\n    for (int i = 1; i \u003c nums.Length; i++)\n    {\n        // 第二步\n        int sortIndex = i - 1;      // 取出排序区的最后一个元素索引\n        int noSortNum = nums[i];    // 取出未排序区的第一个元素\n        // 第三步，在排序区进行比较，将排序区中比取出元素大的值向后移动，并确定插入索引\n        while (sortIndex \u003e= 0 \u0026\u0026 nums[sortIndex] \u003e noSortNum)\n        {\n            nums[sortIndex + 1] = nums[sortIndex];\n            --sortIndex;\n        }\n        // 最终插入数字\n        nums[sortIndex + 1] = noSortNum;\n    }\n}\n\nstatic void Main(string[] args)\n{\n    int[] arr = new int[] { 8, 7, 1, 5, 4, 2, 6, 3, 9 };\n    Console.Write(\"未排序：\");\n    for (int i = 0; i \u003c arr.Length; i++)\n    {\n        Console.Write($\"{arr[i]}, \");\n    }\n    Console.Write(\"\\n\");\n    InsertionSort(arr);\n    Console.Write(\"已排序：\");\n    for (int i = 0; i \u003c arr.Length; i++)\n    {\n        Console.Write($\"{arr[i]}, \");\n    }\n    Console.Write(\"\\n\");\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250507135034-4rss90v",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250507135034-4rss90v",
+				"updated": "20250507135046"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "两层循环的原因："
+				}
+			]
+		},
+		{
+			"ID": "20250507135046-9kpsmfy",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250507135046-9kpsmfy",
+				"updated": "20250507135046"
+			},
+			"Children": [
+				{
+					"ID": "20250507135046-yd6bg2f",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250507135046-yd6bg2f",
+						"updated": "20250507135046"
+					},
+					"Children": [
+						{
+							"ID": "20250507135046-0wbku3y",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250507135046-0wbku3y",
+								"updated": "20250507135058"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "第一层：依次取出未排序区的元素进行排序"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250507135047-u0xtgct",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250507135047-u0xtgct",
+						"updated": "20250507135047"
+					},
+					"Children": [
+						{
+							"ID": "20250507135047-3gl618t",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250507135047-3gl618t",
+								"updated": "20250507135047"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "第二层：找到想要插入的位置"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250507135105-bfi9ujj",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250507135105-bfi9ujj",
+				"updated": "20250507135233"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "为什么第一层循环从 1 开始遍历的原因：插入排序的关键是分两个区域，已排序区 和 未排序区，默认第一个元素在已排序区"
+				}
+			]
+		},
+		{
+			"ID": "20250507135128-cgwz9vo",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250507135128-cgwz9vo",
+				"updated": "20250507135228"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "为何使用 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "while"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 循环：满足条件（未找到插入位置）才比较，否则证明插入位置已经确定，不需要继续循环"
+				}
+			]
+		},
+		{
+			"ID": "20250507135246-bewatio",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250507135246-bewatio",
+				"updated": "20250507135250"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "为什么可以直接往后移位置：每轮未排序数已记录，最后一个位置不怕会丢失"
+				}
+			]
+		},
+		{
+			"ID": "20250507135246-iyx4ud1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250507135246-iyx4ud1",
+				"updated": "20250507135306"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "为什么确定位置后，是放在 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "sortIndex + 1"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 的位置：当循环停止时，插入位置是停止循环的索引 + 1处"
+				}
+			]
+		},
+		{
+			"ID": "20250507133856-7e9ebo2",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250507133856-7e9ebo2",
+				"updated": "20250507133858"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20250507133858-bnljvdj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20250507133858-bnljvdj",
+				"style": "line-height: 22px;",
+				"updated": "20250507133914"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "未排序：8, 7, 1, 5, 4, 2, 6, 3, 9,         \n已排序：1, 2, 3, 4, 5, 6, 7, 8, 9, \n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250324113408-kzhxq5j",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250324113408-kzhxq5j",
+				"updated": "20250507131821"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "算法特性"
+				}
+			]
+		},
+		{
+			"ID": "20250507131029-0ntbpum",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250507131029-0ntbpum",
+				"updated": "20250507131821"
+			},
+			"Children": [
+				{
+					"ID": "20250507131029-r5xlqvn",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250507131029-r5xlqvn",
+						"updated": "20250507131811"
+					},
+					"Children": [
+						{
+							"ID": "20250507131029-50g5xtd",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250507131029-50g5xtd",
+								"updated": "20250507131811"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "时间复杂度为"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong inline-math",
+									"TextMarkInlineMathContent": "O(n^2)"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "、自适应排序"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "：在最差情况下，每次插入操作分别需要循环 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "n−1、n−2、…、2、1"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 次，求和得到 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "(n−1)n/2"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " ，\n因此时间复杂度为 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "O(n^2)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 。在遇到有序数据时，插入操作会提前终止。当输入数组完全有序时，插入排序达到最佳时间复杂度 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "O(n)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "。"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250507131029-le7hnqm",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250507131029-le7hnqm",
+						"updated": "20250507131821"
+					},
+					"Children": [
+						{
+							"ID": "20250507131029-zzjkay5",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250507131029-zzjkay5",
+								"updated": "20250507131821"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "空间复杂度为"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong inline-math",
+									"TextMarkInlineMathContent": "O(1)"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "、原地排序"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "：指针 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "i"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 和 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "j"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 使用常数大小的额外空间。"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250507131029-juujiru",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250507131029-juujiru",
+						"updated": "20250507131029"
+					},
+					"Children": [
+						{
+							"ID": "20250507131029-mxefw78",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250507131029-mxefw78",
+								"updated": "20250507131029"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "稳定排序"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "：在插入操作过程中，我们会将元素插入到相等元素的右侧，不会改变它们的顺序。"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20250507131031-r7vo500",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250507131031-r7vo500",
+				"updated": "20250507134723"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "插入排序的优势"
+				}
+			]
+		},
+		{
+			"ID": "20250507134538-55sr4o6",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250507134538-55sr4o6",
+				"updated": "20250507134558"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "插入排序的时间复杂度为 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "O(n^2)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " ，而我们即将学习的快速排序的时间复杂度为 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "O(n\\log⁡n)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 。\n尽管插入排序的时间复杂度更高，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "但在数据量较小的情况下，插入排序通常更快"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "。"
+				}
+			]
+		},
+		{
+			"ID": "20250507134538-4swivra",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250507134538-4swivra",
+				"updated": "20250507134639"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "这个结论与线性查找和二分查找的适用情况的结论类似。\n快速排序这类 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "O(n\\log⁡n)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 的算法属于基于分治策略的排序算法，往往包含更多单元计算操作。\n而在数据量较小时，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "n^2"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 和 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "n\\log⁡n"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " 的数值比较接近，复杂度不占主导地位，每轮中的单元操作数量起到决定性作用。"
+				}
+			]
+		},
+		{
+			"ID": "20250507134538-ppuifbq",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250507134538-ppuifbq",
+				"updated": "20250507134648"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "实际上，许多编程语言（例如 Java）的内置排序函数采用了插入排序，大致思路为：对于长数组，采用基于分治策略的排序算法，例如快速排序；对于短数组，直接使用插入排序。"
+				}
+			]
+		},
+		{
+			"ID": "20250507134538-yet5j1h",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20250507134538-yet5j1h",
+				"updated": "20250507134706"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "虽然冒泡排序、选择排序和插入排序的时间复杂度都为 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "O(n^2)"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " ，\n但在实际情况中，"
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "strong",
+					"TextMarkTextContent": "插入排序的使用频率显著高于冒泡排序和选择排序"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "，主要有以下原因："
+				}
+			]
+		},
+		{
+			"ID": "20250507134538-ke00ijp",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250507134538-ke00ijp",
+				"updated": "20250507134723"
+			},
+			"Children": [
+				{
+					"ID": "20250507134538-dsez0vo",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250507134538-dsez0vo",
+						"updated": "20250507134710"
+					},
+					"Children": [
+						{
+							"ID": "20250507134538-1m0b1hb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250507134538-1m0b1hb",
+								"updated": "20250507134710"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "冒泡排序基于元素交换实现，需要借助一个临时变量，共涉及 3 个单元操作；\n插入排序基于元素赋值实现，仅需 1 个单元操作。因此，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "冒泡排序的计算开销通常比插入排序更高"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "。"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250507134538-qn3zz61",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250507134538-qn3zz61",
+						"updated": "20250507134723"
+					},
+					"Children": [
+						{
+							"ID": "20250507134538-wj0p488",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250507134538-wj0p488",
+								"updated": "20250507134723"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "选择排序在任何情况下的时间复杂度都为 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "O(n^2)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "。"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "如果给定一组部分有序的数据，插入排序通常比选择排序效率更高"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "。"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250507134538-zirb396",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250507134538-zirb396",
+						"updated": "20250507134538"
+					},
+					"Children": [
+						{
+							"ID": "20250507134538-jj5wcgm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250507134538-jj5wcgm",
+								"updated": "20250507134538"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "选择排序不稳定，无法应用于多级排序。"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

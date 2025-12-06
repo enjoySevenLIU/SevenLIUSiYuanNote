@@ -1,1 +1,995 @@
-{"ID":"20240720224717-p5h95he","Spec":"1","Type":"NodeDocument","Properties":{"id":"20240720224717-p5h95he","title":"CS2L12——冒泡排序","type":"doc","updated":"20250324113726"},"Children":[{"ID":"20240720224745-8z0wrgd","Type":"NodeHeading","HeadingLevel":1,"Properties":{"id":"20240720224745-8z0wrgd","updated":"20240720230912"},"Children":[{"Type":"NodeText","Data":"排序的基本概念"}]},{"ID":"20240720224748-vtc54w8","Type":"NodeParagraph","Properties":{"id":"20240720224748-vtc54w8","updated":"20240720224806"},"Children":[{"Type":"NodeText","Data":"排序是计算机内经常进行的一种操作，其目的是将一组“无序”的记录序列调整为“有序”的记录序列\n常用的排序例子："}]},{"ID":"20240720224806-9tb3myk","Type":"NodeCodeBlock","IsFencedCodeBlock":true,"Properties":{"id":"20240720224806-9tb3myk","style":"line-height: 22px;","updated":"20240720224828"},"Children":[{"Type":"NodeCodeBlockFenceOpenMarker","Data":"```"},{"Type":"NodeCodeBlockFenceInfoMarker","CodeBlockInfo":"YyM="},{"Type":"NodeCodeBlockCode","Data":"8 7 1 5 4 2 6 3 9\n"},{"Type":"NodeCodeBlockFenceCloseMarker","Data":"```"}]},{"ID":"20240720224815-l4sg53u","Type":"NodeParagraph","Properties":{"id":"20240720224815-l4sg53u","updated":"20240720224815"},"Children":[{"Type":"NodeText","Data":"把上面的这个无序排列 变为 有序（升序或者降序）的序列的过程"}]},{"ID":"20240720224830-3oi7mne","Type":"NodeList","ListData":{},"Properties":{"id":"20240720224830-3oi7mne","updated":"20240720224919"},"Children":[{"ID":"20240720224830-3zy697r","Type":"NodeListItem","ListData":{"BulletChar":42,"Marker":"Kg=="},"Properties":{"id":"20240720224830-3zy697r","updated":"20240720224830"},"Children":[{"ID":"20240720224830-y4yrsmm","Type":"NodeParagraph","Properties":{"id":"20240720224830-y4yrsmm","updated":"20240720224847"},"Children":[{"Type":"NodeText","Data":"升序：从小到大，呈上升趋势"}]}]},{"ID":"20240720224847-dpww27i","Type":"NodeListItem","ListData":{"BulletChar":42,"Marker":"Kg=="},"Properties":{"id":"20240720224847-dpww27i","updated":"20240720224919"},"Children":[{"ID":"20240720224847-6zeuwry","Type":"NodeParagraph","Properties":{"id":"20240720224847-6zeuwry","updated":"20240720224919"},"Children":[{"Type":"NodeText","Data":"降序：从大到小，呈下降趋势"}]}]}]},{"ID":"20240720224816-eujv0zw","Type":"NodeCodeBlock","IsFencedCodeBlock":true,"Properties":{"id":"20240720224816-eujv0zw","style":"line-height: 22px;","updated":"20240720224826"},"Children":[{"Type":"NodeCodeBlockFenceOpenMarker","Data":"```"},{"Type":"NodeCodeBlockFenceInfoMarker","CodeBlockInfo":"YyM="},{"Type":"NodeCodeBlockCode","Data":"1 2 3 4 5 6 7 8 9 (升序)\n9 8 7 6 5 4 3 2 1 (降序)\n"},{"Type":"NodeCodeBlockFenceCloseMarker","Data":"```"}]},{"ID":"20240720224932-cpnkhk9","Type":"NodeParagraph","Properties":{"id":"20240720224932-cpnkhk9","updated":"20240720224954"},"Children":[{"Type":"NodeText","Data":"在程序中 序列一般 存储在数组当中，所以 排序往往是对 数组内的元素 进行排序，把数组里面的内容变为有序的"}]},{"ID":"20240720224941-v2zybrw","Type":"NodeCodeBlock","IsFencedCodeBlock":true,"Properties":{"id":"20240720224941-v2zybrw","style":"line-height: 22px;","updated":"20240720224946"},"Children":[{"Type":"NodeCodeBlockFenceOpenMarker","Data":"```"},{"Type":"NodeCodeBlockFenceInfoMarker","CodeBlockInfo":"YyM="},{"Type":"NodeCodeBlockCode","Data":"int[] arr = new int[] { 8, 7, 1, 5, 4, 2, 6, 3, 9 };\n"},{"Type":"NodeCodeBlockFenceCloseMarker","Data":"```"}]},{"ID":"20240720225133-82qhcwi","Type":"NodeHeading","HeadingLevel":1,"Properties":{"id":"20240720225133-82qhcwi","updated":"20240720230912"},"Children":[{"Type":"NodeText","Data":"排序算法的概念"}]},{"ID":"20240720225138-62aba2z","Type":"NodeParagraph","Properties":{"id":"20240720225138-62aba2z","updated":"20240720230912"},"Children":[{"Type":"NodeText","Data":"排序算法（sorting algorithm）用于对一组数据按照特定顺序进行排列。\n排序算法有着广泛的应用，因为有序数据通常能够被更高效地查找、分析和处理。"}]},{"ID":"20240720225205-rs8knm8","Type":"NodeParagraph","Properties":{"id":"20240720225205-rs8knm8","updated":"20240720230912"},"Children":[{"Type":"NodeText","Data":"排序算法中的数据类型可以是整数、浮点数、字符或字符串等。\n排序的判断规则可根据需求设定，如数字大小、字符 ASCII 码顺序或自定义规则。"}]},{"ID":"20240720224955-qnujf8u","Type":"NodeHeading","HeadingLevel":1,"Properties":{"id":"20240720224955-qnujf8u","updated":"20240720231037"},"Children":[{"Type":"NodeText","Data":"冒泡排序"}]},{"ID":"20240720225024-vhzdk1n","Type":"NodeParagraph","Properties":{"id":"20240720225024-vhzdk1n","updated":"20240720230906"},"Children":[{"Type":"NodeText","Data":"冒泡排序（bubble sort）通过连续地比较与交换相邻元素实现排序。这个过程就像气泡从底部升到顶部一样，因此得名冒泡排序。"}]},{"ID":"20240720225905-32z2roh","Type":"NodeParagraph","Properties":{"id":"20240720225905-32z2roh","updated":"20240720231011"},"Children":[{"Type":"NodeText","Data":"设数组的长度为 "},{"Type":"NodeTextMark","TextMarkType":"inline-math","TextMarkInlineMathContent":"n"},{"Type":"NodeText","Data":" ，冒泡排序的步骤为："}]},{"ID":"20240720225905-5hdkac0","Type":"NodeList","ListData":{"Typ":1},"Properties":{"id":"20240720225905-5hdkac0","updated":"20240720231037"},"Children":[{"ID":"20240720225905-v6w01vw","Type":"NodeListItem","ListData":{"Typ":1,"Delimiter":46,"Marker":"MS4=","Num":1},"Properties":{"id":"20240720225905-v6w01vw","updated":"20240720231015"},"Children":[{"ID":"20240720225905-b6ci5tb","Type":"NodeParagraph","Properties":{"id":"20240720225905-b6ci5tb","updated":"20240720231015"},"Children":[{"Type":"NodeText","Data":"首先，对 "},{"Type":"NodeTextMark","TextMarkType":"inline-math","TextMarkInlineMathContent":"n"},{"Type":"NodeText","Data":" 个元素执行“冒泡”，"},{"Type":"NodeTextMark","TextMarkType":"strong","TextMarkTextContent":"将数组的最大元素交换至正确位置"},{"Type":"NodeText","Data":"。"}]}]},{"ID":"20240720225905-a4rdbae","Type":"NodeListItem","ListData":{"Typ":1,"Delimiter":46,"Marker":"Mi4=","Num":2},"Properties":{"id":"20240720225905-a4rdbae","updated":"20240720231022"},"Children":[{"ID":"20240720225905-9jahvrk","Type":"NodeParagraph","Properties":{"id":"20240720225905-9jahvrk","updated":"20240720231022"},"Children":[{"Type":"NodeText","Data":"接下来，对剩余 "},{"Type":"NodeTextMark","TextMarkType":"inline-math","TextMarkInlineMathContent":"n-1"},{"Type":"NodeText","Data":" 个元素执行“冒泡”，"},{"Type":"NodeTextMark","TextMarkType":"strong","TextMarkTextContent":"将第二大元素交换至正确位置"},{"Type":"NodeText","Data":"。"}]}]},{"ID":"20240720225905-su1vt43","Type":"NodeListItem","ListData":{"Typ":1,"Delimiter":46,"Marker":"My4=","Num":3},"Properties":{"id":"20240720225905-su1vt43","updated":"20240720231037"},"Children":[{"ID":"20240720225905-roi7kma","Type":"NodeParagraph","Properties":{"id":"20240720225905-roi7kma","updated":"20240720231037"},"Children":[{"Type":"NodeText","Data":"以此类推，经过 "},{"Type":"NodeTextMark","TextMarkType":"inline-math","TextMarkInlineMathContent":"n-1"},{"Type":"NodeText","Data":" 轮“冒泡”后，"},{"Type":"NodeTextMark","TextMarkType":"strong","TextMarkTextContent":"前"},{"Type":"NodeText","Data":" "},{"Type":"NodeTextMark","TextMarkType":"strong inline-math","TextMarkInlineMathContent":"𝑛 − 1"},{"Type":"NodeText","Data":" "},{"Type":"NodeTextMark","TextMarkType":"strong","TextMarkTextContent":"大的元素都被交换至正确位置"},{"Type":"NodeText","Data":"。"}]}]},{"ID":"20240720225905-ndrer83","Type":"NodeListItem","ListData":{"Typ":1,"Delimiter":46,"Marker":"NC4=","Num":4},"Properties":{"id":"20240720225905-ndrer83","updated":"20240720225905"},"Children":[{"ID":"20240720225905-u9yevzs","Type":"NodeParagraph","Properties":{"id":"20240720225905-u9yevzs","updated":"20240720225905"},"Children":[{"Type":"NodeText","Data":"仅剩的一个元素必定是最小元素，无须排序，因此数组排序完成。"}]}]}]},{"ID":"20240720224724-k3eejbh","Type":"NodeParagraph","Properties":{"id":"20240720224724-k3eejbh","updated":"20240720230906"},"Children":[{"Type":"NodeText","Data":"​"},{"Type":"NodeImage","Data":"span","Properties":{"parent-style":"width: 736px;","style":"width: 726px;"},"Children":[{"Type":"NodeBang"},{"Type":"NodeOpenBracket"},{"Type":"NodeLinkText","Data":"冒泡排序"},{"Type":"NodeCloseBracket"},{"Type":"NodeOpenParen"},{"Type":"NodeLinkDest","Data":"assets/冒泡排序-20240720224724-cs4x2gw.gif"},{"Type":"NodeCloseParen"}]},{"Type":"NodeKramdownSpanIAL","Data":"{: style=\"width: 726px;\" parent-style=\"width: 736px;\"}"},{"Type":"NodeText","Data":"​"}]},{"ID":"20240720225014-4m0cgc1","Type":"NodeParagraph","Properties":{"id":"20240720225014-4m0cgc1","updated":"20240720230906"},"Children":[{"Type":"NodeText","Data":"简记为：两两相邻 不停比较 不停交换 比较n轮"}]},{"ID":"20240720225235-xeh7wg3","Type":"NodeHeading","HeadingLevel":2,"Properties":{"id":"20240720225235-xeh7wg3","updated":"20240720230906"},"Children":[{"Type":"NodeText","Data":"冒泡排序的基本实现"}]},{"ID":"20240720225245-uqmyffc","Type":"NodeCodeBlock","IsFencedCodeBlock":true,"Properties":{"id":"20240720225245-uqmyffc","style":"line-height: 22px;","updated":"20240720230906"},"Children":[{"Type":"NodeCodeBlockFenceOpenMarker","Data":"```"},{"Type":"NodeCodeBlockFenceInfoMarker","CodeBlockInfo":"YyM="},{"Type":"NodeCodeBlockCode","Data":"static void BubbleSort(int[] arr)\n{\n    //外循环：未排序区间为 [0, i]\n    for (int m = 0; m \u003c arr.Length - 1; m++)\n    {\n        //内循环：将未排序区间 [0, i] 中的最大元素交换至该区间的最右端\n        for (int n = 0; n \u003c arr.Length - 1; n++)\n        {\n            //第一步 比较数组中两两相邻的数，如果 第n个数 比n+1的数 大，他们就要交换位置\n            if (arr[n] \u003e arr[n + 1])\n            {\n                //第二部 交换位置 使用中间临时变量交换\n                int temp = arr[n];\n                arr[n] = arr[n + 1];\n                arr[n + 1] = temp;\n            }\n        }\n        //第三步 换n轮\n    }\n}\n\nstatic void Main(string[] args)\n{\n    Console.WriteLine(\"排序前：\");\n    for (int i = 0; i \u003c arr.Length; i++)\n    {\n        Console.Write(arr[i]);\n        Console.Write(' ');\n    }\n    Console.WriteLine();\n\n    BubbleSort(arr);\n\n    Console.WriteLine(\"排序后：\");\n    for (int i = 0; i \u003c arr.Length; i++)\n    {\n        Console.Write(arr[i]);\n        Console.Write(' ');\n    }\n    Console.WriteLine();\n}\n"},{"Type":"NodeCodeBlockFenceCloseMarker","Data":"```"}]},{"ID":"20240720225645-0duit9p","Type":"NodeParagraph","Properties":{"id":"20240720225645-0duit9p","updated":"20240720230906"},"Children":[{"Type":"NodeText","Data":"输出："}]},{"ID":"20240720225647-1cn21rj","Type":"NodeCodeBlock","IsFencedCodeBlock":true,"Properties":{"id":"20240720225647-1cn21rj","style":"line-height: 22px;","updated":"20240720230906"},"Children":[{"Type":"NodeCodeBlockFenceOpenMarker","Data":"```"},{"Type":"NodeCodeBlockFenceInfoMarker","CodeBlockInfo":"YyM="},{"Type":"NodeCodeBlockCode","Data":"排序前：\n8 7 1 5 4 2 6 3 9\n排序后：\n1 2 3 4 5 6 7 8 9\n"},{"Type":"NodeCodeBlockFenceCloseMarker","Data":"```"}]},{"ID":"20240720225811-p6h75w6","Type":"NodeHeading","HeadingLevel":2,"Properties":{"id":"20240720225811-p6h75w6","updated":"20250324113536"},"Children":[{"Type":"NodeText","Data":"冒泡排序的优化实现"}]},{"ID":"20240720225821-jykmr3v","Type":"NodeParagraph","Properties":{"id":"20240720225821-jykmr3v","updated":"20240720230906"},"Children":[{"Type":"NodeText","Data":"确定位置的数字是不用比较的，因此，确定了一轮后，极值（最大或者最小）已经放到了对应的位置（往后放）\n所以 每完成 n 轮，后面位置的数就不用再参与比较了"}]},{"ID":"20240720230244-kv4ozyb","Type":"NodeParagraph","Properties":{"id":"20240720230244-kv4ozyb","updated":"20240720230906"},"Children":[{"Type":"NodeText","Data":"然后，存在这种特殊情况，在前几轮就已经完成了排序，这种情况下，后续没必要再进行多余的比较。\n因此，可以增加一个标志位 "},{"Type":"NodeTextMark","TextMarkType":"code","TextMarkTextContent":"isSort"},{"Type":"NodeText","Data":"​ 来监测这种情况，如果没有出现交换，则说明排序已完成，就立即返回。"}]},{"ID":"20240720230151-w6bn3x5","Type":"NodeCodeBlock","IsFencedCodeBlock":true,"Properties":{"id":"20240720230151-w6bn3x5","style":"line-height: 22px;","updated":"20240720230906"},"Children":[{"Type":"NodeCodeBlockFenceOpenMarker","Data":"```"},{"Type":"NodeCodeBlockFenceInfoMarker","CodeBlockInfo":"YyM="},{"Type":"NodeCodeBlockCode","Data":"static void BetterBubbleSort(int[] arr)\n{\n    bool isSort = false;\n    //第一步 如何比较数组中两两相邻的数\n    for (int m = 0; m \u003c arr.Length - 1; m++)\n    {\n        isSort = false;\n        for (int n = 0; n \u003c arr.Length - m - 1; n++)\n        {\n            //如果 第n个数 比n+1的数 大，他们就要交换位置\n            if (arr[n] \u003e arr[n + 1])\n            {\n                isSort = true;\n                //第二部 交换位置 使用中间临时变量交换\n                int temp = arr[n];\n                arr[n] = arr[n + 1];\n                arr[n + 1] = temp;\n            }\n        }\n        //当一轮结束后，如果isSort这个标识 还是false\n        //则意味着排序已经完成\n        if (!isSort)\n        {\n            break;\n        }\n        //第三步 换n轮\n    }\n}\n\nstatic void Main(string[] args)\n{\n    int[] arr = new int[] { 8, 7, 1, 5, 4, 2, 6, 3, 9 };\n    BetterBubbleSort(arr);\n    for (int i = 0; i \u003c arr.Length; i++)\n    {\n        Console.WriteLine(arr[i]);\n    }\n}\n"},{"Type":"NodeCodeBlockFenceCloseMarker","Data":"```"}]},{"ID":"20240720230708-kefqief","Type":"NodeParagraph","Properties":{"id":"20240720230708-kefqief","updated":"20240720230906"},"Children":[{"Type":"NodeText","Data":"输出："}]},{"ID":"20240720230750-9259w8h","Type":"NodeCodeBlock","IsFencedCodeBlock":true,"Properties":{"id":"20240720230750-9259w8h","style":"line-height: 22px;","updated":"20240720230906"},"Children":[{"Type":"NodeCodeBlockFenceOpenMarker","Data":"```"},{"Type":"NodeCodeBlockFenceInfoMarker","CodeBlockInfo":"YyM="},{"Type":"NodeCodeBlockCode","Data":"排序得到：\n1 2 3 4 5 6 7 8 9\n"},{"Type":"NodeCodeBlockFenceCloseMarker","Data":"```"}]},{"ID":"20250324113536-6mgl8mp","Type":"NodeHeading","HeadingLevel":2,"Properties":{"id":"20250324113536-6mgl8mp","updated":"20250324113726"},"Children":[{"Type":"NodeText","Data":"算法特性"}]},{"ID":"20250324113536-ptgwl1w","Type":"NodeList","ListData":{},"Properties":{"id":"20250324113536-ptgwl1w","updated":"20250324113726"},"Children":[{"ID":"20250324113536-9iwkf5b","Type":"NodeListItem","ListData":{"BulletChar":42,"Marker":"Kg=="},"Properties":{"id":"20250324113536-9iwkf5b","updated":"20250324113715"},"Children":[{"ID":"20250324113536-mkkirnj","Type":"NodeParagraph","Properties":{"id":"20250324113536-mkkirnj","updated":"20250324113715"},"Children":[{"Type":"NodeTextMark","TextMarkType":"strong","TextMarkTextContent":"时间复杂度为"},{"Type":"NodeText","Data":" "},{"Type":"NodeTextMark","TextMarkType":"strong inline-math","TextMarkInlineMathContent":"O(n^2)"},{"Type":"NodeTextMark","TextMarkType":"strong","TextMarkTextContent":"、自适应排序"},{"Type":"NodeText","Data":"：各轮“冒泡”遍历的数组长度依次为 n−1、n−2、…、2、1 ，总和为 "},{"Type":"NodeTextMark","TextMarkType":"inline-math","TextMarkInlineMathContent":"\\frac{n(n-1)}{2}"},{"Type":"NodeText","Data":" 。在引入 "},{"Type":"NodeTextMark","TextMarkType":"code","TextMarkTextContent":"flag"},{"Type":"NodeText","Data":"​ 优化后，最佳时间复杂度可达到 "},{"Type":"NodeTextMark","TextMarkType":"inline-math","TextMarkInlineMathContent":"O(n)"},{"Type":"NodeText","Data":" 。"}]}]},{"ID":"20250324113536-fttm8f0","Type":"NodeListItem","ListData":{"BulletChar":42,"Marker":"Kg=="},"Properties":{"id":"20250324113536-fttm8f0","updated":"20250324113726"},"Children":[{"ID":"20250324113536-30bfu1l","Type":"NodeParagraph","Properties":{"id":"20250324113536-30bfu1l","updated":"20250324113726"},"Children":[{"Type":"NodeTextMark","TextMarkType":"strong","TextMarkTextContent":"空间复杂度为"},{"Type":"NodeText","Data":" "},{"Type":"NodeTextMark","TextMarkType":"strong inline-math","TextMarkInlineMathContent":"O(1)"},{"Type":"NodeTextMark","TextMarkType":"strong","TextMarkTextContent":"、原地排序"},{"Type":"NodeText","Data":"：指针 "},{"Type":"NodeTextMark","TextMarkType":"code","TextMarkTextContent":"i"},{"Type":"NodeText","Data":"​ 和 "},{"Type":"NodeTextMark","TextMarkType":"code","TextMarkTextContent":"j"},{"Type":"NodeText","Data":"​ 使用常数大小的额外空间。"}]}]},{"ID":"20250324113536-9813kow","Type":"NodeListItem","ListData":{"BulletChar":42,"Marker":"Kg=="},"Properties":{"id":"20250324113536-9813kow","updated":"20250324113536"},"Children":[{"ID":"20250324113536-3m195q1","Type":"NodeParagraph","Properties":{"id":"20250324113536-3m195q1","updated":"20250324113536"},"Children":[{"Type":"NodeTextMark","TextMarkType":"strong","TextMarkTextContent":"稳定排序"},{"Type":"NodeText","Data":"：由于在“冒泡”中遇到相等元素不交换。"}]}]}]}]}
+{
+	"ID": "20240720224717-p5h95he",
+	"Spec": "1",
+	"Type": "NodeDocument",
+	"Properties": {
+		"id": "20240720224717-p5h95he",
+		"title": "CS2L12——冒泡排序",
+		"type": "doc",
+		"updated": "20250507111501"
+	},
+	"Children": [
+		{
+			"ID": "20240720224745-8z0wrgd",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240720224745-8z0wrgd",
+				"updated": "20240720230912"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "排序的基本概念"
+				}
+			]
+		},
+		{
+			"ID": "20240720224748-vtc54w8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720224748-vtc54w8",
+				"updated": "20240720224806"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "排序是计算机内经常进行的一种操作，其目的是将一组“无序”的记录序列调整为“有序”的记录序列\n常用的排序例子："
+				}
+			]
+		},
+		{
+			"ID": "20240720224806-9tb3myk",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240720224806-9tb3myk",
+				"style": "line-height: 22px;",
+				"updated": "20240720224828"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "8 7 1 5 4 2 6 3 9\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240720224815-l4sg53u",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720224815-l4sg53u",
+				"updated": "20240720224815"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "把上面的这个无序排列 变为 有序（升序或者降序）的序列的过程"
+				}
+			]
+		},
+		{
+			"ID": "20240720224830-3oi7mne",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20240720224830-3oi7mne",
+				"updated": "20240720224919"
+			},
+			"Children": [
+				{
+					"ID": "20240720224830-3zy697r",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240720224830-3zy697r",
+						"updated": "20240720224830"
+					},
+					"Children": [
+						{
+							"ID": "20240720224830-y4yrsmm",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240720224830-y4yrsmm",
+								"updated": "20240720224847"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "升序：从小到大，呈上升趋势"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240720224847-dpww27i",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20240720224847-dpww27i",
+						"updated": "20240720224919"
+					},
+					"Children": [
+						{
+							"ID": "20240720224847-6zeuwry",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240720224847-6zeuwry",
+								"updated": "20240720224919"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "降序：从大到小，呈下降趋势"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240720224816-eujv0zw",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240720224816-eujv0zw",
+				"style": "line-height: 22px;",
+				"updated": "20240720224826"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "1 2 3 4 5 6 7 8 9 (升序)\n9 8 7 6 5 4 3 2 1 (降序)\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240720224932-cpnkhk9",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720224932-cpnkhk9",
+				"updated": "20240720224954"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "在程序中 序列一般 存储在数组当中，所以 排序往往是对 数组内的元素 进行排序，把数组里面的内容变为有序的"
+				}
+			]
+		},
+		{
+			"ID": "20240720224941-v2zybrw",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240720224941-v2zybrw",
+				"style": "line-height: 22px;",
+				"updated": "20240720224946"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "int[] arr = new int[] { 8, 7, 1, 5, 4, 2, 6, 3, 9 };\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240720225133-82qhcwi",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240720225133-82qhcwi",
+				"updated": "20240720230912"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "排序算法的概念"
+				}
+			]
+		},
+		{
+			"ID": "20240720225138-62aba2z",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720225138-62aba2z",
+				"updated": "20240720230912"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "排序算法（sorting algorithm）用于对一组数据按照特定顺序进行排列。\n排序算法有着广泛的应用，因为有序数据通常能够被更高效地查找、分析和处理。"
+				}
+			]
+		},
+		{
+			"ID": "20240720225205-rs8knm8",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720225205-rs8knm8",
+				"updated": "20240720230912"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "排序算法中的数据类型可以是整数、浮点数、字符或字符串等。\n排序的判断规则可根据需求设定，如数字大小、字符 ASCII 码顺序或自定义规则。"
+				}
+			]
+		},
+		{
+			"ID": "20240720224955-qnujf8u",
+			"Type": "NodeHeading",
+			"HeadingLevel": 1,
+			"Properties": {
+				"id": "20240720224955-qnujf8u",
+				"updated": "20240720231037"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "冒泡排序"
+				}
+			]
+		},
+		{
+			"ID": "20240720225024-vhzdk1n",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720225024-vhzdk1n",
+				"updated": "20240720230906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "冒泡排序（bubble sort）通过连续地比较与交换相邻元素实现排序。这个过程就像气泡从底部升到顶部一样，因此得名冒泡排序。"
+				}
+			]
+		},
+		{
+			"ID": "20240720225905-32z2roh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720225905-32z2roh",
+				"updated": "20240720231011"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "设数组的长度为 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "inline-math",
+					"TextMarkInlineMathContent": "n"
+				},
+				{
+					"Type": "NodeText",
+					"Data": " ，冒泡排序的步骤为："
+				}
+			]
+		},
+		{
+			"ID": "20240720225905-5hdkac0",
+			"Type": "NodeList",
+			"ListData": {
+				"Typ": 1
+			},
+			"Properties": {
+				"id": "20240720225905-5hdkac0",
+				"updated": "20240720231037"
+			},
+			"Children": [
+				{
+					"ID": "20240720225905-v6w01vw",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "MS4=",
+						"Num": 1
+					},
+					"Properties": {
+						"id": "20240720225905-v6w01vw",
+						"updated": "20240720231015"
+					},
+					"Children": [
+						{
+							"ID": "20240720225905-b6ci5tb",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240720225905-b6ci5tb",
+								"updated": "20240720231015"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "首先，对 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "n"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 个元素执行“冒泡”，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "将数组的最大元素交换至正确位置"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "。"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240720225905-a4rdbae",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "Mi4=",
+						"Num": 2
+					},
+					"Properties": {
+						"id": "20240720225905-a4rdbae",
+						"updated": "20240720231022"
+					},
+					"Children": [
+						{
+							"ID": "20240720225905-9jahvrk",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240720225905-9jahvrk",
+								"updated": "20240720231022"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "接下来，对剩余 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "n-1"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 个元素执行“冒泡”，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "将第二大元素交换至正确位置"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "。"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240720225905-su1vt43",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "My4=",
+						"Num": 3
+					},
+					"Properties": {
+						"id": "20240720225905-su1vt43",
+						"updated": "20240720231037"
+					},
+					"Children": [
+						{
+							"ID": "20240720225905-roi7kma",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240720225905-roi7kma",
+								"updated": "20240720231037"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "以此类推，经过 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "n-1"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 轮“冒泡”后，"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "前"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong inline-math",
+									"TextMarkInlineMathContent": "𝑛 − 1"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "大的元素都被交换至正确位置"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "。"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20240720225905-ndrer83",
+					"Type": "NodeListItem",
+					"ListData": {
+						"Typ": 1,
+						"Delimiter": 46,
+						"Marker": "NC4=",
+						"Num": 4
+					},
+					"Properties": {
+						"id": "20240720225905-ndrer83",
+						"updated": "20240720225905"
+					},
+					"Children": [
+						{
+							"ID": "20240720225905-u9yevzs",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20240720225905-u9yevzs",
+								"updated": "20240720225905"
+							},
+							"Children": [
+								{
+									"Type": "NodeText",
+									"Data": "仅剩的一个元素必定是最小元素，无须排序，因此数组排序完成。"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"ID": "20240720224724-k3eejbh",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720224724-k3eejbh",
+				"updated": "20240720230906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				},
+				{
+					"Type": "NodeImage",
+					"Data": "span",
+					"Properties": {
+						"parent-style": "width: 736px;",
+						"style": "width: 726px;"
+					},
+					"Children": [
+						{
+							"Type": "NodeBang"
+						},
+						{
+							"Type": "NodeOpenBracket"
+						},
+						{
+							"Type": "NodeLinkText",
+							"Data": "冒泡排序"
+						},
+						{
+							"Type": "NodeCloseBracket"
+						},
+						{
+							"Type": "NodeOpenParen"
+						},
+						{
+							"Type": "NodeLinkDest",
+							"Data": "assets/冒泡排序-20240720224724-cs4x2gw.gif"
+						},
+						{
+							"Type": "NodeCloseParen"
+						}
+					]
+				},
+				{
+					"Type": "NodeKramdownSpanIAL",
+					"Data": "{: style=\"width: 726px;\" parent-style=\"width: 736px;\"}"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​"
+				}
+			]
+		},
+		{
+			"ID": "20240720225014-4m0cgc1",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720225014-4m0cgc1",
+				"updated": "20240720230906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "简记为：两两相邻 不停比较 不停交换 比较n轮"
+				}
+			]
+		},
+		{
+			"ID": "20240720225235-xeh7wg3",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240720225235-xeh7wg3",
+				"updated": "20240720230906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "冒泡排序的基本实现"
+				}
+			]
+		},
+		{
+			"ID": "20240720225245-uqmyffc",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240720225245-uqmyffc",
+				"style": "line-height: 22px;",
+				"updated": "20240720230906"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "static void BubbleSort(int[] arr)\n{\n    //外循环：未排序区间为 [0, i]\n    for (int m = 0; m \u003c arr.Length - 1; m++)\n    {\n        //内循环：将未排序区间 [0, i] 中的最大元素交换至该区间的最右端\n        for (int n = 0; n \u003c arr.Length - 1; n++)\n        {\n            //第一步 比较数组中两两相邻的数，如果 第n个数 比n+1的数 大，他们就要交换位置\n            if (arr[n] \u003e arr[n + 1])\n            {\n                //第二部 交换位置 使用中间临时变量交换\n                int temp = arr[n];\n                arr[n] = arr[n + 1];\n                arr[n + 1] = temp;\n            }\n        }\n        //第三步 换n轮\n    }\n}\n\nstatic void Main(string[] args)\n{\n    Console.WriteLine(\"排序前：\");\n    for (int i = 0; i \u003c arr.Length; i++)\n    {\n        Console.Write(arr[i]);\n        Console.Write(' ');\n    }\n    Console.WriteLine();\n\n    BubbleSort(arr);\n\n    Console.WriteLine(\"排序后：\");\n    for (int i = 0; i \u003c arr.Length; i++)\n    {\n        Console.Write(arr[i]);\n        Console.Write(' ');\n    }\n    Console.WriteLine();\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240720225645-0duit9p",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720225645-0duit9p",
+				"updated": "20240720230906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20240720225647-1cn21rj",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240720225647-1cn21rj",
+				"style": "line-height: 22px;",
+				"updated": "20240720230906"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "排序前：\n8 7 1 5 4 2 6 3 9\n排序后：\n1 2 3 4 5 6 7 8 9\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240720225811-p6h75w6",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20240720225811-p6h75w6",
+				"updated": "20250324113536"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "冒泡排序的优化实现"
+				}
+			]
+		},
+		{
+			"ID": "20240720225821-jykmr3v",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720225821-jykmr3v",
+				"updated": "20240720230906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "确定位置的数字是不用比较的，因此，确定了一轮后，极值（最大或者最小）已经放到了对应的位置（往后放）\n所以 每完成 n 轮，后面位置的数就不用再参与比较了"
+				}
+			]
+		},
+		{
+			"ID": "20240720230244-kv4ozyb",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720230244-kv4ozyb",
+				"updated": "20240720230906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "然后，存在这种特殊情况，在前几轮就已经完成了排序，这种情况下，后续没必要再进行多余的比较。\n因此，可以增加一个标志位 "
+				},
+				{
+					"Type": "NodeTextMark",
+					"TextMarkType": "code",
+					"TextMarkTextContent": "isSort"
+				},
+				{
+					"Type": "NodeText",
+					"Data": "​ 来监测这种情况，如果没有出现交换，则说明排序已完成，就立即返回。"
+				}
+			]
+		},
+		{
+			"ID": "20240720230151-w6bn3x5",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240720230151-w6bn3x5",
+				"style": "line-height: 22px;",
+				"updated": "20240720230906"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "static void BetterBubbleSort(int[] arr)\n{\n    bool isSort = false;\n    //第一步 如何比较数组中两两相邻的数\n    for (int m = 0; m \u003c arr.Length - 1; m++)\n    {\n        isSort = false;\n        for (int n = 0; n \u003c arr.Length - m - 1; n++)\n        {\n            //如果 第n个数 比n+1的数 大，他们就要交换位置\n            if (arr[n] \u003e arr[n + 1])\n            {\n                isSort = true;\n                //第二部 交换位置 使用中间临时变量交换\n                int temp = arr[n];\n                arr[n] = arr[n + 1];\n                arr[n + 1] = temp;\n            }\n        }\n        //当一轮结束后，如果isSort这个标识 还是false\n        //则意味着排序已经完成\n        if (!isSort)\n        {\n            break;\n        }\n        //第三步 换n轮\n    }\n}\n\nstatic void Main(string[] args)\n{\n    int[] arr = new int[] { 8, 7, 1, 5, 4, 2, 6, 3, 9 };\n    BetterBubbleSort(arr);\n    for (int i = 0; i \u003c arr.Length; i++)\n    {\n        Console.WriteLine(arr[i]);\n    }\n}\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20240720230708-kefqief",
+			"Type": "NodeParagraph",
+			"Properties": {
+				"id": "20240720230708-kefqief",
+				"updated": "20240720230906"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "输出："
+				}
+			]
+		},
+		{
+			"ID": "20240720230750-9259w8h",
+			"Type": "NodeCodeBlock",
+			"IsFencedCodeBlock": true,
+			"Properties": {
+				"id": "20240720230750-9259w8h",
+				"style": "line-height: 22px;",
+				"updated": "20240720230906"
+			},
+			"Children": [
+				{
+					"Type": "NodeCodeBlockFenceOpenMarker",
+					"Data": "```"
+				},
+				{
+					"Type": "NodeCodeBlockFenceInfoMarker",
+					"CodeBlockInfo": "YyM="
+				},
+				{
+					"Type": "NodeCodeBlockCode",
+					"Data": "排序得到：\n1 2 3 4 5 6 7 8 9\n"
+				},
+				{
+					"Type": "NodeCodeBlockFenceCloseMarker",
+					"Data": "```"
+				}
+			]
+		},
+		{
+			"ID": "20250324113536-6mgl8mp",
+			"Type": "NodeHeading",
+			"HeadingLevel": 2,
+			"Properties": {
+				"id": "20250324113536-6mgl8mp",
+				"updated": "20250507111501"
+			},
+			"Children": [
+				{
+					"Type": "NodeText",
+					"Data": "算法特性"
+				}
+			]
+		},
+		{
+			"ID": "20250324113536-ptgwl1w",
+			"Type": "NodeList",
+			"ListData": {},
+			"Properties": {
+				"id": "20250324113536-ptgwl1w",
+				"updated": "20250507111501"
+			},
+			"Children": [
+				{
+					"ID": "20250324113536-9iwkf5b",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250324113536-9iwkf5b",
+						"updated": "20250507111501"
+					},
+					"Children": [
+						{
+							"ID": "20250324113536-mkkirnj",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250324113536-mkkirnj",
+								"updated": "20250507111501"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "时间复杂度为"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong inline-math",
+									"TextMarkInlineMathContent": "O(n^2)"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "、自适应排序"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "：各轮“冒泡”遍历的数组长度依次为 n−1、n−2、…、2、1 ，总和为 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "\\frac{n(n-1)}{2}"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 。\n在引入 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "flag"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 优化后，最佳时间复杂度可达到 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "inline-math",
+									"TextMarkInlineMathContent": "O(n)"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " 。"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250324113536-fttm8f0",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250324113536-fttm8f0",
+						"updated": "20250324113726"
+					},
+					"Children": [
+						{
+							"ID": "20250324113536-30bfu1l",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250324113536-30bfu1l",
+								"updated": "20250324113726"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "空间复杂度为"
+								},
+								{
+									"Type": "NodeText",
+									"Data": " "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong inline-math",
+									"TextMarkInlineMathContent": "O(1)"
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "、原地排序"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "：指针 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "i"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 和 "
+								},
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "code",
+									"TextMarkTextContent": "j"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "​ 使用常数大小的额外空间。"
+								}
+							]
+						}
+					]
+				},
+				{
+					"ID": "20250324113536-9813kow",
+					"Type": "NodeListItem",
+					"ListData": {
+						"BulletChar": 42,
+						"Marker": "Kg=="
+					},
+					"Properties": {
+						"id": "20250324113536-9813kow",
+						"updated": "20250324113536"
+					},
+					"Children": [
+						{
+							"ID": "20250324113536-3m195q1",
+							"Type": "NodeParagraph",
+							"Properties": {
+								"id": "20250324113536-3m195q1",
+								"updated": "20250324113536"
+							},
+							"Children": [
+								{
+									"Type": "NodeTextMark",
+									"TextMarkType": "strong",
+									"TextMarkTextContent": "稳定排序"
+								},
+								{
+									"Type": "NodeText",
+									"Data": "：由于在“冒泡”中遇到相等元素不交换。"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
